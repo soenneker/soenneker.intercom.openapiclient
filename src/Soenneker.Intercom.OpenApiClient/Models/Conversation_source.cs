@@ -47,6 +47,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string DeliveredAs { get; set; }
 #endif
+        /// <summary>Contains metadata if the message was sent as an email</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.Source_email_message_metadata? EmailMessageMetadata { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.Source_email_message_metadata EmailMessageMetadata { get; set; }
+#endif
         /// <summary>The id representing the message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -104,6 +112,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_author>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_author.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "delivered_as", n => { DeliveredAs = n.GetStringValue(); } },
+                { "email_message_metadata", n => { EmailMessageMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Source_email_message_metadata>(global::Soenneker.Intercom.OpenApiClient.Models.Source_email_message_metadata.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
@@ -122,6 +131,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_author>("author", Author);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("delivered_as", DeliveredAs);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Source_email_message_metadata>("email_message_metadata", EmailMessageMetadata);
             writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteStringValue("subject", Subject);

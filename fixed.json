@@ -9397,6 +9397,15 @@
               "type": "boolean"
             },
             "example": "true"
+          },
+          {
+            "name": "include_email_history",
+            "in": "query",
+            "description": "If set to true, the source of the conversation will include the email history.",
+            "schema": {
+              "type": "boolean"
+            },
+            "example": "true"
           }
         ],
         "responses": {
@@ -9431,6 +9440,231 @@
                         "attachments": [],
                         "url": null,
                         "redacted": "false"
+                      },
+                      "contacts": {
+                        "type": "contact.list",
+                        "contacts": [
+                          {
+                            "type": "contact",
+                            "id": "6762f1261bb69f9f2193bba7",
+                            "external_id": "70"
+                          }
+                        ]
+                      },
+                      "first_contact_reply": null,
+                      "admin_assignee_id": null,
+                      "team_assignee_id": null,
+                      "open": "false",
+                      "state": "closed",
+                      "read": "false",
+                      "tags": {
+                        "type": "tag.list",
+                        "tags": [
+                          {
+                            "type": "tag",
+                            "id": "123456",
+                            "name": "Test tag",
+                            "applied_at": "1663597223",
+                            "applied_by": {
+                              "type": "contact",
+                              "id": "1a2b3c"
+                            }
+                          }
+                        ]
+                      },
+                      "priority": "not_priority",
+                      "sla_applied": null,
+                      "statistics": null,
+                      "conversation_rating": null,
+                      "teammates": null,
+                      "title": null,
+                      "custom_attributes": {},
+                      "topics": {},
+                      "ticket": null,
+                      "linked_objects": {
+                        "type": "list",
+                        "data": [],
+                        "total_count": "0",
+                        "has_more": "false"
+                      },
+                      "ai_topics": null,
+                      "ai_agent": null,
+                      "ai_agent_participated": "false",
+                      "conversation_parts": {
+                        "type": "conversation_part.list",
+                        "conversation_parts": [
+                          {
+                            "type": "conversation_part",
+                            "id": "1",
+                            "part_type": "comment",
+                            "body": "\u003Cp\u003EOkay!\u003C/p\u003E",
+                            "created_at": "1663597223",
+                            "updated_at": "1663597260",
+                            "notified_at": "1663597260",
+                            "assigned_to": {
+                              "type": "contact",
+                              "id": "1a2b3c"
+                            },
+                            "author": {
+                              "type": "admin",
+                              "id": "274",
+                              "name": "Operator",
+                              "email": "operator\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": "abcd1234",
+                            "redacted": "false",
+                            "email_message_metadata": null,
+                            "state": "open",
+                            "tags": [
+                              {
+                                "type": "tag",
+                                "id": "123456",
+                                "name": "Test tag"
+                              }
+                            ],
+                            "event_details": null,
+                            "app_package_code": null
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": "2",
+                            "part_type": "custom_action_started",
+                            "body": null,
+                            "created_at": "1740141842",
+                            "updated_at": "1740141842",
+                            "notified_at": "1740141842",
+                            "assigned_to": null,
+                            "author": {
+                              "type": "admin",
+                              "id": "274",
+                              "name": "Jamie Oliver",
+                              "email": "jamie\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": "false",
+                            "email_message_metadata": null,
+                            "state": "open",
+                            "tags": [],
+                            "event_details": {
+                              "action": {
+                                "name": "Jira Create Issue"
+                              }
+                            },
+                            "app_package_code": "test-integration"
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": "3",
+                            "part_type": "conversation_attribute_updated_by_admin",
+                            "body": null,
+                            "created_at": "1740141851",
+                            "updated_at": "1740141851",
+                            "notified_at": "1740141851",
+                            "assigned_to": null,
+                            "author": {
+                              "type": "bot",
+                              "id": "278",
+                              "name": "Fin",
+                              "email": "operator\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": "false",
+                            "email_message_metadata": null,
+                            "state": "open",
+                            "tags": [],
+                            "event_details": {
+                              "attribute": {
+                                "name": "jira_issue_key"
+                              },
+                              "value": {
+                                "name": "PROJ-007"
+                              }
+                            },
+                            "app_package_code": null
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": "4",
+                            "part_type": "custom_action_finished",
+                            "body": null,
+                            "created_at": "1740141857",
+                            "updated_at": "1740141857",
+                            "notified_at": "1740141857",
+                            "assigned_to": null,
+                            "author": {
+                              "type": "admin",
+                              "id": "274",
+                              "name": "Jamie Oliver",
+                              "email": "jamie\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": "false",
+                            "email_message_metadata": null,
+                            "state": "closed",
+                            "tags": [],
+                            "event_details": {
+                              "action": {
+                                "name": "Jira Create Issue",
+                                "result": "success"
+                              }
+                            },
+                            "app_package_code": null
+                          }
+                        ],
+                        "total_count": "4"
+                      }
+                    }
+                  },
+                  "email conversation with history found": {
+                    "value": {
+                      "type": "conversation",
+                      "id": "504",
+                      "created_at": "1774370019",
+                      "updated_at": "1774370019",
+                      "waiting_since": "1774370020",
+                      "snoozed_until": null,
+                      "source": {
+                        "type": "email",
+                        "id": "403918334",
+                        "delivered_as": "customer_initiated",
+                        "subject": "\u003Cp\u003ERe: Bug query\u003C/p\u003E",
+                        "body": "\u003Cp\u003EThis is the message body\u003C/p\u003E",
+                        "recipients": [
+                          {
+                            "type": "to",
+                            "email": "testing-workspace@email.com"
+                          }
+                        ],
+                        "author": {
+                          "type": "lead",
+                          "id": "991267645",
+                          "name": "Ciaran176 Lee",
+                          "email": "admin176@email.com"
+                        },
+                        "attachments": [],
+                        "url": null,
+                        "redacted": "false",
+                        "email_message_metadata": {
+                          "message_id": "abc-123@mail.example.com",
+                          "subject": "Re: Bug query",
+                          "email_address_headers": [
+                            {
+                              "type": "from",
+                              "name": "User Name",
+                              "email_address": "user@example.com"
+                            },
+                            {
+                              "type": "to",
+                              "name": "Another Name",
+                              "email_address": "anotheruser@example.com"
+                            }
+                          ],
+                          "history": "\u003Cdiv\u003E\u003Cspan\u003EOn Jan 28, wrote:\u003C/span\u003E\u003Cblockquote\u003EPrevious thread\u003C/blockquote\u003E\u003C/div\u003E"
+                        }
                       },
                       "contacts": {
                         "type": "contact.list",
@@ -16813,6 +17047,131 @@
                         {
                           "code": "whatsapp_message_not_found",
                           "message": "Whatsapp message not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{team_id}/metrics": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Retrieve team metrics",
+        "description": "Returns real-time activity metrics for admins in the specified team. For each admin, the response includes counts of open, idle, and snoozed conversations.\n\nThis endpoint requires the \u0060realtime_monitoring\u0060 feature to be enabled for your workspace.\n",
+        "operationId": "getTeamMetrics",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          },
+          {
+            "name": "team_id",
+            "in": "path",
+            "description": "The unique identifier of the team to retrieve metrics for. Use \u0060GET /teams\u0060 to list available team IDs.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "42"
+          },
+          {
+            "name": "idle_threshold",
+            "in": "query",
+            "description": "The number of seconds after which an open conversation is considered idle. Clamped to the range 1\u201386400. Defaults to 1800 (30 minutes).",
+            "schema": {
+              "type": "integer",
+              "default": "1800",
+              "example": "1800"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/team_metric_list"
+                },
+                "examples": {
+                  "successful_response": {
+                    "value": {
+                      "type": "team_metric.list",
+                      "data": [
+                        {
+                          "type": "team_metric",
+                          "admin_id": "123",
+                          "open": "5",
+                          "idle": "2",
+                          "snoozed": "1"
+                        },
+                        {
+                          "type": "team_metric",
+                          "admin_id": "456",
+                          "open": "3",
+                          "idle": "0",
+                          "snoozed": "2"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Feature not enabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "feature_disabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "req-456",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Real-time monitoring is not enabled for your workspace."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "team_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "req-789",
+                      "errors": [
+                        {
+                          "code": "team_not_found",
+                          "message": "Team not found"
                         }
                       ]
                     }
@@ -25201,6 +25560,52 @@
         },
         "description": "Payload of the request to assign a conversation"
       },
+      "team_metric": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "team_metric"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The unique identifier for the admin.",
+            "example": "123"
+          },
+          "open": {
+            "type": "integer",
+            "description": "The number of open conversations assigned to the admin.",
+            "example": "5"
+          },
+          "idle": {
+            "type": "integer",
+            "description": "The number of idle conversations assigned to the admin. A conversation is idle when it has been open and waiting for an admin reply longer than the idle_threshold.",
+            "example": "2"
+          },
+          "snoozed": {
+            "type": "integer",
+            "description": "The number of snoozed conversations assigned to the admin.",
+            "example": "1"
+          }
+        },
+        "description": "Per-admin activity metrics within a team."
+      },
+      "team_metric_list": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "team_metric.list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/team_metric"
+            }
+          }
+        },
+        "description": "A list of team metrics."
+      },
       "away_status_reason": {
         "type": "object",
         "properties": {
@@ -27717,6 +28122,9 @@
             "type": "boolean",
             "description": "Whether or not the source message has been redacted. Only applicable for contact initiated messages.",
             "example": "false"
+          },
+          "email_message_metadata": {
+            "$ref": "#/components/schemas/source_email_message_metadata"
           }
         },
         "description": "The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated."
@@ -31050,6 +31458,37 @@
             "description": "The unique identifier for the email message as specified in the Message-ID header",
             "nullable": true,
             "example": "\u003CCADKw7xrXzqSn8v3mP8K8Q8yZ6K8Q8yZ6@mail.gmail.com\u003E"
+          }
+        },
+        "description": "Contains metadata if the message was sent as an email"
+      },
+      "source_email_message_metadata": {
+        "title": "Email Message Metadata",
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "description": "The unique identifier for the email message as specified in the Message-ID header",
+            "nullable": true,
+            "example": "\u003CCADKw7xrXzqSn8v3mP8K8Q8yZ6K8Q8yZ6@mail.gmail.com\u003E"
+          },
+          "subject": {
+            "type": "string",
+            "description": "The subject of the email",
+            "example": "Question about my order"
+          },
+          "email_address_headers": {
+            "title": "Email Address Headers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/email_address_header"
+            },
+            "description": "A list of an email address headers."
+          },
+          "history": {
+            "type": "string",
+            "description": "The HTML content of any quoted or forwarded email history from the initial inbound message",
+            "example": "\u003Cdiv\u003E\u003Cspan\u003EOn Jan 28, wrote:\u003C/span\u003E\u003Cblockquote\u003EPrevious thread\u003C/blockquote\u003E\u003C/div\u003E"
           }
         },
         "description": "Contains metadata if the message was sent as an email"

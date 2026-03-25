@@ -4,73 +4,68 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Models;
-using Soenneker.Intercom.OpenApiClient.Teams.Item;
+using Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
-namespace Soenneker.Intercom.OpenApiClient.Teams
+namespace Soenneker.Intercom.OpenApiClient.Teams.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \teams
+    /// Builds and executes requests for operations under \teams\{-id}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class TeamsRequestBuilder : BaseRequestBuilder
+    public partial class ItemRequestBuilder : BaseRequestBuilder
     {
-        /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.teams.item collection</summary>
-        /// <param name="position">The unique identifier of a given team.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder this[string position]
+        /// <summary>The metrics property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder Metrics
         {
-            get
-            {
-                var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder(urlTplParams, RequestAdapter);
-            }
+            get => new global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.TeamsRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TeamsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/teams", pathParameters)
+        public ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/teams/{%2Did}", pathParameters)
         {
         }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.TeamsRequestBuilder"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TeamsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/teams", rawUrl)
+        public ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/teams/{%2Did}", rawUrl)
         {
         }
         /// <summary>
-        /// This will return a list of team objects for the App.
+        /// You can fetch the details of a single team, containing an array of admins that belong to this team.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Team_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Team"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team_list?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team_list> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Team_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Team_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Team>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Team.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// This will return a list of team objects for the App.
+        /// You can fetch the details of a single team, containing an array of admins that belong to this team.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -91,18 +86,18 @@ namespace Soenneker.Intercom.OpenApiClient.Teams
         /// <summary>
         /// Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.TeamsRequestBuilder"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder"/></returns>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
-        public global::Soenneker.Intercom.OpenApiClient.Teams.TeamsRequestBuilder WithUrl(string rawUrl)
+        public global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder WithUrl(string rawUrl)
         {
-            return new global::Soenneker.Intercom.OpenApiClient.Teams.TeamsRequestBuilder(rawUrl, RequestAdapter);
+            return new global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
         /// Configuration for the request such as headers, query parameters, and middleware options.
         /// </summary>
         [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class TeamsRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
+        public partial class ItemRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
         {
         }
     }

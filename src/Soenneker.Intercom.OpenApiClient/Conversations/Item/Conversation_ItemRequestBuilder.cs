@@ -64,7 +64,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Conversation_ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}{?display_as*,include_translations*,retain_metrics*}", pathParameters)
+        public Conversation_ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}{?display_as*,include_email_history*,include_translations*,retain_metrics*}", pathParameters)
         {
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Conversation_ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}{?display_as*,include_translations*,retain_metrics*}", rawUrl)
+        public Conversation_ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}{?display_as*,include_email_history*,include_translations*,retain_metrics*}", rawUrl)
         {
         }
         /// <summary>
@@ -259,6 +259,9 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             [QueryParameter("display_as")]
             public string DisplayAs { get; set; }
 #endif
+            /// <summary>If set to true, the source of the conversation will include the email history.</summary>
+            [QueryParameter("include_email_history")]
+            public bool? IncludeEmailHistory { get; set; }
             /// <summary>If set to true, conversation parts will be translated to the detected language of the conversation.</summary>
             [QueryParameter("include_translations")]
             public bool? IncludeTranslations { get; set; }
