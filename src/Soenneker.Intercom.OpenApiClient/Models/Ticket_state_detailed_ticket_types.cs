@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A list of ticket type attributes associated with a given ticket type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>? Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type?>? Data { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type> Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type?> Data { get; set; }
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `list`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>()?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("data", Data);
+            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("data", Data);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
