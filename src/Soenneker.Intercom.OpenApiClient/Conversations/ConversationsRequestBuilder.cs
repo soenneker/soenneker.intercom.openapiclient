@@ -105,7 +105,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         /// <summary>
         /// You can create a conversation that has been initiated by a contact (ie. user or lead).The conversation can be an in-app message only.{% admonition type=&quot;info&quot; name=&quot;Sending for visitors&quot; %}You can also send a message from a visitor by specifying their `user_id` or `id` value in the `from` field, along with a `type` field value of `contact`.This visitor will be automatically converted to a contact with a lead role once the conversation is created.{% /admonition %}This will return the Message model that has been created.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Message"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200"/></returns>
         /// <param name="body">Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -114,11 +114,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Message?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_conversation_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_conversation_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Message> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_conversation_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_conversation_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -129,7 +129,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Message>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Message.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}

@@ -9262,7 +9262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/message"
+                  "$ref": "#/components/schemas/createConversation_200"
                 },
                 "examples": {
                   "conversation created": {
@@ -37378,6 +37378,17 @@
             "example": "123"
           }
         }
+      },
+      "createConversation_200": {
+        "required": [
+          "conversation_id"
+        ],
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/message"
+          }
+        ]
       },
       "manageConversation": {
         "required": [
