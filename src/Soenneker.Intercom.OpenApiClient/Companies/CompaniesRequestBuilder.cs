@@ -32,14 +32,14 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.companies.item collection</summary>
         /// <param name="position">The unique identifier for the company which is given by Intercom</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Companies.Item.CompaniesItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Companies.Item.CompaniesItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Companies.Item.Company_ItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Companies.Item.Company_ItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Companies.Item.CompaniesItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("company_%2Did", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Companies.Item.Company_ItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

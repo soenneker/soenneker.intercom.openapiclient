@@ -5256,7 +5256,7 @@
         }
       }
     },
-    "/companies/{id}/notes": {
+    "/companies/{company_id}/notes": {
       "get": {
         "tags": [
           "Notes",
@@ -5267,7 +5267,7 @@
         "operationId": "listCompanyNotes",
         "parameters": [
           {
-            "name": "id",
+            "name": "company_id",
             "in": "path",
             "description": "The unique identifier for the company which is given by Intercom",
             "required": true,
@@ -5417,7 +5417,7 @@
             }
           },
           {
-            "name": "id",
+            "name": "company_id",
             "in": "path",
             "description": "The unique identifier for the company which is given by Intercom",
             "required": true,
@@ -14312,7 +14312,7 @@
           "Data Connectors"
         ],
         "summary": "Create a data connector",
-        "description": "Create a new data connector. The connector is created in \u0060draft\u0060 state. Configure its URL, headers, data inputs, and other settings, then publish it to \u0060live\u0060 when ready.\n",
+        "description": "Create a new data connector. The connector is created in \u0060draft\u0060 state. Configure its URL, headers, data inputs, and other settings, then set it to \u0060live\u0060 when ready.\n",
         "operationId": "createDataConnector",
         "parameters": [
           {
@@ -14760,6 +14760,237 @@
                         {
                           "code": "conflict",
                           "message": "Data connector must be in draft state to be deleted"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Data Connectors"
+        ],
+        "summary": "Update a data connector",
+        "description": "Update an existing data connector. Only provided fields are changed. Set \u0060state\u0060 to \u0060live\u0060 or \u0060draft\u0060 to change the connector\u0027s state.\n",
+        "operationId": "updateDataConnector",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the data connector.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/update_data_connector_request"
+              },
+              "examples": {
+                "Update name and description": {
+                  "summary": "Update basic fields",
+                  "value": {
+                    "name": "Updated Connector Name",
+                    "description": "Updated description"
+                  }
+                },
+                "Set state to live": {
+                  "summary": "Set a connector to live",
+                  "value": {
+                    "state": "live"
+                  }
+                },
+                "Set state to draft": {
+                  "summary": "Set a connector to draft",
+                  "value": {
+                    "state": "draft"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Data connector updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/data_connector_detail"
+                },
+                "examples": {
+                  "Data connector updated": {
+                    "value": {
+                      "type": "data_connector",
+                      "id": "12345",
+                      "name": "Updated Connector Name",
+                      "description": "Updated description",
+                      "state": "draft",
+                      "http_method": "post",
+                      "direct_fin_usage": false,
+                      "audiences": [
+                        "users",
+                        "leads"
+                      ],
+                      "execution_type": "server_side",
+                      "configuration_response_type": "test_response_type",
+                      "data_transformation_type": null,
+                      "client_function_name": null,
+                      "client_function_timeout_ms": null,
+                      "data_inputs": [
+                        {
+                          "name": "conversation_id",
+                          "type": "string",
+                          "description": "The Intercom conversation ID",
+                          "required": true,
+                          "default_value": ""
+                        }
+                      ],
+                      "response_fields": [],
+                      "object_mappings": [],
+                      "token_ids": [],
+                      "customer_authentication": false,
+                      "bypass_authentication": false,
+                      "validate_missing_attributes": false,
+                      "created_by_admin_id": "456",
+                      "updated_by_admin_id": "456",
+                      "created_at": "2025-11-15T09:30:00Z",
+                      "updated_at": "2026-03-24T14:22:15Z",
+                      "execution_results_url": "/data_connectors/12345/execution_results"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data connector not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Data connector not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b4a45e2c-7a8d-4f3e-9c1a-2d5e8f7a6b3c",
+                      "errors": [
+                        {
+                          "code": "data_connector_not_found",
+                          "message": "Data connector not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Data connector in use": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "d6c78e4f-1a2b-3c4d-5e6f-7a8b9c0d1e2f",
+                      "errors": [
+                        {
+                          "code": "data_connector_in_use",
+                          "message": "Data connector is in use by other resources and cannot be set to draft"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Invalid audiences": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid audiences. Must be a subset of: leads, users, visitors"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid field value": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Http Method isn\u0027t an option"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid state": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid state. Must be one of: draft, live"
                         }
                       ]
                     }
@@ -30269,6 +30500,147 @@
         },
         "description": "You can create a data connector by providing the required parameters."
       },
+      "update_data_connector_request": {
+        "title": "Update Data Connector Request",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the data connector.",
+            "example": "Updated Connector Name"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what this data connector does.",
+            "example": "Updated description"
+          },
+          "state": {
+            "enum": [
+              "draft",
+              "live"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The desired state of the connector."
+          },
+          "http_method": {
+            "enum": [
+              "get",
+              "post",
+              "put",
+              "delete",
+              "patch"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The HTTP method used by the data connector.",
+            "example": "post"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the external API endpoint. Supports template variables like \u0060{{order_id}}\u0060.",
+            "example": "https://api.example.com/orders/{{order_id}}/status"
+          },
+          "body": {
+            "type": "string",
+            "description": "The request body template. Supports template variables.",
+            "nullable": true
+          },
+          "direct_fin_usage": {
+            "type": "boolean",
+            "description": "Whether this connector is used directly by Fin.",
+            "example": false
+          },
+          "audiences": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "leads",
+                "users",
+                "visitors"
+              ],
+              "type": "string",
+              "additionalProperties": false
+            },
+            "description": "The audience types this connector targets."
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The header name.",
+                  "example": "Content-Type"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "The header value. Supports template variables.",
+                  "example": "application/json"
+                }
+              }
+            },
+            "description": "HTTP headers to include in the request."
+          },
+          "data_inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the input parameter.",
+                  "example": "order_id"
+                },
+                "type": {
+                  "enum": [
+                    "string",
+                    "integer",
+                    "decimal",
+                    "boolean"
+                  ],
+                  "type": "string",
+                  "additionalProperties": false,
+                  "description": "The data type of the input.",
+                  "example": "string"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A description of the input parameter. Required for each input.",
+                  "example": "The order ID to look up"
+                },
+                "required": {
+                  "type": "boolean",
+                  "description": "Whether this input is required.",
+                  "example": true
+                },
+                "default_value": {
+                  "type": "string",
+                  "description": "The default value for this input, if any."
+                }
+              }
+            },
+            "description": "The input parameters accepted by this data connector. Replaces all existing inputs."
+          },
+          "customer_authentication": {
+            "type": "boolean",
+            "description": "Whether OTP authentication is enabled for this connector.",
+            "example": false
+          },
+          "bypass_authentication": {
+            "type": "boolean",
+            "description": "Whether authentication is bypassed for this connector.",
+            "example": false
+          },
+          "validate_missing_attributes": {
+            "type": "boolean",
+            "description": "Whether to validate missing attributes before execution.",
+            "example": true
+          }
+        },
+        "description": "Update an existing data connector. All fields are optional \u2014 only provided fields will be updated. Set \u0060state\u0060 to \u0060live\u0060 or \u0060draft\u0060 to change the connector\u0027s state.\n"
+      },
       "data_connector": {
         "title": "Data Connector",
         "type": "object",
@@ -33627,6 +33999,22 @@
             "description": "Represents the contact that the note was created about.",
             "nullable": true
           },
+          "company": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "String representing the object\u0027s type. Always has the value \u0060company\u0060."
+              },
+              "id": {
+                "type": "string",
+                "description": "The id of the company.",
+                "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
+              }
+            },
+            "description": "Represents the company that the note was created about.",
+            "nullable": true
+          },
           "author": {
             "$ref": "#/components/schemas/admin"
           },
@@ -33636,7 +34024,7 @@
             "example": "\u003Cp\u003EText for the note.\u003C/p\u003E"
           }
         },
-        "description": "Notes allow you to annotate and comment on your contacts.",
+        "description": "Notes allow you to annotate and comment on your contacts and companies. A note is attached to either a contact or a company, never both.",
         "x-tags": [
           "Notes"
         ]

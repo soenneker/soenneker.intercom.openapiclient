@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then publish it to `live` when ready.
+        /// Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then set it to `live` when ready.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail"/></returns>
         /// <param name="body">You can create a data connector by providing the required parameters.</param>
@@ -118,7 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors
             return requestInfo;
         }
         /// <summary>
-        /// Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then publish it to `live` when ready.
+        /// Create a new data connector. The connector is created in `draft` state. Configure its URL, headers, data inputs, and other settings, then set it to `live` when ready.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create a data connector by providing the required parameters.</param>

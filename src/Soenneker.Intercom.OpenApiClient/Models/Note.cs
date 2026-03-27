@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Notes allow you to annotate and comment on your contacts.
+    /// Notes allow you to annotate and comment on your contacts and companies. A note is attached to either a contact or a company, never both.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Note : IAdditionalDataHolder, IParsable
@@ -30,6 +30,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Body { get; set; }
+#endif
+        /// <summary>Represents the company that the note was created about.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.Note_company? Company { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.Note_company Company { get; set; }
 #endif
         /// <summary>Represents the contact that the note was created about.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -84,6 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>(global::Soenneker.Intercom.OpenApiClient.Models.Admin.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Note_company>(global::Soenneker.Intercom.OpenApiClient.Models.Note_company.CreateFromDiscriminatorValue); } },
                 { "contact", n => { Contact = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Note_contact>(global::Soenneker.Intercom.OpenApiClient.Models.Note_contact.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -99,6 +108,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>("author", Author);
             writer.WriteStringValue("body", Body);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Note_company>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Note_contact>("contact", Contact);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
