@@ -63,6 +63,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The HTTP method used by the data connector.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_http_method? HttpMethod { get; set; }
+        /// <summary>A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_mock_response? MockResponse { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_mock_response MockResponse { get; set; }
+#endif
         /// <summary>The name of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -117,6 +125,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
                 { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_headers>(global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_headers.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_http_method>(); } },
+                { "mock_response", n => { MockResponse = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_mock_response>(global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_mock_response.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_state>(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
@@ -139,6 +148,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_headers>("headers", Headers);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_http_method>("http_method", HttpMethod);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_mock_response>("mock_response", MockResponse);
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request_state>("state", State);
             writer.WriteStringValue("url", Url);
