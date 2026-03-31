@@ -30529,6 +30529,13 @@
                 "status": "shipped"
               }
             }
+          },
+          "token_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of authentication tokens to attach to this data connector."
           }
         },
         "description": "You can create a data connector by providing the required parameters."
@@ -30680,6 +30687,13 @@
                 "status": "shipped"
               }
             }
+          },
+          "token_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of authentication tokens to attach to this data connector. An empty array removes all tokens."
           }
         },
         "description": "Update an existing data connector. All fields are optional \u2014 only provided fields will be updated. Set \u0060state\u0060 to \u0060live\u0060 or \u0060draft\u0060 to change the connector\u0027s state.\n"
@@ -30812,6 +30826,37 @@
             "additionalProperties": false,
             "description": "The current state of the data connector.",
             "example": "live"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the external API endpoint. Supports template variables like \u0060{{order_id}}\u0060.",
+            "nullable": true,
+            "example": "https://api.example.com/orders/{{order_id}}/status"
+          },
+          "body": {
+            "type": "string",
+            "description": "The request body template. Supports template variables.",
+            "nullable": true,
+            "example": "{\u0022text\u0022: \u0022{{message}}\u0022}"
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The header name.",
+                  "example": "Authorization"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Always \u0060\u0022****\u0022\u0060 in responses.",
+                  "example": "****"
+                }
+              }
+            },
+            "description": "HTTP headers for the request. Header values are always redacted as \u0060\u0022****\u0022\u0060 in responses."
           },
           "http_method": {
             "enum": [

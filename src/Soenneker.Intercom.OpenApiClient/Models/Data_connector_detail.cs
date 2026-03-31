@@ -23,6 +23,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_audiences?> Audiences { get; set; }
 #endif
+        /// <summary>The request body template. Supports template variables.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Body { get; set; }
+#nullable restore
+#else
+        public string Body { get; set; }
+#endif
         /// <summary>Whether authentication is bypassed for this connector.</summary>
         public bool? BypassAuthentication { get; set; }
         /// <summary>The name of the client-side function, if applicable.</summary>
@@ -79,6 +87,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>How the connector executes.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_execution_type? ExecutionType { get; set; }
+        /// <summary>HTTP headers for the request. Header values are always redacted as `&quot;****&quot;` in responses.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_headers>? Headers { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_headers> Headers { get; set; }
+#endif
         /// <summary>The HTTP method used by the data connector.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_http_method? HttpMethod { get; set; }
         /// <summary>The unique identifier for the data connector.</summary>
@@ -135,6 +151,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string UpdatedByAdminId { get; set; }
 #endif
+        /// <summary>The URL of the external API endpoint. Supports template variables like `{{order_id}}`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
+#endif
         /// <summary>Whether to validate missing attributes before execution.</summary>
         public bool? ValidateMissingAttributes { get; set; }
         /// <summary>
@@ -163,6 +187,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "audiences", n => { Audiences = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_audiences>()?.AsList(); } },
+                { "body", n => { Body = n.GetStringValue(); } },
                 { "bypass_authentication", n => { BypassAuthentication = n.GetBoolValue(); } },
                 { "client_function_name", n => { ClientFunctionName = n.GetStringValue(); } },
                 { "client_function_timeout_ms", n => { ClientFunctionTimeoutMs = n.GetIntValue(); } },
@@ -176,6 +201,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
                 { "execution_results_url", n => { ExecutionResultsUrl = n.GetStringValue(); } },
                 { "execution_type", n => { ExecutionType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_execution_type>(); } },
+                { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_headers>(global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_headers.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_http_method>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -186,6 +212,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_type>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
                 { "updated_by_admin_id", n => { UpdatedByAdminId = n.GetStringValue(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
                 { "validate_missing_attributes", n => { ValidateMissingAttributes = n.GetBoolValue(); } },
             };
         }
@@ -197,6 +224,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_audiences>("audiences", Audiences);
+            writer.WriteStringValue("body", Body);
             writer.WriteBoolValue("bypass_authentication", BypassAuthentication);
             writer.WriteStringValue("client_function_name", ClientFunctionName);
             writer.WriteIntValue("client_function_timeout_ms", ClientFunctionTimeoutMs);
@@ -210,6 +238,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
             writer.WriteStringValue("execution_results_url", ExecutionResultsUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_execution_type>("execution_type", ExecutionType);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_headers>("headers", Headers);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_http_method>("http_method", HttpMethod);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
@@ -220,6 +249,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_type>("type", Type);
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             writer.WriteStringValue("updated_by_admin_id", UpdatedByAdminId);
+            writer.WriteStringValue("url", Url);
             writer.WriteBoolValue("validate_missing_attributes", ValidateMissingAttributes);
             writer.WriteAdditionalData(AdditionalData);
         }

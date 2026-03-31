@@ -79,6 +79,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>IDs of authentication tokens to attach to this data connector.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? TokenIds { get; set; }
+#nullable restore
+#else
+        public List<string> TokenIds { get; set; }
+#endif
         /// <summary>The URL of the external API endpoint. Supports template variables like `{{order_id}}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -125,6 +133,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method>(); } },
                 { "mock_response", n => { MockResponse = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response>(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "token_ids", n => { TokenIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "validate_missing_attributes", n => { ValidateMissingAttributes = n.GetBoolValue(); } },
             };
@@ -147,6 +156,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method>("http_method", HttpMethod);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response>("mock_response", MockResponse);
             writer.WriteStringValue("name", Name);
+            writer.WriteCollectionOfPrimitiveValues<string>("token_ids", TokenIds);
             writer.WriteStringValue("url", Url);
             writer.WriteBoolValue("validate_missing_attributes", ValidateMissingAttributes);
             writer.WriteAdditionalData(AdditionalData);
