@@ -106,9 +106,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state TicketState { get; set; }
 #endif
         /// <summary>A ticket type, used to define the data fields to be captured in a ticket.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type? TicketType { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type TicketType { get; set; }
+#endif
         /// <summary>Always ticket</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type? Type { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type Type { get; set; }
+#endif
         /// <summary>The last time the ticket was updated as a UTC Unix timestamp.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -151,8 +163,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ticket_id", n => { TicketId = n.GetStringValue(); } },
                 { "ticket_parts", n => { TicketParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts.CreateFromDiscriminatorValue); } },
                 { "ticket_state", n => { TicketState = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state.CreateFromDiscriminatorValue); } },
-                { "ticket_type", n => { TicketType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(); } },
+                { "ticket_type", n => { TicketType = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type.CreateFromDiscriminatorValue); } },
+                { "type", n => { Type = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type.CreateFromDiscriminatorValue); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -178,8 +190,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("ticket_id", TicketId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts>("ticket_parts", TicketParts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state>("ticket_state", TicketState);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("ticket_type", TicketType);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("type", Type);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("ticket_type", TicketType);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
