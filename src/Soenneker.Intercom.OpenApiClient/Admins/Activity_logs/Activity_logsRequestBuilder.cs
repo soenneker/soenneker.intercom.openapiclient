@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Search;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -17,12 +18,17 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Activity_logsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The search property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Search.SearchRequestBuilder Search
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Search.SearchRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder"/> and sets the default values.
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Activity_logsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs?created_at_after={created_at_after}{&created_at_before*,event_types*}", pathParameters)
+        public Activity_logsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs{?created_at_after*,created_at_before*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Activity_logsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs?created_at_after={created_at_after}{&created_at_before*,event_types*}", rawUrl)
+        public Activity_logsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs{?created_at_after*,created_at_before*}", rawUrl)
         {
         }
         /// <summary>
@@ -109,16 +115,6 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
 #else
             [QueryParameter("created_at_before")]
             public string CreatedAtBefore { get; set; }
-#endif
-            /// <summary>An optional list of event types to filter activity logs by. When provided, only logs matching the specified event types are returned. Use the List all activity log event types endpoint to retrieve available values.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("event_types")]
-            public string[]? EventTypes { get; set; }
-#nullable restore
-#else
-            [QueryParameter("event_types")]
-            public string[] EventTypes { get; set; }
 #endif
         }
         /// <summary>

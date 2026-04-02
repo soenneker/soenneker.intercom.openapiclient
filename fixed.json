@@ -241,7 +241,6 @@
             "name": "created_at_after",
             "in": "query",
             "description": "The start date that you request data for. It must be formatted as a UNIX timestamp.",
-            "required": true,
             "schema": {
               "type": "string"
             },
@@ -255,21 +254,6 @@
               "type": "string"
             },
             "example": "1677861493"
-          },
-          {
-            "name": "event_types",
-            "in": "query",
-            "description": "An optional list of event types to filter activity logs by. When provided, only logs matching the specified event types are returned. Use the List all activity log event types endpoint to retrieve available values.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "example": [
-              "admin_login_success",
-              "app_name_change"
-            ]
           }
         ],
         "responses": {
@@ -327,6 +311,122 @@
                           "created_at": 1734537253,
                           "activity_type": "message_state_change",
                           "activity_description": "Ciaran5 Lee changed your Initial message title message from Initial message title to Eventual message title."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "57cc6148-2c0a-471b-bd9e-859538110958",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admins/activity_logs/search": {
+      "post": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "Search activity logs",
+        "description": "Search and filter admin activity logs using a POST request with event type filter in the request body. You can find more details about the available event types in the List all activity log event types endpoint.",
+        "operationId": "searchActivityLogs",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/searchActivityLogs"
+              },
+              "examples": {
+                "search_with_event_types": {
+                  "summary": "Search with event types filter",
+                  "value": {
+                    "created_at_after": "1677253093",
+                    "created_at_before": "1677861493",
+                    "event_types": [
+                      "app_name_change",
+                      "message_state_change"
+                    ]
+                  }
+                },
+                "search_without_filters": {
+                  "summary": "Search with date range only",
+                  "value": {
+                    "created_at_after": "1677253093",
+                    "created_at_before": "1677861493"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/activity_log_list"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "activity_log.list",
+                      "pages": {
+                        "type": "pages",
+                        "next": null,
+                        "page": 1,
+                        "per_page": 20,
+                        "total_pages": 1
+                      },
+                      "activity_logs": [
+                        {
+                          "id": "fca05814-4b72-4dce-ad4f-77a786a2c136",
+                          "performed_by": {
+                            "type": "admin",
+                            "id": "991267464",
+                            "email": "admin5@email.com",
+                            "ip": "127.0.0.1"
+                          },
+                          "metadata": {
+                            "before": "before",
+                            "after": "after"
+                          },
+                          "created_at": 1734537253,
+                          "activity_type": "app_name_change",
+                          "activity_description": "Ciaran5 Lee changed your app name from before to after."
                         }
                       ]
                     }
@@ -37376,6 +37476,42 @@
             "type": "integer",
             "description": "The unique identifier of the away status reason",
             "example": 12345
+          }
+        }
+      },
+      "searchActivityLogs": {
+        "type": "object",
+        "properties": {
+          "created_at_after": {
+            "type": "string",
+            "description": "The start date that you request data for. It must be formatted as a UNIX timestamp.",
+            "example": "1677253093"
+          },
+          "created_at_before": {
+            "type": "string",
+            "description": "The end date that you request data for. It must be formatted as a UNIX timestamp.",
+            "example": "1677861493"
+          },
+          "event_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "An optional list of event types to filter activity logs by. Use the list all activity log event types endpoint to retrieve available values."
+          },
+          "page": {
+            "type": "integer",
+            "description": "The page number of results to return.",
+            "default": 1,
+            "example": 1
+          },
+          "per_page": {
+            "maximum": 250,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The number of results per page. Must be between 1 and 250.",
+            "default": 20,
+            "example": 20
           }
         }
       },
