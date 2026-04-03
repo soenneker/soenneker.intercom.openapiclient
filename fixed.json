@@ -8851,6 +8851,390 @@
         }
       }
     },
+    "/content_snippets": {
+      "get": {
+        "tags": [
+          "Content Snippets"
+        ],
+        "summary": "List all content snippets",
+        "description": "You can fetch a list of all content snippets for a workspace.",
+        "operationId": "listContentSnippets",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of results to fetch.",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results to return per page. Max value of 50.",
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/content_snippet_list"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "content_snippet",
+                          "id": "123",
+                          "title": "How to reset your password",
+                          "locale": "en",
+                          "json_blocks": [
+                            {
+                              "type": "paragraph",
+                              "text": "Navigate to Settings \u003E Security \u003E Reset password."
+                            }
+                          ],
+                          "chatbot_availability": 1,
+                          "copilot_availability": 1,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        }
+                      ],
+                      "total_count": 1,
+                      "page": 1,
+                      "per_page": 50,
+                      "total_pages": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Content Snippets"
+        ],
+        "summary": "Create a content snippet",
+        "description": "You can create a new content snippet.",
+        "operationId": "createContentSnippet",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/content_snippet_create_request"
+              },
+              "examples": {
+                "Create a content snippet": {
+                  "value": {
+                    "title": "How to reset your password",
+                    "json_blocks": [
+                      {
+                        "type": "paragraph",
+                        "text": "Navigate to Settings \u003E Security \u003E Reset password."
+                      }
+                    ],
+                    "locale": "en"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Content snippet created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/content_snippet"
+                },
+                "examples": {
+                  "Content snippet created": {
+                    "value": {
+                      "type": "content_snippet",
+                      "id": "456",
+                      "title": "How to reset your password",
+                      "locale": "en",
+                      "json_blocks": [
+                        {
+                          "type": "paragraph",
+                          "text": "Navigate to Settings \u003E Security \u003E Reset password."
+                        }
+                      ],
+                      "chatbot_availability": 1,
+                      "copilot_availability": 1,
+                      "created_at": 1663597223,
+                      "updated_at": 1663597223
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Validation error": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "The language is not currently supported for Fin"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content_snippets/{id}": {
+      "get": {
+        "tags": [
+          "Content Snippets"
+        ],
+        "summary": "Retrieve a content snippet",
+        "description": "You can fetch a single content snippet by its id.",
+        "operationId": "getContentSnippet",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the content snippet.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/content_snippet"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "content_snippet",
+                      "id": "123",
+                      "title": "How to reset your password",
+                      "locale": "en",
+                      "json_blocks": [
+                        {
+                          "type": "paragraph",
+                          "text": "Navigate to Settings \u003E Security \u003E Reset password."
+                        }
+                      ],
+                      "chatbot_availability": 1,
+                      "copilot_availability": 1,
+                      "created_at": 1663597223,
+                      "updated_at": 1663597223
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content snippet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Content snippet not found": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Content snippet not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Content Snippets"
+        ],
+        "summary": "Update a content snippet",
+        "description": "You can update an existing content snippet.",
+        "operationId": "updateContentSnippet",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the content snippet.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/content_snippet_update_request"
+              },
+              "examples": {
+                "Update a content snippet": {
+                  "value": {
+                    "title": "How to reset your password (updated)",
+                    "json_blocks": [
+                      {
+                        "type": "paragraph",
+                        "text": "Go to Settings \u003E Security \u003E Reset password and follow the steps."
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content snippet updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/content_snippet"
+                },
+                "examples": {
+                  "Content snippet updated": {
+                    "value": {
+                      "type": "content_snippet",
+                      "id": "123",
+                      "title": "How to reset your password (updated)",
+                      "locale": "en",
+                      "json_blocks": [
+                        {
+                          "type": "paragraph",
+                          "text": "Go to Settings \u003E Security \u003E Reset password and follow the steps."
+                        }
+                      ],
+                      "chatbot_availability": 1,
+                      "copilot_availability": 1,
+                      "created_at": 1663597223,
+                      "updated_at": 1663597300
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content snippet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Content snippet not found": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Content snippet not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                },
+                "examples": {
+                  "Validation error": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "The language is not currently supported for Fin"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/conversations/{conversation_id}/tags": {
       "post": {
         "tags": [
@@ -27656,6 +28040,161 @@
           }
         }
       },
+      "content_snippet": {
+        "title": "Content Snippet",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "String representing the object\u0027s type. Always has the value \u0060content_snippet\u0060.",
+            "example": "content_snippet"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the content snippet.",
+            "example": "123"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the content snippet.",
+            "nullable": true,
+            "example": "How to reset your password"
+          },
+          "locale": {
+            "type": "string",
+            "description": "The locale of the content snippet.",
+            "example": "en"
+          },
+          "json_blocks": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The content blocks that make up the body of the snippet."
+          },
+          "chatbot_availability": {
+            "type": "integer",
+            "description": "Whether this snippet is available for Fin (1 = on, 0 = off).",
+            "example": 1
+          },
+          "copilot_availability": {
+            "type": "integer",
+            "description": "Whether this snippet is available for Copilot (1 = on, 0 = off).",
+            "example": 1
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the snippet was created as a UNIX timestamp.",
+            "example": 1663597223
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the snippet was last updated as a UNIX timestamp.",
+            "example": 1663597223
+          }
+        },
+        "description": "A content snippet is a reusable piece of content for your AI agent and Copilot.",
+        "x-tags": [
+          "Content Snippets"
+        ]
+      },
+      "content_snippet_list": {
+        "title": "Content Snippet List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "list"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "example": "list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/content_snippet"
+            },
+            "description": "An array of content snippet objects."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of content snippets.",
+            "example": 1
+          },
+          "page": {
+            "type": "integer",
+            "description": "The current page number.",
+            "example": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "The number of results per page.",
+            "example": 50
+          },
+          "total_pages": {
+            "type": "integer",
+            "description": "The total number of pages.",
+            "example": 1
+          }
+        },
+        "description": "A paginated list of content snippets."
+      },
+      "content_snippet_create_request": {
+        "title": "Create Content Snippet Request",
+        "required": [
+          "title",
+          "json_blocks"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The title of the content snippet.",
+            "example": "How to reset your password"
+          },
+          "json_blocks": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The content blocks that make up the body of the snippet."
+          },
+          "locale": {
+            "type": "string",
+            "description": "The locale of the content snippet. Defaults to \u0060en\u0060.",
+            "default": "en",
+            "example": "en"
+          }
+        },
+        "description": "The request payload for creating a content snippet."
+      },
+      "content_snippet_update_request": {
+        "title": "Update Content Snippet Request",
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The title of the content snippet.",
+            "example": "How to reset your password"
+          },
+          "json_blocks": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The content blocks that make up the body of the snippet."
+          },
+          "locale": {
+            "type": "string",
+            "description": "The locale of the content snippet.",
+            "example": "en"
+          }
+        },
+        "description": "The request payload for updating a content snippet. All fields are optional \u2014 only provided fields will be updated."
+      },
       "conversation_list_item": {
         "title": "Conversation List Item",
         "type": "object",
@@ -38574,6 +39113,10 @@
     {
       "name": "Contacts",
       "description": "Everything about your contacts"
+    },
+    {
+      "name": "Content Snippets",
+      "description": "Everything about your Content Snippets"
     },
     {
       "name": "Conversations",

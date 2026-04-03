@@ -40,34 +40,15 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse?> GetAsWithJob_identifierGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse> GetAsWithJob_identifierGetResponseAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
-        }
-        /// <summary>
-        /// &quot;When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.Your exported message data will be streamed continuously back down to you in a gzipped CSV format.&gt; 📘 Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.&quot;
-        /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierResponse"/></returns>
-        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
-        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        [Obsolete("This method is obsolete. Use GetAsWithJob_identifierGetResponseAsync instead.")]
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#nullable restore
-#else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
-        {
-#endif
-            var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// &quot;When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.Your exported message data will be streamed continuously back down to you in a gzipped CSV format.&gt; 📘 Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.&quot;
@@ -96,14 +77,6 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item
         public global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierItemRequestBuilder(rawUrl, RequestAdapter);
-        }
-        /// <summary>
-        /// Configuration for the request such as headers, query parameters, and middleware options.
-        /// </summary>
-        [Obsolete("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.")]
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class WithJob_identifierItemRequestBuilderGetRequestConfiguration : RequestConfiguration<DefaultQueryParameters>
-        {
         }
     }
 }

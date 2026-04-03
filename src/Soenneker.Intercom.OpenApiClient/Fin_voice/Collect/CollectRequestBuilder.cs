@@ -27,19 +27,6 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Collect
                 return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.Item.CollectItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
-        /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.fin_voice.collect.item collection</summary>
-        /// <param name="position">The external reference ID</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.Item.CollectItemRequestBuilder"/></returns>
-        [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
-        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.Item.CollectItemRequestBuilder this[string position]
-        {
-            get
-            {
-                var urlTplParams = new Dictionary<string, object>(PathParameters);
-                if (!string.IsNullOrWhiteSpace(position)) urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.Item.CollectItemRequestBuilder(urlTplParams, RequestAdapter);
-            }
-        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.CollectRequestBuilder"/> and sets the default values.
         /// </summary>

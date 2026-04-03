@@ -27,19 +27,6 @@ namespace Soenneker.Intercom.OpenApiClient.Notes
                 return new global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
-        /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.notes.item collection</summary>
-        /// <param name="position">The unique identifier of a given note</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder"/></returns>
-        [Obsolete("This indexer is deprecated and will be removed in the next major version. Use the one with the typed parameter instead.")]
-        public global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder this[string position]
-        {
-            get
-            {
-                var urlTplParams = new Dictionary<string, object>(PathParameters);
-                if (!string.IsNullOrWhiteSpace(position)) urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder(urlTplParams, RequestAdapter);
-            }
-        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Notes.NotesRequestBuilder"/> and sets the default values.
         /// </summary>

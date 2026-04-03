@@ -14,6 +14,7 @@ using Soenneker.Intercom.OpenApiClient.Brands;
 using Soenneker.Intercom.OpenApiClient.Calls;
 using Soenneker.Intercom.OpenApiClient.Companies;
 using Soenneker.Intercom.OpenApiClient.Contacts;
+using Soenneker.Intercom.OpenApiClient.Content_snippets;
 using Soenneker.Intercom.OpenApiClient.Conversations;
 using Soenneker.Intercom.OpenApiClient.Custom_channel_events;
 using Soenneker.Intercom.OpenApiClient.Custom_object_instances;
@@ -93,6 +94,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Contacts.ContactsRequestBuilder Contacts
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Contacts.ContactsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The content_snippets property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Content_snippets.Content_snippetsRequestBuilder Content_snippets
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Content_snippets.Content_snippetsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The conversations property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Conversations.ConversationsRequestBuilder Conversations

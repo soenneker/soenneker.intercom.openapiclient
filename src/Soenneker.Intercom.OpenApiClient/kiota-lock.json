@@ -1,5 +1,5 @@
 {
-  "descriptionHash": "5CB0A53D74E0447698FB920B97DE1A06DA3B66362750F762216A058B966D3FD784731DA639A49F5B3EB65E088102C37980F731026158D2FDD2A84BBC52E8F2F1",
+  "descriptionHash": "286EDA4C663BEA0A2C559FE1E5212F8C1F402BB56D75511BF763EBC9909F8D8BC828B88AA523D81AE7D34B02033D436472626BF95DD045418B372AAABA6A26C7",
   "descriptionLocation": "../../fixed.json",
   "lockFileVersion": "1.0.0",
   "kiotaVersion": "1.30.0",
@@ -8,7 +8,7 @@
   "clientNamespaceName": "Soenneker.Intercom.OpenApiClient",
   "language": "CSharp",
   "usesBackingStore": false,
-  "excludeBackwardCompatible": false,
+  "excludeBackwardCompatible": true,
   "includeAdditionalData": true,
   "disableSSLValidation": false,
   "serializers": [
