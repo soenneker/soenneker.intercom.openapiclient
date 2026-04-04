@@ -83,7 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_ticket_type_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_ticket_type_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -92,7 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type?>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can get a list of all ticket types for a workspace.
