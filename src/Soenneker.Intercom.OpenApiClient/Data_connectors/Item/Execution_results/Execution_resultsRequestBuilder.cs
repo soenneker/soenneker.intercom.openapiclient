@@ -114,11 +114,25 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             [QueryParameter("error_type")]
             public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.GetError_typeQueryParameterType? ErrorType { get; set; }
             /// <summary>Include request/response bodies in the response (default false).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
             [QueryParameter("include_bodies")]
-            public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.GetInclude_bodiesQueryParameterType? IncludeBodies { get; set; }
+            public string? IncludeBodies { get; set; }
+#nullable restore
+#else
+            [QueryParameter("include_bodies")]
+            public string IncludeBodies { get; set; }
+#endif
             /// <summary>Include the request URL in the response (default false).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
             [QueryParameter("include_request_url")]
-            public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.GetInclude_request_urlQueryParameterType? IncludeRequestUrl { get; set; }
+            public string? IncludeRequestUrl { get; set; }
+#nullable restore
+#else
+            [QueryParameter("include_request_url")]
+            public string IncludeRequestUrl { get; set; }
+#endif
             /// <summary>The number of results per page (1-30, default 10).</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
@@ -136,8 +150,15 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             [QueryParameter("start_ts")]
             public int? StartTs { get; set; }
             /// <summary>Filter by success status. Use `true`, `false`, or omit for all.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
             [QueryParameter("success")]
-            public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.GetSuccessQueryParameterType? Success { get; set; }
+            public string? Success { get; set; }
+#nullable restore
+#else
+            [QueryParameter("success")]
+            public string Success { get; set; }
+#endif
         }
     }
 }
