@@ -29470,11 +29470,13 @@
         "properties": {
           "role": {
             "type": "string",
-            "description": "The role of the contact."
+            "description": "The role of the contact.",
+            "example": "user"
           },
           "external_id": {
             "type": "string",
-            "description": "A unique identifier for the contact which is given to Intercom"
+            "description": "A unique identifier for the contact which is given to Intercom",
+            "example": "625e90fc55ab113b6d92175f"
           },
           "email": {
             "type": "string",
@@ -29534,7 +29536,12 @@
           "custom_attributes": {
             "type": "object",
             "description": "The custom attributes which are set for the contact",
-            "nullable": true
+            "nullable": true,
+            "example": {
+              "paid_subscriber": true,
+              "monthly_spend": 155.5,
+              "team_mates": 1
+            }
           },
           "type": {
             "type": "string",
