@@ -23,6 +23,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.Convert_conversation_to_ticket_request_attributes Attributes { get; set; }
 #endif
+        /// <summary>The ID of the ticket state associated with the ticket type.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TicketStateId { get; set; }
+#nullable restore
+#else
+        public string TicketStateId { get; set; }
+#endif
         /// <summary>The ID of the type of ticket you want to convert the conversation to</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,6 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Convert_conversation_to_ticket_request_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Convert_conversation_to_ticket_request_attributes.CreateFromDiscriminatorValue); } },
+                { "ticket_state_id", n => { TicketStateId = n.GetStringValue(); } },
                 { "ticket_type_id", n => { TicketTypeId = n.GetStringValue(); } },
             };
         }
@@ -68,6 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Convert_conversation_to_ticket_request_attributes>("attributes", Attributes);
+            writer.WriteStringValue("ticket_state_id", TicketStateId);
             writer.WriteStringValue("ticket_type_id", TicketTypeId);
             writer.WriteAdditionalData(AdditionalData);
         }
