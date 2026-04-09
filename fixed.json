@@ -30197,6 +30197,11 @@
             "type": "integer",
             "description": "How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..",
             "example": 1000
+          },
+          "update_last_request_at": {
+            "type": "boolean",
+            "description": "Set to true to update the company\u0027s last seen time to now.",
+            "example": true
           }
         },
         "description": "You can create or update a Company",

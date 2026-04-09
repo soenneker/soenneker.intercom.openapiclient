@@ -61,6 +61,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? RemoteCreatedAt { get; set; }
         /// <summary>The number of employees in this company.</summary>
         public int? Size { get; set; }
+        /// <summary>Set to true to update the company&apos;s last seen time to now.</summary>
+        public bool? UpdateLastRequestAt { get; set; }
         /// <summary>The URL for this company&apos;s website. Please note that the value specified here is not validated. Accepts any string.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -102,6 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "plan", n => { Plan = n.GetStringValue(); } },
                 { "remote_created_at", n => { RemoteCreatedAt = n.GetIntValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
+                { "update_last_request_at", n => { UpdateLastRequestAt = n.GetBoolValue(); } },
                 { "website", n => { Website = n.GetStringValue(); } },
             };
         }
@@ -120,6 +123,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("plan", Plan);
             writer.WriteIntValue("remote_created_at", RemoteCreatedAt);
             writer.WriteIntValue("size", Size);
+            writer.WriteBoolValue("update_last_request_at", UpdateLastRequestAt);
             writer.WriteStringValue("website", Website);
             writer.WriteAdditionalData(AdditionalData);
         }
