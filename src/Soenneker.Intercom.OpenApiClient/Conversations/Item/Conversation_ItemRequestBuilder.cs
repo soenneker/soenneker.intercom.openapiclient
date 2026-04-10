@@ -9,6 +9,7 @@ using Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Handling_events;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply;
+using Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
@@ -53,6 +54,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply.ReplyRequestBuilder Reply
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply.ReplyRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The side_conversations property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations.Side_conversationsRequestBuilder Side_conversations
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations.Side_conversationsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The tags property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags.TagsRequestBuilder Tags

@@ -20,10 +20,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of conversation response time objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? AssignedTeamFirstResponseTimeByTeam { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? AssignedTeamFirstResponseTime { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> AssignedTeamFirstResponseTimeByTeam { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> AssignedTeamFirstResponseTime { get; set; }
 #endif
         /// <summary>An array of conversation response time objects within office hours</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -111,7 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "adjusted_handling_time", n => { AdjustedHandlingTime = n.GetIntValue(); } },
-                { "assigned_team_first_response_time_by_team", n => { AssignedTeamFirstResponseTimeByTeam = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "assigned_team_first_response_time", n => { AssignedTeamFirstResponseTime = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "assigned_team_first_response_time_in_office_hours", n => { AssignedTeamFirstResponseTimeInOfficeHours = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "count_assignments", n => { CountAssignments = n.GetIntValue(); } },
                 { "count_conversation_parts", n => { CountConversationParts = n.GetIntValue(); } },
@@ -143,7 +143,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("adjusted_handling_time", AdjustedHandlingTime);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>("assigned_team_first_response_time_by_team", AssignedTeamFirstResponseTimeByTeam);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>("assigned_team_first_response_time", AssignedTeamFirstResponseTime);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>("assigned_team_first_response_time_in_office_hours", AssignedTeamFirstResponseTimeInOfficeHours);
             writer.WriteIntValue("count_assignments", CountAssignments);
             writer.WriteIntValue("count_conversation_parts", CountConversationParts);

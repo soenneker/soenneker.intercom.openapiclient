@@ -12778,6 +12778,122 @@
         }
       }
     },
+    "/conversations/{id}/side_conversations": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "List side conversations",
+        "description": "List side conversations for a given conversation. Side conversations are internal threads created by teammates from within a conversation.\n\nEach side conversation includes its conversation parts (messages). Results are paginated.\n\nRequires the \u0060read_conversations\u0060 OAuth scope.\n",
+        "operationId": "listSideConversations",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/intercom_version"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier for the conversation as given by Intercom.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 123
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number of results to return (starting from 1).",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of side conversations to return per page (max 50).",
+            "schema": {
+              "maximum": 50,
+              "type": "integer",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/side_conversation_list"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "side_conversation.list",
+                      "side_conversations": [
+                        {
+                          "side_conversation_id": 456,
+                          "conversation_parts": [
+                            {
+                              "type": "conversation_part",
+                              "id": 789,
+                              "part_type": "comment",
+                              "body": "\u003Cp\u003EInternal note about this issue\u003C/p\u003E",
+                              "author": {
+                                "type": "admin",
+                                "id": 123,
+                                "name": "Jane Example",
+                                "email": "jane@example.com"
+                              },
+                              "created_at": 1663597223,
+                              "updated_at": 1663597223
+                            }
+                          ],
+                          "total_count": 1
+                        }
+                      ],
+                      "total_count": 1,
+                      "pages": {
+                        "type": "pages",
+                        "page": 1,
+                        "per_page": 25,
+                        "total_pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Conversation not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/conversations/redact": {
       "post": {
         "tags": [
@@ -29130,7 +29246,7 @@
             "description": "Total number of conversation parts.",
             "example": 1
           },
-          "assigned_team_first_response_time_by_team": {
+          "assigned_team_first_response_time": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/conversation_response_time"
@@ -33795,6 +33911,87 @@
           }
         },
         "description": "A list of handling events for a conversation"
+      },
+      "side_conversation_summary": {
+        "title": "Side Conversation Summary",
+        "type": "object",
+        "properties": {
+          "side_conversation_id": {
+            "type": "string",
+            "description": "The unique identifier for the side conversation.",
+            "example": 456
+          },
+          "conversation_parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversation_part"
+            },
+            "description": "The conversation parts (messages) in this side conversation."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of conversation parts in this side conversation.",
+            "example": 1
+          }
+        },
+        "description": "A side conversation with its conversation parts."
+      },
+      "side_conversation_list": {
+        "title": "Side Conversation List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "side_conversation.list"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of the response object.",
+            "example": "side_conversation.list"
+          },
+          "side_conversations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/side_conversation_summary"
+            },
+            "description": "An array of side conversation objects."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of side conversations.",
+            "example": 1
+          },
+          "pages": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "pages"
+                ],
+                "type": "string",
+                "additionalProperties": false,
+                "example": "pages"
+              },
+              "page": {
+                "type": "integer",
+                "description": "The current page number.",
+                "example": 1
+              },
+              "per_page": {
+                "type": "integer",
+                "description": "The number of results per page.",
+                "example": 25
+              },
+              "total_pages": {
+                "type": "integer",
+                "description": "The total number of pages.",
+                "example": 1
+              }
+            },
+            "description": "Pagination metadata."
+          }
+        },
+        "description": "A paginated list of side conversations for a conversation."
       },
       "help_center": {
         "title": "Help Center",

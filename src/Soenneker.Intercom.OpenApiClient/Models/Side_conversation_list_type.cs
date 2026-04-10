@@ -3,13 +3,13 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>Always ticket</summary>
+    /// <summary>The type of the response object.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public enum Ticket_type
+    public enum Side_conversation_list_type
     {
-        [EnumMember(Value = "ticket")]
+        [EnumMember(Value = "side_conversation.list")]
         #pragma warning disable CS1591
-        Ticket,
+        Side_conversationList,
         #pragma warning restore CS1591
     }
 }

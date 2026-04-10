@@ -8,45 +8,47 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A list of ticket types associated with a given ticket state.
+    /// A side conversation with its conversation parts.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Ticket_state_detailed_ticket_types : IAdditionalDataHolder, IParsable
+    public partial class Side_conversation_summary : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A list of ticket type attributes associated with a given ticket type.</summary>
+        /// <summary>The conversation parts (messages) in this side conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type?>? Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>? ConversationParts { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type?> Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part> ConversationParts { get; set; }
 #endif
-        /// <summary>String representing the object&apos;s type. Always has the value `list`.</summary>
+        /// <summary>The unique identifier for the side conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? SideConversationId { get; set; }
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string SideConversationId { get; set; }
 #endif
+        /// <summary>The total number of conversation parts in this side conversation.</summary>
+        public int? TotalCount { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state_detailed_ticket_types"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary"/> and sets the default values.
         /// </summary>
-        public Ticket_state_detailed_ticket_types()
+        public Side_conversation_summary()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state_detailed_ticket_types"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state_detailed_ticket_types CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state_detailed_ticket_types();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -56,8 +58,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>()?.AsList(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
+                { "conversation_parts", n => { ConversationParts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "side_conversation_id", n => { SideConversationId = n.GetStringValue(); } },
+                { "total_count", n => { TotalCount = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -67,8 +70,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("data", Data);
-            writer.WriteStringValue("type", Type);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>("conversation_parts", ConversationParts);
+            writer.WriteStringValue("side_conversation_id", SideConversationId);
+            writer.WriteIntValue("total_count", TotalCount);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
