@@ -61,18 +61,18 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         /// <summary>
         /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Company_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Company_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompanyList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can create or update a company.Companies will be only visible in Intercom when there is at least one associated user.Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated.{% admonition type=&quot;warning&quot; name=&quot;Using `company_id`&quot; %}  You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set a unique value once upon creation of the company.{% /admonition %}
@@ -94,11 +94,11 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_company_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_company_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -137,11 +137,11 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_company_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_company_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

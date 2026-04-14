@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Search
         /// <summary>
         /// Retrieve calls by a list of conversation ids and include transcripts when available.A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -44,11 +44,11 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Search
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Search
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieve calls by a list of conversation ids and include transcripts when available.A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.

@@ -36,17 +36,17 @@ namespace Soenneker.Intercom.OpenApiClient.Away_status_reasons
         /// <summary>
         /// Returns a list of all away status reasons configured for the workspace, including deleted ones.
         /// </summary>
-        /// <returns>A List&lt;global::Soenneker.Intercom.OpenApiClient.Models.Away_status_reason&gt;</returns>
+        /// <returns>A List&lt;global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReason&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<List<global::Soenneker.Intercom.OpenApiClient.Models.Away_status_reason>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReason>?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<List<global::Soenneker.Intercom.OpenApiClient.Models.Away_status_reason>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<List<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReason>> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Away_status_reasons
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Intercom.OpenApiClient.Models.Away_status_reason>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Away_status_reason.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            var collectionResult = await RequestAdapter.SendCollectionAsync<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReason>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReason.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
             return collectionResult?.AsList();
         }
         /// <summary>

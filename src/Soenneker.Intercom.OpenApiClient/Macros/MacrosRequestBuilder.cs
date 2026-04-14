@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Macros
         /// <summary>
         /// &quot;You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=\&quot;user.name\&quot; default=\&quot;there\&quot;/&gt;`&quot;
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Macro_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MacroList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -57,11 +57,11 @@ namespace Soenneker.Intercom.OpenApiClient.Macros
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Macro_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Macros.MacrosRequestBuilder.MacrosRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MacroList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Macros.MacrosRequestBuilder.MacrosRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Macro_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Macros.MacrosRequestBuilder.MacrosRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MacroList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Macros.MacrosRequestBuilder.MacrosRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Macros
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Macro_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Macro_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MacroList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MacroList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// &quot;You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=\&quot;user.name\&quot; default=\&quot;there\&quot;/&gt;`&quot;

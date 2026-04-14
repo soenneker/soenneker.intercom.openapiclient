@@ -34,20 +34,20 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Workflows.Item
         {
         }
         /// <summary>
-        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;warning&quot; name=&quot;Unstable API&quot; %}  This API is currently in the Unstable version. Its behavior may change in future releases.{% /admonition %}
+        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;warning&quot; name=&quot;Preview API&quot; %}  This API is currently in the Preview version. Its behavior may change in future releases.{% /admonition %}
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -56,10 +56,10 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Workflows.Item
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;warning&quot; name=&quot;Unstable API&quot; %}  This API is currently in the Unstable version. Its behavior may change in future releases.{% /admonition %}
+        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;warning&quot; name=&quot;Preview API&quot; %}  This API is currently in the Preview version. Its behavior may change in future releases.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

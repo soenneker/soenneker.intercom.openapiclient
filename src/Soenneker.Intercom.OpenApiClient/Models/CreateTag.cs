@@ -8,42 +8,42 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_tag_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag_company_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag_multiple_users_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Untag_company_request"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateTag : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_tag_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_tag_request? CreateOrUpdateTagRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest? CreateOrUpdateTagRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_tag_request CreateOrUpdateTagRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest CreateOrUpdateTagRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag_company_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Tag_company_request? TagCompanyRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest? TagCompanyRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Tag_company_request TagCompanyRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest TagCompanyRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag_multiple_users_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Tag_multiple_users_request? TagMultipleUsersRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest? TagMultipleUsersRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Tag_multiple_users_request TagMultipleUsersRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest TagMultipleUsersRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Untag_company_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Untag_company_request? UntagCompanyRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest? UntagCompanyRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Untag_company_request UntagCompanyRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest UntagCompanyRequest { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -55,21 +55,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTag();
-            if("create_or_update_tag_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("CreateOrUpdateTagRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateOrUpdateTagRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_tag_request();
+                result.CreateOrUpdateTagRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest();
             }
-            else if("tag_company_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("TagCompanyRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.TagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Tag_company_request();
+                result.TagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest();
             }
-            else if("tag_multiple_users_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("TagMultipleUsersRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.TagMultipleUsersRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Tag_multiple_users_request();
+                result.TagMultipleUsersRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest();
             }
-            else if("untag_company_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("UntagCompanyRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.UntagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Untag_company_request();
+                result.UntagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest();
             }
             return result;
         }
@@ -106,19 +106,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             if(CreateOrUpdateTagRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_tag_request>(null, CreateOrUpdateTagRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest>(null, CreateOrUpdateTagRequest);
             }
             else if(TagCompanyRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tag_company_request>(null, TagCompanyRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest>(null, TagCompanyRequest);
             }
             else if(TagMultipleUsersRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tag_multiple_users_request>(null, TagMultipleUsersRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest>(null, TagMultipleUsersRequest);
             }
             else if(UntagCompanyRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Untag_company_request>(null, UntagCompanyRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest>(null, UntagCompanyRequest);
             }
         }
     }

@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
         /// <summary>
         /// You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.{% admonition type=&quot;warning&quot; name=&quot;Experimental&quot; %}  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.{% /admonition %}
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart"/></returns>
         /// <param name="body">Payload for updating a conversation part. Supports two operations:1. Updating the send state of an external reply (requires `send_state` and `info_message`).2. Marking a part as seen by an admin (requires `seen` and `admin_id`).Both operations require `experimental` and `secret` for HMAC authentication.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -45,11 +45,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_part_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationPartRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_part_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationPartRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.{% admonition type=&quot;warning&quot; name=&quot;Experimental&quot; %}  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.{% /admonition %}
@@ -70,11 +70,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_part_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationPartRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_part_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationPartRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

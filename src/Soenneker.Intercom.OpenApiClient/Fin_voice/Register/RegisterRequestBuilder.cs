@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Register
         /// <summary>
         /// Register a Fin Voice call with Intercom. This endpoint creates an external referencethat links an external call identifier to an Intercom call and conversation.The call can be from different sources:- AWS Connect (default)- Five9- Zoom Phone
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse"/></returns>
         /// <param name="body">Register a Fin Voice call with Intercom</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -45,11 +45,11 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Register
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 4XX or 5XX status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Register
                 { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "XXX", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Register a Fin Voice call with Intercom. This endpoint creates an external referencethat links an external call identifier to an Intercom call and conversation.The call can be from different sources:- AWS Connect (default)- Five9- Zoom Phone
@@ -70,11 +70,11 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Register
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

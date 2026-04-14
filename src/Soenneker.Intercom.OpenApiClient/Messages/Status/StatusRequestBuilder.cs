@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Messages.Status
         /// <summary>
         /// Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages.This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providinginformation about delivery state and related message details.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -45,11 +45,11 @@ namespace Soenneker.Intercom.OpenApiClient.Messages.Status
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Messages.Status
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "500", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves statuses of messages sent from the Outbound module. Currently, this API only supports WhatsApp messages.This endpoint returns paginated status events for WhatsApp messages sent via the Outbound module, providinginformation about delivery state and related message details.

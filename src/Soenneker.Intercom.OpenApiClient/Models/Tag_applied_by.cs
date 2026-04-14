@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The admin who applied the tag
+    /// The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Tag_applied_by : global::Soenneker.Intercom.OpenApiClient.Models.Reference, IParsable

@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status
         /// <summary>
         /// Retrieves the delivery status of a specific WhatsApp message by its message ID.Returns the current status, conversation details, and any error information if the message failed to deliver.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -44,11 +44,11 @@ namespace Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status.StatusRequestBuilder.StatusRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Messages.Whatsapp.Status
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieves the delivery status of a specific WhatsApp message by its message ID.Returns the current status, conversation details, and any error information if the message failed to deliver.

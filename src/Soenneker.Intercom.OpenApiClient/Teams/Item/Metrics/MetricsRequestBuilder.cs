@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics
         /// <summary>
         /// Returns real-time activity metrics for admins in the specified team. For each admin, the response includes counts of open, idle, and snoozed conversations.This endpoint requires the `realtime_monitoring` feature to be enabled for your workspace.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Team_metric_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TeamMetricList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
@@ -44,11 +44,11 @@ namespace Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team_metric_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TeamMetricList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team_metric_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TeamMetricList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Team_metric_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Team_metric_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TeamMetricList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TeamMetricList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Returns real-time activity metrics for admins in the specified team. For each admin, the response includes counts of open, idle, and snoozed conversations.This endpoint requires the `realtime_monitoring` feature to be enabled for your workspace.

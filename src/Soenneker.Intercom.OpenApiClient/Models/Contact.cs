@@ -92,10 +92,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_companies? Companies { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies? Companies { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_companies Companies { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies Companies { get; set; }
 #endif
         /// <summary>(UNIX timestamp) The time when the contact was created.</summary>
         public int? CreatedAt { get; set; }
@@ -212,10 +212,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing location meta data about a Intercom contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_location? Location { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation? Location { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_location Location { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation Location { get; set; }
 #endif
         /// <summary>Whether the contact has marked an email sent to them as spam.</summary>
         public bool? MarkedEmailAsSpam { get; set; }
@@ -230,10 +230,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_notes? Notes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes? Notes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_notes Notes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes Notes { get; set; }
 #endif
         /// <summary>The operating system which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -266,18 +266,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing social profiles that a contact has.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_social_profiles? SocialProfiles { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles? SocialProfiles { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_social_profiles SocialProfiles { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles SocialProfiles { get; set; }
 #endif
         /// <summary>An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_tags? Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactTags? Tags { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_tags Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactTags Tags { get; set; }
 #endif
         /// <summary>The type of object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -334,7 +334,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "browser", n => { Browser = n.GetStringValue(); } },
                 { "browser_language", n => { BrowserLanguage = n.GetStringValue(); } },
                 { "browser_version", n => { BrowserVersion = n.GetStringValue(); } },
-                { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_companies>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_companies.CreateFromDiscriminatorValue); } },
+                { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>(global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
@@ -355,17 +355,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "last_email_opened_at", n => { LastEmailOpenedAt = n.GetIntValue(); } },
                 { "last_replied_at", n => { LastRepliedAt = n.GetIntValue(); } },
                 { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
-                { "location", n => { Location = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_location>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_location.CreateFromDiscriminatorValue); } },
+                { "location", n => { Location = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>(global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation.CreateFromDiscriminatorValue); } },
                 { "marked_email_as_spam", n => { MarkedEmailAsSpam = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_notes>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_notes.CreateFromDiscriminatorValue); } },
+                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes.CreateFromDiscriminatorValue); } },
                 { "os", n => { Os = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetIntValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
-                { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_social_profiles>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_social_profiles.CreateFromDiscriminatorValue); } },
-                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_tags>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_tags.CreateFromDiscriminatorValue); } },
+                { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>(global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles.CreateFromDiscriminatorValue); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>(global::Soenneker.Intercom.OpenApiClient.Models.ContactTags.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -389,7 +389,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("browser", Browser);
             writer.WriteStringValue("browser_language", BrowserLanguage);
             writer.WriteStringValue("browser_version", BrowserVersion);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_companies>("companies", Companies);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>("companies", Companies);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
@@ -410,17 +410,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("last_email_opened_at", LastEmailOpenedAt);
             writer.WriteIntValue("last_replied_at", LastRepliedAt);
             writer.WriteIntValue("last_seen_at", LastSeenAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_location>("location", Location);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>("location", Location);
             writer.WriteBoolValue("marked_email_as_spam", MarkedEmailAsSpam);
             writer.WriteStringValue("name", Name);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_notes>("notes", Notes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>("notes", Notes);
             writer.WriteStringValue("os", Os);
             writer.WriteIntValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
             writer.WriteIntValue("signed_up_at", SignedUpAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_social_profiles>("social_profiles", SocialProfiles);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_tags>("tags", Tags);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>("social_profiles", SocialProfiles);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>("tags", Tags);
             writer.WriteStringValue("type", Type);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteIntValue("updated_at", UpdatedAt);

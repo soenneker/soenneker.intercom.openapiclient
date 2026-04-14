@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// <summary>
         /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies and request URL are excluded by default.Use `include_bodies=true` to include bodies.Use `include_request_url=true` to include the sanitised request URL.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_execution_result_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -57,11 +57,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_execution_result_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder.Execution_resultsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder.Execution_resultsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_execution_result_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder.Execution_resultsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder.Execution_resultsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_execution_result_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_execution_result_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies and request URL are excluded by default.Use `include_bodies=true` to include bodies.Use `include_request_url=true` to include the sanitised request URL.

@@ -8,26 +8,26 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Contact_reply_ticket_request"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReplyTicket : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request? AdminReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest? AdminReplyTicketRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request AdminReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest AdminReplyTicketRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Contact_reply_ticket_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_reply_ticket_request? ContactReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest? ContactReplyTicketRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_reply_ticket_request ContactReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest ContactReplyTicketRequest { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,13 +39,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicket();
-            if("admin_reply_ticket_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("AdminReplyTicketRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.AdminReplyTicketRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request();
+                result.AdminReplyTicketRequest = new global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest();
             }
             else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ContactReplyTicketRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Contact_reply_ticket_request();
+                result.ContactReplyTicketRequest = new global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest();
             }
             return result;
         }
@@ -74,11 +74,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             if(AdminReplyTicketRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request>(null, AdminReplyTicketRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest>(null, AdminReplyTicketRequest);
             }
             else if(ContactReplyTicketRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_reply_ticket_request>(null, ContactReplyTicketRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest>(null, ContactReplyTicketRequest);
             }
         }
     }

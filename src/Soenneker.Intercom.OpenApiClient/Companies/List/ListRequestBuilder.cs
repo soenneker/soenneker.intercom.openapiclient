@@ -36,17 +36,17 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.List
         /// <summary>
         /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company_list?> PostAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.List.ListRequestBuilder.ListRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList?> PostAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.List.ListRequestBuilder.ListRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company_list> PostAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.List.ListRequestBuilder.ListRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList> PostAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.List.ListRequestBuilder.ListRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToPostRequestInformation(requestConfiguration);
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.List
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Company_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Company_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompanyList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}

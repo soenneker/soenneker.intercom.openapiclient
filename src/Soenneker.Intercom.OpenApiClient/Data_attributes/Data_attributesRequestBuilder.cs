@@ -49,17 +49,17 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
         /// <summary>
         /// You can fetch a list of all data attributes belonging to a workspace for contacts, companies or conversations.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_attributes.Data_attributesRequestBuilder.Data_attributesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_attributes.Data_attributesRequestBuilder.Data_attributesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_attributes.Data_attributesRequestBuilder.Data_attributesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_attributes.Data_attributesRequestBuilder.Data_attributesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -67,12 +67,12 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can create a data attributes for a `contact` or a `company`.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -80,11 +80,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_attribute_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_attribute_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -94,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Data_attribute.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can fetch a list of all data attributes belonging to a workspace for contacts, companies or conversations.
@@ -123,11 +123,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_attribute_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_attribute_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

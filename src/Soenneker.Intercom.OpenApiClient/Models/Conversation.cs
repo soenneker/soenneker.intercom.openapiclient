@@ -20,20 +20,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Data related to AI Agent involvement in the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent? AiAgent { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgent? AiAgent { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent AiAgent { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgent AiAgent { get; set; }
 #endif
         /// <summary>Indicates whether the AI Agent participated in the conversation.</summary>
         public bool? AiAgentParticipated { get; set; }
         /// <summary>AI-generated topics and subtopics for the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_topics? AiTopics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiTopics? AiTopics { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_topics AiTopics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiTopics AiTopics { get; set; }
 #endif
         /// <summary>Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -46,30 +46,30 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts? Contacts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts? Contacts { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts Contacts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts Contacts { get; set; }
 #endif
         /// <summary>A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_parts? ConversationParts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts? ConversationParts { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_parts ConversationParts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts ConversationParts { get; set; }
 #endif
         /// <summary>The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating? ConversationRating { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating? ConversationRating { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating ConversationRating { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating ConversationRating { get; set; }
 #endif
         /// <summary>The time the conversation was created.</summary>
         public int? CreatedAt { get; set; }
-        /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models.</summary>
+        /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as &quot;CX Score rating&quot; and &quot;CX Score explanation&quot; may also be included.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes? CustomAttributes { get; set; }
@@ -80,10 +80,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing information on the first users message. For a contact initiated message this will represent the users original message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply? FirstContactReply { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply? FirstContactReply { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply FirstContactReply { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply FirstContactReply { get; set; }
 #endif
         /// <summary>The id representing the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -96,10 +96,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list? LinkedObjects { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList? LinkedObjects { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list LinkedObjects { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList LinkedObjects { get; set; }
 #endif
         /// <summary>Indicates whether a conversation is open (true) or closed (false).</summary>
         public bool? Open { get; set; }
@@ -110,30 +110,30 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>&quot;The SLA Applied object contains the details for which SLA has been applied to this conversation.Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.&quot;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied? SlaApplied { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied? SlaApplied { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied SlaApplied { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied SlaApplied { get; set; }
 #endif
         /// <summary>If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.</summary>
         public int? SnoozedUntil { get; set; }
         /// <summary>The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source? Source { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource? Source { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source Source { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource Source { get; set; }
 #endif
         /// <summary>Can be set to &quot;open&quot;, &quot;closed&quot; or &quot;snoozed&quot;.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_state? State { get; set; }
         /// <summary>A Statistics object containing all information required for reporting, with timestamps and calculated metrics.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics? Statistics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics? Statistics { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics Statistics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics Statistics { get; set; }
 #endif
         /// <summary>A list of tags objects associated with a conversation</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -154,10 +154,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The list of teammates who participated in the conversation (wrote at least one conversation part).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates? Teammates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates? Teammates { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates Teammates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates Teammates { get; set; }
 #endif
         /// <summary>The title given to the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -205,29 +205,29 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
-                { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent>(global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent.CreateFromDiscriminatorValue); } },
+                { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgent.CreateFromDiscriminatorValue); } },
                 { "ai_agent_participated", n => { AiAgentParticipated = n.GetBoolValue(); } },
-                { "ai_topics", n => { AiTopics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_topics>(global::Soenneker.Intercom.OpenApiClient.Models.Ai_topics.CreateFromDiscriminatorValue); } },
+                { "ai_topics", n => { AiTopics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiTopics>(global::Soenneker.Intercom.OpenApiClient.Models.AiTopics.CreateFromDiscriminatorValue); } },
                 { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue); } },
-                { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts.CreateFromDiscriminatorValue); } },
-                { "conversation_parts", n => { ConversationParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_parts>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_parts.CreateFromDiscriminatorValue); } },
-                { "conversation_rating", n => { ConversationRating = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating.CreateFromDiscriminatorValue); } },
+                { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts.CreateFromDiscriminatorValue); } },
+                { "conversation_parts", n => { ConversationParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts.CreateFromDiscriminatorValue); } },
+                { "conversation_rating", n => { ConversationRating = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes.CreateFromDiscriminatorValue); } },
-                { "first_contact_reply", n => { FirstContactReply = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply.CreateFromDiscriminatorValue); } },
+                { "first_contact_reply", n => { FirstContactReply = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list>(global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list.CreateFromDiscriminatorValue); } },
+                { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList.CreateFromDiscriminatorValue); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
                 { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority>(); } },
                 { "read", n => { Read = n.GetBoolValue(); } },
-                { "sla_applied", n => { SlaApplied = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied>(global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied.CreateFromDiscriminatorValue); } },
+                { "sla_applied", n => { SlaApplied = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>(global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied.CreateFromDiscriminatorValue); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
-                { "source", n => { Source = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source.CreateFromDiscriminatorValue); } },
+                { "source", n => { Source = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource.CreateFromDiscriminatorValue); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_state>(); } },
-                { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics.CreateFromDiscriminatorValue); } },
+                { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics.CreateFromDiscriminatorValue); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
                 { "team_assignee_id", n => { TeamAssigneeId = n.GetStringValue(); } },
-                { "teammates", n => { Teammates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates.CreateFromDiscriminatorValue); } },
+                { "teammates", n => { Teammates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -242,29 +242,29 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent>("ai_agent", AiAgent);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>("ai_agent", AiAgent);
             writer.WriteBoolValue("ai_agent_participated", AiAgentParticipated);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_topics>("ai_topics", AiTopics);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiTopics>("ai_topics", AiTopics);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>("company", Company);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts>("contacts", Contacts);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_parts>("conversation_parts", ConversationParts);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating>("conversation_rating", ConversationRating);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>("contacts", Contacts);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>("conversation_parts", ConversationParts);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>("conversation_rating", ConversationRating);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes>("custom_attributes", CustomAttributes);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply>("first_contact_reply", FirstContactReply);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>("first_contact_reply", FirstContactReply);
             writer.WriteStringValue("id", Id);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list>("linked_objects", LinkedObjects);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>("linked_objects", LinkedObjects);
             writer.WriteBoolValue("open", Open);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority>("priority", Priority);
             writer.WriteBoolValue("read", Read);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied>("sla_applied", SlaApplied);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>("sla_applied", SlaApplied);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source>("source", Source);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>("source", Source);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_state>("state", State);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics>("statistics", Statistics);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics>("statistics", Statistics);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
             writer.WriteStringValue("team_assignee_id", TeamAssigneeId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates>("teammates", Teammates);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates>("teammates", Teammates);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);

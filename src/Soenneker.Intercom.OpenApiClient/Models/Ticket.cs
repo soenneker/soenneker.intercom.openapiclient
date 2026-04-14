@@ -28,10 +28,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The list of contacts affected by a ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_contacts? Contacts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts? Contacts { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_contacts Contacts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts Contacts { get; set; }
 #endif
         /// <summary>The time the ticket was created as a UTC Unix timestamp.</summary>
         public int? CreatedAt { get; set; }
@@ -48,10 +48,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list? LinkedObjects { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList? LinkedObjects { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list LinkedObjects { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList LinkedObjects { get; set; }
 #endif
         /// <summary>Whether or not the ticket is open. If false, the ticket is closed.</summary>
         public bool? Open { get; set; }
@@ -92,21 +92,27 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A list of Ticket Part objects for each note and event in the ticket. There is a limit of 500 parts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts? TicketParts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketParts? TicketParts { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts TicketParts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketParts TicketParts { get; set; }
 #endif
         /// <summary>A ticket state, used to define the state of a ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state? TicketState { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketState? TicketState { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state TicketState { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketState TicketState { get; set; }
 #endif
         /// <summary>A ticket type, used to define the data fields to be captured in a ticket.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type? TicketType { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketType? TicketType { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketType TicketType { get; set; }
+#endif
         /// <summary>Always ticket</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type? Type { get; set; }
         /// <summary>The last time the ticket was updated as a UTC Unix timestamp.</summary>
@@ -138,20 +144,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetStringValue(); } },
                 { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_category>(); } },
-                { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_contacts>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_contacts.CreateFromDiscriminatorValue); } },
+                { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "is_shared", n => { IsShared = n.GetBoolValue(); } },
-                { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list>(global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list.CreateFromDiscriminatorValue); } },
+                { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList.CreateFromDiscriminatorValue); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
                 { "previous_ticket_state_id", n => { PreviousTicketStateId = n.GetStringValue(); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
                 { "team_assignee_id", n => { TeamAssigneeId = n.GetStringValue(); } },
                 { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_ticket_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_ticket_attributes.CreateFromDiscriminatorValue); } },
                 { "ticket_id", n => { TicketId = n.GetStringValue(); } },
-                { "ticket_parts", n => { TicketParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts.CreateFromDiscriminatorValue); } },
-                { "ticket_state", n => { TicketState = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state.CreateFromDiscriminatorValue); } },
-                { "ticket_type", n => { TicketType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(); } },
+                { "ticket_parts", n => { TicketParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketParts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketParts.CreateFromDiscriminatorValue); } },
+                { "ticket_state", n => { TicketState = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketState>(global::Soenneker.Intercom.OpenApiClient.Models.TicketState.CreateFromDiscriminatorValue); } },
+                { "ticket_type", n => { TicketType = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>(global::Soenneker.Intercom.OpenApiClient.Models.TicketType.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
@@ -165,20 +171,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_category>("category", Category);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_contacts>("contacts", Contacts);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>("contacts", Contacts);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("is_shared", IsShared);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list>("linked_objects", LinkedObjects);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>("linked_objects", LinkedObjects);
             writer.WriteBoolValue("open", Open);
             writer.WriteStringValue("previous_ticket_state_id", PreviousTicketStateId);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
             writer.WriteStringValue("team_assignee_id", TeamAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_ticket_attributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_id", TicketId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts>("ticket_parts", TicketParts);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state>("ticket_state", TicketState);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("ticket_type", TicketType);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketParts>("ticket_parts", TicketParts);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketState>("ticket_state", TicketState);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>("ticket_type", TicketType);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_type>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

@@ -72,10 +72,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The Translated Content of an Group. The keys are the locale codes and the values are the translated content of the Group.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Group_translated_content? TranslatedContent { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent? TranslatedContent { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Group_translated_content TranslatedContent { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent TranslatedContent { get; set; }
 #endif
         /// <summary>The time when the article was last updated (seconds). For multilingual articles, this will be the timestamp of last update of the default language&apos;s content.</summary>
         public int? UpdatedAt { get; set; }
@@ -129,7 +129,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "order", n => { Order = n.GetIntValue(); } },
                 { "parent_id", n => { ParentId = n.GetStringValue(); } },
-                { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Group_translated_content>(global::Soenneker.Intercom.OpenApiClient.Models.Group_translated_content.CreateFromDiscriminatorValue); } },
+                { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent>(global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent.CreateFromDiscriminatorValue); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
@@ -151,7 +151,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteIntValue("order", Order);
             writer.WriteStringValue("parent_id", ParentId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Group_translated_content>("translated_content", TranslatedContent);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent>("translated_content", TranslatedContent);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteStringValue("workspace_id", WorkspaceId);

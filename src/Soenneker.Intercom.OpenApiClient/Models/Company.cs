@@ -72,28 +72,28 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The list of notes associated with the company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_notes? Notes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes? Notes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_notes Notes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes Notes { get; set; }
 #endif
         /// <summary>The plan property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_plan? Plan { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyPlan? Plan { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_plan Plan { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyPlan Plan { get; set; }
 #endif
         /// <summary>The time the company was created by you.</summary>
         public int? RemoteCreatedAt { get; set; }
         /// <summary>The list of segments associated with the company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_segments? Segments { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanySegments? Segments { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_segments Segments { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanySegments Segments { get; set; }
 #endif
         /// <summary>How many sessions the company has recorded.</summary>
         public int? SessionCount { get; set; }
@@ -102,10 +102,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The list of tags associated with the company</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_tags? Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags? Tags { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_tags Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags Tags { get; set; }
 #endif
         /// <summary>Value is `company`</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Company_type? Type { get; set; }
@@ -155,13 +155,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "last_request_at", n => { LastRequestAt = n.GetIntValue(); } },
                 { "monthly_spend", n => { MonthlySpend = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_notes>(global::Soenneker.Intercom.OpenApiClient.Models.Company_notes.CreateFromDiscriminatorValue); } },
-                { "plan", n => { Plan = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_plan>(global::Soenneker.Intercom.OpenApiClient.Models.Company_plan.CreateFromDiscriminatorValue); } },
+                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes.CreateFromDiscriminatorValue); } },
+                { "plan", n => { Plan = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyPlan>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyPlan.CreateFromDiscriminatorValue); } },
                 { "remote_created_at", n => { RemoteCreatedAt = n.GetIntValue(); } },
-                { "segments", n => { Segments = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_segments>(global::Soenneker.Intercom.OpenApiClient.Models.Company_segments.CreateFromDiscriminatorValue); } },
+                { "segments", n => { Segments = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanySegments>(global::Soenneker.Intercom.OpenApiClient.Models.CompanySegments.CreateFromDiscriminatorValue); } },
                 { "session_count", n => { SessionCount = n.GetIntValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
-                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_tags>(global::Soenneker.Intercom.OpenApiClient.Models.Company_tags.CreateFromDiscriminatorValue); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_type>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "user_count", n => { UserCount = n.GetIntValue(); } },
@@ -184,13 +184,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("last_request_at", LastRequestAt);
             writer.WriteIntValue("monthly_spend", MonthlySpend);
             writer.WriteStringValue("name", Name);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_notes>("notes", Notes);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_plan>("plan", Plan);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes>("notes", Notes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyPlan>("plan", Plan);
             writer.WriteIntValue("remote_created_at", RemoteCreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_segments>("segments", Segments);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanySegments>("segments", Segments);
             writer.WriteIntValue("session_count", SessionCount);
             writer.WriteIntValue("size", Size);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_tags>("tags", Tags);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags>("tags", Tags);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_type>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteIntValue("user_count", UserCount);

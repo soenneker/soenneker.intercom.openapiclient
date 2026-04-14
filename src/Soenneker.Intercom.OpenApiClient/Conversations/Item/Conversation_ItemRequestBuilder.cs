@@ -84,18 +84,18 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// <summary>
         /// &quot;{% admonition type=\&quot;warning\&quot; name=\&quot;Irreversible operation\&quot; %}Deleting a conversation is permanent and cannot be reversed.{% /admonition %}You can delete a single conversation. The behavior depends on the `retain_metrics` parameter:- **With `retain_metrics=true` (default)**: Deletes the conversation while retaining reporting data. The conversation will still appear in reporting, though some data may be incomplete due to the deletion.- **With `retain_metrics=false`**: Deletes the conversation and all associated reporting data. The conversation will be completely removed from both the inbox and all reporting.{% admonition type=\&quot;info\&quot; name=\&quot;Required scope for retain_metrics=false\&quot; %}Using `retain_metrics=false` requires the `delete_conversations_and_metrics` OAuth scope.{% /admonition %}For more info, see [this help center article](https://www.intercom.com/help/en/articles/13885146-deleting-a-conversation).&quot;
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation_deleted"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_deleted?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_deleted> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
@@ -104,7 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_deleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation_deleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
@@ -145,11 +145,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_request body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_request body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -208,11 +208,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_request body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Update_conversation_request body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_ItemRequestBuilder.Conversation_ItemRequestBuilderPutQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

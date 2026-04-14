@@ -8,42 +8,42 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Assign_conversation_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Close_conversation_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Open_conversation_request"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Snooze_conversation_request"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ManageConversation : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Assign_conversation_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Assign_conversation_request? AssignConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest? AssignConversationRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Assign_conversation_request AssignConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest AssignConversationRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Close_conversation_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Close_conversation_request? CloseConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest? CloseConversationRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Close_conversation_request CloseConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest CloseConversationRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Open_conversation_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Open_conversation_request? OpenConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest? OpenConversationRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Open_conversation_request OpenConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest OpenConversationRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Snooze_conversation_request"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Snooze_conversation_request? SnoozeConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest? SnoozeConversationRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Snooze_conversation_request SnoozeConversationRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest SnoozeConversationRequest { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -55,21 +55,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.ManageConversation();
-            if("assign_conversation_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("AssignConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.AssignConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Assign_conversation_request();
+                result.AssignConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest();
             }
-            else if("close_conversation_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("CloseConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CloseConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Close_conversation_request();
+                result.CloseConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest();
             }
-            else if("open_conversation_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("OpenConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.OpenConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Open_conversation_request();
+                result.OpenConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest();
             }
-            else if("snooze_conversation_request".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("SnoozeConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.SnoozeConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.Snooze_conversation_request();
+                result.SnoozeConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest();
             }
             return result;
         }
@@ -106,19 +106,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             if(AssignConversationRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Assign_conversation_request>(null, AssignConversationRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest>(null, AssignConversationRequest);
             }
             else if(CloseConversationRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Close_conversation_request>(null, CloseConversationRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest>(null, CloseConversationRequest);
             }
             else if(OpenConversationRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Open_conversation_request>(null, OpenConversationRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest>(null, OpenConversationRequest);
             }
             else if(SnoozeConversationRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Snooze_conversation_request>(null, SnoozeConversationRequest);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest>(null, SnoozeConversationRequest);
             }
         }
     }

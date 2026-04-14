@@ -49,18 +49,18 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         /// <summary>
         /// Delete a single Custom Object instance by external_id.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance_deleted"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance_deleted?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance_deleted> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
@@ -69,23 +69,23 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance_deleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance_deleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Fetch a Custom Object Instance by external_id.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -94,12 +94,12 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Create or update a custom object instance
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance"/></returns>
         /// <param name="body">Payload to create or update a Custom Object instance</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -107,11 +107,11 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_custom_object_instance_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_custom_object_instance_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -121,7 +121,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Custom_object_instance.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Delete a single Custom Object instance by external_id.
@@ -169,11 +169,11 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_custom_object_instance_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_or_update_custom_object_instance_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

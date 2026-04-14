@@ -39,11 +39,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject();
-            if("datetime_1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("Datetime_1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.DatetimeBranch1 = new global::Soenneker.Intercom.OpenApiClient.Models.Datetime_Branch1();
             }
-            else if("datetime_2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("Datetime_2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.DatetimeBranch2 = new global::Soenneker.Intercom.OpenApiClient.Models.Datetime_Branch2();
             }

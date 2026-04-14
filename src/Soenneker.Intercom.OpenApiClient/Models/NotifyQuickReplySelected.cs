@@ -9,7 +9,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class NotifyQuickReplySelected : global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_base_event, IParsable
+    public partial class NotifyQuickReplySelected : global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelBaseEvent, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Id of the selected quick reply option.</summary>

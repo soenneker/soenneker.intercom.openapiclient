@@ -42,7 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         /// <summary>
         /// Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Deleted_data_connector_object"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
@@ -50,11 +50,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_data_connector_object?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_data_connector_object> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
@@ -64,12 +64,12 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_data_connector_object>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Deleted_data_connector_object.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -77,11 +77,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder.Data_connector_ItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder.Data_connector_ItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder.Data_connector_ItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder.Data_connector_ItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -91,12 +91,12 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector&apos;s state.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail"/></returns>
         /// <param name="body">Update an existing data connector. All fields are optional — only provided fields will be updated. Set `state` to `live` or `draft` to change the connector&apos;s state.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -106,11 +106,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail?> PatchAsync(global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail?> PatchAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail> PatchAsync(global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail> PatchAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -122,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
                 { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
@@ -170,11 +170,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPatchRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPatchRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPatchRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Update_data_connector_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPatchRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

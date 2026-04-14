@@ -15,9 +15,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The time when the tag was applied to the object</summary>
+        /// <summary>The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket.</summary>
         public int? AppliedAt { get; set; }
-        /// <summary>The admin who applied the tag</summary>
+        /// <summary>The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Tag_applied_by? AppliedBy { get; set; }

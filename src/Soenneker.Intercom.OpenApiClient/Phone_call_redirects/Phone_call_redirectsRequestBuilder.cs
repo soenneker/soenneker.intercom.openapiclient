@@ -36,18 +36,18 @@ namespace Soenneker.Intercom.OpenApiClient.Phone_call_redirects
         /// <summary>
         /// You can use the API to deflect phone calls to the Intercom Messenger.Calling this endpoint will send an SMS with a link to the Messenger to the phone number specified.If custom attributes are specified, they will be added to the user or lead&apos;s custom data attributes.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Phone_switch"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch"/></returns>
         /// <param name="body">You can create an phone switch</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Phone_switch?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_phone_switch_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Phone_switch> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.Create_phone_switch_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Phone_call_redirects
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Phone_switch>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Phone_switch.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can use the API to deflect phone calls to the Intercom Messenger.Calling this endpoint will send an SMS with a link to the Messenger to the phone number specified.If custom attributes are specified, they will be added to the user or lead&apos;s custom data attributes.
@@ -66,11 +66,11 @@ namespace Soenneker.Intercom.OpenApiClient.Phone_call_redirects
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_phone_switch_request body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.Create_phone_switch_request body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

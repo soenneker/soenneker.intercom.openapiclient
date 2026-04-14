@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Reply
         /// <summary>
         /// You can reply to a ticket with a message from an admin or on behalf of a contact, or with a note for admins.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketReply"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -45,11 +45,11 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Reply
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicket body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicket body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicket body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicket body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Reply
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TicketReply.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can reply to a ticket with a message from an admin or on behalf of a contact, or with a note for admins.

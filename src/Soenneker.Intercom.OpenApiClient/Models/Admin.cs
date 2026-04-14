@@ -82,10 +82,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Admin priority levels for teams</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level? TeamPriorityLevel { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TeamPriorityLevel? TeamPriorityLevel { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level TeamPriorityLevel { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TeamPriorityLevel TeamPriorityLevel { get; set; }
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `admin`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -131,7 +131,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_role>(global::Soenneker.Intercom.OpenApiClient.Models.Admin_role.CreateFromDiscriminatorValue); } },
                 { "team_ids", n => { TeamIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "team_priority_level", n => { TeamPriorityLevel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level>(global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level.CreateFromDiscriminatorValue); } },
+                { "team_priority_level", n => { TeamPriorityLevel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TeamPriorityLevel>(global::Soenneker.Intercom.OpenApiClient.Models.TeamPriorityLevel.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -153,7 +153,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_role>("role", Role);
             writer.WriteCollectionOfPrimitiveValues<int?>("team_ids", TeamIds);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level>("team_priority_level", TeamPriorityLevel);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TeamPriorityLevel>("team_priority_level", TeamPriorityLevel);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -9,16 +9,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class NotifyAttributeCollected : global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_base_event, IParsable
+    public partial class NotifyAttributeCollected : global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelBaseEvent, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>The attribute property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_attribute? Attribute { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelAttribute? Attribute { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_attribute Attribute { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelAttribute Attribute { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
             {
-                { "attribute", n => { Attribute = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_attribute>(global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_attribute.CreateFromDiscriminatorValue); } },
+                { "attribute", n => { Attribute = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelAttribute>(global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelAttribute.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Custom_channel_attribute>("attribute", Attribute);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelAttribute>("attribute", Attribute);
         }
     }
 }

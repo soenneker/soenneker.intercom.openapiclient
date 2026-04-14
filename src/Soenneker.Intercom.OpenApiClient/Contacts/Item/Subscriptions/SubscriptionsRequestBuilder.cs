@@ -49,18 +49,18 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
         /// <summary>
         /// You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has &apos;opted-in&apos; to or has &apos;opted-out&apos; from, depending on the subscription type.This will return a list of Subscription Type objects that the contact is associated with.The data property will show a combined list of:  1.Opt-out subscription types that the user has opted-out from.  2.Opt-in subscription types that the user has opted-in to receiving.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_list?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_list> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -69,12 +69,12 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in:  1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type.  2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type.This will return a subscription type model for the subscription type that was added to the contact.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -82,11 +82,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.AttachSubscriptionTypeToContact body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.AttachSubscriptionTypeToContact body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.AttachSubscriptionTypeToContact body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.AttachSubscriptionTypeToContact body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has &apos;opted-in&apos; to or has &apos;opted-out&apos; from, depending on the subscription type.This will return a list of Subscription Type objects that the contact is associated with.The data property will show a combined list of:  1.Opt-out subscription types that the user has opted-out from.  2.Opt-in subscription types that the user has opted-in to receiving.

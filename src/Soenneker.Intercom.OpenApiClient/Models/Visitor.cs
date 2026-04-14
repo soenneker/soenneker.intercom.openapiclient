@@ -28,18 +28,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The avatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_avatar? Avatar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar? Avatar { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_avatar Avatar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar Avatar { get; set; }
 #endif
         /// <summary>The companies property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_companies? Companies { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies? Companies { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_companies Companies { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies Companies { get; set; }
 #endif
         /// <summary>The time the Visitor was added to Intercom.</summary>
         public int? CreatedAt { get; set; }
@@ -76,10 +76,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The location_data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_location_data? LocationData { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData? LocationData { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_location_data LocationData { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData LocationData { get; set; }
 #endif
         /// <summary>Identifies if this visitor has marked an email as spam.</summary>
         public bool? MarkedEmailAsSpam { get; set; }
@@ -128,10 +128,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The segments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_segments? Segments { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments? Segments { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_segments Segments { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments Segments { get; set; }
 #endif
         /// <summary>The number of sessions the Visitor has had.</summary>
         public int? SessionCount { get; set; }
@@ -140,18 +140,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The social_profiles property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_social_profiles? SocialProfiles { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles? SocialProfiles { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_social_profiles SocialProfiles { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles SocialProfiles { get; set; }
 #endif
         /// <summary>The tags property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_tags? Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags? Tags { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_tags Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags Tags { get; set; }
 #endif
         /// <summary>Value is &apos;visitor&apos;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -241,8 +241,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "anonymous", n => { Anonymous = n.GetBoolValue(); } },
                 { "app_id", n => { AppId = n.GetStringValue(); } },
-                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_avatar>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_avatar.CreateFromDiscriminatorValue); } },
-                { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_companies>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_companies.CreateFromDiscriminatorValue); } },
+                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar.CreateFromDiscriminatorValue); } },
+                { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes.CreateFromDiscriminatorValue); } },
                 { "do_not_track", n => { DoNotTrack = n.GetBoolValue(); } },
@@ -250,7 +250,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "has_hard_bounced", n => { HasHardBounced = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "las_request_at", n => { LasRequestAt = n.GetIntValue(); } },
-                { "location_data", n => { LocationData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_location_data>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_location_data.CreateFromDiscriminatorValue); } },
+                { "location_data", n => { LocationData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData.CreateFromDiscriminatorValue); } },
                 { "marked_email_as_spam", n => { MarkedEmailAsSpam = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetStringValue(); } },
@@ -258,11 +258,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pseudonym", n => { Pseudonym = n.GetStringValue(); } },
                 { "referrer", n => { Referrer = n.GetStringValue(); } },
                 { "remote_created_at", n => { RemoteCreatedAt = n.GetIntValue(); } },
-                { "segments", n => { Segments = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_segments>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_segments.CreateFromDiscriminatorValue); } },
+                { "segments", n => { Segments = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments.CreateFromDiscriminatorValue); } },
                 { "session_count", n => { SessionCount = n.GetIntValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
-                { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_social_profiles>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_social_profiles.CreateFromDiscriminatorValue); } },
-                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_tags>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_tags.CreateFromDiscriminatorValue); } },
+                { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles.CreateFromDiscriminatorValue); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -283,8 +283,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("anonymous", Anonymous);
             writer.WriteStringValue("app_id", AppId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_avatar>("avatar", Avatar);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_companies>("companies", Companies);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar>("avatar", Avatar);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies>("companies", Companies);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes>("custom_attributes", CustomAttributes);
             writer.WriteBoolValue("do_not_track", DoNotTrack);
@@ -292,7 +292,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("has_hard_bounced", HasHardBounced);
             writer.WriteStringValue("id", Id);
             writer.WriteIntValue("las_request_at", LasRequestAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_location_data>("location_data", LocationData);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData>("location_data", LocationData);
             writer.WriteBoolValue("marked_email_as_spam", MarkedEmailAsSpam);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("owner_id", OwnerId);
@@ -300,11 +300,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("pseudonym", Pseudonym);
             writer.WriteStringValue("referrer", Referrer);
             writer.WriteIntValue("remote_created_at", RemoteCreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_segments>("segments", Segments);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments>("segments", Segments);
             writer.WriteIntValue("session_count", SessionCount);
             writer.WriteIntValue("signed_up_at", SignedUpAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_social_profiles>("social_profiles", SocialProfiles);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_tags>("tags", Tags);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles>("social_profiles", SocialProfiles);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags>("tags", Tags);
             writer.WriteStringValue("type", Type);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteIntValue("updated_at", UpdatedAt);

@@ -11,15 +11,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// The Articles API is a central place to gather all information and take actions on your articles. Articles can live within collections and sections, or alternatively they can stand alone.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Article : global::Soenneker.Intercom.OpenApiClient.Models.Article_list_item, IParsable
+    public partial class Article : global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem, IParsable
     {
         /// <summary>The statistics of an article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics? Statistics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics? Statistics { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics Statistics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics Statistics { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
             {
-                { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics>(global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics.CreateFromDiscriminatorValue); } },
+                { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics>("statistics", Statistics);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics>("statistics", Statistics);
         }
     }
 }

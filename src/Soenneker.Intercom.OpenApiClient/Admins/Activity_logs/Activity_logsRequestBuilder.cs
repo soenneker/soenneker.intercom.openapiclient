@@ -42,17 +42,17 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         /// <summary>
         /// You can get a log of activities by all admins in an app.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder.Activity_logsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder.Activity_logsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder.Activity_logsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder.Activity_logsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can get a log of activities by all admins in an app.

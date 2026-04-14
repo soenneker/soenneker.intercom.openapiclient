@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Admin priority levels for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level? AdminPriorityLevel { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel? AdminPriorityLevel { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level AdminPriorityLevel { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel AdminPriorityLevel { get; set; }
 #endif
         /// <summary>The id of the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_ids", n => { AdminIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "admin_priority_level", n => { AdminPriorityLevel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level>(global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level.CreateFromDiscriminatorValue); } },
+                { "admin_priority_level", n => { AdminPriorityLevel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel>(global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -95,7 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<int?>("admin_ids", AdminIds);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level>("admin_priority_level", AdminPriorityLevel);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel>("admin_priority_level", AdminPriorityLevel);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("type", Type);

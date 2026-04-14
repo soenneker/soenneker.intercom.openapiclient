@@ -36,18 +36,18 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations
         /// <summary>
         /// List side conversations for a given conversation. Side conversations are internal threads created by teammates from within a conversation.Each side conversation includes its conversation parts (messages). Results are paginated.Requires the `read_conversations` OAuth scope.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations.Side_conversationsRequestBuilder.Side_conversationsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations.Side_conversationsRequestBuilder.Side_conversationsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations.Side_conversationsRequestBuilder.Side_conversationsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations.Side_conversationsRequestBuilder.Side_conversationsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List side conversations for a given conversation. Side conversations are internal threads created by teammates from within a conversation.Each side conversation includes its conversation parts (messages). Results are paginated.Requires the `read_conversations` OAuth scope.

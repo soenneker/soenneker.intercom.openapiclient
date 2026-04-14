@@ -36,17 +36,17 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Scroll
         /// <summary>
         /// &quot;      The `list all companies` functionality does not work well for huge datasets, and can result in errors and performance problems when paging deeply. The Scroll API provides an efficient mechanism for iterating over all companies in a dataset.- Each app can only have 1 scroll open at a time. You&apos;ll get an error message if you try to have more than one open per app.- If the scroll isn&apos;t used for 1 minute, it expires and calls with that scroll param will fail- If the end of the scroll is reached, \&quot;companies\&quot; will be empty and the scroll parameter will expire{% admonition type=\&quot;info\&quot; name=\&quot;Scroll Parameter\&quot; %}  You can get the first page of companies by simply sending a GET request to the scroll endpoint.  For subsequent requests you will need to use the scroll parameter from the response.{% /admonition %}{% admonition type=\&quot;danger\&quot; name=\&quot;Scroll network timeouts\&quot; %}  Since scroll is often used on large datasets network errors such as timeouts can be encountered. When this occurs you will see a HTTP 500 error with the following message:  \&quot;Request failed due to an internal network error. Please restart the scroll operation.\&quot;  If this happens, you will need to restart your scroll query: It is not possible to continue from a specific point when using scroll.{% /admonition %}&quot;
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.Scroll.ScrollRequestBuilder.ScrollRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.Scroll.ScrollRequestBuilder.ScrollRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.Scroll.ScrollRequestBuilder.ScrollRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.Scroll.ScrollRequestBuilder.ScrollRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Scroll
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// &quot;      The `list all companies` functionality does not work well for huge datasets, and can result in errors and performance problems when paging deeply. The Scroll API provides an efficient mechanism for iterating over all companies in a dataset.- Each app can only have 1 scroll open at a time. You&apos;ll get an error message if you try to have more than one open per app.- If the scroll isn&apos;t used for 1 minute, it expires and calls with that scroll param will fail- If the end of the scroll is reached, \&quot;companies\&quot; will be empty and the scroll parameter will expire{% admonition type=\&quot;info\&quot; name=\&quot;Scroll Parameter\&quot; %}  You can get the first page of companies by simply sending a GET request to the scroll endpoint.  For subsequent requests you will need to use the scroll parameter from the response.{% /admonition %}{% admonition type=\&quot;danger\&quot; name=\&quot;Scroll network timeouts\&quot; %}  Since scroll is often used on large datasets network errors such as timeouts can be encountered. When this occurs you will see a HTTP 500 error with the following message:  \&quot;Request failed due to an internal network error. Please restart the scroll operation.\&quot;  If this happens, you will need to restart your scroll query: It is not possible to continue from a specific point when using scroll.{% /admonition %}&quot;

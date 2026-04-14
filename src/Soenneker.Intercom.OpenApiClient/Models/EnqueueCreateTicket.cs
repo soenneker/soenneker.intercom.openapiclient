@@ -9,7 +9,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class EnqueueCreateTicket : global::Soenneker.Intercom.OpenApiClient.Models.Create_ticket_request, IParsable
+    public partial class EnqueueCreateTicket : global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Option to disable notifications when a Ticket is created.</summary>

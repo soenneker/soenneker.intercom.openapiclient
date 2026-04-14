@@ -36,18 +36,18 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Deleted
         /// <summary>
         /// List all deleted conversation IDs.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page. You can navigate to next pages using the `page` param.{% /admonition %}
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Deleted_conversation_list"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedConversationList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_conversation_list?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Deleted.DeletedRequestBuilder.DeletedRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedConversationList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Deleted.DeletedRequestBuilder.DeletedRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_conversation_list> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Deleted.DeletedRequestBuilder.DeletedRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedConversationList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Deleted.DeletedRequestBuilder.DeletedRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Deleted
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_conversation_list>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Deleted_conversation_list.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedConversationList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedConversationList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// List all deleted conversation IDs.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page. You can navigate to next pages using the `page` param.{% /admonition %}
