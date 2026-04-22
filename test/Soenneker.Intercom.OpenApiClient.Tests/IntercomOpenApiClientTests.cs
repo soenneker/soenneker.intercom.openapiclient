@@ -1,16 +1,15 @@
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Intercom.OpenApiClient.Tests;
 
-[Collection("Collection")]
-public sealed class IntercomOpenApiClientTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public sealed class IntercomOpenApiClientTests : HostedUnitTest
 {
-    public IntercomOpenApiClientTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public IntercomOpenApiClientTests(Host host) : base(host)
     {
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
