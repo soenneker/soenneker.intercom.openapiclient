@@ -38,7 +38,7 @@ jobs:
         run: dotnet build test/Soenneker.Intercom.OpenApiClient.Tests/Soenneker.Intercom.OpenApiClient.Tests.csproj --configuration Release --no-restore --verbosity minimal
 
       - name: Test
-        run: dotnet test test/Soenneker.Intercom.OpenApiClient.Tests/Soenneker.Intercom.OpenApiClient.Tests.csproj --configuration Release --no-build --no-restore --verbosity minimal
+        run: dotnet test --project test/Soenneker.Intercom.OpenApiClient.Tests/Soenneker.Intercom.OpenApiClient.Tests.csproj --configuration Release --no-build --no-restore --verbosity minimal
 
       - name: Pack
         run: dotnet pack src/Soenneker.Intercom.OpenApiClient/Soenneker.Intercom.OpenApiClient.csproj --configuration Release --no-build --no-restore --output . --verbosity minimal
