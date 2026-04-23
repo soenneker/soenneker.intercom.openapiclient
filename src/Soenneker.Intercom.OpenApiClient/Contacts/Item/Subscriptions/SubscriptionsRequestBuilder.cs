@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
         {
         }
         /// <summary>
-        /// You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has &apos;opted-in&apos; to or has &apos;opted-out&apos; from, depending on the subscription type.This will return a list of Subscription Type objects that the contact is associated with.The data property will show a combined list of:  1.Opt-out subscription types that the user has opted-out from.  2.Opt-in subscription types that the user has opted-in to receiving.
+        /// You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has &apos;opted-in&apos; to or has &apos;opted-out&apos; from, depending on the subscription type.This will return a list of Subscription Type objects that the contact is associated with.The data property will show a combined list of:  1.Opt-out subscription types that the user has opted-out from.  2.Opt-in subscription types that the user has opted-in to receiving.**Note:** This endpoint only returns subscriptions where the contact has explicitly configured their preference. Subscriptions that are in the default state — where the contact has not made an explicit opt-in or opt-out choice — are not included in the response.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -99,7 +99,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has &apos;opted-in&apos; to or has &apos;opted-out&apos; from, depending on the subscription type.This will return a list of Subscription Type objects that the contact is associated with.The data property will show a combined list of:  1.Opt-out subscription types that the user has opted-out from.  2.Opt-in subscription types that the user has opted-in to receiving.
+        /// You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has &apos;opted-in&apos; to or has &apos;opted-out&apos; from, depending on the subscription type.This will return a list of Subscription Type objects that the contact is associated with.The data property will show a combined list of:  1.Opt-out subscription types that the user has opted-out from.  2.Opt-in subscription types that the user has opted-in to receiving.**Note:** This endpoint only returns subscriptions where the contact has explicitly configured their preference. Subscriptions that are in the default state — where the contact has not made an explicit opt-in or opt-out choice — are not included in the response.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

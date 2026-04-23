@@ -53,8 +53,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The id of the article&apos;s parent collection or section. An article without this field stands alone.</summary>
-        public int? ParentId { get; set; }
         /// <summary>The ids of the article&apos;s parent collections or sections. An article without this field stands alone.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -62,14 +60,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public List<int?> ParentIds { get; set; }
-#endif
-        /// <summary>The type of parent, which can either be a `collection` or `section`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ParentType { get; set; }
-#nullable restore
-#else
-        public string ParentType { get; set; }
 #endif
         /// <summary>Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state? State { get; set; }
@@ -150,9 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "parent_id", n => { ParentId = n.GetIntValue(); } },
                 { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "parent_type", n => { ParentType = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state>(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
@@ -177,9 +165,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("description", Description);
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteStringValue("id", Id);
-            writer.WriteIntValue("parent_id", ParentId);
             writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
-            writer.WriteStringValue("parent_type", ParentType);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state>("state", State);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
             writer.WriteStringValue("title", Title);

@@ -15,14 +15,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id representing the admin assigned to the ticket.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? AdminAssigneeId { get; set; }
-#nullable restore
-#else
-        public string AdminAssigneeId { get; set; }
-#endif
+        /// <summary>The id representing the admin assigned to the ticket. If it&apos;s not assigned to an admin it will return 0.</summary>
+        public int? AdminAssigneeId { get; set; }
         /// <summary>Category of the Ticket.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.Ticket_category? Category { get; set; }
         /// <summary>The list of contacts affected by a ticket.</summary>
@@ -65,14 +59,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time the ticket will be snoozed until as a UTC Unix timestamp. If null, the ticket is not currently snoozed.</summary>
         public int? SnoozedUntil { get; set; }
-        /// <summary>The id representing the team assigned to the ticket.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? TeamAssigneeId { get; set; }
-#nullable restore
-#else
-        public string TeamAssigneeId { get; set; }
-#endif
+        /// <summary>The id representing the team assigned to the ticket. If it&apos;s not assigned to a team it will return 0.</summary>
+        public int? TeamAssigneeId { get; set; }
         /// <summary>An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are `_default_title_` and `_default_description_`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -142,7 +130,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "admin_assignee_id", n => { AdminAssigneeId = n.GetStringValue(); } },
+                { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_category>(); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
@@ -152,7 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "open", n => { Open = n.GetBoolValue(); } },
                 { "previous_ticket_state_id", n => { PreviousTicketStateId = n.GetStringValue(); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
-                { "team_assignee_id", n => { TeamAssigneeId = n.GetStringValue(); } },
+                { "team_assignee_id", n => { TeamAssigneeId = n.GetIntValue(); } },
                 { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_ticket_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_ticket_attributes.CreateFromDiscriminatorValue); } },
                 { "ticket_id", n => { TicketId = n.GetStringValue(); } },
                 { "ticket_parts", n => { TicketParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketParts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketParts.CreateFromDiscriminatorValue); } },
@@ -169,7 +157,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("admin_assignee_id", AdminAssigneeId);
+            writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_category>("category", Category);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>("contacts", Contacts);
             writer.WriteIntValue("created_at", CreatedAt);
@@ -179,7 +167,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("open", Open);
             writer.WriteStringValue("previous_ticket_state_id", PreviousTicketStateId);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
-            writer.WriteStringValue("team_assignee_id", TeamAssigneeId);
+            writer.WriteIntValue("team_assignee_id", TeamAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_ticket_attributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_id", TicketId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketParts>("ticket_parts", TicketParts);

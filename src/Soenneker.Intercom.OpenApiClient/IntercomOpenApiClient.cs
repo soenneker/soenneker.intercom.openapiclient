@@ -16,7 +16,6 @@ using Soenneker.Intercom.OpenApiClient.Companies;
 using Soenneker.Intercom.OpenApiClient.Contacts;
 using Soenneker.Intercom.OpenApiClient.Content_snippets;
 using Soenneker.Intercom.OpenApiClient.Conversations;
-using Soenneker.Intercom.OpenApiClient.Custom_channel_events;
 using Soenneker.Intercom.OpenApiClient.Custom_object_instances;
 using Soenneker.Intercom.OpenApiClient.Data_attributes;
 using Soenneker.Intercom.OpenApiClient.Data_connectors;
@@ -24,6 +23,7 @@ using Soenneker.Intercom.OpenApiClient.Download;
 using Soenneker.Intercom.OpenApiClient.Emails;
 using Soenneker.Intercom.OpenApiClient.Events;
 using Soenneker.Intercom.OpenApiClient.Export;
+using Soenneker.Intercom.OpenApiClient.Fin;
 using Soenneker.Intercom.OpenApiClient.Fin_voice;
 using Soenneker.Intercom.OpenApiClient.Folders;
 using Soenneker.Intercom.OpenApiClient.Help_center;
@@ -105,11 +105,6 @@ namespace Soenneker.Intercom.OpenApiClient
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Conversations.ConversationsRequestBuilder(PathParameters, RequestAdapter);
         }
-        /// <summary>The custom_channel_events property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Custom_channel_events.Custom_channel_eventsRequestBuilder Custom_channel_events
-        {
-            get => new global::Soenneker.Intercom.OpenApiClient.Custom_channel_events.Custom_channel_eventsRequestBuilder(PathParameters, RequestAdapter);
-        }
         /// <summary>The custom_object_instances property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Custom_object_instancesRequestBuilder Custom_object_instances
         {
@@ -144,6 +139,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Export.ExportRequestBuilder Export
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Export.ExportRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The fin property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Fin.FinRequestBuilder Fin
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Fin.FinRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The fin_voice property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Fin_voice.Fin_voiceRequestBuilder Fin_voice

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
         {
         }
         /// <summary>
-        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.
+        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200"/></returns>
         /// <param name="body">Merge contact data.</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.
+        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Merge contact data.</param>

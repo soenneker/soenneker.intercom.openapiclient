@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Execution_resultsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{data_connector_%2Did}/execution_results{?end_ts*,error_type*,include_bodies*,include_request_url*,per_page*,start_ts*,starting_after*,success*}", pathParameters)
+        public Execution_resultsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{data_connector_%2Did}/execution_results{?end_ts*,error_type*,include_bodies*,per_page*,start_ts*,starting_after*,success*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Execution_resultsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{data_connector_%2Did}/execution_results{?end_ts*,error_type*,include_bodies*,include_request_url*,per_page*,start_ts*,starting_after*,success*}", rawUrl)
+        public Execution_resultsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{data_connector_%2Did}/execution_results{?end_ts*,error_type*,include_bodies*,per_page*,start_ts*,starting_after*,success*}", rawUrl)
         {
         }
         /// <summary>
-        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies and request URL are excluded by default.Use `include_bodies=true` to include bodies.Use `include_request_url=true` to include the sanitised request URL.
+        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies and request URL are excluded by default.Use `include_bodies=true` to include bodies.Use `include_request_url=true` to include the sanitised request URL.
+        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -102,7 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             return new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies and request URL are excluded by default.Use `include_bodies=true` to include bodies.Use `include_request_url=true` to include the sanitised request URL.
+        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Execution_resultsRequestBuilderGetQueryParameters 
@@ -122,16 +122,6 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
 #else
             [QueryParameter("include_bodies")]
             public string IncludeBodies { get; set; }
-#endif
-            /// <summary>Include the request URL in the response (default false).</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("include_request_url")]
-            public string? IncludeRequestUrl { get; set; }
-#nullable restore
-#else
-            [QueryParameter("include_request_url")]
-            public string IncludeRequestUrl { get; set; }
 #endif
             /// <summary>The number of results per page (1-30, default 10).</summary>
             [QueryParameter("per_page")]

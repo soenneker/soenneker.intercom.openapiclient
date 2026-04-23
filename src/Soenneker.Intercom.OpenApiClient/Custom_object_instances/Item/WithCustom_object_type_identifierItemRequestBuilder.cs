@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithCustom_object_type_identifierItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}?external_id={external_id}", pathParameters)
+        public WithCustom_object_type_identifierItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}{?external_id*,page*,per_page*,references_contact_id*,references_conversation_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithCustom_object_type_identifierItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}?external_id={external_id}", rawUrl)
+        public WithCustom_object_type_identifierItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}{?external_id*,page*,per_page*,references_contact_id*,references_conversation_id*}", rawUrl)
         {
         }
         /// <summary>
@@ -72,20 +72,20 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a Custom Object Instance by external_id.
+        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list).
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -94,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Create or update a custom object instance
@@ -137,13 +137,13 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.DELETE, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}?external_id={external_id}", PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
         }
         /// <summary>
-        /// Fetch a Custom Object Instance by external_id.
+        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -209,11 +209,12 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
 #endif
         }
         /// <summary>
-        /// Fetch a Custom Object Instance by external_id.
+        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters 
         {
+            /// <summary>Return the single instance with this external ID. When provided, the response is a single object rather than a list.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("external_id")]
@@ -222,6 +223,32 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
 #else
             [QueryParameter("external_id")]
             public string ExternalId { get; set; }
+#endif
+            /// <summary>Page number of results to fetch.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>Number of results per page. Maximum 150.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
+            /// <summary>Return instances associated with the given contact ID.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("references_contact_id")]
+            public string? ReferencesContactId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("references_contact_id")]
+            public string ReferencesContactId { get; set; }
+#endif
+            /// <summary>Return instances associated with the given conversation ID.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("references_conversation_id")]
+            public string? ReferencesConversationId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("references_conversation_id")]
+            public string ReferencesConversationId { get; set; }
 #endif
         }
     }

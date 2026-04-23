@@ -609,6 +609,15 @@
             "schema": {
               "$ref": "#/components/schemas/IntercomVersion"
             }
+          },
+          {
+            "name": "display_avatar",
+            "in": "query",
+            "description": "If set to true, the response will include the admin\u0027s avatar object containing the image URL. Defaults to false.",
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
           }
         ],
         "responses": {
@@ -809,7 +818,8 @@
                           "url": "https://support.example.com/us/1",
                           "sync_behavior": "automatic",
                           "created_at": 1734537259,
-                          "updated_at": 1734537259
+                          "updated_at": 1734537259,
+                          "audience_ids": []
                         },
                         {
                           "id": 34,
@@ -819,7 +829,8 @@
                           "url": "https://support.example.com/us/2",
                           "sync_behavior": "automatic",
                           "created_at": 1734537259,
-                          "updated_at": 1734537259
+                          "updated_at": 1734537259,
+                          "audience_ids": []
                         },
                         {
                           "id": 35,
@@ -829,7 +840,8 @@
                           "url": "https://support.example.com/us/3",
                           "sync_behavior": "automatic",
                           "created_at": 1734537259,
-                          "updated_at": 1734537259
+                          "updated_at": 1734537259,
+                          "audience_ids": []
                         }
                       ],
                       "pages": {
@@ -924,7 +936,8 @@
                       "url": "https://www.example.com",
                       "sync_behavior": "api",
                       "created_at": 1734537261,
-                      "updated_at": 1734537261
+                      "updated_at": 1734537261,
+                      "audience_ids": []
                     }
                   }
                 }
@@ -1035,7 +1048,8 @@
                       "url": "https://support.example.com/us/5",
                       "sync_behavior": "api",
                       "created_at": 1734537265,
-                      "updated_at": 1734537265
+                      "updated_at": 1734537265,
+                      "audience_ids": []
                     }
                   }
                 }
@@ -1120,7 +1134,8 @@
                       "url": "https://www.example.com",
                       "sync_behavior": "api",
                       "created_at": 1734537267,
-                      "updated_at": 1734537267
+                      "updated_at": 1734537267,
+                      "audience_ids": []
                     }
                   }
                 }
@@ -1674,8 +1689,6 @@
                           "id": 39,
                           "type": "article",
                           "workspace_id": "this_is_an_id64_that_should_be_at_least_4",
-                          "parent_id": 143,
-                          "parent_type": "collection",
                           "parent_ids": [],
                           "tags": {
                             "type": "tag.list",
@@ -1794,8 +1807,6 @@
                       "id": 42,
                       "type": "article",
                       "workspace_id": "this_is_an_id68_that_should_be_at_least_4",
-                      "parent_id": 145,
-                      "parent_type": "collection",
                       "parent_ids": [],
                       "statistics": {
                         "type": "article_statistics",
@@ -1916,8 +1927,6 @@
                       "id": 45,
                       "type": "article",
                       "workspace_id": "this_is_an_id74_that_should_be_at_least_4",
-                      "parent_id": 148,
-                      "parent_type": "collection",
                       "parent_ids": [],
                       "statistics": {
                         "type": "article_statistics",
@@ -2061,8 +2070,6 @@
                       "id": 48,
                       "type": "article",
                       "workspace_id": "this_is_an_id80_that_should_be_at_least_4",
-                      "parent_id": 151,
-                      "parent_type": "collection",
                       "parent_ids": [],
                       "statistics": {
                         "type": "article_statistics",
@@ -2310,8 +2317,6 @@
                             "id": 55,
                             "type": "article",
                             "workspace_id": "this_is_an_id92_that_should_be_at_least_4",
-                            "parent_id": null,
-                            "parent_type": null,
                             "parent_ids": [],
                             "tags": {
                               "type": "tag.list",
@@ -2765,6 +2770,440 @@
                         {
                           "code": "not_found",
                           "message": "Export job not found for identifier: job1"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fin/start": {
+      "post": {
+        "tags": [
+          "Fin Agent"
+        ],
+        "summary": "Start a conversation with Fin",
+        "description": "Initialize Fin by passing it the user\u0027s message along with conversation history and user details.\n\nThese additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access.\n{% /admonition %}\n\nOnce Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.\n\nDuring this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.\n\nEvents can be received via webhooks or Server-Sent Events (SSE) using the \u0060sse_subscription_url\u0060 in the response.\n",
+        "operationId": "startFinConversation",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartFinConversation"
+              },
+              "examples": {
+                "Basic request": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "How can I see my account details?",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                },
+                "Request with conversation history": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "How can I see my account details?",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com",
+                      "attributes": {
+                        "plan_type": "Pro",
+                        "subscription_status": "active"
+                      }
+                    },
+                    "conversation_metadata": {
+                      "history": [
+                        {
+                          "author": "user",
+                          "body": "I need help",
+                          "timestamp": "2025-01-24T10:00:01Z"
+                        },
+                        {
+                          "author": "agent",
+                          "body": "What do you need help with?",
+                          "timestamp": "2025-01-24T10:01:00Z"
+                        }
+                      ],
+                      "attributes": {
+                        "priority_level": "high",
+                        "department": "sales"
+                      }
+                    }
+                  }
+                },
+                "Request with attachments": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "Here is a screenshot of the issue",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    },
+                    "attachments": [
+                      {
+                        "type": "url",
+                        "url": "https://example.com/document.pdf"
+                      },
+                      {
+                        "type": "file",
+                        "name": "screenshot.png",
+                        "content_type": "image/png",
+                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk..."
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fin conversation started successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "conversation_id": {
+                      "type": "string",
+                      "description": "The ID of the conversation.",
+                      "example": "ext-123"
+                    },
+                    "user_id": {
+                      "type": "string",
+                      "description": "The ID of the user.",
+                      "example": "user-456"
+                    },
+                    "status": {
+                      "enum": [
+                        "thinking",
+                        "replying",
+                        "awaiting_user_reply",
+                        "escalated",
+                        "resolved",
+                        "complete"
+                      ],
+                      "type": "string",
+                      "additionalProperties": false,
+                      "description": "Fin\u0027s current status in the conversation workflow.\n",
+                      "example": "thinking"
+                    },
+                    "created_at_ms": {
+                      "type": "string",
+                      "description": "The timestamp the response was created at, with millisecond precision.",
+                      "format": "date-time",
+                      "example": "2025-01-24T10:00:00.123Z"
+                    },
+                    "errors": {
+                      "$ref": "#/components/schemas/FinAgentAttributeErrors"
+                    },
+                    "sse_subscription_url": {
+                      "type": "string",
+                      "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+                      "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
+                    }
+                  },
+                  "Response with attribute errors": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m",
+                      "errors": {
+                        "user": {
+                          "attributes": {
+                            "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
+                          }
+                        },
+                        "conversation": {
+                          "attributes": {
+                            "bad_attr": "Conversation attribute \u0027bad_attr\u0027 does not exist"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "conversation_id is required"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fin/reply": {
+      "post": {
+        "tags": [
+          "Fin Agent"
+        ],
+        "summary": "Reply to Fin",
+        "description": "Once Fin has returned a response to a user\u0027s message, its status will be \u0060awaiting_user_reply\u0060.\n\nIf a user replies, use this endpoint to send this response to Fin.\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access.\n{% /admonition %}\n",
+        "operationId": "replyToFin",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplyToFin"
+              },
+              "examples": {
+                "Basic reply": {
+                  "value": {
+                    "conversation_id": 123456,
+                    "message": {
+                      "author": "user",
+                      "body": "Here\u0027s the information you requested.",
+                      "timestamp": "2025-01-24T09:01:00.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                },
+                "Reply with attachments": {
+                  "value": {
+                    "conversation_id": 123456,
+                    "message": {
+                      "author": "user",
+                      "body": "Here\u0027s the invoice you asked for.",
+                      "timestamp": "2025-01-24T09:01:00.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    },
+                    "attachments": [
+                      {
+                        "type": "url",
+                        "url": "https://example.com/invoice.pdf"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reply sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "conversation_id": {
+                      "type": "string",
+                      "description": "The ID of the conversation.",
+                      "example": "ext-123"
+                    },
+                    "user_id": {
+                      "type": "string",
+                      "description": "The ID of the user.",
+                      "example": "user-456"
+                    },
+                    "status": {
+                      "enum": [
+                        "thinking",
+                        "replying",
+                        "awaiting_user_reply",
+                        "escalated",
+                        "resolved",
+                        "complete"
+                      ],
+                      "type": "string",
+                      "additionalProperties": false,
+                      "description": "Fin\u0027s current status in the conversation workflow.\n",
+                      "example": "thinking"
+                    },
+                    "created_at_ms": {
+                      "type": "string",
+                      "description": "The timestamp the response was created at, with millisecond precision.",
+                      "format": "date-time",
+                      "example": "2025-01-24T10:00:00.123Z"
+                    },
+                    "errors": {
+                      "$ref": "#/components/schemas/FinAgentAttributeErrors"
+                    },
+                    "sse_subscription_url": {
+                      "type": "string",
+                      "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+                      "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
+                    }
+                  },
+                  "Response with attribute errors": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...",
+                      "errors": {
+                        "user": {
+                          "attributes": {
+                            "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "conversation_id is required"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
                         }
                       ]
                     }
@@ -4577,7 +5016,7 @@
                       },
                       "plan": {},
                       "custom_attributes": {
-                        "creation_source": "api"
+                        "industry": "manufacturing"
                       }
                     }
                   }
@@ -6711,7 +7150,7 @@
           "Subscription Types"
         ],
         "summary": "List subscriptions for a contact",
-        "description": "You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has \u0027opted-in\u0027 to or has \u0027opted-out\u0027 from, depending on the subscription type.\nThis will return a list of Subscription Type objects that the contact is associated with.\n\nThe data property will show a combined list of:\n\n  1.Opt-out subscription types that the user has opted-out from.\n  2.Opt-in subscription types that the user has opted-in to receiving.\n",
+        "description": "You can fetch a list of subscription types that are attached to a contact. These can be subscriptions that a user has \u0027opted-in\u0027 to or has \u0027opted-out\u0027 from, depending on the subscription type.\nThis will return a list of Subscription Type objects that the contact is associated with.\n\nThe data property will show a combined list of:\n\n  1.Opt-out subscription types that the user has opted-out from.\n  2.Opt-in subscription types that the user has opted-in to receiving.\n\n**Note:** This endpoint only returns subscriptions where the contact has explicitly configured their preference. Subscriptions that are in the default state \u2014 where the contact has not made an explicit opt-in or opt-out choice \u2014 are not included in the response.\n",
         "operationId": "listSubscriptionsForAContact",
         "parameters": [
           {
@@ -7830,7 +8269,7 @@
           "Contacts"
         ],
         "summary": "Get a contact",
-        "description": "You can fetch the details of a single contact.",
+        "description": "You can fetch the details of a single contact.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts\u0022 %}\n  If a contact has been merged into another contact via the Merge endpoint (POST /contacts/merge), requesting it by its original ID will return a \u0060404 Not Found\u0060 error. Use the merged-into contact\u0027s ID instead.\n{% /admonition %}\n",
         "operationId": "ShowContact",
         "parameters": [
           {
@@ -8057,7 +8496,7 @@
           "Contacts"
         ],
         "summary": "Merge a lead and a user",
-        "description": "You can merge a contact with a \u0060role\u0060 of \u0060lead\u0060 into a contact with a \u0060role\u0060 of \u0060user\u0060.",
+        "description": "You can merge a contact with a \u0060role\u0060 of \u0060lead\u0060 into a contact with a \u0060role\u0060 of \u0060user\u0060.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts are not retrievable via the API\u0022 %}\n  Once a merge is completed, the source contact (\u0060from\u0060) is permanently removed from the active contact list. This means:\n  - **GET /contacts/{id}** \u2014 Requesting the source contact by its original ID will return a \u0060404 Not Found\u0060 error.\n  - **POST /contacts/search** \u2014 The source contact will not appear in search results, including queries filtered by \u0060updated_at\u0060.\n  - **GET /contacts** \u2014 The source contact will not appear in list results.\n\n  Only the target contact (\u0060into\u0060) remains accessible. If your application stores contact IDs, update them to use the target contact\u0027s ID after a merge.\n{% /admonition %}\n",
         "operationId": "MergeContact",
         "parameters": [
           {
@@ -8230,7 +8669,7 @@
           "Contacts"
         ],
         "summary": "Search contacts",
-        "description": "\u0022You can search for multiple contacts by the value of their attributes in order to fetch exactly who you want.\n\nTo search for contacts, you need to send a \u0060POST\u0060 request to \u0060https://api.intercom.io/contacts/search\u0060.\n\nThis will accept a query object in the body which will define your filters in order to search for contacts.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006050\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n### Contact Creation Delay\n\nIf a contact has recently been created, there is a possibility that it will not yet be available when searching. This means that it may not appear in the response. This delay can take a few minutes. If you need to be instantly notified it is recommended to use webhooks and iterate to see if they match your search filters.\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple\u0027s there can be:\n* There\u0027s a limit of max 2 nested filters\n* There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Searching for Timestamp Fields\n\nAll timestamp fields (created_at, updated_at etc.) are indexed as Dates for Contact Search queries; Datetime queries are not currently supported. This means you can only query for timestamp fields by day - not hour, minute or second.\nFor example, if you search for all Contacts with a created_at value greater (\u003E) than 1577869200 (the UNIX timestamp for January 1st, 2020 9:00 AM), that will be interpreted as 1577836800 (January 1st, 2020 12:00 AM). The search results will then include Contacts created from January 2nd, 2020 12:00 AM onwards.\nIf you\u0027d like to get contacts created on January 1st, 2020 you should search with a created_at value equal (=) to 1577836800 (January 1st, 2020 12:00 AM).\nThis behaviour applies only to timestamps used in search queries. The search results will still contain the full UNIX timestamp and be sorted accordingly.\n\n### Accepted Fields\n\nMost key listed as part of the Contacts Model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foorbar\\\u0022\u0060).\n\n| Field                              | Type                           |\n| ---------------------------------- | ------------------------------ |\n| id                                 | String                         |\n| role                               | String\u003Cbr\u003EAccepts user or lead |\n| name                               | String                         |\n| avatar                             | String                         |\n| owner_id                           | Integer                        |\n| email                              | String                         |\n| email_domain                       | String                         |\n| phone                              | String                         |\n| formatted_phone                    | String                         |\n| external_id                        | String                         |\n| created_at                         | Date (UNIX Timestamp)          |\n| signed_up_at                       | Date (UNIX Timestamp)          |\n| updated_at                         | Date (UNIX Timestamp)          |\n| last_seen_at                       | Date (UNIX Timestamp)          |\n| last_contacted_at                  | Date (UNIX Timestamp)          |\n| last_replied_at                    | Date (UNIX Timestamp)          |\n| last_email_opened_at               | Date (UNIX Timestamp)          |\n| last_email_clicked_at              | Date (UNIX Timestamp)          |\n| language_override                  | String                         |\n| browser                            | String                         |\n| browser_language                   | String                         |\n| os                                 | String                         |\n| location.country                   | String                         |\n| location.region                    | String                         |\n| location.city                      | String                         |\n| unsubscribed_from_emails           | Boolean                        |\n| marked_email_as_spam               | Boolean                        |\n| has_hard_bounced                   | Boolean                        |\n| ios_last_seen_at                   | Date (UNIX Timestamp)          |\n| ios_app_version                    | String                         |\n| ios_device                         | String                         |\n| ios_app_device                     | String                         |\n| ios_os_version                     | String                         |\n| ios_app_name                       | String                         |\n| ios_sdk_version                    | String                         |\n| android_last_seen_at               | Date (UNIX Timestamp)          |\n| android_app_version                | String                         |\n| android_device                     | String                         |\n| android_app_name                   | String                         |\n| andoid_sdk_version                 | String                         |\n| segment_id                         | String                         |\n| tag_id                             | String                         |\n| custom_attributes.{attribute_name} | String                         |\n\n### Accepted Operators\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Searching based on \u0060created_at\u0060\\\u0022 %}\n  You cannot use the \u0060\u003C=\u0060 or \u0060\u003E=\u0060 operators to search by \u0060created_at\u0060.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                      | Description                                                      |\n| :------- | :------------------------------- | :--------------------------------------------------------------- |\n| =        | All                              | Equals                                                           |\n| !=       | All                              | Doesn\u0027t Equal                                                    |\n| IN       | All                              | In\u003Cbr\u003EShortcut for \u0060OR\u0060 queries\u003Cbr\u003EValues must be in Array       |\n| NIN      | All                              | Not In\u003Cbr\u003EShortcut for \u0060OR !\u0060 queries\u003Cbr\u003EValues must be in Array |\n| \u003E        | Integer\u003Cbr\u003EDate (UNIX Timestamp) | Greater than                                                     |\n| \u003C       | Integer\u003Cbr\u003EDate (UNIX Timestamp) | Lower than                                                       |\n| ~        | String                           | Contains                                                         |\n| !~       | String                           | Doesn\u0027t Contain                                                  |\n| ^        | String                           | Starts With                                                      |\n| $        | String                           | Ends With                                                        |\n\u0022",
+        "description": "\u0022You can search for multiple contacts by the value of their attributes in order to fetch exactly who you want.\n\nTo search for contacts, you need to send a \u0060POST\u0060 request to \u0060https://api.intercom.io/contacts/search\u0060.\n\nThis will accept a query object in the body which will define your filters in order to search for contacts.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006050\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n### Merged Contacts\n\nContacts that have been merged (via POST /contacts/merge) are excluded from search results. If a contact was recently merged into another, it will no longer appear in queries filtered by \u0060updated_at\u0060 or any other field. Only the target contact from the merge remains searchable.\n\n### Contact Creation Delay\n\nIf a contact has recently been created, there is a possibility that it will not yet be available when searching. This means that it may not appear in the response. This delay can take a few minutes. If you need to be instantly notified it is recommended to use webhooks and iterate to see if they match your search filters.\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple\u0027s there can be:\n* There\u0027s a limit of max 2 nested filters\n* There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Searching for Timestamp Fields\n\nAll timestamp fields (created_at, updated_at etc.) are indexed as Dates for Contact Search queries; Datetime queries are not currently supported. This means you can only query for timestamp fields by day - not hour, minute or second.\nFor example, if you search for all Contacts with a created_at value greater (\u003E) than 1577869200 (the UNIX timestamp for January 1st, 2020 9:00 AM), that will be interpreted as 1577836800 (January 1st, 2020 12:00 AM). The search results will then include Contacts created from January 2nd, 2020 12:00 AM onwards.\nIf you\u0027d like to get contacts created on January 1st, 2020 you should search with a created_at value equal (=) to 1577836800 (January 1st, 2020 12:00 AM).\nThis behaviour applies only to timestamps used in search queries. The search results will still contain the full UNIX timestamp and be sorted accordingly.\n\n### Accepted Fields\n\nMost key listed as part of the Contacts Model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foorbar\\\u0022\u0060).\n\n| Field                              | Type                           |\n| ---------------------------------- | ------------------------------ |\n| id                                 | String                         |\n| role                               | String\u003Cbr\u003EAccepts user or lead |\n| name                               | String                         |\n| avatar                             | String                         |\n| owner_id                           | Integer                        |\n| email                              | String                         |\n| email_domain                       | String                         |\n| phone                              | String                         |\n| formatted_phone                    | String                         |\n| external_id                        | String                         |\n| created_at                         | Date (UNIX Timestamp)          |\n| signed_up_at                       | Date (UNIX Timestamp)          |\n| updated_at                         | Date (UNIX Timestamp)          |\n| last_seen_at                       | Date (UNIX Timestamp)          |\n| last_contacted_at                  | Date (UNIX Timestamp)          |\n| last_replied_at                    | Date (UNIX Timestamp)          |\n| last_email_opened_at               | Date (UNIX Timestamp)          |\n| last_email_clicked_at              | Date (UNIX Timestamp)          |\n| language_override                  | String                         |\n| browser                            | String                         |\n| browser_language                   | String                         |\n| os                                 | String                         |\n| location.country                   | String                         |\n| location.region                    | String                         |\n| location.city                      | String                         |\n| unsubscribed_from_emails           | Boolean                        |\n| marked_email_as_spam               | Boolean                        |\n| has_hard_bounced                   | Boolean                        |\n| ios_last_seen_at                   | Date (UNIX Timestamp)          |\n| ios_app_version                    | String                         |\n| ios_device                         | String                         |\n| ios_app_device                     | String                         |\n| ios_os_version                     | String                         |\n| ios_app_name                       | String                         |\n| ios_sdk_version                    | String                         |\n| android_last_seen_at               | Date (UNIX Timestamp)          |\n| android_app_version                | String                         |\n| android_device                     | String                         |\n| android_app_name                   | String                         |\n| andoid_sdk_version                 | String                         |\n| segment_id                         | String                         |\n| tag_id                             | String                         |\n| custom_attributes.{attribute_name} | String                         |\n\n### Accepted Operators\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Searching based on \u0060created_at\u0060\\\u0022 %}\n  You cannot use the \u0060\u003C=\u0060 or \u0060\u003E=\u0060 operators to search by \u0060created_at\u0060.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                      | Description                                                      |\n| :------- | :------------------------------- | :--------------------------------------------------------------- |\n| =        | All                              | Equals                                                           |\n| !=       | All                              | Doesn\u0027t Equal                                                    |\n| IN       | All                              | In\u003Cbr\u003EShortcut for \u0060OR\u0060 queries\u003Cbr\u003EValues must be in Array       |\n| NIN      | All                              | Not In\u003Cbr\u003EShortcut for \u0060OR !\u0060 queries\u003Cbr\u003EValues must be in Array |\n| \u003E        | Integer\u003Cbr\u003EDate (UNIX Timestamp) | Greater than                                                     |\n| \u003C       | Integer\u003Cbr\u003EDate (UNIX Timestamp) | Lower than                                                       |\n| ~        | String                           | Contains                                                         |\n| !~       | String                           | Doesn\u0027t Contain                                                  |\n| ^        | String                           | Starts With                                                      |\n| $        | String                           | Ends With                                                        |\n\u0022",
         "operationId": "SearchContacts",
         "parameters": [
           {
@@ -8329,7 +8768,7 @@
           "Contacts"
         ],
         "summary": "List all contacts",
-        "description": "You can fetch a list of all contacts (ie. users or leads) in your workspace.\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  You can use pagination to limit the number of results returned. The default is \u006050\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n",
+        "description": "You can fetch a list of all contacts (ie. users or leads) in your workspace.\n{% admonition type=\u0022info\u0022 name=\u0022Merged contacts\u0022 %}\n  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.\n{% /admonition %}\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  You can use pagination to limit the number of results returned. The default is \u006050\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n",
         "operationId": "ListContacts",
         "parameters": [
           {
@@ -9608,8 +10047,8 @@
                             ]
                           },
                           "first_contact_reply": null,
-                          "admin_assignee_id": null,
-                          "team_assignee_id": null,
+                          "admin_assignee_id": 991267715,
+                          "team_assignee_id": 5017691,
                           "open": false,
                           "state": "closed",
                           "read": false,
@@ -9936,8 +10375,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": false,
@@ -10161,8 +10600,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": false,
@@ -10529,8 +10968,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": true,
@@ -10646,8 +11085,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": false,
@@ -10886,7 +11325,7 @@
           "Conversations"
         ],
         "summary": "Search conversations",
-        "description": "\u0022You can search for multiple conversations by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for conversations, you need to send a \u0060POST\u0060 request to \u0060https://api.intercom.io/conversations/search\u0060.\n\nThis will accept a query object in the body which will define your filters in order to search for conversations.\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006020\u0060 results per page and maximum is \u0060150\u0060.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple\u0027s there can be:\n- There\u0027s a limit of max 2 nested filters\n- There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed in the conversation model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foorbar\\\u0022\u0060).\nThe \u0060source.body\u0060 field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a \u0060\\\u0022I need support\\\u0022\u0060 body - the query should contain a \u0060=\u0060 operator with the value \u0060\\\u0022support\\\u0022\u0060 for such conversation to be returned. A query with a \u0060=\u0060 operator and a \u0060\\\u0022need support\\\u0022\u0060 value will not yield a result.\n\n| Field                                     | Type                                                                                                                                                   |\n| :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                                                                                 |\n| created_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| updated_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| source.type                               | String\u003Cbr\u003EAccepted fields are \u0060conversation\u0060, \u0060email\u0060, \u0060facebook\u0060, \u0060instagram\u0060, \u0060phone_call\u0060, \u0060phone_switch\u0060, \u0060push\u0060, \u0060sms\u0060, \u0060twitter\u0060 and \u0060whatsapp\u0060. |\n| source.id                                 | String                                                                                                                                                 |\n| source.delivered_as                       | String                                                                                                                                                 |\n| source.subject                            | String                                                                                                                                                 |\n| source.body                               | String                                                                                                                                                 |\n| source.author.id                          | String                                                                                                                                                 |\n| source.author.type                        | String                                                                                                                                                 |\n| source.author.name                        | String                                                                                                                                                 |\n| source.author.email                       | String                                                                                                                                                 |\n| source.url                                | String                                                                                                                                                 |\n| contact_ids                               | String                                                                                                                                                 |\n| teammate_ids                              | String                                                                                                                                                 |\n| admin_assignee_id                         | String                                                                                                                                                 |\n| team_assignee_id                          | String                                                                                                                                                 |\n| channel_initiated                         | String                                                                                                                                                 |\n| open                                      | Boolean                                                                                                                                                |\n| read                                      | Boolean                                                                                                                                                |\n| state                                     | String                                                                                                                                                 |\n| waiting_since                             | Date (UNIX timestamp)                                                                                                                                  |\n| snoozed_until                             | Date (UNIX timestamp)                                                                                                                                  |\n| tag_ids                                   | String                                                                                                                                                 |\n| priority                                  | String                                                                                                                                                 |\n| statistics.time_to_assignment             | Integer                                                                                                                                                |\n| statistics.time_to_admin_reply            | Integer                                                                                                                                                |\n| statistics.time_to_first_close            | Integer                                                                                                                                                |\n| statistics.time_to_last_close             | Integer                                                                                                                                                |\n| statistics.median_time_to_reply           | Integer                                                                                                                                                |\n| statistics.first_contact_reply_at         | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_assignment_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_admin_reply_at           | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_close_at                 | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_at             | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_admin_reply_at | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_contact_reply_at          | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_admin_reply_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_close_at                  | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_closed_by_id              | String                                                                                                                                                 |\n| statistics.count_reopens                  | Integer                                                                                                                                                |\n| statistics.count_assignments              | Integer                                                                                                                                                |\n| statistics.count_conversation_parts       | Integer                                                                                                                                                |\n| conversation_rating.requested_at          | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.replied_at            | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.score                 | Integer                                                                                                                                                |\n| conversation_rating.remark                | String                                                                                                                                                 |\n| conversation_rating.contact_id            | String                                                                                                                                                 |\n| conversation_rating.admin_d               | String                                                                                                                                                 |\n| ai_agent_participated                     | Boolean                                                                                                                                                |\n| ai_agent.resolution_state                 | String                                                                                                                                                 |\n| ai_agent.last_answer_type                 | String                                                                                                                                                 |\n| ai_agent.rating                           | Integer                                                                                                                                                |\n| ai_agent.rating_remark                    | String                                                                                                                                                 |\n| ai_agent.source_type                      | String                                                                                                                                                 |\n| ai_agent.source_title                     | String                                                                                                                                                 |\n\n### Accepted Operators\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type  (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn\u0027t Equal                                                |\n| IN       | All                            | In  Shortcut for \u0060OR\u0060 queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for \u0060OR !\u0060 queries  Values must be in Array |\n| \u003E        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| \u003C       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn\u0027t Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |\n\u0022",
+        "description": "\u0022You can search for multiple conversations by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for conversations, you need to send a \u0060POST\u0060 request to \u0060https://api.intercom.io/conversations/search\u0060.\n\nThis will accept a query object in the body which will define your filters in order to search for conversations.\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006020\u0060 results per page and maximum is \u0060150\u0060.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple\u0027s there can be:\n- There\u0027s a limit of max 2 nested filters\n- There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed in the conversation model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foorbar\\\u0022\u0060).\nThe \u0060source.body\u0060 field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a \u0060\\\u0022I need support\\\u0022\u0060 body - the query should contain a \u0060=\u0060 operator with the value \u0060\\\u0022support\\\u0022\u0060 for such conversation to be returned. A query with a \u0060=\u0060 operator and a \u0060\\\u0022need support\\\u0022\u0060 value will not yield a result.\n\n| Field                                     | Type                                                                                                                                                   |\n| :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                                                                                 |\n| created_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| updated_at                                | Date (UNIX timestamp)                                                                                                                                  |\n| source.type                               | String\u003Cbr\u003EAccepted fields are \u0060conversation\u0060, \u0060email\u0060, \u0060facebook\u0060, \u0060instagram\u0060, \u0060phone_call\u0060, \u0060phone_switch\u0060, \u0060push\u0060, \u0060sms\u0060, \u0060twitter\u0060 and \u0060whatsapp\u0060. |\n| source.id                                 | String                                                                                                                                                 |\n| source.delivered_as                       | String                                                                                                                                                 |\n| source.subject                            | String                                                                                                                                                 |\n| source.body                               | String                                                                                                                                                 |\n| source.author.id                          | String                                                                                                                                                 |\n| source.author.type                        | String                                                                                                                                                 |\n| source.author.name                        | String                                                                                                                                                 |\n| source.author.email                       | String                                                                                                                                                 |\n| source.url                                | String                                                                                                                                                 |\n| contact_ids                               | String                                                                                                                                                 |\n| teammate_ids                              | String                                                                                                                                                 |\n| admin_assignee_id                         | Integer                                                                                                                                                |\n| team_assignee_id                          | Integer                                                                                                                                                |\n| channel_initiated                         | String                                                                                                                                                 |\n| open                                      | Boolean                                                                                                                                                |\n| read                                      | Boolean                                                                                                                                                |\n| state                                     | String                                                                                                                                                 |\n| waiting_since                             | Date (UNIX timestamp)                                                                                                                                  |\n| snoozed_until                             | Date (UNIX timestamp)                                                                                                                                  |\n| tag_ids                                   | String                                                                                                                                                 |\n| priority                                  | String                                                                                                                                                 |\n| statistics.time_to_assignment             | Integer                                                                                                                                                |\n| statistics.time_to_admin_reply            | Integer                                                                                                                                                |\n| statistics.time_to_first_close            | Integer                                                                                                                                                |\n| statistics.time_to_last_close             | Integer                                                                                                                                                |\n| statistics.median_time_to_reply           | Integer                                                                                                                                                |\n| statistics.first_contact_reply_at         | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_assignment_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_admin_reply_at           | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.first_close_at                 | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_at             | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_assignment_admin_reply_at | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_contact_reply_at          | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_admin_reply_at            | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_close_at                  | Date (UNIX timestamp)                                                                                                                                  |\n| statistics.last_closed_by_id              | String                                                                                                                                                 |\n| statistics.count_reopens                  | Integer                                                                                                                                                |\n| statistics.count_assignments              | Integer                                                                                                                                                |\n| statistics.count_conversation_parts       | Integer                                                                                                                                                |\n| conversation_rating.requested_at          | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.replied_at            | Date (UNIX timestamp)                                                                                                                                  |\n| conversation_rating.score                 | Integer                                                                                                                                                |\n| conversation_rating.remark                | String                                                                                                                                                 |\n| conversation_rating.contact_id            | String                                                                                                                                                 |\n| conversation_rating.admin_d               | String                                                                                                                                                 |\n| ai_agent_participated                     | Boolean                                                                                                                                                |\n| ai_agent.resolution_state                 | String                                                                                                                                                 |\n| ai_agent.last_answer_type                 | String                                                                                                                                                 |\n| ai_agent.rating                           | Integer                                                                                                                                                |\n| ai_agent.rating_remark                    | String                                                                                                                                                 |\n| ai_agent.source_type                      | String                                                                                                                                                 |\n| ai_agent.source_title                     | String                                                                                                                                                 |\n\n### Accepted Operators\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type  (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn\u0027t Equal                                                |\n| IN       | All                            | In  Shortcut for \u0060OR\u0060 queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for \u0060OR !\u0060 queries  Values must be in Array |\n| \u003E        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| \u003C       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn\u0027t Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |\n\u0022",
         "operationId": "searchConversations",
         "parameters": [
           {
@@ -10980,8 +11419,8 @@
                             ]
                           },
                           "first_contact_reply": null,
-                          "admin_assignee_id": null,
-                          "team_assignee_id": null,
+                          "admin_assignee_id": 991267715,
+                          "team_assignee_id": 5017691,
                           "open": false,
                           "state": "closed",
                           "read": false,
@@ -11163,8 +11602,8 @@
                         "type": "conversation",
                         "url": null
                       },
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": true,
                       "state": "open",
                       "read": false,
@@ -11255,8 +11694,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": false,
@@ -11347,8 +11786,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": false,
@@ -11443,8 +11882,8 @@
                         "type": "conversation",
                         "url": null
                       },
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": true,
                       "state": "open",
                       "read": false,
@@ -11703,8 +12142,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": false,
                       "state": "closed",
                       "read": false,
@@ -11795,8 +12234,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": true,
                       "state": "snoozed",
                       "read": false,
@@ -11887,8 +12326,8 @@
                         ]
                       },
                       "first_contact_reply": null,
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": true,
                       "state": "open",
                       "read": true,
@@ -11980,7 +12419,7 @@
                       },
                       "first_contact_reply": null,
                       "admin_assignee_id": 991267715,
-                      "team_assignee_id": null,
+                      "team_assignee_id": 5017691,
                       "open": true,
                       "state": "open",
                       "read": false,
@@ -12986,8 +13425,8 @@
                         "type": "conversation",
                         "url": null
                       },
-                      "admin_assignee_id": null,
-                      "team_assignee_id": null,
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
                       "open": true,
                       "state": "open",
                       "read": true,
@@ -13421,256 +13860,6 @@
         }
       }
     },
-    "/custom_channel_events/notify_new_conversation": {
-      "post": {
-        "tags": [
-          "Custom Channel Events"
-        ],
-        "summary": "Notify Intercom of a new conversation created in a custom channel",
-        "description": "Notifies Intercom that a new conversation was created in your custom channel/platform. This triggers conversation creation and workflow automations within Intercom for your custom channel integration.\n\u003E **Note:** This endpoint is currently under managed availability. Please reach out to your accounts team to discuss access and tailored, hands-on support.\n",
-        "operationId": "notifyNewConversation",
-        "parameters": [
-          {
-            "name": "Intercom-Version",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/IntercomVersionPreview"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CustomChannelBaseEvent"
-              },
-              "examples": {
-                "example-1": {
-                  "summary": "Example request",
-                  "value": {
-                    "event_id": "evt_12345",
-                    "external_conversation_id": "conv_67890",
-                    "contact": {
-                      "type": "user",
-                      "external_id": "user_001",
-                      "name": "Jane Doe",
-                      "email": "jane.doe@example.com"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/CustomChannelNotificationSuccess"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/ObjectNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/ValidationError"
-          }
-        }
-      }
-    },
-    "/custom_channel_events/notify_new_message": {
-      "post": {
-        "tags": [
-          "Custom Channel Events"
-        ],
-        "summary": "Notify Intercom of a new message in a custom channel conversation",
-        "description": "Notifies Intercom that a new message was sent in a conversation on your custom channel/platform. This allows Intercom to process the message and trigger any relevant workflow automations.\n\u003E **Note:** This endpoint is currently under managed availability. Please reach out to your accounts team to discuss access and tailored, hands-on support.\n",
-        "operationId": "notifyNewMessage",
-        "parameters": [
-          {
-            "name": "Intercom-Version",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/IntercomVersionPreview"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NotifyNewMessage"
-              },
-              "examples": {
-                "example-1": {
-                  "summary": "Example request",
-                  "value": {
-                    "event_id": "evt_54321",
-                    "external_conversation_id": "conv_98765",
-                    "contact": {
-                      "type": "user",
-                      "external_id": "user_002",
-                      "name": "John Smith",
-                      "email": "john.smith@example.com"
-                    },
-                    "body": "Hello, I need help with my order."
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/CustomChannelNotificationSuccess"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/ObjectNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/ValidationError"
-          }
-        }
-      }
-    },
-    "/custom_channel_events/notify_quick_reply_selected": {
-      "post": {
-        "tags": [
-          "Custom Channel Events"
-        ],
-        "summary": "Notify Intercom of a quick reply response in a custom channel conversation",
-        "description": "Notifies Intercom that a user selected a quick reply option in your custom channel/platform. This allows Intercom to process the response and trigger any relevant workflow automations.\n\u003E **Note:** This endpoint is currently under managed availability. Please reach out to your accounts team to discuss access and tailored, hands-on support.\n",
-        "operationId": "notifyQuickReplySelected",
-        "parameters": [
-          {
-            "name": "Intercom-Version",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/IntercomVersionPreview"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NotifyQuickReplySelected"
-              },
-              "examples": {
-                "example-1": {
-                  "summary": "Example request",
-                  "value": {
-                    "event_id": "evt_67890",
-                    "external_conversation_id": "conv_13579",
-                    "contact": {
-                      "type": "user",
-                      "external_id": "user_003",
-                      "name": "Alice Example",
-                      "email": "alice@example.com"
-                    },
-                    "quick_reply_option_id": 1234
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/CustomChannelNotificationSuccess"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/ObjectNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/ValidationError"
-          }
-        }
-      }
-    },
-    "/custom_channel_events/notify_attribute_collected": {
-      "post": {
-        "tags": [
-          "Custom Channel Events"
-        ],
-        "summary": "Notify Intercom of an attribute collector response in a custom channel conversation",
-        "description": "Notifies Intercom that a user provided a response to an attribute collector in your custom channel/platform. This allows Intercom to process the attribute and trigger any relevant workflow automations.\n\u003E **Note:** This endpoint is currently under managed availability. Please reach out to your accounts team to discuss access and tailored, hands-on support.\n",
-        "operationId": "notifyAttributeCollected",
-        "parameters": [
-          {
-            "name": "Intercom-Version",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/IntercomVersionPreview"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NotifyAttributeCollected"
-              },
-              "examples": {
-                "example-1": {
-                  "summary": "Example request",
-                  "value": {
-                    "event_id": "evt_24680",
-                    "external_conversation_id": "conv_11223",
-                    "contact": {
-                      "type": "user",
-                      "external_id": "user_004",
-                      "name": "Bob Example",
-                      "email": "bob@example.com"
-                    },
-                    "attribute": {
-                      "id": "shipping_address",
-                      "value": "123 Main St, Springfield"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/CustomChannelNotificationSuccess"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/ObjectNotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/ValidationError"
-          }
-        }
-      }
-    },
     "/custom_object_instances/{custom_object_type_identifier}": {
       "post": {
         "tags": [
@@ -13751,26 +13940,49 @@
         "tags": [
           "Custom Object Instances"
         ],
-        "summary": "Get Custom Object Instance by External ID",
-        "description": "Fetch a Custom Object Instance by external_id.",
-        "operationId": "getCustomObjectInstancesByExternalId",
+        "summary": "List Custom Object Instances",
+        "description": "List instances of a custom object type. Three modes are supported:\n- **No filter** \u2014 returns all instances for the type.\n- **\u0060references_contact_id\u0060** \u2014 returns instances associated with the given contact.\n- **\u0060references_conversation_id\u0060** \u2014 returns instances associated with the given conversation.\n\nWhen **\u0060external_id\u0060** is provided, returns a single matching instance (not a list).",
+        "operationId": "listCustomObjectInstances",
         "parameters": [
+          {
+            "name": "references_contact_id",
+            "in": "query",
+            "description": "Return instances associated with the given contact ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "references_conversation_id",
+            "in": "query",
+            "description": "Return instances associated with the given conversation ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "external_id",
             "in": "query",
-            "required": true,
+            "description": "Return the single instance with this external ID. When provided, the response is a single object rather than a list.",
             "schema": {
-              "title": "Find by external_id",
-              "required": [
-                "external_id"
-              ],
-              "type": "string",
-              "properties": {
-                "external_id": {
-                  "type": "string"
-                }
-              },
-              "description": "The unique identifier for the instance in the external system it originated from."
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of results to fetch.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Number of results per page. Maximum 150.",
+            "schema": {
+              "maximum": 150,
+              "type": "integer"
             }
           },
           {
@@ -13787,22 +13999,47 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CustomObjectInstance"
+                  "$ref": "#/components/schemas/CustomObjectInstancesPaginatedList"
                 },
                 "examples": {
                   "successful": {
                     "value": {
-                      "id": 24,
-                      "type": "Order",
-                      "custom_attributes": {
-                        "order_number": "ORDER-12345",
-                        "total_amount": 99.99
+                      "type": "list",
+                      "pages": {
+                        "type": "pages",
+                        "page": 1,
+                        "per_page": 20,
+                        "total_pages": 1
                       },
-                      "external_id": 123,
-                      "external_created_at": null,
-                      "external_updated_at": null,
-                      "created_at": 1734537748,
-                      "updated_at": 1734537748
+                      "total_count": 2,
+                      "data": [
+                        {
+                          "id": 2,
+                          "type": "Order",
+                          "custom_attributes": {
+                            "order_number": "ORDER-98765",
+                            "total_amount": 149.99
+                          },
+                          "external_id": "order_002",
+                          "external_created_at": null,
+                          "external_updated_at": null,
+                          "created_at": 1734537800,
+                          "updated_at": 1734537800
+                        },
+                        {
+                          "id": 1,
+                          "type": "Order",
+                          "custom_attributes": {
+                            "order_number": "ORDER-12345",
+                            "total_amount": 99.99
+                          },
+                          "external_id": "order_001",
+                          "external_created_at": 1734537100,
+                          "external_updated_at": 1734537100,
+                          "created_at": 1734537100,
+                          "updated_at": 1734537100
+                        }
+                      ]
                     }
                   }
                 }
@@ -13813,7 +14050,7 @@
             "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "$ref": "#/components/responses/ObjectNotFound"
+            "$ref": "#/components/responses/TypeNotFound"
           }
         }
       },
@@ -15655,7 +15892,7 @@
           "Data Connectors"
         ],
         "summary": "List execution results for a data connector",
-        "description": "Retrieve paginated execution logs for a specific data connector.\nResults from the last hour are returned by default. Use \u0060start_ts\u0060 and \u0060end_ts\u0060 to customize the time range.\n\nRequest/response bodies and request URL are excluded by default.\nUse \u0060include_bodies=true\u0060 to include bodies.\nUse \u0060include_request_url=true\u0060 to include the sanitised request URL.\n",
+        "description": "Retrieve paginated execution logs for a specific data connector.\nResults from the last hour are returned by default. Use \u0060start_ts\u0060 and \u0060end_ts\u0060 to customize the time range.\n\nRequest/response bodies are excluded by default. Use \u0060include_bodies=true\u0060 to include them.\n",
         "operationId": "listDataConnectorExecutionResults",
         "parameters": [
           {
@@ -15757,19 +15994,6 @@
               "type": "string",
               "additionalProperties": false
             }
-          },
-          {
-            "name": "include_request_url",
-            "in": "query",
-            "description": "Include the request URL in the response (default false).",
-            "schema": {
-              "enum": [
-                true,
-                false
-              ],
-              "type": "string",
-              "additionalProperties": false
-            }
           }
         ],
         "responses": {
@@ -15792,6 +16016,7 @@
                           "success": true,
                           "http_status": 200,
                           "http_method": "post",
+                          "request_url": "https://api.vendor.com/webhook",
                           "execution_time_ms": 150,
                           "source_type": "workflow",
                           "source_id": 5001,
@@ -16290,7 +16515,7 @@
           "Data Export"
         ],
         "summary": "Create content data export",
-        "description": "To create your export job, you need to send a \u0060POST\u0060 request to the export endpoint \u0060https://api.intercom.io/export/content/data\u0060.\n\nThe only parameters you need to provide are the range of dates that you want exported.\n\n\u003E\uD83D\uDEA7 Limit of one active job\n\u003E\n\u003E You can only have one active job per workspace. You will receive a HTTP status code of 429 with the message Exceeded rate limit of 1 pending message data export jobs if you attempt to create a second concurrent job.\n\n\u003E\u2757\uFE0F Updated_at not included\n\u003E\n\u003E It should be noted that the timeframe only includes messages sent during the time period and not messages that were only updated during this period. For example, if a message was updated yesterday but sent two days ago, you would need to set the created_at_after date before the message was sent to include that in your retrieval job.\n\n\u003E\uD83D\uDCD8 Date ranges are inclusive\n\u003E\n\u003E Requesting data for 2018-06-01 until 2018-06-30 will get all data for those days including those specified - e.g. 2018-06-01 00:00:00 until 2018-06-30 23:59:99.\n",
+        "description": "To create your export job, you need to send a \u0060POST\u0060 request to the export endpoint \u0060https://api.intercom.io/export/content/data\u0060.\n\nThis endpoint exports **message delivery and engagement data** for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not export raw message or conversation content.\n\nThe only parameters you need to provide are the range of dates that you want exported.\n\n\u003E\uD83D\uDEA7 Limit of one active job\n\u003E\n\u003E You can only have one active job per workspace. You will receive a HTTP status code of 429 with the message Exceeded rate limit of 1 pending message data export jobs if you attempt to create a second concurrent job.\n\n\u003E\u2757\uFE0F Updated_at not included\n\u003E\n\u003E It should be noted that the timeframe only includes messages sent during the time period and not messages that were only updated during this period. For example, if a message was updated yesterday but sent two days ago, you would need to set the created_at_after date before the message was sent to include that in your retrieval job.\n\n\u003E\uD83D\uDCD8 Date ranges are inclusive\n\u003E\n\u003E Requesting data for 2018-06-01 until 2018-06-30 will get all data for those days including those specified - e.g. 2018-06-01 00:00:00 until 2018-06-30 23:59:99.\n",
         "operationId": "createDataExport",
         "parameters": [
           {
@@ -23407,7 +23632,7 @@
           "Tickets"
         ],
         "summary": "Search tickets",
-        "description": "\u0022You can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for tickets, you send a \u0060POST\u0060 request to \u0060https://api.intercom.io/tickets/search\u0060.\n\nThis will accept a query object in the body which will define your filters.\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006020\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiples there can be:\n- There\u0027s a limit of max 2 nested filters\n- There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foobar\\\u0022\u0060).\nThe \u0060source.body\u0060 field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a \u0060\\\u0022I need support\\\u0022\u0060 body - the query should contain a \u0060=\u0060 operator with the value \u0060\\\u0022support\\\u0022\u0060 for such conversation to be returned. A query with a \u0060=\u0060 operator and a \u0060\\\u0022need support\\\u0022\u0060 value will not yield a result.\n\n| Field                                     | Type                                                                                     |\n| :---------------------------------------- | :--------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                   |\n| created_at                                | Date (UNIX timestamp)                                                                    |\n| updated_at                                | Date (UNIX timestamp)                                                                    |\n| title                           | String                                                                                   |\n| description                     | String                                                                                   |\n| category                                  | String                                                                                   |\n| ticket_type_id                            | String                                                                                   |\n| contact_ids                               | String                                                                                   |\n| teammate_ids                              | String                                                                                   |\n| admin_assignee_id                         | String                                                                                   |\n| team_assignee_id                          | String                                                                                   |\n| open                                      | Boolean                                                                                  |\n| state                                     | String                                                                                   |\n| snoozed_until                             | Date (UNIX timestamp)                                                                    |\n| ticket_attribute.{id}                     | String or Boolean or Date (UNIX timestamp) or Float or Integer                           |\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Searching by Category\\\u0022 %}\nWhen searching for tickets by the **\u0060category\u0060** field, specific terms must be used instead of the category names:\n* For **Customer** category tickets, use the term \u0060request\u0060.\n* For **Back-office** category tickets, use the term \u0060task\u0060.\n* For **Tracker** category tickets, use the term \u0060tracker\u0060.\n{% /admonition %}\n\n### Accepted Operators\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Searching based on \u0060created_at\u0060\\\u0022 %}\n  You may use the \u0060\u003C=\u0060 or \u0060\u003E=\u0060 operators to search by \u0060created_at\u0060.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type  (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn\u0027t Equal                                                |\n| IN       | All                            | In  Shortcut for \u0060OR\u0060 queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for \u0060OR !\u0060 queries  Values must be in Array |\n| \u003E        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| \u003C       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn\u0027t Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |\n\u0022",
+        "description": "\u0022You can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for tickets, you send a \u0060POST\u0060 request to \u0060https://api.intercom.io/tickets/search\u0060.\n\nThis will accept a query object in the body which will define your filters.\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006020\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiples there can be:\n- There\u0027s a limit of max 2 nested filters\n- There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foobar\\\u0022\u0060).\nThe \u0060source.body\u0060 field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a \u0060\\\u0022I need support\\\u0022\u0060 body - the query should contain a \u0060=\u0060 operator with the value \u0060\\\u0022support\\\u0022\u0060 for such conversation to be returned. A query with a \u0060=\u0060 operator and a \u0060\\\u0022need support\\\u0022\u0060 value will not yield a result.\n\n| Field                                     | Type                                                                                     |\n| :---------------------------------------- | :--------------------------------------------------------------------------------------- |\n| id                                        | String                                                                                   |\n| created_at                                | Date (UNIX timestamp)                                                                    |\n| updated_at                                | Date (UNIX timestamp)                                                                    |\n| title                           | String                                                                                   |\n| description                     | String                                                                                   |\n| category                                  | String                                                                                   |\n| ticket_type_id                            | String                                                                                   |\n| contact_ids                               | String                                                                                   |\n| teammate_ids                              | String                                                                                   |\n| admin_assignee_id                         | Integer                                                                                  |\n| team_assignee_id                          | Integer                                                                                  |\n| open                                      | Boolean                                                                                  |\n| state                                     | String                                                                                   |\n| snoozed_until                             | Date (UNIX timestamp)                                                                    |\n| ticket_attribute.{id}                     | String or Boolean or Date (UNIX timestamp) or Float or Integer                           |\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Searching by Category\\\u0022 %}\nWhen searching for tickets by the **\u0060category\u0060** field, specific terms must be used instead of the category names:\n* For **Customer** category tickets, use the term \u0060request\u0060.\n* For **Back-office** category tickets, use the term \u0060task\u0060.\n* For **Tracker** category tickets, use the term \u0060tracker\u0060.\n{% /admonition %}\n\n### Accepted Operators\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Searching based on \u0060created_at\u0060\\\u0022 %}\n  You may use the \u0060\u003C=\u0060 or \u0060\u003E=\u0060 operators to search by \u0060created_at\u0060.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type  (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn\u0027t Equal                                                |\n| IN       | All                            | In  Shortcut for \u0060OR\u0060 queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for \u0060OR !\u0060 queries  Values must be in Array |\n| \u003E        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |\n| \u003C       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn\u0027t Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |\n\u0022",
         "operationId": "searchTickets",
         "parameters": [
           {
@@ -25408,6 +25633,48 @@
           "Ai Agent"
         ]
       },
+      "SalesAgent": {
+        "title": "Sales Agent",
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "enum": [
+              "qualified",
+              "disqualified",
+              "product_discovery",
+              "escalated_to_support",
+              "spam"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The fixed outcome of the sales agent interaction, used for billing and tracking.",
+            "nullable": true,
+            "example": "qualified"
+          },
+          "routing_outcome": {
+            "type": "string",
+            "description": "The identifier of the user-defined routing outcome selected by the sales agent.",
+            "nullable": true,
+            "example": "enterprise_sales"
+          },
+          "collected_data": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A flat key-value map of memory fields collected by the sales agent during the conversation.",
+            "nullable": true,
+            "example": {
+              "email": "user@example.com",
+              "company.name": "Acme Inc"
+            }
+          }
+        },
+        "description": "Data related to Sales Agent involvement in the conversation.",
+        "x-tags": [
+          "Sales Agent"
+        ]
+      },
       "AiSubtopic": {
         "title": "AI Subtopic",
         "type": "object",
@@ -25833,24 +26100,12 @@
             "nullable": true,
             "example": "http://intercom.test/help/en/articles/3-default-language"
           },
-          "parent_id": {
-            "type": "integer",
-            "description": "The id of the article\u0027s parent collection or section. An article without this field stands alone.",
-            "nullable": true,
-            "example": 125685
-          },
           "parent_ids": {
             "type": "array",
             "items": {
               "type": "integer"
             },
             "description": "The ids of the article\u0027s parent collections or sections. An article without this field stands alone."
-          },
-          "parent_type": {
-            "type": "string",
-            "description": "The type of parent, which can either be a \u0060collection\u0060 or \u0060section\u0060.",
-            "nullable": true,
-            "example": "collection"
           },
           "default_locale": {
             "type": "string",
@@ -27927,6 +28182,13 @@
             "description": "The time when the content import source was last updated.",
             "format": "date-time",
             "example": 1672928610
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The unique identifiers for the audiences associated with this content import source."
           }
         },
         "description": "An external source for External Pages that you add to your Fin Content Library.",
@@ -28266,14 +28528,12 @@
           },
           "admin_assignee_id": {
             "type": "integer",
-            "description": "The id of the admin assigned to the conversation. If it\u0027s not assigned to an admin it will return null.",
-            "nullable": true,
+            "description": "The id of the admin assigned to the conversation. If it\u0027s not assigned to an admin it will return 0.",
             "example": 0
           },
           "team_assignee_id": {
-            "type": "string",
-            "description": "The id of the team assigned to the conversation. If it\u0027s not assigned to a team it will return null.",
-            "nullable": true,
+            "type": "integer",
+            "description": "The id of the team assigned to the conversation. If it\u0027s not assigned to a team it will return 0.",
             "example": 5017691
           },
           "company": {
@@ -28331,6 +28591,14 @@
           },
           "ai_agent": {
             "$ref": "#/components/schemas/AiAgent"
+          },
+          "sales_agent_participated": {
+            "type": "boolean",
+            "description": "Indicates whether the Sales Agent participated in the conversation.",
+            "example": false
+          },
+          "sales_agent": {
+            "$ref": "#/components/schemas/SalesAgent"
           }
         },
         "description": "The data returned about your conversations when you list or search them.",
@@ -28417,14 +28685,12 @@
           },
           "admin_assignee_id": {
             "type": "integer",
-            "description": "The id of the admin assigned to the conversation. If it\u0027s not assigned to an admin it will return null.",
-            "nullable": true,
+            "description": "The id of the admin assigned to the conversation. If it\u0027s not assigned to an admin it will return 0.",
             "example": 0
           },
           "team_assignee_id": {
-            "type": "string",
-            "description": "The id of the team assigned to the conversation. If it\u0027s not assigned to a team it will return null.",
-            "nullable": true,
+            "type": "integer",
+            "description": "The id of the team assigned to the conversation. If it\u0027s not assigned to a team it will return 0.",
             "example": 5017691
           },
           "company": {
@@ -28488,6 +28754,14 @@
           },
           "ai_agent": {
             "$ref": "#/components/schemas/AiAgent"
+          },
+          "sales_agent_participated": {
+            "type": "boolean",
+            "description": "Indicates whether the Sales Agent participated in the conversation.",
+            "example": false
+          },
+          "sales_agent": {
+            "$ref": "#/components/schemas/SalesAgent"
           }
         },
         "description": "Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.",
@@ -29512,6 +29786,15 @@
             "type": "string",
             "description": "The URL of the content import source.",
             "example": "https://help.example.com"
+          },
+          "audience_ids": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UnionBranch"
+              }
+            ],
+            "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.",
+            "nullable": true
           }
         },
         "description": "You can add an Content Import Source to your Fin Content Library."
@@ -30682,6 +30965,40 @@
           }
         },
         "description": "The list of associated custom object instances for a given reference attribute on the parent object."
+      },
+      "CustomObjectInstancesPaginatedList": {
+        "title": "Custom Object Instances",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "list"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of the object - \u0060list\u0060.",
+            "example": "list"
+          },
+          "pages": {
+            "$ref": "#/components/schemas/PagesLink"
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "A count of the total number of custom object instances.",
+            "example": 2
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomObjectInstance"
+            },
+            "description": "An array of Custom Object Instance objects."
+          }
+        },
+        "description": "A paginated list of custom object instances.",
+        "x-tags": [
+          "Custom Object Instances"
+        ]
       },
       "CustomerRequest": {
         "required": [
@@ -32035,7 +32352,7 @@
             "example": "https://api.intercom.test/download/messages/data/example"
           }
         },
-        "description": "The data export api is used to view all message sent \u0026 viewed in a given timeframe.",
+        "description": "The data export API is used to export message delivery and engagement statistics for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more) sent in a given timeframe. The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces).",
         "x-tags": [
           "Data Export"
         ]
@@ -32428,105 +32745,6 @@
           }
         },
         "description": "Contains details about name of the action that was initiated for conversation part type \u003Ccode\u003Ecustom_action_started\u003C/code\u003E."
-      },
-      "CustomChannelAttribute": {
-        "title": "Custom Channel - Attribute",
-        "required": [
-          "id",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Identifier for the attribute being collected."
-          },
-          "value": {
-            "type": "string",
-            "description": "Value provided by the user for the attribute."
-          }
-        }
-      },
-      "CustomChannelBaseEvent": {
-        "title": "Custom Channel - Base Event",
-        "required": [
-          "event_id",
-          "external_conversation_id",
-          "contact"
-        ],
-        "type": "object",
-        "properties": {
-          "event_id": {
-            "type": "string",
-            "description": "Unique identifier for the event."
-          },
-          "external_conversation_id": {
-            "type": "string",
-            "description": "Identifier for the conversation in your application."
-          },
-          "contact": {
-            "$ref": "#/components/schemas/CustomChannelContact"
-          }
-        }
-      },
-      "CustomChannelContact": {
-        "title": "Custom Channel - Simplified Contact",
-        "required": [
-          "type",
-          "external_id"
-        ],
-        "type": "object",
-        "properties": {
-          "type": {
-            "enum": [
-              "user",
-              "lead"
-            ],
-            "type": "string",
-            "additionalProperties": false,
-            "description": "Type of contact, must be \u0022user\u0022 or \u0022lead\u0022."
-          },
-          "external_id": {
-            "type": "string",
-            "description": "External identifier for the contact. Intercom will take care of the mapping of your external_id with our internal ones so you don\u0027t have to worry about it."
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the contact. Required for user type."
-          },
-          "email": {
-            "type": "string",
-            "description": "Email address of the contact. Required for user type.",
-            "format": "email"
-          }
-        }
-      },
-      "CustomChannelNotificationResponse": {
-        "required": [
-          "external_conversation_id",
-          "conversation_id",
-          "external_contact_id",
-          "contact_id"
-        ],
-        "type": "object",
-        "properties": {
-          "external_conversation_id": {
-            "type": "string",
-            "description": "The external conversation ID provided in the notification request"
-          },
-          "conversation_id": {
-            "type": "string",
-            "description": "The Intercom conversation ID mapped to the external conversation ID"
-          },
-          "external_contact_id": {
-            "type": "string",
-            "description": "The external contact ID provided in the notification request"
-          },
-          "contact_id": {
-            "type": "string",
-            "description": "The Intercom contact ID mapped to the external contact ID"
-          }
-        }
       },
       "CustomActionFinished": {
         "title": "Part type - custom_action_finished",
@@ -33135,6 +33353,355 @@
         "description": "This will return a list of external pages for the App.",
         "x-tags": [
           "AI Content"
+        ]
+      },
+      "FinAgentMessage": {
+        "title": "Fin Agent Message",
+        "required": [
+          "author",
+          "body",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "author": {
+            "enum": [
+              "user",
+              "agent",
+              "fin"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The author that created the message.",
+            "example": "user"
+          },
+          "body": {
+            "type": "string",
+            "description": "The body of the message. Accepts both plain text and HTML format.\nWhen sending a message to Fin, this should contain the user\u0027s message.\nFin\u0027s response will be returned as HTML.\n",
+            "example": "How can I see my account details?"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The timestamp when the message was created.\nUsed to deduplicate messages sent within a 5 minute window.\nIdeally should include milliseconds for higher precision.\n",
+            "format": "date-time",
+            "example": "2025-01-24T10:01:20.000Z"
+          },
+          "timestamp_ms": {
+            "type": "string",
+            "description": "The timestamp when the message was created, with millisecond precision.\nOnly present in event responses (fin_replied).\n",
+            "format": "date-time",
+            "example": "2025-01-24T10:01:20.456Z"
+          }
+        },
+        "description": "A message exchanged within a Fin Agent conversation.",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentUser": {
+        "title": "Fin Agent User",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the user. This value will be used to uniquely identify the user\nduring a conversation with Fin. Maps to the user_id field on the Intercom User object.\n",
+            "example": 123456
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the user.",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user.",
+            "format": "email",
+            "example": "john.doe@example.com"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "A hash of attributes associated with the user.\nAttributes can be used by Fin to target content and responses.\nLimit to 10 attributes.\n",
+            "example": {
+              "plan_type": "Pro",
+              "subscription_status": "active"
+            }
+          }
+        },
+        "description": "A user object representing the user in a Fin Agent conversation.",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentAttachment": {
+        "title": "Fin Agent Attachment",
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "url",
+              "file"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of attachment.",
+            "example": "url"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the attachment. Required when type is \u0027url\u0027. Must be publicly accessible.",
+            "format": "uri",
+            "example": "https://example.com/document.pdf"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the file. Required when type is \u0027file\u0027.",
+            "example": "screenshot.png"
+          },
+          "content_type": {
+            "type": "string",
+            "description": "The MIME type of the file. Required when type is \u0027file\u0027.",
+            "example": "image/png"
+          },
+          "data": {
+            "type": "string",
+            "description": "Base64-encoded file data. Required when type is \u0027file\u0027.",
+            "format": "byte",
+            "example": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk..."
+          }
+        },
+        "description": "An attachment object representing a file or URL attachment included with a message.\nAttachments can be used to provide additional context to Fin.\nMaximum of 10 attachments per request.\n",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentConversationMetadata": {
+        "title": "Fin Agent Conversation Metadata",
+        "type": "object",
+        "properties": {
+          "history": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinAgentMessage"
+            },
+            "description": "An array of previous messages in the conversation before Fin is initialized.\nThis data provides context to Fin and helps generate a better answer.\nLimit to the last 10 messages.\n"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "A hash of attributes associated with the conversation.\nThese attributes can be used by Fin to provide more contextual responses.\nLimit to 10 attributes.\n",
+            "example": {
+              "priority_level": "high",
+              "department": "sales"
+            }
+          }
+        },
+        "description": "Metadata about the conversation, including history and attributes.",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentAttributeErrors": {
+        "title": "Fin Agent Attribute Errors",
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/FinAgentAttributeErrorsUser"
+          },
+          "conversation": {
+            "$ref": "#/components/schemas/FinAgentAttributeErrorsConversation"
+          }
+        },
+        "description": "Contains error details if any user or conversation attribute updates failed.",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentStatusUpdatedEvent": {
+        "title": "Fin Agent Status Updated Event",
+        "required": [
+          "event_name",
+          "conversation_id",
+          "user_id",
+          "status",
+          "created_at_ms"
+        ],
+        "type": "object",
+        "properties": {
+          "event_name": {
+            "enum": [
+              "fin_status_updated"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The name of the event.",
+            "example": "fin_status_updated"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation.",
+            "example": 123456
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user.",
+            "example": 7891
+          },
+          "status": {
+            "enum": [
+              "awaiting_user_reply",
+              "escalated",
+              "resolved",
+              "complete"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "\u0022Fin\u0027s current status.\n- awaiting_user_reply: Fin has finished replying and is waiting for the user to respond\n- escalated: The conversation has been escalated to a human\n- resolved: The user\u0027s query has been resolved\n- complete: Fin has completed its workflow\n\u0022",
+            "example": "escalated"
+          },
+          "reason": {
+            "type": "string",
+            "description": "\u0022Optional. A human-readable explanation of why the conversation was escalated.\nOnly present when status is \u0027escalated\u0027.\nPossible values include:\n- \\\u0022Escalation requested by user\\\u0022\n- \\\u0022Escalation rule: {rule_name}\\\u0022\n- \\\u0022Escalation rule matched\\\u0022\n- \\\u0022Routed to team\\\u0022\n- \\\u0022Conversation finished without resolution\\\u0022\n\u0022",
+            "example": "Escalation requested by user"
+          },
+          "created_at_ms": {
+            "type": "string",
+            "description": "The timestamp the event was created at, with millisecond precision.",
+            "format": "date-time",
+            "example": "2025-01-24T10:00:00.123Z"
+          }
+        },
+        "description": "Event fired when Fin\u0027s status changes during a conversation.\nFin will report its status to the client via this event.\n",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentRepliedEvent": {
+        "title": "Fin Agent Replied Event",
+        "required": [
+          "event_name",
+          "conversation_id",
+          "user_id",
+          "message",
+          "status",
+          "created_at_ms"
+        ],
+        "type": "object",
+        "properties": {
+          "event_name": {
+            "enum": [
+              "fin_replied"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The name of the event.",
+            "example": "fin_replied"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation.",
+            "example": 123456
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user.",
+            "example": 7891
+          },
+          "message": {
+            "$ref": "#/components/schemas/FinAgentRepliedEventMessage"
+          },
+          "status": {
+            "enum": [
+              "replying",
+              "awaiting_user_reply"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "\u0022Fin\u0027s current status.\n- replying: Intermediate reply part; more parts may follow\n- awaiting_user_reply: Legacy status; use fin_status_updated event as the done signal instead\n\u0022",
+            "example": "replying"
+          },
+          "stream_id": {
+            "type": "string",
+            "description": "Optional. Present when the reply was generated via streaming.\nCorrelates this event with the fin_reply_chunk events that preceded it.\nUse this to know when to replace streamed chunk_text with the final message body.\n",
+            "example": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+          },
+          "created_at_ms": {
+            "type": "string",
+            "description": "The timestamp the event was created at, with millisecond precision.",
+            "format": "date-time",
+            "example": "2025-01-24T10:00:00.123Z"
+          }
+        },
+        "description": "Event fired when Fin replies to a user.\nThe content of the response will be contained in the message object.\nIntermediate replies have status \u0027replying\u0027; a separate fin_status_updated\nevent with \u0027awaiting_user_reply\u0027 fires as a done signal.\n",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
+      "FinAgentReplyChunkEvent": {
+        "title": "Fin Agent Reply Chunk Event",
+        "required": [
+          "event_name",
+          "conversation_id",
+          "stream_id",
+          "chunk_index",
+          "chunk_text",
+          "created_at_ms"
+        ],
+        "type": "object",
+        "properties": {
+          "event_name": {
+            "enum": [
+              "fin_reply_chunk"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The name of the event.",
+            "example": "fin_reply_chunk"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation.",
+            "example": 123456
+          },
+          "stream_id": {
+            "type": "string",
+            "description": "A unique identifier for this streaming response.\nCorrelates chunks with each other and with the eventual fin_replied event.\n",
+            "example": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+          },
+          "chunk_index": {
+            "type": "integer",
+            "description": "0-based counter for this chunk within the stream. Contiguous.\n",
+            "example": 3
+          },
+          "chunk_text": {
+            "type": "string",
+            "description": "The full accumulated plain text of Fin\u0027s answer so far.\nEach chunk supersedes the previous \u2014 replace rather than append.\n",
+            "example": "You can see your account details by clicking"
+          },
+          "status": {
+            "enum": [
+              "replying"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "Fin\u0027s current status (always \u0027replying\u0027 for this event).",
+            "example": "replying"
+          },
+          "created_at_ms": {
+            "type": "string",
+            "description": "The timestamp the event was created at, with millisecond precision.",
+            "format": "date-time",
+            "example": "2025-01-24T10:00:00.123Z"
+          }
+        },
+        "description": "SSE-only event fired during streaming reply generation.\nEach chunk contains the full accumulated plain text of Fin\u0027s answer so far (cumulative, not a delta).\nOnly delivered over SSE when streaming is enabled. Not available via webhooks.\nWhen the fin_replied event arrives with the same stream_id, replace streamed text with the final HTML body.\n",
+        "x-tags": [
+          "Fin Agent"
         ]
       },
       "FileAttribute": {
@@ -35505,13 +36072,13 @@
             "$ref": "#/components/schemas/TicketContacts"
           },
           "admin_assignee_id": {
-            "type": "string",
-            "description": "The id representing the admin assigned to the ticket.",
+            "type": "integer",
+            "description": "The id representing the admin assigned to the ticket. If it\u0027s not assigned to an admin it will return 0.",
             "example": 1295
           },
           "team_assignee_id": {
-            "type": "string",
-            "description": "The id representing the team assigned to the ticket.",
+            "type": "integer",
+            "description": "The id representing the team assigned to the ticket. If it\u0027s not assigned to a team it will return 0.",
             "example": 1295
           },
           "created_at": {
@@ -36608,6 +37175,21 @@
             "type": "string",
             "description": "The URL of the content import source. This may only be different from the existing value if the sync behavior is API.",
             "example": "https://help.example.com"
+          },
+          "audience_ids": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UnionBranch"
+              }
+            ],
+            "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences.",
+            "nullable": true
+          },
+          "apply_audience_to_existing_content": {
+            "type": "boolean",
+            "description": "When true, the audience will be applied to all existing external pages belonging to this content import source.",
+            "default": false,
+            "example": false
           }
         },
         "description": "You can modify a Content Import Source of your Fin Content Library."
@@ -38059,6 +38641,63 @@
           }
         }
       },
+      "FinAgentAttributeErrorsUser": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Map of user attribute names to error messages."
+          }
+        },
+        "description": "User-related attribute errors."
+      },
+      "FinAgentAttributeErrorsConversation": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Map of conversation attribute names to error messages."
+          }
+        },
+        "description": "Conversation-related attribute errors."
+      },
+      "FinAgentRepliedEventMessage": {
+        "required": [
+          "author",
+          "body",
+          "timestamp_ms"
+        ],
+        "type": "object",
+        "properties": {
+          "author": {
+            "enum": [
+              "fin"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The author of the message (always \u0027fin\u0027 for this event).",
+            "example": "fin"
+          },
+          "body": {
+            "type": "string",
+            "description": "The HTML body of Fin\u0027s response.",
+            "example": "\u003Cp\u003EYou can see your account details by clicking on the \u003Cem\u003EAccount\u003C/em\u003E tab in the top right corner of the screen.\u003C/p\u003E"
+          },
+          "timestamp_ms": {
+            "type": "string",
+            "description": "The timestamp the message was created at, with millisecond precision.",
+            "format": "date-time",
+            "example": "2025-01-24T09:01:00.456Z"
+          }
+        },
+        "description": "Fin\u0027s answer to the user\u0027s query."
+      },
       "SideConversationListPages": {
         "type": "object",
         "properties": {
@@ -38465,6 +39104,26 @@
         },
         "description": "The workflow configuration."
       },
+      "FinAgentAttributeErrorsUserAttributes": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Map of user attribute names to error messages.",
+        "example": {
+          "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
+        }
+      },
+      "FinAgentAttributeErrorsConversationAttributes": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Map of conversation attribute names to error messages.",
+        "example": {
+          "bad_attr": "Conversation attribute \u0027bad_attr\u0027 does not exist"
+        }
+      },
       "SetAwayAdmin": {
         "required": [
           "away_mode_enabled",
@@ -38653,6 +39312,67 @@
                 }
               }
             }
+          }
+        }
+      },
+      "StartFinConversation": {
+        "required": [
+          "conversation_id",
+          "message",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation that is calling Fin via this API.",
+            "example": "ext-123"
+          },
+          "message": {
+            "$ref": "#/components/schemas/FinAgentMessage"
+          },
+          "user": {
+            "$ref": "#/components/schemas/FinAgentUser"
+          },
+          "attachments": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinAgentAttachment"
+            },
+            "description": "An array of attachments to include with the message. Maximum of 10 attachments."
+          },
+          "conversation_metadata": {
+            "$ref": "#/components/schemas/FinAgentConversationMetadata"
+          }
+        }
+      },
+      "ReplyToFin": {
+        "required": [
+          "conversation_id",
+          "message",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation.",
+            "example": 123456
+          },
+          "message": {
+            "$ref": "#/components/schemas/FinAgentMessage"
+          },
+          "user": {
+            "$ref": "#/components/schemas/FinAgentUser"
+          },
+          "attachments": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinAgentAttachment"
+            },
+            "description": "An array of attachments to include with the message. Maximum of 10 attachments."
           }
         }
       },
@@ -39046,65 +39766,6 @@
           }
         }
       },
-      "NotifyNewMessage": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CustomChannelBaseEvent"
-          },
-          {
-            "required": [
-              "body"
-            ],
-            "type": "object",
-            "properties": {
-              "body": {
-                "type": "string",
-                "description": "The message content sent by the user."
-              }
-            }
-          }
-        ]
-      },
-      "NotifyQuickReplySelected": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CustomChannelBaseEvent"
-          },
-          {
-            "required": [
-              "quick_reply_option_id"
-            ],
-            "type": "object",
-            "properties": {
-              "quick_reply_option_id": {
-                "type": "string",
-                "description": "Id of the selected quick reply option."
-              }
-            }
-          }
-        ]
-      },
-      "NotifyAttributeCollected": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CustomChannelBaseEvent"
-          },
-          {
-            "required": [
-              "attribute"
-            ],
-            "type": "object",
-            "properties": {
-              "attribute": {
-                "$ref": "#/components/schemas/CustomChannelAttribute"
-              }
-            }
-          }
-        ]
-      },
       "ShowCallTranscript200": {
         "type": "string",
         "description": "Transcript text"
@@ -39351,21 +40012,7 @@
         "type": "object",
         "properties": {
           "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Recipient"
-            },
-            "description": "The recipients of the message.",
-            "example": [
-              {
-                "type": "user",
-                "id": "536e564f316c83104c000020"
-              },
-              {
-                "type": "lead",
-                "id": "536e564f316c83104c000021"
-              }
-            ]
+            "type": "integer"
           }
         }
       }
@@ -39514,26 +40161,6 @@
             }
           }
         }
-      },
-      "CustomChannelNotificationSuccess": {
-        "description": "Successfully notified Intercom",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/CustomChannelNotificationResponse"
-            },
-            "examples": {
-              "NotificationSuccess": {
-                "value": {
-                  "external_conversation_id": "customer_conversation_id_12",
-                  "conversation_id": "intercom_conversation_id_34",
-                  "external_contact_id": "customer_contact_id_56",
-                  "contact_id": "intercom_contact_id_79"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "securitySchemes": {
@@ -39600,10 +40227,6 @@
       }
     },
     {
-      "name": "Custom Channel Events",
-      "description": "With the \u0022Custom Channel\u0022 integration, you can bring Fin and Intercom capabilities to your own platform via API, enabling powerful custom integrations.\n\nIntercom treats your integration like any other Intercom channel, allowing your application and Intercom to exchange events seamlessly. This makes it possible, for example, for your users to interact with Fin directly within your own application\u2019s UI.\n\n\u003E **Note:** \u0022Fin over API\u0022 is currently under managed availability. Please reach out to your accounts team to discuss access and tailored, hands-on support.\n"
-    },
-    {
       "name": "Custom Object Instances",
       "description": "Everything about your Custom Object instances.\n{% admonition type=\u0022warning\u0022 name=\u0022Permission Requirements\u0022 %}\n  From now on, to access this endpoint, you need additional permissions. Please head over to the [Developer Hub](https://app.intercom.com/a/apps/_/developer-hub) app package authentication settings to configure the required permissions.\n{% /admonition %}\n"
     },
@@ -39621,11 +40244,15 @@
     },
     {
       "name": "Data Export",
-      "description": "Everything about your Data Exports"
+      "description": "Export message delivery and engagement statistics (opens, clicks, replies, completions, dismissals, unsubscribes, bounces) for outbound content such as Emails, Posts, Custom Bots, Surveys, Tours, and Series."
     },
     {
       "name": "Emails",
       "description": "Everything about your Emails"
+    },
+    {
+      "name": "Fin Agent",
+      "description": "Access Fin programmatically via the Fin Agent API endpoints.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access and tailored, hands-on support.\n{% /admonition %}\n\n\u0026nbsp;\n\nIntegration is centered around two endpoints (\u0060/fin/start\u0060 and \u0060/fin/reply\u0060) and a set of events that notify your application of Fin\u0027s status and responses. Events can be delivered via webhooks or Server-Sent Events (SSE).\n\n\u0026nbsp;\n\n**Events**\n\nConfigure a webhook endpoint in the Fin Agent API settings to receive events, or use the \u0060sse_subscription_url\u0060 from the API response to subscribe via SSE. See the [setup guide](/docs/guides/fin-agent-api/setup) for configuration details.\n\n- \u0060fin_status_updated\u0060 - Fired when Fin\u0027s status changes (awaiting_user_reply, escalated, resolved, complete)\n- \u0060fin_replied\u0060 - Fired when Fin sends a reply to the user\n- \u0060fin_reply_chunk\u0060 - SSE-only streaming event fired during reply generation (requires streaming enabled)\n\nAll webhook requests include an \u0060X-Fin-Agent-API-Webhook-Signature\u0060 header for request validation.\n"
     },
     {
       "name": "Help Center",

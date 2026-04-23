@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? AudienceIds { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch AudienceIds { get; set; }
+#endif
         /// <summary>The status of the content import source.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequest_status? Status { get; set; }
         /// <summary>If you intend to create or update External Pages via the API, this should be set to `api`.</summary>
@@ -53,6 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "audience_ids", n => { AudienceIds = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch.CreateFromDiscriminatorValue); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequest_status>(); } },
                 { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequest_sync_behavior>(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
@@ -65,6 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>("audience_ids", AudienceIds);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequest_status>("status", Status);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequest_sync_behavior>("sync_behavior", SyncBehavior);
             writer.WriteStringValue("url", Url);
