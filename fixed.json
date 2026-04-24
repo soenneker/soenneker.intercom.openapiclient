@@ -38675,6 +38675,11 @@
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "A unique identifier for this message.",
+            "example": 98765
+          },
           "author": {
             "enum": [
               "fin"
