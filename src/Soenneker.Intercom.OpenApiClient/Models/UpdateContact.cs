@@ -65,7 +65,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The id of an admin that has been assigned account ownership of the contact</summary>
-        public int? OwnerId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OwnerId { get; set; }
+#nullable restore
+#else
+        public string OwnerId { get; set; }
+#endif
         /// <summary>The contacts phone</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -126,7 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
                 { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "owner_id", n => { OwnerId = n.GetIntValue(); } },
+                { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
@@ -148,7 +154,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("language_override", LanguageOverride);
             writer.WriteIntValue("last_seen_at", LastSeenAt);
             writer.WriteStringValue("name", Name);
-            writer.WriteIntValue("owner_id", OwnerId);
+            writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
             writer.WriteIntValue("signed_up_at", SignedUpAt);

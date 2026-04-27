@@ -244,7 +244,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Os { get; set; }
 #endif
         /// <summary>The id of an admin that has been assigned account ownership of the contact.</summary>
-        public int? OwnerId { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OwnerId { get; set; }
+#nullable restore
+#else
+        public string OwnerId { get; set; }
+#endif
         /// <summary>The contacts phone.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -360,7 +366,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes.CreateFromDiscriminatorValue); } },
                 { "os", n => { Os = n.GetStringValue(); } },
-                { "owner_id", n => { OwnerId = n.GetIntValue(); } },
+                { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
@@ -415,7 +421,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>("notes", Notes);
             writer.WriteStringValue("os", Os);
-            writer.WriteIntValue("owner_id", OwnerId);
+            writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
             writer.WriteIntValue("signed_up_at", SignedUpAt);

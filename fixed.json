@@ -27247,7 +27247,7 @@
             "example": "John Doe"
           },
           "owner_id": {
-            "type": "integer",
+            "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
             "example": 123
@@ -29717,7 +29717,7 @@
             "example": 1571672154
           },
           "owner_id": {
-            "type": "integer",
+            "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact",
             "nullable": true,
             "example": 123
@@ -37116,7 +37116,7 @@
             "example": 1571672154
           },
           "owner_id": {
-            "type": "integer",
+            "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact",
             "nullable": true,
             "example": 123
