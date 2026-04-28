@@ -1356,6 +1356,8 @@ paths:
                   state: published
                   parent_id: 145
                   parent_type: collection
+                  parent_ids:
+                  - 145
                   translated_content:
                     fr:
                       title: Merci pour tout
@@ -1545,6 +1547,9 @@ paths:
                 value:
                   title: Christmas is here!
                   body: "<p>New gifts in store for the jolly season</p>"
+                  parent_ids:
+                  - 18
+                  - 19
               article_not_found:
                 summary: Article Not Found
                 value:
@@ -7061,6 +7066,54 @@ paths:
                     errors:
                     - code: validation_error
                       message: The language is not currently supported for Fin
+              schema:
+                "$ref": "#/components/schemas/error"
+    delete:
+      summary: Delete a content snippet
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier for the content snippet.
+        schema:
+          type: string
+          example: '123'
+      tags:
+      - Content Snippets
+      operationId: deleteContentSnippet
+      description: You can delete a single content snippet by its id.
+      responses:
+        '204':
+          description: Content snippet deleted
+        '404':
+          description: Content snippet not found
+          content:
+            application/json:
+              examples:
+                Content snippet not found:
+                  value:
+                    type: error.list
+                    errors:
+                    - code: not_found
+                      message: Content snippet not found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Content snippet has procedure dependencies
+          content:
+            application/json:
+              examples:
+                Content snippet has procedure dependencies:
+                  value:
+                    type: error.list
+                    errors:
+                    - code: content_has_procedure_dependencies
+                      message: Content snippet has dependent procedures and cannot
+                        be deleted
               schema:
                 "$ref": "#/components/schemas/error"
   "/conversations/{conversation_id}/tags":
@@ -19279,7 +19332,7 @@ components:
           example: http://intercom.test/help/en/articles/3-default-language
         parent_ids:
           type: array
-          description: The ids of the article's parent collections or sections. An
+          description: The ids of the article's parent collections. An
             article without this field stands alone.
           items:
             type: integer
@@ -22108,6 +22161,15 @@ components:
           type: string
           description: The type of parent, which can either be a `collection` or `section`.
           example: collection
+        parent_ids:
+          type: array
+          description: The ids of the article's parent collections.
+            An article without this field stands alone.
+          items:
+            type: integer
+          example:
+          - 18
+          - 19
         translated_content:
           "$ref": "#/components/schemas/article_translated_content"
         folder_id:
@@ -28256,6 +28318,15 @@ components:
           type: string
           description: The type of parent, which can either be a `collection` or `section`.
           example: collection
+        parent_ids:
+          type: array
+          description: The ids of the article's parent collections.
+            An article without this field stands alone.
+          items:
+            type: integer
+          example:
+          - 18
+          - 19
         translated_content:
           "$ref": "#/components/schemas/article_translated_content"
         folder_id:

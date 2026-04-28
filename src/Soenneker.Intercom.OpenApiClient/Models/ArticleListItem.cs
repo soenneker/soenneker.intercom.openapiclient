@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The ids of the article&apos;s parent collections or sections. An article without this field stands alone.</summary>
+        /// <summary>The ids of the article&apos;s parent collections. An article without this field stands alone.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? ParentIds { get; set; }

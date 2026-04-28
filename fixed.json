@@ -1769,6 +1769,9 @@
                     "state": "published",
                     "parent_id": 145,
                     "parent_type": "collection",
+                    "parent_ids": [
+                      145
+                    ],
                     "translated_content": {
                       "fr": {
                         "title": "Merci pour tout",
@@ -2042,7 +2045,11 @@
                   "summary": "successful",
                   "value": {
                     "title": "Christmas is here!",
-                    "body": "\u003Cp\u003ENew gifts in store for the jolly season\u003C/p\u003E"
+                    "body": "\u003Cp\u003ENew gifts in store for the jolly season\u003C/p\u003E",
+                    "parent_ids": [
+                      18,
+                      19
+                    ]
                   }
                 },
                 "article_not_found": {
@@ -9663,6 +9670,81 @@
                         {
                           "code": "validation_error",
                           "message": "The language is not currently supported for Fin"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Content Snippets"
+        ],
+        "summary": "Delete a content snippet",
+        "description": "You can delete a single content snippet by its id.",
+        "operationId": "deleteContentSnippet",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the content snippet.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": 123
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Content snippet not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Content snippet not found": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Content snippet not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Content snippet has procedure dependencies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Content snippet has procedure dependencies": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "content_has_procedure_dependencies",
+                          "message": "Content snippet has dependent procedures and cannot be deleted"
                         }
                       ]
                     }
@@ -26105,7 +26187,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "The ids of the article\u0027s parent collections or sections. An article without this field stands alone."
+            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
           },
           "default_locale": {
             "type": "string",
@@ -29551,6 +29633,13 @@
             "type": "string",
             "description": "The type of parent, which can either be a \u0060collection\u0060 or \u0060section\u0060.",
             "example": "collection"
+          },
+          "parent_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
           },
           "translated_content": {
             "$ref": "#/components/schemas/ArticleTranslatedContent"
@@ -36993,6 +37082,13 @@
             "type": "string",
             "description": "The type of parent, which can either be a \u0060collection\u0060 or \u0060section\u0060.",
             "example": "collection"
+          },
+          "parent_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
           },
           "translated_content": {
             "$ref": "#/components/schemas/ArticleTranslatedContent"

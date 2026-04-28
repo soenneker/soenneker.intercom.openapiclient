@@ -43,6 +43,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ParentId { get; set; }
 #endif
+        /// <summary>The ids of the article&apos;s parent collections. An article without this field stands alone.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? ParentIds { get; set; }
+#nullable restore
+#else
+        public List<int?> ParentIds { get; set; }
+#endif
         /// <summary>The type of parent, which can either be a `collection` or `section`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -99,6 +107,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "parent_id", n => { ParentId = n.GetStringValue(); } },
+                { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "parent_type", n => { ParentType = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest_state>(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
@@ -117,6 +126,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("description", Description);
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteStringValue("parent_id", ParentId);
+            writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
             writer.WriteStringValue("parent_type", ParentType);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest_state>("state", State);
             writer.WriteStringValue("title", Title);
