@@ -25,6 +25,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
+        /// <summary>The body of the article in markdown. For multilingual articles, this will be the body of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
+#endif
         /// <summary>The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language&apos;s content in seconds.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The default locale of the help center. This field is only returned for multilingual help centers.</summary>
@@ -135,6 +143,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "default_locale", n => { DefaultLocale = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
@@ -160,6 +169,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("default_locale", DefaultLocale);
             writer.WriteStringValue("description", Description);

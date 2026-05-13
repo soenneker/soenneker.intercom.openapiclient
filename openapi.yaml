@@ -1243,6 +1243,7 @@ paths:
                       title: This is the article title
                       description: ''
                       body: ''
+                      body_markdown: ''
                       author_id: 991267492
                       state: published
                       created_at: 1734537283
@@ -1304,6 +1305,7 @@ paths:
                     title: Thanks for everything
                     description: Description of the Article
                     body: <p class="no-margin">Body of the Article</p>
+                    body_markdown: "Body of the Article\n"
                     author_id: 991267497
                     state: published
                     created_at: 1734537288
@@ -1418,6 +1420,7 @@ paths:
                     title: This is the article title
                     description: ''
                     body: ''
+                    body_markdown: ''
                     author_id: 991267502
                     state: published
                     created_at: 1734537292
@@ -1501,6 +1504,7 @@ paths:
                     title: Christmas is here!
                     description: ''
                     body: <p class="no-margin">New gifts in store for the jolly season</p>
+                    body_markdown: "New gifts in store for the jolly season\n"
                     author_id: 991267508
                     state: published
                     created_at: 1734537297
@@ -2876,6 +2880,7 @@ paths:
                     - id: '39'
                       title: Thanks for everything
                       body: Body of the Article
+                      body_markdown: "Body of the Article\n"
                       owner_id: 991266252
                       author_id: 991266252
                       locale: en
@@ -2917,6 +2922,7 @@ paths:
                     id: '42'
                     title: Thanks for everything
                     body: Body of the Article
+                    body_markdown: "Body of the Article\n"
                     owner_id: 991266252
                     author_id: 991266252
                     locale: en
@@ -3000,6 +3006,7 @@ paths:
                   value:
                     id: '45'
                     body: Body of the Article
+                    body_markdown: "Body of the Article\n"
                     owner_id: 991266252
                     author_id: 991266252
                     locale: en
@@ -3062,6 +3069,7 @@ paths:
                   value:
                     id: '48'
                     body: Body of the Article
+                    body_markdown: "Body of the Article\n"
                     owner_id: 991266252
                     author_id: 991266252
                     locale: en
@@ -3980,7 +3988,16 @@ paths:
       tags:
       - Companies
       operationId: deleteCompany
-      description: You can delete a single company.
+      description: |
+        Delete a single company.
+
+        This endpoint does not permanently remove the company. It archives the company record and detaches any contacts attached to it; the contacts themselves are not deleted. A `company.deleted` webhook is sent once archival completes.
+
+        The endpoint returns `200` with `"deleted": true` as soon as the request is accepted — archival is processed asynchronously.
+
+        {% admonition type="warning" %}
+        Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.
+        {% /admonition %}
       responses:
         '200':
           description: Successful
@@ -5942,8 +5959,23 @@ paths:
       description: |
         You can fetch the details of a single contact.
 
-        {% admonition type="warning" name="Merged contacts" %}
-          If a contact has been merged into another contact via the Merge endpoint (POST /contacts/merge), requesting it by its original ID will return a `404 Not Found` error. Use the merged-into contact's ID instead.
+        {% admonition type="info" name="Merged contacts return 410 Gone" %}
+          If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.
+
+          **Response headers:**
+          ```
+          Link: </contacts/{canonical_id}>; rel="canonical"
+          ```
+
+          **Response body:**
+          ```json
+          {
+            "type": "error.list",
+            "errors": [{ "code": "contact_merged", "message": "This contact has been merged. See the 'Link' header for the canonical contact." }]
+          }
+          ```
+
+          The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).
         {% /admonition %}
       responses:
         '200':
@@ -6061,6 +6093,28 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '410':
+          description: Contact Merged
+          headers:
+            Link:
+              description: 'Link to the canonical (merged-into) contact. Format:
+                `</contacts/{id}>; rel="canonical"`'
+              schema:
+                type: string
+                example: '</contacts/6762f0d01bb69f9f2193bb7d>; rel="canonical"'
+          content:
+            application/json:
+              examples:
+                Contact Merged:
+                  value:
+                    type: error.list
+                    request_id: 45b30bd1-75d2-40cc-bb39-74ac133a2836
+                    errors:
+                    - code: contact_merged
+                      message: This contact has been merged. See the 'Link' header
+                        for the canonical contact.
               schema:
                 "$ref": "#/components/schemas/error"
     delete:
@@ -6627,8 +6681,12 @@ paths:
       tags:
       - Contacts
       operationId: ShowContactByExternalId
-      description: You can fetch the details of a single contact by external ID. Note
-        that this endpoint only supports users and not leads.
+      description: |
+        You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.
+
+        {% admonition type="info" name="Merged contacts return 410 Gone" %}
+          If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.
+        {% /admonition %}
       responses:
         '200':
           description: successful
@@ -6747,6 +6805,28 @@ paths:
                       message: Access Token Invalid
               schema:
                 "$ref": "#/components/schemas/error"
+        '410':
+          description: Contact Merged
+          headers:
+            Link:
+              description: 'Link to the canonical (merged-into) contact. Format:
+                `</contacts/{id}>; rel="canonical"`'
+              schema:
+                type: string
+                example: '</contacts/6762f0df1bb69f9f2193bb84>; rel="canonical"'
+          content:
+            application/json:
+              examples:
+                Contact Merged:
+                  value:
+                    type: error.list
+                    request_id: 1fb28be7-cda6-4029-b4da-447ef61cb61a
+                    errors:
+                    - code: contact_merged
+                      message: This contact has been merged. See the 'Link' header
+                        for the canonical contact.
+              schema:
+                "$ref": "#/components/schemas/error"
   "/contacts/{id}/archive":
     post:
       summary: Archive contact
@@ -6825,6 +6905,168 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/contact_blocked"
+  "/contacts/bulk":
+    post:
+      summary: Bulk update contacts
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - Contacts
+      operationId: BulkUpdateContacts
+      description: |
+        You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update.
+
+        The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.
+
+        {% admonition type="info" name="Limits" %}
+          - Maximum of 100 contacts per request.
+          - You can append tasks to an existing job by including `job.id` in the request body.
+        {% /admonition %}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/bulk_update_contacts_request"
+            examples:
+              successful:
+                summary: Successful
+                value:
+                  contacts:
+                  - id: abc123
+                    language_override: fr
+                  - id: def456
+                    name: Updated Name
+                  - id: ghi789
+                    language_override: es
+                    name: "María García"
+              append_to_existing_job:
+                summary: Append to existing job
+                value:
+                  contacts:
+                  - id: abc123
+                    language_override: de
+                  job:
+                    id: job_v2_1
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    id: job_v2_1
+                    type: contacts.bulk.job
+                    state: running
+                    created_at: 1713360000
+                    updated_at: 1713360060
+                    completed_at:
+                    tasks:
+                    - id: task_v2_1
+                      item_count: 3
+                      state: pending
+                      created_at: 1713360000
+                      started_at:
+                      completed_at:
+                    url: https://api.intercom.io/contacts/bulk/job_v2_1
+              schema:
+                "$ref": "#/components/schemas/contacts_bulk_job"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                missing_contacts:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: missing_field
+                      message: contacts field must be supplied
+                too_many_contacts:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: invalid_parameter
+                      message: maximum number of contacts per request is 100
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/contacts/bulk/{id}":
+    get:
+      summary: Get a bulk update job
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        description: The unique identifier for the bulk job.
+        example: job_v2_1
+        required: true
+        schema:
+          type: string
+      tags:
+      - Contacts
+      operationId: ShowBulkUpdateContactsJob
+      description: |
+        You can check the status of a bulk contact update job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    id: job_v2_1
+                    type: contacts.bulk.job
+                    state: completed
+                    created_at: 1713360000
+                    updated_at: 1713360120
+                    completed_at: 1713360120
+                    tasks:
+                    - id: task_v2_1
+                      item_count: 3
+                      state: completed
+                      created_at: 1713360000
+                      started_at: 1713360060
+                      completed_at: 1713360120
+                    url: https://api.intercom.io/contacts/bulk/job_v2_1
+              schema:
+                "$ref": "#/components/schemas/contacts_bulk_job"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
   "/content_snippets":
     get:
       summary: List all content snippets
@@ -6868,6 +7110,7 @@ paths:
                       json_blocks:
                       - type: paragraph
                         text: Navigate to Settings > Security > Reset password.
+                      body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
                       chatbot_availability: 1
                       copilot_availability: 1
                       created_at: 1663597223
@@ -6918,6 +7161,7 @@ paths:
                     json_blocks:
                     - type: paragraph
                       text: Navigate to Settings > Security > Reset password.
+                    body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
                     chatbot_availability: 1
                     copilot_availability: 1
                     created_at: 1663597223
@@ -6971,6 +7215,7 @@ paths:
                     json_blocks:
                     - type: paragraph
                       text: Navigate to Settings > Security > Reset password.
+                    body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
                     chatbot_availability: 1
                     copilot_availability: 1
                     created_at: 1663597223
@@ -7036,6 +7281,7 @@ paths:
                     json_blocks:
                     - type: paragraph
                       text: Go to Settings > Security > Reset password and follow the steps.
+                    body_markdown: "# How to reset your password (updated)\n\nGo to Settings > Security > Reset password and follow the steps.\n"
                     chatbot_availability: 1
                     copilot_availability: 1
                     created_at: 1663597223
@@ -14507,6 +14753,10 @@ paths:
                     phone: "+15551234567"
                     fin_recording_url: "https://api.intercom.io/calls/124/recording"
                     fin_transcription_url: "https://api.intercom.io/calls/124/transcript"
+                    duration: 90
+                    talk_time: 85
+                    queue_time: 3
+                    hold_time: null
               schema:
                 "$ref": "#/components/schemas/call"
         '404':
@@ -19091,8 +19341,13 @@ components:
           example: This article will show you how to create a new article.
         body:
           type: string
-          description: The body of the article.
+          description: The body of the article in HTML.
           example: This is the body of the article.
+        body_markdown:
+          type: string
+          nullable: true
+          description: The body of the article in markdown.
+          example: "# How to create a new article\n\nThis is the body of the article.\n"
         author_id:
           type: integer
           description: The ID of the author of the article.
@@ -19264,6 +19519,12 @@ components:
           description: The body of the article in HTML. For multilingual articles,
             this will be the body of the default language's content.
           example: Default language body in html
+        body_markdown:
+          type: string
+          nullable: true
+          description: The body of the article in markdown. For multilingual articles,
+            this will be the body of the default language's content.
+          example: "# Default language title\n\nDefault language body in markdown\n"
         author_id:
           type: integer
           description: The id of the author of the article. For multilingual articles,
@@ -19349,6 +19610,11 @@ components:
           nullable: true
           description: The body of the article in HTML.
           example: Default language body in html
+        body_markdown:
+          type: string
+          nullable: true
+          description: The body of the article in markdown.
+          example: "# Internal Guide\n\nBody of the article in markdown\n"
         owner_id:
           type: integer
           description: The id of the owner of the article.
@@ -20014,6 +20280,51 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/brand"
+    bulk_update_contacts_request:
+      title: Bulk Update Contacts Request
+      type: object
+      description: Request body for bulk updating contacts.
+      required:
+      - contacts
+      properties:
+        contacts:
+          type: array
+          description: An array of contact objects to update. Each must include an `id`
+            and the fields to update. Maximum 100 contacts per request.
+          maxItems: 100
+          items:
+            type: object
+            required:
+            - id
+            properties:
+              id:
+                type: string
+                description: The unique identifier for the contact.
+                example: abc123
+              email:
+                type: string
+                description: The contact's email address.
+                example: joe@example.com
+              name:
+                type: string
+                description: The contact's name.
+                example: Joe Bloggs
+              language_override:
+                type: string
+                description: A preferred language setting for the contact, used by
+                  the Intercom Messenger.
+                example: fr
+              custom_attributes:
+                type: object
+                description: Custom attributes to update on the contact.
+        job:
+          type: object
+          description: Optional. Include to append tasks to an existing job.
+          properties:
+            id:
+              type: string
+              description: The ID of an existing bulk job to append to.
+              example: job_v2_1
     company:
       title: Company
       type: object
@@ -20578,6 +20889,96 @@ components:
           example: 100
         pages:
           "$ref": "#/components/schemas/cursor_pages"
+    contacts_bulk_job:
+      title: Contacts Bulk Job
+      type: object
+      x-tags:
+      - Contacts
+      description: A bulk job for updating contacts asynchronously. Track the job
+        status using the `state` field.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the bulk job.
+          example: job_v2_1
+        type:
+          type: string
+          description: The type of the object.
+          enum:
+          - contacts.bulk.job
+          example: contacts.bulk.job
+        state:
+          type: string
+          description: The current state of the job.
+          enum:
+          - pending
+          - running
+          - completed
+          - completed_with_errors
+          example: running
+        created_at:
+          type: integer
+          format: date-time
+          description: The time the job was created as a UNIX timestamp.
+          example: 1713360000
+        updated_at:
+          type: integer
+          format: date-time
+          description: The time the job was last updated as a UNIX timestamp.
+          example: 1713360060
+        completed_at:
+          type: integer
+          format: date-time
+          nullable: true
+          description: The time the job completed as a UNIX timestamp. Null if not
+            yet completed.
+          example: 1713360120
+        tasks:
+          type: array
+          description: The tasks that make up this bulk job.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The unique identifier for the task.
+                example: task_v2_1
+              item_count:
+                type: integer
+                description: The number of items in this task.
+                example: 3
+              state:
+                type: string
+                description: The current state of the task.
+                enum:
+                - pending
+                - running
+                - completed
+                - completed_with_errors
+                example: pending
+              created_at:
+                type: integer
+                format: date-time
+                description: The time the task was created as a UNIX timestamp.
+                example: 1713360000
+              started_at:
+                type: integer
+                format: date-time
+                nullable: true
+                description: The time the task started as a UNIX timestamp. Null if
+                  not yet started.
+                example: 1713360060
+              completed_at:
+                type: integer
+                format: date-time
+                nullable: true
+                description: The time the task completed as a UNIX timestamp. Null
+                  if not yet completed.
+                example: 1713360120
+        url:
+          type: string
+          description: The URL to check the job status.
+          example: https://api.intercom.io/contacts/bulk/job_v2_1
     contact_location:
       title: Contact Location
       type: object
@@ -21104,6 +21505,11 @@ components:
           example:
           - type: paragraph
             text: Navigate to Settings > Security > Reset password.
+        body_markdown:
+          type: string
+          nullable: true
+          description: The body of the content snippet in markdown.
+          example: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
         chatbot_availability:
           type: integer
           description: Whether this snippet is available for Fin (1 = on, 0 = off).
@@ -21156,11 +21562,12 @@ components:
     content_snippet_create_request:
       title: Create Content Snippet Request
       type: object
-      description: The request payload for creating a content snippet.
+      description: The request payload for creating a content snippet. You must provide
+        either `json_blocks` or `body_markdown` for the snippet content — they are
+        mutually exclusive.
       nullable: false
       required:
       - title
-      - json_blocks
       properties:
         title:
           type: string
@@ -21169,12 +21576,19 @@ components:
           example: How to reset your password
         json_blocks:
           type: array
-          description: The content blocks that make up the body of the snippet.
+          description: The content blocks that make up the body of the snippet. Mutually
+            exclusive with `body_markdown`.
           items:
             type: object
           example:
           - type: paragraph
             text: Navigate to Settings > Security > Reset password.
+        body_markdown:
+          type: string
+          description: The content of the snippet in markdown. An alternative to `json_blocks` — you
+            can provide content as markdown instead of structured blocks. Mutually exclusive
+            with `json_blocks`.
+          example: "# Hello\n\nSome content.\n"
         locale:
           type: string
           description: The locale of the content snippet. Defaults to `en`.
@@ -21184,7 +21598,8 @@ components:
       title: Update Content Snippet Request
       type: object
       description: The request payload for updating a content snippet. All fields
-        are optional — only provided fields will be updated.
+        are optional — only provided fields will be updated. `json_blocks` and
+        `body_markdown` are mutually exclusive.
       nullable: false
       properties:
         title:
@@ -21194,12 +21609,19 @@ components:
           example: How to reset your password
         json_blocks:
           type: array
-          description: The content blocks that make up the body of the snippet.
+          description: The content blocks that make up the body of the snippet. Mutually
+            exclusive with `body_markdown`.
           items:
             type: object
           example:
           - type: paragraph
             text: Navigate to Settings > Security > Reset password.
+        body_markdown:
+          type: string
+          description: The content of the snippet in markdown. An alternative to `json_blocks` — you
+            can provide content as markdown instead of structured blocks. Mutually exclusive
+            with `json_blocks`.
+          example: "## Updated heading\n\nNew content.\n"
         locale:
           type: string
           description: The locale of the content snippet.
@@ -22103,9 +22525,15 @@ components:
           example: Description of the Article
         body:
           type: string
-          description: The content of the article. For multilingual articles, this
-            will be the body of the default language's content.
+          description: The content of the article in HTML. For multilingual articles, this
+            will be the body of the default language's content. Mutually exclusive with `body_markdown`.
           example: "<p>This is the body in html</p>"
+        body_markdown:
+          type: string
+          description: The content of the article in markdown. For multilingual articles, this
+            will be the body of the default language's content. An alternative to `body` — you
+            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+          example: "# Hello\n\nA paragraph with **bold** text.\n"
         author_id:
           type: integer
           description: The id of the author of the article. For multilingual articles,
@@ -22161,8 +22589,13 @@ components:
           example: Thanks for everything
         body:
           type: string
-          description: The content of the article.
+          description: The content of the article in HTML. Mutually exclusive with `body_markdown`.
           example: "<p>This is the body in html</p>"
+        body_markdown:
+          type: string
+          description: The content of the article in markdown. An alternative to `body` — you
+            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+          example: "# Internal Guide\n\nSome instructions.\n"
         author_id:
           type: integer
           description: The id of the author of the article.
@@ -23168,6 +23601,26 @@ components:
           format: uri
           nullable: true
           description: API URL to the AI Agent (Fin) call transcript if available.
+        duration:
+          type: integer
+          nullable: true
+          description: Total call duration in seconds from the caller's perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended.
+          example: 900
+        talk_time:
+          type: integer
+          nullable: true
+          description: Total time in seconds the agent and customer were connected.
+          example: 300
+        queue_time:
+          type: integer
+          nullable: true
+          description: Total time in seconds the caller waited in queue before connecting, when assigned to a team.
+          example: 45
+        hold_time:
+          type: integer
+          nullable: true
+          description: Total time in seconds the caller was placed on hold during the call.
+          example: 60
     call_list:
       title: Calls
       type: object
@@ -28300,9 +28753,15 @@ components:
           example: Description of the Article
         body:
           type: string
-          description: The content of the article. For multilingual articles, this
-            will be the body of the default language's content.
+          description: The content of the article in HTML. For multilingual articles, this
+            will be the body of the default language's content. Mutually exclusive with `body_markdown`.
           example: "<p>This is the body in html</p>"
+        body_markdown:
+          type: string
+          description: The content of the article in markdown. For multilingual articles, this
+            will be the body of the default language's content. An alternative to `body` — you
+            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+          example: "## Updated heading\n\nNew content.\n"
         author_id:
           type: integer
           description: The id of the author of the article. For multilingual articles,
@@ -28355,7 +28814,12 @@ components:
           example: Thanks for everything
         body:
           type: string
-          description: The content of the article.
+          description: The content of the article in HTML. Mutually exclusive with `body_markdown`.
+        body_markdown:
+          type: string
+          description: The content of the article in markdown. An alternative to `body` — you
+            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+          example: "## Updated\n\nNew content.\n"
         author_id:
           type: integer
           description: The id of the author of the article.

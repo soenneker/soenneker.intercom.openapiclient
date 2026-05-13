@@ -1697,6 +1697,7 @@
                           "title": "This is the article title",
                           "description": "",
                           "body": "",
+                          "body_markdown": "",
                           "author_id": 991267492,
                           "state": "published",
                           "created_at": 1734537283,
@@ -1827,6 +1828,7 @@
                       "title": "Thanks for everything",
                       "description": "Description of the Article",
                       "body": "\u003Cp class=\u0022no-margin\u0022\u003EBody of the Article\u003C/p\u003E",
+                      "body_markdown": "Body of the Article\n",
                       "author_id": 991267497,
                       "state": "published",
                       "created_at": 1734537288,
@@ -1947,6 +1949,7 @@
                       "title": "This is the article title",
                       "description": "",
                       "body": "",
+                      "body_markdown": "",
                       "author_id": 991267502,
                       "state": "published",
                       "created_at": 1734537292,
@@ -2094,6 +2097,7 @@
                       "title": "Christmas is here!",
                       "description": "",
                       "body": "\u003Cp class=\u0022no-margin\u0022\u003ENew gifts in store for the jolly season\u003C/p\u003E",
+                      "body_markdown": "New gifts in store for the jolly season\n",
                       "author_id": 991267508,
                       "state": "published",
                       "created_at": 1734537297,
@@ -3973,6 +3977,7 @@
                           "id": 39,
                           "title": "Thanks for everything",
                           "body": "Body of the Article",
+                          "body_markdown": "Body of the Article\n",
                           "owner_id": 991266252,
                           "author_id": 991266252,
                           "locale": "en"
@@ -4068,6 +4073,7 @@
                       "id": 42,
                       "title": "Thanks for everything",
                       "body": "Body of the Article",
+                      "body_markdown": "Body of the Article\n",
                       "owner_id": 991266252,
                       "author_id": 991266252,
                       "locale": "en"
@@ -4168,6 +4174,7 @@
                     "value": {
                       "id": 45,
                       "body": "Body of the Article",
+                      "body_markdown": "Body of the Article\n",
                       "owner_id": 991266252,
                       "author_id": 991266252,
                       "locale": "en"
@@ -4291,6 +4298,7 @@
                     "value": {
                       "id": 48,
                       "body": "Body of the Article",
+                      "body_markdown": "Body of the Article\n",
                       "owner_id": 991266252,
                       "author_id": 991266252,
                       "locale": "en"
@@ -5508,7 +5516,7 @@
           "Companies"
         ],
         "summary": "Delete a company",
-        "description": "You can delete a single company.",
+        "description": "\u0022Delete a single company.\n\nThis endpoint does not permanently remove the company. It archives the company record and detaches any contacts attached to it; the contacts themselves are not deleted. A \u0060company.deleted\u0060 webhook is sent once archival completes.\n\nThe endpoint returns \u0060200\u0060 with \u0060\\\u0022deleted\\\u0022: true\u0060 as soon as the request is accepted \u2014 archival is processed asynchronously.\n\n{% admonition type=\\\u0022warning\\\u0022 %}\nThird-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.\n{% /admonition %}\n\u0022",
         "operationId": "deleteCompany",
         "parameters": [
           {
@@ -8276,7 +8284,7 @@
           "Contacts"
         ],
         "summary": "Get a contact",
-        "description": "You can fetch the details of a single contact.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts\u0022 %}\n  If a contact has been merged into another contact via the Merge endpoint (POST /contacts/merge), requesting it by its original ID will return a \u0060404 Not Found\u0060 error. Use the merged-into contact\u0027s ID instead.\n{% /admonition %}\n",
+        "description": "\u0022You can fetch the details of a single contact.\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Merged contacts return 410 Gone\\\u0022 %}\n  If a contact has been merged into another contact via the Merge endpoint (\u0060POST /contacts/merge\u0060), requesting it by its original ID will return **HTTP 410 Gone** with a \u0060Link\u0060 header pointing to the canonical (merged-into) contact.\n\n  **Response headers:**\n  \u0060\u0060\u0060\n  Link: \u003C/contacts/{canonical_id}\u003E; rel=\\\u0022canonical\\\u0022\n  \u0060\u0060\u0060\n\n  **Response body:**\n  \u0060\u0060\u0060json\n  {\n    \\\u0022type\\\u0022: \\\u0022error.list\\\u0022,\n    \\\u0022errors\\\u0022: [{ \\\u0022code\\\u0022: \\\u0022contact_merged\\\u0022, \\\u0022message\\\u0022: \\\u0022This contact has been merged. See the \u0027Link\u0027 header for the canonical contact.\\\u0022 }]\n  }\n  \u0060\u0060\u0060\n\n  The \u0060Link\u0060 header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).\n{% /admonition %}\n\u0022",
         "operationId": "ShowContact",
         "parameters": [
           {
@@ -8424,6 +8432,30 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Contact Merged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Contact Merged": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "45b30bd1-75d2-40cc-bb39-74ac133a2836",
+                      "errors": [
+                        {
+                          "code": "contact_merged",
+                          "message": "This contact has been merged. See the \u0027Link\u0027 header for the canonical contact."
                         }
                       ]
                     }
@@ -9015,7 +9047,7 @@
           "Contacts"
         ],
         "summary": "Get a contact by External ID",
-        "description": "You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.",
+        "description": "You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.\n\n{% admonition type=\u0022info\u0022 name=\u0022Merged contacts return 410 Gone\u0022 %}\n  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a \u0060Link\u0060 header pointing to the canonical (merged-into) contact. See \u0060GET /contacts/{id}\u0060 for details on the response format.\n{% /admonition %}\n",
         "operationId": "ShowContactByExternalId",
         "parameters": [
           {
@@ -9170,6 +9202,30 @@
                 }
               }
             }
+          },
+          "410": {
+            "description": "Contact Merged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Contact Merged": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1fb28be7-cda6-4029-b4da-447ef61cb61a",
+                      "errors": [
+                        {
+                          "code": "contact_merged",
+                          "message": "This contact has been merged. See the \u0027Link\u0027 header for the canonical contact."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -9297,6 +9353,253 @@
         }
       }
     },
+    "/contacts/bulk": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Bulk update contacts",
+        "description": "You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an \u0060id\u0060 field identifying the contact to update.\n\nThe endpoint creates an async job that processes the updates in the background. Use the returned job ID with \u0060GET /contacts/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 100 contacts per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
+        "operationId": "BulkUpdateContacts",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateContactsRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Successful",
+                  "value": {
+                    "contacts": [
+                      {
+                        "id": "abc123",
+                        "language_override": "fr"
+                      },
+                      {
+                        "id": "def456",
+                        "name": "Updated Name"
+                      },
+                      {
+                        "id": "ghi789",
+                        "language_override": "es",
+                        "name": "Mar\u00EDa Garc\u00EDa"
+                      }
+                    ]
+                  }
+                },
+                "append_to_existing_job": {
+                  "summary": "Append to existing job",
+                  "value": {
+                    "contacts": [
+                      {
+                        "id": "abc123",
+                        "language_override": "de"
+                      }
+                    ],
+                    "job": {
+                      "id": "job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "contacts.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 3,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_contacts": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "missing_field",
+                          "message": "contacts field must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "too_many_contacts": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "invalid_parameter",
+                          "message": "maximum number of contacts per request is 100"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/bulk/{id}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get a bulk update job",
+        "description": "\u0022You can check the status of a bulk contact update job. The \u0060state\u0060 field indicates the overall job progress: \u0060pending\u0060, \u0060running\u0060, \u0060completed\u0060, or \u0060completed_with_errors\u0060.\n\u0022",
+        "operationId": "ShowBulkUpdateContactsJob",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the bulk job.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "job_v2_1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "contacts.bulk.job",
+                      "state": "completed",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360120,
+                      "completed_at": 1713360120,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 3,
+                          "state": "completed",
+                          "created_at": 1713360000,
+                          "started_at": 1713360060,
+                          "completed_at": 1713360120
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/content_snippets": {
       "get": {
         "tags": [
@@ -9356,6 +9659,7 @@
                               "text": "Navigate to Settings \u003E Security \u003E Reset password."
                             }
                           ],
+                          "body_markdown": "# How to reset your password\n\nNavigate to Settings \u003E Security \u003E Reset password.\n",
                           "chatbot_availability": 1,
                           "copilot_availability": 1,
                           "created_at": 1663597223,
@@ -9434,6 +9738,7 @@
                           "text": "Navigate to Settings \u003E Security \u003E Reset password."
                         }
                       ],
+                      "body_markdown": "# How to reset your password\n\nNavigate to Settings \u003E Security \u003E Reset password.\n",
                       "chatbot_availability": 1,
                       "copilot_availability": 1,
                       "created_at": 1663597223,
@@ -9518,6 +9823,7 @@
                           "text": "Navigate to Settings \u003E Security \u003E Reset password."
                         }
                       ],
+                      "body_markdown": "# How to reset your password\n\nNavigate to Settings \u003E Security \u003E Reset password.\n",
                       "chatbot_availability": 1,
                       "copilot_availability": 1,
                       "created_at": 1663597223,
@@ -9622,6 +9928,7 @@
                           "text": "Go to Settings \u003E Security \u003E Reset password and follow the steps."
                         }
                       ],
+                      "body_markdown": "# How to reset your password (updated)\n\nGo to Settings \u003E Security \u003E Reset password and follow the steps.\n",
                       "chatbot_availability": 1,
                       "copilot_availability": 1,
                       "created_at": 1663597223,
@@ -19821,7 +20128,11 @@
                       "ended_reason": "answered",
                       "phone": 15551234567,
                       "fin_recording_url": "https://api.intercom.io/calls/124/recording",
-                      "fin_transcription_url": "https://api.intercom.io/calls/124/transcript"
+                      "fin_transcription_url": "https://api.intercom.io/calls/124/transcript",
+                      "duration": 90,
+                      "talk_time": 85,
+                      "queue_time": 3,
+                      "hold_time": null
                     }
                   }
                 }
@@ -25875,8 +26186,14 @@
           },
           "body": {
             "type": "string",
-            "description": "The body of the article.",
+            "description": "The body of the article in HTML.",
             "example": "This is the body of the article."
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The body of the article in markdown.",
+            "nullable": true,
+            "example": "# How to create a new article\n\nThis is the body of the article.\n"
           },
           "author_id": {
             "type": "integer",
@@ -26097,6 +26414,12 @@
             "nullable": true,
             "example": "Default language body in html"
           },
+          "body_markdown": {
+            "type": "string",
+            "description": "The body of the article in markdown. For multilingual articles, this will be the body of the default language\u0027s content.",
+            "nullable": true,
+            "example": "# Default language title\n\nDefault language body in markdown\n"
+          },
           "author_id": {
             "type": "integer",
             "description": "The id of the author of the article. For multilingual articles, this will be the id of the author of the default language\u0027s content. Must be a teammate on the help center\u0027s workspace.",
@@ -26188,6 +26511,12 @@
             "description": "The body of the article in HTML.",
             "nullable": true,
             "example": "Default language body in html"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The body of the article in markdown.",
+            "nullable": true,
+            "example": "# Internal Guide\n\nBody of the article in markdown\n"
           },
           "owner_id": {
             "type": "integer",
@@ -26989,6 +27318,56 @@
           "Brands"
         ]
       },
+      "BulkUpdateContactsRequest": {
+        "title": "Bulk Update Contacts Request",
+        "required": [
+          "contacts"
+        ],
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique identifier for the contact.",
+                  "example": "abc123"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "The contact\u0027s email address.",
+                  "example": "joe@example.com"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The contact\u0027s name.",
+                  "example": "Joe Bloggs"
+                },
+                "language_override": {
+                  "type": "string",
+                  "description": "A preferred language setting for the contact, used by the Intercom Messenger.",
+                  "example": "fr"
+                },
+                "custom_attributes": {
+                  "type": "object",
+                  "description": "Custom attributes to update on the contact."
+                }
+              }
+            },
+            "description": "An array of contact objects to update. Each must include an \u0060id\u0060 and the fields to update. Maximum 100 contacts per request."
+          },
+          "job": {
+            "$ref": "#/components/schemas/BulkUpdateContactsRequestJob"
+          }
+        },
+        "description": "Request body for bulk updating contacts."
+      },
       "Company": {
         "title": "Company",
         "type": "object",
@@ -27635,6 +28014,117 @@
           }
         },
         "description": "Contacts are your users in Intercom."
+      },
+      "ContactsBulkJob": {
+        "title": "Contacts Bulk Job",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the bulk job.",
+            "example": "job_v2_1"
+          },
+          "type": {
+            "enum": [
+              "contacts.bulk.job"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of the object.",
+            "example": "contacts.bulk.job"
+          },
+          "state": {
+            "enum": [
+              "pending",
+              "running",
+              "completed",
+              "completed_with_errors"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The current state of the job.",
+            "example": "running"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the job was created as a UNIX timestamp.",
+            "format": "date-time",
+            "example": 1713360000
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the job was last updated as a UNIX timestamp.",
+            "format": "date-time",
+            "example": 1713360060
+          },
+          "completed_at": {
+            "type": "integer",
+            "description": "The time the job completed as a UNIX timestamp. Null if not yet completed.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1713360120
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique identifier for the task.",
+                  "example": "task_v2_1"
+                },
+                "item_count": {
+                  "type": "integer",
+                  "description": "The number of items in this task.",
+                  "example": 3
+                },
+                "state": {
+                  "enum": [
+                    "pending",
+                    "running",
+                    "completed",
+                    "completed_with_errors"
+                  ],
+                  "type": "string",
+                  "additionalProperties": false,
+                  "description": "The current state of the task.",
+                  "example": "pending"
+                },
+                "created_at": {
+                  "type": "integer",
+                  "description": "The time the task was created as a UNIX timestamp.",
+                  "format": "date-time",
+                  "example": 1713360000
+                },
+                "started_at": {
+                  "type": "integer",
+                  "description": "The time the task started as a UNIX timestamp. Null if not yet started.",
+                  "format": "date-time",
+                  "nullable": true,
+                  "example": 1713360060
+                },
+                "completed_at": {
+                  "type": "integer",
+                  "description": "The time the task completed as a UNIX timestamp. Null if not yet completed.",
+                  "format": "date-time",
+                  "nullable": true,
+                  "example": 1713360120
+                }
+              }
+            },
+            "description": "The tasks that make up this bulk job."
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL to check the job status.",
+            "example": "https://api.intercom.io/contacts/bulk/job_v2_1"
+          }
+        },
+        "description": "A bulk job for updating contacts asynchronously. Track the job status using the \u0060state\u0060 field.",
+        "x-tags": [
+          "Contacts"
+        ]
       },
       "ContactLocation": {
         "title": "Contact Location",
@@ -28357,6 +28847,12 @@
             },
             "description": "The content blocks that make up the body of the snippet."
           },
+          "body_markdown": {
+            "type": "string",
+            "description": "The body of the content snippet in markdown.",
+            "nullable": true,
+            "example": "# How to reset your password\n\nNavigate to Settings \u003E Security \u003E Reset password.\n"
+          },
           "chatbot_availability": {
             "type": "integer",
             "description": "Whether this snippet is available for Fin (1 = on, 0 = off).",
@@ -28428,8 +28924,7 @@
       "ContentSnippetCreateRequest": {
         "title": "Create Content Snippet Request",
         "required": [
-          "title",
-          "json_blocks"
+          "title"
         ],
         "type": "object",
         "properties": {
@@ -28444,7 +28939,12 @@
             "items": {
               "type": "object"
             },
-            "description": "The content blocks that make up the body of the snippet."
+            "description": "The content blocks that make up the body of the snippet. Mutually exclusive with \u0060body_markdown\u0060."
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the snippet in markdown. An alternative to \u0060json_blocks\u0060 \u2014 you can provide content as markdown instead of structured blocks. Mutually exclusive with \u0060json_blocks\u0060.",
+            "example": "# Hello\n\nSome content.\n"
           },
           "locale": {
             "type": "string",
@@ -28453,7 +28953,7 @@
             "example": "en"
           }
         },
-        "description": "The request payload for creating a content snippet."
+        "description": "The request payload for creating a content snippet. You must provide either \u0060json_blocks\u0060 or \u0060body_markdown\u0060 for the snippet content \u2014 they are mutually exclusive."
       },
       "ContentSnippetUpdateRequest": {
         "title": "Update Content Snippet Request",
@@ -28470,7 +28970,12 @@
             "items": {
               "type": "object"
             },
-            "description": "The content blocks that make up the body of the snippet."
+            "description": "The content blocks that make up the body of the snippet. Mutually exclusive with \u0060body_markdown\u0060."
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the snippet in markdown. An alternative to \u0060json_blocks\u0060 \u2014 you can provide content as markdown instead of structured blocks. Mutually exclusive with \u0060json_blocks\u0060.",
+            "example": "## Updated heading\n\nNew content.\n"
           },
           "locale": {
             "type": "string",
@@ -28478,7 +28983,7 @@
             "example": "en"
           }
         },
-        "description": "The request payload for updating a content snippet. All fields are optional \u2014 only provided fields will be updated."
+        "description": "The request payload for updating a content snippet. All fields are optional \u2014 only provided fields will be updated. \u0060json_blocks\u0060 and \u0060body_markdown\u0060 are mutually exclusive."
       },
       "ConversationListItem": {
         "title": "Conversation List Item",
@@ -29555,8 +30060,13 @@
           },
           "body": {
             "type": "string",
-            "description": "The content of the article. For multilingual articles, this will be the body of the default language\u0027s content.",
+            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060.",
             "example": "\u003Cp\u003EThis is the body in html\u003C/p\u003E"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the article in markdown. For multilingual articles, this will be the body of the default language\u0027s content. An alternative to \u0060body\u0060 \u2014 you can provide content as markdown instead of HTML. Mutually exclusive with \u0060body\u0060.",
+            "example": "# Hello\n\nA paragraph with **bold** text.\n"
           },
           "author_id": {
             "type": "integer",
@@ -29619,8 +30129,13 @@
           },
           "body": {
             "type": "string",
-            "description": "The content of the article.",
+            "description": "The content of the article in HTML. Mutually exclusive with \u0060body_markdown\u0060.",
             "example": "\u003Cp\u003EThis is the body in html\u003C/p\u003E"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the article in markdown. An alternative to \u0060body\u0060 \u2014 you can provide content as markdown instead of HTML. Mutually exclusive with \u0060body\u0060.",
+            "example": "# Internal Guide\n\nSome instructions.\n"
           },
           "author_id": {
             "type": "integer",
@@ -30843,6 +31358,30 @@
             "description": "API URL to the AI Agent (Fin) call transcript if available.",
             "format": "uri",
             "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "description": "Total call duration in seconds from the caller\u0027s perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended.",
+            "nullable": true,
+            "example": 900
+          },
+          "talk_time": {
+            "type": "integer",
+            "description": "Total time in seconds the agent and customer were connected.",
+            "nullable": true,
+            "example": 300
+          },
+          "queue_time": {
+            "type": "integer",
+            "description": "Total time in seconds the caller waited in queue before connecting, when assigned to a team.",
+            "nullable": true,
+            "example": 45
+          },
+          "hold_time": {
+            "type": "integer",
+            "description": "Total time in seconds the caller was placed on hold during the call.",
+            "nullable": true,
+            "example": 60
           }
         },
         "description": "Represents a phone call in Intercom",
@@ -32730,7 +33269,7 @@
         "description": "Contains metadata if the message was sent as an email"
       },
       "Metadata": {
-        "type": "string"
+        "$ref": "#/components/schemas/ConversationPartMetadata"
       },
       "ConversationAttributeUpdatedByWorkflow": {
         "title": "Part type - conversation_attribute_updated_by_workflow",
@@ -37061,8 +37600,13 @@
           },
           "body": {
             "type": "string",
-            "description": "The content of the article. For multilingual articles, this will be the body of the default language\u0027s content.",
+            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060.",
             "example": "\u003Cp\u003EThis is the body in html\u003C/p\u003E"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the article in markdown. For multilingual articles, this will be the body of the default language\u0027s content. An alternative to \u0060body\u0060 \u2014 you can provide content as markdown instead of HTML. Mutually exclusive with \u0060body\u0060.",
+            "example": "## Updated heading\n\nNew content.\n"
           },
           "author_id": {
             "type": "integer",
@@ -37120,7 +37664,12 @@
           },
           "body": {
             "type": "string",
-            "description": "The content of the article."
+            "description": "The content of the article in HTML. Mutually exclusive with \u0060body_markdown\u0060."
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the article in markdown. An alternative to \u0060body\u0060 \u2014 you can provide content as markdown instead of HTML. Mutually exclusive with \u0060body\u0060.",
+            "example": "## Updated\n\nNew content.\n"
           },
           "author_id": {
             "type": "integer",
@@ -38080,6 +38629,17 @@
           }
         },
         "description": "An object containing the results of the search."
+      },
+      "BulkUpdateContactsRequestJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing bulk job to append to.",
+            "example": "job_v2_1"
+          }
+        },
+        "description": "Optional. Include to append tasks to an existing job."
       },
       "CompanyPlan": {
         "type": "object",

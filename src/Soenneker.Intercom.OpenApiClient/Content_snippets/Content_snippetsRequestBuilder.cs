@@ -68,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets
         /// You can create a new content snippet.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet"/></returns>
-        /// <param name="body">The request payload for creating a content snippet.</param>
+        /// <param name="body">The request payload for creating a content snippet. You must provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
@@ -112,7 +112,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets
         /// You can create a new content snippet.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request payload for creating a content snippet.</param>
+        /// <param name="body">The request payload for creating a content snippet. You must provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

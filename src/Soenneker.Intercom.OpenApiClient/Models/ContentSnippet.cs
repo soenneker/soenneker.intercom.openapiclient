@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The body of the content snippet in markdown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
+#endif
         /// <summary>Whether this snippet is available for Fin (1 = on, 0 = off).</summary>
         public int? ChatbotAvailability { get; set; }
         /// <summary>Whether this snippet is available for Copilot (1 = on, 0 = off).</summary>
@@ -88,6 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "chatbot_availability", n => { ChatbotAvailability = n.GetIntValue(); } },
                 { "copilot_availability", n => { CopilotAvailability = n.GetIntValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
@@ -106,6 +115,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("chatbot_availability", ChatbotAvailability);
             writer.WriteIntValue("copilot_availability", CopilotAvailability);
             writer.WriteIntValue("created_at", CreatedAt);

@@ -17,13 +17,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The ID of the author of the article.</summary>
         public int? AuthorId { get; set; }
-        /// <summary>The body of the article.</summary>
+        /// <summary>The body of the article in HTML.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get; set; }
 #nullable restore
 #else
         public string Body { get; set; }
+#endif
+        /// <summary>The body of the article in markdown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
 #endif
         /// <summary>The time when the article was created (seconds).</summary>
         public int? CreatedAt { get; set; }
@@ -84,6 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_state>(); } },
@@ -102,6 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("description", Description);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_state>("state", State);

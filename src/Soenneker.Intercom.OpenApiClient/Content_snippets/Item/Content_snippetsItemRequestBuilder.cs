@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item
         /// You can update an existing content snippet.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet"/></returns>
-        /// <param name="body">The request payload for updating a content snippet. All fields are optional — only provided fields will be updated.</param>
+        /// <param name="body">The request payload for updating a content snippet. All fields are optional — only provided fields will be updated. `json_blocks` and `body_markdown` are mutually exclusive.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
@@ -150,7 +150,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item
         /// You can update an existing content snippet.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request payload for updating a content snippet. All fields are optional — only provided fields will be updated.</param>
+        /// <param name="body">The request payload for updating a content snippet. All fields are optional — only provided fields will be updated. `json_blocks` and `body_markdown` are mutually exclusive.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

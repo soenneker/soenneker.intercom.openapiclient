@@ -17,13 +17,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace.</summary>
         public int? AuthorId { get; set; }
-        /// <summary>The content of the article. For multilingual articles, this will be the body of the default language&apos;s content.</summary>
+        /// <summary>The content of the article in HTML. For multilingual articles, this will be the body of the default language&apos;s content. Mutually exclusive with `body_markdown`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get; set; }
 #nullable restore
 #else
         public string Body { get; set; }
+#endif
+        /// <summary>The content of the article in markdown. For multilingual articles, this will be the body of the default language&apos;s content. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
 #endif
         /// <summary>The description of the article. For multilingual articles, this will be the description of the default language&apos;s content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -104,6 +112,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "parent_id", n => { ParentId = n.GetStringValue(); } },
@@ -123,6 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteStringValue("description", Description);
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteStringValue("parent_id", ParentId);

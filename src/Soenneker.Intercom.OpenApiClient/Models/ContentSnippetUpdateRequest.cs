@@ -8,14 +8,22 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The request payload for updating a content snippet. All fields are optional — only provided fields will be updated.
+    /// The request payload for updating a content snippet. All fields are optional — only provided fields will be updated. `json_blocks` and `body_markdown` are mutually exclusive.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContentSnippetUpdateRequest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The content blocks that make up the body of the snippet.</summary>
+        /// <summary>The content of the snippet in markdown. An alternative to `json_blocks` — you can provide content as markdown instead of structured blocks. Mutually exclusive with `json_blocks`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
+#endif
+        /// <summary>The content blocks that make up the body of the snippet. Mutually exclusive with `body_markdown`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>? JsonBlocks { get; set; }
@@ -64,6 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
@@ -76,6 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>("json_blocks", JsonBlocks);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("title", Title);

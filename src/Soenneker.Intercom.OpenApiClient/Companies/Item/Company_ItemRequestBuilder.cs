@@ -52,7 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Item
         {
         }
         /// <summary>
-        /// You can delete a single company.
+        /// &quot;Delete a single company.This endpoint does not permanently remove the company. It archives the company record and detaches any contacts attached to it; the contacts themselves are not deleted. A `company.deleted` webhook is sent once archival completes.The endpoint returns `200` with `\&quot;deleted\&quot;: true` as soon as the request is accepted — archival is processed asynchronously.{% admonition type=\&quot;warning\&quot; %}Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedCompanyObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -127,7 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single company.
+        /// &quot;Delete a single company.This endpoint does not permanently remove the company. It archives the company record and detaches any contacts attached to it; the contacts themselves are not deleted. A `company.deleted` webhook is sent once archival completes.The endpoint returns `200` with `\&quot;deleted\&quot;: true` as soon as the request is accepted — archival is processed asynchronously.{% admonition type=\&quot;warning\&quot; %}Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -25,6 +25,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
+        /// <summary>The body of the article in markdown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
+#endif
         /// <summary>The time when the article was created.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The ID of the folder this article belongs to, or null if not in a folder.</summary>
@@ -86,6 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -105,6 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteStringValue("id", Id);

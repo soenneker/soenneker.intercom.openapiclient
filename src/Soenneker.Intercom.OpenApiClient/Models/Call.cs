@@ -71,6 +71,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Direction { get; set; }
 #endif
+        /// <summary>Total call duration in seconds from the caller&apos;s perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended.</summary>
+        public int? Duration { get; set; }
         /// <summary>The ended_at property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -103,6 +105,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string FinTranscriptionUrl { get; set; }
 #endif
+        /// <summary>Total time in seconds the caller was placed on hold during the call.</summary>
+        public int? HoldTime { get; set; }
         /// <summary>The id of the call.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -127,6 +131,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Phone { get; set; }
 #endif
+        /// <summary>Total time in seconds the caller waited in queue before connecting, when assigned to a team.</summary>
+        public int? QueueTime { get; set; }
         /// <summary>API URL to download or redirect to the call recording if available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -143,6 +149,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string State { get; set; }
 #endif
+        /// <summary>Total time in seconds the agent and customer were connected.</summary>
+        public int? TalkTime { get; set; }
         /// <summary>API URL to the call transcript if available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -199,15 +207,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
                 { "direction", n => { Direction = n.GetStringValue(); } },
+                { "duration", n => { Duration = n.GetIntValue(); } },
                 { "ended_at", n => { EndedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
                 { "ended_reason", n => { EndedReason = n.GetStringValue(); } },
                 { "fin_recording_url", n => { FinRecordingUrl = n.GetStringValue(); } },
                 { "fin_transcription_url", n => { FinTranscriptionUrl = n.GetStringValue(); } },
+                { "hold_time", n => { HoldTime = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "initiated_at", n => { InitiatedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "queue_time", n => { QueueTime = n.GetIntValue(); } },
                 { "recording_url", n => { RecordingUrl = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
+                { "talk_time", n => { TalkTime = n.GetIntValue(); } },
                 { "transcription_url", n => { TranscriptionUrl = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
@@ -227,15 +239,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("created_at", CreatedAt);
             writer.WriteStringValue("direction", Direction);
+            writer.WriteIntValue("duration", Duration);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("ended_at", EndedAt);
             writer.WriteStringValue("ended_reason", EndedReason);
             writer.WriteStringValue("fin_recording_url", FinRecordingUrl);
             writer.WriteStringValue("fin_transcription_url", FinTranscriptionUrl);
+            writer.WriteIntValue("hold_time", HoldTime);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("initiated_at", InitiatedAt);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteIntValue("queue_time", QueueTime);
             writer.WriteStringValue("recording_url", RecordingUrl);
             writer.WriteStringValue("state", State);
+            writer.WriteIntValue("talk_time", TalkTime);
             writer.WriteStringValue("transcription_url", TranscriptionUrl);
             writer.WriteStringValue("type", Type);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("updated_at", UpdatedAt);

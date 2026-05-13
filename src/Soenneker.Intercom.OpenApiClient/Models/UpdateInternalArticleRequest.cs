@@ -17,13 +17,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The id of the author of the article.</summary>
         public int? AuthorId { get; set; }
-        /// <summary>The content of the article.</summary>
+        /// <summary>The content of the article in HTML. Mutually exclusive with `body_markdown`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get; set; }
 #nullable restore
 #else
         public string Body { get; set; }
+#endif
+        /// <summary>The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
 #endif
         /// <summary>The ID of the folder to place this article in, or null to remove it from its folder.</summary>
         public int? FolderId { get; set; }
@@ -64,6 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "owner_id", n => { OwnerId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
@@ -78,6 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteIntValue("owner_id", OwnerId);
             writer.WriteStringValue("title", Title);

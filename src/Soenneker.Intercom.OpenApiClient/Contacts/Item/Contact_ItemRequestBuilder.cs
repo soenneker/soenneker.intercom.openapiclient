@@ -105,12 +105,13 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single contact.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts&quot; %}  If a contact has been merged into another contact via the Merge endpoint (POST /contacts/merge), requesting it by its original ID will return a `404 Not Found` error. Use the merged-into contact&apos;s ID instead.{% /admonition %}
+        /// &quot;You can fetch the details of a single contact.{% admonition type=\&quot;info\&quot; name=\&quot;Merged contacts return 410 Gone\&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=\&quot;canonical\&quot;  ```  **Response body:**  ```json  {    \&quot;type\&quot;: \&quot;error.list\&quot;,    \&quot;errors\&quot;: [{ \&quot;code\&quot;: \&quot;contact_merged\&quot;, \&quot;message\&quot;: \&quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.\&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 410 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -124,6 +125,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "410", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -172,7 +174,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single contact.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts&quot; %}  If a contact has been merged into another contact via the Merge endpoint (POST /contacts/merge), requesting it by its original ID will return a `404 Not Found` error. Use the merged-into contact&apos;s ID instead.{% /admonition %}
+        /// &quot;You can fetch the details of a single contact.{% admonition type=\&quot;info\&quot; name=\&quot;Merged contacts return 410 Gone\&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=\&quot;canonical\&quot;  ```  **Response body:**  ```json  {    \&quot;type\&quot;: \&quot;error.list\&quot;,    \&quot;errors\&quot;: [{ \&quot;code\&quot;: \&quot;contact_merged\&quot;, \&quot;message\&quot;: \&quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.\&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
