@@ -11,8 +11,66 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// The Articles API is a central place to gather all information and take actions on your articles. Articles can live within collections and sections, or alternatively they can stand alone.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Article : global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem, IParsable
+    public partial class Article : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace.</summary>
+        public int? AuthorId { get; set; }
+        /// <summary>The body of the article in HTML. For multilingual articles, this will be the body of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Body { get; set; }
+#nullable restore
+#else
+        public string Body { get; set; }
+#endif
+        /// <summary>The body of the article in markdown. For multilingual articles, this will be the body of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
+#endif
+        /// <summary>The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language&apos;s content in seconds.</summary>
+        public int? CreatedAt { get; set; }
+        /// <summary>The default locale of the help center. This field is only returned for multilingual help centers.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DefaultLocale { get; set; }
+#nullable restore
+#else
+        public string DefaultLocale { get; set; }
+#endif
+        /// <summary>The description of the article. For multilingual articles, this will be the description of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Description { get; set; }
+#nullable restore
+#else
+        public string Description { get; set; }
+#endif
+        /// <summary>The ID of the folder this article belongs to, or null if not in a folder.</summary>
+        public int? FolderId { get; set; }
+        /// <summary>The unique identifier for the article which is given by Intercom.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The ids of the article&apos;s parent collections. An article without this field stands alone.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? ParentIds { get; set; }
+#nullable restore
+#else
+        public List<int?> ParentIds { get; set; }
+#endif
+        /// <summary>Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.Article_state? State { get; set; }
         /// <summary>The statistics of an article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -21,12 +79,64 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics Statistics { get; set; }
 #endif
+        /// <summary>A list of tags objects associated with a conversation</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.Tags? Tags { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.Tags Tags { get; set; }
+#endif
+        /// <summary>The title of the article. For multilingual articles, this will be the title of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Title { get; set; }
+#nullable restore
+#else
+        public string Title { get; set; }
+#endif
+        /// <summary>The Translated Content of an Article. The keys are the locale codes and the values are the translated content of the article.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent? TranslatedContent { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent TranslatedContent { get; set; }
+#endif
+        /// <summary>The type of object - `article`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.Article_type? Type { get; set; }
+        /// <summary>The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language&apos;s content in seconds.</summary>
+        public int? UpdatedAt { get; set; }
+        /// <summary>The URL of the article. For multilingual articles, this will be the URL of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
+#endif
+        /// <summary>The id of the workspace which the article belongs to.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WorkspaceId { get; set; }
+#nullable restore
+#else
+        public string WorkspaceId { get; set; }
+#endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/> and sets the default values.
+        /// </summary>
+        public Article()
+        {
+            AdditionalData = new Dictionary<string, object>();
+            State = global::Soenneker.Intercom.OpenApiClient.Models.Article_state.Draft;
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.Article CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.Article CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.Article();
@@ -35,22 +145,56 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
+                { "author_id", n => { AuthorId = n.GetIntValue(); } },
+                { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "default_locale", n => { DefaultLocale = n.GetStringValue(); } },
+                { "description", n => { Description = n.GetStringValue(); } },
+                { "folder_id", n => { FolderId = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_state>(); } },
                 { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics.CreateFromDiscriminatorValue); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
+                { "title", n => { Title = n.GetStringValue(); } },
+                { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent.CreateFromDiscriminatorValue); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_type>(); } },
+                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
+                { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
         }
         /// <summary>
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            writer.WriteIntValue("author_id", AuthorId);
+            writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
+            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteStringValue("default_locale", DefaultLocale);
+            writer.WriteStringValue("description", Description);
+            writer.WriteIntValue("folder_id", FolderId);
+            writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_state>("state", State);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics>("statistics", Statistics);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
+            writer.WriteStringValue("title", Title);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent>("translated_content", TranslatedContent);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_type>("type", Type);
+            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteStringValue("url", Url);
+            writer.WriteStringValue("workspace_id", WorkspaceId);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

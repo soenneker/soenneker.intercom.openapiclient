@@ -11,14 +11,75 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// The Internal Articles API is a central place to gather all information and take actions on your internal articles.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class InternalArticle : global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleListItem, IParsable
+    public partial class InternalArticle : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The id of the author of the article.</summary>
+        public int? AuthorId { get; set; }
+        /// <summary>The body of the article in HTML.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Body { get; set; }
+#nullable restore
+#else
+        public string Body { get; set; }
+#endif
+        /// <summary>The body of the article in markdown.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BodyMarkdown { get; set; }
+#nullable restore
+#else
+        public string BodyMarkdown { get; set; }
+#endif
+        /// <summary>The time when the article was created.</summary>
+        public int? CreatedAt { get; set; }
+        /// <summary>The ID of the folder this article belongs to, or null if not in a folder.</summary>
+        public int? FolderId { get; set; }
+        /// <summary>The unique identifier for the article which is given by Intercom.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The default locale of the article.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
+        /// <summary>The id of the owner of the article.</summary>
+        public int? OwnerId { get; set; }
+        /// <summary>The title of the article.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Title { get; set; }
+#nullable restore
+#else
+        public string Title { get; set; }
+#endif
+        /// <summary>The type of object - `internal_article`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle_type? Type { get; set; }
+        /// <summary>The time when the article was last updated.</summary>
+        public int? UpdatedAt { get; set; }
+        /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle"/> and sets the default values.
+        /// </summary>
+        public InternalArticle()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle();
@@ -27,20 +88,42 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
+                { "author_id", n => { AuthorId = n.GetIntValue(); } },
+                { "body", n => { Body = n.GetStringValue(); } },
+                { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "folder_id", n => { FolderId = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
+                { "owner_id", n => { OwnerId = n.GetIntValue(); } },
+                { "title", n => { Title = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle_type>(); } },
+                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
         /// <summary>
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            writer.WriteIntValue("author_id", AuthorId);
+            writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("body_markdown", BodyMarkdown);
+            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteIntValue("folder_id", FolderId);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("locale", Locale);
+            writer.WriteIntValue("owner_id", OwnerId);
+            writer.WriteStringValue("title", Title);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle_type>("type", Type);
+            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

@@ -7,11 +7,10 @@ using System.IO;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>
-    /// Message are how you reach out to contacts in Intercom. They are created when an admin sends an outbound message to a contact.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+    #pragma warning disable CS1591
     public partial class CreateConversation200 : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }

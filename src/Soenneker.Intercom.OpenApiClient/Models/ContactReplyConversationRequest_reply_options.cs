@@ -7,50 +7,39 @@ using System.IO;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>
-    /// deleted contact object
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ContactDeleted : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class ContactReplyConversationRequest_reply_options : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Whether the contact is deleted or not.</summary>
-        public bool? Deleted { get; set; }
-        /// <summary>The unique identifier for the contact which is provided by the Client.</summary>
+        /// <summary>The text of the chosen reply option.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalId { get; set; }
+        public string? Text { get; set; }
 #nullable restore
 #else
-        public string ExternalId { get; set; }
+        public string Text { get; set; }
 #endif
-        /// <summary>The unique identifier for the contact which is given by Intercom.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>always contact</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted_type? Type { get; set; }
+        /// <summary>The unique identifier for the quick reply option selected.</summary>
+        public Guid? Uuid { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options"/> and sets the default values.
         /// </summary>
-        public ContactDeleted()
+        public ContactReplyConversationRequest_reply_options()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -60,10 +49,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "deleted", n => { Deleted = n.GetBoolValue(); } },
-                { "external_id", n => { ExternalId = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted_type>(); } },
+                { "text", n => { Text = n.GetStringValue(); } },
+                { "uuid", n => { Uuid = n.GetGuidValue(); } },
             };
         }
         /// <summary>
@@ -73,10 +60,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteBoolValue("deleted", Deleted);
-            writer.WriteStringValue("external_id", ExternalId);
-            writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted_type>("type", Type);
+            writer.WriteStringValue("text", Text);
+            writer.WriteGuidValue("uuid", Uuid);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

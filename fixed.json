@@ -2407,7 +2407,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ListAwayStatusReasons200"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwayStatusReason"
+                  }
                 }
               }
             }
@@ -25205,7 +25208,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CollectFinVoiceCallsByConversationId200"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AiCallResponse"
+                  }
                 }
               }
             }
@@ -26132,14 +26138,109 @@
       "Article": {
         "title": "Article",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ArticleListItem"
-          }
-        ],
         "properties": {
           "statistics": {
             "$ref": "#/components/schemas/ArticleStatistics"
+          },
+          "type": {
+            "enum": [
+              "article"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of object - \u0060article\u0060.",
+            "example": "article"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the article which is given by Intercom.",
+            "example": 6871119
+          },
+          "workspace_id": {
+            "type": "string",
+            "description": "The id of the workspace which the article belongs to.",
+            "example": "hfi1bx4l"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the article. For multilingual articles, this will be the title of the default language\u0027s content.",
+            "example": "Default language title"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the article. For multilingual articles, this will be the description of the default language\u0027s content.",
+            "nullable": true,
+            "example": "Default language description"
+          },
+          "body": {
+            "type": "string",
+            "description": "The body of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content.",
+            "nullable": true,
+            "example": "Default language body in html"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The body of the article in markdown. For multilingual articles, this will be the body of the default language\u0027s content.",
+            "nullable": true,
+            "example": "# Default language title\n\nDefault language body in markdown\n"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "The id of the author of the article. For multilingual articles, this will be the id of the author of the default language\u0027s content. Must be a teammate on the help center\u0027s workspace.",
+            "example": 5017691
+          },
+          "state": {
+            "enum": [
+              "published",
+              "draft"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "Whether the article is \u0060published\u0060 or is a \u0060draft\u0060. For multilingual articles, this will be the state of the default language\u0027s content.",
+            "default": "draft",
+            "example": "published"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language\u0027s content in seconds.",
+            "format": "date-time",
+            "example": 1672928359
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language\u0027s content in seconds.",
+            "format": "date-time",
+            "example": 1672928610
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the article. For multilingual articles, this will be the URL of the default language\u0027s content.",
+            "nullable": true,
+            "example": "http://intercom.test/help/en/articles/3-default-language"
+          },
+          "parent_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
+          },
+          "default_locale": {
+            "type": "string",
+            "description": "The default locale of the help center. This field is only returned for multilingual help centers.",
+            "example": "en"
+          },
+          "translated_content": {
+            "$ref": "#/components/schemas/ArticleTranslatedContent"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/Tags"
+          },
+          "folder_id": {
+            "type": "integer",
+            "description": "The ID of the folder this article belongs to, or null if not in a folder.",
+            "nullable": true,
+            "example": 6
           }
         },
         "description": "The Articles API is a central place to gather all information and take actions on your articles. Articles can live within collections and sections, or alternatively they can stand alone.",
@@ -26150,11 +26251,71 @@
       "InternalArticle": {
         "title": "Internal Article",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/InternalArticleListItem"
+        "properties": {
+          "type": {
+            "enum": [
+              "internal_article"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of object - \u0060internal_article\u0060.",
+            "example": "internal_article"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the article which is given by Intercom.",
+            "example": 6871119
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the article."
+          },
+          "body": {
+            "type": "string",
+            "description": "The body of the article in HTML.",
+            "nullable": true,
+            "example": "Default language body in html"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The body of the article in markdown.",
+            "nullable": true,
+            "example": "# Internal Guide\n\nBody of the article in markdown\n"
+          },
+          "owner_id": {
+            "type": "integer",
+            "description": "The id of the owner of the article.",
+            "example": 5017691
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "The id of the author of the article.",
+            "example": 5017691
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time when the article was created.",
+            "format": "date-time",
+            "example": 1672928359
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time when the article was last updated.",
+            "format": "date-time",
+            "example": 1672928610
+          },
+          "locale": {
+            "type": "string",
+            "description": "The default locale of the article.",
+            "example": "en"
+          },
+          "folder_id": {
+            "type": "integer",
+            "description": "The ID of the folder this article belongs to, or null if not in a folder.",
+            "nullable": true,
+            "example": 6
           }
-        ],
+        },
         "description": "The Internal Articles API is a central place to gather all information and take actions on your internal articles.",
         "x-tags": [
           "Articles"
@@ -27970,16 +28131,31 @@
       "ContactDeleted": {
         "title": "Contact Deleted",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReference"
-          }
-        ],
         "properties": {
           "deleted": {
             "type": "boolean",
             "description": "Whether the contact is deleted or not.",
             "example": true
+          },
+          "type": {
+            "enum": [
+              "contact"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "always contact",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": 70
           }
         },
         "description": "deleted contact object"
@@ -28317,14 +28493,12 @@
       "ContactReplyEmailRequest": {
         "title": "Email",
         "required": [
-          "email"
+          "email",
+          "message_type",
+          "type",
+          "body"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReplyBaseRequest"
-          }
-        ],
         "properties": {
           "email": {
             "type": "string",
@@ -28336,6 +28510,63 @@
               "$ref": "#/components/schemas/ConversationAttachmentFiles"
             },
             "description": "A list of files that will be added as attachments."
+          },
+          "message_type": {
+            "enum": [
+              "comment"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "type": {
+            "enum": [
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the comment."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "attachment_urls": {
+            "title": "Attachment URLs",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "reply_options": {
+            "title": "Contact Quick Reply",
+            "type": "array",
+            "items": {
+              "title": "Quick Reply Option",
+              "required": [
+                "text",
+                "uuid"
+              ],
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text of the chosen reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The unique identifier for the quick reply option selected.",
+                  "format": "uuid"
+                }
+              }
+            },
+            "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
           }
         },
         "description": "Payload of the request to reply on behalf of a contact using their \u0060email\u0060"
@@ -28343,14 +28574,12 @@
       "ContactReplyIntercomUserIdRequest": {
         "title": "Intercom User ID",
         "required": [
-          "intercom_user_id"
+          "intercom_user_id",
+          "message_type",
+          "type",
+          "body"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReplyBaseRequest"
-          }
-        ],
         "properties": {
           "intercom_user_id": {
             "type": "string",
@@ -28362,6 +28591,63 @@
               "$ref": "#/components/schemas/ConversationAttachmentFiles"
             },
             "description": "A list of files that will be added as attachments."
+          },
+          "message_type": {
+            "enum": [
+              "comment"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "type": {
+            "enum": [
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the comment."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "attachment_urls": {
+            "title": "Attachment URLs",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "reply_options": {
+            "title": "Contact Quick Reply",
+            "type": "array",
+            "items": {
+              "title": "Quick Reply Option",
+              "required": [
+                "text",
+                "uuid"
+              ],
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text of the chosen reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The unique identifier for the quick reply option selected.",
+                  "format": "uuid"
+                }
+              }
+            },
+            "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
           }
         },
         "description": "Payload of the request to reply on behalf of a contact using their \u0060intercom_user_id\u0060"
@@ -28369,18 +28655,73 @@
       "ContactReplyTicketEmailRequest": {
         "title": "Email",
         "required": [
-          "email"
+          "email",
+          "message_type",
+          "type",
+          "body"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReplyBaseRequest"
-          }
-        ],
         "properties": {
           "email": {
             "type": "string",
             "description": "The email you have defined for the user."
+          },
+          "message_type": {
+            "enum": [
+              "comment"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "type": {
+            "enum": [
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the comment."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "attachment_urls": {
+            "title": "Attachment URLs",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "reply_options": {
+            "title": "Contact Quick Reply",
+            "type": "array",
+            "items": {
+              "title": "Quick Reply Option",
+              "required": [
+                "text",
+                "uuid"
+              ],
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text of the chosen reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The unique identifier for the quick reply option selected.",
+                  "format": "uuid"
+                }
+              }
+            },
+            "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
           }
         },
         "description": "Payload of the request to reply on behalf of a contact using their \u0060email\u0060"
@@ -28388,18 +28729,73 @@
       "ContactReplyTicketIntercomUserIdRequest": {
         "title": "Intercom User ID",
         "required": [
-          "intercom_user_id"
+          "intercom_user_id",
+          "message_type",
+          "type",
+          "body"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReplyBaseRequest"
-          }
-        ],
         "properties": {
           "intercom_user_id": {
             "type": "string",
             "description": "The identifier for the contact as given by Intercom."
+          },
+          "message_type": {
+            "enum": [
+              "comment"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "type": {
+            "enum": [
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the comment."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "attachment_urls": {
+            "title": "Attachment URLs",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "reply_options": {
+            "title": "Contact Quick Reply",
+            "type": "array",
+            "items": {
+              "title": "Quick Reply Option",
+              "required": [
+                "text",
+                "uuid"
+              ],
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text of the chosen reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The unique identifier for the quick reply option selected.",
+                  "format": "uuid"
+                }
+              }
+            },
+            "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
           }
         },
         "description": "Payload of the request to reply on behalf of a contact using their \u0060intercom_user_id\u0060"
@@ -28439,18 +28835,73 @@
       "ContactReplyTicketUserIdRequest": {
         "title": "User ID",
         "required": [
-          "user_id"
+          "user_id",
+          "message_type",
+          "type",
+          "body"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReplyBaseRequest"
-          }
-        ],
         "properties": {
           "user_id": {
             "type": "string",
             "description": "The external_id you have defined for the contact."
+          },
+          "message_type": {
+            "enum": [
+              "comment"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "type": {
+            "enum": [
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the comment."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "attachment_urls": {
+            "title": "Attachment URLs",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "reply_options": {
+            "title": "Contact Quick Reply",
+            "type": "array",
+            "items": {
+              "title": "Quick Reply Option",
+              "required": [
+                "text",
+                "uuid"
+              ],
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text of the chosen reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The unique identifier for the quick reply option selected.",
+                  "format": "uuid"
+                }
+              }
+            },
+            "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
           }
         },
         "description": "Payload of the request to reply on behalf of a contact using their \u0060user_id\u0060"
@@ -28458,14 +28909,12 @@
       "ContactReplyUserIdRequest": {
         "title": "User ID",
         "required": [
-          "user_id"
+          "user_id",
+          "message_type",
+          "type",
+          "body"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReplyBaseRequest"
-          }
-        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -28478,6 +28927,63 @@
               "$ref": "#/components/schemas/ConversationAttachmentFiles"
             },
             "description": "A list of files that will be added as attachments. You can include up to 10 files."
+          },
+          "message_type": {
+            "enum": [
+              "comment"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "type": {
+            "enum": [
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the comment."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "attachment_urls": {
+            "title": "Attachment URLs",
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "reply_options": {
+            "title": "Contact Quick Reply",
+            "type": "array",
+            "items": {
+              "title": "Quick Reply Option",
+              "required": [
+                "text",
+                "uuid"
+              ],
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "The text of the chosen reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The unique identifier for the quick reply option selected.",
+                  "format": "uuid"
+                }
+              }
+            },
+            "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
           }
         },
         "description": "Payload of the request to reply on behalf of a contact using their \u0060user_id\u0060"
@@ -28583,16 +29089,31 @@
       "ContactArchived": {
         "title": "Contact Archived",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReference"
-          }
-        ],
         "properties": {
           "archived": {
             "type": "boolean",
             "description": "Whether the contact is archived or not.",
             "example": true
+          },
+          "type": {
+            "enum": [
+              "contact"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "always contact",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": 70
           }
         },
         "description": "archived contact object"
@@ -28600,16 +29121,31 @@
       "ContactUnarchived": {
         "title": "Contact Unarchived",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReference"
-          }
-        ],
         "properties": {
           "archived": {
             "type": "boolean",
             "description": "Whether the contact is archived or not.",
             "example": false
+          },
+          "type": {
+            "enum": [
+              "contact"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "always contact",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": 70
           }
         },
         "description": "unarchived contact object"
@@ -28617,16 +29153,31 @@
       "ContactBlocked": {
         "title": "Contact Blocked",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ContactReference"
-          }
-        ],
         "properties": {
           "blocked": {
             "type": "boolean",
             "description": "Always true.",
             "example": true
+          },
+          "type": {
+            "enum": [
+              "contact"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "always contact",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": 70
           }
         },
         "description": "blocked contact object"
@@ -29670,12 +30221,11 @@
           "quick_reply_options": {
             "type": "array",
             "items": {
-              "type": "object",
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/QuickReplyOption"
-                }
+              "required": [
+                "text",
+                "uuid"
               ],
+              "type": "object",
               "properties": {
                 "translations": {
                   "type": "object",
@@ -29685,6 +30235,15 @@
                     "en": "Hello",
                     "fr": "Bonjour"
                   }
+                },
+                "text": {
+                  "type": "string",
+                  "description": "The text to display in this quick reply option."
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.",
+                  "format": "uuid"
                 }
               }
             },
@@ -36315,13 +36874,20 @@
           },
           "applied_by": {
             "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Reference"
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "",
+                "example": "contact"
+              },
+              "id": {
+                "type": "string",
+                "description": "",
+                "nullable": true,
+                "example": "1a2b3c"
               }
-            ],
-            "description": "The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket.",
-            "nullable": true
+            },
+            "description": "The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, or ticket."
           }
         },
         "description": "A tag allows you to label your contacts, companies, and conversations and list them using that tag.",
@@ -36357,58 +36923,65 @@
       "TagCreateResponse": {
         "title": "Create or Update Tag Response",
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TagBasic"
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "value is \u0022tag\u0022",
+            "example": "tag"
           },
-          {
-            "type": "object",
-            "properties": {
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The Intercom ID of the user.",
-                      "example": "6329e838deab40166d1a53f7"
-                    },
-                    "tagged": {
-                      "type": "boolean",
-                      "description": "Whether the user was tagged (true) or untagged (false).",
-                      "example": true
-                    }
-                  }
+          "id": {
+            "type": "string",
+            "description": "The id of the tag",
+            "example": 123456
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the tag",
+            "example": "Test tag"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The Intercom ID of the user.",
+                  "example": "6329e838deab40166d1a53f7"
                 },
-                "description": "The users that were tagged or untagged.",
-                "nullable": true,
-                "example": []
-              },
-              "companies": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The Intercom ID of the company.",
-                      "example": "6329e838deab40166d1a5400"
-                    },
-                    "tagged": {
-                      "type": "boolean",
-                      "description": "Whether the company was tagged (true) or untagged (false).",
-                      "example": true
-                    }
-                  }
-                },
-                "description": "The companies that were tagged or untagged.",
-                "nullable": true,
-                "example": []
+                "tagged": {
+                  "type": "boolean",
+                  "description": "Whether the user was tagged (true) or untagged (false).",
+                  "example": true
+                }
               }
-            }
+            },
+            "description": "The users that were tagged or untagged.",
+            "nullable": true,
+            "example": []
+          },
+          "companies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The Intercom ID of the company.",
+                  "example": "6329e838deab40166d1a5400"
+                },
+                "tagged": {
+                  "type": "boolean",
+                  "description": "Whether the company was tagged (true) or untagged (false).",
+                  "example": true
+                }
+              }
+            },
+            "description": "The companies that were tagged or untagged.",
+            "nullable": true,
+            "example": []
           }
-        ],
+        },
         "description": "The response for creating or updating a tag, including the entities that were tagged or untagged."
       },
       "TagCompanyRequest": {
@@ -40253,49 +40826,844 @@
       },
       "UpdateContact200": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Contact"
-          }
-        ],
         "properties": {
           "enabled_push_messaging": {
             "type": "boolean",
             "description": "If the user has enabled push messaging.",
             "nullable": true,
             "example": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of object.",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": "f3b87a2e09d514c6c2e79b9a"
+          },
+          "workspace_id": {
+            "type": "string",
+            "description": "The id of the workspace which the contact belongs to.",
+            "example": "ecahpwf5"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the contact.",
+            "example": "user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email.",
+            "example": "joe@example.com"
+          },
+          "email_domain": {
+            "type": "string",
+            "description": "The contact\u0027s email domain.",
+            "example": "example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contacts phone.",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "formatted_phone": {
+            "type": "string",
+            "description": "The contacts phone number normalized to the E164 format",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "name": {
+            "type": "string",
+            "description": "The contacts name.",
+            "nullable": true,
+            "example": "John Doe"
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The id of an admin that has been assigned account ownership of the contact.",
+            "nullable": true,
+            "example": 123
+          },
+          "has_hard_bounced": {
+            "type": "boolean",
+            "description": "Whether the contact has had an email sent to them hard bounce.",
+            "example": true
+          },
+          "marked_email_as_spam": {
+            "type": "boolean",
+            "description": "Whether the contact has marked an email sent to them as spam.",
+            "example": true
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from emails.",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was created.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "signed_up_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_replied_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_contacted_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_opened_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_clicked_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "language_override": {
+            "type": "string",
+            "description": "A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.",
+            "nullable": true,
+            "example": "en"
+          },
+          "browser": {
+            "type": "string",
+            "description": "The name of the browser which the contact is using.",
+            "nullable": true,
+            "example": "Chrome"
+          },
+          "browser_version": {
+            "type": "string",
+            "description": "The version of the browser which the contact is using.",
+            "nullable": true,
+            "example": "80.0.3987.132"
+          },
+          "browser_language": {
+            "type": "string",
+            "description": "The language set by the browser which the contact is using.",
+            "nullable": true,
+            "example": "en-US"
+          },
+          "os": {
+            "type": "string",
+            "description": "The operating system which the contact is using.",
+            "nullable": true,
+            "example": "Mac OS X"
+          },
+          "android_app_name": {
+            "type": "string",
+            "description": "The name of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "android_app_version": {
+            "type": "string",
+            "description": "The version of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "android_device": {
+            "type": "string",
+            "description": "The Android device which the contact is using.",
+            "nullable": true,
+            "example": "Pixel 3"
+          },
+          "android_os_version": {
+            "type": "string",
+            "description": "The version of the Android OS which the contact is using.",
+            "nullable": true,
+            "example": 10
+          },
+          "android_sdk_version": {
+            "type": "string",
+            "description": "The version of the Android SDK which the contact is using.",
+            "nullable": true,
+            "example": 28
+          },
+          "android_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "ios_app_name": {
+            "type": "string",
+            "description": "The name of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "ios_app_version": {
+            "type": "string",
+            "description": "The version of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "ios_device": {
+            "type": "string",
+            "description": "The iOS device which the contact is using.",
+            "nullable": true,
+            "example": "iPhone 11"
+          },
+          "ios_os_version": {
+            "type": "string",
+            "description": "The version of iOS which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_sdk_version": {
+            "type": "string",
+            "description": "The version of the iOS SDK which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "custom_attributes": {
+            "type": "object",
+            "description": "The custom attributes which are set for the contact."
+          },
+          "avatar": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of object",
+                "example": "avatar"
+              },
+              "image_url": {
+                "type": "string",
+                "description": "An image URL containing the avatar of a contact.",
+                "format": "uri",
+                "nullable": true,
+                "example": "https://example.org/128Wash.jpg"
+              }
+            },
+            "nullable": true
+          },
+          "tags": {
+            "$ref": "#/components/schemas/ContactTags"
+          },
+          "notes": {
+            "$ref": "#/components/schemas/ContactNotes"
+          },
+          "companies": {
+            "$ref": "#/components/schemas/ContactCompanies"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ContactLocation"
+          },
+          "social_profiles": {
+            "$ref": "#/components/schemas/ContactSocialProfiles"
           }
         }
       },
       "ShowContact200": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Contact"
-          }
-        ],
         "properties": {
           "enabled_push_messaging": {
             "type": "boolean",
             "description": "If the user has enabled push messaging.",
             "nullable": true,
             "example": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of object.",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": "f3b87a2e09d514c6c2e79b9a"
+          },
+          "workspace_id": {
+            "type": "string",
+            "description": "The id of the workspace which the contact belongs to.",
+            "example": "ecahpwf5"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the contact.",
+            "example": "user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email.",
+            "example": "joe@example.com"
+          },
+          "email_domain": {
+            "type": "string",
+            "description": "The contact\u0027s email domain.",
+            "example": "example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contacts phone.",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "formatted_phone": {
+            "type": "string",
+            "description": "The contacts phone number normalized to the E164 format",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "name": {
+            "type": "string",
+            "description": "The contacts name.",
+            "nullable": true,
+            "example": "John Doe"
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The id of an admin that has been assigned account ownership of the contact.",
+            "nullable": true,
+            "example": 123
+          },
+          "has_hard_bounced": {
+            "type": "boolean",
+            "description": "Whether the contact has had an email sent to them hard bounce.",
+            "example": true
+          },
+          "marked_email_as_spam": {
+            "type": "boolean",
+            "description": "Whether the contact has marked an email sent to them as spam.",
+            "example": true
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from emails.",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was created.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "signed_up_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_replied_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_contacted_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_opened_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_clicked_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "language_override": {
+            "type": "string",
+            "description": "A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.",
+            "nullable": true,
+            "example": "en"
+          },
+          "browser": {
+            "type": "string",
+            "description": "The name of the browser which the contact is using.",
+            "nullable": true,
+            "example": "Chrome"
+          },
+          "browser_version": {
+            "type": "string",
+            "description": "The version of the browser which the contact is using.",
+            "nullable": true,
+            "example": "80.0.3987.132"
+          },
+          "browser_language": {
+            "type": "string",
+            "description": "The language set by the browser which the contact is using.",
+            "nullable": true,
+            "example": "en-US"
+          },
+          "os": {
+            "type": "string",
+            "description": "The operating system which the contact is using.",
+            "nullable": true,
+            "example": "Mac OS X"
+          },
+          "android_app_name": {
+            "type": "string",
+            "description": "The name of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "android_app_version": {
+            "type": "string",
+            "description": "The version of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "android_device": {
+            "type": "string",
+            "description": "The Android device which the contact is using.",
+            "nullable": true,
+            "example": "Pixel 3"
+          },
+          "android_os_version": {
+            "type": "string",
+            "description": "The version of the Android OS which the contact is using.",
+            "nullable": true,
+            "example": 10
+          },
+          "android_sdk_version": {
+            "type": "string",
+            "description": "The version of the Android SDK which the contact is using.",
+            "nullable": true,
+            "example": 28
+          },
+          "android_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "ios_app_name": {
+            "type": "string",
+            "description": "The name of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "ios_app_version": {
+            "type": "string",
+            "description": "The version of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "ios_device": {
+            "type": "string",
+            "description": "The iOS device which the contact is using.",
+            "nullable": true,
+            "example": "iPhone 11"
+          },
+          "ios_os_version": {
+            "type": "string",
+            "description": "The version of iOS which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_sdk_version": {
+            "type": "string",
+            "description": "The version of the iOS SDK which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "custom_attributes": {
+            "type": "object",
+            "description": "The custom attributes which are set for the contact."
+          },
+          "avatar": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of object",
+                "example": "avatar"
+              },
+              "image_url": {
+                "type": "string",
+                "description": "An image URL containing the avatar of a contact.",
+                "format": "uri",
+                "nullable": true,
+                "example": "https://example.org/128Wash.jpg"
+              }
+            },
+            "nullable": true
+          },
+          "tags": {
+            "$ref": "#/components/schemas/ContactTags"
+          },
+          "notes": {
+            "$ref": "#/components/schemas/ContactNotes"
+          },
+          "companies": {
+            "$ref": "#/components/schemas/ContactCompanies"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ContactLocation"
+          },
+          "social_profiles": {
+            "$ref": "#/components/schemas/ContactSocialProfiles"
           }
         }
       },
       "MergeContact200": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Contact"
-          }
-        ],
         "properties": {
           "enabled_push_messaging": {
             "type": "boolean",
             "description": "If the user has enabled push messaging.",
             "nullable": true,
             "example": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of object.",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": "f3b87a2e09d514c6c2e79b9a"
+          },
+          "workspace_id": {
+            "type": "string",
+            "description": "The id of the workspace which the contact belongs to.",
+            "example": "ecahpwf5"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the contact.",
+            "example": "user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email.",
+            "example": "joe@example.com"
+          },
+          "email_domain": {
+            "type": "string",
+            "description": "The contact\u0027s email domain.",
+            "example": "example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contacts phone.",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "formatted_phone": {
+            "type": "string",
+            "description": "The contacts phone number normalized to the E164 format",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "name": {
+            "type": "string",
+            "description": "The contacts name.",
+            "nullable": true,
+            "example": "John Doe"
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The id of an admin that has been assigned account ownership of the contact.",
+            "nullable": true,
+            "example": 123
+          },
+          "has_hard_bounced": {
+            "type": "boolean",
+            "description": "Whether the contact has had an email sent to them hard bounce.",
+            "example": true
+          },
+          "marked_email_as_spam": {
+            "type": "boolean",
+            "description": "Whether the contact has marked an email sent to them as spam.",
+            "example": true
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from emails.",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was created.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "signed_up_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_replied_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_contacted_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_opened_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_clicked_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "language_override": {
+            "type": "string",
+            "description": "A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.",
+            "nullable": true,
+            "example": "en"
+          },
+          "browser": {
+            "type": "string",
+            "description": "The name of the browser which the contact is using.",
+            "nullable": true,
+            "example": "Chrome"
+          },
+          "browser_version": {
+            "type": "string",
+            "description": "The version of the browser which the contact is using.",
+            "nullable": true,
+            "example": "80.0.3987.132"
+          },
+          "browser_language": {
+            "type": "string",
+            "description": "The language set by the browser which the contact is using.",
+            "nullable": true,
+            "example": "en-US"
+          },
+          "os": {
+            "type": "string",
+            "description": "The operating system which the contact is using.",
+            "nullable": true,
+            "example": "Mac OS X"
+          },
+          "android_app_name": {
+            "type": "string",
+            "description": "The name of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "android_app_version": {
+            "type": "string",
+            "description": "The version of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "android_device": {
+            "type": "string",
+            "description": "The Android device which the contact is using.",
+            "nullable": true,
+            "example": "Pixel 3"
+          },
+          "android_os_version": {
+            "type": "string",
+            "description": "The version of the Android OS which the contact is using.",
+            "nullable": true,
+            "example": 10
+          },
+          "android_sdk_version": {
+            "type": "string",
+            "description": "The version of the Android SDK which the contact is using.",
+            "nullable": true,
+            "example": 28
+          },
+          "android_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "ios_app_name": {
+            "type": "string",
+            "description": "The name of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "ios_app_version": {
+            "type": "string",
+            "description": "The version of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "ios_device": {
+            "type": "string",
+            "description": "The iOS device which the contact is using.",
+            "nullable": true,
+            "example": "iPhone 11"
+          },
+          "ios_os_version": {
+            "type": "string",
+            "description": "The version of iOS which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_sdk_version": {
+            "type": "string",
+            "description": "The version of the iOS SDK which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "custom_attributes": {
+            "type": "object",
+            "description": "The custom attributes which are set for the contact."
+          },
+          "avatar": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of object",
+                "example": "avatar"
+              },
+              "image_url": {
+                "type": "string",
+                "description": "An image URL containing the avatar of a contact.",
+                "format": "uri",
+                "nullable": true,
+                "example": "https://example.org/128Wash.jpg"
+              }
+            },
+            "nullable": true
+          },
+          "tags": {
+            "$ref": "#/components/schemas/ContactTags"
+          },
+          "notes": {
+            "$ref": "#/components/schemas/ContactNotes"
+          },
+          "companies": {
+            "$ref": "#/components/schemas/ContactCompanies"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ContactLocation"
+          },
+          "social_profiles": {
+            "$ref": "#/components/schemas/ContactSocialProfiles"
           }
         }
       },
@@ -40325,33 +41693,563 @@
       },
       "CreateContact200": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Contact"
-          }
-        ],
         "properties": {
           "enabled_push_messaging": {
             "type": "boolean",
             "description": "If the user has enabled push messaging.",
             "nullable": true,
             "example": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of object.",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": "f3b87a2e09d514c6c2e79b9a"
+          },
+          "workspace_id": {
+            "type": "string",
+            "description": "The id of the workspace which the contact belongs to.",
+            "example": "ecahpwf5"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the contact.",
+            "example": "user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email.",
+            "example": "joe@example.com"
+          },
+          "email_domain": {
+            "type": "string",
+            "description": "The contact\u0027s email domain.",
+            "example": "example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contacts phone.",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "formatted_phone": {
+            "type": "string",
+            "description": "The contacts phone number normalized to the E164 format",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "name": {
+            "type": "string",
+            "description": "The contacts name.",
+            "nullable": true,
+            "example": "John Doe"
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The id of an admin that has been assigned account ownership of the contact.",
+            "nullable": true,
+            "example": 123
+          },
+          "has_hard_bounced": {
+            "type": "boolean",
+            "description": "Whether the contact has had an email sent to them hard bounce.",
+            "example": true
+          },
+          "marked_email_as_spam": {
+            "type": "boolean",
+            "description": "Whether the contact has marked an email sent to them as spam.",
+            "example": true
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from emails.",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was created.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "signed_up_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_replied_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_contacted_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_opened_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_clicked_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "language_override": {
+            "type": "string",
+            "description": "A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.",
+            "nullable": true,
+            "example": "en"
+          },
+          "browser": {
+            "type": "string",
+            "description": "The name of the browser which the contact is using.",
+            "nullable": true,
+            "example": "Chrome"
+          },
+          "browser_version": {
+            "type": "string",
+            "description": "The version of the browser which the contact is using.",
+            "nullable": true,
+            "example": "80.0.3987.132"
+          },
+          "browser_language": {
+            "type": "string",
+            "description": "The language set by the browser which the contact is using.",
+            "nullable": true,
+            "example": "en-US"
+          },
+          "os": {
+            "type": "string",
+            "description": "The operating system which the contact is using.",
+            "nullable": true,
+            "example": "Mac OS X"
+          },
+          "android_app_name": {
+            "type": "string",
+            "description": "The name of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "android_app_version": {
+            "type": "string",
+            "description": "The version of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "android_device": {
+            "type": "string",
+            "description": "The Android device which the contact is using.",
+            "nullable": true,
+            "example": "Pixel 3"
+          },
+          "android_os_version": {
+            "type": "string",
+            "description": "The version of the Android OS which the contact is using.",
+            "nullable": true,
+            "example": 10
+          },
+          "android_sdk_version": {
+            "type": "string",
+            "description": "The version of the Android SDK which the contact is using.",
+            "nullable": true,
+            "example": 28
+          },
+          "android_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "ios_app_name": {
+            "type": "string",
+            "description": "The name of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "ios_app_version": {
+            "type": "string",
+            "description": "The version of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "ios_device": {
+            "type": "string",
+            "description": "The iOS device which the contact is using.",
+            "nullable": true,
+            "example": "iPhone 11"
+          },
+          "ios_os_version": {
+            "type": "string",
+            "description": "The version of iOS which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_sdk_version": {
+            "type": "string",
+            "description": "The version of the iOS SDK which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "custom_attributes": {
+            "type": "object",
+            "description": "The custom attributes which are set for the contact."
+          },
+          "avatar": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of object",
+                "example": "avatar"
+              },
+              "image_url": {
+                "type": "string",
+                "description": "An image URL containing the avatar of a contact.",
+                "format": "uri",
+                "nullable": true,
+                "example": "https://example.org/128Wash.jpg"
+              }
+            },
+            "nullable": true
+          },
+          "tags": {
+            "$ref": "#/components/schemas/ContactTags"
+          },
+          "notes": {
+            "$ref": "#/components/schemas/ContactNotes"
+          },
+          "companies": {
+            "$ref": "#/components/schemas/ContactCompanies"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ContactLocation"
+          },
+          "social_profiles": {
+            "$ref": "#/components/schemas/ContactSocialProfiles"
           }
         }
       },
       "ShowContactByExternalId200": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Contact"
-          }
-        ],
         "properties": {
           "enabled_push_messaging": {
             "type": "boolean",
             "description": "If the user has enabled push messaging.",
             "nullable": true,
             "example": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of object.",
+            "example": "contact"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client.",
+            "nullable": true,
+            "example": "f3b87a2e09d514c6c2e79b9a"
+          },
+          "workspace_id": {
+            "type": "string",
+            "description": "The id of the workspace which the contact belongs to.",
+            "example": "ecahpwf5"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the contact.",
+            "example": "user"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email.",
+            "example": "joe@example.com"
+          },
+          "email_domain": {
+            "type": "string",
+            "description": "The contact\u0027s email domain.",
+            "example": "example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contacts phone.",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "formatted_phone": {
+            "type": "string",
+            "description": "The contacts phone number normalized to the E164 format",
+            "nullable": true,
+            "example": 1123456789
+          },
+          "name": {
+            "type": "string",
+            "description": "The contacts name.",
+            "nullable": true,
+            "example": "John Doe"
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The id of an admin that has been assigned account ownership of the contact.",
+            "nullable": true,
+            "example": 123
+          },
+          "has_hard_bounced": {
+            "type": "boolean",
+            "description": "Whether the contact has had an email sent to them hard bounce.",
+            "example": true
+          },
+          "marked_email_as_spam": {
+            "type": "boolean",
+            "description": "Whether the contact has marked an email sent to them as spam.",
+            "example": true
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from emails.",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was created.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "format": "date-time",
+            "example": 1571672154
+          },
+          "signed_up_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_replied_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_contacted_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_opened_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "last_email_clicked_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "language_override": {
+            "type": "string",
+            "description": "A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.",
+            "nullable": true,
+            "example": "en"
+          },
+          "browser": {
+            "type": "string",
+            "description": "The name of the browser which the contact is using.",
+            "nullable": true,
+            "example": "Chrome"
+          },
+          "browser_version": {
+            "type": "string",
+            "description": "The version of the browser which the contact is using.",
+            "nullable": true,
+            "example": "80.0.3987.132"
+          },
+          "browser_language": {
+            "type": "string",
+            "description": "The language set by the browser which the contact is using.",
+            "nullable": true,
+            "example": "en-US"
+          },
+          "os": {
+            "type": "string",
+            "description": "The operating system which the contact is using.",
+            "nullable": true,
+            "example": "Mac OS X"
+          },
+          "android_app_name": {
+            "type": "string",
+            "description": "The name of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "android_app_version": {
+            "type": "string",
+            "description": "The version of the Android app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "android_device": {
+            "type": "string",
+            "description": "The Android device which the contact is using.",
+            "nullable": true,
+            "example": "Pixel 3"
+          },
+          "android_os_version": {
+            "type": "string",
+            "description": "The version of the Android OS which the contact is using.",
+            "nullable": true,
+            "example": 10
+          },
+          "android_sdk_version": {
+            "type": "string",
+            "description": "The version of the Android SDK which the contact is using.",
+            "nullable": true,
+            "example": 28
+          },
+          "android_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "ios_app_name": {
+            "type": "string",
+            "description": "The name of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "Intercom"
+          },
+          "ios_app_version": {
+            "type": "string",
+            "description": "The version of the iOS app which the contact is using.",
+            "nullable": true,
+            "example": "5.0.0"
+          },
+          "ios_device": {
+            "type": "string",
+            "description": "The iOS device which the contact is using.",
+            "nullable": true,
+            "example": "iPhone 11"
+          },
+          "ios_os_version": {
+            "type": "string",
+            "description": "The version of iOS which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_sdk_version": {
+            "type": "string",
+            "description": "The version of the iOS SDK which the contact is using.",
+            "nullable": true,
+            "example": "13.3.1"
+          },
+          "ios_last_seen_at": {
+            "type": "integer",
+            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          },
+          "custom_attributes": {
+            "type": "object",
+            "description": "The custom attributes which are set for the contact."
+          },
+          "avatar": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of object",
+                "example": "avatar"
+              },
+              "image_url": {
+                "type": "string",
+                "description": "An image URL containing the avatar of a contact.",
+                "format": "uri",
+                "nullable": true,
+                "example": "https://example.org/128Wash.jpg"
+              }
+            },
+            "nullable": true
+          },
+          "tags": {
+            "$ref": "#/components/schemas/ContactTags"
+          },
+          "notes": {
+            "$ref": "#/components/schemas/ContactNotes"
+          },
+          "companies": {
+            "$ref": "#/components/schemas/ContactCompanies"
+          },
+          "location": {
+            "$ref": "#/components/schemas/ContactLocation"
+          },
+          "social_profiles": {
+            "$ref": "#/components/schemas/ContactSocialProfiles"
           }
         }
       },
@@ -40389,14 +42287,61 @@
       },
       "CreateConversation200": {
         "required": [
-          "conversation_id"
+          "conversation_id",
+          "type",
+          "id",
+          "created_at",
+          "body",
+          "message_type"
         ],
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Message"
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the message",
+            "example": "user_message"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id representing the message.",
+            "example": 1488971108
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the conversation was created.",
+            "format": "date-time",
+            "example": 1667560812
+          },
+          "subject": {
+            "type": "string",
+            "description": "\u0022The subject of the message. Only present if message_type: email.\u0022",
+            "example": "Greetings"
+          },
+          "body": {
+            "type": "string",
+            "description": "The message body, which may contain HTML.",
+            "example": "Hello"
+          },
+          "message_type": {
+            "enum": [
+              "email",
+              "inapp",
+              "facebook",
+              "twitter",
+              "sms",
+              "whatsapp"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of message that was sent. Can be email, inapp, facebook, twitter, sms or whatsapp.",
+            "example": "inapp"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The associated conversation_id",
+            "example": 64619700005570
           }
-        ]
+        }
       },
       "ManageConversation": {
         "required": [
@@ -40465,28 +42410,140 @@
             "type": "array",
             "items": {
               "type": "object",
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/Call"
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "String representing the object\u0027s type. Always has the value \u0060call\u0060.",
+                  "example": "call"
                 },
-                {
-                  "type": "object",
-                  "properties": {
-                    "transcript": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      },
-                      "description": "The call transcript if available, otherwise an empty array."
-                    },
-                    "transcript_status": {
-                      "type": "string",
-                      "description": "The status of the transcript if available.",
-                      "nullable": true
-                    }
-                  }
+                "id": {
+                  "type": "string",
+                  "description": "The id of the call.",
+                  "example": 123
+                },
+                "conversation_id": {
+                  "type": "string",
+                  "description": "The id of the conversation associated with the call, if any.",
+                  "nullable": true,
+                  "example": 456
+                },
+                "admin_id": {
+                  "type": "string",
+                  "description": "The id of the admin associated with the call, if any.",
+                  "nullable": true,
+                  "example": 789
+                },
+                "contact_id": {
+                  "type": "string",
+                  "description": "The id of the contact associated with the call, if any.",
+                  "nullable": true,
+                  "example": "6762f0dd1bb69f9f2193bb83"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "The current state of the call.",
+                  "example": "completed"
+                },
+                "initiated_at": {
+                  "$ref": "#/components/schemas/Datetime"
+                },
+                "answered_at": {
+                  "$ref": "#/components/schemas/Datetime"
+                },
+                "ended_at": {
+                  "$ref": "#/components/schemas/Datetime"
+                },
+                "created_at": {
+                  "$ref": "#/components/schemas/Datetime"
+                },
+                "updated_at": {
+                  "$ref": "#/components/schemas/Datetime"
+                },
+                "recording_url": {
+                  "type": "string",
+                  "description": "API URL to download or redirect to the call recording if available.",
+                  "format": "uri",
+                  "nullable": true,
+                  "example": "https://api.intercom.io/calls/123/recording"
+                },
+                "transcription_url": {
+                  "type": "string",
+                  "description": "API URL to the call transcript if available.",
+                  "format": "uri",
+                  "nullable": true,
+                  "example": "https://api.intercom.io/calls/123/transcript"
+                },
+                "call_type": {
+                  "type": "string",
+                  "description": "The type of call.",
+                  "example": "phone"
+                },
+                "direction": {
+                  "type": "string",
+                  "description": "The direction of the call.",
+                  "example": "outbound"
+                },
+                "ended_reason": {
+                  "type": "string",
+                  "description": "The reason for the call end, if applicable.",
+                  "nullable": true,
+                  "example": "completed"
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "The phone number involved in the call, in E.164 format.",
+                  "nullable": true,
+                  "example": 15551234567
+                },
+                "fin_recording_url": {
+                  "type": "string",
+                  "description": "API URL to the AI Agent (Fin) call recording if available.",
+                  "format": "uri",
+                  "nullable": true
+                },
+                "fin_transcription_url": {
+                  "type": "string",
+                  "description": "API URL to the AI Agent (Fin) call transcript if available.",
+                  "format": "uri",
+                  "nullable": true
+                },
+                "duration": {
+                  "type": "integer",
+                  "description": "Total call duration in seconds from the caller\u0027s perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended.",
+                  "nullable": true,
+                  "example": 900
+                },
+                "talk_time": {
+                  "type": "integer",
+                  "description": "Total time in seconds the agent and customer were connected.",
+                  "nullable": true,
+                  "example": 300
+                },
+                "queue_time": {
+                  "type": "integer",
+                  "description": "Total time in seconds the caller waited in queue before connecting, when assigned to a team.",
+                  "nullable": true,
+                  "example": 45
+                },
+                "hold_time": {
+                  "type": "integer",
+                  "description": "Total time in seconds the caller was placed on hold during the call.",
+                  "nullable": true,
+                  "example": 60
+                },
+                "transcript": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
+                  "description": "The call transcript if available, otherwise an empty array."
+                },
+                "transcript_status": {
+                  "type": "string",
+                  "description": "The status of the transcript if available.",
+                  "nullable": true
                 }
-              ]
+              }
             }
           }
         }
@@ -40591,47 +42648,258 @@
         }
       },
       "CreateTicket": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CreateTicketRequest"
-          }
+        "required": [
+          "ticket_type_id",
+          "contacts"
         ],
+        "type": "object",
         "properties": {
           "skip_notifications": {
             "type": "boolean",
             "description": "Option to disable notifications when a Ticket is created.",
             "example": true
+          },
+          "ticket_type_id": {
+            "type": "string",
+            "description": "The ID of the type of ticket you want to create",
+            "example": 1234
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "title": "ID",
+                  "required": [
+                    "id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The identifier for the contact as given by Intercom."
+                    }
+                  }
+                },
+                {
+                  "title": "External ID",
+                  "required": [
+                    "external_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "external_id": {
+                      "type": "string",
+                      "description": "The external_id you have defined for the contact who is being added as a participant."
+                    }
+                  }
+                },
+                {
+                  "title": "Email",
+                  "required": [
+                    "email"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "The email you have defined for the contact who is being added as a participant. If a contact with this email does not exist, one will be created."
+                    }
+                  }
+                }
+              ]
+            },
+            "description": "The list of contacts (users or leads) affected by this ticket. Currently only one is allowed"
+          },
+          "conversation_to_link_id": {
+            "type": "string",
+            "description": "The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets:\n - conversation | back-office ticket\n - customer tickets | non-shared back-office ticket\n - conversation | tracker ticket\n - customer ticket | tracker ticket",
+            "example": 1234
+          },
+          "company_id": {
+            "type": "string",
+            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom",
+            "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the ticket was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "ticket_attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "nullable": true
+                },
+                {
+                  "$ref": "#/components/schemas/UnionBranch"
+                }
+              ]
+            },
+            "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060)."
+          },
+          "assignment": {
+            "$ref": "#/components/schemas/CreateTicketRequestAssignment"
           }
         }
       },
       "EnqueueCreateTicket": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CreateTicketRequest"
-          }
+        "required": [
+          "ticket_type_id",
+          "contacts"
         ],
+        "type": "object",
         "properties": {
           "skip_notifications": {
             "type": "boolean",
             "description": "Option to disable notifications when a Ticket is created.",
             "example": true
+          },
+          "ticket_type_id": {
+            "type": "string",
+            "description": "The ID of the type of ticket you want to create",
+            "example": 1234
+          },
+          "contacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "title": "ID",
+                  "required": [
+                    "id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The identifier for the contact as given by Intercom."
+                    }
+                  }
+                },
+                {
+                  "title": "External ID",
+                  "required": [
+                    "external_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "external_id": {
+                      "type": "string",
+                      "description": "The external_id you have defined for the contact who is being added as a participant."
+                    }
+                  }
+                },
+                {
+                  "title": "Email",
+                  "required": [
+                    "email"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "The email you have defined for the contact who is being added as a participant. If a contact with this email does not exist, one will be created."
+                    }
+                  }
+                }
+              ]
+            },
+            "description": "The list of contacts (users or leads) affected by this ticket. Currently only one is allowed"
+          },
+          "conversation_to_link_id": {
+            "type": "string",
+            "description": "The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets:\n - conversation | back-office ticket\n - customer tickets | non-shared back-office ticket\n - conversation | tracker ticket\n - customer ticket | tracker ticket",
+            "example": 1234
+          },
+          "company_id": {
+            "type": "string",
+            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom",
+            "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the ticket was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "ticket_attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "nullable": true
+                },
+                {
+                  "$ref": "#/components/schemas/UnionBranch"
+                }
+              ]
+            },
+            "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060)."
+          },
+          "assignment": {
+            "$ref": "#/components/schemas/CreateTicketRequestAssignment"
           }
         }
       },
       "UpdateTicket": {
         "type": "object",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/UpdateTicketRequest"
-          }
-        ],
         "properties": {
           "skip_notifications": {
             "type": "boolean",
             "description": "Option to disable notifications when a Ticket is updated.",
             "example": true
+          },
+          "ticket_attributes": {
+            "type": "object",
+            "description": "The attributes set on the ticket.",
+            "example": {
+              "_default_title_": "example",
+              "_default_description_": "having a problem"
+            }
+          },
+          "ticket_state_id": {
+            "type": "string",
+            "description": "The ID of the ticket state associated with the ticket type.",
+            "example": 123
+          },
+          "company_id": {
+            "type": "string",
+            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.",
+            "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
+          },
+          "open": {
+            "type": "boolean",
+            "description": "Specify if a ticket is open. Set to false to close a ticket. Closing a ticket will also unsnooze it.",
+            "example": true
+          },
+          "is_shared": {
+            "type": "boolean",
+            "description": "Specify whether the ticket is visible to users.",
+            "example": true
+          },
+          "snoozed_until": {
+            "type": "integer",
+            "description": "The time you want the ticket to reopen.",
+            "format": "timestamp",
+            "example": 1673609604
+          },
+          "admin_id": {
+            "type": "integer",
+            "description": "The ID of the admin performing ticket update. Needed for workflows execution and attributing actions to specific admins.",
+            "example": 123
+          },
+          "assignee_id": {
+            "type": "string",
+            "description": "The ID of the admin or team to which the ticket is assigned. Set this 0 to unassign it.",
+            "example": 123
           }
         }
       },

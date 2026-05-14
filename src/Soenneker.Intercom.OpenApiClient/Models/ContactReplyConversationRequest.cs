@@ -22,6 +22,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> AttachmentFiles { get; set; }
 #endif
+        /// <summary>A list of image URLs that will be added as attachments. You can include up to 10 URLs.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? AttachmentUrls { get; set; }
+#nullable restore
+#else
+        public List<string> AttachmentUrls { get; set; }
+#endif
+        /// <summary>The text body of the comment.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Body { get; set; }
+#nullable restore
+#else
+        public string Body { get; set; }
+#endif
+        /// <summary>The time the reply was created. If not provided, the current time will be used.</summary>
+        public int? CreatedAt { get; set; }
         /// <summary>The email you have defined for the user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -37,6 +55,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string IntercomUserId { get; set; }
+#endif
+        /// <summary>The message_type property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_message_type? MessageType { get; set; }
+        /// <summary>The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options>? ReplyOptions { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options> ReplyOptions { get; set; }
 #endif
         /// <summary>Union discriminator</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -80,8 +108,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "attachment_files", n => { AttachmentFiles = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "body", n => { Body = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "intercom_user_id", n => { IntercomUserId = n.GetStringValue(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_message_type>(); } },
+                { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options>(global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
@@ -94,8 +127,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>("attachment_files", AttachmentFiles);
+            writer.WriteCollectionOfPrimitiveValues<string>("attachment_urls", AttachmentUrls);
+            writer.WriteStringValue("body", Body);
+            writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("intercom_user_id", IntercomUserId);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_message_type>("message_type", MessageType);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest_reply_options>("reply_options", ReplyOptions);
             writer.WriteStringValue("type", Type);
             writer.WriteStringValue("user_id", UserId);
             writer.WriteAdditionalData(AdditionalData);

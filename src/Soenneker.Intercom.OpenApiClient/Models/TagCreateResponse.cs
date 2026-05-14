@@ -11,8 +11,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// The response for creating or updating a tag, including the entities that were tagged or untagged.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class TagCreateResponse : global::Soenneker.Intercom.OpenApiClient.Models.TagBasic, IParsable
+    public partial class TagCreateResponse : IAdditionalDataHolder, IParsable
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The companies that were tagged or untagged.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -20,6 +22,30 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies> Companies { get; set; }
+#endif
+        /// <summary>The id of the tag</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The name of the tag</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Name { get; set; }
+#nullable restore
+#else
+        public string Name { get; set; }
+#endif
+        /// <summary>value is &quot;tag&quot;</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
 #endif
         /// <summary>The users that were tagged or untagged.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -30,11 +56,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users> Users { get; set; }
 #endif
         /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse"/> and sets the default values.
+        /// </summary>
+        public TagCreateResponse()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
+        /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse();
@@ -43,11 +76,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
                 { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetStringValue(); } },
                 { "users", n => { Users = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -55,12 +91,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies>("companies", Companies);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("name", Name);
+            writer.WriteStringValue("type", Type);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users>("users", Users);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

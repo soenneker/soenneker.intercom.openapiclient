@@ -9,17 +9,76 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class EnqueueCreateTicket : global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest, IParsable
+    public partial class EnqueueCreateTicket : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The assignment property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment? Assignment { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment Assignment { get; set; }
+#endif
+        /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CompanyId { get; set; }
+#nullable restore
+#else
+        public string CompanyId { get; set; }
+#endif
+        /// <summary>The list of contacts (users or leads) affected by this ticket. Currently only one is allowed</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts>? Contacts { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts> Contacts { get; set; }
+#endif
+        /// <summary>The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets: - conversation | back-office ticket - customer tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket | tracker ticket</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConversationToLinkId { get; set; }
+#nullable restore
+#else
+        public string ConversationToLinkId { get; set; }
+#endif
+        /// <summary>The time the ticket was created. If not provided, the current time will be used.</summary>
+        public int? CreatedAt { get; set; }
         /// <summary>Option to disable notifications when a Ticket is created.</summary>
         public bool? SkipNotifications { get; set; }
+        /// <summary>The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of type `list`, the key should be `priority` and the value of the attribute should be the guid of the list item (e.g. `de1825a0-0164-4070-8ca6-13e22462fa7e`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_ticket_attributes? TicketAttributes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_ticket_attributes TicketAttributes { get; set; }
+#endif
+        /// <summary>The ID of the type of ticket you want to create</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TicketTypeId { get; set; }
+#nullable restore
+#else
+        public string TicketTypeId { get; set; }
+#endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket"/> and sets the default values.
+        /// </summary>
+        public EnqueueCreateTicket()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket();
@@ -28,22 +87,131 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
+                { "assignment", n => { Assignment = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment.CreateFromDiscriminatorValue); } },
+                { "company_id", n => { CompanyId = n.GetStringValue(); } },
+                { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts>(global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "conversation_to_link_id", n => { ConversationToLinkId = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
+                { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_ticket_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_ticket_attributes.CreateFromDiscriminatorValue); } },
+                { "ticket_type_id", n => { TicketTypeId = n.GetStringValue(); } },
             };
         }
         /// <summary>
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment>("assignment", Assignment);
+            writer.WriteStringValue("company_id", CompanyId);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts>("contacts", Contacts);
+            writer.WriteStringValue("conversation_to_link_id", ConversationToLinkId);
+            writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteBoolValue("skip_notifications", SkipNotifications);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_ticket_attributes>("ticket_attributes", TicketAttributes);
+            writer.WriteStringValue("ticket_type_id", TicketTypeId);
+            writer.WriteAdditionalData(AdditionalData);
+        }
+        /// <summary>
+        /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember1"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember2"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember3"/>
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class EnqueueCreateTicket_contacts : IComposedTypeWrapper, IParsable
+        {
+            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember1"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember1? EnqueueCreateTicketContactsMember1 { get; set; }
+#nullable restore
+#else
+            public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember1 EnqueueCreateTicketContactsMember1 { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember2"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember2? EnqueueCreateTicketContactsMember2 { get; set; }
+#nullable restore
+#else
+            public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember2 EnqueueCreateTicketContactsMember2 { get; set; }
+#endif
+            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember3"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember3? EnqueueCreateTicketContactsMember3 { get; set; }
+#nullable restore
+#else
+            public global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember3 EnqueueCreateTicketContactsMember3 { get; set; }
+#endif
+            /// <summary>
+            /// Creates a new instance of the appropriate class based on discriminator value
+            /// </summary>
+            /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts"/></returns>
+            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
+            public static global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts CreateFromDiscriminatorValue(IParseNode parseNode)
+            {
+                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
+                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+                var result = new global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket.EnqueueCreateTicket_contacts();
+                if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.EnqueueCreateTicketContactsMember1 = new global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember1();
+                }
+                else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.EnqueueCreateTicketContactsMember2 = new global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember2();
+                }
+                else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    result.EnqueueCreateTicketContactsMember3 = new global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember3();
+                }
+                return result;
+            }
+            /// <summary>
+            /// The deserialization information for the current model
+            /// </summary>
+            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
+            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+            {
+                if(EnqueueCreateTicketContactsMember1 != null)
+                {
+                    return EnqueueCreateTicketContactsMember1.GetFieldDeserializers();
+                }
+                else if(EnqueueCreateTicketContactsMember2 != null)
+                {
+                    return EnqueueCreateTicketContactsMember2.GetFieldDeserializers();
+                }
+                else if(EnqueueCreateTicketContactsMember3 != null)
+                {
+                    return EnqueueCreateTicketContactsMember3.GetFieldDeserializers();
+                }
+                return new Dictionary<string, Action<IParseNode>>();
+            }
+            /// <summary>
+            /// Serializes information the current object
+            /// </summary>
+            /// <param name="writer">Serialization writer to use to serialize this model</param>
+            public virtual void Serialize(ISerializationWriter writer)
+            {
+                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+                if(EnqueueCreateTicketContactsMember1 != null)
+                {
+                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember1>(null, EnqueueCreateTicketContactsMember1);
+                }
+                else if(EnqueueCreateTicketContactsMember2 != null)
+                {
+                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember2>(null, EnqueueCreateTicketContactsMember2);
+                }
+                else if(EnqueueCreateTicketContactsMember3 != null)
+                {
+                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EnqueueCreateTicket_contactsMember3>(null, EnqueueCreateTicketContactsMember3);
+                }
+            }
         }
     }
 }

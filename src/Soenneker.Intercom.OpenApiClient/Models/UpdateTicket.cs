@@ -9,17 +9,66 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class UpdateTicket : global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequest, IParsable
+    public partial class UpdateTicket : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The ID of the admin performing ticket update. Needed for workflows execution and attributing actions to specific admins.</summary>
+        public int? AdminId { get; set; }
+        /// <summary>The ID of the admin or team to which the ticket is assigned. Set this 0 to unassign it.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AssigneeId { get; set; }
+#nullable restore
+#else
+        public string AssigneeId { get; set; }
+#endif
+        /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CompanyId { get; set; }
+#nullable restore
+#else
+        public string CompanyId { get; set; }
+#endif
+        /// <summary>Specify whether the ticket is visible to users.</summary>
+        public bool? IsShared { get; set; }
+        /// <summary>Specify if a ticket is open. Set to false to close a ticket. Closing a ticket will also unsnooze it.</summary>
+        public bool? Open { get; set; }
         /// <summary>Option to disable notifications when a Ticket is updated.</summary>
         public bool? SkipNotifications { get; set; }
+        /// <summary>The time you want the ticket to reopen.</summary>
+        public int? SnoozedUntil { get; set; }
+        /// <summary>The attributes set on the ticket.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket_ticket_attributes? TicketAttributes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket_ticket_attributes TicketAttributes { get; set; }
+#endif
+        /// <summary>The ID of the ticket state associated with the ticket type.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TicketStateId { get; set; }
+#nullable restore
+#else
+        public string TicketStateId { get; set; }
+#endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket"/> and sets the default values.
+        /// </summary>
+        public UpdateTicket()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket();
@@ -28,22 +77,38 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
+                { "admin_id", n => { AdminId = n.GetIntValue(); } },
+                { "assignee_id", n => { AssigneeId = n.GetStringValue(); } },
+                { "company_id", n => { CompanyId = n.GetStringValue(); } },
+                { "is_shared", n => { IsShared = n.GetBoolValue(); } },
+                { "open", n => { Open = n.GetBoolValue(); } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
+                { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
+                { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket_ticket_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket_ticket_attributes.CreateFromDiscriminatorValue); } },
+                { "ticket_state_id", n => { TicketStateId = n.GetStringValue(); } },
             };
         }
         /// <summary>
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            writer.WriteIntValue("admin_id", AdminId);
+            writer.WriteStringValue("assignee_id", AssigneeId);
+            writer.WriteStringValue("company_id", CompanyId);
+            writer.WriteBoolValue("is_shared", IsShared);
+            writer.WriteBoolValue("open", Open);
             writer.WriteBoolValue("skip_notifications", SkipNotifications);
+            writer.WriteIntValue("snoozed_until", SnoozedUntil);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket_ticket_attributes>("ticket_attributes", TicketAttributes);
+            writer.WriteStringValue("ticket_state_id", TicketStateId);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

@@ -9,17 +9,316 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ShowContactByExternalId200 : global::Soenneker.Intercom.OpenApiClient.Models.Contact, IParsable
+    public partial class ShowContactByExternalId200 : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The name of the Android app which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AndroidAppName { get; set; }
+#nullable restore
+#else
+        public string AndroidAppName { get; set; }
+#endif
+        /// <summary>The version of the Android app which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AndroidAppVersion { get; set; }
+#nullable restore
+#else
+        public string AndroidAppVersion { get; set; }
+#endif
+        /// <summary>The Android device which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AndroidDevice { get; set; }
+#nullable restore
+#else
+        public string AndroidDevice { get; set; }
+#endif
+        /// <summary>(UNIX timestamp) The time when the contact was last seen on an Android device.</summary>
+        public int? AndroidLastSeenAt { get; set; }
+        /// <summary>The version of the Android OS which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AndroidOsVersion { get; set; }
+#nullable restore
+#else
+        public string AndroidOsVersion { get; set; }
+#endif
+        /// <summary>The version of the Android SDK which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AndroidSdkVersion { get; set; }
+#nullable restore
+#else
+        public string AndroidSdkVersion { get; set; }
+#endif
+        /// <summary>The avatar property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_avatar? Avatar { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_avatar Avatar { get; set; }
+#endif
+        /// <summary>The name of the browser which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Browser { get; set; }
+#nullable restore
+#else
+        public string Browser { get; set; }
+#endif
+        /// <summary>The language set by the browser which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BrowserLanguage { get; set; }
+#nullable restore
+#else
+        public string BrowserLanguage { get; set; }
+#endif
+        /// <summary>The version of the browser which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BrowserVersion { get; set; }
+#nullable restore
+#else
+        public string BrowserVersion { get; set; }
+#endif
+        /// <summary>An object with metadata about companies attached to a contact . Up to 10 will be displayed here. Use the url to get more.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies? Companies { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies Companies { get; set; }
+#endif
+        /// <summary>(UNIX timestamp) The time when the contact was created.</summary>
+        public int? CreatedAt { get; set; }
+        /// <summary>The custom attributes which are set for the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_custom_attributes? CustomAttributes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_custom_attributes CustomAttributes { get; set; }
+#endif
+        /// <summary>The contact&apos;s email.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Email { get; set; }
+#nullable restore
+#else
+        public string Email { get; set; }
+#endif
+        /// <summary>The contact&apos;s email domain.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EmailDomain { get; set; }
+#nullable restore
+#else
+        public string EmailDomain { get; set; }
+#endif
         /// <summary>If the user has enabled push messaging.</summary>
         public bool? EnabledPushMessaging { get; set; }
+        /// <summary>The unique identifier for the contact which is provided by the Client.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExternalId { get; set; }
+#nullable restore
+#else
+        public string ExternalId { get; set; }
+#endif
+        /// <summary>The contacts phone number normalized to the E164 format</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FormattedPhone { get; set; }
+#nullable restore
+#else
+        public string FormattedPhone { get; set; }
+#endif
+        /// <summary>Whether the contact has had an email sent to them hard bounce.</summary>
+        public bool? HasHardBounced { get; set; }
+        /// <summary>The unique identifier for the contact which is given by Intercom.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The name of the iOS app which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IosAppName { get; set; }
+#nullable restore
+#else
+        public string IosAppName { get; set; }
+#endif
+        /// <summary>The version of the iOS app which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IosAppVersion { get; set; }
+#nullable restore
+#else
+        public string IosAppVersion { get; set; }
+#endif
+        /// <summary>The iOS device which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IosDevice { get; set; }
+#nullable restore
+#else
+        public string IosDevice { get; set; }
+#endif
+        /// <summary>(UNIX timestamp) The last time the contact used the iOS app.</summary>
+        public int? IosLastSeenAt { get; set; }
+        /// <summary>The version of iOS which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IosOsVersion { get; set; }
+#nullable restore
+#else
+        public string IosOsVersion { get; set; }
+#endif
+        /// <summary>The version of the iOS SDK which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IosSdkVersion { get; set; }
+#nullable restore
+#else
+        public string IosSdkVersion { get; set; }
+#endif
+        /// <summary>A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LanguageOverride { get; set; }
+#nullable restore
+#else
+        public string LanguageOverride { get; set; }
+#endif
+        /// <summary>(UNIX timestamp) The time when the contact was last messaged.</summary>
+        public int? LastContactedAt { get; set; }
+        /// <summary>(UNIX timestamp) The time when the contact last clicked a link in an email.</summary>
+        public int? LastEmailClickedAt { get; set; }
+        /// <summary>(UNIX timestamp) The time when the contact last opened an email.</summary>
+        public int? LastEmailOpenedAt { get; set; }
+        /// <summary>(UNIX timestamp) The time when the contact last messaged in.</summary>
+        public int? LastRepliedAt { get; set; }
+        /// <summary>(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).</summary>
+        public int? LastSeenAt { get; set; }
+        /// <summary>An object containing location meta data about a Intercom contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation? Location { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation Location { get; set; }
+#endif
+        /// <summary>Whether the contact has marked an email sent to them as spam.</summary>
+        public bool? MarkedEmailAsSpam { get; set; }
+        /// <summary>The contacts name.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Name { get; set; }
+#nullable restore
+#else
+        public string Name { get; set; }
+#endif
+        /// <summary>An object containing notes meta data about the notes that a contact has. Up to 10 will be displayed here. Use the url to get more.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes? Notes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes Notes { get; set; }
+#endif
+        /// <summary>The operating system which the contact is using.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Os { get; set; }
+#nullable restore
+#else
+        public string Os { get; set; }
+#endif
+        /// <summary>The id of an admin that has been assigned account ownership of the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OwnerId { get; set; }
+#nullable restore
+#else
+        public string OwnerId { get; set; }
+#endif
+        /// <summary>The contacts phone.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Phone { get; set; }
+#nullable restore
+#else
+        public string Phone { get; set; }
+#endif
+        /// <summary>The role of the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Role { get; set; }
+#nullable restore
+#else
+        public string Role { get; set; }
+#endif
+        /// <summary>(UNIX timestamp) The time specified for when a contact signed up.</summary>
+        public int? SignedUpAt { get; set; }
+        /// <summary>An object containing social profiles that a contact has.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles? SocialProfiles { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles SocialProfiles { get; set; }
+#endif
+        /// <summary>An object containing tags meta data about the tags that a contact has. Up to 10 will be displayed here. Use the url to get more.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactTags? Tags { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactTags Tags { get; set; }
+#endif
+        /// <summary>The type of object.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
+#endif
+        /// <summary>Whether the contact is unsubscribed from emails.</summary>
+        public bool? UnsubscribedFromEmails { get; set; }
+        /// <summary>(UNIX timestamp) The time when the contact was last updated.</summary>
+        public int? UpdatedAt { get; set; }
+        /// <summary>The id of the workspace which the contact belongs to.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WorkspaceId { get; set; }
+#nullable restore
+#else
+        public string WorkspaceId { get; set; }
+#endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200"/> and sets the default values.
+        /// </summary>
+        public ShowContactByExternalId200()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200 CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200 CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200();
@@ -28,22 +327,114 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
+                { "android_app_name", n => { AndroidAppName = n.GetStringValue(); } },
+                { "android_app_version", n => { AndroidAppVersion = n.GetStringValue(); } },
+                { "android_device", n => { AndroidDevice = n.GetStringValue(); } },
+                { "android_last_seen_at", n => { AndroidLastSeenAt = n.GetIntValue(); } },
+                { "android_os_version", n => { AndroidOsVersion = n.GetStringValue(); } },
+                { "android_sdk_version", n => { AndroidSdkVersion = n.GetStringValue(); } },
+                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_avatar>(global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_avatar.CreateFromDiscriminatorValue); } },
+                { "browser", n => { Browser = n.GetStringValue(); } },
+                { "browser_language", n => { BrowserLanguage = n.GetStringValue(); } },
+                { "browser_version", n => { BrowserVersion = n.GetStringValue(); } },
+                { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>(global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies.CreateFromDiscriminatorValue); } },
+                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "email", n => { Email = n.GetStringValue(); } },
+                { "email_domain", n => { EmailDomain = n.GetStringValue(); } },
                 { "enabled_push_messaging", n => { EnabledPushMessaging = n.GetBoolValue(); } },
+                { "external_id", n => { ExternalId = n.GetStringValue(); } },
+                { "formatted_phone", n => { FormattedPhone = n.GetStringValue(); } },
+                { "has_hard_bounced", n => { HasHardBounced = n.GetBoolValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "ios_app_name", n => { IosAppName = n.GetStringValue(); } },
+                { "ios_app_version", n => { IosAppVersion = n.GetStringValue(); } },
+                { "ios_device", n => { IosDevice = n.GetStringValue(); } },
+                { "ios_last_seen_at", n => { IosLastSeenAt = n.GetIntValue(); } },
+                { "ios_os_version", n => { IosOsVersion = n.GetStringValue(); } },
+                { "ios_sdk_version", n => { IosSdkVersion = n.GetStringValue(); } },
+                { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
+                { "last_contacted_at", n => { LastContactedAt = n.GetIntValue(); } },
+                { "last_email_clicked_at", n => { LastEmailClickedAt = n.GetIntValue(); } },
+                { "last_email_opened_at", n => { LastEmailOpenedAt = n.GetIntValue(); } },
+                { "last_replied_at", n => { LastRepliedAt = n.GetIntValue(); } },
+                { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
+                { "location", n => { Location = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>(global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation.CreateFromDiscriminatorValue); } },
+                { "marked_email_as_spam", n => { MarkedEmailAsSpam = n.GetBoolValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
+                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes.CreateFromDiscriminatorValue); } },
+                { "os", n => { Os = n.GetStringValue(); } },
+                { "owner_id", n => { OwnerId = n.GetStringValue(); } },
+                { "phone", n => { Phone = n.GetStringValue(); } },
+                { "role", n => { Role = n.GetStringValue(); } },
+                { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
+                { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>(global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles.CreateFromDiscriminatorValue); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>(global::Soenneker.Intercom.OpenApiClient.Models.ContactTags.CreateFromDiscriminatorValue); } },
+                { "type", n => { Type = n.GetStringValue(); } },
+                { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
         }
         /// <summary>
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            writer.WriteStringValue("android_app_name", AndroidAppName);
+            writer.WriteStringValue("android_app_version", AndroidAppVersion);
+            writer.WriteStringValue("android_device", AndroidDevice);
+            writer.WriteIntValue("android_last_seen_at", AndroidLastSeenAt);
+            writer.WriteStringValue("android_os_version", AndroidOsVersion);
+            writer.WriteStringValue("android_sdk_version", AndroidSdkVersion);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_avatar>("avatar", Avatar);
+            writer.WriteStringValue("browser", Browser);
+            writer.WriteStringValue("browser_language", BrowserLanguage);
+            writer.WriteStringValue("browser_version", BrowserVersion);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>("companies", Companies);
+            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteStringValue("email", Email);
+            writer.WriteStringValue("email_domain", EmailDomain);
             writer.WriteBoolValue("enabled_push_messaging", EnabledPushMessaging);
+            writer.WriteStringValue("external_id", ExternalId);
+            writer.WriteStringValue("formatted_phone", FormattedPhone);
+            writer.WriteBoolValue("has_hard_bounced", HasHardBounced);
+            writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("ios_app_name", IosAppName);
+            writer.WriteStringValue("ios_app_version", IosAppVersion);
+            writer.WriteStringValue("ios_device", IosDevice);
+            writer.WriteIntValue("ios_last_seen_at", IosLastSeenAt);
+            writer.WriteStringValue("ios_os_version", IosOsVersion);
+            writer.WriteStringValue("ios_sdk_version", IosSdkVersion);
+            writer.WriteStringValue("language_override", LanguageOverride);
+            writer.WriteIntValue("last_contacted_at", LastContactedAt);
+            writer.WriteIntValue("last_email_clicked_at", LastEmailClickedAt);
+            writer.WriteIntValue("last_email_opened_at", LastEmailOpenedAt);
+            writer.WriteIntValue("last_replied_at", LastRepliedAt);
+            writer.WriteIntValue("last_seen_at", LastSeenAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>("location", Location);
+            writer.WriteBoolValue("marked_email_as_spam", MarkedEmailAsSpam);
+            writer.WriteStringValue("name", Name);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>("notes", Notes);
+            writer.WriteStringValue("os", Os);
+            writer.WriteStringValue("owner_id", OwnerId);
+            writer.WriteStringValue("phone", Phone);
+            writer.WriteStringValue("role", Role);
+            writer.WriteIntValue("signed_up_at", SignedUpAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>("social_profiles", SocialProfiles);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>("tags", Tags);
+            writer.WriteStringValue("type", Type);
+            writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
+            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteStringValue("workspace_id", WorkspaceId);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }

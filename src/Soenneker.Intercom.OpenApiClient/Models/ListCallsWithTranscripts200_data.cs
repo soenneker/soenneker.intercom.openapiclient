@@ -9,9 +9,147 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class ListCallsWithTranscripts200_data : global::Soenneker.Intercom.OpenApiClient.Models.Call, IParsable
+    public partial class ListCallsWithTranscripts200_data : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
+        public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The id of the admin associated with the call, if any.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdminId { get; set; }
+#nullable restore
+#else
+        public string AdminId { get; set; }
+#endif
+        /// <summary>The answered_at property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject? AnsweredAt { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject AnsweredAt { get; set; }
+#endif
+        /// <summary>The type of call.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CallType { get; set; }
+#nullable restore
+#else
+        public string CallType { get; set; }
+#endif
+        /// <summary>The id of the contact associated with the call, if any.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ContactId { get; set; }
+#nullable restore
+#else
+        public string ContactId { get; set; }
+#endif
+        /// <summary>The id of the conversation associated with the call, if any.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ConversationId { get; set; }
+#nullable restore
+#else
+        public string ConversationId { get; set; }
+#endif
+        /// <summary>The created_at property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject? CreatedAt { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject CreatedAt { get; set; }
+#endif
+        /// <summary>The direction of the call.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Direction { get; set; }
+#nullable restore
+#else
+        public string Direction { get; set; }
+#endif
+        /// <summary>Total call duration in seconds from the caller&apos;s perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended.</summary>
+        public int? Duration { get; set; }
+        /// <summary>The ended_at property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject? EndedAt { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject EndedAt { get; set; }
+#endif
+        /// <summary>The reason for the call end, if applicable.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EndedReason { get; set; }
+#nullable restore
+#else
+        public string EndedReason { get; set; }
+#endif
+        /// <summary>API URL to the AI Agent (Fin) call recording if available.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FinRecordingUrl { get; set; }
+#nullable restore
+#else
+        public string FinRecordingUrl { get; set; }
+#endif
+        /// <summary>API URL to the AI Agent (Fin) call transcript if available.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FinTranscriptionUrl { get; set; }
+#nullable restore
+#else
+        public string FinTranscriptionUrl { get; set; }
+#endif
+        /// <summary>Total time in seconds the caller was placed on hold during the call.</summary>
+        public int? HoldTime { get; set; }
+        /// <summary>The id of the call.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The initiated_at property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject? InitiatedAt { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject InitiatedAt { get; set; }
+#endif
+        /// <summary>The phone number involved in the call, in E.164 format.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Phone { get; set; }
+#nullable restore
+#else
+        public string Phone { get; set; }
+#endif
+        /// <summary>Total time in seconds the caller waited in queue before connecting, when assigned to a team.</summary>
+        public int? QueueTime { get; set; }
+        /// <summary>API URL to download or redirect to the call recording if available.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? RecordingUrl { get; set; }
+#nullable restore
+#else
+        public string RecordingUrl { get; set; }
+#endif
+        /// <summary>The current state of the call.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? State { get; set; }
+#nullable restore
+#else
+        public string State { get; set; }
+#endif
+        /// <summary>Total time in seconds the agent and customer were connected.</summary>
+        public int? TalkTime { get; set; }
         /// <summary>The call transcript if available, otherwise an empty array.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -19,6 +157,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data_transcript> Transcript { get; set; }
+#endif
+        /// <summary>API URL to the call transcript if available.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? TranscriptionUrl { get; set; }
+#nullable restore
+#else
+        public string TranscriptionUrl { get; set; }
 #endif
         /// <summary>The status of the transcript if available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -28,12 +174,35 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string TranscriptStatus { get; set; }
 #endif
+        /// <summary>String representing the object&apos;s type. Always has the value `call`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
+#endif
+        /// <summary>The updated_at property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject? UpdatedAt { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject UpdatedAt { get; set; }
+#endif
+        /// <summary>
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data"/> and sets the default values.
+        /// </summary>
+        public ListCallsWithTranscripts200_data()
+        {
+            AdditionalData = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static new global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             return new global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data();
@@ -42,24 +211,70 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// The deserialization information for the current model
         /// </summary>
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-        public override IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
+        public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
+            return new Dictionary<string, Action<IParseNode>>
             {
+                { "admin_id", n => { AdminId = n.GetStringValue(); } },
+                { "answered_at", n => { AnsweredAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
+                { "call_type", n => { CallType = n.GetStringValue(); } },
+                { "contact_id", n => { ContactId = n.GetStringValue(); } },
+                { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
+                { "created_at", n => { CreatedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
+                { "direction", n => { Direction = n.GetStringValue(); } },
+                { "duration", n => { Duration = n.GetIntValue(); } },
+                { "ended_at", n => { EndedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
+                { "ended_reason", n => { EndedReason = n.GetStringValue(); } },
+                { "fin_recording_url", n => { FinRecordingUrl = n.GetStringValue(); } },
+                { "fin_transcription_url", n => { FinTranscriptionUrl = n.GetStringValue(); } },
+                { "hold_time", n => { HoldTime = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "initiated_at", n => { InitiatedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
+                { "phone", n => { Phone = n.GetStringValue(); } },
+                { "queue_time", n => { QueueTime = n.GetIntValue(); } },
+                { "recording_url", n => { RecordingUrl = n.GetStringValue(); } },
+                { "state", n => { State = n.GetStringValue(); } },
+                { "talk_time", n => { TalkTime = n.GetIntValue(); } },
                 { "transcript", n => { Transcript = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data_transcript>(global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data_transcript.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "transcript_status", n => { TranscriptStatus = n.GetStringValue(); } },
+                { "transcription_url", n => { TranscriptionUrl = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetStringValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>(global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
         /// Serializes information the current object
         /// </summary>
         /// <param name="writer">Serialization writer to use to serialize this model</param>
-        public override void Serialize(ISerializationWriter writer)
+        public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            writer.WriteStringValue("admin_id", AdminId);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("answered_at", AnsweredAt);
+            writer.WriteStringValue("call_type", CallType);
+            writer.WriteStringValue("contact_id", ContactId);
+            writer.WriteStringValue("conversation_id", ConversationId);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("created_at", CreatedAt);
+            writer.WriteStringValue("direction", Direction);
+            writer.WriteIntValue("duration", Duration);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("ended_at", EndedAt);
+            writer.WriteStringValue("ended_reason", EndedReason);
+            writer.WriteStringValue("fin_recording_url", FinRecordingUrl);
+            writer.WriteStringValue("fin_transcription_url", FinTranscriptionUrl);
+            writer.WriteIntValue("hold_time", HoldTime);
+            writer.WriteStringValue("id", Id);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("initiated_at", InitiatedAt);
+            writer.WriteStringValue("phone", Phone);
+            writer.WriteIntValue("queue_time", QueueTime);
+            writer.WriteStringValue("recording_url", RecordingUrl);
+            writer.WriteStringValue("state", State);
+            writer.WriteIntValue("talk_time", TalkTime);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200_data_transcript>("transcript", Transcript);
+            writer.WriteStringValue("transcription_url", TranscriptionUrl);
             writer.WriteStringValue("transcript_status", TranscriptStatus);
+            writer.WriteStringValue("type", Type);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DatetimeObject>("updated_at", UpdatedAt);
+            writer.WriteAdditionalData(AdditionalData);
         }
     }
 }
