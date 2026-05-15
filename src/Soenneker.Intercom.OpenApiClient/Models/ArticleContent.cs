@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The list of audience IDs this article content is targeted to for Fin AI Agent. On multilingual help centers this field appears per-locale inside `translated_content`. On single-language help centers it appears at the article root level. Empty array means no audience targeting is set.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? AudienceIds { get; set; }
+#nullable restore
+#else
+        public List<int?> AudienceIds { get; set; }
+#endif
         /// <summary>The ID of the author of the article.</summary>
         public int? AuthorId { get; set; }
         /// <summary>The body of the article in HTML.</summary>
@@ -90,6 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
@@ -109,6 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);

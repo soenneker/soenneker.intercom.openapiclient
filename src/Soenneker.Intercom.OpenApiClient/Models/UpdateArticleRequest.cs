@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>&quot;The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. Sending `audience_ids: []` clears all audience memberships from every locale. For per-locale targeting, use `translated_content.&lt;locale&gt;.audience_ids` instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.&quot;</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? AudienceIds { get; set; }
+#nullable restore
+#else
+        public List<int?> AudienceIds { get; set; }
+#endif
         /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace.</summary>
         public int? AuthorId { get; set; }
         /// <summary>The content of the article in HTML. For multilingual articles, this will be the body of the default language&apos;s content. Mutually exclusive with `body_markdown`.</summary>
@@ -110,6 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
@@ -130,6 +139,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);

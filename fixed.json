@@ -26387,6 +26387,14 @@
             "type": "string",
             "description": "The URL of the article.",
             "example": "http://intercom.test/help/en/articles/3-default-language"
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The list of audience IDs this article content is targeted to for Fin AI Agent. On multilingual help centers this field appears per-locale inside \u0060translated_content\u0060. On single-language help centers it appears at the article root level. Empty array means no audience targeting is set.",
+            "nullable": true
           }
         },
         "description": "The Content of an Article.",
@@ -30667,6 +30675,14 @@
             "description": "The ID of the folder to place this article in, or null to leave it without a folder.",
             "nullable": true,
             "example": 6
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level \u0060audience_ids\u0060 broadcasts the same set to every locale. For per-locale targeting, use \u0060translated_content.\u003Clocale\u003E.audience_ids\u0060 instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.",
+            "nullable": true
           }
         },
         "description": "You can create an Article",
@@ -38221,6 +38237,14 @@
             "description": "The ID of the folder to place this article in, or null to remove it from its folder.",
             "nullable": true,
             "example": 6
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "\u0022The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level \u0060audience_ids\u0060 broadcasts the same set to every locale. Sending \u0060audience_ids: []\u0060 clears all audience memberships from every locale. For per-locale targeting, use \u0060translated_content.\u003Clocale\u003E.audience_ids\u0060 instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.\u0022",
+            "nullable": true
           }
         },
         "description": "You can Update an Article",
