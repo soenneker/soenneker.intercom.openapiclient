@@ -25,6 +25,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string CustomDomain { get; set; }
 #endif
+        /// <summary>Whether this help center is the default for the workspace.</summary>
+        public bool? Default { get; set; }
         /// <summary>The display name of the Help Center only seen by teammates.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,6 +50,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Identifier { get; set; }
+#endif
+        /// <summary>The locales in which the help center is available.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? Locales { get; set; }
+#nullable restore
+#else
+        public List<string> Locales { get; set; }
 #endif
         /// <summary>The time when the Help Center was last updated.</summary>
         public int? UpdatedAt { get; set; }
@@ -96,9 +106,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "custom_domain", n => { CustomDomain = n.GetStringValue(); } },
+                { "default", n => { Default = n.GetBoolValue(); } },
                 { "display_name", n => { DisplayName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "identifier", n => { Identifier = n.GetStringValue(); } },
+                { "locales", n => { Locales = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "website_turned_on", n => { WebsiteTurnedOn = n.GetBoolValue(); } },
@@ -114,9 +126,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("custom_domain", CustomDomain);
+            writer.WriteBoolValue("default", Default);
             writer.WriteStringValue("display_name", DisplayName);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("identifier", Identifier);
+            writer.WriteCollectionOfPrimitiveValues<string>("locales", Locales);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteBoolValue("website_turned_on", WebsiteTurnedOn);

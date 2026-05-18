@@ -15,6 +15,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language&apos;s content.</summary>
+        public bool? AiChatbotAvailability { get; set; }
+        /// <summary>Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language&apos;s content.</summary>
+        public bool? AiCopilotAvailability { get; set; }
+        /// <summary>Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language&apos;s content.</summary>
+        public bool? AiSalesAgentAvailability { get; set; }
         /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace.</summary>
         public int? AuthorId { get; set; }
         /// <summary>The body of the article in HTML. For multilingual articles, this will be the body of the default language&apos;s content.</summary>
@@ -141,6 +147,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "ai_chatbot_availability", n => { AiChatbotAvailability = n.GetBoolValue(); } },
+                { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
+                { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
@@ -167,6 +176,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("ai_chatbot_availability", AiChatbotAvailability);
+            writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
+            writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);

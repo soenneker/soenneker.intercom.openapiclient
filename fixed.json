@@ -1702,7 +1702,10 @@
                           "state": "published",
                           "created_at": 1734537283,
                           "updated_at": 1734537283,
-                          "url": "http://help-center.test/myapp-64/en/articles/39-this-is-the-article-title"
+                          "url": "http://help-center.test/myapp-64/en/articles/39-this-is-the-article-title",
+                          "ai_chatbot_availability": true,
+                          "ai_copilot_availability": true,
+                          "ai_sales_agent_availability": true
                         }
                       ]
                     }
@@ -1833,7 +1836,10 @@
                       "state": "published",
                       "created_at": 1734537288,
                       "updated_at": 1734537288,
-                      "url": "http://help-center.test/myapp-68/en/articles/42-thanks-for-everything"
+                      "url": "http://help-center.test/myapp-68/en/articles/42-thanks-for-everything",
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true
                     }
                   }
                 }
@@ -1954,7 +1960,10 @@
                       "state": "published",
                       "created_at": 1734537292,
                       "updated_at": 1734537292,
-                      "url": "http://help-center.test/myapp-74/en/articles/45-this-is-the-article-title"
+                      "url": "http://help-center.test/myapp-74/en/articles/45-this-is-the-article-title",
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true
                     }
                   }
                 }
@@ -2102,7 +2111,10 @@
                       "state": "published",
                       "created_at": 1734537297,
                       "updated_at": 1734537298,
-                      "url": "http://help-center.test/myapp-80/en/articles/48-christmas-is-here"
+                      "url": "http://help-center.test/myapp-80/en/articles/48-christmas-is-here",
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true
                     }
                   }
                 }
@@ -2340,7 +2352,10 @@
                             "state": "draft",
                             "created_at": 1734537306,
                             "updated_at": 1734537306,
-                            "url": null
+                            "url": null,
+                            "ai_chatbot_availability": true,
+                            "ai_copilot_availability": true,
+                            "ai_sales_agent_availability": true
                           }
                         ],
                         "highlights": []
@@ -3818,7 +3833,11 @@
                       "website_turned_on": false,
                       "display_name": "Intercom Help Center",
                       "url": "https://help.mycompany.com",
-                      "custom_domain": "help.mycompany.com"
+                      "custom_domain": "help.mycompany.com",
+                      "default": false,
+                      "locales": [
+                        "en"
+                      ]
                     }
                   }
                 }
@@ -26241,6 +26260,21 @@
             "description": "The ID of the folder this article belongs to, or null if not in a folder.",
             "nullable": true,
             "example": 6
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language\u0027s content.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language\u0027s content.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language\u0027s content.",
+            "example": true
           }
         },
         "description": "The Articles API is a central place to gather all information and take actions on your articles. Articles can live within collections and sections, or alternatively they can stand alone.",
@@ -26395,6 +26429,21 @@
             },
             "description": "The list of audience IDs this article content is targeted to for Fin AI Agent. On multilingual help centers this field appears per-locale inside \u0060translated_content\u0060. On single-language help centers it appears at the article root level. Empty array means no audience targeting is set.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Chatbot.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Copilot.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Sales Agent.",
+            "example": true
           }
         },
         "description": "The Content of an Article.",
@@ -26646,6 +26695,21 @@
             "description": "The ID of the folder this article belongs to, or null if not in a folder.",
             "nullable": true,
             "example": 6
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Chatbot. For multilingual articles, this will be the value of the default language\u0027s content.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Copilot. For multilingual articles, this will be the value of the default language\u0027s content.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language\u0027s content.",
+            "example": true
           }
         },
         "description": "The data returned about your articles when you list them.",
@@ -35211,6 +35275,18 @@
             "description": "Custom domain configured for the help center",
             "nullable": true,
             "example": "help.mycompany.com"
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Whether this help center is the default for the workspace.",
+            "example": false
+          },
+          "locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The locales in which the help center is available."
           }
         },
         "description": "Help Centers contain collections",
