@@ -1747,6 +1747,74 @@ paths:
                   $ref: "#/components/schemas/away_status_reason"
         '401':
           "$ref": "#/components/responses/Unauthorized"
+  "/audiences":
+    get:
+      summary: List all audiences
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch. Defaults to first page.
+        example: 1
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of results to return per page. Defaults to 50. Maximum
+          is 50.
+        example: 50
+        schema:
+          type: integer
+          maximum: 50
+      tags:
+      - Audiences
+      operationId: listAudiences
+      description: You can fetch a list of all audiences for the workspace.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                Successful response:
+                  value:
+                    type: list
+                    data:
+                    - type: audience
+                      id: '123'
+                      name: VIP Customers
+                      created_at: 1717200000
+                      updated_at: 1717200000
+                    - type: audience
+                      id: '456'
+                      name: Enterprise Accounts
+                      created_at: 1717200000
+                      updated_at: 1717200000
+                    total_count: 2
+                    page: 1
+                    per_page: 50
+                    total_pages: 1
+              schema:
+                "$ref": "#/components/schemas/audience_list"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: b1939528-98f0-4a63-a442-2cc9203fc8c7
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
   "/export/reporting_data/enqueue":
     post:
       summary: Enqueue a new reporting data export job
@@ -7680,7 +7748,6 @@ paths:
                         data: []
                         total_count: 0
                         has_more: false
-                      ai_topics:
                       ai_agent:
                       ai_agent_participated: false
               schema:
@@ -7929,7 +7996,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -8106,7 +8172,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -8354,7 +8419,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -8461,7 +8525,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -8799,7 +8862,6 @@ paths:
                         data: []
                         total_count: 0
                         has_more: false
-                      ai_topics:
                       ai_agent:
                       ai_agent_participated: false
               schema:
@@ -8902,7 +8964,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -8979,7 +9040,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -9068,7 +9128,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -9148,7 +9207,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -9349,7 +9407,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -9426,7 +9483,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -9503,7 +9559,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -9580,7 +9635,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -10289,7 +10343,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -10363,6 +10416,199 @@ paths:
                   type: conversation_part
                   conversation_id: really_123_doesnt_exist
                   conversation_part_id: really_123_doesnt_exist
+  "/conversations/{id}/merge":
+    post:
+      summary: Merge a conversation
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        required: true
+        description: The identifier for the secondary (source) conversation to merge away.
+        example: '123'
+        schema:
+          type: string
+      tags:
+      - Conversations
+      operationId: mergeConversation
+      description: |
+        Merge a secondary (source) conversation into a primary (target) conversation.
+        The secondary conversation is closed and linked to the primary, which
+        becomes the surviving thread. Returns the primary conversation on success.
+
+        Requires `write_conversations` OAuth scope. When the secondary is a ticket,
+        `write_tickets` scope is also required.
+      responses:
+        '200':
+          description: Conversation merged
+          content:
+            application/json:
+              examples:
+                Conversation merged:
+                  value:
+                    type: conversation
+                    id: '456'
+                    created_at: 1734537559
+                    updated_at: 1734537561
+                    waiting_since: 1734537561
+                    snoozed_until:
+                    source:
+                      type: conversation
+                      id: '403918349'
+                      delivered_as: admin_initiated
+                      subject: ''
+                      body: "<p>this is the message body</p>"
+                      author:
+                        type: admin
+                        id: '991267694'
+                        name: Ciaran212 Lee
+                        email: admin212@email.com
+                      attachments: []
+                      url:
+                      redacted: false
+                    contacts:
+                      type: contact.list
+                      contacts:
+                      - type: contact
+                        id: 6762f1571bb69f9f2193bbbb
+                        external_id: '70'
+                    first_contact_reply:
+                      created_at: 1734537561
+                      type: conversation
+                      url:
+                    admin_assignee_id:
+                    team_assignee_id:
+                    open: true
+                    state: open
+                    read: false
+                    tags:
+                      type: tag.list
+                      tags: []
+                    priority: not_priority
+                    sla_applied:
+                    statistics:
+                    conversation_rating:
+                    teammates:
+                    title:
+                    custom_attributes: {}
+                    topics: {}
+                    ticket:
+                    linked_objects:
+                      type: list
+                      data: []
+                      total_count: 0
+                      has_more: false
+                    ai_topics:
+                    ai_agent:
+                    ai_agent_participated: false
+                    conversation_parts:
+                      type: conversation_part.list
+                      conversation_parts:
+                      - type: conversation_part
+                        id: '133'
+                        part_type: merged_primary_conversation
+                        body:
+                        created_at: 1734537561
+                        updated_at: 1734537561
+                        notified_at: 1734537561
+                        assigned_to:
+                        author:
+                          id: '991267694'
+                          type: bot
+                          name: Operator
+                          email: operator@intercom.io
+                        attachments: []
+                        external_id:
+                        redacted: false
+                        metadata: {}
+                        email_message_metadata:
+                        app_package_code: null
+                      total_count: 1
+              schema:
+                "$ref": "#/components/schemas/conversation"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                Bad request:
+                  value:
+                    type: error.list
+                    request_id: 450e0b22-ccc2-40dd-bf54-bc0faaa28f57
+                    errors:
+                    - code: parameter_invalid
+                      message: merge_into_conversation_id must be a valid integer conversation ID
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                Forbidden:
+                  value:
+                    type: error.list
+                    request_id: b4f6c9d3-2345-6789-abcd-ef0123456789
+                    errors:
+                    - code: forbidden
+                      message: Forbidden request
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Merge failed
+          content:
+            application/json:
+              examples:
+                Primary not found:
+                  value:
+                    type: error.list
+                    request_id: c5a7d0e4-3456-789a-bcde-f01234567890
+                    errors:
+                    - code: merge_failed
+                      message: Primary conversation not found
+                Already merged:
+                  value:
+                    type: error.list
+                    request_id: d6b8e1f5-4567-890b-cdef-012345678901
+                    errors:
+                    - code: merge_failed
+                      message: Secondary conversation has already been merged
+                Self-merge:
+                  value:
+                    type: error.list
+                    request_id: e7c9f2a6-5678-901c-def0-123456789012
+                    errors:
+                    - code: merge_failed
+                      message: Cannot merge a conversation into itself
+              schema:
+                "$ref": "#/components/schemas/error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/merge_conversations_request"
+            examples:
+              merge_a_conversation:
+                summary: Merge a conversation
+                value:
+                  merge_into_conversation_id: 456
   "/conversations/{id}/convert":
     post:
       summary: Convert a conversation to a ticket
@@ -19226,57 +19472,6 @@ components:
           example:
             email: user@example.com
             company.name: Acme Inc
-    ai_subtopic:
-      title: AI Subtopic
-      type: object
-      description: An AI-generated subtopic under a topic.
-      properties:
-        type:
-          type: string
-          description: Always ai_subtopic.
-          example: ai_subtopic
-        name:
-          type: string
-          description: The name of the subtopic.
-          example: Payment Issues
-        id:
-          type: integer
-          description: The ID of the subtopic.
-          example: 42
-    ai_topic:
-      title: AI Topic
-      type: object
-      description: An AI-generated topic assigned to the conversation.
-      properties:
-        type:
-          type: string
-          description: Always ai_topic.
-          example: ai_topic
-        topic_name:
-          type: string
-          description: The name of the AI-generated topic.
-          example: Billing
-        subtopics:
-          type: array
-          description: The subtopics under this topic.
-          items:
-            $ref: '#/components/schemas/ai_subtopic'
-    ai_topics:
-      title: AI Topics
-      type: object
-      x-tags:
-      - AI Topics
-      description: AI-generated topics and subtopics for the conversation.
-      properties:
-        type:
-          type: string
-          description: Always ai_topics.
-          example: ai_topics
-        topics:
-          type: array
-          description: The list of AI-generated topics for this conversation.
-          items:
-            $ref: '#/components/schemas/ai_topic'
     app:
       title: App
       type: object
@@ -19312,6 +19507,68 @@ components:
           type: boolean
           description: Whether or not the app uses identity verification.
           example: false
+    audience:
+      title: Audience
+      type: object
+      x-tags:
+      - Audiences
+      description: An audience represents a group of contacts that can be targeted
+        by Fin.
+      properties:
+        type:
+          type: string
+          description: The type of object.
+          enum:
+          - audience
+          example: audience
+        id:
+          type: string
+          description: The unique identifier representing the audience.
+          example: '123'
+        name:
+          type: string
+          description: The name of the audience.
+          example: VIP Customers
+        created_at:
+          type: integer
+          description: The time the audience was created as a Unix timestamp.
+          example: 1717200000
+        updated_at:
+          type: integer
+          description: The time the audience was last updated as a Unix timestamp.
+          example: 1717200000
+    audience_list:
+      title: Audience List
+      type: object
+      description: A paginated list of audience objects.
+      properties:
+        type:
+          type: string
+          description: The type of the object.
+          enum:
+          - list
+          example: list
+        data:
+          type: array
+          description: A list of audience objects.
+          items:
+            "$ref": "#/components/schemas/audience"
+        total_count:
+          type: integer
+          description: The total number of audiences.
+          example: 2
+        page:
+          type: integer
+          description: The current page number.
+          example: 1
+        per_page:
+          type: integer
+          description: The number of results per page.
+          example: 50
+        total_pages:
+          type: integer
+          description: The total number of pages.
+          example: 1
     article:
       title: Article
       type: object
@@ -21909,8 +22166,6 @@ components:
           "$ref": "#/components/schemas/conversation_parts"
         linked_objects:
           "$ref": "#/components/schemas/linked_object_list"
-        ai_topics:
-          "$ref": "#/components/schemas/ai_topics"
         ai_agent_participated:
           type: boolean
           description: Indicates whether the AI Agent participated in the conversation.
@@ -26759,6 +27014,19 @@ components:
           description: The unique identifier for the contact to merge into. Must be
             a user.
           example: 5ba682d23d7cf92bef87bfd4
+    merge_conversations_request:
+      title: Merge Conversations Request
+      type: object
+      description: Payload to merge a secondary conversation into a primary conversation.
+      x-tags:
+      - Conversations
+      properties:
+        merge_into_conversation_id:
+          type: integer
+          description: The ID of the primary (target) conversation to merge into.
+          example: 456
+      required:
+      - merge_into_conversation_id
     message:
       type: object
       title: Message
@@ -29904,6 +30172,8 @@ tags:
   description: Everything about your Articles
 - name: Away Status Reasons
   description: Everything about your Away Status Reasons
+- name: Audiences
+  description: Everything about your Audiences
 - name: Brands
   description: Everything about your Brands
 - name: Calls

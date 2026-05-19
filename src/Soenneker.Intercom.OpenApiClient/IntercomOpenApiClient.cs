@@ -9,6 +9,7 @@ using Microsoft.Kiota.Serialization.Text;
 using Soenneker.Intercom.OpenApiClient.Admins;
 using Soenneker.Intercom.OpenApiClient.Ai;
 using Soenneker.Intercom.OpenApiClient.Articles;
+using Soenneker.Intercom.OpenApiClient.Audiences;
 using Soenneker.Intercom.OpenApiClient.Away_status_reasons;
 using Soenneker.Intercom.OpenApiClient.Brands;
 using Soenneker.Intercom.OpenApiClient.Calls;
@@ -69,6 +70,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder Articles
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The audiences property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Audiences.AudiencesRequestBuilder Audiences
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Audiences.AudiencesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The away_status_reasons property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Away_status_reasons.Away_status_reasonsRequestBuilder Away_status_reasons

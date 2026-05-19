@@ -2436,6 +2436,107 @@
         }
       }
     },
+    "/audiences": {
+      "get": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "List all audiences",
+        "description": "You can fetch a list of all audiences for the workspace.",
+        "operationId": "listAudiences",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of results to fetch. Defaults to first page.",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results to return per page. Defaults to 50. Maximum is 50.",
+            "schema": {
+              "maximum": 50,
+              "type": "integer"
+            },
+            "example": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudienceList"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "audience",
+                          "id": 123,
+                          "name": "VIP Customers",
+                          "created_at": 1717200000,
+                          "updated_at": 1717200000
+                        },
+                        {
+                          "type": "audience",
+                          "id": 456,
+                          "name": "Enterprise Accounts",
+                          "created_at": 1717200000,
+                          "updated_at": 1717200000
+                        }
+                      ],
+                      "total_count": 2,
+                      "page": 1,
+                      "per_page": 50,
+                      "total_pages": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b1939528-98f0-4a63-a442-2cc9203fc8c7",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/export/reporting_data/enqueue": {
       "post": {
         "tags": [
@@ -10482,7 +10583,6 @@
                             "total_count": 0,
                             "has_more": false
                           },
-                          "ai_topics": null,
                           "ai_agent": null,
                           "ai_agent_participated": false
                         }
@@ -10821,7 +10921,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -11046,7 +11145,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -11406,7 +11504,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -11537,7 +11634,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -11854,7 +11950,6 @@
                             "total_count": 0,
                             "has_more": false
                           },
-                          "ai_topics": null,
                           "ai_agent": null,
                           "ai_agent_participated": false
                         }
@@ -12037,7 +12132,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12129,7 +12223,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12221,7 +12314,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12317,7 +12409,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12577,7 +12668,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12669,7 +12759,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12761,7 +12850,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -12853,7 +12941,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -13860,7 +13947,6 @@
                         "total_count": 0,
                         "has_more": false
                       },
-                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
                       "conversation_parts": {
@@ -13937,6 +14023,282 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{id}/merge": {
+      "post": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Merge a conversation",
+        "description": "Merge a secondary (source) conversation into a primary (target) conversation.\nThe secondary conversation is closed and linked to the primary, which\nbecomes the surviving thread. Returns the primary conversation on success.\n\nRequires \u0060write_conversations\u0060 OAuth scope. When the secondary is a ticket,\n\u0060write_tickets\u0060 scope is also required.\n",
+        "operationId": "mergeConversation",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier for the secondary (source) conversation to merge away.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 123
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MergeConversationsRequest"
+              },
+              "examples": {
+                "merge_a_conversation": {
+                  "summary": "Merge a conversation",
+                  "value": {
+                    "merge_into_conversation_id": 456
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conversation merged",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                },
+                "examples": {
+                  "Conversation merged": {
+                    "value": {
+                      "type": "conversation",
+                      "id": 456,
+                      "created_at": 1734537559,
+                      "updated_at": 1734537561,
+                      "waiting_since": 1734537561,
+                      "snoozed_until": null,
+                      "source": {
+                        "type": "conversation",
+                        "id": 403918349,
+                        "delivered_as": "admin_initiated",
+                        "subject": "",
+                        "body": "\u003Cp\u003Ethis is the message body\u003C/p\u003E",
+                        "author": {
+                          "type": "admin",
+                          "id": 991267694,
+                          "name": "Ciaran212 Lee",
+                          "email": "admin212@email.com"
+                        },
+                        "attachments": [],
+                        "url": null,
+                        "redacted": false
+                      },
+                      "contacts": {
+                        "type": "contact.list",
+                        "contacts": [
+                          {
+                            "type": "contact",
+                            "id": "6762f1571bb69f9f2193bbbb",
+                            "external_id": 70
+                          }
+                        ]
+                      },
+                      "first_contact_reply": {
+                        "created_at": 1734537561,
+                        "type": "conversation",
+                        "url": null
+                      },
+                      "admin_assignee_id": null,
+                      "team_assignee_id": null,
+                      "open": true,
+                      "state": "open",
+                      "read": false,
+                      "tags": {
+                        "type": "tag.list",
+                        "tags": []
+                      },
+                      "priority": "not_priority",
+                      "sla_applied": null,
+                      "statistics": null,
+                      "conversation_rating": null,
+                      "teammates": null,
+                      "title": null,
+                      "custom_attributes": {},
+                      "topics": {},
+                      "ticket": null,
+                      "linked_objects": {
+                        "type": "list",
+                        "data": [],
+                        "total_count": 0,
+                        "has_more": false
+                      },
+                      "ai_topics": null,
+                      "ai_agent": null,
+                      "ai_agent_participated": false,
+                      "conversation_parts": {
+                        "type": "conversation_part.list",
+                        "conversation_parts": [
+                          {
+                            "type": "conversation_part",
+                            "id": 133,
+                            "part_type": "merged_primary_conversation",
+                            "body": null,
+                            "created_at": 1734537561,
+                            "updated_at": 1734537561,
+                            "notified_at": 1734537561,
+                            "assigned_to": null,
+                            "author": {
+                              "id": 991267694,
+                              "type": "bot",
+                              "name": "Operator",
+                              "email": "operator@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": false,
+                            "metadata": {},
+                            "email_message_metadata": null,
+                            "app_package_code": null
+                          }
+                        ],
+                        "total_count": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Bad request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "450e0b22-ccc2-40dd-bf54-bc0faaa28f57",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "merge_into_conversation_id must be a valid integer conversation ID"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e5b8e2-1234-5678-9abc-def012345678",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Forbidden": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b4f6c9d3-2345-6789-abcd-ef0123456789",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Forbidden request"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Merge failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Primary not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c5a7d0e4-3456-789a-bcde-f01234567890",
+                      "errors": [
+                        {
+                          "code": "merge_failed",
+                          "message": "Primary conversation not found"
+                        }
+                      ]
+                    }
+                  },
+                  "Already merged": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "d6b8e1f5-4567-890b-cdef-012345678901",
+                      "errors": [
+                        {
+                          "code": "merge_failed",
+                          "message": "Secondary conversation has already been merged"
+                        }
+                      ]
+                    }
+                  },
+                  "Self-merge": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e7c9f2a6-5678-901c-def0-123456789012",
+                      "errors": [
+                        {
+                          "code": "merge_failed",
+                          "message": "Cannot merge a conversation into itself"
                         }
                       ]
                     }
@@ -26042,74 +26404,6 @@
           "Sales Agent"
         ]
       },
-      "AiSubtopic": {
-        "title": "AI Subtopic",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Always ai_subtopic.",
-            "example": "ai_subtopic"
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the subtopic.",
-            "example": "Payment Issues"
-          },
-          "id": {
-            "type": "integer",
-            "description": "The ID of the subtopic.",
-            "example": 42
-          }
-        },
-        "description": "An AI-generated subtopic under a topic."
-      },
-      "AiTopic": {
-        "title": "AI Topic",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Always ai_topic.",
-            "example": "ai_topic"
-          },
-          "topic_name": {
-            "type": "string",
-            "description": "The name of the AI-generated topic.",
-            "example": "Billing"
-          },
-          "subtopics": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AiSubtopic"
-            },
-            "description": "The subtopics under this topic."
-          }
-        },
-        "description": "An AI-generated topic assigned to the conversation."
-      },
-      "AiTopics": {
-        "title": "AI Topics",
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Always ai_topics.",
-            "example": "ai_topics"
-          },
-          "topics": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AiTopic"
-            },
-            "description": "The list of AI-generated topics for this conversation."
-          }
-        },
-        "description": "AI-generated topics and subtopics for the conversation.",
-        "x-tags": [
-          "AI Topics"
-        ]
-      },
       "App": {
         "title": "App",
         "type": "object",
@@ -26153,6 +26447,88 @@
         },
         "description": "App is a workspace on Intercom",
         "nullable": true
+      },
+      "Audience": {
+        "title": "Audience",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "audience"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of object.",
+            "example": "audience"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier representing the audience.",
+            "example": 123
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the audience.",
+            "example": "VIP Customers"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the audience was created as a Unix timestamp.",
+            "example": 1717200000
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the audience was last updated as a Unix timestamp.",
+            "example": 1717200000
+          }
+        },
+        "description": "An audience represents a group of contacts that can be targeted by Fin.",
+        "x-tags": [
+          "Audiences"
+        ]
+      },
+      "AudienceList": {
+        "title": "Audience List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "list"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of the object.",
+            "example": "list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Audience"
+            },
+            "description": "A list of audience objects."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of audiences.",
+            "example": 2
+          },
+          "page": {
+            "type": "integer",
+            "description": "The current page number.",
+            "example": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "The number of results per page.",
+            "example": 50
+          },
+          "total_pages": {
+            "type": "integer",
+            "description": "The total number of pages.",
+            "example": 1
+          }
+        },
+        "description": "A paginated list of audience objects."
       },
       "Article": {
         "title": "Article",
@@ -29902,9 +30278,6 @@
           },
           "linked_objects": {
             "$ref": "#/components/schemas/LinkedObjectList"
-          },
-          "ai_topics": {
-            "$ref": "#/components/schemas/AiTopics"
           },
           "ai_agent_participated": {
             "type": "boolean",
@@ -35611,6 +35984,24 @@
           }
         },
         "description": "Merge contact data."
+      },
+      "MergeConversationsRequest": {
+        "title": "Merge Conversations Request",
+        "required": [
+          "merge_into_conversation_id"
+        ],
+        "type": "object",
+        "properties": {
+          "merge_into_conversation_id": {
+            "type": "integer",
+            "description": "The ID of the primary (target) conversation to merge into.",
+            "example": 456
+          }
+        },
+        "description": "Payload to merge a secondary conversation into a primary conversation.",
+        "x-tags": [
+          "Conversations"
+        ]
       },
       "Message": {
         "title": "Message",
@@ -43232,6 +43623,10 @@
     {
       "name": "Away Status Reasons",
       "description": "Everything about your Away Status Reasons"
+    },
+    {
+      "name": "Audiences",
+      "description": "Everything about your Audiences"
     },
     {
       "name": "Brands",
