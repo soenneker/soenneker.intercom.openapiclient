@@ -27,6 +27,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Indicates whether the AI Agent participated in the conversation.</summary>
         public bool? AiAgentParticipated { get; set; }
+        /// <summary>The channel through which a conversation was originally initiated and its current channel.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannel? Channel { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannel Channel { get; set; }
+#endif
         /// <summary>Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -119,7 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.</summary>
         public int? SnoozedUntil { get; set; }
-        /// <summary>The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.</summary>
+        /// <summary>The first message or event that started this conversation. Describes the origin and who initiated it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource? Source { get; set; }
@@ -203,6 +211,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgent.CreateFromDiscriminatorValue); } },
                 { "ai_agent_participated", n => { AiAgentParticipated = n.GetBoolValue(); } },
+                { "channel", n => { Channel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannel>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannel.CreateFromDiscriminatorValue); } },
                 { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts.CreateFromDiscriminatorValue); } },
                 { "conversation_parts", n => { ConversationParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts.CreateFromDiscriminatorValue); } },
@@ -241,6 +250,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>("ai_agent", AiAgent);
             writer.WriteBoolValue("ai_agent_participated", AiAgentParticipated);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannel>("channel", Channel);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>("contacts", Contacts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>("conversation_parts", ConversationParts);

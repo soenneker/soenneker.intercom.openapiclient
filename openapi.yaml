@@ -7750,6 +7750,9 @@ paths:
                         has_more: false
                       ai_agent:
                       ai_agent_participated: false
+                      channel:
+                        initial: messenger
+                        current: messenger
               schema:
                 "$ref": "#/components/schemas/conversation_list"
         '401':
@@ -7998,6 +8001,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -8174,6 +8180,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -8421,6 +8430,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -8527,6 +8539,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts: []
@@ -8864,6 +8879,9 @@ paths:
                         has_more: false
                       ai_agent:
                       ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
               schema:
                 "$ref": "#/components/schemas/conversation_list"
       requestBody:
@@ -8966,6 +8984,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9042,6 +9063,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9130,6 +9154,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9209,6 +9236,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9409,6 +9439,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9485,6 +9518,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9561,6 +9597,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -9637,6 +9676,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -10345,6 +10387,9 @@ paths:
                       has_more: false
                     ai_agent:
                     ai_agent_participated: false
+                    channel:
+                      initial: messenger
+                      current: messenger
                     conversation_parts:
                       type: conversation_part.list
                       conversation_parts:
@@ -22059,6 +22104,10 @@ components:
         sales_agent:
           "$ref": "#/components/schemas/sales_agent"
           nullable: true
+        channel:
+          "$ref": "#/components/schemas/conversation_channel"
+          nullable: true
+          description: The channel through which the conversation was initiated and its current channel.
     conversation:
       title: Conversation
       type: object
@@ -22180,6 +22229,10 @@ components:
         sales_agent:
           "$ref": "#/components/schemas/sales_agent"
           nullable: true
+        channel:
+          "$ref": "#/components/schemas/conversation_channel"
+          nullable: true
+          description: The channel through which the conversation was initiated and its current channel.
     conversation_attachment_files:
       title: Conversation attachment files
       type: object
@@ -22197,6 +22250,21 @@ components:
           type: string
           description: The name of the file.
           example: test.json
+    conversation_channel:
+      title: Conversation Channel
+      type: object
+      description: The channel through which a conversation was originally initiated and its current channel.
+      properties:
+        initial:
+          type: string
+          nullable: true
+          description: The channel through which the conversation was originally initiated. Possible values include `messenger`, `zendesk_sunshine`, `zendesk_ticket`, `twitter`, `email`. Returns `null` if channel data is unavailable.
+          example: messenger
+        current:
+          type: string
+          nullable: true
+          description: The current channel of the conversation. May differ from `initial` if the conversation was migrated between channels. Returns `null` if channel data is unavailable.
+          example: messenger
     conversation_contacts:
       title: Contacts
       type: object
@@ -22416,8 +22484,8 @@ components:
     conversation_part_author:
       title: Conversation part author
       type: object
-      description: The object who initiated the conversation, which can be a Contact,
-        Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams.
+      description: The author of this conversation part. Can be a Contact, Admin,
+        or Bot.
         For Twitter, this will be blank.
       properties:
         type:
@@ -22545,66 +22613,98 @@ components:
     conversation_source:
       title: Conversation source
       type: object
-      description: The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
+      description: The first message or event that started this conversation. Describes
+        the origin and who initiated it.
       properties:
         type:
           type: string
-          description: This includes conversation, email, facebook, instagram, phone_call,
-            phone_switch, push, sms, twitter and whatsapp.
-          example: conversation
-          enum:
-          - conversation
-          - email
-          - facebook
-          - instagram
-          - phone_call
-          - phone_switch
-          - push
-          - sms
-          - twitter
-          - whatsapp
+          description: The origin of this conversation.
+          example: email
         id:
           type: string
-          description: The id representing the message.
+          nullable: true
+          description: The id of the source message.
           example: '3'
         delivered_as:
           type: string
-          description: The conversation's initiation type. Possible values are customer_initiated,
-            campaigns_initiated (legacy campaigns), operator_initiated (Custom bot),
-            automated (Series and other outbounds with dynamic audience message) and
-            admin_initiated (fixed audience message, ticket initiated by an admin,
-            group email).
+          description: How the conversation was initiated.
           example: operator_initiated
+        recipients:
+          type: array
+          nullable: true
+          description: The recipients of the source message. Only present for email
+            conversations.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The recipient type. One of `to`, `cc`, or `bcc`.
+                example: to
+              email:
+                type: string
+                format: email
+                description: The recipient email address.
+                example: user@example.com
+              drop_reason:
+                type: string
+                nullable: true
+                description: The reason this recipient was dropped, if applicable.
+                example:
         subject:
           type: string
-          description: Optional. The message subject. For Twitter, this will show
-            a generic message regarding why the subject is obscured.
+          nullable: true
+          description: The message subject. Only present for email conversations.
           example: ''
         body:
           type: string
-          description: The message body, which may contain HTML. For Twitter, this
-            will show a generic message regarding why the body is obscured.
+          nullable: true
+          description: The message body, which may contain HTML.
           example: "<p>Hey there!</p>"
         author:
-          "$ref": "#/components/schemas/conversation_part_author"
+          "$ref": "#/components/schemas/conversation_source_author"
         attachments:
           type: array
-          description: A list of attachments for the part.
+          description: A list of attachments on the source message.
           items:
             "$ref": "#/components/schemas/part_attachment"
         url:
           type: string
           nullable: true
-          description: The URL where the conversation was started. For Twitter, Email,
-            and Bots, this will be blank.
-          example:
+          description: The URL where the conversation was started.
+          example: https://intercom.help/company/article/123
         redacted:
           type: boolean
-          description: Whether or not the source message has been redacted. Only applicable
-            for contact initiated messages.
+          description: Whether or not the source content has been redacted.
           example: false
         email_message_metadata:
           "$ref": "#/components/schemas/source_email_message_metadata"
+    conversation_source_author:
+      title: Conversation source author
+      type: object
+      description: The author who started the conversation. Can be a Contact, Admin,
+        or Bot.
+      properties:
+        type:
+          type: string
+          description: The type of the author.
+          example: admin
+        id:
+          type: string
+          nullable: true
+          description: The id of the author.
+          example: '274'
+        name:
+          type: string
+          nullable: true
+          description: The name of the author.
+          example: Jane Doe
+        email:
+          type: string
+          format: email
+          nullable: true
+          description: The email of the author.
+          example: jane.doe@example.com
     conversation_statistics:
       title: Conversation statistics
       type: object

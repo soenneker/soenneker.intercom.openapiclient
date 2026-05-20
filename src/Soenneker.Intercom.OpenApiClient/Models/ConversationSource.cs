@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.
+    /// The first message or event that started this conversation. Describes the origin and who initiated it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationSource : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A list of attachments for the part.</summary>
+        /// <summary>A list of attachments on the source message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>? Attachments { get; set; }
@@ -23,15 +23,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment> Attachments { get; set; }
 #endif
-        /// <summary>The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.</summary>
+        /// <summary>The author who started the conversation. Can be a Contact, Admin, or Bot.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor? Author { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor? Author { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor Author { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor Author { get; set; }
 #endif
-        /// <summary>The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured.</summary>
+        /// <summary>The message body, which may contain HTML.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get; set; }
@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>The conversation&apos;s initiation type. Possible values are customer_initiated, campaigns_initiated (legacy campaigns), operator_initiated (Custom bot), automated (Series and other outbounds with dynamic audience message) and admin_initiated (fixed audience message, ticket initiated by an admin, group email).</summary>
+        /// <summary>How the conversation was initiated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DeliveredAs { get; set; }
@@ -55,7 +55,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata EmailMessageMetadata { get; set; }
 #endif
-        /// <summary>The id representing the message.</summary>
+        /// <summary>The id of the source message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
@@ -63,9 +63,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>Whether or not the source message has been redacted. Only applicable for contact initiated messages.</summary>
+        /// <summary>The recipients of the source message. Only present for email conversations.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients>? Recipients { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients> Recipients { get; set; }
+#endif
+        /// <summary>Whether or not the source content has been redacted.</summary>
         public bool? Redacted { get; set; }
-        /// <summary>Optional. The message subject. For Twitter, this will show a generic message regarding why the subject is obscured.</summary>
+        /// <summary>The message subject. Only present for email conversations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subject { get; set; }
@@ -73,9 +81,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Subject { get; set; }
 #endif
-        /// <summary>This includes conversation, email, facebook, instagram, phone_call, phone_switch, push, sms, twitter and whatsapp.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_type? Type { get; set; }
-        /// <summary>The URL where the conversation was started. For Twitter, Email, and Bots, this will be blank.</summary>
+        /// <summary>The origin of this conversation.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
+#endif
+        /// <summary>The URL where the conversation was started.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Url { get; set; }
@@ -109,14 +123,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor.CreateFromDiscriminatorValue); } },
+                { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "delivered_as", n => { DeliveredAs = n.GetStringValue(); } },
                 { "email_message_metadata", n => { EmailMessageMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "recipients", n => { Recipients = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_type>(); } },
+                { "type", n => { Type = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -128,14 +143,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>("attachments", Attachments);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor>("author", Author);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor>("author", Author);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("delivered_as", DeliveredAs);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata>("email_message_metadata", EmailMessageMetadata);
             writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients>("recipients", Recipients);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteStringValue("subject", Subject);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_type>("type", Type);
+            writer.WriteStringValue("type", Type);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }

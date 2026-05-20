@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment> Attachments { get; set; }
 #endif
-        /// <summary>The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank.</summary>
+        /// <summary>The author of this conversation part. Can be a Contact, Admin, or Bot. For Twitter, this will be blank.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor? Author { get; set; }

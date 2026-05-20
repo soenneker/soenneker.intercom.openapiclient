@@ -10584,7 +10584,11 @@
                             "has_more": false
                           },
                           "ai_agent": null,
-                          "ai_agent_participated": false
+                          "ai_agent_participated": false,
+                          "channel": {
+                            "initial": "messenger",
+                            "current": "messenger"
+                          }
                         }
                       ]
                     }
@@ -10923,6 +10927,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -11147,6 +11155,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -11506,6 +11518,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -11636,6 +11652,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [],
@@ -11953,7 +11973,11 @@
                           "ai_agent": null,
                           "ai_agent_participated": false
                         }
-                      ]
+                      ],
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      }
                     }
                   }
                 }
@@ -12134,6 +12158,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12225,6 +12253,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12316,6 +12348,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12411,6 +12447,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12670,6 +12710,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12761,6 +12805,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12852,6 +12900,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12943,6 +12995,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -13949,6 +14005,10 @@
                       },
                       "ai_agent": null,
                       "ai_agent_participated": false,
+                      "channel": {
+                        "initial": "messenger",
+                        "current": "messenger"
+                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -30134,6 +30194,9 @@
           },
           "sales_agent": {
             "$ref": "#/components/schemas/SalesAgent"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/ConversationChannel"
           }
         },
         "description": "The data returned about your conversations when you list or search them.",
@@ -30294,6 +30357,9 @@
           },
           "sales_agent": {
             "$ref": "#/components/schemas/SalesAgent"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/ConversationChannel"
           }
         },
         "description": "Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.",
@@ -30322,6 +30388,25 @@
           }
         },
         "description": "Properties of the attachment files in a conversation part"
+      },
+      "ConversationChannel": {
+        "title": "Conversation Channel",
+        "type": "object",
+        "properties": {
+          "initial": {
+            "type": "string",
+            "description": "The channel through which the conversation was originally initiated. Possible values include \u0060messenger\u0060, \u0060zendesk_sunshine\u0060, \u0060zendesk_ticket\u0060, \u0060twitter\u0060, \u0060email\u0060. Returns \u0060null\u0060 if channel data is unavailable.",
+            "nullable": true,
+            "example": "messenger"
+          },
+          "current": {
+            "type": "string",
+            "description": "The current channel of the conversation. May differ from \u0060initial\u0060 if the conversation was migrated between channels. Returns \u0060null\u0060 if channel data is unavailable.",
+            "nullable": true,
+            "example": "messenger"
+          }
+        },
+        "description": "The channel through which a conversation was originally initiated and its current channel."
       },
       "ConversationContacts": {
         "title": "Contacts",
@@ -30628,7 +30713,7 @@
             "example": false
           }
         },
-        "description": "The object who initiated the conversation, which can be a Contact, Admin or Team. Bots and campaigns send messages on behalf of Admins or Teams. For Twitter, this will be blank."
+        "description": "The author of this conversation part. Can be a Contact, Admin, or Bot. For Twitter, this will be blank."
       },
       "ConversationParts": {
         "title": "Conversation Parts",
@@ -30765,68 +30850,116 @@
         "type": "object",
         "properties": {
           "type": {
-            "enum": [
-              "conversation",
-              "email",
-              "facebook",
-              "instagram",
-              "phone_call",
-              "phone_switch",
-              "push",
-              "sms",
-              "twitter",
-              "whatsapp"
-            ],
             "type": "string",
-            "additionalProperties": false,
-            "description": "This includes conversation, email, facebook, instagram, phone_call, phone_switch, push, sms, twitter and whatsapp.",
-            "example": "conversation"
+            "description": "The origin of this conversation.",
+            "example": "email"
           },
           "id": {
             "type": "string",
-            "description": "The id representing the message.",
+            "description": "The id of the source message.",
+            "nullable": true,
             "example": 3
           },
           "delivered_as": {
             "type": "string",
-            "description": "The conversation\u0027s initiation type. Possible values are customer_initiated, campaigns_initiated (legacy campaigns), operator_initiated (Custom bot), automated (Series and other outbounds with dynamic audience message) and admin_initiated (fixed audience message, ticket initiated by an admin, group email).",
+            "description": "How the conversation was initiated.",
             "example": "operator_initiated"
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The recipient type. One of \u0060to\u0060, \u0060cc\u0060, or \u0060bcc\u0060.",
+                  "example": "to"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "The recipient email address.",
+                  "format": "email",
+                  "example": "user@example.com"
+                },
+                "drop_reason": {
+                  "type": "string",
+                  "description": "The reason this recipient was dropped, if applicable.",
+                  "nullable": true,
+                  "example": null
+                }
+              }
+            },
+            "description": "The recipients of the source message. Only present for email conversations.",
+            "nullable": true
           },
           "subject": {
             "type": "string",
-            "description": "Optional. The message subject. For Twitter, this will show a generic message regarding why the subject is obscured."
+            "description": "The message subject. Only present for email conversations.",
+            "nullable": true
           },
           "body": {
             "type": "string",
-            "description": "The message body, which may contain HTML. For Twitter, this will show a generic message regarding why the body is obscured.",
+            "description": "The message body, which may contain HTML.",
+            "nullable": true,
             "example": "\u003Cp\u003EHey there!\u003C/p\u003E"
           },
           "author": {
-            "$ref": "#/components/schemas/ConversationPartAuthor"
+            "$ref": "#/components/schemas/ConversationSourceAuthor"
           },
           "attachments": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PartAttachment"
             },
-            "description": "A list of attachments for the part."
+            "description": "A list of attachments on the source message."
           },
           "url": {
             "type": "string",
-            "description": "The URL where the conversation was started. For Twitter, Email, and Bots, this will be blank.",
+            "description": "The URL where the conversation was started.",
             "nullable": true,
-            "example": null
+            "example": "https://intercom.help/company/article/123"
           },
           "redacted": {
             "type": "boolean",
-            "description": "Whether or not the source message has been redacted. Only applicable for contact initiated messages.",
+            "description": "Whether or not the source content has been redacted.",
             "example": false
           },
           "email_message_metadata": {
             "$ref": "#/components/schemas/SourceEmailMessageMetadata"
           }
         },
-        "description": "The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated."
+        "description": "The first message or event that started this conversation. Describes the origin and who initiated it."
+      },
+      "ConversationSourceAuthor": {
+        "title": "Conversation source author",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the author.",
+            "example": "admin"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the author.",
+            "nullable": true,
+            "example": 274
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the author.",
+            "nullable": true,
+            "example": "Jane Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the author.",
+            "format": "email",
+            "nullable": true,
+            "example": "jane.doe@example.com"
+          }
+        },
+        "description": "The author who started the conversation. Can be a Contact, Admin, or Bot."
       },
       "ConversationStatistics": {
         "title": "Conversation statistics",
