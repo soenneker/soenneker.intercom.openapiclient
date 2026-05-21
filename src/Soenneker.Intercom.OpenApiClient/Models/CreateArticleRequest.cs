@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? FolderId { get; set; }
         /// <summary>The id of the article&apos;s parent collection or section. An article without this field stands alone.</summary>
         public int? ParentId { get; set; }
-        /// <summary>The ids of the article&apos;s parent collections. An article without this field stands alone.</summary>
+        /// <summary>The ids of the parent collections to place this article in. Send an empty array to leave the article without a collection. When provided, this takes precedence over `parent_id` and `parent_type`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? ParentIds { get; set; }

@@ -241,6 +241,7 @@
             "name": "created_at_after",
             "in": "query",
             "description": "The start date that you request data for. It must be formatted as a UNIX timestamp.",
+            "required": true,
             "schema": {
               "type": "string"
             },
@@ -1771,8 +1772,6 @@
                     "body": "Body of the Article",
                     "author_id": 991267497,
                     "state": "published",
-                    "parent_id": 145,
-                    "parent_type": "collection",
                     "parent_ids": [
                       145
                     ],
@@ -2348,6 +2347,7 @@
                             "title": "Title 1",
                             "description": "",
                             "body": "",
+                            "body_markdown": "",
                             "author_id": 991267521,
                             "state": "draft",
                             "created_at": 1734537306,
@@ -2900,440 +2900,6 @@
                         {
                           "code": "not_found",
                           "message": "Export job not found for identifier: job1"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fin/start": {
-      "post": {
-        "tags": [
-          "Fin Agent"
-        ],
-        "summary": "Start a conversation with Fin",
-        "description": "Initialize Fin by passing it the user\u0027s message along with conversation history and user details.\n\nThese additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access.\n{% /admonition %}\n\nOnce Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.\n\nDuring this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.\n\nEvents can be received via webhooks or Server-Sent Events (SSE) using the \u0060sse_subscription_url\u0060 in the response.\n",
-        "operationId": "startFinConversation",
-        "parameters": [
-          {
-            "name": "Intercom-Version",
-            "in": "header",
-            "schema": {
-              "$ref": "#/components/schemas/IntercomVersion"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StartFinConversation"
-              },
-              "examples": {
-                "Basic request": {
-                  "value": {
-                    "conversation_id": "ext-123",
-                    "message": {
-                      "author": "user",
-                      "body": "How can I see my account details?",
-                      "timestamp": "2025-01-24T10:01:20.000Z"
-                    },
-                    "user": {
-                      "id": 123456,
-                      "name": "John Doe",
-                      "email": "john.doe@example.com"
-                    }
-                  }
-                },
-                "Request with conversation history": {
-                  "value": {
-                    "conversation_id": "ext-123",
-                    "message": {
-                      "author": "user",
-                      "body": "How can I see my account details?",
-                      "timestamp": "2025-01-24T10:01:20.000Z"
-                    },
-                    "user": {
-                      "id": 123456,
-                      "name": "John Doe",
-                      "email": "john.doe@example.com",
-                      "attributes": {
-                        "plan_type": "Pro",
-                        "subscription_status": "active"
-                      }
-                    },
-                    "conversation_metadata": {
-                      "history": [
-                        {
-                          "author": "user",
-                          "body": "I need help",
-                          "timestamp": "2025-01-24T10:00:01Z"
-                        },
-                        {
-                          "author": "agent",
-                          "body": "What do you need help with?",
-                          "timestamp": "2025-01-24T10:01:00Z"
-                        }
-                      ],
-                      "attributes": {
-                        "priority_level": "high",
-                        "department": "sales"
-                      }
-                    }
-                  }
-                },
-                "Request with attachments": {
-                  "value": {
-                    "conversation_id": "ext-123",
-                    "message": {
-                      "author": "user",
-                      "body": "Here is a screenshot of the issue",
-                      "timestamp": "2025-01-24T10:01:20.000Z"
-                    },
-                    "user": {
-                      "id": 123456,
-                      "name": "John Doe",
-                      "email": "john.doe@example.com"
-                    },
-                    "attachments": [
-                      {
-                        "type": "url",
-                        "url": "https://example.com/document.pdf"
-                      },
-                      {
-                        "type": "file",
-                        "name": "screenshot.png",
-                        "content_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk..."
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Fin conversation started successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "conversation_id": {
-                      "type": "string",
-                      "description": "The ID of the conversation.",
-                      "example": "ext-123"
-                    },
-                    "user_id": {
-                      "type": "string",
-                      "description": "The ID of the user.",
-                      "example": "user-456"
-                    },
-                    "status": {
-                      "enum": [
-                        "thinking",
-                        "replying",
-                        "awaiting_user_reply",
-                        "escalated",
-                        "resolved",
-                        "complete"
-                      ],
-                      "type": "string",
-                      "additionalProperties": false,
-                      "description": "Fin\u0027s current status in the conversation workflow.\n",
-                      "example": "thinking"
-                    },
-                    "created_at_ms": {
-                      "type": "string",
-                      "description": "The timestamp the response was created at, with millisecond precision.",
-                      "format": "date-time",
-                      "example": "2025-01-24T10:00:00.123Z"
-                    },
-                    "errors": {
-                      "$ref": "#/components/schemas/FinAgentAttributeErrors"
-                    },
-                    "sse_subscription_url": {
-                      "type": "string",
-                      "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
-                      "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
-                    }
-                  }
-                },
-                "examples": {
-                  "Successful response": {
-                    "value": {
-                      "conversation_id": "ext-123",
-                      "user_id": "user-456",
-                      "status": "thinking",
-                      "created_at_ms": "2025-01-24T10:00:00.123Z",
-                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
-                    }
-                  },
-                  "Response with attribute errors": {
-                    "value": {
-                      "conversation_id": "ext-123",
-                      "user_id": "user-456",
-                      "status": "thinking",
-                      "created_at_ms": "2025-01-24T10:00:00.123Z",
-                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m",
-                      "errors": {
-                        "user": {
-                          "attributes": {
-                            "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
-                          }
-                        },
-                        "conversation": {
-                          "attributes": {
-                            "bad_attr": "Conversation attribute \u0027bad_attr\u0027 does not exist"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Invalid request": {
-                    "value": {
-                      "type": "error.list",
-                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
-                      "errors": [
-                        {
-                          "code": "parameter_invalid",
-                          "message": "conversation_id is required"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Unauthorized": {
-                    "value": {
-                      "type": "error.list",
-                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
-                      "errors": [
-                        {
-                          "code": "unauthorized",
-                          "message": "Access Token Invalid"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fin/reply": {
-      "post": {
-        "tags": [
-          "Fin Agent"
-        ],
-        "summary": "Reply to Fin",
-        "description": "Once Fin has returned a response to a user\u0027s message, its status will be \u0060awaiting_user_reply\u0060.\n\nIf a user replies, use this endpoint to send this response to Fin.\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access.\n{% /admonition %}\n",
-        "operationId": "replyToFin",
-        "parameters": [
-          {
-            "name": "Intercom-Version",
-            "in": "header",
-            "schema": {
-              "$ref": "#/components/schemas/IntercomVersion"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ReplyToFin"
-              },
-              "examples": {
-                "Basic reply": {
-                  "value": {
-                    "conversation_id": 123456,
-                    "message": {
-                      "author": "user",
-                      "body": "Here\u0027s the information you requested.",
-                      "timestamp": "2025-01-24T09:01:00.000Z"
-                    },
-                    "user": {
-                      "id": 123456,
-                      "name": "John Doe",
-                      "email": "john.doe@example.com"
-                    }
-                  }
-                },
-                "Reply with attachments": {
-                  "value": {
-                    "conversation_id": 123456,
-                    "message": {
-                      "author": "user",
-                      "body": "Here\u0027s the invoice you asked for.",
-                      "timestamp": "2025-01-24T09:01:00.000Z"
-                    },
-                    "user": {
-                      "id": 123456,
-                      "name": "John Doe",
-                      "email": "john.doe@example.com"
-                    },
-                    "attachments": [
-                      {
-                        "type": "url",
-                        "url": "https://example.com/invoice.pdf"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Reply sent successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "conversation_id": {
-                      "type": "string",
-                      "description": "The ID of the conversation.",
-                      "example": "ext-123"
-                    },
-                    "user_id": {
-                      "type": "string",
-                      "description": "The ID of the user.",
-                      "example": "user-456"
-                    },
-                    "status": {
-                      "enum": [
-                        "thinking",
-                        "replying",
-                        "awaiting_user_reply",
-                        "escalated",
-                        "resolved",
-                        "complete"
-                      ],
-                      "type": "string",
-                      "additionalProperties": false,
-                      "description": "Fin\u0027s current status in the conversation workflow.\n",
-                      "example": "thinking"
-                    },
-                    "created_at_ms": {
-                      "type": "string",
-                      "description": "The timestamp the response was created at, with millisecond precision.",
-                      "format": "date-time",
-                      "example": "2025-01-24T10:00:00.123Z"
-                    },
-                    "errors": {
-                      "$ref": "#/components/schemas/FinAgentAttributeErrors"
-                    },
-                    "sse_subscription_url": {
-                      "type": "string",
-                      "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
-                      "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
-                    }
-                  }
-                },
-                "examples": {
-                  "Successful response": {
-                    "value": {
-                      "conversation_id": "ext-123",
-                      "user_id": "user-456",
-                      "status": "thinking",
-                      "created_at_ms": "2025-01-24T10:00:00.123Z",
-                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
-                    }
-                  },
-                  "Response with attribute errors": {
-                    "value": {
-                      "conversation_id": "ext-123",
-                      "user_id": "user-456",
-                      "status": "thinking",
-                      "created_at_ms": "2025-01-24T10:00:00.123Z",
-                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...",
-                      "errors": {
-                        "user": {
-                          "attributes": {
-                            "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Invalid request": {
-                    "value": {
-                      "type": "error.list",
-                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
-                      "errors": [
-                        {
-                          "code": "parameter_invalid",
-                          "message": "conversation_id is required"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Unauthorized": {
-                    "value": {
-                      "type": "error.list",
-                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
-                      "errors": [
-                        {
-                          "code": "unauthorized",
-                          "message": "Access Token Invalid"
                         }
                       ]
                     }
@@ -10583,12 +10149,9 @@
                             "total_count": 0,
                             "has_more": false
                           },
+                          "ai_topics": null,
                           "ai_agent": null,
-                          "ai_agent_participated": false,
-                          "channel": {
-                            "initial": "messenger",
-                            "current": "messenger"
-                          }
+                          "ai_agent_participated": false
                         }
                       ]
                     }
@@ -10925,12 +10488,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -11153,12 +10713,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -11516,12 +11073,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -11650,12 +11204,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [],
@@ -11970,14 +11521,11 @@
                             "total_count": 0,
                             "has_more": false
                           },
+                          "ai_topics": null,
                           "ai_agent": null,
                           "ai_agent_participated": false
                         }
-                      ],
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      }
+                      ]
                     }
                   }
                 }
@@ -12156,12 +11704,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12251,12 +11796,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12346,12 +11888,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12445,12 +11984,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12708,12 +12244,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12803,12 +12336,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12898,12 +12428,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -12993,12 +12520,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -14003,12 +13527,9 @@
                         "total_count": 0,
                         "has_more": false
                       },
+                      "ai_topics": null,
                       "ai_agent": null,
                       "ai_agent_participated": false,
-                      "channel": {
-                        "initial": "messenger",
-                        "current": "messenger"
-                      },
                       "conversation_parts": {
                         "type": "conversation_part.list",
                         "conversation_parts": [
@@ -17507,7 +17028,7 @@
           "Workflows"
         ],
         "summary": "Export a workflow",
-        "description": "Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.\n\nThis endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Preview API\u0022 %}\n  This API is currently in the Preview version. Its behavior may change in future releases.\n{% /admonition %}\n",
+        "description": "Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.\n\nThis endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.\n\n{% admonition type=\u0022info\u0022 name=\u0022Preview API\u0022 %}\n  This endpoint is available in the Preview API version. We may make iterative improvements, including adding new fields or refining existing ones.\n{% /admonition %}\n",
         "operationId": "exportWorkflow",
         "parameters": [
           {
@@ -20025,6 +19546,276 @@
                     "value": {
                       "type": "error.list",
                       "request_id": "81384687-5818-4df9-b421-fba77edd6c17",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/secure_mode_secrets": {
+      "get": {
+        "tags": [
+          "Identity Verification Secrets"
+        ],
+        "summary": "List all identity verification secrets",
+        "description": "Returns the identity verification secrets configured for your workspace.\n\nEach entry includes metadata only \u2014 the HMAC signing material itself is **never** returned by this endpoint. The raw secret is only available once, in the response to \u0060POST /secure_mode_secrets\u0060. Persist it at that moment.\n",
+        "operationId": "listIdentityVerificationSecrets",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityVerificationSecretList"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "identity_verification_secret",
+                          "id": 102,
+                          "name": "Production Web",
+                          "supports_android": false,
+                          "supports_ios": false,
+                          "supports_web": true,
+                          "created_at": 1734537243
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f8e61d8-6a9a-4f1e-bfbb-6c7c0c0aef1c",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Identity Verification Secrets"
+        ],
+        "summary": "Create an identity verification secret",
+        "description": "\u0022Creates a new identity verification secret for your workspace. Intercom generates a 256-bit, cryptographically random value server-side and returns it once in the response.\n\n**This is the only opportunity to capture the secret.** Store it in your secure configuration immediately. The \u0060secret\u0060 field is omitted from all subsequent responses (including \u0060GET /secure_mode_secrets\u0060) \u2014 if you lose it, you must rotate a new secret in and delete this one.\n\nYou must enable the secret for at least one platform (\u0060supports_android\u0060, \u0060supports_ios\u0060, or \u0060supports_web\u0060). Rotation flow: create the new secret, roll it out to every client signing \u0060user_hash\u0060 values, then delete the old secret with \u0060DELETE /secure_mode_secrets/{id}\u0060 once traffic has cut over.\n\u0022",
+        "operationId": "createIdentityVerificationSecret",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateIdentityVerificationSecretRequest"
+              },
+              "examples": {
+                "web_only": {
+                  "summary": "Create a web-only secret",
+                  "value": {
+                    "name": "Production Web",
+                    "supports_web": true
+                  }
+                },
+                "multi_platform": {
+                  "summary": "Create a secret for web and mobile",
+                  "value": {
+                    "name": "Production all-platform",
+                    "supports_web": true,
+                    "supports_ios": true,
+                    "supports_android": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Secret created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityVerificationSecretWithMaterial"
+                },
+                "examples": {
+                  "Secret created": {
+                    "value": {
+                      "type": "identity_verification_secret",
+                      "id": 103,
+                      "name": "Production Web",
+                      "secret": "9Zw0xNs3vKk0fPz9rwKqNbzH3mPVQmQxL9vhSm9Tk4A",
+                      "supports_android": false,
+                      "supports_ios": false,
+                      "supports_web": true,
+                      "created_at": 1734537500
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2fda7f9b-4a31-4c59-8b3f-3e5c4f8a1d22",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "name is required"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/secure_mode_secrets/{id}": {
+      "delete": {
+        "tags": [
+          "Identity Verification Secrets"
+        ],
+        "summary": "Delete an identity verification secret",
+        "description": "\u0022Soft-deletes an identity verification secret. After deletion, any \u0060user_hash\u0060 values signed with that secret will no longer verify \u2014 Messenger sessions depending on it will be rejected on their next request. Use this to complete a rotation: create a new secret, roll it out, then delete the old one.\n\u0022",
+        "operationId": "deleteIdentityVerificationSecret",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the identity verification secret",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 102
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Secret not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Secret not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "77b9d3c0-09e1-4d5f-8e6c-7d4a2f1b9a12",
+                      "errors": [
+                        {
+                          "code": "identity_verification_secret_not_found",
+                          "message": "Identity verification secret not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c1c0477c-5b80-4874-be65-01ec8a9ffe14",
                       "errors": [
                         {
                           "code": "unauthorized",
@@ -25679,6 +25470,660 @@
           }
         }
       }
+    },
+    "/fin/start": {
+      "post": {
+        "tags": [
+          "Fin Agent"
+        ],
+        "summary": "Start a conversation with Fin",
+        "description": "Initialize Fin by passing it the user\u0027s message along with conversation history and user details.\n\nThese additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access.\n{% /admonition %}\n\nOnce Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.\n\nDuring this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.\n\nEvents can be received via webhooks or Server-Sent Events (SSE) using the \u0060sse_subscription_url\u0060 in the response.\n",
+        "operationId": "startFinConversation",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartFinConversation"
+              },
+              "examples": {
+                "Basic request": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "How can I see my account details?",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                },
+                "Request with settings": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "How can I resolve my outstanding invoice?",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "Jane Smith",
+                      "email": "jane.smith@example.com"
+                    },
+                    "settings": {
+                      "follow_up_questions": false,
+                      "email": true
+                    }
+                  }
+                },
+                "Request with conversation history": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "How can I see my account details?",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com",
+                      "attributes": {
+                        "plan_type": "Pro",
+                        "subscription_status": "active"
+                      }
+                    },
+                    "conversation_metadata": {
+                      "history": [
+                        {
+                          "author": "user",
+                          "body": "I need help",
+                          "timestamp": "2025-01-24T10:00:01Z"
+                        },
+                        {
+                          "author": "agent",
+                          "body": "What do you need help with?",
+                          "timestamp": "2025-01-24T10:01:00Z"
+                        }
+                      ],
+                      "attributes": {
+                        "priority_level": "high",
+                        "department": "sales"
+                      }
+                    }
+                  }
+                },
+                "Request with attachments": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "message": {
+                      "author": "user",
+                      "body": "Here is a screenshot of the issue",
+                      "timestamp": "2025-01-24T10:01:20.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    },
+                    "attachments": [
+                      {
+                        "type": "url",
+                        "url": "https://example.com/document.pdf"
+                      },
+                      {
+                        "type": "file",
+                        "name": "screenshot.png",
+                        "content_type": "image/png",
+                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk..."
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fin conversation started successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "conversation_id": {
+                      "type": "string",
+                      "description": "The ID of the conversation.",
+                      "example": "ext-123"
+                    },
+                    "user_id": {
+                      "type": "string",
+                      "description": "The ID of the user.",
+                      "example": "user-456"
+                    },
+                    "status": {
+                      "enum": [
+                        "thinking",
+                        "replying",
+                        "awaiting_user_reply",
+                        "escalated",
+                        "resolved",
+                        "complete"
+                      ],
+                      "type": "string",
+                      "additionalProperties": false,
+                      "description": "Fin\u0027s current status in the conversation workflow.\n",
+                      "example": "thinking"
+                    },
+                    "created_at_ms": {
+                      "type": "string",
+                      "description": "The timestamp the response was created at, with millisecond precision.",
+                      "format": "date-time",
+                      "example": "2025-01-24T10:00:00.123Z"
+                    },
+                    "errors": {
+                      "$ref": "#/components/schemas/FinAgentAttributeErrors"
+                    },
+                    "sse_subscription_url": {
+                      "type": "string",
+                      "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+                      "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
+                    }
+                  },
+                  "Response with attribute errors": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m",
+                      "errors": {
+                        "user": {
+                          "attributes": {
+                            "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
+                          }
+                        },
+                        "conversation": {
+                          "attributes": {
+                            "bad_attr": "Conversation attribute \u0027bad_attr\u0027 does not exist"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "conversation_id is required"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fin/reply": {
+      "post": {
+        "tags": [
+          "Fin Agent"
+        ],
+        "summary": "Reply to Fin",
+        "description": "Once Fin has returned a response to a user\u0027s message, its status will be \u0060awaiting_user_reply\u0060.\n\nIf a user replies, use this endpoint to send this response to Fin.\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access.\n{% /admonition %}\n",
+        "operationId": "replyToFin",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReplyToFin"
+              },
+              "examples": {
+                "Basic reply": {
+                  "value": {
+                    "conversation_id": 123456,
+                    "message": {
+                      "author": "user",
+                      "body": "Here\u0027s the information you requested.",
+                      "timestamp": "2025-01-24T09:01:00.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                },
+                "Reply with settings": {
+                  "value": {
+                    "conversation_id": 123456,
+                    "message": {
+                      "author": "user",
+                      "body": "Thanks, here is my order number.",
+                      "timestamp": "2025-01-24T09:01:00.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "Jane Smith",
+                      "email": "jane.smith@example.com"
+                    },
+                    "settings": {
+                      "follow_up_questions": false,
+                      "email": true
+                    }
+                  }
+                },
+                "Reply with attachments": {
+                  "value": {
+                    "conversation_id": 123456,
+                    "message": {
+                      "author": "user",
+                      "body": "Here\u0027s the invoice you asked for.",
+                      "timestamp": "2025-01-24T09:01:00.000Z"
+                    },
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    },
+                    "attachments": [
+                      {
+                        "type": "url",
+                        "url": "https://example.com/invoice.pdf"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reply sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "conversation_id": {
+                      "type": "string",
+                      "description": "The ID of the conversation.",
+                      "example": "ext-123"
+                    },
+                    "user_id": {
+                      "type": "string",
+                      "description": "The ID of the user.",
+                      "example": "user-456"
+                    },
+                    "status": {
+                      "enum": [
+                        "thinking",
+                        "replying",
+                        "awaiting_user_reply",
+                        "escalated",
+                        "resolved",
+                        "complete"
+                      ],
+                      "type": "string",
+                      "additionalProperties": false,
+                      "description": "Fin\u0027s current status in the conversation workflow.\n",
+                      "example": "thinking"
+                    },
+                    "created_at_ms": {
+                      "type": "string",
+                      "description": "The timestamp the response was created at, with millisecond precision.",
+                      "format": "date-time",
+                      "example": "2025-01-24T10:00:00.123Z"
+                    },
+                    "errors": {
+                      "$ref": "#/components/schemas/FinAgentAttributeErrors"
+                    },
+                    "sse_subscription_url": {
+                      "type": "string",
+                      "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+                      "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
+                    }
+                  }
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
+                    }
+                  },
+                  "Response with attribute errors": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "user_id": "user-456",
+                      "status": "thinking",
+                      "created_at_ms": "2025-01-24T10:00:00.123Z",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...",
+                      "errors": {
+                        "user": {
+                          "attributes": {
+                            "invalid_attr": "User attribute \u0027invalid_attr\u0027 does not exist"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "conversation_id is required"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/procedures/{conversation_id}/collect_agent_input": {
+      "post": {
+        "tags": [
+          "Procedures"
+        ],
+        "summary": "Submit human input to a Fin Procedure HITL step",
+        "description": "Submit human-collected input to a Fin Procedure that is paused at a Human in the Loop (HITL) step.\n\nWhen a procedure reaches a HITL step with the API channel enabled, Intercom sends a \u0060procedure.hitl_notification.created\u0060 webhook. Use the \u0060callback_url\u0060 from that webhook payload to call this endpoint with the collected attribute values.\n\nThe \u0060step_id\u0060 must match the one from the webhook payload, and \u0060attribute_values\u0060 must include a value for every attribute listed in \u0060attributes_to_collect\u0060.\n\n{% admonition type=\u0022info\u0022 name=\u0022Authentication\u0022 %}\nThis endpoint requires an OAuth token with the \u0060write_conversations\u0060 scope. The admin associated with the token must have access to the conversation.\n{% /admonition %}\n\n{% admonition type=\u0022warning\u0022 name=\u0022Feature access\u0022 %}\nThis endpoint requires the Procedures HITL API feature to be enabled for your workspace.\n{% /admonition %}\n",
+        "operationId": "collectProcedureAgentInput",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "description": "The ID of the conversation where the HITL step was triggered.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 215473853299345
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectAgentInputRequest"
+              },
+              "examples": {
+                "Submit boolean and list values": {
+                  "value": {
+                    "step_id": "d5b81f72-adb9-4317-b973-75b3c3624c09",
+                    "attribute_values": [
+                      {
+                        "identifier": "workflow_local_variables.72c5a6b3-3cce-41d8-8e30-14da40791958",
+                        "value": true
+                      },
+                      {
+                        "identifier": "workflow_local_variables.5adb55fb-f549-44a0-8ee9-7e652ad77c25",
+                        "value": "85f00ba7-558c-4b02-a397-6f5c3659941c"
+                      }
+                    ]
+                  }
+                },
+                "Submit string value": {
+                  "value": {
+                    "step_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                    "attribute_values": [
+                      {
+                        "identifier": "workflow_local_variables.11111111-2222-3333-4444-555555555555",
+                        "value": "Approved by manager"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response \u2014 the procedure resumes with the provided values.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Admin lacks conversation access": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Admin does not have access to this conversation"
+                        }
+                      ]
+                    }
+                  },
+                  "Feature not enabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Procedures HITL API is not enabled for your app."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Resource not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "HITL request expired": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "This HITL request has expired"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Already fulfilled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "conflict",
+                          "message": "This HITL request has already been fulfilled"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -25778,6 +26223,7 @@
               "conversation_topic_change",
               "conversation_topic_creation",
               "conversation_topic_deletion",
+              "customer_facing_name_change",
               "help_center_settings_change",
               "inbound_conversations_change",
               "inbox_access_change",
@@ -26464,6 +26910,74 @@
           "Sales Agent"
         ]
       },
+      "AiSubtopic": {
+        "title": "AI Subtopic",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always ai_subtopic.",
+            "example": "ai_subtopic"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the subtopic.",
+            "example": "Payment Issues"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The ID of the subtopic.",
+            "example": 42
+          }
+        },
+        "description": "An AI-generated subtopic under a topic."
+      },
+      "AiTopic": {
+        "title": "AI Topic",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always ai_topic.",
+            "example": "ai_topic"
+          },
+          "topic_name": {
+            "type": "string",
+            "description": "The name of the AI-generated topic.",
+            "example": "Billing"
+          },
+          "subtopics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AiSubtopic"
+            },
+            "description": "The subtopics under this topic."
+          }
+        },
+        "description": "An AI-generated topic assigned to the conversation."
+      },
+      "AiTopics": {
+        "title": "AI Topics",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always ai_topics.",
+            "example": "ai_topics"
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AiTopic"
+            },
+            "description": "The list of AI-generated topics for this conversation."
+          }
+        },
+        "description": "AI-generated topics and subtopics for the conversation.",
+        "x-tags": [
+          "AI Topics"
+        ]
+      },
       "App": {
         "title": "App",
         "type": "object",
@@ -26678,7 +27192,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
+            "description": "The ids of the article\u0027s parent collections or sections. An article without this field stands alone."
           },
           "default_locale": {
             "type": "string",
@@ -27113,7 +27627,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
+            "description": "The ids of the article\u0027s parent collections or sections. An article without this field stands alone."
           },
           "default_locale": {
             "type": "string",
@@ -28037,6 +28551,48 @@
         },
         "description": "Request body for bulk updating contacts."
       },
+      "CollectAgentInputRequest": {
+        "title": "Collect Agent Input Request",
+        "required": [
+          "step_id",
+          "attribute_values"
+        ],
+        "type": "object",
+        "properties": {
+          "step_id": {
+            "type": "string",
+            "description": "The step_id from the webhook payload, identifying which HITL step this response is for.",
+            "example": "d5b81f72-adb9-4317-b973-75b3c3624c09"
+          },
+          "attribute_values": {
+            "type": "array",
+            "items": {
+              "required": [
+                "identifier",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "identifier": {
+                  "type": "string",
+                  "description": "Must exactly match an identifier from the webhook\u0027s attributes_to_collect array.",
+                  "example": "workflow_local_variables.72c5a6b3-3cce-41d8-8e30-14da40791958"
+                },
+                "value": {
+                  "type": "object",
+                  "description": "The value for this attribute. Must be type-compatible with the attribute\u0027s data_type from the webhook (e.g., boolean for boolean attributes, option ID string for list attributes).",
+                  "example": true
+                }
+              }
+            },
+            "description": "Array of attribute values matching the attributes_to_collect from the webhook payload. Must include a value for every attribute listed."
+          }
+        },
+        "description": "Request body for submitting human-collected input to a HITL procedure step.",
+        "x-tags": [
+          "Procedures"
+        ]
+      },
       "Company": {
         "title": "Company",
         "type": "object",
@@ -28329,7 +28885,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "has_hard_bounced": {
             "type": "boolean",
@@ -30194,9 +30750,6 @@
           },
           "sales_agent": {
             "$ref": "#/components/schemas/SalesAgent"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannel"
           }
         },
         "description": "The data returned about your conversations when you list or search them.",
@@ -30342,6 +30895,9 @@
           "linked_objects": {
             "$ref": "#/components/schemas/LinkedObjectList"
           },
+          "ai_topics": {
+            "$ref": "#/components/schemas/AiTopics"
+          },
           "ai_agent_participated": {
             "type": "boolean",
             "description": "Indicates whether the AI Agent participated in the conversation.",
@@ -30357,9 +30913,6 @@
           },
           "sales_agent": {
             "$ref": "#/components/schemas/SalesAgent"
-          },
-          "channel": {
-            "$ref": "#/components/schemas/ConversationChannel"
           }
         },
         "description": "Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.",
@@ -30388,25 +30941,6 @@
           }
         },
         "description": "Properties of the attachment files in a conversation part"
-      },
-      "ConversationChannel": {
-        "title": "Conversation Channel",
-        "type": "object",
-        "properties": {
-          "initial": {
-            "type": "string",
-            "description": "The channel through which the conversation was originally initiated. Possible values include \u0060messenger\u0060, \u0060zendesk_sunshine\u0060, \u0060zendesk_ticket\u0060, \u0060twitter\u0060, \u0060email\u0060. Returns \u0060null\u0060 if channel data is unavailable.",
-            "nullable": true,
-            "example": "messenger"
-          },
-          "current": {
-            "type": "string",
-            "description": "The current channel of the conversation. May differ from \u0060initial\u0060 if the conversation was migrated between channels. Returns \u0060null\u0060 if channel data is unavailable.",
-            "nullable": true,
-            "example": "messenger"
-          }
-        },
-        "description": "The channel through which a conversation was originally initiated and its current channel."
       },
       "ConversationContacts": {
         "title": "Contacts",
@@ -30713,7 +31247,7 @@
             "example": false
           }
         },
-        "description": "The author of this conversation part. Can be a Contact, Admin, or Bot. For Twitter, this will be blank."
+        "description": "The author of this conversation part. Can be a Contact, Admin, or Bot."
       },
       "ConversationParts": {
         "title": "Conversation Parts",
@@ -31235,7 +31769,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
+            "description": "The ids of the parent collections to place this article in. Send an empty array to leave the article without a collection. When provided, this takes precedence over \u0060parent_id\u0060 and \u0060parent_type\u0060."
           },
           "translated_content": {
             "$ref": "#/components/schemas/ArticleTranslatedContent"
@@ -31418,7 +31952,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "unsubscribed_from_emails": {
             "type": "boolean",
@@ -35244,6 +35778,34 @@
           "Fin Agent"
         ]
       },
+      "FinAgentSettings": {
+        "title": "Fin Agent Settings",
+        "type": "object",
+        "properties": {
+          "follow_up_questions": {
+            "type": "boolean",
+            "description": "\u0022When \u0060true\u0060 (default), Fin may ask clarifying questions and escalate to a human agent\nas needed.\n\nWhen \u0060false\u0060, Fin operates in non-conversational mode: it will not ask follow-up\nquestions and will not escalate to a human agent. Use this when you want Fin to respond\nwith a single, self-contained answer \u2014 for example, in asynchronous channels where\nback-and-forth conversation is not practical.\n\u0022",
+            "default": true,
+            "example": true
+          },
+          "procedures": {
+            "type": "boolean",
+            "description": "When \u0060true\u0060 (default), Fin will follow any configured procedures during the\nconversation.\n\nWhen \u0060false\u0060, Fin skips procedures and responds using its general knowledge and\nconfigured content only.\n",
+            "default": true,
+            "example": false
+          },
+          "email": {
+            "type": "boolean",
+            "description": "When \u0060true\u0060, Fin formats its replies as email-style responses, suitable for sending\ndirectly to users via email. This adjusts tone and structure to match email conventions\nrather than chat.\n\nDefaults to \u0060false\u0060, which produces chat-style responses.\n",
+            "default": false,
+            "example": true
+          }
+        },
+        "description": "Optional settings to control Fin\u0027s behaviour for this request.",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
       "FinAgentStatusUpdatedEvent": {
         "title": "Fin Agent Status Updated Event",
         "required": [
@@ -35883,6 +36445,154 @@
         "x-tags": [
           "Jobs"
         ]
+      },
+      "IdentityVerificationSecret": {
+        "title": "Identity Verification Secret",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "value is \u0022identity_verification_secret\u0022",
+            "example": "identity_verification_secret"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the secret",
+            "example": 102
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the secret, used to identify it in rotation flows",
+            "example": "Production Web"
+          },
+          "supports_android": {
+            "type": "boolean",
+            "description": "Whether the secret is enabled for the Android SDK",
+            "example": false
+          },
+          "supports_ios": {
+            "type": "boolean",
+            "description": "Whether the secret is enabled for the iOS SDK",
+            "example": false
+          },
+          "supports_web": {
+            "type": "boolean",
+            "description": "Whether the secret is enabled for the Messenger on web",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the secret was created, as a Unix timestamp",
+            "example": 1734537243
+          }
+        },
+        "description": "Metadata for an HMAC secret used to sign \u0060user_hash\u0060 values for Messenger identity verification. The \u0060secret\u0060 field is intentionally omitted \u2014 it is only returned once, in the response to \u0060POST /secure_mode_secrets\u0060.",
+        "x-tags": [
+          "Identity Verification Secrets"
+        ]
+      },
+      "IdentityVerificationSecretWithMaterial": {
+        "title": "Identity Verification Secret (with material)",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "value is \u0022identity_verification_secret\u0022",
+            "example": "identity_verification_secret"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the secret",
+            "example": 102
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the secret, used to identify it in rotation flows",
+            "example": "Production Web"
+          },
+          "supports_android": {
+            "type": "boolean",
+            "description": "Whether the secret is enabled for the Android SDK",
+            "example": false
+          },
+          "supports_ios": {
+            "type": "boolean",
+            "description": "Whether the secret is enabled for the iOS SDK",
+            "example": false
+          },
+          "supports_web": {
+            "type": "boolean",
+            "description": "Whether the secret is enabled for the Messenger on web",
+            "example": true
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the secret was created, as a Unix timestamp",
+            "example": 1734537243
+          },
+          "secret": {
+            "type": "string",
+            "description": "The 256-bit HMAC signing key, base64url-encoded. Returned ONCE at creation time and never surfaced again.",
+            "example": "9Zw0xNs3vKk0fPz9rwKqNbzH3mPVQmQxL9vhSm9Tk4A"
+          }
+        },
+        "description": "Returned once, at creation time, from \u0060POST /secure_mode_secrets\u0060. Includes the raw \u0060secret\u0060 field. Persist the secret immediately \u2014 it is never retrievable again.",
+        "x-tags": [
+          "Identity Verification Secrets"
+        ]
+      },
+      "IdentityVerificationSecretList": {
+        "title": "Identity Verification Secrets",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "list"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of the object",
+            "example": "list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdentityVerificationSecret"
+            },
+            "description": "The identity verification secrets configured for the workspace."
+          }
+        },
+        "description": "A list of identity verification secrets for the workspace. The \u0060secret\u0060 field is intentionally omitted from each entry."
+      },
+      "CreateIdentityVerificationSecretRequest": {
+        "title": "Create Identity Verification Secret Request",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for the secret.",
+            "example": "Production Web"
+          },
+          "supports_android": {
+            "type": "boolean",
+            "description": "Enable this secret for the Android SDK.",
+            "example": false
+          },
+          "supports_ios": {
+            "type": "boolean",
+            "description": "Enable this secret for the iOS SDK.",
+            "example": false
+          },
+          "supports_web": {
+            "type": "boolean",
+            "description": "Enable this secret for the Messenger on web.",
+            "example": true
+          }
+        },
+        "description": "Request payload for creating a new identity verification secret. At least one platform flag must be \u0060true\u0060."
       },
       "IntercomVersion": {
         "enum": [
@@ -38827,7 +39537,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "The ids of the article\u0027s parent collections. An article without this field stands alone."
+            "description": "The ids of the parent collections to place this article in. Send an empty array to remove the article from all collections. When provided, this takes precedence over \u0060parent_id\u0060 and \u0060parent_type\u0060."
           },
           "translated_content": {
             "$ref": "#/components/schemas/ArticleTranslatedContent"
@@ -38967,7 +39677,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "unsubscribed_from_emails": {
             "type": "boolean",
@@ -41015,16 +41725,21 @@
         }
       },
       "SearchActivityLogs": {
+        "required": [
+          "created_at_after"
+        ],
         "type": "object",
         "properties": {
           "created_at_after": {
-            "type": "string",
+            "type": "integer",
             "description": "The start date that you request data for. It must be formatted as a UNIX timestamp.",
+            "format": "date-time",
             "example": 1677253093
           },
           "created_at_before": {
-            "type": "string",
+            "type": "integer",
             "description": "The end date that you request data for. It must be formatted as a UNIX timestamp.",
+            "format": "date-time",
             "example": 1677861493
           },
           "event_types": {
@@ -41176,67 +41891,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "StartFinConversation": {
-        "required": [
-          "conversation_id",
-          "message",
-          "user"
-        ],
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "type": "string",
-            "description": "The ID of the conversation that is calling Fin via this API.",
-            "example": "ext-123"
-          },
-          "message": {
-            "$ref": "#/components/schemas/FinAgentMessage"
-          },
-          "user": {
-            "$ref": "#/components/schemas/FinAgentUser"
-          },
-          "attachments": {
-            "maxItems": 10,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FinAgentAttachment"
-            },
-            "description": "An array of attachments to include with the message. Maximum of 10 attachments."
-          },
-          "conversation_metadata": {
-            "$ref": "#/components/schemas/FinAgentConversationMetadata"
-          }
-        }
-      },
-      "ReplyToFin": {
-        "required": [
-          "conversation_id",
-          "message",
-          "user"
-        ],
-        "type": "object",
-        "properties": {
-          "conversation_id": {
-            "type": "string",
-            "description": "The ID of the conversation.",
-            "example": 123456
-          },
-          "message": {
-            "$ref": "#/components/schemas/FinAgentMessage"
-          },
-          "user": {
-            "$ref": "#/components/schemas/FinAgentUser"
-          },
-          "attachments": {
-            "maxItems": 10,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FinAgentAttachment"
-            },
-            "description": "An array of attachments to include with the message. Maximum of 10 attachments."
           }
         }
       },
@@ -41515,7 +42169,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "has_hard_bounced": {
             "type": "boolean",
@@ -41796,7 +42450,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "has_hard_bounced": {
             "type": "boolean",
@@ -42077,7 +42731,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "has_hard_bounced": {
             "type": "boolean",
@@ -42382,7 +43036,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "has_hard_bounced": {
             "type": "boolean",
@@ -42663,7 +43317,7 @@
             "type": "string",
             "description": "The id of an admin that has been assigned account ownership of the contact.",
             "nullable": true,
-            "example": 123
+            "example": 321
           },
           "has_hard_bounced": {
             "type": "boolean",
@@ -43533,6 +44187,76 @@
           "$ref": "#/components/schemas/AiCallResponse"
         }
       },
+      "StartFinConversation": {
+        "required": [
+          "conversation_id",
+          "message",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation that is calling Fin via this API.",
+            "example": "ext-123"
+          },
+          "message": {
+            "$ref": "#/components/schemas/FinAgentMessage"
+          },
+          "user": {
+            "$ref": "#/components/schemas/FinAgentUser"
+          },
+          "attachments": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinAgentAttachment"
+            },
+            "description": "An array of attachments to include with the message. Maximum of 10 attachments."
+          },
+          "conversation_metadata": {
+            "$ref": "#/components/schemas/FinAgentConversationMetadata"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/FinAgentSettings"
+          }
+        }
+      },
+      "ReplyToFin": {
+        "required": [
+          "conversation_id",
+          "message",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation.",
+            "example": 123456
+          },
+          "message": {
+            "$ref": "#/components/schemas/FinAgentMessage"
+          },
+          "user": {
+            "$ref": "#/components/schemas/FinAgentUser"
+          },
+          "attachments": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinAgentAttachment"
+            },
+            "description": "An array of attachments to include with the message. Maximum of 10 attachments."
+          },
+          "settings": {
+            "$ref": "#/components/schemas/FinAgentSettings"
+          }
+        }
+      },
+      "CollectProcedureAgentInput200": {
+        "type": "object"
+      },
       "Datetime_Branch1": {
         "required": [
           "value"
@@ -43822,6 +44546,10 @@
       "description": "Everything about your Help Center"
     },
     {
+      "name": "Identity Verification Secrets",
+      "description": "Manage HMAC signing secrets for Messenger identity verification \u2014 list, create, and rotate out. Signing material is returned only once, at creation time."
+    },
+    {
       "name": "Internal Articles",
       "description": "Everything about your Internal Articles"
     },
@@ -43849,6 +44577,10 @@
     {
       "name": "Notes",
       "description": "Everything about your Notes"
+    },
+    {
+      "name": "Procedures",
+      "description": "Submit human-collected input to Fin Procedures via the HITL (Human in the Loop) API.\n\n\u0026nbsp;\n\nWhen a Fin Procedure reaches a HITL step with the API channel enabled, Intercom sends a \u0060procedure.hitl_notification.created\u0060 webhook to your system. Your system collects the required input and responds via the callback endpoint documented here.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nThis API requires the Procedures HITL API feature to be enabled for your workspace and an OAuth token with the \u0060write_conversations\u0060 scope.\n{% /admonition %}\n"
     },
     {
       "name": "Segments",

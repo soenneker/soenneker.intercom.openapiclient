@@ -36,6 +36,8 @@ using Soenneker.Intercom.OpenApiClient.Messages;
 using Soenneker.Intercom.OpenApiClient.News;
 using Soenneker.Intercom.OpenApiClient.Notes;
 using Soenneker.Intercom.OpenApiClient.Phone_call_redirects;
+using Soenneker.Intercom.OpenApiClient.Procedures;
+using Soenneker.Intercom.OpenApiClient.Secure_mode_secrets;
 using Soenneker.Intercom.OpenApiClient.Segments;
 using Soenneker.Intercom.OpenApiClient.Subscription_types;
 using Soenneker.Intercom.OpenApiClient.Tags;
@@ -205,6 +207,16 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Phone_call_redirects.Phone_call_redirectsRequestBuilder Phone_call_redirects
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Phone_call_redirects.Phone_call_redirectsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The procedures property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Procedures.ProceduresRequestBuilder Procedures
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Procedures.ProceduresRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The secure_mode_secrets property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Secure_mode_secrets.Secure_mode_secretsRequestBuilder Secure_mode_secrets
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Secure_mode_secrets.Secure_mode_secretsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The segments property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Segments.SegmentsRequestBuilder Segments

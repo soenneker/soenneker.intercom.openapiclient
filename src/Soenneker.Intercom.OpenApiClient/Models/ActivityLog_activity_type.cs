@@ -188,6 +188,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         Conversation_topic_deletion,
         #pragma warning restore CS1591
+        [EnumMember(Value = "customer_facing_name_change")]
+        #pragma warning disable CS1591
+        Customer_facing_name_change,
+        #pragma warning restore CS1591
         [EnumMember(Value = "help_center_settings_change")]
         #pragma warning disable CS1591
         Help_center_settings_change,

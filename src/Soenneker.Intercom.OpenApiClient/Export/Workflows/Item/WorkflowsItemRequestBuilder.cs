@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Workflows.Item
         {
         }
         /// <summary>
-        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;warning&quot; name=&quot;Preview API&quot; %}  This API is currently in the Preview version. Its behavior may change in future releases.{% /admonition %}
+        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;info&quot; name=&quot;Preview API&quot; %}  This endpoint is available in the Preview API version. We may make iterative improvements, including adding new fields or refining existing ones.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Workflows.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExport.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;warning&quot; name=&quot;Preview API&quot; %}  This API is currently in the Preview version. Its behavior may change in future releases.{% /admonition %}
+        /// Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.{% admonition type=&quot;info&quot; name=&quot;Preview API&quot; %}  This endpoint is available in the Preview API version. We may make iterative improvements, including adding new fields or refining existing ones.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

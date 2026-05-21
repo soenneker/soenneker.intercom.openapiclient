@@ -15,21 +15,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The start date that you request data for. It must be formatted as a UNIX timestamp.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? CreatedAtAfter { get; set; }
-#nullable restore
-#else
-        public string CreatedAtAfter { get; set; }
-#endif
+        public int? CreatedAtAfter { get; set; }
         /// <summary>The end date that you request data for. It must be formatted as a UNIX timestamp.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? CreatedAtBefore { get; set; }
-#nullable restore
-#else
-        public string CreatedAtBefore { get; set; }
-#endif
+        public int? CreatedAtBefore { get; set; }
         /// <summary>An optional list of event types to filter activity logs by. Use the list all activity log event types endpoint to retrieve available values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -67,8 +55,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at_after", n => { CreatedAtAfter = n.GetStringValue(); } },
-                { "created_at_before", n => { CreatedAtBefore = n.GetStringValue(); } },
+                { "created_at_after", n => { CreatedAtAfter = n.GetIntValue(); } },
+                { "created_at_before", n => { CreatedAtBefore = n.GetIntValue(); } },
                 { "event_types", n => { EventTypes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
@@ -81,8 +69,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("created_at_after", CreatedAtAfter);
-            writer.WriteStringValue("created_at_before", CreatedAtBefore);
+            writer.WriteIntValue("created_at_after", CreatedAtAfter);
+            writer.WriteIntValue("created_at_before", CreatedAtBefore);
             writer.WriteCollectionOfPrimitiveValues<string>("event_types", EventTypes);
             writer.WriteIntValue("page", Page);
             writer.WriteIntValue("per_page", PerPage);

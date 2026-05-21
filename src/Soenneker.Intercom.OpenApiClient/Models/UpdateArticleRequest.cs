@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ParentId { get; set; }
 #endif
-        /// <summary>The ids of the article&apos;s parent collections. An article without this field stands alone.</summary>
+        /// <summary>The ids of the parent collections to place this article in. Send an empty array to remove the article from all collections. When provided, this takes precedence over `parent_id` and `parent_type`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? ParentIds { get; set; }

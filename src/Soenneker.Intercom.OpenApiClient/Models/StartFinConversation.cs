@@ -46,6 +46,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage Message { get; set; }
 #endif
+        /// <summary>Optional settings to control Fin&apos;s behaviour for this request.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings? Settings { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings Settings { get; set; }
+#endif
         /// <summary>A user object representing the user in a Fin Agent conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -83,6 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "conversation_metadata", n => { ConversationMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata.CreateFromDiscriminatorValue); } },
                 { "message", n => { Message = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage.CreateFromDiscriminatorValue); } },
+                { "settings", n => { Settings = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings.CreateFromDiscriminatorValue); } },
                 { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser.CreateFromDiscriminatorValue); } },
             };
         }
@@ -97,6 +106,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata>("conversation_metadata", ConversationMetadata);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>("message", Message);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings>("settings", Settings);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>("user", User);
             writer.WriteAdditionalData(AdditionalData);
         }

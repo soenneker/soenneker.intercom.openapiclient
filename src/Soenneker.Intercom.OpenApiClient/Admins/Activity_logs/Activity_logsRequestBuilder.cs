@@ -28,7 +28,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Activity_logsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs{?created_at_after*,created_at_before*}", pathParameters)
+        public Activity_logsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs?created_at_after={created_at_after}{&created_at_before*}", pathParameters)
         {
         }
         /// <summary>
@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Activity_logsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs{?created_at_after*,created_at_before*}", rawUrl)
+        public Activity_logsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs?created_at_after={created_at_after}{&created_at_before*}", rawUrl)
         {
         }
         /// <summary>
