@@ -1224,7 +1224,11 @@
                           "external_id": 3,
                           "created_at": 1734537269,
                           "updated_at": 1734537269,
-                          "last_ingested_at": 1734537269
+                          "last_ingested_at": 1734537269,
+                          "audience_ids": [
+                            1,
+                            2
+                          ]
                         },
                         {
                           "id": 18,
@@ -1330,7 +1334,11 @@
                     "locale": "en",
                     "source_id": 44,
                     "title": "Test",
-                    "url": "https://www.example.com"
+                    "url": "https://www.example.com",
+                    "audience_ids": [
+                      1,
+                      2
+                    ]
                   }
                 }
               }
@@ -1361,7 +1369,11 @@
                       "external_id": "abc1234",
                       "created_at": 1734537273,
                       "updated_at": 1734537274,
-                      "last_ingested_at": 1734537274
+                      "last_ingested_at": 1734537274,
+                      "audience_ids": [
+                        1,
+                        2
+                      ]
                     }
                   }
                 }
@@ -1384,6 +1396,29 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown audience IDs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unknown audience IDs": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "audience_ids contains unknown audience IDs: 999"
                         }
                       ]
                     }
@@ -1436,7 +1471,11 @@
                       "external_id": 4,
                       "created_at": 1734537276,
                       "updated_at": 1734537276,
-                      "last_ingested_at": 1734537276
+                      "last_ingested_at": 1734537276,
+                      "audience_ids": [
+                        1,
+                        2
+                      ]
                     }
                   }
                 }
@@ -1509,7 +1548,11 @@
                       "external_id": 5,
                       "created_at": 1734537278,
                       "updated_at": 1734537278,
-                      "last_ingested_at": 1734537278
+                      "last_ingested_at": 1734537278,
+                      "audience_ids": [
+                        1,
+                        2
+                      ]
                     }
                   }
                 }
@@ -1573,7 +1616,11 @@
                     "locale": "en",
                     "source_id": 47,
                     "title": "Test",
-                    "url": "https://www.example.com"
+                    "url": "https://www.example.com",
+                    "audience_ids": [
+                      1,
+                      2
+                    ]
                   }
                 }
               }
@@ -1604,7 +1651,11 @@
                       "external_id": 5678,
                       "created_at": 1734537280,
                       "updated_at": 1734537281,
-                      "last_ingested_at": 1734537281
+                      "last_ingested_at": 1734537281,
+                      "audience_ids": [
+                        1,
+                        2
+                      ]
                     }
                   }
                 }
@@ -1627,6 +1678,29 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown audience IDs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unknown audience IDs": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "audience_ids contains unknown audience IDs: 999"
                         }
                       ]
                     }
@@ -32683,6 +32757,14 @@
             "type": "string",
             "description": "The identifier for the external page which was given by the source. Must be unique for the source.",
             "example": 5678
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The list of audience IDs to target this external page to for Fin AI Agent. Omitting the field preserves any default audience segments inherited from the parent content import source. Pass an explicit array to override inherited defaults with the given set. Pass \u0060[]\u0060 to clear all audience memberships (even if the source has defaults). Unknown audience IDs return a \u0060404\u0060 error with no partial commit.",
+            "nullable": true
           }
         },
         "description": "You can add an External Page to your Fin Content Library."
@@ -35910,6 +35992,14 @@
             "description": "The time when the external page was last ingested.",
             "format": "date-time",
             "example": 1672928610
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The list of audience IDs this external page is targeted to for Fin AI Agent. Empty array means no audience targeting is set.",
+            "nullable": true
           }
         },
         "description": "External pages that you have added to your Fin Content Library.",
@@ -40258,6 +40348,14 @@
             "type": "string",
             "description": "The identifier for the external page which was given by the source. Must be unique for the source.",
             "example": 5678
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The list of audience IDs to target this external page to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass \u0060[]\u0060 to clear all audience memberships. Unknown audience IDs return a \u0060404\u0060 error with no partial commit.",
+            "nullable": true
           }
         },
         "description": "You can update an External Page in your Fin Content Library."
