@@ -47,12 +47,13 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
         {
         }
         /// <summary>
-        /// You can fetch a list of all data attributes belonging to a workspace for contacts, companies or conversations.
+        /// You can fetch a list of all data attributes belonging to a workspace for contacts or companies.{% admonition type=&quot;warning&quot; name=&quot;Conversation attributes removed&quot; %}Conversation attributes are no longer returned by this endpoint. Calling without a `model` parameter no longer includes them in the response, and `model=conversation` returns a `422` error. Use [GET /conversations/attributes](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) instead.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_attributes.Data_attributesRequestBuilder.Data_attributesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -66,6 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -97,7 +99,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all data attributes belonging to a workspace for contacts, companies or conversations.
+        /// You can fetch a list of all data attributes belonging to a workspace for contacts or companies.{% admonition type=&quot;warning&quot; name=&quot;Conversation attributes removed&quot; %}Conversation attributes are no longer returned by this endpoint. Calling without a `model` parameter no longer includes them in the response, and `model=conversation` returns a `422` error. Use [GET /conversations/attributes](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) instead.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -147,7 +149,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
             return new global::Soenneker.Intercom.OpenApiClient.Data_attributes.Data_attributesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all data attributes belonging to a workspace for contacts, companies or conversations.
+        /// You can fetch a list of all data attributes belonging to a workspace for contacts or companies.{% admonition type=&quot;warning&quot; name=&quot;Conversation attributes removed&quot; %}Conversation attributes are no longer returned by this endpoint. Calling without a `model` parameter no longer includes them in the response, and `model=conversation` returns a `422` error. Use [GET /conversations/attributes](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) instead.{% /admonition %}
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Data_attributesRequestBuilderGetQueryParameters 
@@ -155,7 +157,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
             /// <summary>Include archived attributes in the list. By default we return only non archived data attributes.</summary>
             [QueryParameter("include_archived")]
             public bool? IncludeArchived { get; set; }
-            /// <summary>Specify the data attribute model to return.</summary>
+            /// <summary>Specify the data attribute model to return. For conversation attributes, use `GET /conversations/attributes` instead.</summary>
             [QueryParameter("model")]
             public global::Soenneker.Intercom.OpenApiClient.Data_attributes.GetModelQueryParameterType? Model { get; set; }
         }

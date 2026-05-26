@@ -27,6 +27,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Indicates whether the AI Agent participated in the conversation.</summary>
         public bool? AiAgentParticipated { get; set; }
+        /// <summary>The channel through which the conversation was initiated and its current channel.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItem_channel? Channel { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItem_channel Channel { get; set; }
+#endif
         /// <summary>Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -195,6 +203,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgent.CreateFromDiscriminatorValue); } },
                 { "ai_agent_participated", n => { AiAgentParticipated = n.GetBoolValue(); } },
+                { "channel", n => { Channel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItem_channel>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItem_channel.CreateFromDiscriminatorValue); } },
                 { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts.CreateFromDiscriminatorValue); } },
                 { "conversation_rating", n => { ConversationRating = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating.CreateFromDiscriminatorValue); } },
@@ -232,6 +241,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>("ai_agent", AiAgent);
             writer.WriteBoolValue("ai_agent_participated", AiAgentParticipated);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItem_channel>("channel", Channel);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>("contacts", Contacts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>("conversation_rating", ConversationRating);

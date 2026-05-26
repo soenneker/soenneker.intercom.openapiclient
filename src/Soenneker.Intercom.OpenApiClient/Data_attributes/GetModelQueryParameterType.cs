@@ -16,9 +16,5 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
         #pragma warning disable CS1591
         Company,
         #pragma warning restore CS1591
-        [EnumMember(Value = "conversation")]
-        #pragma warning disable CS1591
-        Conversation,
-        #pragma warning restore CS1591
     }
 }

@@ -15,14 +15,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The list of audience IDs to target this external page to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error with no partial commit.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<int?>? AudienceIds { get; set; }
-#nullable restore
-#else
-        public List<int?> AudienceIds { get; set; }
-#endif
         /// <summary>The identifier for the external page which was given by the source. Must be unique for the source.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -87,7 +79,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "fin_availability", n => { FinAvailability = n.GetBoolValue(); } },
                 { "html", n => { Html = n.GetStringValue(); } },
@@ -104,7 +95,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteBoolValue("fin_availability", FinAvailability);
             writer.WriteStringValue("html", Html);

@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A list of all data attributes belonging to a workspace for contacts, companies or conversations.
+    /// A list of all data attributes belonging to a workspace for contacts or companies.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DataAttributeList : IAdditionalDataHolder, IParsable

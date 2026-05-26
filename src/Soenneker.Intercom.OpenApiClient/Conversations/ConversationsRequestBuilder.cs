@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Conversations.Attributes;
 using Soenneker.Intercom.OpenApiClient.Conversations.Deleted;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item;
 using Soenneker.Intercom.OpenApiClient.Conversations.Redact;
@@ -21,6 +22,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The attributes property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.AttributesRequestBuilder Attributes
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.AttributesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The deleted property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Deleted.DeletedRequestBuilder Deleted
         {
