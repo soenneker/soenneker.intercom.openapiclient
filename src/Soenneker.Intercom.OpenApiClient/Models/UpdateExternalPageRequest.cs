@@ -15,6 +15,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether the external page should be used to answer questions by AI Agent.</summary>
+        public bool? AiAgentAvailability { get; set; }
+        /// <summary>Whether the external page should be used to answer questions by AI Copilot.</summary>
+        public bool? AiCopilotAvailability { get; set; }
+        /// <summary>Whether the external page should be used to answer questions by AI Sales Agent.</summary>
+        public bool? AiSalesAgentAvailability { get; set; }
         /// <summary>The identifier for the external page which was given by the source. Must be unique for the source.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -23,7 +29,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalId { get; set; }
 #endif
-        /// <summary>Whether the external page should be used to answer questions by Fin.</summary>
+        /// <summary>Deprecated. Use ai_agent_availability, ai_copilot_availability, and ai_sales_agent_availability instead.</summary>
         public bool? FinAvailability { get; set; }
         /// <summary>The body of the external page in HTML.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -79,6 +85,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "ai_agent_availability", n => { AiAgentAvailability = n.GetBoolValue(); } },
+                { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
+                { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "fin_availability", n => { FinAvailability = n.GetBoolValue(); } },
                 { "html", n => { Html = n.GetStringValue(); } },
@@ -95,6 +104,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("ai_agent_availability", AiAgentAvailability);
+            writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
+            writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteBoolValue("fin_availability", FinAvailability);
             writer.WriteStringValue("html", Html);

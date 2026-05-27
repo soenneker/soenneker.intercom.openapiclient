@@ -15,6 +15,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether the content snippet should be available for AI Chatbot (Fin).</summary>
+        public bool? AiChatbotAvailability { get; set; }
+        /// <summary>Whether the content snippet should be available for AI Copilot.</summary>
+        public bool? AiCopilotAvailability { get; set; }
+        /// <summary>Whether the content snippet should be available for AI Sales Agent.</summary>
+        public bool? AiSalesAgentAvailability { get; set; }
         /// <summary>The list of audience IDs to target this content snippet to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass `[]` to clear all audience memberships. Unknown audience IDs return a `404` error with no partial commit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -80,6 +86,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "ai_chatbot_availability", n => { AiChatbotAvailability = n.GetBoolValue(); } },
+                { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
+                { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
                 { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -94,6 +103,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("ai_chatbot_availability", AiChatbotAvailability);
+            writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
+            writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
             writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>("json_blocks", JsonBlocks);

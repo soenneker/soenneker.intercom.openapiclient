@@ -15,6 +15,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this sets the default language&apos;s availability.</summary>
+        public bool? AiChatbotAvailability { get; set; }
+        /// <summary>Whether the article should be available for AI Copilot. For multilingual articles, this sets the default language&apos;s availability.</summary>
+        public bool? AiCopilotAvailability { get; set; }
+        /// <summary>Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language&apos;s availability.</summary>
+        public bool? AiSalesAgentAvailability { get; set; }
         /// <summary>The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. For per-locale targeting, use `translated_content.&lt;locale&gt;.audience_ids` instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -112,6 +118,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "ai_chatbot_availability", n => { AiChatbotAvailability = n.GetBoolValue(); } },
+                { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
+                { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
                 { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
@@ -133,6 +142,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("ai_chatbot_availability", AiChatbotAvailability);
+            writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
+            writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
             writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);

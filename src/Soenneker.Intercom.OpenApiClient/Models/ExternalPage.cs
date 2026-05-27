@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalId { get; set; }
 #endif
-        /// <summary>Deprecated. Use ai_agent_availability and ai_copilot_availability instead.</summary>
+        /// <summary>Deprecated. Use ai_agent_availability, ai_copilot_availability, and ai_sales_agent_availability instead.</summary>
         public bool? FinAvailability { get; set; }
         /// <summary>The body of the external page in HTML.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

@@ -15,11 +15,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Whether this snippet is available for AI Chatbot.</summary>
+        /// <summary>Whether the content snippet is available for AI Chatbot (Fin).</summary>
         public bool? AiChatbotAvailability { get; set; }
-        /// <summary>Whether this snippet is available for AI Copilot.</summary>
+        /// <summary>Whether the content snippet is available for AI Copilot.</summary>
         public bool? AiCopilotAvailability { get; set; }
-        /// <summary>Whether this snippet is available for AI Sales Agent.</summary>
+        /// <summary>Whether the content snippet is available for AI Sales Agent.</summary>
         public bool? AiSalesAgentAvailability { get; set; }
         /// <summary>The list of audience IDs this content snippet is targeted to for Fin AI Agent. Empty array means no audience targeting is set.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -37,9 +37,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string BodyMarkdown { get; set; }
 #endif
-        /// <summary>Whether this snippet is available for Fin (1 = on, 0 = off).</summary>
+        /// <summary>Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1 = on, 0 = off).</summary>
+        [Obsolete("")]
         public int? ChatbotAvailability { get; set; }
-        /// <summary>Whether this snippet is available for Copilot (1 = on, 0 = off).</summary>
+        /// <summary>Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for Copilot (1 = on, 0 = off).</summary>
+        [Obsolete("")]
         public int? CopilotAvailability { get; set; }
         /// <summary>The time the snippet was created as a UNIX timestamp.</summary>
         public int? CreatedAt { get; set; }

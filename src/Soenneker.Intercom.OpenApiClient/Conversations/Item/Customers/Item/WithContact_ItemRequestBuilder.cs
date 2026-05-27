@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item
         {
         }
         /// <summary>
-        /// You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.{% admonition type=&quot;warning&quot; name=&quot;Contacts without an email&quot; %}If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.{% /admonition %}
+        /// You can remove participants who are contacts from a group conversation, on behalf of an admin.{% admonition type=&quot;warning&quot; name=&quot;Removing the last participant&quot; %}You cannot remove the last remaining contact from a conversation.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="body">The request body</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.{% admonition type=&quot;warning&quot; name=&quot;Contacts without an email&quot; %}If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.{% /admonition %}
+        /// You can remove participants who are contacts from a group conversation, on behalf of an admin.{% admonition type=&quot;warning&quot; name=&quot;Removing the last participant&quot; %}You cannot remove the last remaining contact from a conversation.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

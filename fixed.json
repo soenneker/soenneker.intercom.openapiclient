@@ -3680,7 +3680,10 @@
                           "audience_ids": [
                             1,
                             2
-                          ]
+                          ],
+                          "ai_chatbot_availability": true,
+                          "ai_copilot_availability": true,
+                          "ai_sales_agent_availability": true
                         }
                       ]
                     }
@@ -3784,7 +3787,10 @@
                       "audience_ids": [
                         1,
                         2
-                      ]
+                      ],
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true
                     }
                   }
                 }
@@ -3912,7 +3918,10 @@
                       "audience_ids": [
                         1,
                         2
-                      ]
+                      ],
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true
                     }
                   }
                 }
@@ -4044,7 +4053,10 @@
                       "audience_ids": [
                         1,
                         2
-                      ]
+                      ],
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true
                     }
                   }
                 }
@@ -12829,7 +12841,7 @@
     "/conversations/{conversation_id}/conversation_parts/{id}": {
       "put": {
         "tags": [
-          "Conversations"
+          "Conversation Parts"
         ],
         "summary": "Update a conversation part",
         "description": "You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Experimental\u0022 %}\n  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.\n{% /admonition %}\n",
@@ -13027,7 +13039,7 @@
     "/conversations/{id}/customers": {
       "post": {
         "tags": [
-          "Conversations"
+          "Conversation Participants"
         ],
         "summary": "Attach a contact to a conversation",
         "description": "You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Contacts without an email\u0022 %}\nIf you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with \u0060role\u0060 set to \u0060lead\u0060.\n{% /admonition %}\n\n",
@@ -13181,10 +13193,10 @@
     "/conversations/{conversation_id}/customers/{contact_id}": {
       "delete": {
         "tags": [
-          "Conversations"
+          "Conversation Participants"
         ],
         "summary": "Detach a contact from a group conversation",
-        "description": "You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Contacts without an email\u0022 %}\nIf you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with \u0060role\u0060 set to \u0060lead\u0060.\n{% /admonition %}\n\n",
+        "description": "You can remove participants who are contacts from a group conversation, on behalf of an admin.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Removing the last participant\u0022 %}\nYou cannot remove the last remaining contact from a conversation.\n{% /admonition %}\n\n",
         "operationId": "detachContactFromConversation",
         "parameters": [
           {
@@ -13605,7 +13617,7 @@
     "/conversations/redact": {
       "post": {
         "tags": [
-          "Conversations"
+          "Conversation Parts"
         ],
         "summary": "Redact a conversation part",
         "description": "You can redact a conversation part or the source message of a conversation (as seen in the source object).\n\n{% admonition type=\u0022info\u0022 name=\u0022Redacting parts and messages\u0022 %}\nIf you are redacting a conversation part, it must have a \u0060body\u0060. If you are redacting a source message, it must have been created by a contact. We will return a \u0060conversation_part_not_redactable\u0060 error if these criteria are not met.\n{% /admonition %}\n\n",
@@ -28713,6 +28725,21 @@
             },
             "description": "The list of audience IDs this internal article is targeted to for Fin AI Agent. Empty array means no audience targeting is set.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article is available for AI Chatbot (Fin).",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article is available for AI Copilot.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article is available for AI Sales Agent.",
+            "example": true
           }
         },
         "description": "The Internal Articles API is a central place to gather all information and take actions on your internal articles.",
@@ -29156,6 +29183,21 @@
             },
             "description": "The list of audience IDs this internal article is targeted to for Fin AI Agent. Empty array means no audience targeting is set.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article is available for AI Chatbot (Fin).",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article is available for AI Copilot.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article is available for AI Sales Agent.",
+            "example": true
           }
         },
         "description": "The data returned about your internal articles when you list them.",
@@ -31893,27 +31935,29 @@
           },
           "chatbot_availability": {
             "type": "integer",
-            "description": "Whether this snippet is available for Fin (1 = on, 0 = off).",
-            "example": 1
+            "description": "Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1 = on, 0 = off).",
+            "example": 1,
+            "deprecated": true
           },
           "copilot_availability": {
             "type": "integer",
-            "description": "Whether this snippet is available for Copilot (1 = on, 0 = off).",
-            "example": 1
+            "description": "Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for Copilot (1 = on, 0 = off).",
+            "example": 1,
+            "deprecated": true
           },
           "ai_chatbot_availability": {
             "type": "boolean",
-            "description": "Whether this snippet is available for AI Chatbot.",
+            "description": "Whether the content snippet is available for AI Chatbot (Fin).",
             "example": true
           },
           "ai_copilot_availability": {
             "type": "boolean",
-            "description": "Whether this snippet is available for AI Copilot.",
+            "description": "Whether the content snippet is available for AI Copilot.",
             "example": true
           },
           "ai_sales_agent_availability": {
             "type": "boolean",
-            "description": "Whether this snippet is available for AI Sales Agent.",
+            "description": "Whether the content snippet is available for AI Sales Agent.",
             "example": true
           },
           "created_at": {
@@ -32020,6 +32064,24 @@
             },
             "description": "The list of audience IDs to target this content snippet to for Fin AI Agent. Pass an empty array or omit the field for no audience targeting. Unknown audience IDs return a \u0060404\u0060 error with no partial commit.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the content snippet should be available for AI Chatbot (Fin). Defaults to false.",
+            "default": false,
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the content snippet should be available for AI Copilot. Defaults to false.",
+            "default": false,
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the content snippet should be available for AI Sales Agent. Defaults to false.",
+            "default": false,
+            "example": true
           }
         },
         "description": "The request payload for creating a content snippet. You must provide either \u0060json_blocks\u0060 or \u0060body_markdown\u0060 for the snippet content \u2014 they are mutually exclusive."
@@ -32058,6 +32120,21 @@
             },
             "description": "The list of audience IDs to target this content snippet to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass \u0060[]\u0060 to clear all audience memberships. Unknown audience IDs return a \u0060404\u0060 error with no partial commit.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the content snippet should be available for AI Chatbot (Fin).",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the content snippet should be available for AI Copilot.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the content snippet should be available for AI Sales Agent.",
+            "example": true
           }
         },
         "description": "The request payload for updating a content snippet. All fields are optional \u2014 only provided fields will be updated. \u0060json_blocks\u0060 and \u0060body_markdown\u0060 are mutually exclusive."
@@ -33304,6 +33381,21 @@
             },
             "description": "The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level \u0060audience_ids\u0060 broadcasts the same set to every locale. For per-locale targeting, use \u0060translated_content.\u003Clocale\u003E.audience_ids\u0060 instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Copilot. For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
           }
         },
         "description": "You can create an Article",
@@ -33356,6 +33448,24 @@
             },
             "description": "The list of audience IDs to target this internal article to for Fin AI Agent. Pass an empty array or omit the field for no audience targeting. Unknown audience IDs return a \u0060404\u0060 error with no partial commit.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article should be available for AI Chatbot (Fin). Defaults to false.",
+            "default": false,
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article should be available for AI Copilot. Defaults to false.",
+            "default": false,
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article should be available for AI Sales Agent. Defaults to false.",
+            "default": false,
+            "example": true
           }
         },
         "description": "You can create an Internal Article",
@@ -33846,6 +33956,12 @@
           "ai_copilot_availability": {
             "type": "boolean",
             "description": "Whether the external page should be used to answer questions by AI Copilot. Will not default when updating an existing external page.",
+            "default": false,
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the external page should be used to answer questions by AI Sales Agent. Will not default when updating an existing external page.",
             "default": false,
             "example": true
           },
@@ -38537,7 +38653,7 @@
           },
           "fin_availability": {
             "type": "boolean",
-            "description": "Deprecated. Use ai_agent_availability and ai_copilot_availability instead.",
+            "description": "Deprecated. Use ai_agent_availability, ai_copilot_availability, and ai_sales_agent_availability instead.",
             "example": true
           },
           "locale": {
@@ -42562,6 +42678,21 @@
             },
             "description": "\u0022The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level \u0060audience_ids\u0060 broadcasts the same set to every locale. Sending \u0060audience_ids: []\u0060 clears all audience memberships from every locale. For per-locale targeting, use \u0060translated_content.\u003Clocale\u003E.audience_ids\u0060 instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.\u0022",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Copilot. For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
           }
         },
         "description": "You can Update an Article",
@@ -42608,6 +42739,21 @@
             },
             "description": "The list of audience IDs to target this internal article to for Fin AI Agent. Omitting the field leaves existing audience memberships unchanged (PATCH semantics). Pass \u0060[]\u0060 to clear all audience memberships. Unknown audience IDs return a \u0060404\u0060 error with no partial commit.",
             "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article should be available for AI Chatbot (Fin).",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article should be available for AI Copilot.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the internal article should be available for AI Sales Agent.",
+            "example": true
           }
         },
         "description": "You can Update an Internal Article",
@@ -42900,10 +43046,24 @@
             "description": "The URL of the external page. This will be used by Fin to link end users to the page it based its answer on.",
             "example": "https://help.example.com/en/articles/1234-getting-started"
           },
+          "ai_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the external page should be used to answer questions by AI Agent.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the external page should be used to answer questions by AI Copilot.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the external page should be used to answer questions by AI Sales Agent.",
+            "example": true
+          },
           "fin_availability": {
             "type": "boolean",
-            "description": "Whether the external page should be used to answer questions by Fin.",
-            "default": true,
+            "description": "Deprecated. Use ai_agent_availability, ai_copilot_availability, and ai_sales_agent_availability instead.",
             "example": true
           },
           "locale": {
@@ -47549,6 +47709,14 @@
         "description": "What is a conversation?",
         "url": "https://www.intercom.com/help/en/articles/4323904-what-is-a-conversation"
       }
+    },
+    {
+      "name": "Conversation Parts",
+      "description": "Update and redact individual conversation parts"
+    },
+    {
+      "name": "Conversation Participants",
+      "description": "Manage contacts participating in conversations"
     },
     {
       "name": "Conversations Attributes",
