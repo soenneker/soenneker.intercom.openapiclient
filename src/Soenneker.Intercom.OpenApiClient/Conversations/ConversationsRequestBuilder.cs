@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations{?per_page*,starting_after*}", pathParameters)
+        public ConversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations{?include_monitors*,include_scorecards*,per_page*,starting_after*}", pathParameters)
         {
         }
         /// <summary>
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations{?per_page*,starting_after*}", rawUrl)
+        public ConversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations{?include_monitors*,include_scorecards*,per_page*,starting_after*}", rawUrl)
         {
         }
         /// <summary>
@@ -180,6 +180,12 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConversationsRequestBuilderGetQueryParameters 
         {
+            /// <summary>If set to true, the response will include a `monitor_evaluations` array on each conversation with any QA monitor results that flagged it.</summary>
+            [QueryParameter("include_monitors")]
+            public bool? IncludeMonitors { get; set; }
+            /// <summary>If set to true, the response will include a `scorecards` array on each conversation with any QA scorecard results.</summary>
+            [QueryParameter("include_scorecards")]
+            public bool? IncludeScorecards { get; set; }
             /// <summary>How many results per page</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }

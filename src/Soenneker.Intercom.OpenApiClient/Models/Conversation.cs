@@ -109,6 +109,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList LinkedObjects { get; set; }
 #endif
+        /// <summary>QA monitor evaluations that flagged this conversation. Only included when `include_monitors=true` is passed as a query parameter.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation>? MonitorEvaluations { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation> MonitorEvaluations { get; set; }
+#endif
         /// <summary>Indicates whether a conversation is open (true) or closed (false).</summary>
         public bool? Open { get; set; }
         /// <summary>If marked as priority, it will return priority or else not_priority.</summary>
@@ -125,6 +133,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Indicates whether the Sales Agent participated in the conversation.</summary>
         public bool? SalesAgentParticipated { get; set; }
+        /// <summary>QA scorecard results for this conversation. Only included when `include_scorecards=true` is passed as a query parameter.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard>? Scorecards { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard> Scorecards { get; set; }
+#endif
         /// <summary>&quot;The SLA Applied object contains the details for which SLA has been applied to this conversation.Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.&quot;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -230,11 +246,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "first_contact_reply", n => { FirstContactReply = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList.CreateFromDiscriminatorValue); } },
+                { "monitor_evaluations", n => { MonitorEvaluations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
                 { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority>(); } },
                 { "read", n => { Read = n.GetBoolValue(); } },
                 { "sales_agent", n => { SalesAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgent>(global::Soenneker.Intercom.OpenApiClient.Models.SalesAgent.CreateFromDiscriminatorValue); } },
                 { "sales_agent_participated", n => { SalesAgentParticipated = n.GetBoolValue(); } },
+                { "scorecards", n => { Scorecards = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "sla_applied", n => { SlaApplied = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>(global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied.CreateFromDiscriminatorValue); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
                 { "source", n => { Source = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource.CreateFromDiscriminatorValue); } },
@@ -270,11 +288,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>("first_contact_reply", FirstContactReply);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>("linked_objects", LinkedObjects);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation>("monitor_evaluations", MonitorEvaluations);
             writer.WriteBoolValue("open", Open);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority>("priority", Priority);
             writer.WriteBoolValue("read", Read);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgent>("sales_agent", SalesAgent);
             writer.WriteBoolValue("sales_agent_participated", SalesAgentParticipated);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard>("scorecards", Scorecards);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>("sla_applied", SlaApplied);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>("source", Source);

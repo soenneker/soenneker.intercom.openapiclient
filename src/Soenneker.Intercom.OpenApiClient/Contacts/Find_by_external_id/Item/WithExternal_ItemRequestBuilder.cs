@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithExternal_ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{external_id}", pathParameters)
+        public WithExternal_ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{external_id}{?include_merge_history*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithExternal_ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{external_id}", rawUrl)
+        public WithExternal_ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{external_id}{?include_merge_history*}", rawUrl)
         {
         }
         /// <summary>
@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 410 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder.WithExternal_ItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder.WithExternal_ItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -65,11 +65,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder.WithExternal_ItemRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder.WithExternal_ItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -85,6 +85,16 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class WithExternal_ItemRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Only returned for contacts with a `user` role.</summary>
+            [QueryParameter("include_merge_history")]
+            public bool? IncludeMergeHistory { get; set; }
         }
     }
 }

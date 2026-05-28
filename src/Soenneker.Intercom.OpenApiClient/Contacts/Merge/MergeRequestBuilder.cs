@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public MergeRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/merge", pathParameters)
+        public MergeRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/merge{?include_merge_history*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public MergeRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/merge", rawUrl)
+        public MergeRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/merge{?include_merge_history*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
+        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return `410 Gone` with a `Link` header pointing to the canonical (merged-into) contact.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200"/></returns>
         /// <param name="body">Merge contact data.</param>
@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -59,18 +59,18 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
+        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return `410 Gone` with a `Link` header pointing to the canonical (merged-into) contact.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Merge contact data.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -88,6 +88,16 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return `410 Gone` with a `Link` header pointing to the canonical (merged-into) contact.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class MergeRequestBuilderPostQueryParameters 
+        {
+            /// <summary>Pass `true` to include the merge history of the resulting contact in the response. Only returned for contacts with a `user` role.</summary>
+            [QueryParameter("include_merge_history")]
+            public bool? IncludeMergeHistory { get; set; }
         }
     }
 }

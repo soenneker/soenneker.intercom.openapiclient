@@ -2,7 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
-using Soenneker.Intercom.OpenApiClient.Content.Search;
+using Soenneker.Intercom.OpenApiClient.Content.Bulk_actions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,10 +15,10 @@ namespace Soenneker.Intercom.OpenApiClient.Content
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContentRequestBuilder : BaseRequestBuilder
     {
-        /// <summary>The search property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Content.Search.SearchRequestBuilder Search
+        /// <summary>The bulk_actions property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Content.Bulk_actions.Bulk_actionsRequestBuilder Bulk_actions
         {
-            get => new global::Soenneker.Intercom.OpenApiClient.Content.Search.SearchRequestBuilder(PathParameters, RequestAdapter);
+            get => new global::Soenneker.Intercom.OpenApiClient.Content.Bulk_actions.Bulk_actionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Content.ContentRequestBuilder"/> and sets the default values.

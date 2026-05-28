@@ -8,23 +8,13 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// An audience represents a group of contacts that can be targeted by Fin.
+    /// The request payload for creating an audience.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class Audience : IAdditionalDataHolder, IParsable
+    public partial class CreateAudienceRequest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The time the audience was created as a Unix timestamp.</summary>
-        public int? CreatedAt { get; private set; }
-        /// <summary>The unique identifier representing the audience.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; private set; }
-#nullable restore
-#else
-        public string Id { get; private set; }
-#endif
         /// <summary>The name of the audience.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -49,26 +39,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> RolePredicates { get; set; }
 #endif
-        /// <summary>The type of object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Audience_type? Type { get; private set; }
-        /// <summary>The time the audience was last updated as a Unix timestamp.</summary>
-        public int? UpdatedAt { get; private set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Audience"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateAudienceRequest"/> and sets the default values.
         /// </summary>
-        public Audience()
+        public CreateAudienceRequest()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Audience"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateAudienceRequest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.Audience CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.CreateAudienceRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Audience();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.CreateAudienceRequest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -78,13 +64,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "predicates", n => { Predicates = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>(global::Soenneker.Intercom.OpenApiClient.Models.Predicate.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "role_predicates", n => { RolePredicates = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>(global::Soenneker.Intercom.OpenApiClient.Models.Predicate.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Audience_type>(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
         /// <summary>

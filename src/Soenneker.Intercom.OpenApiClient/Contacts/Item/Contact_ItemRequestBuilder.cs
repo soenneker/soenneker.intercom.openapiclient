@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Archive;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Block;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies;
+using Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Notes;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Segments;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions;
@@ -40,6 +41,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder(PathParameters, RequestAdapter);
         }
+        /// <summary>The merge_history property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history.Merge_historyRequestBuilder Merge_history
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history.Merge_historyRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The notes property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Notes.NotesRequestBuilder Notes
         {
@@ -70,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Contact_ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact_%2Did}", pathParameters)
+        public Contact_ItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact_%2Did}{?include_merge_history*}", pathParameters)
         {
         }
         /// <summary>
@@ -78,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Contact_ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact_%2Did}", rawUrl)
+        public Contact_ItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact_%2Did}{?include_merge_history*}", rawUrl)
         {
         }
         /// <summary>
@@ -114,11 +120,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 410 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -139,11 +145,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderPutQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -180,11 +186,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -200,11 +206,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderPutQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder.Contact_ItemRequestBuilderPutQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -222,6 +228,26 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// &quot;You can fetch the details of a single contact.{% admonition type=\&quot;info\&quot; name=\&quot;Merged contacts return 410 Gone\&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=\&quot;canonical\&quot;  ```  **Response body:**  ```json  {    \&quot;type\&quot;: \&quot;error.list\&quot;,    \&quot;errors\&quot;: [{ \&quot;code\&quot;: \&quot;contact_merged\&quot;, \&quot;message\&quot;: \&quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.\&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}&quot;
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class Contact_ItemRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Only returned for contacts with a `user` role.</summary>
+            [QueryParameter("include_merge_history")]
+            public bool? IncludeMergeHistory { get; set; }
+        }
+        /// <summary>
+        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class Contact_ItemRequestBuilderPutQueryParameters 
+        {
+            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Only returned for contacts with a `user` role.</summary>
+            [QueryParameter("include_merge_history")]
+            public bool? IncludeMergeHistory { get; set; }
         }
     }
 }

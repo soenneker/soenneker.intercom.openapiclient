@@ -560,7 +560,8 @@
                         "security_settings_change",
                         "temporary_expectation_change",
                         "upfront_email_collection_change",
-                        "welcome_message_change"
+                        "welcome_message_change",
+                        "hide_csat_from_agents_setting_change"
                       ]
                     }
                   }
@@ -2496,6 +2497,22 @@
                           "type": "audience",
                           "id": 123,
                           "name": "VIP Customers",
+                          "predicates": [
+                            {
+                              "attribute": "company.name",
+                              "type": "string",
+                              "comparison": "contains",
+                              "value": "Acme"
+                            }
+                          ],
+                          "role_predicates": [
+                            {
+                              "attribute": "role",
+                              "type": "role",
+                              "comparison": "eq",
+                              "value": "user"
+                            }
+                          ],
                           "created_at": 1717200000,
                           "updated_at": 1717200000
                         },
@@ -2503,6 +2520,22 @@
                           "type": "audience",
                           "id": 456,
                           "name": "Enterprise Accounts",
+                          "predicates": [
+                            {
+                              "attribute": "custom_attributes.plan",
+                              "type": "string",
+                              "comparison": "eq",
+                              "value": "enterprise"
+                            }
+                          ],
+                          "role_predicates": [
+                            {
+                              "attribute": "role",
+                              "type": "role",
+                              "comparison": "eq",
+                              "value": "user"
+                            }
+                          ],
                           "created_at": 1717200000,
                           "updated_at": 1717200000
                         }
@@ -2529,6 +2562,499 @@
                     "value": {
                       "type": "error.list",
                       "request_id": "b1939528-98f0-4a63-a442-2cc9203fc8c7",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Create an audience",
+        "description": "You can create a new audience by making a POST request to \u0060https://api.intercom.io/audiences\u0060.",
+        "operationId": "createAudience",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAudienceRequest"
+              },
+              "examples": {
+                "audience_created": {
+                  "summary": "Audience created",
+                  "value": {
+                    "name": "VIP Customers",
+                    "predicates": [
+                      {
+                        "attribute": "company.name",
+                        "type": "string",
+                        "comparison": "contains",
+                        "value": "Acme"
+                      }
+                    ],
+                    "role_predicates": [
+                      {
+                        "attribute": "role",
+                        "type": "role",
+                        "comparison": "eq",
+                        "value": "user"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Audience created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Audience"
+                },
+                "examples": {
+                  "Audience created": {
+                    "value": {
+                      "type": "audience",
+                      "id": 789,
+                      "name": "VIP Customers",
+                      "predicates": [
+                        {
+                          "attribute": "company.name",
+                          "type": "string",
+                          "comparison": "contains",
+                          "value": "Acme"
+                        }
+                      ],
+                      "role_predicates": [
+                        {
+                          "attribute": "role",
+                          "type": "role",
+                          "comparison": "eq",
+                          "value": "user"
+                        }
+                      ],
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Validation error": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e6b0c1-4f2d-4e8a-9c7b-1d2e3f4a5b6c",
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Name is required"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c1d2e3f4-5a6b-7c8d-9e0f-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audiences/{id}": {
+      "get": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Retrieve an audience",
+        "description": "You can fetch the details of a single audience by making a GET request to \u0060https://api.intercom.io/audiences/{id}\u0060.",
+        "operationId": "retrieveAudience",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the audience.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 123
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audience found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Audience"
+                },
+                "examples": {
+                  "Audience found": {
+                    "value": {
+                      "type": "audience",
+                      "id": 123,
+                      "name": "VIP Customers",
+                      "predicates": [
+                        {
+                          "attribute": "company.name",
+                          "type": "string",
+                          "comparison": "contains",
+                          "value": "Acme"
+                        }
+                      ],
+                      "role_predicates": [
+                        {
+                          "attribute": "role",
+                          "type": "role",
+                          "comparison": "eq",
+                          "value": "user"
+                        }
+                      ],
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Audience not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "d5e6f7a8-1b2c-3d4e-5f6a-7b8c9d0e1f2a",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c4d5e6f7-8a9b-0c1d-2e3f-4a5b6c7d8e9f",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Update an audience",
+        "description": "You can update the details of a single audience by making a PUT request to \u0060https://api.intercom.io/audiences/{id}\u0060.",
+        "operationId": "updateAudience",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the audience.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 123
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAudienceRequest"
+              },
+              "examples": {
+                "audience_updated": {
+                  "summary": "Audience updated",
+                  "value": {
+                    "name": "Enterprise Accounts",
+                    "predicates": [
+                      {
+                        "attribute": "custom_attributes.plan",
+                        "type": "string",
+                        "comparison": "eq",
+                        "value": "enterprise"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audience updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Audience"
+                },
+                "examples": {
+                  "Audience updated": {
+                    "value": {
+                      "type": "audience",
+                      "id": 123,
+                      "name": "Enterprise Accounts",
+                      "predicates": [
+                        {
+                          "attribute": "custom_attributes.plan",
+                          "type": "string",
+                          "comparison": "eq",
+                          "value": "enterprise"
+                        }
+                      ],
+                      "role_predicates": [
+                        {
+                          "attribute": "role",
+                          "type": "role",
+                          "comparison": "eq",
+                          "value": "user"
+                        }
+                      ],
+                      "created_at": 1717200000,
+                      "updated_at": 1717200100
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Audience not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e7f8a9b0-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Validation error": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "f0a1b2c3-4d5e-6f7a-8b9c-0d1e2f3a4b5c",
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Name must not be blank"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "f8a9b0c1-2d3e-4f5a-6b7c-8d9e0f1a2b3c",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Audiences"
+        ],
+        "summary": "Delete an audience",
+        "description": "You can delete a single audience by making a DELETE request to \u0060https://api.intercom.io/audiences/{id}\u0060.",
+        "operationId": "deleteAudience",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the audience.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": 123
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Audience not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Audience not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b2c3d4e5-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
                       "errors": [
                         {
                           "code": "unauthorized",
@@ -7763,6 +8289,15 @@
               "type": "string"
             },
             "example": "63a07ddf05a32042dffac965"
+          },
+          {
+            "name": "include_merge_history",
+            "in": "query",
+            "description": "Pass \u0060true\u0060 to include the contact\u0027s merge history in the response. Only returned for contacts with a \u0060user\u0060 role.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "requestBody": {
@@ -8069,6 +8604,15 @@
               "type": "string"
             },
             "example": "63a07ddf05a32042dffac965"
+          },
+          {
+            "name": "include_merge_history",
+            "in": "query",
+            "description": "Pass \u0060true\u0060 to include the contact\u0027s merge history in the response. Only returned for contacts with a \u0060user\u0060 role.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -8301,7 +8845,7 @@
           "Contacts"
         ],
         "summary": "Merge a lead and a user",
-        "description": "You can merge a contact with a \u0060role\u0060 of \u0060lead\u0060 into a contact with a \u0060role\u0060 of \u0060user\u0060.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts are not retrievable via the API\u0022 %}\n  Once a merge is completed, the source contact (\u0060from\u0060) is permanently removed from the active contact list. This means:\n  - **GET /contacts/{id}** \u2014 Requesting the source contact by its original ID will return a \u0060404 Not Found\u0060 error.\n  - **POST /contacts/search** \u2014 The source contact will not appear in search results, including queries filtered by \u0060updated_at\u0060.\n  - **GET /contacts** \u2014 The source contact will not appear in list results.\n\n  Only the target contact (\u0060into\u0060) remains accessible. If your application stores contact IDs, update them to use the target contact\u0027s ID after a merge.\n{% /admonition %}\n",
+        "description": "You can merge a contact with a \u0060role\u0060 of \u0060lead\u0060 into a contact with a \u0060role\u0060 of \u0060user\u0060.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts are not retrievable via the API\u0022 %}\n  Once a merge is completed, the source contact (\u0060from\u0060) is permanently removed from the active contact list. This means:\n  - **GET /contacts/{id}** \u2014 Requesting the source contact by its original ID will return \u0060410 Gone\u0060 with a \u0060Link\u0060 header pointing to the canonical (merged-into) contact.\n  - **POST /contacts/search** \u2014 The source contact will not appear in search results, including queries filtered by \u0060updated_at\u0060.\n  - **GET /contacts** \u2014 The source contact will not appear in list results.\n\n  Only the target contact (\u0060into\u0060) remains accessible. If your application stores contact IDs, update them to use the target contact\u0027s ID after a merge.\n{% /admonition %}\n",
         "operationId": "MergeContact",
         "parameters": [
           {
@@ -8309,6 +8853,15 @@
             "in": "header",
             "schema": {
               "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "include_merge_history",
+            "in": "query",
+            "description": "Pass \u0060true\u0060 to include the merge history of the resulting contact in the response. Only returned for contacts with a \u0060user\u0060 role.",
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           }
         ],
@@ -8483,6 +9036,15 @@
             "schema": {
               "$ref": "#/components/schemas/IntercomVersion"
             }
+          },
+          {
+            "name": "include_merge_history",
+            "in": "query",
+            "description": "Pass \u0060true\u0060 to include a \u0060merge_history\u0060 array on each contact in the response. Only returned for contacts with a \u0060user\u0060 role.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "requestBody": {
@@ -8581,6 +9143,15 @@
             "in": "header",
             "schema": {
               "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "include_merge_history",
+            "in": "query",
+            "description": "Pass \u0060true\u0060 to include a \u0060merge_history\u0060 array on each contact in the response. Only returned for contacts with a \u0060user\u0060 role.",
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           }
         ],
@@ -8832,6 +9403,15 @@
               "type": "string"
             },
             "example": "cdd29344-5e0c-4ef0-ac56-f9ba2979bc27"
+          },
+          {
+            "name": "include_merge_history",
+            "in": "query",
+            "description": "Pass \u0060true\u0060 to include the contact\u0027s merge history in the response. Only returned for contacts with a \u0060user\u0060 role.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -9119,6 +9699,144 @@
         }
       }
     },
+    "/contacts/{id}/merge_history": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get contact merge history",
+        "description": "Retrieve the paginated list of contacts that have been merged into a given contact.\n\nOnly available for contacts with a \u0060user\u0060 role. Returns a \u0060404\u0060 if the contact is not found or has a \u0060lead\u0060 role.\n",
+        "operationId": "ListContactMergeHistory",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the contact to fetch merge history for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "63a07ddf05a32042dffac965"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "A cursor for pagination. Pass the \u0060next_cursor\u0060 value from a previous response to fetch the next page.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results to return per page (default 50, max 150).",
+            "schema": {
+              "maximum": 150,
+              "minimum": 1,
+              "type": "integer",
+              "default": 50
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "The order to return results in. Defaults to descending.",
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "additionalProperties": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MergeHistoryList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "merge_history",
+                          "source_contact_id": "5ba682d23d7cf92bef87bfd3",
+                          "source_contact_role": "lead",
+                          "merged_at": 1571672154
+                        }
+                      ],
+                      "next_cursor": "eyJpZCI6IjYyMzQ1NiJ9",
+                      "has_more": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "45b30bd1-75d2-40cc-bb39-74ac133a2836",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contact not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Contact not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "45b30bd1-75d2-40cc-bb39-74ac133a2836",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Contact not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/contacts/bulk": {
       "post": {
         "tags": [
@@ -9359,6 +10077,185 @@
                       ]
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/content/bulk_actions": {
+      "post": {
+        "tags": [
+          "Content"
+        ],
+        "summary": "Run a bulk action on Knowledge Hub content (Preview)",
+        "description": "\u0022Asynchronously run a bulk action over up to 1,000 Knowledge Hub content items.\n\nFive actions are supported:\n  * \u0060publish\u0060 and \u0060unpublish\u0060 \u2014 apply to \u0060article_content\u0060 only.\n  * \u0060delete\u0060 \u2014 permanently delete content (excludes synced sources and \u0060external_content\u0060).\n  * \u0060set_availability\u0060 \u2014 toggle Fin AI Agent, Copilot, and Sales Agent availability flags.\n  * \u0060set_audience\u0060 \u2014 manage segment membership on content.\n\nThe endpoint validates the request, enqueues background work, and returns 202 with a\nplaceholder envelope. Items whose \u0060type\u0060 is not in the action\u0027s allowlist are silently\ndropped before processing. Articles imported from synced sources (Confluence, Notion,\nZendesk, Salesforce Knowledge, etc.) are silently skipped on \u0060delete\u0060 \u2014 they can only be\nremoved by disconnecting the underlying import source.\n\nRequires the \u0060write_content\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n\u0022",
+        "operationId": "bulkContentActions",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContentBulkActionRequest"
+              },
+              "examples": {
+                "publish": {
+                  "summary": "Publish articles",
+                  "value": {
+                    "action": "publish",
+                    "content_ids": [
+                      {
+                        "type": "article_content",
+                        "id": 12345678
+                      },
+                      {
+                        "type": "article_content",
+                        "id": 12345679
+                      }
+                    ]
+                  }
+                },
+                "unpublish": {
+                  "summary": "Unpublish articles",
+                  "value": {
+                    "action": "unpublish",
+                    "content_ids": [
+                      {
+                        "type": "article_content",
+                        "id": 12345678
+                      }
+                    ]
+                  }
+                },
+                "delete": {
+                  "summary": "Delete content across types",
+                  "value": {
+                    "action": "delete",
+                    "content_ids": [
+                      {
+                        "type": "article_content",
+                        "id": 12345678
+                      },
+                      {
+                        "type": "internal_article",
+                        "id": 12345679
+                      },
+                      {
+                        "type": "content_snippet",
+                        "id": 12345680
+                      }
+                    ]
+                  }
+                },
+                "set_availability": {
+                  "summary": "Toggle Fin AI Agent on, Copilot off",
+                  "value": {
+                    "action": "set_availability",
+                    "content_ids": [
+                      {
+                        "type": "article_content",
+                        "id": 12345678
+                      }
+                    ],
+                    "availability": {
+                      "ai_agent": true,
+                      "copilot": false
+                    }
+                  }
+                },
+                "set_audience": {
+                  "summary": "Add and remove segments",
+                  "value": {
+                    "action": "set_audience",
+                    "content_ids": [
+                      {
+                        "type": "article_content",
+                        "id": 12345678
+                      }
+                    ],
+                    "audience": {
+                      "add_segment_ids": [
+                        100
+                      ],
+                      "remove_segment_ids": [
+                        200
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted \u2014 work has been enqueued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentBulkActionResponse"
+                },
+                "examples": {
+                  "Queued": {
+                    "summary": "Queued",
+                    "value": {
+                      "type": "content_bulk_action",
+                      "status": "queued"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2e760b85-9020-471b-89dc-f579ec8a0104",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden \u2014 token is missing the \u0060write_content\u0060 OAuth scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid action, content_ids, or action-specific parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -10216,6 +11113,26 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "include_monitors",
+            "in": "query",
+            "description": "If set to true, the response will include a \u0060monitor_evaluations\u0060 array on each conversation with any QA monitor results that flagged it.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": true
+          },
+          {
+            "name": "include_scorecards",
+            "in": "query",
+            "description": "If set to true, the response will include a \u0060scorecards\u0060 array on each conversation with any QA scorecard results.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": true
           }
         ],
         "responses": {
@@ -10303,6 +11220,71 @@
                             "initial": "messenger",
                             "current": "messenger"
                           }
+                        }
+                      ]
+                    }
+                  },
+                  "with QA evaluations": {
+                    "summary": "Response with \u0060include_monitors=true\u0060 and \u0060include_scorecards=true\u0060",
+                    "value": {
+                      "type": "conversation.list",
+                      "pages": {
+                        "type": "pages",
+                        "page": 1,
+                        "per_page": 20,
+                        "total_pages": 1
+                      },
+                      "total_count": 1,
+                      "conversations": [
+                        {
+                          "type": "conversation",
+                          "id": 601,
+                          "created_at": 1734537700,
+                          "updated_at": 1734537760,
+                          "title": null,
+                          "open": true,
+                          "state": "open",
+                          "read": true,
+                          "priority": "not_priority",
+                          "admin_assignee_id": 991267715,
+                          "team_assignee_id": 5017691,
+                          "ai_agent_participated": false,
+                          "monitor_evaluations": [
+                            {
+                              "monitor_id": 12345,
+                              "monitor_name": "Customer complaint handling",
+                              "monitor_type": "prompt",
+                              "result": "flagged",
+                              "explanation": "The customer mentioned wanting a refund without resolution.",
+                              "evaluated_at": 1734537760
+                            }
+                          ],
+                          "scorecards": [
+                            {
+                              "scorecard_id": 67890,
+                              "scorecard_version_id": 67891,
+                              "name": "Standard QA Review",
+                              "scorecard_type": "human",
+                              "passed": true,
+                              "score": 0.85,
+                              "ai_score": 0.9,
+                              "evaluated_at": 1734537760,
+                              "reviewed_teammate": {
+                                "type": "admin",
+                                "admin_id": 991267715
+                              },
+                              "evaluators": [
+                                {
+                                  "evaluator_id": 54321,
+                                  "result": {
+                                    "value": "pass",
+                                    "source": "ai",
+                                    "reasoning": "The agent acknowledged the issue and resolved it within the same response."
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
@@ -10556,6 +11538,26 @@
             "description": "If set to true, the source of the conversation will include the email history.",
             "schema": {
               "type": "boolean"
+            },
+            "example": true
+          },
+          {
+            "name": "include_monitors",
+            "in": "query",
+            "description": "If set to true, the response will include a \u0060monitor_evaluations\u0060 array with any QA monitor results that flagged this conversation.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": true
+          },
+          {
+            "name": "include_scorecards",
+            "in": "query",
+            "description": "If set to true, the response will include a \u0060scorecards\u0060 array with any QA scorecard results for this conversation.",
+            "schema": {
+              "type": "boolean",
+              "default": false
             },
             "example": true
           }
@@ -11002,6 +12004,59 @@
                         ],
                         "total_count": 4
                       }
+                    }
+                  },
+                  "with QA evaluations": {
+                    "summary": "Response with \u0060include_monitors=true\u0060 and \u0060include_scorecards=true\u0060",
+                    "value": {
+                      "type": "conversation",
+                      "id": 601,
+                      "created_at": 1734537700,
+                      "updated_at": 1734537760,
+                      "title": null,
+                      "open": true,
+                      "state": "open",
+                      "read": true,
+                      "priority": "not_priority",
+                      "admin_assignee_id": 991267715,
+                      "team_assignee_id": 5017691,
+                      "ai_agent_participated": false,
+                      "monitor_evaluations": [
+                        {
+                          "monitor_id": 12345,
+                          "monitor_name": "Customer complaint handling",
+                          "monitor_type": "prompt",
+                          "result": "flagged",
+                          "explanation": "The customer mentioned wanting a refund without resolution.",
+                          "evaluated_at": 1734537760
+                        }
+                      ],
+                      "scorecards": [
+                        {
+                          "scorecard_id": 67890,
+                          "scorecard_version_id": 67891,
+                          "name": "Standard QA Review",
+                          "scorecard_type": "human",
+                          "passed": true,
+                          "score": 0.85,
+                          "ai_score": 0.9,
+                          "evaluated_at": 1734537760,
+                          "reviewed_teammate": {
+                            "type": "admin",
+                            "admin_id": 991267715
+                          },
+                          "evaluators": [
+                            {
+                              "evaluator_id": 54321,
+                              "result": {
+                                "value": "pass",
+                                "source": "ai",
+                                "reasoning": "The agent acknowledged the issue and resolved it within the same response."
+                              }
+                            }
+                          ]
+                        }
+                      ]
                     }
                   }
                 }
@@ -11579,6 +12634,26 @@
             "schema": {
               "$ref": "#/components/schemas/IntercomVersion"
             }
+          },
+          {
+            "name": "include_monitors",
+            "in": "query",
+            "description": "If set to true, the response will include a \u0060monitor_evaluations\u0060 array on each conversation with any QA monitor results that flagged it.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": true
+          },
+          {
+            "name": "include_scorecards",
+            "in": "query",
+            "description": "If set to true, the response will include a \u0060scorecards\u0060 array on each conversation with any QA scorecard results.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": true
           }
         ],
         "requestBody": {
@@ -11695,6 +12770,71 @@
                             "initial": "messenger",
                             "current": "messenger"
                           }
+                        }
+                      ]
+                    }
+                  },
+                  "with QA evaluations": {
+                    "summary": "Response with \u0060include_monitors=true\u0060 and \u0060include_scorecards=true\u0060",
+                    "value": {
+                      "type": "conversation.list",
+                      "pages": {
+                        "type": "pages",
+                        "page": 1,
+                        "per_page": 5,
+                        "total_pages": 1
+                      },
+                      "total_count": 1,
+                      "conversations": [
+                        {
+                          "type": "conversation",
+                          "id": 601,
+                          "created_at": 1734537700,
+                          "updated_at": 1734537760,
+                          "title": null,
+                          "open": true,
+                          "state": "open",
+                          "read": true,
+                          "priority": "not_priority",
+                          "admin_assignee_id": 991267715,
+                          "team_assignee_id": 5017691,
+                          "ai_agent_participated": false,
+                          "monitor_evaluations": [
+                            {
+                              "monitor_id": 12345,
+                              "monitor_name": "Customer complaint handling",
+                              "monitor_type": "prompt",
+                              "result": "flagged",
+                              "explanation": "The customer mentioned wanting a refund without resolution.",
+                              "evaluated_at": 1734537760
+                            }
+                          ],
+                          "scorecards": [
+                            {
+                              "scorecard_id": 67890,
+                              "scorecard_version_id": 67891,
+                              "name": "Standard QA Review",
+                              "scorecard_type": "human",
+                              "passed": true,
+                              "score": 0.85,
+                              "ai_score": 0.9,
+                              "evaluated_at": 1734537760,
+                              "reviewed_teammate": {
+                                "type": "admin",
+                                "admin_id": 991267715
+                              },
+                              "evaluators": [
+                                {
+                                  "evaluator_id": 54321,
+                                  "result": {
+                                    "value": "pass",
+                                    "source": "ai",
+                                    "reasoning": "The agent acknowledged the issue and resolved it within the same response."
+                                  }
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
@@ -27665,7 +28805,8 @@
               "security_settings_change",
               "temporary_expectation_change",
               "upfront_email_collection_change",
-              "welcome_message_change"
+              "welcome_message_change",
+              "hide_csat_from_agents_setting_change"
             ],
             "type": "string",
             "additionalProperties": false,
@@ -28452,11 +29593,13 @@
             "type": "string",
             "additionalProperties": false,
             "description": "The type of object.",
+            "readOnly": true,
             "example": "audience"
           },
           "id": {
             "type": "string",
             "description": "The unique identifier representing the audience.",
+            "readOnly": true,
             "example": 123
           },
           "name": {
@@ -28464,14 +29607,30 @@
             "description": "The name of the audience.",
             "example": "VIP Customers"
           },
+          "predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Predicate"
+            },
+            "description": "The predicates that define which contacts belong to the audience."
+          },
+          "role_predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Predicate"
+            },
+            "description": "Role-based predicates that further filter audience membership by contact role."
+          },
           "created_at": {
             "type": "integer",
             "description": "The time the audience was created as a Unix timestamp.",
+            "readOnly": true,
             "example": 1717200000
           },
           "updated_at": {
             "type": "integer",
             "description": "The time the audience was last updated as a Unix timestamp.",
+            "readOnly": true,
             "example": 1717200000
           }
         },
@@ -28522,6 +29681,33 @@
           }
         },
         "description": "A paginated list of audience objects."
+      },
+      "Predicate": {
+        "title": "Predicate",
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "type": "string",
+            "description": "The attribute to filter on.",
+            "example": "company.name"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the attribute.",
+            "example": "string"
+          },
+          "comparison": {
+            "type": "string",
+            "description": "The comparison operator.",
+            "example": "contains"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value to compare against.",
+            "example": "Acme"
+          }
+        },
+        "description": "A condition used to filter contacts in an audience."
       },
       "Article": {
         "title": "Article",
@@ -30369,54 +31555,54 @@
           },
           "created_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was created.",
+            "description": "(Unix timestamp in seconds) The time when the contact was created.",
             "format": "date-time",
             "example": 1571672154
           },
           "updated_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last updated.",
             "format": "date-time",
             "example": 1571672154
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_replied_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "description": "(Unix timestamp in seconds) The time when the contact last messaged in.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_contacted_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last messaged.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_opened_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last opened an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_clicked_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last clicked a link in an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -30483,7 +31669,7 @@
           },
           "android_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen on an Android device.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -30520,7 +31706,7 @@
           },
           "ios_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "description": "(Unix timestamp in seconds) The last time the contact used the iOS app.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -30561,6 +31747,14 @@
           },
           "social_profiles": {
             "$ref": "#/components/schemas/ContactSocialProfiles"
+          },
+          "merge_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "A list of contacts that were merged into this contact. Only included in the response when \u0060include_merge_history=true\u0060 is passed as a query parameter. Only available for contacts with a \u0060user\u0060 role.",
+            "nullable": true
           }
         },
         "description": "Contacts represent your leads and users in Intercom.",
@@ -30568,6 +31762,74 @@
           "Contacts"
         ],
         "x-fern-sdk-group-name": "contacts"
+      },
+      "MergeHistoryItem": {
+        "title": "Merge History Item",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of object.",
+            "example": "merge_history"
+          },
+          "source_contact_id": {
+            "type": "string",
+            "description": "The Intercom ID of the contact that was merged into this contact.",
+            "example": "5ba682d23d7cf92bef87bfd3"
+          },
+          "source_contact_role": {
+            "enum": [
+              "lead",
+              "user"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The role of the contact that was merged in.",
+            "example": "lead"
+          },
+          "merged_at": {
+            "type": "integer",
+            "description": "(Unix timestamp in seconds) The time when the merge occurred.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1571672154
+          }
+        },
+        "description": "A record of a contact that was merged into another contact."
+      },
+      "MergeHistoryList": {
+        "title": "Merge History List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "list"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The type of object.",
+            "example": "list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "An array of merge history entries."
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "A cursor to pass as the \u0060cursor\u0060 query parameter to fetch the next page of results. Absent when there are no more pages.",
+            "nullable": true,
+            "example": "WyIxNjM0NTY3ODkwIl0"
+          },
+          "has_more": {
+            "type": "boolean",
+            "description": "Whether there are more results to fetch.",
+            "example": false
+          }
+        },
+        "description": "A paginated list of merge history entries for a contact."
       },
       "ContactAttachedCompanies": {
         "title": "Contact Attached Companies",
@@ -31711,6 +32973,80 @@
         },
         "description": "blocked contact object"
       },
+      "ContentBulkActionRequest": {
+        "title": "Content Bulk Action Request Payload",
+        "required": [
+          "action",
+          "content_ids"
+        ],
+        "type": "object",
+        "properties": {
+          "action": {
+            "enum": [
+              "publish",
+              "unpublish",
+              "delete",
+              "set_availability",
+              "set_audience"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "\u0022The bulk action to perform. Allowed \u0060content_ids[].type\u0060 values vary per action:\n  * \u0060publish\u0060, \u0060unpublish\u0060: \u0060article_content\u0060\n  * \u0060delete\u0060: \u0060article_content\u0060, \u0060content_snippet\u0060, \u0060file_source_content\u0060, \u0060internal_article\u0060\n  * \u0060set_availability\u0060, \u0060set_audience\u0060: \u0060article_content\u0060, \u0060content_snippet\u0060, \u0060external_content\u0060, \u0060file_source_content\u0060, \u0060internal_article\u0060\n\u0022",
+            "example": "publish"
+          },
+          "content_ids": {
+            "maxItems": 1000,
+            "type": "array",
+            "items": {
+              "required": [
+                "type",
+                "id"
+              ],
+              "type": "object",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "article_content",
+                    "content_snippet",
+                    "external_content",
+                    "file_source_content",
+                    "internal_article"
+                  ],
+                  "type": "string",
+                  "additionalProperties": false,
+                  "example": "article_content"
+                },
+                "id": {
+                  "type": "string",
+                  "example": 12345678
+                }
+              }
+            },
+            "description": "Up to 1,000 content items to apply the action to."
+          },
+          "availability": {
+            "$ref": "#/components/schemas/ContentBulkActionRequestAvailability"
+          },
+          "audience": {
+            "$ref": "#/components/schemas/ContentBulkActionRequestAudience"
+          }
+        }
+      },
+      "ContentBulkActionResponse": {
+        "title": "Content Bulk Action Response Envelope",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "content_bulk_action"
+          },
+          "status": {
+            "type": "string",
+            "example": "queued"
+          }
+        },
+        "description": "Phase 1 envelope returned immediately after the request is enqueued. A future\nPreview release will replace this with a polling-friendly job resource that\nsurfaces progress and per-item results (updated, unchanged, skipped, failed).\n"
+      },
       "ContentImportSource": {
         "title": "Content Import Source",
         "required": [
@@ -32307,6 +33643,20 @@
               }
             },
             "description": "The channel through which the conversation was initiated and its current channel."
+          },
+          "monitor_evaluations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationMonitorEvaluation"
+            },
+            "description": "QA monitor evaluations that flagged this conversation. Only included when \u0060include_monitors=true\u0060 is passed as a query parameter."
+          },
+          "scorecards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationScorecard"
+            },
+            "description": "QA scorecard results for this conversation. Only included when \u0060include_scorecards=true\u0060 is passed as a query parameter."
           }
         },
         "description": "The data returned about your conversations when you list or search them.",
@@ -32488,9 +33838,254 @@
               }
             },
             "description": "The channel through which the conversation was initiated and its current channel."
+          },
+          "monitor_evaluations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationMonitorEvaluation"
+            },
+            "description": "QA monitor evaluations that flagged this conversation. Only included when \u0060include_monitors=true\u0060 is passed as a query parameter."
+          },
+          "scorecards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationScorecard"
+            },
+            "description": "QA scorecard results for this conversation. Only included when \u0060include_scorecards=true\u0060 is passed as a query parameter."
           }
         },
         "description": "Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationMonitorEvaluation": {
+        "title": "Conversation Monitor Evaluation",
+        "type": "object",
+        "properties": {
+          "monitor_id": {
+            "type": "string",
+            "description": "The unique identifier of the monitor that produced this evaluation.",
+            "example": 12345
+          },
+          "monitor_name": {
+            "type": "string",
+            "description": "The name of the monitor at the time of evaluation. Null if the monitor has since been deleted.",
+            "nullable": true,
+            "example": "Customer complaint handling"
+          },
+          "monitor_type": {
+            "type": "string",
+            "description": "The type of the monitor. Null if the monitor has since been deleted.",
+            "nullable": true,
+            "example": "prompt"
+          },
+          "result": {
+            "type": "string",
+            "description": "The evaluation outcome reported by the monitor.",
+            "example": "flagged"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "The reasoning provided by the monitor for its result. May be null if no reasoning was generated.",
+            "nullable": true,
+            "example": "The customer mentioned wanting a refund without resolution."
+          },
+          "evaluated_at": {
+            "type": "integer",
+            "description": "The time the monitor evaluated this conversation. Null in the rare case the underlying record\u0027s timestamp is not yet set.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1719493065
+          }
+        },
+        "description": "A QA monitor evaluation that flagged this conversation. Returned in the \u0060monitor_evaluations\u0060 array on conversation responses when \u0060include_monitors=true\u0060 is passed.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecard": {
+        "title": "Conversation Scorecard",
+        "type": "object",
+        "properties": {
+          "scorecard_id": {
+            "type": "string",
+            "description": "The unique identifier of the scorecard definition.",
+            "example": 67890
+          },
+          "scorecard_version_id": {
+            "type": "string",
+            "description": "The unique identifier of the specific scorecard version that produced this result.",
+            "example": 67891
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the scorecard.",
+            "example": "Standard QA Review"
+          },
+          "scorecard_type": {
+            "type": "string",
+            "description": "The type of scorecard.",
+            "example": "human"
+          },
+          "passed": {
+            "type": "boolean",
+            "description": "Whether the conversation passed the scorecard. Null when the scorecard has not been scored.",
+            "nullable": true,
+            "example": true
+          },
+          "score": {
+            "type": "number",
+            "description": "The numeric score for the scorecard. Null when the scorecard has not been scored.",
+            "nullable": true,
+            "example": 0.85
+          },
+          "ai_score": {
+            "type": "number",
+            "description": "The numeric score produced by AI evaluation, if applicable. Null when not AI-scored.",
+            "nullable": true,
+            "example": 0.9
+          },
+          "evaluated_at": {
+            "type": "integer",
+            "description": "The time the scorecard was last evaluated. Null in the rare case the underlying record\u0027s timestamp is not yet set.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1719493065
+          },
+          "reviewed_teammate": {
+            "$ref": "#/components/schemas/ConversationScorecardReviewedTeammate"
+          },
+          "evaluators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationScorecardEvaluator"
+            },
+            "description": "Per-evaluator results within this scorecard."
+          }
+        },
+        "description": "A QA scorecard result for this conversation. Returned in the \u0060scorecards\u0060 array on conversation responses when \u0060include_scorecards=true\u0060 is passed.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardReviewedTeammate": {
+        "title": "Reviewed Teammate",
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "ai",
+              "admin"
+            ],
+            "type": "string",
+            "additionalProperties": false,
+            "description": "The kind of reviewee. \u0060ai\u0060 if the conversation was handled by Fin or scored without a specific teammate; \u0060admin\u0060 if a specific teammate was reviewed.",
+            "example": "admin"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The id of the admin who was reviewed. Present only when \u0060type\u0060 is \u0060admin\u0060.",
+            "nullable": true,
+            "example": 991267715
+          }
+        },
+        "description": "The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardEvaluator": {
+        "title": "Conversation Scorecard Evaluator",
+        "type": "object",
+        "properties": {
+          "evaluator_id": {
+            "type": "string",
+            "description": "The unique identifier of the evaluator (criterion) within the scorecard.",
+            "example": 54321
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "The evaluator\u0027s selected value (typically a label such as \u0060pass\u0060, \u0060fail\u0060, or a category identifier).",
+                "nullable": true,
+                "example": "pass"
+              },
+              "source": {
+                "type": "string",
+                "description": "The origin of the result (for example, \u0060ai\u0060 or \u0060human\u0060).",
+                "nullable": true,
+                "example": "ai"
+              },
+              "reasoning": {
+                "type": "string",
+                "description": "A free-text explanation of the result.",
+                "nullable": true,
+                "example": "The agent acknowledged the issue and resolved it within the same response."
+              },
+              "reason_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Identifiers for structured reasons assigned to the result, if any.",
+                "nullable": true
+              },
+              "other_text": {
+                "type": "string",
+                "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reason_ids\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
+                "nullable": true,
+                "example": "Agent acknowledged the issue but missed the follow-up question about billing."
+              }
+            },
+            "description": "The evaluator\u0027s result for this conversation. Null if the evaluator was not scored."
+          }
+        },
+        "description": "A single evaluator within a scorecard, including its result for this conversation.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardEvaluatorResult": {
+        "title": "Conversation Scorecard Evaluator Result",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The evaluator\u0027s selected value (typically a label such as \u0060pass\u0060, \u0060fail\u0060, or a category identifier).",
+            "nullable": true,
+            "example": "pass"
+          },
+          "source": {
+            "type": "string",
+            "description": "The origin of the result (for example, \u0060ai\u0060 or \u0060human\u0060).",
+            "nullable": true,
+            "example": "ai"
+          },
+          "reasoning": {
+            "type": "string",
+            "description": "A free-text explanation of the result.",
+            "nullable": true,
+            "example": "The agent acknowledged the issue and resolved it within the same response."
+          },
+          "reason_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Identifiers for structured reasons assigned to the result, if any.",
+            "nullable": true
+          },
+          "other_text": {
+            "type": "string",
+            "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reason_ids\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
+            "nullable": true,
+            "example": "Agent acknowledged the issue but missed the follow-up question about billing."
+          }
+        },
+        "description": "The outcome of a single evaluator within a scorecard.",
         "x-tags": [
           "Conversations"
         ]
@@ -33305,6 +34900,35 @@
         },
         "description": "You can merge a Visitor to a Contact of role type lead or user."
       },
+      "CreateAudienceRequest": {
+        "title": "Create Audience Request",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the audience.",
+            "example": "VIP Customers"
+          },
+          "predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Predicate"
+            },
+            "description": "The predicates that define which contacts belong to the audience."
+          },
+          "role_predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Predicate"
+            },
+            "description": "Role-based predicates that further filter audience membership by contact role."
+          }
+        },
+        "description": "The request payload for creating an audience."
+      },
       "CreateArticleRequest": {
         "title": "Create Article Request Payload",
         "required": [
@@ -33571,14 +35195,14 @@
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "The time specified for when a contact signed up",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually)",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -42606,6 +44230,32 @@
         },
         "description": "You can tag a single company or a list of companies."
       },
+      "UpdateAudienceRequest": {
+        "title": "Update Audience Request",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the audience.",
+            "example": "Enterprise Accounts"
+          },
+          "predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Predicate"
+            },
+            "description": "The predicates that define which contacts belong to the audience."
+          },
+          "role_predicates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Predicate"
+            },
+            "description": "Role-based predicates that further filter audience membership by contact role."
+          }
+        },
+        "description": "The request payload for updating an audience. All fields are optional \u2014 only provided fields will be updated."
+      },
       "UpdateArticleRequest": {
         "title": "Update Article Request Payload",
         "type": "object",
@@ -42822,14 +44472,14 @@
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "The time specified for when a contact signed up",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually)",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -43814,6 +45464,49 @@
           }
         },
         "description": "The list of notes associated with the company"
+      },
+      "ContentBulkActionRequestAvailability": {
+        "type": "object",
+        "properties": {
+          "ai_agent": {
+            "type": "boolean",
+            "description": "Toggle Fin AI Agent availability."
+          },
+          "copilot": {
+            "type": "boolean",
+            "description": "Toggle Copilot availability."
+          },
+          "sales_agent": {
+            "type": "boolean",
+            "description": "Toggle Sales Agent availability."
+          }
+        },
+        "description": "Required when \u0060action\u0060 is \u0060set_availability\u0060. Each field is optional \u2014 only the\nproperties present in the request are toggled.\n"
+      },
+      "ContentBulkActionRequestAudience": {
+        "type": "object",
+        "properties": {
+          "add_segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Segment IDs to assign to the selected content."
+          },
+          "remove_segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Segment IDs to remove from the selected content."
+          },
+          "remove_all": {
+            "type": "boolean",
+            "description": "When \u0060true\u0060, removes all segments from the selected content.",
+            "example": false
+          }
+        },
+        "description": "Required when \u0060action\u0060 is \u0060set_audience\u0060. Manages segment membership."
       },
       "ConvertVisitorRequestUser": {
         "required": [
@@ -45385,54 +47078,54 @@
           },
           "created_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was created.",
+            "description": "(Unix timestamp in seconds) The time when the contact was created.",
             "format": "date-time",
             "example": 1571672154
           },
           "updated_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last updated.",
             "format": "date-time",
             "example": 1571672154
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_replied_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "description": "(Unix timestamp in seconds) The time when the contact last messaged in.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_contacted_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last messaged.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_opened_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last opened an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_clicked_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last clicked a link in an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -45499,7 +47192,7 @@
           },
           "android_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen on an Android device.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -45536,7 +47229,7 @@
           },
           "ios_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "description": "(Unix timestamp in seconds) The last time the contact used the iOS app.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -45577,6 +47270,14 @@
           },
           "social_profiles": {
             "$ref": "#/components/schemas/ContactSocialProfiles"
+          },
+          "merge_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "A list of contacts that were merged into this contact. Only included in the response when \u0060include_merge_history=true\u0060 is passed as a query parameter. Only available for contacts with a \u0060user\u0060 role.",
+            "nullable": true
           }
         }
       },
@@ -45666,54 +47367,54 @@
           },
           "created_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was created.",
+            "description": "(Unix timestamp in seconds) The time when the contact was created.",
             "format": "date-time",
             "example": 1571672154
           },
           "updated_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last updated.",
             "format": "date-time",
             "example": 1571672154
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_replied_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "description": "(Unix timestamp in seconds) The time when the contact last messaged in.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_contacted_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last messaged.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_opened_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last opened an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_clicked_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last clicked a link in an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -45780,7 +47481,7 @@
           },
           "android_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen on an Android device.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -45817,7 +47518,7 @@
           },
           "ios_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "description": "(Unix timestamp in seconds) The last time the contact used the iOS app.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -45858,6 +47559,14 @@
           },
           "social_profiles": {
             "$ref": "#/components/schemas/ContactSocialProfiles"
+          },
+          "merge_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "A list of contacts that were merged into this contact. Only included in the response when \u0060include_merge_history=true\u0060 is passed as a query parameter. Only available for contacts with a \u0060user\u0060 role.",
+            "nullable": true
           }
         }
       },
@@ -45947,54 +47656,54 @@
           },
           "created_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was created.",
+            "description": "(Unix timestamp in seconds) The time when the contact was created.",
             "format": "date-time",
             "example": 1571672154
           },
           "updated_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last updated.",
             "format": "date-time",
             "example": 1571672154
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_replied_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "description": "(Unix timestamp in seconds) The time when the contact last messaged in.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_contacted_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last messaged.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_opened_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last opened an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_clicked_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last clicked a link in an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46061,7 +47770,7 @@
           },
           "android_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen on an Android device.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46098,7 +47807,7 @@
           },
           "ios_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "description": "(Unix timestamp in seconds) The last time the contact used the iOS app.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46139,6 +47848,14 @@
           },
           "social_profiles": {
             "$ref": "#/components/schemas/ContactSocialProfiles"
+          },
+          "merge_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "A list of contacts that were merged into this contact. Only included in the response when \u0060include_merge_history=true\u0060 is passed as a query parameter. Only available for contacts with a \u0060user\u0060 role.",
+            "nullable": true
           }
         }
       },
@@ -46252,54 +47969,54 @@
           },
           "created_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was created.",
+            "description": "(Unix timestamp in seconds) The time when the contact was created.",
             "format": "date-time",
             "example": 1571672154
           },
           "updated_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last updated.",
             "format": "date-time",
             "example": 1571672154
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_replied_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "description": "(Unix timestamp in seconds) The time when the contact last messaged in.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_contacted_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last messaged.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_opened_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last opened an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_clicked_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last clicked a link in an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46366,7 +48083,7 @@
           },
           "android_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen on an Android device.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46403,7 +48120,7 @@
           },
           "ios_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "description": "(Unix timestamp in seconds) The last time the contact used the iOS app.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46444,6 +48161,14 @@
           },
           "social_profiles": {
             "$ref": "#/components/schemas/ContactSocialProfiles"
+          },
+          "merge_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "A list of contacts that were merged into this contact. Only included in the response when \u0060include_merge_history=true\u0060 is passed as a query parameter. Only available for contacts with a \u0060user\u0060 role.",
+            "nullable": true
           }
         }
       },
@@ -46533,54 +48258,54 @@
           },
           "created_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was created.",
+            "description": "(Unix timestamp in seconds) The time when the contact was created.",
             "format": "date-time",
             "example": 1571672154
           },
           "updated_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last updated.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last updated.",
             "format": "date-time",
             "example": 1571672154
           },
           "signed_up_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time specified for when a contact signed up.",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_replied_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last messaged in.",
+            "description": "(Unix timestamp in seconds) The time when the contact last messaged in.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_contacted_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last messaged.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last messaged.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_opened_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last opened an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last opened an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
           },
           "last_email_clicked_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact last clicked a link in an email.",
+            "description": "(Unix timestamp in seconds) The time when the contact last clicked a link in an email.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46647,7 +48372,7 @@
           },
           "android_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The time when the contact was last seen on an Android device.",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen on an Android device.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46684,7 +48409,7 @@
           },
           "ios_last_seen_at": {
             "type": "integer",
-            "description": "(UNIX timestamp) The last time the contact used the iOS app.",
+            "description": "(Unix timestamp in seconds) The last time the contact used the iOS app.",
             "format": "date-time",
             "nullable": true,
             "example": 1571672154
@@ -46725,6 +48450,14 @@
           },
           "social_profiles": {
             "$ref": "#/components/schemas/ContactSocialProfiles"
+          },
+          "merge_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergeHistoryItem"
+            },
+            "description": "A list of contacts that were merged into this contact. Only included in the response when \u0060include_merge_history=true\u0060 is passed as a query parameter. Only available for contacts with a \u0060user\u0060 role.",
+            "nullable": true
           }
         }
       },

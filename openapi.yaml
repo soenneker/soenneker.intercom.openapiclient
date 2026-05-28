@@ -481,6 +481,7 @@ paths:
                     - temporary_expectation_change
                     - upfront_email_collection_change
                     - welcome_message_change
+                    - hide_csat_from_agents_setting_change
               schema:
                 "$ref": "#/components/schemas/activity_log_event_type_list"
         '401':
@@ -1798,11 +1799,31 @@ paths:
                     - type: audience
                       id: '123'
                       name: VIP Customers
+                      predicates:
+                      - attribute: company.name
+                        type: string
+                        comparison: contains
+                        value: Acme
+                      role_predicates:
+                      - attribute: role
+                        type: role
+                        comparison: eq
+                        value: user
                       created_at: 1717200000
                       updated_at: 1717200000
                     - type: audience
                       id: '456'
                       name: Enterprise Accounts
+                      predicates:
+                      - attribute: custom_attributes.plan
+                        type: string
+                        comparison: eq
+                        value: enterprise
+                      role_predicates:
+                      - attribute: role
+                        type: role
+                        comparison: eq
+                        value: user
                       created_at: 1717200000
                       updated_at: 1717200000
                     total_count: 2
@@ -1820,6 +1841,314 @@ paths:
                   value:
                     type: error.list
                     request_id: b1939528-98f0-4a63-a442-2cc9203fc8c7
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+    post:
+      summary: Create an audience
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - Audiences
+      operationId: createAudience
+      description: You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_audience_request"
+            examples:
+              audience_created:
+                summary: Audience created
+                value:
+                  name: VIP Customers
+                  predicates:
+                  - attribute: company.name
+                    type: string
+                    comparison: contains
+                    value: Acme
+                  role_predicates:
+                  - attribute: role
+                    type: role
+                    comparison: eq
+                    value: user
+      responses:
+        '201':
+          description: Audience created
+          content:
+            application/json:
+              examples:
+                Audience created:
+                  value:
+                    type: audience
+                    id: '789'
+                    name: VIP Customers
+                    predicates:
+                    - attribute: company.name
+                      type: string
+                      comparison: contains
+                      value: Acme
+                    role_predicates:
+                    - attribute: role
+                      type: role
+                      comparison: eq
+                      value: user
+                    created_at: 1717200000
+                    updated_at: 1717200000
+              schema:
+                "$ref": "#/components/schemas/audience"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              examples:
+                Validation error:
+                  value:
+                    type: error.list
+                    request_id: a3e6b0c1-4f2d-4e8a-9c7b-1d2e3f4a5b6c
+                    errors:
+                    - code: validation_error
+                      message: Name is required
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: c1d2e3f4-5a6b-7c8d-9e0f-1a2b3c4d5e6f
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/audiences/{id}":
+    get:
+      summary: Retrieve an audience
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier for the audience.
+        example: '123'
+        schema:
+          type: string
+      tags:
+      - Audiences
+      operationId: retrieveAudience
+      description: You can fetch the details of a single audience by making a GET request
+        to `https://api.intercom.io/audiences/{id}`.
+      responses:
+        '200':
+          description: Audience found
+          content:
+            application/json:
+              examples:
+                Audience found:
+                  value:
+                    type: audience
+                    id: '123'
+                    name: VIP Customers
+                    predicates:
+                    - attribute: company.name
+                      type: string
+                      comparison: contains
+                      value: Acme
+                    role_predicates:
+                    - attribute: role
+                      type: role
+                      comparison: eq
+                      value: user
+                    created_at: 1717200000
+                    updated_at: 1717200000
+              schema:
+                "$ref": "#/components/schemas/audience"
+        '404':
+          description: Audience not found
+          content:
+            application/json:
+              examples:
+                Audience not found:
+                  value:
+                    type: error.list
+                    request_id: d5e6f7a8-1b2c-3d4e-5f6a-7b8c9d0e1f2a
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: c4d5e6f7-8a9b-0c1d-2e3f-4a5b6c7d8e9f
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+    put:
+      summary: Update an audience
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier for the audience.
+        example: '123'
+        schema:
+          type: string
+      tags:
+      - Audiences
+      operationId: updateAudience
+      description: You can update the details of a single audience by making a PUT request
+        to `https://api.intercom.io/audiences/{id}`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_audience_request"
+            examples:
+              audience_updated:
+                summary: Audience updated
+                value:
+                  name: Enterprise Accounts
+                  predicates:
+                  - attribute: custom_attributes.plan
+                    type: string
+                    comparison: eq
+                    value: enterprise
+      responses:
+        '200':
+          description: Audience updated
+          content:
+            application/json:
+              examples:
+                Audience updated:
+                  value:
+                    type: audience
+                    id: '123'
+                    name: Enterprise Accounts
+                    predicates:
+                    - attribute: custom_attributes.plan
+                      type: string
+                      comparison: eq
+                      value: enterprise
+                    role_predicates:
+                    - attribute: role
+                      type: role
+                      comparison: eq
+                      value: user
+                    created_at: 1717200000
+                    updated_at: 1717200100
+              schema:
+                "$ref": "#/components/schemas/audience"
+        '404':
+          description: Audience not found
+          content:
+            application/json:
+              examples:
+                Audience not found:
+                  value:
+                    type: error.list
+                    request_id: e7f8a9b0-1c2d-3e4f-5a6b-7c8d9e0f1a2b
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              examples:
+                Validation error:
+                  value:
+                    type: error.list
+                    request_id: f0a1b2c3-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+                    errors:
+                    - code: validation_error
+                      message: Name must not be blank
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: f8a9b0c1-2d3e-4f5a-6b7c-8d9e0f1a2b3c
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+    delete:
+      summary: Delete an audience
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier for the audience.
+        example: '123'
+        schema:
+          type: string
+      tags:
+      - Audiences
+      operationId: deleteAudience
+      description: You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.
+      responses:
+        '204':
+          description: Audience deleted
+        '404':
+          description: Audience not found
+          content:
+            application/json:
+              examples:
+                Audience not found:
+                  value:
+                    type: error.list
+                    request_id: a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: b2c3d4e5-6f7a-8b9c-0d1e-2f3a4b5c6d7e
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
@@ -5481,6 +5810,14 @@ paths:
         required: true
         schema:
           type: string
+      - name: include_merge_history
+        in: query
+        description: Pass `true` to include the contact's merge history in the response.
+          Only returned for contacts with a `user` role.
+        required: false
+        schema:
+          type: boolean
+          default: false
       tags:
       - Contacts
       - Custom Object Instances
@@ -5744,6 +6081,14 @@ paths:
         required: true
         schema:
           type: string
+      - name: include_merge_history
+        in: query
+        description: Pass `true` to include the contact's merge history in the response.
+          Only returned for contacts with a `user` role.
+        required: false
+        schema:
+          type: boolean
+          default: false
       tags:
       - Contacts
       operationId: ShowContact
@@ -5954,6 +6299,14 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: include_merge_history
+        in: query
+        description: Pass `true` to include the merge history of the resulting contact
+          in the response. Only returned for contacts with a `user` role.
+        required: false
+        schema:
+          type: boolean
+          default: false
       tags:
       - Contacts
       operationId: MergeContact
@@ -5962,7 +6315,7 @@ paths:
 
         {% admonition type="warning" name="Merged contacts are not retrievable via the API" %}
           Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:
-          - **GET /contacts/{id}** — Requesting the source contact by its original ID will return a `404 Not Found` error.
+          - **GET /contacts/{id}** — Requesting the source contact by its original ID will return `410 Gone` with a `Link` header pointing to the canonical (merged-into) contact.
           - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.
           - **GET /contacts** — The source contact will not appear in list results.
 
@@ -6105,6 +6458,14 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: include_merge_history
+        in: query
+        description: Pass `true` to include a `merge_history` array on each contact
+          in the response. Only returned for contacts with a `user` role.
+        required: false
+        schema:
+          type: boolean
+          default: false
       tags:
       - Contacts
       operationId: SearchContacts
@@ -6270,6 +6631,14 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: include_merge_history
+        in: query
+        description: Pass `true` to include a `merge_history` array on each contact
+          in the response. Only returned for contacts with a `user` role.
+        required: false
+        schema:
+          type: boolean
+          default: false
       tags:
       - Contacts
       operationId: ListContacts
@@ -6469,6 +6838,14 @@ paths:
         description: The external ID of the user that you want to retrieve
         schema:
           type: string
+      - name: include_merge_history
+        in: query
+        description: Pass `true` to include the contact's merge history in the response.
+          Only returned for contacts with a `user` role.
+        required: false
+        schema:
+          type: boolean
+          default: false
       tags:
       - Contacts
       operationId: ShowContactByExternalId
@@ -6696,6 +7073,99 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/contact_blocked"
+  "/contacts/{id}/merge_history":
+    get:
+      summary: Get contact merge history
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        description: The id of the contact to fetch merge history for.
+        example: 63a07ddf05a32042dffac965
+        required: true
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: A cursor for pagination. Pass the `next_cursor` value from a
+          previous response to fetch the next page.
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        description: The number of results to return per page (default 50, max 150).
+        required: false
+        schema:
+          type: integer
+          default: 50
+          minimum: 1
+          maximum: 150
+      - name: order
+        in: query
+        description: The order to return results in. Defaults to descending.
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      tags:
+      - Contacts
+      operationId: ListContactMergeHistory
+      description: |
+        Retrieve the paginated list of contacts that have been merged into a given contact.
+
+        Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    type: list
+                    data:
+                    - type: merge_history
+                      source_contact_id: 5ba682d23d7cf92bef87bfd3
+                      source_contact_role: lead
+                      merged_at: 1571672154
+                    next_cursor: eyJpZCI6IjYyMzQ1NiJ9
+                    has_more: true
+              schema:
+                "$ref": "#/components/schemas/merge_history_list"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 45b30bd1-75d2-40cc-bb39-74ac133a2836
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              examples:
+                Contact not found:
+                  value:
+                    type: error.list
+                    request_id: 45b30bd1-75d2-40cc-bb39-74ac133a2836
+                    errors:
+                    - code: not_found
+                      message: Contact not found
+              schema:
+                "$ref": "#/components/schemas/error"
   "/contacts/bulk":
     post:
       summary: Bulk update contacts
@@ -6858,6 +7328,128 @@ paths:
                       message: Access Token Invalid
               schema:
                 "$ref": "#/components/schemas/error"
+  "/content/bulk_actions":
+    post:
+      summary: Run a bulk action on Knowledge Hub content (Preview)
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - Content
+      operationId: bulkContentActions
+      description: |
+        Asynchronously run a bulk action over up to 1,000 Knowledge Hub content items.
+
+        Five actions are supported:
+          * `publish` and `unpublish` — apply to `article_content` only.
+          * `delete` — permanently delete content (excludes synced sources and `external_content`).
+          * `set_availability` — toggle Fin AI Agent, Copilot, and Sales Agent availability flags.
+          * `set_audience` — manage segment membership on content.
+
+        The endpoint validates the request, enqueues background work, and returns 202 with a
+        placeholder envelope. Items whose `type` is not in the action's allowlist are silently
+        dropped before processing. Articles imported from synced sources (Confluence, Notion,
+        Zendesk, Salesforce Knowledge, etc.) are silently skipped on `delete` — they can only be
+        removed by disconnecting the underlying import source.
+
+        Requires the `write_content` OAuth scope. Set `Intercom-Version: Preview`.
+      responses:
+        '202':
+          description: Accepted — work has been enqueued
+          content:
+            application/json:
+              examples:
+                Queued:
+                  summary: Queued
+                  value:
+                    type: content_bulk_action
+                    status: queued
+              schema:
+                "$ref": "#/components/schemas/content_bulk_action_response"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 2e760b85-9020-471b-89dc-f579ec8a0104
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '403':
+          description: Forbidden — token is missing the `write_content` OAuth scope
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Invalid action, content_ids, or action-specific parameters
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/content_bulk_action_request"
+            examples:
+              publish:
+                summary: Publish articles
+                value:
+                  action: publish
+                  content_ids:
+                  - type: article_content
+                    id: '12345678'
+                  - type: article_content
+                    id: '12345679'
+              unpublish:
+                summary: Unpublish articles
+                value:
+                  action: unpublish
+                  content_ids:
+                  - type: article_content
+                    id: '12345678'
+              delete:
+                summary: Delete content across types
+                value:
+                  action: delete
+                  content_ids:
+                  - type: article_content
+                    id: '12345678'
+                  - type: internal_article
+                    id: '12345679'
+                  - type: content_snippet
+                    id: '12345680'
+              set_availability:
+                summary: Toggle Fin AI Agent on, Copilot off
+                value:
+                  action: set_availability
+                  content_ids:
+                  - type: article_content
+                    id: '12345678'
+                  availability:
+                    ai_agent: true
+                    copilot: false
+              set_audience:
+                summary: Add and remove segments
+                value:
+                  action: set_audience
+                  content_ids:
+                  - type: article_content
+                    id: '12345678'
+                  audience:
+                    add_segment_ids:
+                    - 100
+                    remove_segment_ids:
+                    - 200
   "/content_snippets":
     get:
       summary: List all content snippets
@@ -7426,6 +8018,22 @@ paths:
         description: String used to get the next page of conversations.
         schema:
           type: string
+      - name: include_monitors
+        in: query
+        required: false
+        description: If set to true, the response will include a `monitor_evaluations` array on each conversation with any QA monitor results that flagged it.
+        example: true
+        schema:
+          type: boolean
+          default: false
+      - name: include_scorecards
+        in: query
+        required: false
+        description: If set to true, the response will include a `scorecards` array on each conversation with any QA scorecard results.
+        example: true
+        schema:
+          type: boolean
+          default: false
       tags:
       - Conversations
       operationId: listConversations
@@ -7508,6 +8116,54 @@ paths:
                       channel:
                         initial: messenger
                         current: messenger
+                with QA evaluations:
+                  summary: Response with `include_monitors=true` and `include_scorecards=true`
+                  value:
+                    type: conversation.list
+                    pages:
+                      type: pages
+                      page: 1
+                      per_page: 20
+                      total_pages: 1
+                    total_count: 1
+                    conversations:
+                    - type: conversation
+                      id: '601'
+                      created_at: 1734537700
+                      updated_at: 1734537760
+                      title:
+                      open: true
+                      state: open
+                      read: true
+                      priority: not_priority
+                      admin_assignee_id: 991267715
+                      team_assignee_id: 5017691
+                      ai_agent_participated: false
+                      monitor_evaluations:
+                      - monitor_id: '12345'
+                        monitor_name: Customer complaint handling
+                        monitor_type: prompt
+                        result: flagged
+                        explanation: The customer mentioned wanting a refund without resolution.
+                        evaluated_at: 1734537760
+                      scorecards:
+                      - scorecard_id: '67890'
+                        scorecard_version_id: '67891'
+                        name: Standard QA Review
+                        scorecard_type: human
+                        passed: true
+                        score: 0.85
+                        ai_score: 0.9
+                        evaluated_at: 1734537760
+                        reviewed_teammate:
+                          type: admin
+                          admin_id: '991267715'
+                        evaluators:
+                        - evaluator_id: '54321'
+                          result:
+                            value: pass
+                            source: ai
+                            reasoning: The agent acknowledged the issue and resolved it within the same response.
               schema:
                 "$ref": "#/components/schemas/conversation_list"
         '401':
@@ -7676,6 +8332,22 @@ paths:
         example: true
         schema:
           type: boolean
+      - name: include_monitors
+        in: query
+        required: false
+        description: If set to true, the response will include a `monitor_evaluations` array with any QA monitor results that flagged this conversation.
+        example: true
+        schema:
+          type: boolean
+          default: false
+      - name: include_scorecards
+        in: query
+        required: false
+        description: If set to true, the response will include a `scorecards` array with any QA scorecard results for this conversation.
+        example: true
+        schema:
+          type: boolean
+          default: false
       tags:
       - Conversations
       operationId: retrieveConversation
@@ -8042,6 +8714,46 @@ paths:
                             result: success
                         app_package_code: null
                       total_count: 4
+                with QA evaluations:
+                  summary: Response with `include_monitors=true` and `include_scorecards=true`
+                  value:
+                    type: conversation
+                    id: '601'
+                    created_at: 1734537700
+                    updated_at: 1734537760
+                    title:
+                    open: true
+                    state: open
+                    read: true
+                    priority: not_priority
+                    admin_assignee_id: 991267715
+                    team_assignee_id: 5017691
+                    ai_agent_participated: false
+                    monitor_evaluations:
+                    - monitor_id: '12345'
+                      monitor_name: Customer complaint handling
+                      monitor_type: prompt
+                      result: flagged
+                      explanation: The customer mentioned wanting a refund without resolution.
+                      evaluated_at: 1734537760
+                    scorecards:
+                    - scorecard_id: '67890'
+                      scorecard_version_id: '67891'
+                      name: Standard QA Review
+                      scorecard_type: human
+                      passed: true
+                      score: 0.85
+                      ai_score: 0.9
+                      evaluated_at: 1734537760
+                      reviewed_teammate:
+                        type: admin
+                        admin_id: '991267715'
+                      evaluators:
+                      - evaluator_id: '54321'
+                        result:
+                          value: pass
+                          source: ai
+                          reasoning: The agent acknowledged the issue and resolved it within the same response.
               schema:
                 "$ref": "#/components/schemas/conversation"
         '404':
@@ -8468,6 +9180,22 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: include_monitors
+        in: query
+        required: false
+        description: If set to true, the response will include a `monitor_evaluations` array on each conversation with any QA monitor results that flagged it.
+        example: true
+        schema:
+          type: boolean
+          default: false
+      - name: include_scorecards
+        in: query
+        required: false
+        description: If set to true, the response will include a `scorecards` array on each conversation with any QA scorecard results.
+        example: true
+        schema:
+          type: boolean
+          default: false
       tags:
       - Conversations
       operationId: searchConversations
@@ -8642,6 +9370,54 @@ paths:
                       channel:
                         initial: messenger
                         current: messenger
+                with QA evaluations:
+                  summary: Response with `include_monitors=true` and `include_scorecards=true`
+                  value:
+                    type: conversation.list
+                    pages:
+                      type: pages
+                      page: 1
+                      per_page: 5
+                      total_pages: 1
+                    total_count: 1
+                    conversations:
+                    - type: conversation
+                      id: '601'
+                      created_at: 1734537700
+                      updated_at: 1734537760
+                      title:
+                      open: true
+                      state: open
+                      read: true
+                      priority: not_priority
+                      admin_assignee_id: 991267715
+                      team_assignee_id: 5017691
+                      ai_agent_participated: false
+                      monitor_evaluations:
+                      - monitor_id: '12345'
+                        monitor_name: Customer complaint handling
+                        monitor_type: prompt
+                        result: flagged
+                        explanation: The customer mentioned wanting a refund without resolution.
+                        evaluated_at: 1734537760
+                      scorecards:
+                      - scorecard_id: '67890'
+                        scorecard_version_id: '67891'
+                        name: Standard QA Review
+                        scorecard_type: human
+                        passed: true
+                        score: 0.85
+                        ai_score: 0.9
+                        evaluated_at: 1734537760
+                        reviewed_teammate:
+                          type: admin
+                          admin_id: '991267715'
+                        evaluators:
+                        - evaluator_id: '54321'
+                          result:
+                            value: pass
+                            source: ai
+                            reasoning: The agent acknowledged the issue and resolved it within the same response.
               schema:
                 "$ref": "#/components/schemas/conversation_list"
       requestBody:
@@ -20178,6 +20954,7 @@ components:
           - temporary_expectation_change
           - upfront_email_collection_change
           - welcome_message_change
+          - hide_csat_from_agents_setting_change
           example: app_name_change
         activity_description:
           type: string
@@ -20851,22 +21628,47 @@ components:
           enum:
           - audience
           example: audience
+          readOnly: true
         id:
           type: string
           description: The unique identifier representing the audience.
           example: '123'
+          readOnly: true
         name:
           type: string
           description: The name of the audience.
           example: VIP Customers
+        predicates:
+          type: array
+          description: The predicates that define which contacts belong to the audience.
+          items:
+            "$ref": "#/components/schemas/predicate"
+          example:
+          - attribute: company.name
+            type: string
+            comparison: contains
+            value: Acme
+        role_predicates:
+          type: array
+          description: Role-based predicates that further filter audience membership by
+            contact role.
+          items:
+            "$ref": "#/components/schemas/predicate"
+          example:
+          - attribute: role
+            type: role
+            comparison: eq
+            value: user
         created_at:
           type: integer
           description: The time the audience was created as a Unix timestamp.
           example: 1717200000
+          readOnly: true
         updated_at:
           type: integer
           description: The time the audience was last updated as a Unix timestamp.
           example: 1717200000
+          readOnly: true
     audience_list:
       title: Audience List
       type: object
@@ -20899,6 +21701,27 @@ components:
           type: integer
           description: The total number of pages.
           example: 1
+    predicate:
+      title: Predicate
+      type: object
+      description: A condition used to filter contacts in an audience.
+      properties:
+        attribute:
+          type: string
+          description: The attribute to filter on.
+          example: company.name
+        type:
+          type: string
+          description: The type of the attribute.
+          example: string
+        comparison:
+          type: string
+          description: The comparison operator.
+          example: contains
+        value:
+          type: string
+          description: The value to compare against.
+          example: Acme
     article:
       title: Article
       type: object
@@ -22328,51 +23151,51 @@ components:
         created_at:
           type: integer
           format: date-time
-          description: "(UNIX timestamp) The time when the contact was created."
+          description: "(Unix timestamp in seconds) The time when the contact was created."
           example: 1571672154
         updated_at:
           type: integer
           format: date-time
-          description: "(UNIX timestamp) The time when the contact was last updated."
+          description: "(Unix timestamp in seconds) The time when the contact was last updated."
           example: 1571672154
         signed_up_at:
           type: integer
           format: date-time
           nullable: true
-          description: "(UNIX timestamp) The time specified for when a contact signed
+          description: "(Unix timestamp in seconds) The time specified for when a contact signed
             up."
           example: 1571672154
         last_seen_at:
           type: integer
           format: date-time
           nullable: true
-          description: "(UNIX timestamp) The time when the contact was last seen (either
+          description: "(Unix timestamp in seconds) The time when the contact was last seen (either
             where the Intercom Messenger was installed or when specified manually)."
           example: 1571672154
         last_replied_at:
           type: integer
           format: date-time
           nullable: true
-          description: "(UNIX timestamp) The time when the contact last messaged in."
+          description: "(Unix timestamp in seconds) The time when the contact last messaged in."
           example: 1571672154
         last_contacted_at:
           type: integer
           format: date-time
           nullable: true
-          description: "(UNIX timestamp) The time when the contact was last messaged."
+          description: "(Unix timestamp in seconds) The time when the contact was last messaged."
           example: 1571672154
         last_email_opened_at:
           type: integer
           format: date-time
           nullable: true
-          description: "(UNIX timestamp) The time when the contact last opened an
+          description: "(Unix timestamp in seconds) The time when the contact last opened an
             email."
           example: 1571672154
         last_email_clicked_at:
           type: integer
           format: date-time
           nullable: true
-          description: "(UNIX timestamp) The time when the contact last clicked a
+          description: "(Unix timestamp in seconds) The time when the contact last clicked a
             link in an email."
           example: 1571672154
         language_override:
@@ -22432,7 +23255,7 @@ components:
           type: integer
           nullable: true
           format: date-time
-          description: "(UNIX timestamp) The time when the contact was last seen on
+          description: "(Unix timestamp in seconds) The time when the contact was last seen on
             an Android device."
           example: 1571672154
         ios_app_name:
@@ -22464,7 +23287,7 @@ components:
           type: integer
           nullable: true
           format: date-time
-          description: "(UNIX timestamp) The last time the contact used the iOS app."
+          description: "(Unix timestamp in seconds) The last time the contact used the iOS app."
           example: 1571672154
         custom_attributes:
           type: object
@@ -22493,6 +23316,66 @@ components:
           "$ref": "#/components/schemas/contact_location"
         social_profiles:
           "$ref": "#/components/schemas/contact_social_profiles"
+        merge_history:
+          type: array
+          nullable: true
+          description: A list of contacts that were merged into this contact. Only
+            included in the response when `include_merge_history=true` is passed as
+            a query parameter. Only available for contacts with a `user` role.
+          items:
+            "$ref": "#/components/schemas/merge_history_item"
+    merge_history_item:
+      title: Merge History Item
+      type: object
+      description: A record of a contact that was merged into another contact.
+      properties:
+        type:
+          type: string
+          description: The type of object.
+          example: merge_history
+        source_contact_id:
+          type: string
+          description: The Intercom ID of the contact that was merged into this contact.
+          example: 5ba682d23d7cf92bef87bfd3
+        source_contact_role:
+          type: string
+          description: The role of the contact that was merged in.
+          enum:
+          - lead
+          - user
+          example: lead
+        merged_at:
+          type: integer
+          nullable: true
+          format: date-time
+          description: "(Unix timestamp in seconds) The time when the merge occurred."
+          example: 1571672154
+    merge_history_list:
+      title: Merge History List
+      type: object
+      description: A paginated list of merge history entries for a contact.
+      properties:
+        type:
+          type: string
+          description: The type of object.
+          enum:
+          - list
+          example: list
+        data:
+          type: array
+          description: An array of merge history entries.
+          items:
+            "$ref": "#/components/schemas/merge_history_item"
+        next_cursor:
+          type: string
+          nullable: true
+          description: A cursor to pass as the `cursor` query parameter to fetch
+            the next page of results. Absent when there are no more pages.
+          example: WyIxNjM0NTY3ODkwIl0
+        has_more:
+          type: boolean
+          description: Whether there are more results to fetch.
+          example: false
     contact_attached_companies:
       title: Contact Attached Companies
       type: object
@@ -23028,6 +23911,100 @@ components:
           type: boolean
           description: Always true.
           example: true
+    content_bulk_action_request:
+      title: Content Bulk Action Request Payload
+      type: object
+      required:
+      - action
+      - content_ids
+      properties:
+        action:
+          type: string
+          description: |
+            The bulk action to perform. Allowed `content_ids[].type` values vary per action:
+              * `publish`, `unpublish`: `article_content`
+              * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`
+              * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`
+          enum:
+          - publish
+          - unpublish
+          - delete
+          - set_availability
+          - set_audience
+          example: publish
+        content_ids:
+          type: array
+          maxItems: 1000
+          description: Up to 1,000 content items to apply the action to.
+          items:
+            type: object
+            required:
+            - type
+            - id
+            properties:
+              type:
+                type: string
+                enum:
+                - article_content
+                - content_snippet
+                - external_content
+                - file_source_content
+                - internal_article
+                example: article_content
+              id:
+                type: string
+                example: '12345678'
+        availability:
+          type: object
+          description: |
+            Required when `action` is `set_availability`. Each field is optional — only the
+            properties present in the request are toggled.
+          properties:
+            ai_agent:
+              type: boolean
+              description: Toggle Fin AI Agent availability.
+            copilot:
+              type: boolean
+              description: Toggle Copilot availability.
+            sales_agent:
+              type: boolean
+              description: Toggle Sales Agent availability.
+        audience:
+          type: object
+          description: Required when `action` is `set_audience`. Manages segment membership.
+          properties:
+            add_segment_ids:
+              type: array
+              description: Segment IDs to assign to the selected content.
+              items:
+                type: integer
+              example:
+              - 100
+            remove_segment_ids:
+              type: array
+              description: Segment IDs to remove from the selected content.
+              items:
+                type: integer
+              example:
+              - 200
+            remove_all:
+              type: boolean
+              description: When `true`, removes all segments from the selected content.
+              example: false
+    content_bulk_action_response:
+      title: Content Bulk Action Response Envelope
+      type: object
+      description: |
+        Phase 1 envelope returned immediately after the request is enqueued. A future
+        Preview release will replace this with a polling-friendly job resource that
+        surfaces progress and per-item results (updated, unchanged, skipped, failed).
+      properties:
+        type:
+          type: string
+          example: content_bulk_action
+        status:
+          type: string
+          example: queued
     content_import_source:
       title: Content Import Source
       type: object
@@ -23537,6 +24514,16 @@ components:
           type: object
           nullable: true
           description: The channel through which the conversation was initiated and its current channel.
+        monitor_evaluations:
+          type: array
+          description: QA monitor evaluations that flagged this conversation. Only included when `include_monitors=true` is passed as a query parameter.
+          items:
+            "$ref": "#/components/schemas/conversation_monitor_evaluation"
+        scorecards:
+          type: array
+          description: QA scorecard results for this conversation. Only included when `include_scorecards=true` is passed as a query parameter.
+          items:
+            "$ref": "#/components/schemas/conversation_scorecard"
     conversation:
       title: Conversation
       type: object
@@ -23666,6 +24653,174 @@ components:
           type: object
           nullable: true
           description: The channel through which the conversation was initiated and its current channel.
+        monitor_evaluations:
+          type: array
+          description: QA monitor evaluations that flagged this conversation. Only included when `include_monitors=true` is passed as a query parameter.
+          items:
+            "$ref": "#/components/schemas/conversation_monitor_evaluation"
+        scorecards:
+          type: array
+          description: QA scorecard results for this conversation. Only included when `include_scorecards=true` is passed as a query parameter.
+          items:
+            "$ref": "#/components/schemas/conversation_scorecard"
+    conversation_monitor_evaluation:
+      title: Conversation Monitor Evaluation
+      type: object
+      x-tags:
+      - Conversations
+      description: A QA monitor evaluation that flagged this conversation. Returned in the `monitor_evaluations` array on conversation responses when `include_monitors=true` is passed.
+      properties:
+        monitor_id:
+          type: string
+          description: The unique identifier of the monitor that produced this evaluation.
+          example: '12345'
+        monitor_name:
+          type: string
+          nullable: true
+          description: The name of the monitor at the time of evaluation. Null if the monitor has since been deleted.
+          example: Customer complaint handling
+        monitor_type:
+          type: string
+          nullable: true
+          description: The type of the monitor. Null if the monitor has since been deleted.
+          example: prompt
+        result:
+          type: string
+          description: The evaluation outcome reported by the monitor.
+          example: flagged
+        explanation:
+          type: string
+          nullable: true
+          description: The reasoning provided by the monitor for its result. May be null if no reasoning was generated.
+          example: The customer mentioned wanting a refund without resolution.
+        evaluated_at:
+          type: integer
+          format: date-time
+          nullable: true
+          description: The time the monitor evaluated this conversation. Null in the rare case the underlying record's timestamp is not yet set.
+          example: 1719493065
+    conversation_scorecard:
+      title: Conversation Scorecard
+      type: object
+      x-tags:
+      - Conversations
+      description: A QA scorecard result for this conversation. Returned in the `scorecards` array on conversation responses when `include_scorecards=true` is passed.
+      properties:
+        scorecard_id:
+          type: string
+          description: The unique identifier of the scorecard definition.
+          example: '67890'
+        scorecard_version_id:
+          type: string
+          description: The unique identifier of the specific scorecard version that produced this result.
+          example: '67891'
+        name:
+          type: string
+          description: The name of the scorecard.
+          example: Standard QA Review
+        scorecard_type:
+          type: string
+          description: The type of scorecard.
+          example: human
+        passed:
+          type: boolean
+          nullable: true
+          description: Whether the conversation passed the scorecard. Null when the scorecard has not been scored.
+          example: true
+        score:
+          type: number
+          nullable: true
+          description: The numeric score for the scorecard. Null when the scorecard has not been scored.
+          example: 0.85
+        ai_score:
+          type: number
+          nullable: true
+          description: The numeric score produced by AI evaluation, if applicable. Null when not AI-scored.
+          example: 0.9
+        evaluated_at:
+          type: integer
+          format: date-time
+          nullable: true
+          description: The time the scorecard was last evaluated. Null in the rare case the underlying record's timestamp is not yet set.
+          example: 1719493065
+        reviewed_teammate:
+          "$ref": "#/components/schemas/conversation_scorecard_reviewed_teammate"
+        evaluators:
+          type: array
+          description: Per-evaluator results within this scorecard.
+          items:
+            "$ref": "#/components/schemas/conversation_scorecard_evaluator"
+    conversation_scorecard_reviewed_teammate:
+      title: Reviewed Teammate
+      type: object
+      x-tags:
+      - Conversations
+      description: The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.
+      properties:
+        type:
+          type: string
+          enum:
+          - ai
+          - admin
+          description: The kind of reviewee. `ai` if the conversation was handled by Fin or scored without a specific teammate; `admin` if a specific teammate was reviewed.
+          example: admin
+        admin_id:
+          type: string
+          nullable: true
+          description: The id of the admin who was reviewed. Present only when `type` is `admin`.
+          example: '991267715'
+    conversation_scorecard_evaluator:
+      title: Conversation Scorecard Evaluator
+      type: object
+      x-tags:
+      - Conversations
+      description: A single evaluator within a scorecard, including its result for this conversation.
+      properties:
+        evaluator_id:
+          type: string
+          description: The unique identifier of the evaluator (criterion) within the scorecard.
+          example: '54321'
+        result:
+          allOf:
+            - "$ref": "#/components/schemas/conversation_scorecard_evaluator_result"
+          nullable: true
+          description: The evaluator's result for this conversation. Null if the evaluator was not scored.
+    conversation_scorecard_evaluator_result:
+      title: Conversation Scorecard Evaluator Result
+      type: object
+      x-tags:
+      - Conversations
+      description: The outcome of a single evaluator within a scorecard.
+      properties:
+        value:
+          type: string
+          nullable: true
+          description: The evaluator's selected value (typically a label such as `pass`, `fail`, or a category identifier).
+          example: pass
+        source:
+          type: string
+          nullable: true
+          description: The origin of the result (for example, `ai` or `human`).
+          example: ai
+        reasoning:
+          type: string
+          nullable: true
+          description: A free-text explanation of the result.
+          example: The agent acknowledged the issue and resolved it within the same response.
+        reason_ids:
+          type: array
+          nullable: true
+          description: Identifiers for structured reasons assigned to the result, if any.
+          items:
+            type: string
+          example:
+          - '101'
+          - '102'
+        other_text:
+          type: string
+          nullable: true
+          description: Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` — typically captured when the reviewer selects an "Other" option or adds a custom note. Null when not provided.
+          example: Agent acknowledged the issue but missed the follow-up question about billing.
     conversation_channel:
       title: Conversation Channel
       type: object
@@ -24352,6 +25507,38 @@ components:
       - type
       - user
       - visitor
+    create_audience_request:
+      title: Create Audience Request
+      type: object
+      description: The request payload for creating an audience.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the audience.
+          example: VIP Customers
+        predicates:
+          type: array
+          description: The predicates that define which contacts belong to the audience.
+          items:
+            "$ref": "#/components/schemas/predicate"
+          example:
+          - attribute: company.name
+            type: string
+            comparison: contains
+            value: Acme
+        role_predicates:
+          type: array
+          description: Role-based predicates that further filter audience membership by
+            contact role.
+          items:
+            "$ref": "#/components/schemas/predicate"
+          example:
+          - attribute: role
+            type: role
+            comparison: eq
+            value: user
     create_article_request:
       description: You can create an Article
       type: object
@@ -24586,14 +25773,14 @@ components:
           type: integer
           format: date-time
           nullable: true
-          description: The time specified for when a contact signed up
+          description: (Unix timestamp in seconds) The time specified for when a contact signed up.
           example: 1571672154
         last_seen_at:
           type: integer
           format: date-time
           nullable: true
-          description: The time when the contact was last seen (either where the Intercom
-            Messenger was installed or when specified manually)
+          description: (Unix timestamp in seconds) The time when the contact was last seen
+            (either where the Intercom Messenger was installed or when specified manually).
           example: 1571672154
         owner_id:
           type: string
@@ -31257,6 +32444,37 @@ components:
       required:
       - name
       - companies
+    update_audience_request:
+      title: Update Audience Request
+      type: object
+      description: The request payload for updating an audience. All fields are optional
+        — only provided fields will be updated.
+      properties:
+        name:
+          type: string
+          description: The name of the audience.
+          example: Enterprise Accounts
+        predicates:
+          type: array
+          description: The predicates that define which contacts belong to the audience.
+          items:
+            "$ref": "#/components/schemas/predicate"
+          example:
+          - attribute: custom_attributes.plan
+            type: string
+            comparison: eq
+            value: enterprise
+        role_predicates:
+          type: array
+          description: Role-based predicates that further filter audience membership by
+            contact role.
+          items:
+            "$ref": "#/components/schemas/predicate"
+          example:
+          - attribute: role
+            type: role
+            comparison: eq
+            value: user
     update_article_request:
       description: You can Update an Article
       type: object
@@ -31471,14 +32689,14 @@ components:
           type: integer
           format: date-time
           nullable: true
-          description: The time specified for when a contact signed up
+          description: (Unix timestamp in seconds) The time specified for when a contact signed up.
           example: 1571672154
         last_seen_at:
           type: integer
           format: date-time
           nullable: true
-          description: The time when the contact was last seen (either where the Intercom
-            Messenger was installed or when specified manually)
+          description: (Unix timestamp in seconds) The time when the contact was last seen
+            (either where the Intercom Messenger was installed or when specified manually).
           example: 1571672154
         owner_id:
           type: string

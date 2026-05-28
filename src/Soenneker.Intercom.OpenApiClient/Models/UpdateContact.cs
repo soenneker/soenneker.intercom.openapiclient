@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string LanguageOverride { get; set; }
 #endif
-        /// <summary>The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually)</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).</summary>
         public int? LastSeenAt { get; set; }
         /// <summary>The contacts name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -88,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Role { get; set; }
 #endif
-        /// <summary>The time specified for when a contact signed up</summary>
+        /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
         public int? SignedUpAt { get; set; }
         /// <summary>Union discriminator</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

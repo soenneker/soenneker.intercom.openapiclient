@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AndroidDevice { get; set; }
 #endif
-        /// <summary>(UNIX timestamp) The time when the contact was last seen on an Android device.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact was last seen on an Android device.</summary>
         public int? AndroidLastSeenAt { get; set; }
         /// <summary>The version of the Android OS which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,7 +97,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies Companies { get; set; }
 #endif
-        /// <summary>(UNIX timestamp) The time when the contact was created.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact was created.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The custom attributes which are set for the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -173,7 +173,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string IosDevice { get; set; }
 #endif
-        /// <summary>(UNIX timestamp) The last time the contact used the iOS app.</summary>
+        /// <summary>(Unix timestamp in seconds) The last time the contact used the iOS app.</summary>
         public int? IosLastSeenAt { get; set; }
         /// <summary>The version of iOS which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -199,15 +199,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string LanguageOverride { get; set; }
 #endif
-        /// <summary>(UNIX timestamp) The time when the contact was last messaged.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact was last messaged.</summary>
         public int? LastContactedAt { get; set; }
-        /// <summary>(UNIX timestamp) The time when the contact last clicked a link in an email.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact last clicked a link in an email.</summary>
         public int? LastEmailClickedAt { get; set; }
-        /// <summary>(UNIX timestamp) The time when the contact last opened an email.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact last opened an email.</summary>
         public int? LastEmailOpenedAt { get; set; }
-        /// <summary>(UNIX timestamp) The time when the contact last messaged in.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact last messaged in.</summary>
         public int? LastRepliedAt { get; set; }
-        /// <summary>(UNIX timestamp) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).</summary>
         public int? LastSeenAt { get; set; }
         /// <summary>An object containing location meta data about a Intercom contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -219,6 +219,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether the contact has marked an email sent to them as spam.</summary>
         public bool? MarkedEmailAsSpam { get; set; }
+        /// <summary>A list of contacts that were merged into this contact. Only included in the response when `include_merge_history=true` is passed as a query parameter. Only available for contacts with a `user` role.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>? MergeHistory { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem> MergeHistory { get; set; }
+#endif
         /// <summary>The contacts name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -267,7 +275,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Role { get; set; }
 #endif
-        /// <summary>(UNIX timestamp) The time specified for when a contact signed up.</summary>
+        /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
         public int? SignedUpAt { get; set; }
         /// <summary>An object containing social profiles that a contact has.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -295,7 +303,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether the contact is unsubscribed from emails.</summary>
         public bool? UnsubscribedFromEmails { get; set; }
-        /// <summary>(UNIX timestamp) The time when the contact was last updated.</summary>
+        /// <summary>(Unix timestamp in seconds) The time when the contact was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The id of the workspace which the contact belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -363,6 +371,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
                 { "location", n => { Location = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>(global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation.CreateFromDiscriminatorValue); } },
                 { "marked_email_as_spam", n => { MarkedEmailAsSpam = n.GetBoolValue(); } },
+                { "merge_history", n => { MergeHistory = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>(global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes.CreateFromDiscriminatorValue); } },
                 { "os", n => { Os = n.GetStringValue(); } },
@@ -418,6 +427,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("last_seen_at", LastSeenAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>("location", Location);
             writer.WriteBoolValue("marked_email_as_spam", MarkedEmailAsSpam);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>("merge_history", MergeHistory);
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>("notes", Notes);
             writer.WriteStringValue("os", Os);

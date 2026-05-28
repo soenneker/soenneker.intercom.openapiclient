@@ -284,5 +284,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         Welcome_message_change,
         #pragma warning restore CS1591
+        [EnumMember(Value = "hide_csat_from_agents_setting_change")]
+        #pragma warning disable CS1591
+        Hide_csat_from_agents_setting_change,
+        #pragma warning restore CS1591
     }
 }
