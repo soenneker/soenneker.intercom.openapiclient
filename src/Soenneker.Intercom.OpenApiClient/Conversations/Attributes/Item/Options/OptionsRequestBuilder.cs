@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.conversations.attributes.item.options.item collection</summary>
         /// <param name="position">The UUID of the list option to update (from the `id` field in the options array)</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options.Item.WithOption_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options.Item.WithOption_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options.Item.WithOptionItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options.Item.WithOptionItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("option_id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options.Item.WithOption_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("optionId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Conversations.Attributes.Item.Options.Item.WithOptionItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

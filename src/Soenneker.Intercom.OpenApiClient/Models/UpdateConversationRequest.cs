@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as &quot;CX Score rating&quot; and &quot;CX Score explanation&quot; may also be included.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes CustomAttributes { get; set; }
 #endif
         /// <summary>Mark a conversation as read within Intercom.</summary>
         public bool? Read { get; set; }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes.CreateFromDiscriminatorValue); } },
                 { "read", n => { Read = n.GetBoolValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("company_id", CompanyId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequest_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes>("custom_attributes", CustomAttributes);
             writer.WriteBoolValue("read", Read);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

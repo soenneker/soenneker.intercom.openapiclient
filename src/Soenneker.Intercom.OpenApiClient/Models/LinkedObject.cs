@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Category of the Linked Ticket Object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject_category? Category { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectCategory? Category { get; set; }
         /// <summary>The ID of the linked object</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>ticket or conversation</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject"/> and sets the default values.
         /// </summary>
@@ -52,9 +52,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject_category>(); } },
+                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectCategory>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectType>(); } },
             };
         }
         /// <summary>
@@ -64,9 +64,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject_category>("category", Category);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectCategory>("category", Category);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

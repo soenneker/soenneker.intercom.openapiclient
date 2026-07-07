@@ -34,9 +34,9 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Start
         {
         }
         /// <summary>
-        /// Initialize Fin by passing it the user&apos;s message along with conversation history and user details.These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.{% admonition type=&quot;warning&quot; %}Please reach out to your accounts team to discuss access.{% /admonition %}Once Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.During this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.Events can be received via webhooks or Server-Sent Events (SSE) using the `sse_subscription_url` in the response.
+        /// {% admonition type=&quot;info&quot; name=&quot;Legacy — conversational mode&quot; %}`/fin/start` powers the conversational model, where your own UI drives a back-and-forth with Fin. This endpoint is no longer actively developed and is maintained only for existing integrations — new functionality lands on the orchestration endpoints.{% /admonition %}Initialize Fin by passing it the user&apos;s message along with conversation history and user details.These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.Once Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.During this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.Events can be received via webhooks or Server-Sent Events (SSE) using the `sse_subscription_url` in the response.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartPostResponse"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -44,11 +44,11 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Start
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartPostResponse?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation200Response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversationRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartPostResponse> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation200Response> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversationRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -58,21 +58,21 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Start
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartPostResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Initialize Fin by passing it the user&apos;s message along with conversation history and user details.These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.{% admonition type=&quot;warning&quot; %}Please reach out to your accounts team to discuss access.{% /admonition %}Once Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.During this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.Events can be received via webhooks or Server-Sent Events (SSE) using the `sse_subscription_url` in the response.
+        /// {% admonition type=&quot;info&quot; name=&quot;Legacy — conversational mode&quot; %}`/fin/start` powers the conversational model, where your own UI drives a back-and-forth with Fin. This endpoint is no longer actively developed and is maintained only for existing integrations — new functionality lands on the orchestration endpoints.{% /admonition %}Initialize Fin by passing it the user&apos;s message along with conversation history and user details.These additional pieces of context will be used by Fin to provide a better and more contextual answer to the user.Once Fin is initialized, it progresses through a series of statuses such as *thinking*, *replying*, *awaiting_user_reply*, or *resolved* before ending with a status of *complete*.During this workflow, the client should allow Fin to continue uninterrupted until a final *complete* status is returned, at which point control of the conversation passes back to the client.Events can be received via webhooks or Server-Sent Events (SSE) using the `sse_subscription_url` in the response.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversationRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversation body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.StartFinConversationRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

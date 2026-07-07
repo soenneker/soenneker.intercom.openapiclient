@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.fin_voice.conversation.item collection</summary>
         /// <param name="position">The Intercom conversation identifier</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item.WithConversation_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item.WithConversation_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item.WithConversationItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item.WithConversationItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("conversation_id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item.WithConversation_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("conversationId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item.WithConversationItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

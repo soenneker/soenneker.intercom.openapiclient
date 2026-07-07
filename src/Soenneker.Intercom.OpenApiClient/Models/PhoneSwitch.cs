@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Phone { get; set; }
 #endif
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitchType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "phone", n => { Phone = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitchType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("phone", Phone);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitchType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

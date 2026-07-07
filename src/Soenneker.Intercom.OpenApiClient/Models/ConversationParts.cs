@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total_count property</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts"/> and sets the default values.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_parts", n => { ConversationPartsProp = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsType>(); } },
             };
         }
         /// <summary>
@@ -66,7 +66,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart>("conversation_parts", ConversationPartsProp);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

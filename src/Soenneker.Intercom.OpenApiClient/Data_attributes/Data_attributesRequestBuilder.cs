@@ -159,7 +159,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes
             public bool? IncludeArchived { get; set; }
             /// <summary>Specify the data attribute model to return. For conversation attributes, use `GET /conversations/attributes` instead.</summary>
             [QueryParameter("model")]
-            public global::Soenneker.Intercom.OpenApiClient.Data_attributes.GetModelQueryParameterType? Model { get; set; }
+            public global::Soenneker.Intercom.OpenApiClient.Models.LisDataAttributesModelParameter? Model { get; set; }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The type of the content source.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSource_content_type? ContentType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSourceContentType? ContentType { get; set; }
         /// <summary>The ISO 639 language code of the content source.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -66,7 +66,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "content_type", n => { ContentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSource_content_type>(); } },
+                { "content_type", n => { ContentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourceContentType>(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
@@ -79,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSource_content_type>("content_type", ContentType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourceContentType>("content_type", ContentType);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("url", Url);

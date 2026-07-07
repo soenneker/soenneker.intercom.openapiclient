@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ObjectTypeId { get; set; }
 #endif
         /// <summary>&quot;The cardinality of the relationship: `one` or `many`.&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReference_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReferenceType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReference"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "object_type_id", n => { ObjectTypeId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReference_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReferenceType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("object_type_id", ObjectTypeId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReference_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationAttributeRequestReferenceType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -18,7 +18,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether the attribute allows multiple files to be attached to it (only applicable to file attributes)</summary>
         public bool? AllowMultipleValues { get; set; }
         /// <summary>The data type of the attribute</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketTypeAttributeRequest_data_type? DataType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketTypeAttributeRequestDataType? DataType { get; set; }
         /// <summary>The description of the attribute presented to the teammate or contact</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -59,6 +59,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public CreateTicketTypeAttributeRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            RequiredToCreate = false;
+            RequiredToCreateForContacts = false;
+            VisibleOnCreate = true;
+            VisibleToContacts = true;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -79,7 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "allow_multiple_values", n => { AllowMultipleValues = n.GetBoolValue(); } },
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketTypeAttributeRequest_data_type>(); } },
+                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketTypeAttributeRequestDataType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "list_items", n => { ListItems = n.GetStringValue(); } },
                 { "multiline", n => { Multiline = n.GetBoolValue(); } },
@@ -98,7 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("allow_multiple_values", AllowMultipleValues);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketTypeAttributeRequest_data_type>("data_type", DataType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketTypeAttributeRequestDataType>("data_type", DataType);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("list_items", ListItems);
             writer.WriteBoolValue("multiline", Multiline);

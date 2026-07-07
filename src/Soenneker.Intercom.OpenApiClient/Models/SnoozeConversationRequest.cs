@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string AdminId { get; set; }
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequestMessageType? MessageType { get; set; }
         /// <summary>The time you want the conversation to reopen.</summary>
         public int? SnoozedUntil { get; set; }
         /// <summary>
@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest_message_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequestMessageType>(); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
             };
         }
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest_message_type>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequestMessageType>("message_type", MessageType);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
             writer.WriteAdditionalData(AdditionalData);
         }

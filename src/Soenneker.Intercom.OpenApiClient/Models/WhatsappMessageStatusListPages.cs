@@ -17,17 +17,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Information for fetching next page (null if no more pages)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_next? Next { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext? Next { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_next Next { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext Next { get; set; }
 #endif
         /// <summary>Number of results per page</summary>
         public int? PerPage { get; set; }
         /// <summary>Total number of pages</summary>
         public int? TotalPages { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages"/> and sets the default values.
         /// </summary>
@@ -53,10 +53,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_next>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_next.CreateFromDiscriminatorValue); } },
+                { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext.CreateFromDiscriminatorValue); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
                 { "total_pages", n => { TotalPages = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesType>(); } },
             };
         }
         /// <summary>
@@ -66,10 +66,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_next>("next", Next);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext>("next", Next);
             writer.WriteIntValue("per_page", PerPage);
             writer.WriteIntValue("total_pages", TotalPages);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

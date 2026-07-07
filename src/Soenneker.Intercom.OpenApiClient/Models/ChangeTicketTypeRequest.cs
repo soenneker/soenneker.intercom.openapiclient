@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequest_ticket_attributes? TicketAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequestTicketAttributesProperty? TicketAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequest_ticket_attributes TicketAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequestTicketAttributesProperty TicketAttributes { get; set; }
 #endif
         /// <summary>The ID of the ticket state for the new ticket type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -64,7 +64,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequest_ticket_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequest_ticket_attributes.CreateFromDiscriminatorValue); } },
+                { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequestTicketAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequestTicketAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "ticket_state_id", n => { TicketStateId = n.GetStringValue(); } },
                 { "ticket_type_id", n => { TicketTypeId = n.GetStringValue(); } },
             };
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequest_ticket_attributes>("ticket_attributes", TicketAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ChangeTicketTypeRequestTicketAttributesProperty>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_state_id", TicketStateId);
             writer.WriteStringValue("ticket_type_id", TicketTypeId);
             writer.WriteAdditionalData(AdditionalData);

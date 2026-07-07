@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string AdminId { get; set; }
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequestMessageType? MessageType { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest_message_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequestMessageType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest_message_type>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequestMessageType>("message_type", MessageType);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

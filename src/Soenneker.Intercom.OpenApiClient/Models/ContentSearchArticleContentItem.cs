@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Title { get; set; }
 #endif
         /// <summary>Always `article_content`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItemType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem"/> and sets the default values.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItemType>(); } },
             };
         }
         /// <summary>
@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItemType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.content_snippets.item collection</summary>
         /// <param name="position">The unique identifier for the content snippet.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Content_snippetsItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Content_snippetsItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Content_snippets.Item.ContentSnippetItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Content_snippets.Item.ContentSnippetItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Content_snippetsItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("contentSnippet%2Did", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Content_snippets.Item.ContentSnippetItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

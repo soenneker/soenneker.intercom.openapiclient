@@ -65,6 +65,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public CreateInternalArticleRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            AiChatbotAvailability = false;
+            AiCopilotAvailability = false;
+            AiSalesAgentAvailability = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

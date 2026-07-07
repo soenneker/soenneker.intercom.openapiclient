@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote> Notes { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "notes", n => { Notes = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotesType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>("notes", Notes);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

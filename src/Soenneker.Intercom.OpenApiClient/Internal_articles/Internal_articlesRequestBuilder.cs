@@ -26,14 +26,14 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.internal_articles.item collection</summary>
         /// <param name="position">The unique identifier for the article which is given by Intercom.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Internal_articlesItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Internal_articlesItemRequestBuilder this[int position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.ItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.ItemRequestBuilder this[int position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Internal_articlesItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("%2Did", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.ItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

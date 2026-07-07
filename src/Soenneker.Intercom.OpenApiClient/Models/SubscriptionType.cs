@@ -16,14 +16,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Describes the type of consent.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_consent_type? ConsentType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType? ConsentType { get; set; }
         /// <summary>The message types that this subscription supports - can contain `email` or `sms_message`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_content_types?>? ContentTypes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?>? ContentTypes { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_content_types?> ContentTypes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?> ContentTypes { get; set; }
 #endif
         /// <summary>A translation object contains the localised details of a subscription type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -42,7 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>The state of the subscription type.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState? State { get; set; }
         /// <summary>An array of translations objects with the localised version of the subscription type in each available locale within your translation settings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -84,11 +84,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "consent_type", n => { ConsentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_consent_type>(); } },
-                { "content_types", n => { ContentTypes = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_content_types>()?.AsList(); } },
+                { "consent_type", n => { ConsentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType>(); } },
+                { "content_types", n => { ContentTypes = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem>()?.AsList(); } },
                 { "default_translation", n => { DefaultTranslation = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Translation>(global::Soenneker.Intercom.OpenApiClient.Models.Translation.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_state>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState>(); } },
                 { "translations", n => { Translations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Translation>(global::Soenneker.Intercom.OpenApiClient.Models.Translation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
@@ -100,11 +100,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_consent_type>("consent_type", ConsentType);
-            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_content_types>("content_types", ContentTypes);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType>("consent_type", ConsentType);
+            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem>("content_types", ContentTypes);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Translation>("default_translation", DefaultTranslation);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState>("state", State);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Translation>("translations", Translations);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);

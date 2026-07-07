@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Bulk
         {
         }
         /// <summary>
-        /// You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update.The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.{% admonition type=&quot;info&quot; name=&quot;Limits&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.{% /admonition %}
+        /// &quot;You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update. You can also add or remove tags on each contact by including a `tags` object.Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.{% admonition type=\&quot;info\&quot; name=\&quot;Limits\&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob"/></returns>
         /// <param name="body">Request body for bulk updating contacts.</param>
@@ -57,15 +57,15 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Bulk
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -74,22 +74,22 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Bulk
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update.The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.{% admonition type=&quot;info&quot; name=&quot;Limits&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.{% /admonition %}
+        /// &quot;You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update. You can also add or remove tags on each contact by including a `tags` object.Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.{% admonition type=\&quot;info\&quot; name=\&quot;Limits\&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Request body for bulk updating contacts.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);

@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A hash of key/value pairs containing any other data about the company you want Intercom to store.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty CustomAttributes { get; set; }
 #endif
         /// <summary>The industry that this company operates in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,7 +97,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "industry", n => { Industry = n.GetStringValue(); } },
                 { "monthly_spend", n => { MonthlySpend = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -116,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("company_id", CompanyId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("industry", Industry);
             writer.WriteIntValue("monthly_spend", MonthlySpend);
             writer.WriteStringValue("name", Name);

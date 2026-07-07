@@ -75,8 +75,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ParentType { get; set; }
 #endif
+        /// <summary>&quot;ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: \&quot;published\&quot;`, the article is scheduled instead of published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Combining with `state: \&quot;draft\&quot;` returns 400 `parameter_invalid`. Sending in the same request as `scheduled_unpublish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.&quot;</summary>
+        public DateTimeOffset? ScheduledPublishAt { get; set; }
+        /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
+        public DateTimeOffset? ScheduledUnpublishAt { get; set; }
         /// <summary>Whether the article will be `published` or will be a `draft`. Defaults to draft. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequest_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequestState? State { get; set; }
         /// <summary>The title of the article.For multilingual articles, this will be the title of the default language&apos;s content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -130,7 +134,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "parent_id", n => { ParentId = n.GetIntValue(); } },
                 { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "parent_type", n => { ParentType = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequest_state>(); } },
+                { "scheduled_publish_at", n => { ScheduledPublishAt = n.GetDateTimeOffsetValue(); } },
+                { "scheduled_unpublish_at", n => { ScheduledUnpublishAt = n.GetDateTimeOffsetValue(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequestState>(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent.CreateFromDiscriminatorValue); } },
             };
@@ -154,7 +160,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("parent_id", ParentId);
             writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
             writer.WriteStringValue("parent_type", ParentType);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequest_state>("state", State);
+            writer.WriteDateTimeOffsetValue("scheduled_publish_at", ScheduledPublishAt);
+            writer.WriteDateTimeOffsetValue("scheduled_unpublish_at", ScheduledUnpublishAt);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequestState>("state", State);
             writer.WriteStringValue("title", Title);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent>("translated_content", TranslatedContent);
             writer.WriteAdditionalData(AdditionalData);

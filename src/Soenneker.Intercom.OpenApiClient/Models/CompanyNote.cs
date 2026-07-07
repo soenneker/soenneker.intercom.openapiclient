@@ -34,10 +34,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Represents the company that the note was created about.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote_company? Company { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany? Company { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote_company Company { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany Company { get; set; }
 #endif
         /// <summary>The time the note was created.</summary>
         public int? CreatedAt { get; set; }
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>(global::Soenneker.Intercom.OpenApiClient.Models.Admin.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote_company>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote_company.CreateFromDiscriminatorValue); } },
+                { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -99,7 +99,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>("author", Author);
             writer.WriteStringValue("body", Body);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote_company>("company", Company);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany>("company", Company);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("type", Type);

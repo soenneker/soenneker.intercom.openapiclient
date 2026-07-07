@@ -23,6 +23,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AdminId { get; set; }
 #endif
+        /// <summary>A list of files that will be added as attachments. You can include up to 10 files. If both attachment_files and attachment_urls are provided, attachment_files takes precedence.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? AttachmentFiles { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> AttachmentFiles { get; set; }
+#endif
         /// <summary>A list of image URLs that will be added as attachments. You can include up to 10 URLs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -44,17 +52,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>If set to true, the note will be cross-posted to all linked conversations. Only applicable to note message types on back-office tickets.</summary>
         public bool? CrossPost { get; set; }
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType? MessageType { get; set; }
         /// <summary>The quick reply options to display. Must be present for quick_reply message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_reply_options>? ReplyOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>? ReplyOptions { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_reply_options> ReplyOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem> ReplyOptions { get; set; }
 #endif
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/> and sets the default values.
         /// </summary>
@@ -81,13 +89,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
+                { "attachment_files", n => { AttachmentFiles = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "cross_post", n => { CrossPost = n.GetBoolValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_message_type>(); } },
-                { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_reply_options>(global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_reply_options.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType>(); } },
+                { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestType>(); } },
             };
         }
         /// <summary>
@@ -98,13 +107,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>("attachment_files", AttachmentFiles);
             writer.WriteCollectionOfPrimitiveValues<string>("attachment_urls", AttachmentUrls);
             writer.WriteStringValue("body", Body);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteBoolValue("cross_post", CrossPost);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_message_type>("message_type", MessageType);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_reply_options>("reply_options", ReplyOptions);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType>("message_type", MessageType);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>("reply_options", ReplyOptions);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

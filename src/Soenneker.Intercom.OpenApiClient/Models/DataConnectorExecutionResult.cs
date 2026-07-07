@@ -42,11 +42,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ErrorMessage { get; set; }
 #endif
         /// <summary>The type of error that occurred, if any.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_error_type? ErrorType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultErrorType? ErrorType { get; set; }
         /// <summary>The execution time in milliseconds.</summary>
         public int? ExecutionTimeMs { get; set; }
         /// <summary>The HTTP method used for the request.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_http_method? HttpMethod { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultHttpMethod? HttpMethod { get; set; }
         /// <summary>The HTTP status code returned by the external API.</summary>
         public int? HttpStatus { get; set; }
         /// <summary>The unique identifier for the execution result.</summary>
@@ -98,11 +98,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string SourceId { get; set; }
 #endif
         /// <summary>The type of source that triggered this execution.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_source_type? SourceType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultSourceType? SourceType { get; set; }
         /// <summary>Whether the execution was successful.</summary>
         public bool? Success { get; set; }
         /// <summary>The type of object - `data_connector.execution`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult"/> and sets the default values.
         /// </summary>
@@ -132,9 +132,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "data_connector_id", n => { DataConnectorId = n.GetStringValue(); } },
                 { "error_message", n => { ErrorMessage = n.GetStringValue(); } },
-                { "error_type", n => { ErrorType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_error_type>(); } },
+                { "error_type", n => { ErrorType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultErrorType>(); } },
                 { "execution_time_ms", n => { ExecutionTimeMs = n.GetIntValue(); } },
-                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_http_method>(); } },
+                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultHttpMethod>(); } },
                 { "http_status", n => { HttpStatus = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "raw_response_body", n => { RawResponseBody = n.GetStringValue(); } },
@@ -142,9 +142,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "request_url", n => { RequestUrl = n.GetStringValue(); } },
                 { "response_body", n => { ResponseBody = n.GetStringValue(); } },
                 { "source_id", n => { SourceId = n.GetStringValue(); } },
-                { "source_type", n => { SourceType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_source_type>(); } },
+                { "source_type", n => { SourceType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultSourceType>(); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultType>(); } },
             };
         }
         /// <summary>
@@ -158,9 +158,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
             writer.WriteStringValue("data_connector_id", DataConnectorId);
             writer.WriteStringValue("error_message", ErrorMessage);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_error_type>("error_type", ErrorType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultErrorType>("error_type", ErrorType);
             writer.WriteIntValue("execution_time_ms", ExecutionTimeMs);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_http_method>("http_method", HttpMethod);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultHttpMethod>("http_method", HttpMethod);
             writer.WriteIntValue("http_status", HttpStatus);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("raw_response_body", RawResponseBody);
@@ -168,9 +168,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("request_url", RequestUrl);
             writer.WriteStringValue("response_body", ResponseBody);
             writer.WriteStringValue("source_id", SourceId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_source_type>("source_type", SourceType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultSourceType>("source_type", SourceType);
             writer.WriteBoolValue("success", Success);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

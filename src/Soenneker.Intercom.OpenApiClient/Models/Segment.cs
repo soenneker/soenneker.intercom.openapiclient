@@ -36,9 +36,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>&quot;Type of the contact: contact (lead) or user.&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Segment_person_type? PersonType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SegmentPersonType? PersonType { get; set; }
         /// <summary>The type of object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Segment_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SegmentType? Type { get; set; }
         /// <summary>The time the segment was updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -70,8 +70,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "person_type", n => { PersonType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Segment_person_type>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Segment_type>(); } },
+                { "person_type", n => { PersonType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentPersonType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -86,8 +86,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Segment_person_type>("person_type", PersonType);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Segment_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentPersonType>("person_type", PersonType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A count of the total number of collections.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type of the object - `list`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CollectionList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CollectionListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CollectionList"/> and sets the default values.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Collection>(global::Soenneker.Intercom.OpenApiClient.Models.Collection.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectionListType>(); } },
             };
         }
         /// <summary>
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Collection>("data", Data);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectionListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

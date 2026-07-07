@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Total number of pages of results.</summary>
         public int? TotalPages { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePages_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePagesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePages"/> and sets the default values.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
                 { "prev", n => { Prev = n.GetStringValue(); } },
                 { "total_pages", n => { TotalPages = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePages_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePagesType>(); } },
             };
         }
         /// <summary>
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("per_page", PerPage);
             writer.WriteStringValue("prev", Prev);
             writer.WriteIntValue("total_pages", TotalPages);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePages_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchResponsePagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

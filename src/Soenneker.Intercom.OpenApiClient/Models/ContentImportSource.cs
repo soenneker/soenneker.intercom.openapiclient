@@ -30,11 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time when the content import source was last synced.</summary>
         public int? LastSyncedAt { get; set; }
         /// <summary>The status of the content import source.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_status? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus? Status { get; set; }
         /// <summary>If you intend to create or update External Pages via the API, this should be set to `api`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_sync_behavior? SyncBehavior { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceSyncBehavior? SyncBehavior { get; set; }
         /// <summary>Always external_page</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType? Type { get; set; }
         /// <summary>The time when the content import source was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The URL of the root of the external source.</summary>
@@ -51,7 +51,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public ContentImportSource()
         {
             AdditionalData = new Dictionary<string, object>();
-            Status = global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_status.Active;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -75,9 +74,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "last_synced_at", n => { LastSyncedAt = n.GetIntValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_status>(); } },
-                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_sync_behavior>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_type>(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus>(); } },
+                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceSyncBehavior>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -93,9 +92,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteIntValue("id", Id);
             writer.WriteIntValue("last_synced_at", LastSyncedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_status>("status", Status);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_sync_behavior>("sync_behavior", SyncBehavior);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceSyncBehavior>("sync_behavior", SyncBehavior);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

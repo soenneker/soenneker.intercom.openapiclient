@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages Pages { get; set; }
 #endif
         /// <summary>Always list</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MacroList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MacroList"/> and sets the default values.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Macro>(global::Soenneker.Intercom.OpenApiClient.Models.Macro.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages>(global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListType>(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Macro>("data", Data);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages>("pages", Pages);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

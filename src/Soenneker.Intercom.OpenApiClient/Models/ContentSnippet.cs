@@ -56,10 +56,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The content blocks that make up the body of the snippet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet_json_blocks>? JsonBlocks { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetJsonBlocksItemProperty>? JsonBlocks { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet_json_blocks> JsonBlocks { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetJsonBlocksItemProperty> JsonBlocks { get; set; }
 #endif
         /// <summary>The locale of the content snippet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -121,7 +121,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "copilot_availability", n => { CopilotAvailability = n.GetIntValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet_json_blocks>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet_json_blocks.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetJsonBlocksItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetJsonBlocksItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -144,7 +144,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("copilot_availability", CopilotAvailability);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet_json_blocks>("json_blocks", JsonBlocks);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetJsonBlocksItemProperty>("json_blocks", JsonBlocks);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("type", Type);

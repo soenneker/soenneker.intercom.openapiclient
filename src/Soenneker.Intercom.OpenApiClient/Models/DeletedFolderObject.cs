@@ -20,7 +20,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The unique identifier for the deleted folder</summary>
         public int? Id { get; set; }
         /// <summary>The type of object - `folder`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject_object? Object { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObjectObject? Object { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject"/> and sets the default values.
         /// </summary>
@@ -48,7 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
-                { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject_object>(); } },
+                { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObjectObject>(); } },
             };
         }
         /// <summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("deleted", Deleted);
             writer.WriteIntValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject_object>("object", Object);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObjectObject>("object", Object);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

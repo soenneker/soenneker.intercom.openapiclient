@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The custom attributes which are set for the Custom Object instance.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributes? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributes CustomAttributes { get; set; }
 #endif
         /// <summary>The time when the Custom Object instance was created in the external system it originated from.</summary>
         public int? ExternalCreatedAt { get; set; }
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributes.CreateFromDiscriminatorValue); } },
                 { "external_created_at", n => { ExternalCreatedAt = n.GetIntValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "external_updated_at", n => { ExternalUpdatedAt = n.GetIntValue(); } },
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributes>("custom_attributes", CustomAttributes);
             writer.WriteIntValue("external_created_at", ExternalCreatedAt);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteIntValue("external_updated_at", ExternalUpdatedAt);

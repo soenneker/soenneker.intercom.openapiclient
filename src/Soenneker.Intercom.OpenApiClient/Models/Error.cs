@@ -19,10 +19,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of one or more error objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Error_errors>? Errors { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItem>? Errors { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Error_errors> Errors { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItem> Errors { get; set; }
 #endif
         /// <summary>The primary error message.</summary>
         public override string Message { get => base.Message; }
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Error_errors>(global::Soenneker.Intercom.OpenApiClient.Models.Error_errors.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "errors", n => { Errors = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItem>(global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "request_id", n => { RequestId = n.GetGuidValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Error_errors>("errors", Errors);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItem>("errors", Errors);
             writer.WriteGuidValue("request_id", RequestId);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);

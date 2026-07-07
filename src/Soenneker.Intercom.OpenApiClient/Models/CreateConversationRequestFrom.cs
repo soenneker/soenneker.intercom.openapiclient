@@ -17,7 +17,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The identifier for the contact which is given by Intercom.</summary>
         public Guid? Id { get; set; }
         /// <summary>The role associated to the contact - user or lead.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFromType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom"/> and sets the default values.
         /// </summary>
@@ -44,7 +44,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "id", n => { Id = n.GetGuidValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFromType>(); } },
             };
         }
         /// <summary>
@@ -55,7 +55,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteGuidValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFromType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

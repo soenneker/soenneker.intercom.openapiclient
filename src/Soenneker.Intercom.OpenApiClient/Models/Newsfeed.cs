@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The type of object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedType? Type { get; set; }
         /// <summary>Timestamp for when the newsfeed was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -79,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

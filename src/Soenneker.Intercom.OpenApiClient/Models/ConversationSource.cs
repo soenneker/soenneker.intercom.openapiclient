@@ -66,10 +66,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The recipients of the source message. Only present for email conversations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients>? Recipients { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem>? Recipients { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients> Recipients { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem> Recipients { get; set; }
 #endif
         /// <summary>Whether or not the source content has been redacted.</summary>
         public bool? Redacted { get; set; }
@@ -128,7 +128,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "delivered_as", n => { DeliveredAs = n.GetStringValue(); } },
                 { "email_message_metadata", n => { EmailMessageMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "recipients", n => { Recipients = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "recipients", n => { Recipients = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -148,7 +148,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("delivered_as", DeliveredAs);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SourceEmailMessageMetadata>("email_message_metadata", EmailMessageMetadata);
             writer.WriteStringValue("id", Id);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource_recipients>("recipients", Recipients);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem>("recipients", Recipients);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteStringValue("subject", Subject);
             writer.WriteStringValue("type", Type);

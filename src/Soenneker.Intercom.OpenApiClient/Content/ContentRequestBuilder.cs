@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Content.Bulk_actions;
+using Soenneker.Intercom.OpenApiClient.Content.Search;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Soenneker.Intercom.OpenApiClient.Content
         public global::Soenneker.Intercom.OpenApiClient.Content.Bulk_actions.Bulk_actionsRequestBuilder Bulk_actions
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Content.Bulk_actions.Bulk_actionsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The search property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Content.Search.SearchRequestBuilder Search
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Content.Search.SearchRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Content.ContentRequestBuilder"/> and sets the default values.

@@ -19,14 +19,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? Email { get; set; }
         /// <summary>&quot;When `true` (default), Fin may ask clarifying questions and escalate to a human agentas needed.When `false`, Fin operates in non-conversational mode: it will not ask follow-upquestions and will not escalate to a human agent. Use this when you want Fin to respondwith a single, self-contained answer — for example, in asynchronous channels whereback-and-forth conversation is not practical.&quot;</summary>
         public bool? FollowUpQuestions { get; set; }
-        /// <summary>When `true` (default), Fin will follow any configured procedures during theconversation.When `false`, Fin skips procedures and responds using its general knowledge andconfigured content only.</summary>
-        public bool? Procedures { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings"/> and sets the default values.
         /// </summary>
         public FinAgentSettings()
         {
             AdditionalData = new Dictionary<string, object>();
+            Email = false;
+            FollowUpQuestions = true;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -48,7 +48,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "email", n => { Email = n.GetBoolValue(); } },
                 { "follow_up_questions", n => { FollowUpQuestions = n.GetBoolValue(); } },
-                { "procedures", n => { Procedures = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -60,7 +59,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("email", Email);
             writer.WriteBoolValue("follow_up_questions", FollowUpQuestions);
-            writer.WriteBoolValue("procedures", Procedures);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

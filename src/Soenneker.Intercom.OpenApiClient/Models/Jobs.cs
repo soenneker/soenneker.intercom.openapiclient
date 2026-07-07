@@ -48,9 +48,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ResourceUrl { get; set; }
 #endif
         /// <summary>The status of the job execution.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Jobs_status? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.JobsStatus? Status { get; set; }
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Jobs_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.JobsType? Type { get; set; }
         /// <summary>API endpoint URL to check the job status.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,8 +88,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "resource_id", n => { ResourceId = n.GetStringValue(); } },
                 { "resource_type", n => { ResourceType = n.GetStringValue(); } },
                 { "resource_url", n => { ResourceUrl = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Jobs_status>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Jobs_type>(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.JobsStatus>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.JobsType>(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -104,8 +104,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("resource_id", ResourceId);
             writer.WriteStringValue("resource_type", ResourceType);
             writer.WriteStringValue("resource_url", ResourceUrl);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Jobs_status>("status", Status);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Jobs_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.JobsStatus>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.JobsType>("type", Type);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }

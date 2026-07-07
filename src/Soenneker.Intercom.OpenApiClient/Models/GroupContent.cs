@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The type of object - `group_content` .</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.GroupContent_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.GroupContentType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.GroupContent"/> and sets the default values.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupContent_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupContentType>(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupContent_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupContentType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

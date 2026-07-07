@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id or company_id of the company can be passed as input parameters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest_companies>? Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem>? Companies { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest_companies> Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem> Companies { get; set; }
 #endif
         /// <summary>The name of the tag, which will be created if not found.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest_companies>(global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest_companies.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest_companies>("companies", Companies);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem>("companies", Companies);
             writer.WriteStringValue("name", Name);
             writer.WriteAdditionalData(AdditionalData);
         }

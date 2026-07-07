@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Where the macro is available for use.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Macro_available_on?>? AvailableOn { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.MacroAvailableOnItem?>? AvailableOn { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Macro_available_on?> AvailableOn { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.MacroAvailableOnItem?> AvailableOn { get; set; }
 #endif
         /// <summary>The body of the macro in HTML format with placeholders transformed to XML-like format.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -58,11 +58,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `macro`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Macro_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MacroType? Type { get; set; }
         /// <summary>The time the macro was last updated in ISO 8601 format.</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>Who can view this macro.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Macro_visible_to? VisibleTo { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MacroVisibleTo? VisibleTo { get; set; }
         /// <summary>The team IDs that can view this macro when visible_to is set to specific_teams.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -96,15 +96,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "available_on", n => { AvailableOn = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Macro_available_on>()?.AsList(); } },
+                { "available_on", n => { AvailableOn = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.MacroAvailableOnItem>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_text", n => { BodyText = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Macro_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
-                { "visible_to", n => { VisibleTo = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Macro_visible_to>(); } },
+                { "visible_to", n => { VisibleTo = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroVisibleTo>(); } },
                 { "visible_to_team_ids", n => { VisibleToTeamIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
@@ -115,15 +115,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Macro_available_on>("available_on", AvailableOn);
+            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.MacroAvailableOnItem>("available_on", AvailableOn);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_text", BodyText);
             writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Macro_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroType>("type", Type);
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Macro_visible_to>("visible_to", VisibleTo);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroVisibleTo>("visible_to", VisibleTo);
             writer.WriteCollectionOfPrimitiveValues<string>("visible_to_team_ids", VisibleToTeamIds);
             writer.WriteAdditionalData(AdditionalData);
         }

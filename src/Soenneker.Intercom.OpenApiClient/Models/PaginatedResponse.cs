@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of Objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data>? Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseDataItem>? Data { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data> Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseDataItem> Data { get; set; }
 #endif
         /// <summary>Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data.A &quot;cursor&quot; or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or &quot;pages&quot; as needed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A count of the total number of objects.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type of object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse"/> and sets the default values.
         /// </summary>
@@ -60,10 +60,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data>(global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseDataItem>(global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseDataItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseType>(); } },
             };
         }
         /// <summary>
@@ -73,68 +73,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data>("data", Data);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseDataItem>("data", Data);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponseType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsItem"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class PaginatedResponse_data : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed? Newsfeed { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed Newsfeed { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsItem"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.NewsItem? NewsItem { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.NewsItem NewsItem { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var result = new global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.PaginatedResponse_data();
-                result.Newsfeed = new global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed();
-                result.NewsItem = new global::Soenneker.Intercom.OpenApiClient.Models.NewsItem();
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(Newsfeed != null || NewsItem != null)
-                {
-                    return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(Newsfeed, NewsItem);
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed>(null, Newsfeed, NewsItem);
-            }
         }
     }
 }

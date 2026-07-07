@@ -20,15 +20,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? AudienceIds { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestAudienceIds? AudienceIds { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch AudienceIds { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestAudienceIds AudienceIds { get; set; }
 #endif
         /// <summary>The status of the content import source.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_status? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestStatus? Status { get; set; }
         /// <summary>If you intend to create or update External Pages via the API, this should be set to `api`. You can not change the value to or from api.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_sync_behavior? SyncBehavior { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestSyncBehavior? SyncBehavior { get; set; }
         /// <summary>The URL of the content import source. This may only be different from the existing value if the sync behavior is API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public UpdateContentImportSourceRequest()
         {
             AdditionalData = new Dictionary<string, object>();
-            Status = global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_status.Active;
+            ApplyAudienceToExistingContent = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -64,9 +64,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "apply_audience_to_existing_content", n => { ApplyAudienceToExistingContent = n.GetBoolValue(); } },
-                { "audience_ids", n => { AudienceIds = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch.CreateFromDiscriminatorValue); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_status>(); } },
-                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_sync_behavior>(); } },
+                { "audience_ids", n => { AudienceIds = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestAudienceIds>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestAudienceIds.CreateFromDiscriminatorValue); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestStatus>(); } },
+                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestSyncBehavior>(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -78,9 +78,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("apply_audience_to_existing_content", ApplyAudienceToExistingContent);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>("audience_ids", AudienceIds);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_status>("status", Status);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequest_sync_behavior>("sync_behavior", SyncBehavior);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestAudienceIds>("audience_ids", AudienceIds);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestStatus>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestSyncBehavior>("sync_behavior", SyncBehavior);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }

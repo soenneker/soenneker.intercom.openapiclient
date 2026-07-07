@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Models;
 using Soenneker.Intercom.OpenApiClient.Tickets.Item.Change_type;
+using Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations;
 using Soenneker.Intercom.OpenApiClient.Tickets.Item.Reply;
 using Soenneker.Intercom.OpenApiClient.Tickets.Item.Tags;
 using System.Collections.Generic;
@@ -24,6 +25,11 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item
         public global::Soenneker.Intercom.OpenApiClient.Tickets.Item.Change_type.Change_typeRequestBuilder Change_type
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Tickets.Item.Change_type.Change_typeRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The linked_conversations property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations.Linked_conversationsRequestBuilder Linked_conversations
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations.Linked_conversationsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The reply property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Tickets.Item.Reply.ReplyRequestBuilder Reply
@@ -111,11 +117,11 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Ticket> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -172,11 +178,11 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicket body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

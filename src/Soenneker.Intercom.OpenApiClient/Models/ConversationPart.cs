@@ -110,7 +110,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether or not the conversation part has been redacted.</summary>
         public bool? Redacted { get; set; }
         /// <summary>Indicates the current state of conversation when the conversation part was created.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState? State { get; set; }
         /// <summary>A list of tags objects associated with the conversation part.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -168,7 +168,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "notified_at", n => { NotifiedAt = n.GetIntValue(); } },
                 { "part_type", n => { PartType = n.GetStringValue(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart_state>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>(); } },
                 { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>(global::Soenneker.Intercom.OpenApiClient.Models.TagBasic.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -195,7 +195,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("notified_at", NotifiedAt);
             writer.WriteStringValue("part_type", PartType);
             writer.WriteBoolValue("redacted", Redacted);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>("state", State);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>("tags", Tags);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);

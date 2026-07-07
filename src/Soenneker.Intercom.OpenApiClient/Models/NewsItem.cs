@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id of the sender of the news item. Must be a teammate on the workspace.</summary>
         public int? SenderId { get; set; }
         /// <summary>News items will not be visible to your users in the assigned newsfeeds until they are set live.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.NewsItem_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.NewsItemState? State { get; set; }
         /// <summary>The title of the news item.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Title { get; set; }
 #endif
         /// <summary>The type of object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.NewsItem_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType? Type { get; set; }
         /// <summary>Timestamp for when the news item was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The id of the workspace which the news item belongs to.</summary>
@@ -125,9 +125,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "newsfeed_assignments", n => { NewsfeedAssignments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "reactions", n => { Reactions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "sender_id", n => { SenderId = n.GetIntValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem_state>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemState>(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
@@ -148,9 +148,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>("newsfeed_assignments", NewsfeedAssignments);
             writer.WriteCollectionOfPrimitiveValues<string>("reactions", Reactions);
             writer.WriteIntValue("sender_id", SenderId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemState>("state", State);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("workspace_id", WorkspaceId);
             writer.WriteAdditionalData(AdditionalData);

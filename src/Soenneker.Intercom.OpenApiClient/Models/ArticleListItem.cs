@@ -41,6 +41,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language&apos;s content in seconds.</summary>
         public int? CreatedAt { get; set; }
+        /// <summary>The ID of the teammate who created the article. For multilingual articles, this will be the creator of the default language&apos;s content.</summary>
+        public int? CreatedById { get; private set; }
         /// <summary>The default locale of the help center. This field is only returned for multilingual help centers.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,8 +59,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
+        /// <summary>The time, in seconds, when the staged draft was last edited, or `null` when there is no staged draft. Only returned on the `Preview` API version.</summary>
+        public int? DraftUpdatedAt { get; set; }
+        /// <summary>Whether the article is excluded from Fin AI Agent article suggestions.</summary>
+        public bool? ExcludeFromArticleSuggestions { get; private set; }
         /// <summary>The ID of the folder this article belongs to, or null if not in a folder.</summary>
         public int? FolderId { get; set; }
+        /// <summary>Whether the published article has unpublished changes staged as a draft on top of its live content. Only returned on the `Preview` API version. For multilingual articles this reflects the default language&apos;s content; a pure draft (never published) reports `false`.</summary>
+        public bool? HasUnpublishedChanges { get; set; }
+        /// <summary>The audience that can view this article in the Help Center. `everyone` means all users and visitors can view it; `restricted` indicates a custom audience ruleset. For multilingual articles, this is the article-level audience.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleHelpCenterAudience? HelpCenterAudience { get; private set; }
         /// <summary>The unique identifier for the article which is given by Intercom.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -75,8 +85,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<int?> ParentIds { get; set; }
 #endif
+        /// <summary>The Unix timestamp (in seconds) at which the article is scheduled to be published. `null` when no publish is scheduled. Mutually exclusive with `scheduled_unpublish_at` — at most one pending schedule exists per article.</summary>
+        public int? ScheduledPublishAt { get; private set; }
+        /// <summary>The Unix timestamp (in seconds) at which the article is scheduled to be unpublished. `null` when no unpublish is scheduled. Mutually exclusive with `scheduled_publish_at` — at most one pending schedule exists per article.</summary>
+        public int? ScheduledUnpublishAt { get; private set; }
         /// <summary>Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleState? State { get; set; }
         /// <summary>A list of tags objects associated with a conversation</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -102,9 +116,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent TranslatedContent { get; set; }
 #endif
         /// <summary>The type of object - `article`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleType? Type { get; set; }
         /// <summary>The time when the article was last updated. For multilingual articles, this will be the timestamp of last update of the default language&apos;s content in seconds.</summary>
         public int? UpdatedAt { get; set; }
+        /// <summary>The ID of the teammate who last updated the article. For multilingual articles, this will be the last editor of the default language&apos;s content.</summary>
+        public int? UpdatedById { get; private set; }
         /// <summary>The URL of the article. For multilingual articles, this will be the URL of the default language&apos;s content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -127,7 +143,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public ArticleListItem()
         {
             AdditionalData = new Dictionary<string, object>();
-            State = global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state.Draft;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -154,17 +169,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_by_id", n => { CreatedById = n.GetIntValue(); } },
                 { "default_locale", n => { DefaultLocale = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
+                { "draft_updated_at", n => { DraftUpdatedAt = n.GetIntValue(); } },
+                { "exclude_from_article_suggestions", n => { ExcludeFromArticleSuggestions = n.GetBoolValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
+                { "has_unpublished_changes", n => { HasUnpublishedChanges = n.GetBoolValue(); } },
+                { "help_center_audience", n => { HelpCenterAudience = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleHelpCenterAudience>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state>(); } },
+                { "scheduled_publish_at", n => { ScheduledPublishAt = n.GetIntValue(); } },
+                { "scheduled_unpublish_at", n => { ScheduledUnpublishAt = n.GetIntValue(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleState>(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_by_id", n => { UpdatedById = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
@@ -185,14 +208,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("default_locale", DefaultLocale);
             writer.WriteStringValue("description", Description);
+            writer.WriteIntValue("draft_updated_at", DraftUpdatedAt);
             writer.WriteIntValue("folder_id", FolderId);
+            writer.WriteBoolValue("has_unpublished_changes", HasUnpublishedChanges);
             writer.WriteStringValue("id", Id);
             writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleState>("state", State);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
             writer.WriteStringValue("title", Title);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent>("translated_content", TranslatedContent);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleListItem_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteStringValue("workspace_id", WorkspaceId);

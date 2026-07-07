@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time the reply was created. If not provided, the current time will be used.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType? MessageType { get; set; }
         /// <summary>The quick reply options to display to the end user. Must be present for quick_reply message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption> ReplyOptions { get; set; }
 #endif
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest"/> and sets the default values.
         /// </summary>
@@ -91,9 +91,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest_message_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>(); } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>(global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType>(); } },
             };
         }
         /// <summary>
@@ -108,9 +108,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<string>("attachment_urls", AttachmentUrls);
             writer.WriteStringValue("body", Body);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest_message_type>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>("reply_options", ReplyOptions);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -52,7 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id of the sender of the news item. Must be a teammate on the workspace.</summary>
         public int? SenderId { get; set; }
         /// <summary>News items will not be visible to your users in the assigned newsfeeds until they are set live.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequestState? State { get; set; }
         /// <summary>The title of the news item.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -92,7 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "newsfeed_assignments", n => { NewsfeedAssignments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "reactions", n => { Reactions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "sender_id", n => { SenderId = n.GetIntValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest_state>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequestState>(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
         }
@@ -109,7 +109,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>("newsfeed_assignments", NewsfeedAssignments);
             writer.WriteCollectionOfPrimitiveValues<string>("reactions", Reactions);
             writer.WriteIntValue("sender_id", SenderId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequestState>("state", State);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);
         }

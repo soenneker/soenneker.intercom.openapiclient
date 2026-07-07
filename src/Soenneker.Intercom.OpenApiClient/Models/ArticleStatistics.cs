@@ -17,6 +17,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The number of conversations started from the article.</summary>
         public int? Conversions { get; set; }
+        /// <summary>The number of conversations in which Fin AI Agent used this article, summed across all of the article&apos;s locales.</summary>
+        public int? FinInvolvements { get; private set; }
+        /// <summary>The percentage of Fin AI Agent involvements that resulted in a resolution (fin_resolutions / fin_involvements * 100).</summary>
+        public float? FinResolutionRate { get; private set; }
+        /// <summary>The number of conversations Fin AI Agent resolved using this article, summed across all of the article&apos;s locales.</summary>
+        public int? FinResolutions { get; private set; }
         /// <summary>The percentage of happy reactions the article has received against other types of reaction.</summary>
         public float? HappyReactionPercentage { get; set; }
         /// <summary>The percentage of neutral reactions the article has received against other types of reaction.</summary>
@@ -26,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The percentage of sad reactions the article has received against other types of reaction.</summary>
         public float? SadReactionPercentage { get; set; }
         /// <summary>The type of object - `article_statistics`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatisticsType? Type { get; set; }
         /// <summary>The number of total views the article has received.</summary>
         public int? Views { get; set; }
         /// <summary>
@@ -55,11 +61,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "conversions", n => { Conversions = n.GetIntValue(); } },
+                { "fin_involvements", n => { FinInvolvements = n.GetIntValue(); } },
+                { "fin_resolution_rate", n => { FinResolutionRate = n.GetFloatValue(); } },
+                { "fin_resolutions", n => { FinResolutions = n.GetIntValue(); } },
                 { "happy_reaction_percentage", n => { HappyReactionPercentage = n.GetFloatValue(); } },
                 { "neutral_reaction_percentage", n => { NeutralReactionPercentage = n.GetFloatValue(); } },
                 { "reactions", n => { Reactions = n.GetIntValue(); } },
                 { "sad_reaction_percentage", n => { SadReactionPercentage = n.GetFloatValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatisticsType>(); } },
                 { "views", n => { Views = n.GetIntValue(); } },
             };
         }
@@ -75,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteFloatValue("neutral_reaction_percentage", NeutralReactionPercentage);
             writer.WriteIntValue("reactions", Reactions);
             writer.WriteFloatValue("sad_reaction_percentage", SadReactionPercentage);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatistics_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleStatisticsType>("type", Type);
             writer.WriteIntValue("views", Views);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The author that created the message.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage_author? Author { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessageAuthor? Author { get; set; }
         /// <summary>The body of the message. Accepts both plain text and HTML format.When sending a message to Fin, this should contain the user&apos;s message.Fin&apos;s response will be returned as HTML.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "author", n => { Author = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage_author>(); } },
+                { "author", n => { Author = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessageAuthor>(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "timestamp", n => { Timestamp = n.GetDateTimeOffsetValue(); } },
                 { "timestamp_ms", n => { TimestampMs = n.GetDateTimeOffsetValue(); } },
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage_author>("author", Author);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessageAuthor>("author", Author);
             writer.WriteStringValue("body", Body);
             writer.WriteDateTimeOffsetValue("timestamp", Timestamp);
             writer.WriteDateTimeOffsetValue("timestamp_ms", TimestampMs);

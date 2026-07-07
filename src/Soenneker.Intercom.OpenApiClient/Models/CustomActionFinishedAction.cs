@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>Status of the action</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedAction_result? Result { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedActionResult? Result { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedAction"/> and sets the default values.
         /// </summary>
@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "result", n => { Result = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedAction_result>(); } },
+                { "result", n => { Result = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedActionResult>(); } },
             };
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedAction_result>("result", Result);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinishedActionResult>("result", Result);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

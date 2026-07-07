@@ -12,8 +12,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public partial class ContentBulkActionRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>&quot;The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_action? Action { get; set; }
+        /// <summary>&quot;The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`  * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`, `file_source_content`, `internal_article`&quot;</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction? Action { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Required when `action` is `set_audience`. Manages segment membership.</summary>
@@ -35,10 +35,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Up to 1,000 content items to apply the action to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_content_ids>? ContentIds { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>? ContentIds { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_content_ids> ContentIds { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem> ContentIds { get; set; }
+#endif
+        /// <summary>Required when `action` is `update_tags`. Applies and/or removes existing tags.Supply at least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDsmay be supplied across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs mustreference existing, non-archived tags; exceeding the limit or referencing unknown orarchived IDs is rejected with `parameter_invalid` (HTTP 422).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags? Tags { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags Tags { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest"/> and sets the default values.
@@ -65,10 +73,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "action", n => { Action = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_action>(); } },
+                { "action", n => { Action = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction>(); } },
                 { "audience", n => { Audience = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience>(global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience.CreateFromDiscriminatorValue); } },
                 { "availability", n => { Availability = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability>(global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability.CreateFromDiscriminatorValue); } },
-                { "content_ids", n => { ContentIds = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_content_ids>(global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_content_ids.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "content_ids", n => { ContentIds = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>(global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags>(global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -78,10 +87,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_action>("action", Action);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction>("action", Action);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience>("audience", Audience);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability>("availability", Availability);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest_content_ids>("content_ids", ContentIds);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>("content_ids", ContentIds);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags>("tags", Tags);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

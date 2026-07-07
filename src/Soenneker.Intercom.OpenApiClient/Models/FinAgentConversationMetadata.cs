@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A hash of attributes associated with the conversation.These attributes can be used by Fin to provide more contextual responses.Limit to 10 attributes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata_attributes? Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadataAttributesProperty? Attributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata_attributes Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadataAttributesProperty Attributes { get; set; }
 #endif
         /// <summary>An array of previous messages in the conversation before Fin is initialized.This data provides context to Fin and helps generate a better answer.Limit to the last 10 messages.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata_attributes.CreateFromDiscriminatorValue); } },
+                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadataAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadataAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "history", n => { History = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadata_attributes>("attributes", Attributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadataAttributesProperty>("attributes", Attributes);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>("history", History);
             writer.WriteAdditionalData(AdditionalData);
         }

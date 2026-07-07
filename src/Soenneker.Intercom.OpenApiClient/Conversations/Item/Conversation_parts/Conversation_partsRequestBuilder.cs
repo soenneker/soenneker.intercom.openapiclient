@@ -10,7 +10,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
 {
     /// <summary>
-    /// Builds and executes requests for operations under \conversations\{conversation_-id}\conversation_parts
+    /// Builds and executes requests for operations under \conversations\{conversation-id}\conversation_parts
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Conversation_partsRequestBuilder : BaseRequestBuilder
@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Conversation_partsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}/conversation_parts", pathParameters)
+        public Conversation_partsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/conversation_parts", pathParameters)
         {
         }
         /// <summary>
@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Conversation_partsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}/conversation_parts", rawUrl)
+        public Conversation_partsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/conversation_parts", rawUrl)
         {
         }
     }

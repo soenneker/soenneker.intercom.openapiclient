@@ -29,10 +29,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequest_options>? Options { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem>? Options { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequest_options> Options { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem> Options { get; set; }
 #endif
         /// <summary>Union discriminator</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "archived", n => { Archived = n.GetBoolValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "messenger_writable", n => { MessengerWritable = n.GetBoolValue(); } },
-                { "options", n => { Options = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequest_options>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequest_options.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "options", n => { Options = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("archived", Archived);
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("messenger_writable", MessengerWritable);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequest_options>("options", Options);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem>("options", Options);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

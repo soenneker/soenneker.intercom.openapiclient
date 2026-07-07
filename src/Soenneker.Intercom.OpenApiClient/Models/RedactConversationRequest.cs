@@ -8,26 +8,26 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember2"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class RedactConversationRequest : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1? RedactConversationRequestMember1 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest? RedactConversationRequestRedactConversationPartRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1 RedactConversationRequestMember1 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest RedactConversationRequestRedactConversationPartRequest { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember2"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember2? RedactConversationRequestMember2 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest? RedactConversationRequestRedactConversationSourceRequest { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember2 RedactConversationRequestMember2 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest RedactConversationRequestRedactConversationSourceRequest { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,13 +39,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequest();
-            if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("RedactConversationRequestRedactConversationPartRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.RedactConversationRequestMember1 = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1();
+                result.RedactConversationRequestRedactConversationPartRequest = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest();
             }
-            else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("RedactConversationRequestRedactConversationSourceRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.RedactConversationRequestMember2 = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember2();
+                result.RedactConversationRequestRedactConversationSourceRequest = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest();
             }
             return result;
         }
@@ -55,13 +55,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(RedactConversationRequestMember1 != null)
+            if(RedactConversationRequestRedactConversationPartRequest != null)
             {
-                return RedactConversationRequestMember1.GetFieldDeserializers();
+                return RedactConversationRequestRedactConversationPartRequest.GetFieldDeserializers();
             }
-            else if(RedactConversationRequestMember2 != null)
+            else if(RedactConversationRequestRedactConversationSourceRequest != null)
             {
-                return RedactConversationRequestMember2.GetFieldDeserializers();
+                return RedactConversationRequestRedactConversationSourceRequest.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -72,13 +72,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(RedactConversationRequestMember1 != null)
+            if(RedactConversationRequestRedactConversationPartRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1>(null, RedactConversationRequestMember1);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest>(null, RedactConversationRequestRedactConversationPartRequest);
             }
-            else if(RedactConversationRequestMember2 != null)
+            else if(RedactConversationRequestRedactConversationSourceRequest != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember2>(null, RedactConversationRequestMember2);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest>(null, RedactConversationRequestRedactConversationSourceRequest);
             }
         }
     }

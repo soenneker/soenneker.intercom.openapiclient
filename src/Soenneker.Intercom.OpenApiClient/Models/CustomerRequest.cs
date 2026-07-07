@@ -8,34 +8,34 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember1"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember2"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember3"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CustomerRequest : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember1"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember1? CustomerRequestMember1 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail? CustomerRequestEmail { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember1 CustomerRequestMember1 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail CustomerRequestEmail { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember2"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember2? CustomerRequestMember2 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId? CustomerRequestIntercomUserId { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember2 CustomerRequestMember2 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId CustomerRequestIntercomUserId { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember3"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember3? CustomerRequestMember3 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId? CustomerRequestUserId { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember3 CustomerRequestMember3 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId CustomerRequestUserId { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -47,17 +47,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequest();
-            if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("CustomerRequestEmail".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CustomerRequestMember1 = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember1();
+                result.CustomerRequestEmail = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail();
             }
-            else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("CustomerRequestIntercomUserId".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CustomerRequestMember2 = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember2();
+                result.CustomerRequestIntercomUserId = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId();
             }
-            else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("CustomerRequestUserId".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CustomerRequestMember3 = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember3();
+                result.CustomerRequestUserId = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId();
             }
             return result;
         }
@@ -67,17 +67,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(CustomerRequestMember1 != null)
+            if(CustomerRequestEmail != null)
             {
-                return CustomerRequestMember1.GetFieldDeserializers();
+                return CustomerRequestEmail.GetFieldDeserializers();
             }
-            else if(CustomerRequestMember2 != null)
+            else if(CustomerRequestIntercomUserId != null)
             {
-                return CustomerRequestMember2.GetFieldDeserializers();
+                return CustomerRequestIntercomUserId.GetFieldDeserializers();
             }
-            else if(CustomerRequestMember3 != null)
+            else if(CustomerRequestUserId != null)
             {
-                return CustomerRequestMember3.GetFieldDeserializers();
+                return CustomerRequestUserId.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -88,17 +88,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(CustomerRequestMember1 != null)
+            if(CustomerRequestEmail != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember1>(null, CustomerRequestMember1);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail>(null, CustomerRequestEmail);
             }
-            else if(CustomerRequestMember2 != null)
+            else if(CustomerRequestIntercomUserId != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember2>(null, CustomerRequestMember2);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId>(null, CustomerRequestIntercomUserId);
             }
-            else if(CustomerRequestMember3 != null)
+            else if(CustomerRequestUserId != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestMember3>(null, CustomerRequestMember3);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId>(null, CustomerRequestUserId);
             }
         }
     }

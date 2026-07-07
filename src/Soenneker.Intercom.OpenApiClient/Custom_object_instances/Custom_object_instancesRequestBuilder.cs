@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.custom_object_instances.item collection</summary>
         /// <param name="position">The unique identifier of the custom object type that defines the structure of the custom object instance.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("custom_object_type_identifier", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("customObjectTypeIdentifier", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

@@ -18,7 +18,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether the ticket state is archived</summary>
         public bool? Archived { get; set; }
         /// <summary>The category of the ticket state</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailed_category? Category { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory? Category { get; set; }
         /// <summary>The state the ticket is currently in, in a human readable form - visible to customers, in the messenger, email and tickets portal.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "archived", n => { Archived = n.GetBoolValue(); } },
-                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailed_category>(); } },
+                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory>(); } },
                 { "external_label", n => { ExternalLabel = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "internal_label", n => { InternalLabel = n.GetStringValue(); } },
@@ -101,7 +101,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("archived", Archived);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailed_category>("category", Category);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory>("category", Category);
             writer.WriteStringValue("external_label", ExternalLabel);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("internal_label", InternalLabel);

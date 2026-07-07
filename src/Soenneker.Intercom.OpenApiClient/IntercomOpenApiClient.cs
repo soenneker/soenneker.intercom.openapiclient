@@ -36,6 +36,7 @@ using Soenneker.Intercom.OpenApiClient.Me;
 using Soenneker.Intercom.OpenApiClient.Messages;
 using Soenneker.Intercom.OpenApiClient.News;
 using Soenneker.Intercom.OpenApiClient.Notes;
+using Soenneker.Intercom.OpenApiClient.Office_hours_schedules;
 using Soenneker.Intercom.OpenApiClient.Phone_call_redirects;
 using Soenneker.Intercom.OpenApiClient.Procedures;
 using Soenneker.Intercom.OpenApiClient.Secure_mode_secrets;
@@ -208,6 +209,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Notes.NotesRequestBuilder Notes
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Notes.NotesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The office_hours_schedules property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Office_hours_schedulesRequestBuilder Office_hours_schedules
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Office_hours_schedulesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The phone_call_redirects property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Phone_call_redirects.Phone_call_redirectsRequestBuilder Phone_call_redirects

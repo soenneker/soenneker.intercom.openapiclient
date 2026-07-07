@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total number of content sources used by AI Agent in the conversation.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList"/> and sets the default values.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "content_sources", n => { ContentSources = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSource>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSource.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesListType>(); } },
             };
         }
         /// <summary>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSource>("content_sources", ContentSources);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

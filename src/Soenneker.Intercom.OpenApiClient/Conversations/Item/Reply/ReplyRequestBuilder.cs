@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply
 {
     /// <summary>
-    /// Builds and executes requests for operations under \conversations\{conversation_-id}\reply
+    /// Builds and executes requests for operations under \conversations\{conversation-id}\reply
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReplyRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReplyRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}/reply", pathParameters)
+        public ReplyRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/reply", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ReplyRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}/reply", rawUrl)
+        public ReplyRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/reply", rawUrl)
         {
         }
         /// <summary>
-        /// You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.
+        /// You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.{% admonition type=&quot;warning&quot; name=&quot;Bot replies to inbound email&quot; %}By default, bot or Operator replies to an inbound email conversation aren&apos;t sent to your customer. The reply is stored as an unnotifiable bot comment, and no `seen` receipt is generated until an email is actually delivered.To send these replies as outbound emails, reach out to your accounts team to enable the email-reply feature flag for your workspace.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="body">The request body</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.
+        /// You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.{% admonition type=&quot;warning&quot; name=&quot;Bot replies to inbound email&quot; %}By default, bot or Operator replies to an inbound email conversation aren&apos;t sent to your customer. The reply is stored as an unnotifiable bot comment, and no `seen` receipt is generated until an email is actually delivered.To send these replies as outbound emails, reach out to your accounts team to enable the email-reply feature flag for your workspace.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total number of side conversations.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type of the response object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList"/> and sets the default values.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages>(global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages.CreateFromDiscriminatorValue); } },
                 { "side_conversations", n => { SideConversations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary>(global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType>(); } },
             };
         }
         /// <summary>
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages>("pages", Pages);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary>("side_conversations", SideConversations);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

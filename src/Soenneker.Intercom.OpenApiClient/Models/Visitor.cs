@@ -46,10 +46,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The custom attributes you have set on the Visitor.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorCustomAttributesProperty? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorCustomAttributesProperty CustomAttributes { get; set; }
 #endif
         /// <summary>Identifies if this visitor has do not track enabled.</summary>
         public bool? DoNotTrack { get; set; }
@@ -244,7 +244,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar.CreateFromDiscriminatorValue); } },
                 { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "do_not_track", n => { DoNotTrack = n.GetBoolValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "has_hard_bounced", n => { HasHardBounced = n.GetBoolValue(); } },
@@ -286,7 +286,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorAvatar>("avatar", Avatar);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompanies>("companies", Companies);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Visitor_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteBoolValue("do_not_track", DoNotTrack);
             writer.WriteStringValue("email", Email);
             writer.WriteBoolValue("has_hard_bounced", HasHardBounced);

@@ -42,7 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total number of companies</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type of object - `list`</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll"/> and sets the default values.
         /// </summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
                 { "scroll_param", n => { ScrollParam = n.GetStringValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollType>(); } },
             };
         }
         /// <summary>
@@ -86,7 +86,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
             writer.WriteStringValue("scroll_param", ScrollParam);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

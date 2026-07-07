@@ -32,9 +32,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Body { get; set; }
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequestMessageType? MessageType { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequestType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest"/> and sets the default values.
         /// </summary>
@@ -62,8 +62,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest_message_type>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequestMessageType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequestType>(); } },
             };
         }
         /// <summary>
@@ -75,8 +75,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
             writer.WriteStringValue("body", Body);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest_message_type>("message_type", MessageType);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequestMessageType>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequestType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

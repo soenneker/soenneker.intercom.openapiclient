@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Cancel
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.export.cancel.item collection</summary>
         /// <param name="position">job_identifier</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Export.Cancel.Item.WithJob_identifierItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Export.Cancel.Item.WithJob_identifierItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Export.Cancel.Item.WithJobIdentifierItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Export.Cancel.Item.WithJobIdentifierItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("job_identifier", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Export.Cancel.Item.WithJob_identifierItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("jobIdentifier", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Export.Cancel.Item.WithJobIdentifierItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

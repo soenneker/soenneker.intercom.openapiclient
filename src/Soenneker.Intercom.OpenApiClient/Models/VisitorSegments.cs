@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<string> Segments { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments"/> and sets the default values.
         /// </summary>
@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "segments", n => { Segments = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsType>(); } },
             };
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("segments", Segments);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegments_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages Pages { get; set; }
 #endif
         /// <summary>The type of object - `list`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList"/> and sets the default values.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListType>(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult>("data", Data);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages>("pages", Pages);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

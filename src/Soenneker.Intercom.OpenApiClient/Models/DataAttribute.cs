@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Set to true if this is a CDA</summary>
         public bool? Custom { get; set; }
         /// <summary>The data type of the attribute.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_data_type? DataType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeDataType? DataType { get; set; }
         /// <summary>Readable description of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Can this attribute be updated by the Messenger</summary>
         public bool? MessengerWritable { get; set; }
         /// <summary>Value is `contact` for user/lead attributes and `company` for company attributes.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_model? Model { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeModel? Model { get; set; }
         /// <summary>Name of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<string> Options { get; set; }
 #endif
         /// <summary>Value is `data_attribute`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeType? Type { get; set; }
         /// <summary>Can this attribute be updated in the UI</summary>
         public bool? UiWritable { get; set; }
         /// <summary>The time the attribute was last updated as a UTC Unix timestamp</summary>
@@ -115,16 +115,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "archived", n => { Archived = n.GetBoolValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "custom", n => { Custom = n.GetBoolValue(); } },
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_data_type>(); } },
+                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeDataType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "full_name", n => { FullName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "messenger_writable", n => { MessengerWritable = n.GetBoolValue(); } },
-                { "model", n => { Model = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_model>(); } },
+                { "model", n => { Model = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeModel>(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "options", n => { Options = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeType>(); } },
                 { "ui_writable", n => { UiWritable = n.GetBoolValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
@@ -141,16 +141,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("archived", Archived);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteBoolValue("custom", Custom);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_data_type>("data_type", DataType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeDataType>("data_type", DataType);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("full_name", FullName);
             writer.WriteIntValue("id", Id);
             writer.WriteStringValue("label", Label);
             writer.WriteBoolValue("messenger_writable", MessengerWritable);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_model>("model", Model);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeModel>("model", Model);
             writer.WriteStringValue("name", Name);
             writer.WriteCollectionOfPrimitiveValues<string>("options", Options);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeType>("type", Type);
             writer.WriteBoolValue("ui_writable", UiWritable);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

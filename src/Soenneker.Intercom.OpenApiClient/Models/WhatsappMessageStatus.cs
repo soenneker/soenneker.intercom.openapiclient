@@ -28,10 +28,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Error details, present only when status is &quot;failed&quot;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_error? Error { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusError? Error { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_error Error { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusError Error { get; set; }
 #endif
         /// <summary>The WhatsApp message ID</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -42,7 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string MessageId { get; set; }
 #endif
         /// <summary>Current delivery status of the message</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_status? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusStatus? Status { get; set; }
         /// <summary>Name of the WhatsApp template used</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,9 +88,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "error", n => { Error = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_error>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_error.CreateFromDiscriminatorValue); } },
+                { "error", n => { Error = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusError>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusError.CreateFromDiscriminatorValue); } },
                 { "message_id", n => { MessageId = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_status>(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusStatus>(); } },
                 { "template_name", n => { TemplateName = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -105,9 +105,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_error>("error", Error);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusError>("error", Error);
             writer.WriteStringValue("message_id", MessageId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatus_status>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusStatus>("status", Status);
             writer.WriteStringValue("template_name", TemplateName);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);

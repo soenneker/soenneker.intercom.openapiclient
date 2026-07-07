@@ -59,6 +59,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public UpdateTicketTypeAttributeRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            RequiredToCreate = false;
+            RequiredToCreateForContacts = false;
+            VisibleOnCreate = true;
+            VisibleToContacts = true;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

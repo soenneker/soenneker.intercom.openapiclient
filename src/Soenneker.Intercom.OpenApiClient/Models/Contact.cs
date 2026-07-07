@@ -60,10 +60,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The avatar property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_avatar? Avatar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar? Avatar { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_avatar Avatar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar Avatar { get; set; }
 #endif
         /// <summary>The name of the browser which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -102,10 +102,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The custom attributes which are set for the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty CustomAttributes { get; set; }
 #endif
         /// <summary>The contact&apos;s email.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -344,13 +344,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "android_last_seen_at", n => { AndroidLastSeenAt = n.GetIntValue(); } },
                 { "android_os_version", n => { AndroidOsVersion = n.GetStringValue(); } },
                 { "android_sdk_version", n => { AndroidSdkVersion = n.GetStringValue(); } },
-                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_avatar>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_avatar.CreateFromDiscriminatorValue); } },
+                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar.CreateFromDiscriminatorValue); } },
                 { "browser", n => { Browser = n.GetStringValue(); } },
                 { "browser_language", n => { BrowserLanguage = n.GetStringValue(); } },
                 { "browser_version", n => { BrowserVersion = n.GetStringValue(); } },
                 { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>(global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "email_domain", n => { EmailDomain = n.GetStringValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
@@ -400,13 +400,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("android_last_seen_at", AndroidLastSeenAt);
             writer.WriteStringValue("android_os_version", AndroidOsVersion);
             writer.WriteStringValue("android_sdk_version", AndroidSdkVersion);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_avatar>("avatar", Avatar);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar>("avatar", Avatar);
             writer.WriteStringValue("browser", Browser);
             writer.WriteStringValue("browser_language", BrowserLanguage);
             writer.WriteStringValue("browser_version", BrowserVersion);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>("companies", Companies);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Contact_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("email_domain", EmailDomain);
             writer.WriteStringValue("external_id", ExternalId);

@@ -28,7 +28,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total number of linked objects.</summary>
         public int? TotalCount { get; set; }
         /// <summary>Always list.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList"/> and sets the default values.
         /// </summary>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "has_more", n => { HasMore = n.GetBoolValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectListType>(); } },
             };
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject>("data", Data);
             writer.WriteBoolValue("has_more", HasMore);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

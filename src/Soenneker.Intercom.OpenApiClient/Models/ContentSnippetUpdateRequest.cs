@@ -40,10 +40,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The content blocks that make up the body of the snippet. Mutually exclusive with `body_markdown`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>? JsonBlocks { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequestJsonBlocksItemProperty>? JsonBlocks { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks> JsonBlocks { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequestJsonBlocksItemProperty> JsonBlocks { get; set; }
 #endif
         /// <summary>The locale of the content snippet.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -91,7 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
                 { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
-                { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequestJsonBlocksItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequestJsonBlocksItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -108,7 +108,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
             writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteStringValue("body_markdown", BodyMarkdown);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequest_json_blocks>("json_blocks", JsonBlocks);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetUpdateRequestJsonBlocksItemProperty>("json_blocks", JsonBlocks);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

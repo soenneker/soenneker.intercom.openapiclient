@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> RolePredicates { get; set; }
 #endif
         /// <summary>The type of object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Audience_type? Type { get; private set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AudienceType? Type { get; private set; }
         /// <summary>The time the audience was last updated as a Unix timestamp.</summary>
         public int? UpdatedAt { get; private set; }
         /// <summary>
@@ -83,7 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "predicates", n => { Predicates = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>(global::Soenneker.Intercom.OpenApiClient.Models.Predicate.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "role_predicates", n => { RolePredicates = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>(global::Soenneker.Intercom.OpenApiClient.Models.Predicate.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Audience_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AudienceType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }

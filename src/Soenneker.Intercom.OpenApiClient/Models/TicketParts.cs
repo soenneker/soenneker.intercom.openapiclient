@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total_count property</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketParts_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartsType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketParts"/> and sets the default values.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "ticket_parts", n => { TicketPartsProp = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPart.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketParts_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartsType>(); } },
             };
         }
         /// <summary>
@@ -66,7 +66,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart>("ticket_parts", TicketPartsProp);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketParts_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartsType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

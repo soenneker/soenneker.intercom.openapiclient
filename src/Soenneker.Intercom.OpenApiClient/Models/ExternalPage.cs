@@ -52,7 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time when the external page was last ingested.</summary>
         public int? LastIngestedAt { get; set; }
         /// <summary>Always en</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_locale? Locale { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageLocale? Locale { get; set; }
         /// <summary>The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.</summary>
         public int? SourceId { get; set; }
         /// <summary>The title of the external page.</summary>
@@ -64,7 +64,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Title { get; set; }
 #endif
         /// <summary>Always external_page</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType? Type { get; set; }
         /// <summary>The time when the external page was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The URL of the external page. This will be used by Fin to link end users to the page it based its answer on.</summary>
@@ -81,7 +81,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public ExternalPage()
         {
             AdditionalData = new Dictionary<string, object>();
-            Locale = global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_locale.En;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -110,10 +109,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "html", n => { Html = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "last_ingested_at", n => { LastIngestedAt = n.GetIntValue(); } },
-                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_locale>(); } },
+                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageLocale>(); } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -134,10 +133,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("html", Html);
             writer.WriteStringValue("id", Id);
             writer.WriteIntValue("last_ingested_at", LastIngestedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_locale>("locale", Locale);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageLocale>("locale", Locale);
             writer.WriteIntValue("source_id", SourceId);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

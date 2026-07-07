@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The audience types this connector targets.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_audiences?>? Audiences { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestAudiencesItem?>? Audiences { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_audiences?> Audiences { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestAudiencesItem?> Audiences { get; set; }
 #endif
         /// <summary>The request body template. Supports template variables.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -38,10 +38,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The input parameters accepted by this data connector. Replaces all existing inputs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_data_inputs>? DataInputs { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem>? DataInputs { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_data_inputs> DataInputs { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem> DataInputs { get; set; }
 #endif
         /// <summary>A description of what this data connector does.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,20 +56,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>HTTP headers to include in the request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_headers>? Headers { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem>? Headers { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_headers> Headers { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem> Headers { get; set; }
 #endif
         /// <summary>The HTTP method used by the data connector.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_http_method? HttpMethod { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHttpMethod? HttpMethod { get; set; }
         /// <summary>A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_mock_response? MockResponse { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestMockResponseProperty? MockResponse { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_mock_response MockResponse { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestMockResponseProperty MockResponse { get; set; }
 #endif
         /// <summary>The name of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The desired state of the connector.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestState? State { get; set; }
         /// <summary>IDs of authentication tokens to attach to this data connector. An empty array removes all tokens.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -124,18 +124,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "audiences", n => { Audiences = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_audiences>()?.AsList(); } },
+                { "audiences", n => { Audiences = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestAudiencesItem>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "bypass_authentication", n => { BypassAuthentication = n.GetBoolValue(); } },
                 { "customer_authentication", n => { CustomerAuthentication = n.GetBoolValue(); } },
-                { "data_inputs", n => { DataInputs = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_data_inputs>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_data_inputs.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data_inputs", n => { DataInputs = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
-                { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_headers>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_headers.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_http_method>(); } },
-                { "mock_response", n => { MockResponse = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_mock_response>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_mock_response.CreateFromDiscriminatorValue); } },
+                { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHttpMethod>(); } },
+                { "mock_response", n => { MockResponse = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestMockResponseProperty>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestMockResponseProperty.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_state>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestState>(); } },
                 { "token_ids", n => { TokenIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "validate_missing_attributes", n => { ValidateMissingAttributes = n.GetBoolValue(); } },
@@ -148,18 +148,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_audiences>("audiences", Audiences);
+            writer.WriteCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestAudiencesItem>("audiences", Audiences);
             writer.WriteStringValue("body", Body);
             writer.WriteBoolValue("bypass_authentication", BypassAuthentication);
             writer.WriteBoolValue("customer_authentication", CustomerAuthentication);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_data_inputs>("data_inputs", DataInputs);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem>("data_inputs", DataInputs);
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_headers>("headers", Headers);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_http_method>("http_method", HttpMethod);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_mock_response>("mock_response", MockResponse);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem>("headers", Headers);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHttpMethod>("http_method", HttpMethod);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestMockResponseProperty>("mock_response", MockResponse);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequest_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestState>("state", State);
             writer.WriteCollectionOfPrimitiveValues<string>("token_ids", TokenIds);
             writer.WriteStringValue("url", Url);
             writer.WriteBoolValue("validate_missing_attributes", ValidateMissingAttributes);

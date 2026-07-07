@@ -82,11 +82,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string PartType { get; set; }
 #endif
         /// <summary>The previous state of the ticket.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_previous_ticket_state? PreviousTicketState { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartPreviousTicketState? PreviousTicketState { get; set; }
         /// <summary>Whether or not the ticket part has been redacted.</summary>
         public bool? Redacted { get; set; }
         /// <summary>The state of the ticket.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_ticket_state? TicketState { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTicketState? TicketState { get; set; }
         /// <summary>Always ticket_part</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -100,10 +100,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The updated attribute data of the ticket part. Only present for attribute update parts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_updated_attribute_data? UpdatedAttributeData { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData? UpdatedAttributeData { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_updated_attribute_data UpdatedAttributeData { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData UpdatedAttributeData { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketPart"/> and sets the default values.
@@ -139,12 +139,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "part_type", n => { PartType = n.GetStringValue(); } },
-                { "previous_ticket_state", n => { PreviousTicketState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_previous_ticket_state>(); } },
+                { "previous_ticket_state", n => { PreviousTicketState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartPreviousTicketState>(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
-                { "ticket_state", n => { TicketState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_ticket_state>(); } },
+                { "ticket_state", n => { TicketState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTicketState>(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
-                { "updated_attribute_data", n => { UpdatedAttributeData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_updated_attribute_data>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_updated_attribute_data.CreateFromDiscriminatorValue); } },
+                { "updated_attribute_data", n => { UpdatedAttributeData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -163,12 +163,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("part_type", PartType);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_previous_ticket_state>("previous_ticket_state", PreviousTicketState);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartPreviousTicketState>("previous_ticket_state", PreviousTicketState);
             writer.WriteBoolValue("redacted", Redacted);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_ticket_state>("ticket_state", TicketState);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTicketState>("ticket_state", TicketState);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPart_updated_attribute_data>("updated_attribute_data", UpdatedAttributeData);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData>("updated_attribute_data", UpdatedAttributeData);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

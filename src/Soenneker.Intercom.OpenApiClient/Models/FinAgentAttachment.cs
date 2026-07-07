@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The type of attachment.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachment_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachmentType? Type { get; set; }
         /// <summary>The URL of the attachment. Required when type is &apos;url&apos;. Must be publicly accessible.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "content_type", n => { ContentType = n.GetStringValue(); } },
                 { "data", n => { Data = n.GetByteArrayValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachment_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachmentType>(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -91,7 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("content_type", ContentType);
             writer.WriteByteArrayValue("data", Data);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachment_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachmentType>("type", Type);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }

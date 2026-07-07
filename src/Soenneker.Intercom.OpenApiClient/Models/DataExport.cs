@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string JobIdentfier { get; set; }
 #endif
         /// <summary>The current state of your job.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataExport_status? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataExportStatus? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataExport"/> and sets the default values.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "download_expires_at", n => { DownloadExpiresAt = n.GetStringValue(); } },
                 { "download_url", n => { DownloadUrl = n.GetStringValue(); } },
                 { "job_identfier", n => { JobIdentfier = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataExport_status>(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataExportStatus>(); } },
             };
         }
         /// <summary>
@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("download_expires_at", DownloadExpiresAt);
             writer.WriteStringValue("download_url", DownloadUrl);
             writer.WriteStringValue("job_identfier", JobIdentfier);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataExport_status>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataExportStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

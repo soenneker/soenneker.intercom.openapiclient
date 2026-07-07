@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history
 {
     /// <summary>
-    /// Builds and executes requests for operations under \contacts\{contact_-id}\merge_history
+    /// Builds and executes requests for operations under \contacts\{contact-id}\merge_history
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Merge_historyRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Merge_historyRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact_%2Did}/merge_history{?cursor*,order*,per_page*}", pathParameters)
+        public Merge_historyRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/merge_history{?cursor*,order*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Merge_historyRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact_%2Did}/merge_history{?cursor*,order*,per_page*}", rawUrl)
+        public Merge_historyRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/merge_history{?cursor*,order*,per_page*}", rawUrl)
         {
         }
         /// <summary>
@@ -104,7 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history
 #endif
             /// <summary>The order to return results in. Defaults to descending.</summary>
             [QueryParameter("order")]
-            public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history.GetOrderQueryParameterType? Order { get; set; }
+            public global::Soenneker.Intercom.OpenApiClient.Models.ListContactMergeHistoryOrderParameter? Order { get; set; }
             /// <summary>The number of results to return per page (default 50, max 150).</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }

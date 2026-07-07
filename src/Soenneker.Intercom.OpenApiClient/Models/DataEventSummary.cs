@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string IntercomUserId { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummary_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummaryType? Type { get; set; }
         /// <summary>The user ID of the user</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "events", n => { Events = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummaryItem>(global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummaryItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "intercom_user_id", n => { IntercomUserId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummary_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummaryType>(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -91,7 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("email", Email);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummaryItem>("events", Events);
             writer.WriteStringValue("intercom_user_id", IntercomUserId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummary_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummaryType>("type", Type);
             writer.WriteStringValue("user_id", UserId);
             writer.WriteAdditionalData(AdditionalData);
         }

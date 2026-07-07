@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time when the AI agent rating was created.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The type of the last answer delivered by AI Agent. If no answer was delivered then this will return `null`</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_last_answer_type? LastAnswerType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType? LastAnswerType { get; set; }
         /// <summary>The customer satisfaction rating given to AI Agent, from 1-5.</summary>
         public int? Rating { get; set; }
         /// <summary>The customer satisfaction rating remark given to AI Agent.</summary>
@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string RatingRemark { get; set; }
 #endif
         /// <summary>The resolution state of AI Agent. If no AI or custom answer has been delivered then this will return `null`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_resolution_state? ResolutionState { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState? ResolutionState { get; set; }
         /// <summary>The title of the source that triggered AI Agent involvement in the conversation. If this is `essentials_plan_setup` then it will return `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,7 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string SourceTitle { get; set; }
 #endif
         /// <summary>The type of the source that triggered AI Agent involvement in the conversation.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_source_type? SourceType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType? SourceType { get; set; }
         /// <summary>The time when the AI agent rating was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -78,12 +78,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "content_sources", n => { ContentSources = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "last_answer_type", n => { LastAnswerType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_last_answer_type>(); } },
+                { "last_answer_type", n => { LastAnswerType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType>(); } },
                 { "rating", n => { Rating = n.GetIntValue(); } },
                 { "rating_remark", n => { RatingRemark = n.GetStringValue(); } },
-                { "resolution_state", n => { ResolutionState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_resolution_state>(); } },
+                { "resolution_state", n => { ResolutionState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState>(); } },
                 { "source_title", n => { SourceTitle = n.GetStringValue(); } },
-                { "source_type", n => { SourceType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_source_type>(); } },
+                { "source_type", n => { SourceType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -96,12 +96,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList>("content_sources", ContentSources);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_last_answer_type>("last_answer_type", LastAnswerType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType>("last_answer_type", LastAnswerType);
             writer.WriteIntValue("rating", Rating);
             writer.WriteStringValue("rating_remark", RatingRemark);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_resolution_state>("resolution_state", ResolutionState);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState>("resolution_state", ResolutionState);
             writer.WriteStringValue("source_title", SourceTitle);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent_source_type>("source_type", SourceType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType>("source_type", SourceType);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -18,15 +18,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Cursor for the next page of results.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_next? Next { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext? Next { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_next Next { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext Next { get; set; }
 #endif
         /// <summary>The number of results per page.</summary>
         public int? PerPage { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages"/> and sets the default values.
         /// </summary>
@@ -52,9 +52,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_next>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_next.CreateFromDiscriminatorValue); } },
+                { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext.CreateFromDiscriminatorValue); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesType>(); } },
             };
         }
         /// <summary>
@@ -64,9 +64,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_next>("next", Next);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext>("next", Next);
             writer.WriteIntValue("per_page", PerPage);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

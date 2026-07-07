@@ -28,17 +28,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>The current state of the job.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobState? State { get; set; }
         /// <summary>The tasks that make up this bulk job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks>? Tasks { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobTasksItem>? Tasks { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks> Tasks { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobTasksItem> Tasks { get; set; }
 #endif
         /// <summary>The type of the object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobType? Type { get; set; }
         /// <summary>The time the job was last updated as a UNIX timestamp.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The URL to check the job status.</summary>
@@ -77,9 +77,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "completed_at", n => { CompletedAt = n.GetIntValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_state>(); } },
-                { "tasks", n => { Tasks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks>(global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_type>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobState>(); } },
+                { "tasks", n => { Tasks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobTasksItem>(global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobTasksItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -94,9 +94,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("completed_at", CompletedAt);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_state>("state", State);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks>("tasks", Tasks);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobState>("state", State);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobTasksItem>("tasks", Tasks);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJobType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

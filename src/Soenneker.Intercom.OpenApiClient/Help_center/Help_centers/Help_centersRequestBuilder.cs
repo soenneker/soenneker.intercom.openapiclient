@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.help_center.help_centers.item collection</summary>
         /// <param name="position">The unique identifier for the collection which is given by Intercom.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Help_centersItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Help_centersItemRequestBuilder this[int position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.HelpCenterItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.HelpCenterItemRequestBuilder this[int position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Help_centersItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("helpCenter%2Did", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.HelpCenterItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

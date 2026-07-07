@@ -38,10 +38,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The channel through which the conversation was initiated and its current channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_channel? Channel { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannelComposed? Channel { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_channel Channel { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannelComposed Channel { get; set; }
 #endif
         /// <summary>Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -80,10 +80,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as &quot;CX Score rating&quot; and &quot;CX Score explanation&quot; may also be included.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes CustomAttributes { get; set; }
 #endif
         /// <summary>An object containing information on the first users message. For a contact initiated message this will represent the users original message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -119,8 +119,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Indicates whether a conversation is open (true) or closed (false).</summary>
         public bool? Open { get; set; }
-        /// <summary>If marked as priority, it will return priority or else not_priority.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority? Priority { get; set; }
+        /// <summary>The priority level of the conversation. Returns one of none, low, medium, high, or urgent.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPriority? Priority { get; set; }
         /// <summary>Indicates whether a conversation has been read.</summary>
         public bool? Read { get; set; }
         /// <summary>Data related to Sales Agent involvement in the conversation.</summary>
@@ -160,7 +160,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource Source { get; set; }
 #endif
         /// <summary>Can be set to &quot;open&quot;, &quot;closed&quot; or &quot;snoozed&quot;.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationState? State { get; set; }
         /// <summary>A Statistics object containing all information required for reporting, with timestamps and calculated metrics.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -236,19 +236,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgent.CreateFromDiscriminatorValue); } },
                 { "ai_agent_participated", n => { AiAgentParticipated = n.GetBoolValue(); } },
                 { "ai_topics", n => { AiTopics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiTopics>(global::Soenneker.Intercom.OpenApiClient.Models.AiTopics.CreateFromDiscriminatorValue); } },
-                { "channel", n => { Channel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_channel>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_channel.CreateFromDiscriminatorValue); } },
+                { "channel", n => { Channel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannelComposed>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannelComposed.CreateFromDiscriminatorValue); } },
                 { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts.CreateFromDiscriminatorValue); } },
                 { "conversation_parts", n => { ConversationParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts.CreateFromDiscriminatorValue); } },
                 { "conversation_rating", n => { ConversationRating = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes.CreateFromDiscriminatorValue); } },
                 { "first_contact_reply", n => { FirstContactReply = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList.CreateFromDiscriminatorValue); } },
                 { "monitor_evaluations", n => { MonitorEvaluations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
-                { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority>(); } },
+                { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPriority>(); } },
                 { "read", n => { Read = n.GetBoolValue(); } },
                 { "sales_agent", n => { SalesAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgent>(global::Soenneker.Intercom.OpenApiClient.Models.SalesAgent.CreateFromDiscriminatorValue); } },
                 { "sales_agent_participated", n => { SalesAgentParticipated = n.GetBoolValue(); } },
@@ -256,7 +256,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "sla_applied", n => { SlaApplied = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>(global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied.CreateFromDiscriminatorValue); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
                 { "source", n => { Source = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource.CreateFromDiscriminatorValue); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_state>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationState>(); } },
                 { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics.CreateFromDiscriminatorValue); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
                 { "team_assignee_id", n => { TeamAssigneeId = n.GetIntValue(); } },
@@ -278,19 +278,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>("ai_agent", AiAgent);
             writer.WriteBoolValue("ai_agent_participated", AiAgentParticipated);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiTopics>("ai_topics", AiTopics);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_channel>("channel", Channel);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationChannelComposed>("channel", Channel);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>("contacts", Contacts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>("conversation_parts", ConversationParts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>("conversation_rating", ConversationRating);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes>("custom_attributes", CustomAttributes);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>("first_contact_reply", FirstContactReply);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>("linked_objects", LinkedObjects);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation>("monitor_evaluations", MonitorEvaluations);
             writer.WriteBoolValue("open", Open);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_priority>("priority", Priority);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPriority>("priority", Priority);
             writer.WriteBoolValue("read", Read);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgent>("sales_agent", SalesAgent);
             writer.WriteBoolValue("sales_agent_participated", SalesAgentParticipated);
@@ -298,7 +298,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>("sla_applied", SlaApplied);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>("source", Source);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_state>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationState>("state", State);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics>("statistics", Statistics);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
             writer.WriteIntValue("team_assignee_id", TeamAssigneeId);

@@ -27,7 +27,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time the attribute was created as a UTC Unix timestamp.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>&quot;The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType_data_type? DataType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBaseDataType? DataType { get; set; }
         /// <summary>Readable description of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether this attribute is required.</summary>
         public bool? Required { get; set; }
         /// <summary>Value is `conversation_attribute`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBaseType? Type { get; set; }
         /// <summary>The time the attribute was last updated as a UTC Unix timestamp.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>Team IDs that can see this attribute. Empty array means all teams.</summary>
@@ -96,13 +96,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "archived", n => { Archived = n.GetBoolValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType_data_type>(); } },
+                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBaseDataType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "options", n => { Options = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOption>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOption.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "required", n => { Required = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBaseType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "visible_to_team_ids", n => { VisibleToTeamIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
@@ -117,13 +117,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("admin_id", AdminId);
             writer.WriteBoolValue("archived", Archived);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType_data_type>("data_type", DataType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBaseDataType>("data_type", DataType);
             writer.WriteStringValue("description", Description);
             writer.WriteIntValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOption>("options", Options);
             writer.WriteBoolValue("required", Required);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBaseType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteCollectionOfPrimitiveValues<string>("visible_to_team_ids", VisibleToTeamIds);
             writer.WriteAdditionalData(AdditionalData);

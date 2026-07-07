@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Search
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content/search?query={query}{&page*,per_page*}", pathParameters)
+        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content/search{?any_tag_ids,content_types,copilot_state*,created_at_after*,created_at_before*,created_by_ids,fin_sales_state*,fin_service_state*,folder_entity_type*,folder_ids,last_updated_by_ids,locales,page*,per_page*,query*,states,tag_ids,tag_operator*,updated_at_after*,updated_at_before*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Search
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content/search?query={query}{&page*,per_page*}", rawUrl)
+        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content/search{?any_tag_ids,content_types,copilot_state*,created_at_after*,created_at_before*,created_by_ids,fin_sales_state*,fin_service_state*,folder_entity_type*,folder_ids,last_updated_by_ids,locales,page*,per_page*,query*,states,tag_ids,tag_operator*,updated_at_after*,updated_at_before*}", rawUrl)
         {
         }
         /// <summary>
@@ -92,13 +92,91 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Search
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SearchRequestBuilderGetQueryParameters 
         {
+            /// <summary>Filter by tag IDs using OR semantics — returns content matching any of the given tags. Alternative to `tag_ids` + `tag_operator`. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("any_tag_ids")]
+            public int?[]? AnyTagIds { get; set; }
+#nullable restore
+#else
+            [QueryParameter("any_tag_ids")]
+            public int?[] AnyTagIds { get; set; }
+#endif
+            /// <summary>Restrict the search to specific content types. When provided, this REPLACES the default content type set rather than filtering on top of it. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("content_types")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentContentTypesParameterItem[]? ContentTypes { get; set; }
+#nullable restore
+#else
+            [QueryParameter("content_types")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentContentTypesParameterItem[] ContentTypes { get; set; }
+#endif
+            /// <summary>Filter by whether the content is enabled for Copilot.</summary>
+            [QueryParameter("copilot_state")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentCopilotStateParameter? CopilotState { get; set; }
+            /// <summary>Return content created at or after this time. Unix epoch seconds.</summary>
+            [QueryParameter("created_at_after")]
+            public int? CreatedAtAfter { get; set; }
+            /// <summary>Return content created at or before this time. Unix epoch seconds.</summary>
+            [QueryParameter("created_at_before")]
+            public int? CreatedAtBefore { get; set; }
+            /// <summary>Filter by the admin IDs that created the content. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("created_by_ids")]
+            public int?[]? CreatedByIds { get; set; }
+#nullable restore
+#else
+            [QueryParameter("created_by_ids")]
+            public int?[] CreatedByIds { get; set; }
+#endif
+            /// <summary>Filter by whether the content is enabled for Fin Sales Agent.</summary>
+            [QueryParameter("fin_sales_state")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentFinSalesStateParameter? FinSalesState { get; set; }
+            /// <summary>Filter by whether the content is enabled for Fin AI Agent (customer-facing service).</summary>
+            [QueryParameter("fin_service_state")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentFinServiceStateParameter? FinServiceState { get; set; }
+            /// <summary>Required when `folder_ids` is provided. Identifies the entity type the folder IDs refer to.</summary>
+            [QueryParameter("folder_entity_type")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentFolderEntityTypeParameter? FolderEntityType { get; set; }
+            /// <summary>Filter by folder IDs. Must be sent together with `folder_entity_type`. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("folder_ids")]
+            public int?[]? FolderIds { get; set; }
+#nullable restore
+#else
+            [QueryParameter("folder_ids")]
+            public int?[] FolderIds { get; set; }
+#endif
+            /// <summary>Filter by the admin IDs that last updated the content. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("last_updated_by_ids")]
+            public int?[]? LastUpdatedByIds { get; set; }
+#nullable restore
+#else
+            [QueryParameter("last_updated_by_ids")]
+            public int?[] LastUpdatedByIds { get; set; }
+#endif
+            /// <summary>Filter by locale codes (e.g. `en`, `fr`, `de`). Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("locales")]
+            public string[]? Locales { get; set; }
+#nullable restore
+#else
+            [QueryParameter("locales")]
+            public string[] Locales { get; set; }
+#endif
             /// <summary>The page number to fetch. Defaults to 1. Values below 1 are clamped to 1.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
             /// <summary>Number of results per page. Defaults to 10. Maximum 50.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
-            /// <summary>The keyword(s) to search for across the knowledge base contents.</summary>
+            /// <summary>A free-text search term matched against the title and body of each content item. When omitted, returns the most recent content items.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("query")]
@@ -108,6 +186,35 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Search
             [QueryParameter("query")]
             public string Query { get; set; }
 #endif
+            /// <summary>Filter by publication state. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("states")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentStatesParameterItem[]? States { get; set; }
+#nullable restore
+#else
+            [QueryParameter("states")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentStatesParameterItem[] States { get; set; }
+#endif
+            /// <summary>Filter by tag IDs. Pairs with `tag_operator` to control match semantics. Accepts a comma-separated list or repeated params.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("tag_ids")]
+            public int?[]? TagIds { get; set; }
+#nullable restore
+#else
+            [QueryParameter("tag_ids")]
+            public int?[] TagIds { get; set; }
+#endif
+            /// <summary>Match operator paired with `tag_ids`. `IN` returns content matching any of the given tags; `NIN` excludes content matching any of them.</summary>
+            [QueryParameter("tag_operator")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentTagOperatorParameter? TagOperator { get; set; }
+            /// <summary>Return content last updated at or after this time. Unix epoch seconds.</summary>
+            [QueryParameter("updated_at_after")]
+            public int? UpdatedAtAfter { get; set; }
+            /// <summary>Return content last updated at or before this time. Unix epoch seconds.</summary>
+            [QueryParameter("updated_at_before")]
+            public int? UpdatedAtBefore { get; set; }
         }
     }
 }

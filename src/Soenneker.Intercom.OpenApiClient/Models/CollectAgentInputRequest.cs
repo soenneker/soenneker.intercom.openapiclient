@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Array of attribute values matching the attributes_to_collect from the webhook payload. Must include a value for every attribute listed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest_attribute_values>? AttributeValues { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem>? AttributeValues { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest_attribute_values> AttributeValues { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem> AttributeValues { get; set; }
 #endif
         /// <summary>The step_id from the webhook payload, identifying which HITL step this response is for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "attribute_values", n => { AttributeValues = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest_attribute_values>(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest_attribute_values.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "attribute_values", n => { AttributeValues = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem>(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "step_id", n => { StepId = n.GetStringValue(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest_attribute_values>("attribute_values", AttributeValues);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem>("attribute_values", AttributeValues);
             writer.WriteStringValue("step_id", StepId);
             writer.WriteAdditionalData(AdditionalData);
         }

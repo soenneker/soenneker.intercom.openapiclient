@@ -288,7 +288,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Tr { get; set; }
 #endif
         /// <summary>The type of object - article_translated_content.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType? Type { get; set; }
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -372,7 +372,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "sr", n => { Sr = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "sv", n => { Sv = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "tr", n => { Tr = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType>(); } },
                 { "vi", n => { Vi = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "zh-CN", n => { ZhCN = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "zh-TW", n => { ZhTW = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
@@ -419,7 +419,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("sr", Sr);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("sv", Sv);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("tr", Tr);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType>("type", Type);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("vi", Vi);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("zh-CN", ZhCN);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("zh-TW", ZhTW);

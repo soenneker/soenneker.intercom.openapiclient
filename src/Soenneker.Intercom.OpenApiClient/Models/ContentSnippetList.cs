@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total number of pages.</summary>
         public int? TotalPages { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetList"/> and sets the default values.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
                 { "total_pages", n => { TotalPages = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetListType>(); } },
             };
         }
         /// <summary>
@@ -78,7 +78,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("per_page", PerPage);
             writer.WriteIntValue("total_count", TotalCount);
             writer.WriteIntValue("total_pages", TotalPages);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -36,27 +36,29 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
         /// <summary>
         /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return `410 Gone` with a `Link` header pointing to the canonical (merged-into) contact.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200Response"/></returns>
         /// <param name="body">Merge contact data.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200Response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200Response> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder.MergeRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MergeContact200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can merge a contact with a `role` of `lead` into a contact with a `role` of `user`.{% admonition type=&quot;warning&quot; name=&quot;Merged contacts are not retrievable via the API&quot; %}  Once a merge is completed, the source contact (`from`) is permanently removed from the active contact list. This means:  - **GET /contacts/{id}** — Requesting the source contact by its original ID will return `410 Gone` with a `Link` header pointing to the canonical (merged-into) contact.  - **POST /contacts/search** — The source contact will not appear in search results, including queries filtered by `updated_at`.  - **GET /contacts** — The source contact will not appear in list results.  Only the target contact (`into`) remains accessible. If your application stores contact IDs, update them to use the target contact&apos;s ID after a merge.{% /admonition %}

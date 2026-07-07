@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<string> SocialProfiles { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfilesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles"/> and sets the default values.
         /// </summary>
@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "social_profiles", n => { SocialProfiles = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfilesType>(); } },
             };
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("social_profiles", SocialProfiles);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfiles_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSocialProfilesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

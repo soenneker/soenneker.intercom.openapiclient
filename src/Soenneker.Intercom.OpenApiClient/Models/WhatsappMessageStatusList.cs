@@ -17,10 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The events property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events>? Events { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItem>? Events { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events> Events { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItem> Events { get; set; }
 #endif
         /// <summary>The pages property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -41,7 +41,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Total number of events</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList"/> and sets the default values.
         /// </summary>
@@ -67,11 +67,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "events", n => { Events = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "events", n => { Events = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItem>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages.CreateFromDiscriminatorValue); } },
                 { "ruleset_id", n => { RulesetId = n.GetStringValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListType>(); } },
             };
         }
         /// <summary>
@@ -81,11 +81,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events>("events", Events);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItem>("events", Events);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages>("pages", Pages);
             writer.WriteStringValue("ruleset_id", RulesetId);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

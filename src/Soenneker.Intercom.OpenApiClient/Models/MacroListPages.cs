@@ -18,15 +18,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Cursor for the next page</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_next? Next { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesNext? Next { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_next Next { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesNext Next { get; set; }
 #endif
         /// <summary>Number of results per page</summary>
         public int? PerPage { get; set; }
         /// <summary>The type of pagination</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages"/> and sets the default values.
         /// </summary>
@@ -52,9 +52,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_next>(global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_next.CreateFromDiscriminatorValue); } },
+                { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesNext>(global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesNext.CreateFromDiscriminatorValue); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesType>(); } },
             };
         }
         /// <summary>
@@ -64,9 +64,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_next>("next", Next);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesNext>("next", Next);
             writer.WriteIntValue("per_page", PerPage);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPages_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MacroListPagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

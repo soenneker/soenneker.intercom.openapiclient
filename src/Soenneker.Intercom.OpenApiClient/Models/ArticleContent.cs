@@ -49,6 +49,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time when the article was created (seconds).</summary>
         public int? CreatedAt { get; set; }
+        /// <summary>The ID of the teammate who created this content version.</summary>
+        public int? CreatedById { get; private set; }
         /// <summary>The description of the article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,8 +59,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
+        /// <summary>The time, in seconds, when this locale&apos;s staged draft was last edited, or `null` when there is no staged draft. Only returned on the `Preview` API version.</summary>
+        public int? DraftUpdatedAt { get; set; }
+        /// <summary>Whether this locale&apos;s published content has unpublished changes staged as a draft on top of its live content. Only returned on the `Preview` API version.</summary>
+        public bool? HasUnpublishedChanges { get; set; }
         /// <summary>Whether the article is `published` or is a `draft` .</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentState? State { get; set; }
         /// <summary>The title of the article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -68,9 +74,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Title { get; set; }
 #endif
         /// <summary>The type of object - `article_content` .</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType? Type { get; set; }
         /// <summary>The time when the article was last updated (seconds).</summary>
         public int? UpdatedAt { get; set; }
+        /// <summary>The ID of the teammate who last updated this content version.</summary>
+        public int? UpdatedById { get; private set; }
         /// <summary>The URL of the article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -112,11 +120,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_by_id", n => { CreatedById = n.GetIntValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_state>(); } },
+                { "draft_updated_at", n => { DraftUpdatedAt = n.GetIntValue(); } },
+                { "has_unpublished_changes", n => { HasUnpublishedChanges = n.GetBoolValue(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentState>(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_by_id", n => { UpdatedById = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -136,9 +148,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("description", Description);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_state>("state", State);
+            writer.WriteIntValue("draft_updated_at", DraftUpdatedAt);
+            writer.WriteBoolValue("has_unpublished_changes", HasUnpublishedChanges);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentState>("state", State);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);

@@ -34,10 +34,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An Article title highlighted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights_highlighted_title>? HighlightedTitle { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem>? HighlightedTitle { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights_highlighted_title> HighlightedTitle { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem> HighlightedTitle { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights"/> and sets the default values.
@@ -66,7 +66,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "article_id", n => { ArticleId = n.GetStringValue(); } },
                 { "highlighted_summary", n => { HighlightedSummary = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
-                { "highlighted_title", n => { HighlightedTitle = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights_highlighted_title>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights_highlighted_title.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "highlighted_title", n => { HighlightedTitle = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -78,7 +78,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("article_id", ArticleId);
             writer.WriteObjectValue<UntypedNode>("highlighted_summary", HighlightedSummary);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights_highlighted_title>("highlighted_title", HighlightedTitle);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem>("highlighted_title", HighlightedTitle);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

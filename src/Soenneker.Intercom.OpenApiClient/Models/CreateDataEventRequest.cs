@@ -43,18 +43,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Optional metadata about the event.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequest_metadata? Metadata { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequestMetadataProperty? Metadata { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequest_metadata Metadata { get; set; }
-#endif
-        /// <summary>Union discriminator</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequestMetadataProperty Metadata { get; set; }
 #endif
         /// <summary>Your identifier for the user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -93,8 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "event_name", n => { EventName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequest_metadata>(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequest_metadata.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetStringValue(); } },
+                { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequestMetadataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequestMetadataProperty.CreateFromDiscriminatorValue); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -109,8 +100,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("event_name", EventName);
             writer.WriteStringValue("id", Id);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequest_metadata>("metadata", Metadata);
-            writer.WriteStringValue("type", Type);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventRequestMetadataProperty>("metadata", Metadata);
             writer.WriteStringValue("user_id", UserId);
             writer.WriteAdditionalData(AdditionalData);
         }

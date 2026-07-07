@@ -18,7 +18,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The identifier for the admin which is given by Intercom.</summary>
         public int? Id { get; set; }
         /// <summary>Always `admin`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFromType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom"/> and sets the default values.
         /// </summary>
@@ -45,7 +45,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "id", n => { Id = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFromType>(); } },
             };
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFromType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

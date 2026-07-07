@@ -31,6 +31,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Into { get; set; }
 #endif
+        /// <summary>Set to `true` to merge two contacts that are not duplicates (they share no matching email or phone).</summary>
+        public bool? SkipDuplicateValidation { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest"/> and sets the default values.
         /// </summary>
@@ -58,6 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "from", n => { From = n.GetStringValue(); } },
                 { "into", n => { Into = n.GetStringValue(); } },
+                { "skip_duplicate_validation", n => { SkipDuplicateValidation = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -69,6 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("from", From);
             writer.WriteStringValue("into", Into);
+            writer.WriteBoolValue("skip_duplicate_validation", SkipDuplicateValidation);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

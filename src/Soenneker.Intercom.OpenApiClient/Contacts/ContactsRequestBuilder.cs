@@ -44,14 +44,14 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.contacts.item collection</summary>
         /// <param name="position">id</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("contact_%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Contact_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("contact%2Did", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>
@@ -96,18 +96,18 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         /// <summary>
         /// You can create a new contact (ie. user or lead).
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateContact body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateContactRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateContact body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateContactRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -116,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
@@ -145,11 +145,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateContact body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateContactRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateContact body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateContactRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

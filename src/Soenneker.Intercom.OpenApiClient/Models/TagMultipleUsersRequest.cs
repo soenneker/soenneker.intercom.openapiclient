@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The users property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest_users>? Users { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequestUsersItem>? Users { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest_users> Users { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequestUsersItem> Users { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest"/> and sets the default values.
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "users", n => { Users = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest_users>(global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest_users.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "users", n => { Users = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequestUsersItem>(global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequestUsersItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("name", Name);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest_users>("users", Users);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequestUsersItem>("users", Users);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

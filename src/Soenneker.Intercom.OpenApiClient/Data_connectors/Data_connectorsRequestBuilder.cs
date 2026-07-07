@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.data_connectors.item collection</summary>
         /// <param name="position">The unique identifier of the data connector.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.DataConnectorItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.DataConnectorItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("data_connector_%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Data_connector_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("dataConnector%2Did", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.DataConnectorItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

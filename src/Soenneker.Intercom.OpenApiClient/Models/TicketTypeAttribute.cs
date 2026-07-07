@@ -48,10 +48,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Input options for the attribute</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute_input_options? InputOptions { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeInputOptionsProperty? InputOptions { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute_input_options InputOptions { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeInputOptionsProperty InputOptions { get; set; }
 #endif
         /// <summary>The name of the ticket type attribute</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -97,6 +97,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public TicketTypeAttribute()
         {
             AdditionalData = new Dictionary<string, object>();
+            RequiredToCreate = false;
+            RequiredToCreateForContacts = false;
+            VisibleOnCreate = true;
+            VisibleToContacts = true;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -122,7 +126,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "default", n => { Default = n.GetBoolValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "input_options", n => { InputOptions = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute_input_options>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute_input_options.CreateFromDiscriminatorValue); } },
+                { "input_options", n => { InputOptions = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeInputOptionsProperty>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeInputOptionsProperty.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "order", n => { Order = n.GetIntValue(); } },
                 { "required_to_create", n => { RequiredToCreate = n.GetBoolValue(); } },
@@ -148,7 +152,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("default", Default);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("id", Id);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute_input_options>("input_options", InputOptions);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeInputOptionsProperty>("input_options", InputOptions);
             writer.WriteStringValue("name", Name);
             writer.WriteIntValue("order", Order);
             writer.WriteBoolValue("required_to_create", RequiredToCreate);

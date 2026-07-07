@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Additional metadata about the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_data? Data { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData? Data { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_data Data { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData Data { get; set; }
 #endif
         /// <summary>Phone number in E.164 format for the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string PhoneNumber { get; set; }
 #endif
         /// <summary>Source of the call. Can be &quot;five9&quot;, &quot;zoom_phone&quot;, or defaults to &quot;aws_connect&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_source? Source { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource? Source { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest"/> and sets the default values.
         /// </summary>
@@ -67,9 +67,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "call_id", n => { CallId = n.GetStringValue(); } },
-                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_data>(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_data.CreateFromDiscriminatorValue); } },
+                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData>(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData.CreateFromDiscriminatorValue); } },
                 { "phone_number", n => { PhoneNumber = n.GetStringValue(); } },
-                { "source", n => { Source = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_source>(); } },
+                { "source", n => { Source = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource>(); } },
             };
         }
         /// <summary>
@@ -80,9 +80,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("call_id", CallId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_data>("data", Data);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData>("data", Data);
             writer.WriteStringValue("phone_number", PhoneNumber);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest_source>("source", Source);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource>("source", Source);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

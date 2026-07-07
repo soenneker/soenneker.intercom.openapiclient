@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of contact objects to update. Each must include an `id` and the fields to update. Maximum 100 contacts per request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest_contacts>? Contacts { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem>? Contacts { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest_contacts> Contacts { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem> Contacts { get; set; }
 #endif
         /// <summary>Optional. Include to append tasks to an existing job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest_contacts>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest_contacts.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "job", n => { Job = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob.CreateFromDiscriminatorValue); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequest_contacts>("contacts", Contacts);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem>("contacts", Contacts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob>("job", Job);
             writer.WriteAdditionalData(AdditionalData);
         }

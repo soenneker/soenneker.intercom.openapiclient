@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Html { get; set; }
 #endif
         /// <summary>Always en</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequest_locale? Locale { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequestLocale? Locale { get; set; }
         /// <summary>The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.</summary>
         public int? SourceId { get; set; }
         /// <summary>The title of the external page.</summary>
@@ -65,7 +65,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public UpdateExternalPageRequest()
         {
             AdditionalData = new Dictionary<string, object>();
-            Locale = global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequest_locale.En;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -91,7 +90,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "fin_availability", n => { FinAvailability = n.GetBoolValue(); } },
                 { "html", n => { Html = n.GetStringValue(); } },
-                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequest_locale>(); } },
+                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequestLocale>(); } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
@@ -110,7 +109,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteBoolValue("fin_availability", FinAvailability);
             writer.WriteStringValue("html", Html);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequest_locale>("locale", Locale);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateExternalPageRequestLocale>("locale", Locale);
             writer.WriteIntValue("source_id", SourceId);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("url", Url);

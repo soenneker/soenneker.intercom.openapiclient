@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string SourceContactId { get; set; }
 #endif
         /// <summary>The role of the contact that was merged in.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem_source_contact_role? SourceContactRole { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole? SourceContactRole { get; set; }
         /// <summary>The type of object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "merged_at", n => { MergedAt = n.GetIntValue(); } },
                 { "source_contact_id", n => { SourceContactId = n.GetStringValue(); } },
-                { "source_contact_role", n => { SourceContactRole = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem_source_contact_role>(); } },
+                { "source_contact_role", n => { SourceContactRole = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole>(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -75,7 +75,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("merged_at", MergedAt);
             writer.WriteStringValue("source_contact_id", SourceContactId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem_source_contact_role>("source_contact_role", SourceContactRole);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole>("source_contact_role", SourceContactRole);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

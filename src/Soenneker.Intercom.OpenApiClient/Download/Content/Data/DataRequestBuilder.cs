@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Content.Data
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.download.content.data.item collection</summary>
         /// <param name="position">job_identifier</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJobIdentifierItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJobIdentifierItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("job_identifier", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("jobIdentifier", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJobIdentifierItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

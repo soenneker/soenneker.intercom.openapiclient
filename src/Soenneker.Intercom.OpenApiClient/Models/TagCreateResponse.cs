@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The companies that were tagged or untagged.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies>? Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem>? Companies { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies> Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem> Companies { get; set; }
 #endif
         /// <summary>The id of the tag</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -50,10 +50,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The users that were tagged or untagged.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users>? Users { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2UsersItem>? Users { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users> Users { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2UsersItem> Users { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse"/> and sets the default values.
@@ -80,11 +80,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "users", n => { Users = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "users", n => { Users = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2UsersItem>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2UsersItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
         /// <summary>
@@ -94,11 +94,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_companies>("companies", Companies);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem>("companies", Companies);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("type", Type);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse_users>("users", Users);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2UsersItem>("users", Users);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

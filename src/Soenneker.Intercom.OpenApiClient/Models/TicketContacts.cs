@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactReference> Contacts { get; set; }
 #endif
         /// <summary>always contact.list</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketContactsType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactReference>(global::Soenneker.Intercom.OpenApiClient.Models.ContactReference.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContactsType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactReference>("contacts", Contacts);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContactsType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

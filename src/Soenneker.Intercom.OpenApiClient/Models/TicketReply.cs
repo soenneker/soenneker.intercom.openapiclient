@@ -50,11 +50,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>Type of the part</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReply_part_type? PartType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyPartType? PartType { get; set; }
         /// <summary>Whether or not the ticket part has been redacted.</summary>
         public bool? Redacted { get; set; }
         /// <summary>Always ticket_part</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReply_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyType? Type { get; set; }
         /// <summary>The last time the note was updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -87,9 +87,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "part_type", n => { PartType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply_part_type>(); } },
+                { "part_type", n => { PartType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyPartType>(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -105,9 +105,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("body", Body);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply_part_type>("part_type", PartType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyPartType>("part_type", PartType);
             writer.WriteBoolValue("redacted", Redacted);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReply_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

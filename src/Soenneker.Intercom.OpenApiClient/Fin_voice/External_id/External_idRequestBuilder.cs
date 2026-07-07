@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.External_id
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.fin_voice.external_id.item collection</summary>
         /// <param name="position">The external call identifier from the call provider</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.External_id.Item.WithExternal_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.External_id.Item.WithExternal_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.External_id.Item.WithExternalItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.External_id.Item.WithExternalItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("external_id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.External_id.Item.WithExternal_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("externalId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.External_id.Item.WithExternalItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

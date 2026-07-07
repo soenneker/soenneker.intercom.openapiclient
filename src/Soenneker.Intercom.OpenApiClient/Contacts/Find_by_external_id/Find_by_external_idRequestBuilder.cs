@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.contacts.find_by_external_id.item collection</summary>
         /// <param name="position">The external ID of the user that you want to retrieve</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternalItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternalItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("external_id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternal_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("externalId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternalItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

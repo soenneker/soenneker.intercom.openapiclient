@@ -8,26 +8,26 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember1"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember2"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttribute"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateDataAttributeRequest : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember1"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttribute"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember1? CreateDataAttributeRequestMember1 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttribute? CreateDataAttributeRequestListAttribute { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember1 CreateDataAttributeRequestMember1 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttribute CreateDataAttributeRequestListAttribute { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember2"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember2? CreateDataAttributeRequestMember2 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType? CreateDataAttributeRequestOtherType { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember2 CreateDataAttributeRequestMember2 { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType CreateDataAttributeRequestOtherType { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,13 +39,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequest();
-            if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("CreateDataAttributeRequestListAttribute".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateDataAttributeRequestMember1 = new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember1();
+                result.CreateDataAttributeRequestListAttribute = new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttribute();
             }
-            else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("CreateDataAttributeRequestOtherType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateDataAttributeRequestMember2 = new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember2();
+                result.CreateDataAttributeRequestOtherType = new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType();
             }
             return result;
         }
@@ -55,13 +55,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(CreateDataAttributeRequestMember1 != null)
+            if(CreateDataAttributeRequestListAttribute != null)
             {
-                return CreateDataAttributeRequestMember1.GetFieldDeserializers();
+                return CreateDataAttributeRequestListAttribute.GetFieldDeserializers();
             }
-            else if(CreateDataAttributeRequestMember2 != null)
+            else if(CreateDataAttributeRequestOtherType != null)
             {
-                return CreateDataAttributeRequestMember2.GetFieldDeserializers();
+                return CreateDataAttributeRequestOtherType.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -72,13 +72,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(CreateDataAttributeRequestMember1 != null)
+            if(CreateDataAttributeRequestListAttribute != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember1>(null, CreateDataAttributeRequestMember1);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttribute>(null, CreateDataAttributeRequestListAttribute);
             }
-            else if(CreateDataAttributeRequestMember2 != null)
+            else if(CreateDataAttributeRequestOtherType != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestMember2>(null, CreateDataAttributeRequestMember2);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType>(null, CreateDataAttributeRequestOtherType);
             }
         }
     }

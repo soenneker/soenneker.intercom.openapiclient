@@ -15,10 +15,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Current priority state</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged_current_priority? CurrentPriority { get; set; }
-        /// <summary>Previous priority state</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged_previous_priority? PreviousPriority { get; set; }
+        /// <summary>Current priority level</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.PriorityChangedCurrentPriority? CurrentPriority { get; set; }
+        /// <summary>Previous priority level</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.PriorityChangedPreviousPriority? PreviousPriority { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged"/> and sets the default values.
         /// </summary>
@@ -44,8 +44,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "current_priority", n => { CurrentPriority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged_current_priority>(); } },
-                { "previous_priority", n => { PreviousPriority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged_previous_priority>(); } },
+                { "current_priority", n => { CurrentPriority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChangedCurrentPriority>(); } },
+                { "previous_priority", n => { PreviousPriority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChangedPreviousPriority>(); } },
             };
         }
         /// <summary>
@@ -55,8 +55,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged_current_priority>("current_priority", CurrentPriority);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged_previous_priority>("previous_priority", PreviousPriority);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChangedCurrentPriority>("current_priority", CurrentPriority);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PriorityChangedPreviousPriority>("previous_priority", PreviousPriority);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

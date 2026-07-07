@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \data_connectors\{data_connector_-id}\execution_results\{id}
+    /// Builds and executes requests for operations under \data_connectors\{dataConnector-id}\execution_results\{id}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Execution_resultsItemRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Execution_resultsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{data_connector_%2Did}/execution_results/{id}", pathParameters)
+        public Execution_resultsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{dataConnector%2Did}/execution_results/{id}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Execution_resultsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{data_connector_%2Did}/execution_results/{id}", rawUrl)
+        public Execution_resultsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{dataConnector%2Did}/execution_results/{id}", rawUrl)
         {
         }
         /// <summary>

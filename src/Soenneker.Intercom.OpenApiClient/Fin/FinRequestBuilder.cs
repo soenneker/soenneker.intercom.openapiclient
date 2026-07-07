@@ -2,6 +2,9 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Fin.Ask;
+using Soenneker.Intercom.OpenApiClient.Fin.Capabilities;
+using Soenneker.Intercom.OpenApiClient.Fin.Procedures;
 using Soenneker.Intercom.OpenApiClient.Fin.Reply;
 using Soenneker.Intercom.OpenApiClient.Fin.Start;
 using System.Collections.Generic;
@@ -16,6 +19,21 @@ namespace Soenneker.Intercom.OpenApiClient.Fin
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class FinRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The ask property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Fin.Ask.AskRequestBuilder Ask
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Fin.Ask.AskRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The capabilities property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Fin.Capabilities.CapabilitiesRequestBuilder Capabilities
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Fin.Capabilities.CapabilitiesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The procedures property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Fin.Procedures.ProceduresRequestBuilder Procedures
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Fin.Procedures.ProceduresRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The reply property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Fin.Reply.ReplyRequestBuilder Reply
         {

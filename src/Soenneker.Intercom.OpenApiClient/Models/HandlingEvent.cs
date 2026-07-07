@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>ISO8601 timestamp when the event occurred</summary>
         public DateTimeOffset? Timestamp { get; set; }
         /// <summary>The type of handling event</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HandlingEventType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent"/> and sets the default values.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "reason", n => { Reason = n.GetStringValue(); } },
                 { "teammate", n => { Teammate = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TeammateReference>(global::Soenneker.Intercom.OpenApiClient.Models.TeammateReference.CreateFromDiscriminatorValue); } },
                 { "timestamp", n => { Timestamp = n.GetDateTimeOffsetValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEventType>(); } },
             };
         }
         /// <summary>
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("reason", Reason);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TeammateReference>("teammate", Teammate);
             writer.WriteDateTimeOffsetValue("timestamp", Timestamp);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEventType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

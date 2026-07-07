@@ -24,14 +24,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Field { get; set; }
 #endif
         /// <summary>The accepted operators you can use to define how you want to search for the value.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest_operator? Operator { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestOperator? Operator { get; set; }
         /// <summary>The value that you want to search on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? Value { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValue? Value { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch Value { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValue Value { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest"/> and sets the default values.
@@ -59,8 +59,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "field", n => { Field = n.GetStringValue(); } },
-                { "operator", n => { Operator = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest_operator>(); } },
-                { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch.CreateFromDiscriminatorValue); } },
+                { "operator", n => { Operator = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestOperator>(); } },
+                { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValue>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValue.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -71,8 +71,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("field", Field);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest_operator>("operator", Operator);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>("value", Value);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestOperator>("operator", Operator);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValue>("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

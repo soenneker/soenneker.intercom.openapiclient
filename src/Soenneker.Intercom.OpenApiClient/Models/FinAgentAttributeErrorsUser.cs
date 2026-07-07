@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Map of user attribute names to error messages.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser_attributes? Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUserAttributesProperty? Attributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser_attributes Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUserAttributesProperty Attributes { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser"/> and sets the default values.
@@ -48,7 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser_attributes.CreateFromDiscriminatorValue); } },
+                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUserAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUserAttributesProperty.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser_attributes>("attributes", Attributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUserAttributesProperty>("attributes", Attributes);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.fin_voice.phone_number.item collection</summary>
         /// <param name="position">Phone number in E.164 format</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number.Item.WithPhone_numberItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number.Item.WithPhone_numberItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number.Item.WithPhoneNumberItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number.Item.WithPhoneNumberItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("phone_number", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number.Item.WithPhone_numberItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("phoneNumber", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Fin_voice.Phone_number.Item.WithPhoneNumberItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

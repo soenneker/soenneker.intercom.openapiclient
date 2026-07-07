@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string SlaName { get; set; }
 #endif
         /// <summary>&quot;SLA statuses:            - `hit`: If there’s at least one hit event in the underlying sla_events table, and no “missed” or “canceled” events for the conversation.            - `missed`: If there are any missed sla_events for the conversation and no canceled events. If there’s even a single missed sla event, the status will always be missed. A missed status is not applied when the SLA expires, only the next time a teammate replies.            - `active`: An SLA has been applied to a conversation, but has not yet been fulfilled. SLA status is active only if there are no “hit, “missed”, or “canceled” events.&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied_sla_status? SlaStatus { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus? SlaStatus { get; set; }
         /// <summary>object type</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },
-                { "sla_status", n => { SlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied_sla_status>(); } },
+                { "sla_status", n => { SlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus>(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("sla_name", SlaName);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied_sla_status>("sla_status", SlaStatus);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus>("sla_status", SlaStatus);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

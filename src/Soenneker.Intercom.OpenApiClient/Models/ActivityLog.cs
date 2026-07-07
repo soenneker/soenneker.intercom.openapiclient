@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ActivityDescription { get; set; }
 #endif
         /// <summary>The activity_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog_activity_type? ActivityType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogActivityType? ActivityType { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the activity was created.</summary>
@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "activity_description", n => { ActivityDescription = n.GetStringValue(); } },
-                { "activity_type", n => { ActivityType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog_activity_type>(); } },
+                { "activity_type", n => { ActivityType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogActivityType>(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata.CreateFromDiscriminatorValue); } },
@@ -92,7 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("activity_description", ActivityDescription);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog_activity_type>("activity_type", ActivityType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogActivityType>("activity_type", ActivityType);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata>("metadata", Metadata);

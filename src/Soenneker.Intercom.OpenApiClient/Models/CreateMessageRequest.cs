@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The bcc property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc? Bcc { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc? Bcc { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc Bcc { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc Bcc { get; set; }
 #endif
         /// <summary>The content of the message. HTML and plaintext are supported.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -34,10 +34,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The cc property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc? Cc { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc? Cc { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc Cc { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc Cc { get; set; }
 #endif
         /// <summary>Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided.</summary>
         public bool? CreateConversationWithoutContactReply { get; set; }
@@ -52,7 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom From { get; set; }
 #endif
         /// <summary>&quot;The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`.&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType? MessageType { get; set; }
         /// <summary>The title of the email.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -72,18 +72,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The to property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to? To { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo? To { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to To { get; set; }
-#endif
-        /// <summary>Union discriminator</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo To { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest"/> and sets the default values.
@@ -91,6 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public CreateMessageRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            CreateConversationWithoutContactReply = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -110,17 +103,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "bcc", n => { Bcc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc.CreateFromDiscriminatorValue); } },
+                { "bcc", n => { Bcc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "cc", n => { Cc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc.CreateFromDiscriminatorValue); } },
+                { "cc", n => { Cc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc.CreateFromDiscriminatorValue); } },
                 { "create_conversation_without_contact_reply", n => { CreateConversationWithoutContactReply = n.GetBoolValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom.CreateFromDiscriminatorValue); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest_message_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType>(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "template", n => { Template = n.GetStringValue(); } },
-                { "to", n => { To = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetStringValue(); } },
+                { "to", n => { To = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -130,243 +122,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc>("bcc", Bcc);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc>("bcc", Bcc);
             writer.WriteStringValue("body", Body);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc>("cc", Cc);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc>("cc", Cc);
             writer.WriteBoolValue("create_conversation_without_contact_reply", CreateConversationWithoutContactReply);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom>("from", From);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest_message_type>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType>("message_type", MessageType);
             writer.WriteStringValue("subject", Subject);
             writer.WriteStringValue("template", Template);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to>("to", To);
-            writer.WriteStringValue("type", Type);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo>("to", To);
             writer.WriteAdditionalData(AdditionalData);
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class CreateMessageRequest_bcc : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.Recipient? Recipient { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.Recipient Recipient { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? UnionBranch { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch UnionBranch { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
-                var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_bcc();
-                if("Recipient".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.Recipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
-                }
-                else if("UnionBranch".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.UnionBranch = new global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(Recipient != null)
-                {
-                    return Recipient.GetFieldDeserializers();
-                }
-                else if(UnionBranch != null)
-                {
-                    return UnionBranch.GetFieldDeserializers();
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(Recipient != null)
-                {
-                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, Recipient);
-                }
-                else if(UnionBranch != null)
-                {
-                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(null, UnionBranch);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class CreateMessageRequest_cc : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.Recipient? Recipient { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.Recipient Recipient { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? UnionBranch { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch UnionBranch { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
-                var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_cc();
-                if("Recipient".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.Recipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
-                }
-                else if("UnionBranch".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.UnionBranch = new global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(Recipient != null)
-                {
-                    return Recipient.GetFieldDeserializers();
-                }
-                else if(UnionBranch != null)
-                {
-                    return UnionBranch.GetFieldDeserializers();
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(Recipient != null)
-                {
-                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, Recipient);
-                }
-                else if(UnionBranch != null)
-                {
-                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(null, UnionBranch);
-                }
-            }
-        }
-        /// <summary>
-        /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch"/>
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class CreateMessageRequest_to : IComposedTypeWrapper, IParsable
-        {
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.Recipient? Recipient { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.Recipient Recipient { get; set; }
-#endif
-            /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? UnionBranch { get; set; }
-#nullable restore
-#else
-            public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch UnionBranch { get; set; }
-#endif
-            /// <summary>
-            /// Creates a new instance of the appropriate class based on discriminator value
-            /// </summary>
-            /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to"/></returns>
-            /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-            public static global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to CreateFromDiscriminatorValue(IParseNode parseNode)
-            {
-                if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-                var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
-                var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequest.CreateMessageRequest_to();
-                if("Recipient".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.Recipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
-                }
-                else if("UnionBranch".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.UnionBranch = new global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch();
-                }
-                return result;
-            }
-            /// <summary>
-            /// The deserialization information for the current model
-            /// </summary>
-            /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
-            public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
-            {
-                if(Recipient != null)
-                {
-                    return Recipient.GetFieldDeserializers();
-                }
-                else if(UnionBranch != null)
-                {
-                    return UnionBranch.GetFieldDeserializers();
-                }
-                return new Dictionary<string, Action<IParseNode>>();
-            }
-            /// <summary>
-            /// Serializes information the current object
-            /// </summary>
-            /// <param name="writer">Serialization writer to use to serialize this model</param>
-            public virtual void Serialize(ISerializationWriter writer)
-            {
-                if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-                if(Recipient != null)
-                {
-                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, Recipient);
-                }
-                else if(UnionBranch != null)
-                {
-                    writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(null, UnionBranch);
-                }
-            }
         }
     }
 }

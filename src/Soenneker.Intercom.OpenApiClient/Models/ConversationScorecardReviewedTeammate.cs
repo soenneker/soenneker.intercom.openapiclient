@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string AdminId { get; set; }
 #endif
         /// <summary>The kind of reviewee. `ai` if the conversation was handled by Fin or scored without a specific teammate; `admin` if a specific teammate was reviewed.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammateType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammateType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammateType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

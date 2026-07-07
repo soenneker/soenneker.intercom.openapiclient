@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A hash of attributes associated with the user.Attributes can be used by Fin to target content and responses.Limit to 10 attributes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser_attributes? Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUserAttributesProperty? Attributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser_attributes Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUserAttributesProperty Attributes { get; set; }
 #endif
         /// <summary>The email of the user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser_attributes.CreateFromDiscriminatorValue); } },
+                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUserAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUserAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser_attributes>("attributes", Attributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUserAttributesProperty>("attributes", Attributes);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);

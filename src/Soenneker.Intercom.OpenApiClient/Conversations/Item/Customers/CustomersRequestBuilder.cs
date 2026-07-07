@@ -13,21 +13,21 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers
 {
     /// <summary>
-    /// Builds and executes requests for operations under \conversations\{conversation_-id}\customers
+    /// Builds and executes requests for operations under \conversations\{conversation-id}\customers
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CustomersRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.conversations.item.customers.item collection</summary>
         /// <param name="position">The identifier for the contact as given by Intercom.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item.WithContact_ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item.WithContact_ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item.WithContactItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item.WithContactItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("contact_id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item.WithContact_ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("contactId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item.WithContactItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CustomersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}/customers", pathParameters)
+        public CustomersRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/customers", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CustomersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation_%2Did}/customers", rawUrl)
+        public CustomersRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/customers", rawUrl)
         {
         }
         /// <summary>

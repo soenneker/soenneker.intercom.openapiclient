@@ -17,13 +17,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The tags property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_tags>? Tags { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem>? Tags { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_tags> Tags { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem> Tags { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags"/> and sets the default values.
         /// </summary>
@@ -49,8 +49,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_tags>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_tags.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_type>(); } },
+                { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsType>(); } },
             };
         }
         /// <summary>
@@ -60,8 +60,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_tags>("tags", Tags);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags_type>("type", Type);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem>("tags", Tags);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

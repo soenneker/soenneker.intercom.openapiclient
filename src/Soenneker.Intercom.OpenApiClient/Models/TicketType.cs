@@ -18,7 +18,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether the ticket type is archived or not.</summary>
         public bool? Archived { get; set; }
         /// <summary>Category of the Ticket Type.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketType_category? Category { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeCategory? Category { get; set; }
         /// <summary>The date and time the ticket type was created.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The description of the ticket type</summary>
@@ -113,7 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "archived", n => { Archived = n.GetBoolValue(); } },
-                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketType_category>(); } },
+                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeCategory>(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "icon", n => { Icon = n.GetStringValue(); } },
@@ -134,7 +134,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("archived", Archived);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketType_category>("category", Category);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeCategory>("category", Category);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("icon", Icon);

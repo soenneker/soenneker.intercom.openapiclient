@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input
 {
     /// <summary>
-    /// Builds and executes requests for operations under \procedures\{conversation_id}\collect_agent_input
+    /// Builds and executes requests for operations under \procedures\{conversationId}\collect_agent_input
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Collect_agent_inputRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Collect_agent_inputRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/procedures/{conversation_id}/collect_agent_input", pathParameters)
+        public Collect_agent_inputRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/procedures/{conversationId}/collect_agent_input", pathParameters)
         {
         }
         /// <summary>
@@ -30,13 +30,13 @@ namespace Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Collect_agent_inputRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/procedures/{conversation_id}/collect_agent_input", rawUrl)
+        public Collect_agent_inputRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/procedures/{conversationId}/collect_agent_input", rawUrl)
         {
         }
         /// <summary>
         /// Submit human-collected input to a Fin Procedure that is paused at a Human in the Loop (HITL) step.When a procedure reaches a HITL step with the API channel enabled, Intercom sends a `procedure.hitl_notification.created` webhook. Use the `callback_url` from that webhook payload to call this endpoint with the collected attribute values.The `step_id` must match the one from the webhook payload, and `attribute_values` must include a value for every attribute listed in `attributes_to_collect`.{% admonition type=&quot;info&quot; name=&quot;Authentication&quot; %}This endpoint requires an OAuth token with the `write_conversations` scope. The admin associated with the token must have access to the conversation.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Feature access&quot; %}This endpoint requires the Procedures HITL API feature to be enabled for your workspace.{% /admonition %}
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputPostResponse"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CollectProcedureAgentInput200ResponseResponseJson"/></returns>
         /// <param name="body">Request body for submitting human-collected input to a HITL procedure step.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -46,11 +46,11 @@ namespace Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 409 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputPostResponse?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CollectProcedureAgentInput200ResponseResponseJson?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputPostResponse> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CollectProcedureAgentInput200ResponseResponseJson> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputPostResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputPostResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CollectProcedureAgentInput200ResponseResponseJson>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CollectProcedureAgentInput200ResponseResponseJson.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Submit human-collected input to a Fin Procedure that is paused at a Human in the Loop (HITL) step.When a procedure reaches a HITL step with the API channel enabled, Intercom sends a `procedure.hitl_notification.created` webhook. Use the `callback_url` from that webhook payload to call this endpoint with the collected attribute values.The `step_id` must match the one from the webhook payload, and `attribute_values` must include a value for every attribute listed in `attributes_to_collect`.{% admonition type=&quot;info&quot; name=&quot;Authentication&quot; %}This endpoint requires an OAuth token with the `write_conversations` scope. The admin associated with the token must have access to the conversation.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Feature access&quot; %}This endpoint requires the Procedures HITL API feature to be enabled for your workspace.{% /admonition %}

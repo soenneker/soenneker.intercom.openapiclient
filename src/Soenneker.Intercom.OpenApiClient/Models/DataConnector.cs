@@ -44,7 +44,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ExecutionResultsUrl { get; set; }
 #endif
         /// <summary>The HTTP method used by the data connector.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_http_method? HttpMethod { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorHttpMethod? HttpMethod { get; set; }
         /// <summary>The unique identifier for the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -62,9 +62,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The current state of the data connector.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorState? State { get; set; }
         /// <summary>The type of object - `data_connector`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType? Type { get; set; }
         /// <summary>The time the data connector was last updated.</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>The ID of the admin who last updated this data connector.</summary>
@@ -105,11 +105,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
                 { "execution_results_url", n => { ExecutionResultsUrl = n.GetStringValue(); } },
-                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_http_method>(); } },
+                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorHttpMethod>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_state>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_type>(); } },
+                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorState>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
                 { "updated_by_admin_id", n => { UpdatedByAdminId = n.GetStringValue(); } },
             };
@@ -126,11 +126,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
             writer.WriteStringValue("execution_results_url", ExecutionResultsUrl);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_http_method>("http_method", HttpMethod);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorHttpMethod>("http_method", HttpMethod);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_state>("state", State);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnector_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorState>("state", State);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>("type", Type);
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             writer.WriteStringValue("updated_by_admin_id", UpdatedByAdminId);
             writer.WriteAdditionalData(AdditionalData);

@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Overall SLA status</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_current_sla_status? CurrentSlaStatus { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedCurrentSlaStatus? CurrentSlaStatus { get; set; }
         /// <summary>Name of the SLA</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -28,13 +28,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Status of all SLA targets at the time of breach</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_states? SlaStates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaStatesProperty? SlaStates { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_states SlaStates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaStatesProperty SlaStates { get; set; }
 #endif
         /// <summary>Which specific target was missed</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_target_type? SlaTargetType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaTargetType? SlaTargetType { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed"/> and sets the default values.
         /// </summary>
@@ -60,10 +60,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "current_sla_status", n => { CurrentSlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_current_sla_status>(); } },
+                { "current_sla_status", n => { CurrentSlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedCurrentSlaStatus>(); } },
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },
-                { "sla_states", n => { SlaStates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_states>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_states.CreateFromDiscriminatorValue); } },
-                { "sla_target_type", n => { SlaTargetType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_target_type>(); } },
+                { "sla_states", n => { SlaStates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaStatesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaStatesProperty.CreateFromDiscriminatorValue); } },
+                { "sla_target_type", n => { SlaTargetType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaTargetType>(); } },
             };
         }
         /// <summary>
@@ -73,10 +73,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_current_sla_status>("current_sla_status", CurrentSlaStatus);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedCurrentSlaStatus>("current_sla_status", CurrentSlaStatus);
             writer.WriteStringValue("sla_name", SlaName);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_states>("sla_states", SlaStates);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed_sla_target_type>("sla_target_type", SlaTargetType);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaStatesProperty>("sla_states", SlaStates);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedSlaTargetType>("sla_target_type", SlaTargetType);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

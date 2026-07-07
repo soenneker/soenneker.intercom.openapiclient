@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of type `list`, the key should be `priority` and the value of the attribute should be the guid of the list item (e.g. `de1825a0-0164-4070-8ca6-13e22462fa7e`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequest_attributes? Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes? Attributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequest_attributes Attributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes Attributes { get; set; }
 #endif
         /// <summary>The ID of the ticket state associated with the ticket type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -64,7 +64,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequest_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequest_attributes.CreateFromDiscriminatorValue); } },
+                { "attributes", n => { Attributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes.CreateFromDiscriminatorValue); } },
                 { "ticket_state_id", n => { TicketStateId = n.GetStringValue(); } },
                 { "ticket_type_id", n => { TicketTypeId = n.GetStringValue(); } },
             };
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequest_attributes>("attributes", Attributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes>("attributes", Attributes);
             writer.WriteStringValue("ticket_state_id", TicketStateId);
             writer.WriteStringValue("ticket_type_id", TicketTypeId);
             writer.WriteAdditionalData(AdditionalData);

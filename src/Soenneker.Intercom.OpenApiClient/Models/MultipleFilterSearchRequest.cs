@@ -16,14 +16,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>An operator to allow boolean inspection between multiple fields.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest_operator? Operator { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator? Operator { get; set; }
         /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch? Value { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue? Value { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch Value { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue Value { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest"/> and sets the default values.
@@ -50,8 +50,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "operator", n => { Operator = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest_operator>(); } },
-                { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch.CreateFromDiscriminatorValue); } },
+                { "operator", n => { Operator = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator>(); } },
+                { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue>(global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -61,8 +61,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest_operator>("operator", Operator);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>("value", Value);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator>("operator", Operator);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue>("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

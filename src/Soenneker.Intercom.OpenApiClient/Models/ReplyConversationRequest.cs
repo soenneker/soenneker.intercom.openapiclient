@@ -43,10 +43,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.AdminReplyConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest();
             }
-            else if("".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.ContactReplyConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyConversationRequest();
-            }
             return result;
         }
         /// <summary>

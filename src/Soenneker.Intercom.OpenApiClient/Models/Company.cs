@@ -36,10 +36,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The custom attributes you have set on the company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyCustomAttributesProperty? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyCustomAttributesProperty CustomAttributes { get; set; }
 #endif
         /// <summary>The Intercom defined id representing the company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -108,7 +108,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags Tags { get; set; }
 #endif
         /// <summary>Value is `company`</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyType? Type { get; set; }
         /// <summary>The last time the company was updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The number of users in the company.</summary>
@@ -149,7 +149,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "app_id", n => { AppId = n.GetStringValue(); } },
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_custom_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.Company_custom_attributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "industry", n => { Industry = n.GetStringValue(); } },
                 { "last_request_at", n => { LastRequestAt = n.GetIntValue(); } },
@@ -162,7 +162,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "session_count", n => { SessionCount = n.GetIntValue(); } },
                 { "size", n => { Size = n.GetIntValue(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags.CreateFromDiscriminatorValue); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_type>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "user_count", n => { UserCount = n.GetIntValue(); } },
                 { "website", n => { Website = n.GetStringValue(); } },
@@ -178,7 +178,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("app_id", AppId);
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_custom_attributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("industry", Industry);
             writer.WriteIntValue("last_request_at", LastRequestAt);
@@ -191,7 +191,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("session_count", SessionCount);
             writer.WriteIntValue("size", Size);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyTags>("tags", Tags);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_type>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteIntValue("user_count", UserCount);
             writer.WriteStringValue("website", Website);

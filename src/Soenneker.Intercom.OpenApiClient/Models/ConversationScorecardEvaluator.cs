@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The evaluator&apos;s result for this conversation. Null if the evaluator was not scored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator_result? Result { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed? Result { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator_result Result { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed Result { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator"/> and sets the default values.
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "evaluator_id", n => { EvaluatorId = n.GetStringValue(); } },
-                { "result", n => { Result = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator_result>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator_result.CreateFromDiscriminatorValue); } },
+                { "result", n => { Result = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("evaluator_id", EvaluatorId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator_result>("result", Result);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed>("result", Result);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>&quot;The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.&quot;</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_data_type? DataType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType? DataType { get; set; }
         /// <summary>Readable description of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -35,10 +35,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Reference configuration for related objects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference? Reference { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2Reference? Reference { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference Reference { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2Reference Reference { get; set; }
 #endif
         /// <summary>Whether this attribute is required.</summary>
         public bool? Required { get; set; }
@@ -75,10 +75,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_data_type>(); } },
+                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "reference", n => { Reference = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference>(global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference.CreateFromDiscriminatorValue); } },
+                { "reference", n => { Reference = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2Reference>(global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2Reference.CreateFromDiscriminatorValue); } },
                 { "required", n => { Required = n.GetBoolValue(); } },
                 { "visible_to_team_ids", n => { VisibleToTeamIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
@@ -90,10 +90,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_data_type>("data_type", DataType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType>("data_type", DataType);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("name", Name);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference>("reference", Reference);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2Reference>("reference", Reference);
             writer.WriteBoolValue("required", Required);
             writer.WriteCollectionOfPrimitiveValues<string>("visible_to_team_ids", VisibleToTeamIds);
             writer.WriteAdditionalData(AdditionalData);

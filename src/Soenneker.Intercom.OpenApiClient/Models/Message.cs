@@ -42,7 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>The type of message that was sent. Can be email, inapp, facebook, twitter, sms or whatsapp.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Message_message_type? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MessageMessageType? MessageType { get; set; }
         /// <summary>&quot;The subject of the message. Only present if message_type: email.&quot;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Message_message_type>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MessageMessageType>(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
@@ -104,7 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Message_message_type>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MessageMessageType>("message_type", MessageType);
             writer.WriteStringValue("subject", Subject);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
