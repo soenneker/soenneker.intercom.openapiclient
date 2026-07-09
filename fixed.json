@@ -22487,6 +22487,352 @@
         }
       }
     },
+    "/ecommerce/connectors/{id}/catalog": {
+      "post": {
+        "tags": [
+          "Ecommerce Connectors"
+        ],
+        "summary": "Upload a product catalog",
+        "description": "Upload a product catalog to an ecommerce connector. The catalog must be a JSON\narray of product objects. There are two upload modes:\n\n**Single-file upload** \u2014 POST a single catalog file (up to 99 MB per request).\nOmit \u0060finalize\u0060 and \u0060import_job_id\u0060. Returns \u0060202 Accepted\u0060 when sync has started.\n\n**Multipart upload** \u2014 For catalogs that must be split across multiple requests:\n\n1. POST the first part with \u0060finalize=false\u0060 (no \u0060import_job_id\u0060). The response\n   returns an \u0060import_job_id\u0060 and \u0060next_part_number\u0060.\n2. POST each subsequent part with \u0060finalize=false\u0060, the \u0060import_job_id\u0060 from step 1,\n   and the \u0060part_number\u0060 from the previous response. Each part must be \u2264 99 MB.\n3. POST with \u0060finalize=true\u0060 and the \u0060import_job_id\u0060 to complete the upload and\n   start the sync. No catalog file is required in the finalization request.\n\nPart uploads are idempotent \u2014 retrying the same \u0060part_number\u0060 does not create\na duplicate. If a response is lost, retry with the same \u0060part_number\u0060.\n",
+        "operationId": "UploadEcommerceCatalog",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the ecommerce connector.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": 42939
+            }
+          },
+          {
+            "name": "import_job_id",
+            "in": "query",
+            "description": "The import job ID returned from the first multipart upload request. Required\nwhen uploading subsequent parts (\u0060part_number\u0060 \u2265 2) and when finalizing\na multipart session (\u0060finalize=true\u0060).\n",
+            "schema": {
+              "type": "string",
+              "example": "job_01abc123"
+            }
+          },
+          {
+            "name": "part_number",
+            "in": "query",
+            "description": "The sequential part number for a multipart upload. Must be a positive integer.\nThe server returns \u0060next_part_number\u0060 in each response to guide the next request.\nRetrying the same \u0060part_number\u0060 is safe and idempotent.\n",
+            "schema": {
+              "type": "integer",
+              "example": 2
+            }
+          },
+          {
+            "name": "finalize",
+            "in": "query",
+            "description": "Set to \u0060true\u0060 to finalize a multipart upload session and start the catalog sync.\nNo catalog file is required when finalizing. Set to \u0060false\u0060 to upload a part in\na multipart session. Omit entirely for a single-file upload.\n",
+            "schema": {
+              "$ref": "#/components/schemas/UploadEcommerceCatalogFinalizeParameter"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadEcommerceCatalogFormDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Multipart catalog part uploaded successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceCatalogUploadPartResponse"
+                },
+                "examples": {
+                  "Part uploaded": {
+                    "value": {
+                      "import_job_id": "job_01abc123",
+                      "next_part_number": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Catalog accepted and sync has started.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceCatalogUploadResponse"
+                },
+                "examples": {
+                  "Sync started": {
+                    "value": {
+                      "import_job_id": "job_01abc123",
+                      "status": "processing",
+                      "message": "Catalog received. Sync has started."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing catalog file": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "catalog file is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Catalog is not a file": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "catalog must be an uploaded file"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Connector not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "import_source_not_found",
+                          "message": "No connector found with the provided id."
+                        }
+                      ]
+                    }
+                  },
+                  "Feature not available": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "The catalog API is not available for this workspace."
+                        }
+                      ]
+                    }
+                  },
+                  "Upload session not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "upload_session_not_found",
+                          "message": "No active upload session found for the provided import_job_id."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Sync already in progress": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "sync_in_progress",
+                          "message": "A catalog upload is already in progress. Please wait for it to complete."
+                        }
+                      ]
+                    }
+                  },
+                  "Multipart session already exists": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "sync_in_progress",
+                          "message": "A multipart upload is already in progress. Use import_job_id to continue."
+                        }
+                      ]
+                    }
+                  },
+                  "Session cannot be finalized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "upload_session_not_finalizable",
+                          "message": "Upload session cannot be finalized in its current state."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable content.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Catalog is not a JSON array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_catalog_format",
+                          "message": "catalog must be a JSON array"
+                        }
+                      ]
+                    }
+                  },
+                  "Catalog items are not objects": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_catalog_format",
+                          "message": "each item in the catalog array must be a JSON object"
+                        }
+                      ]
+                    }
+                  },
+                  "Part number is not a positive integer": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_part_number",
+                          "message": "part_number must be a positive integer"
+                        }
+                      ]
+                    }
+                  },
+                  "Out-of-sequence part number": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_part_number",
+                          "message": "Expected part 2, got 3"
+                        }
+                      ]
+                    }
+                  },
+                  "File exceeds size limit": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "payload_too_large",
+                          "message": "catalog file exceeds 99MB limit"
+                        }
+                      ]
+                    }
+                  },
+                  "import_job_id required for multipart": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "import_job_id_required",
+                          "message": "Include import_job_id to continue an existing upload session."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Storage error": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "internal_error",
+                          "message": "Failed to store catalog"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/events": {
       "post": {
         "tags": [
@@ -42431,6 +42777,43 @@
           }
         }
       },
+      "EcommerceCatalogUploadPartResponse": {
+        "title": "Ecommerce Catalog Upload Part Response",
+        "type": "object",
+        "properties": {
+          "import_job_id": {
+            "type": "string",
+            "description": "The unique identifier for the active upload session. Pass this as \u0060import_job_id\u0060\nin subsequent part uploads and in the finalization request.\n",
+            "example": "job_01abc123"
+          },
+          "next_part_number": {
+            "type": "integer",
+            "description": "The part number to use in the next upload request.",
+            "example": 2
+          }
+        },
+        "description": "Returned after a multipart catalog part is successfully uploaded."
+      },
+      "EcommerceCatalogUploadResponse": {
+        "title": "Ecommerce Catalog Upload Response",
+        "type": "object",
+        "properties": {
+          "import_job_id": {
+            "type": "string",
+            "description": "The unique identifier for the import job.",
+            "example": "job_01abc123"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EcommerceCatalogUploadResponseStatus"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable description of the sync status.",
+            "example": "Catalog received. Sync has started."
+          }
+        },
+        "description": "Returned when a catalog upload is accepted and sync has started."
+      },
       "EmailAddressHeader": {
         "title": "Email Address Header",
         "type": "object",
@@ -44098,6 +44481,10 @@
       },
       "MergeContactsRequest": {
         "title": "Merge contact data",
+        "required": [
+          "from",
+          "into"
+        ],
         "type": "object",
         "properties": {
           "from": {
@@ -52335,6 +52722,16 @@
           }
         }
       },
+      "UploadEcommerceCatalogFormDataRequest": {
+        "type": "object",
+        "properties": {
+          "catalog": {
+            "type": "string",
+            "description": "The catalog JSON file. Required for all requests except finalization\n(\u0060finalize=true\u0060). Must be a valid JSON array of objects. Max 99 MB.\n",
+            "format": "binary"
+          }
+        }
+      },
       "ShowCallTranscript200Response": {
         "type": "string",
         "description": "Transcript text"
@@ -57271,6 +57668,25 @@
           ]
         }
       },
+      "EcommerceCatalogUploadResponseStatus": {
+        "enum": [
+          "processing"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The current status of the catalog sync.",
+        "example": "processing",
+        "x-ms-enum": {
+          "name": "EcommerceCatalogUploadResponseStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "processing",
+              "name": "Processing"
+            }
+          ]
+        }
+      },
       "PriorityChangedCurrentPriority": {
         "enum": [
           "none",
@@ -60981,6 +61397,15 @@
         ],
         "type": "string",
         "additionalProperties": false
+      },
+      "UploadEcommerceCatalogFinalizeParameter": {
+        "enum": [
+          true,
+          false
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "example": false
       }
     },
     "responses": {
@@ -61235,6 +61660,10 @@
     {
       "name": "Data Export",
       "description": "Export message delivery and engagement statistics (opens, clicks, replies, completions, dismissals, unsubscribes, bounces) for outbound content such as Emails, Posts, Custom Bots, Surveys, Tours, and Series."
+    },
+    {
+      "name": "Ecommerce Connectors",
+      "description": "Upload and manage product catalogs via ecommerce connectors. Supports single-file\nuploads (up to 99 MB) and multipart uploads for larger catalogs.\n"
     },
     {
       "name": "Emails",

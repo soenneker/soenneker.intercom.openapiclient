@@ -22,6 +22,7 @@ using Soenneker.Intercom.OpenApiClient.Custom_object_instances;
 using Soenneker.Intercom.OpenApiClient.Data_attributes;
 using Soenneker.Intercom.OpenApiClient.Data_connectors;
 using Soenneker.Intercom.OpenApiClient.Download;
+using Soenneker.Intercom.OpenApiClient.Ecommerce;
 using Soenneker.Intercom.OpenApiClient.Emails;
 using Soenneker.Intercom.OpenApiClient.Events;
 using Soenneker.Intercom.OpenApiClient.Export;
@@ -139,6 +140,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Download.DownloadRequestBuilder Download
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Download.DownloadRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The ecommerce property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Ecommerce.EcommerceRequestBuilder Ecommerce
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Ecommerce.EcommerceRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The emails property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Emails.EmailsRequestBuilder Emails
