@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CatalogRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecommerce/connectors/{id}/catalog{?finalize*,import_job_id*,part_number*}", pathParameters)
+        public CatalogRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecommerce/connectors/{id}/catalog", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CatalogRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecommerce/connectors/{id}/catalog{?finalize*,import_job_id*,part_number*}", rawUrl)
+        public CatalogRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ecommerce/connectors/{id}/catalog", rawUrl)
         {
         }
         /// <summary>
@@ -48,11 +48,11 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse?> PostAsync(MultipartBody body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder.CatalogRequestBuilderPostQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse?> PostAsync(MultipartBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse> PostAsync(MultipartBody body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder.CatalogRequestBuilderPostQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse> PostAsync(MultipartBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -76,11 +76,11 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPostRequestInformation(MultipartBody body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder.CatalogRequestBuilderPostQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(MultipartBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPostRequestInformation(MultipartBody body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder.CatalogRequestBuilderPostQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPostRequestInformation(MultipartBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -98,36 +98,6 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog
         public global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder(rawUrl, RequestAdapter);
-        }
-        /// <summary>
-        /// Upload a product catalog to an ecommerce connector. The catalog must be a JSONarray of product objects. There are two upload modes:**Single-file upload** — POST a single catalog file (up to 99 MB per request).Omit `finalize` and `import_job_id`. Returns `202 Accepted` when sync has started.**Multipart upload** — For catalogs that must be split across multiple requests:1. POST the first part with `finalize=false` (no `import_job_id`). The response   returns an `import_job_id` and `next_part_number`.2. POST each subsequent part with `finalize=false`, the `import_job_id` from step 1,   and the `part_number` from the previous response. Each part must be ≤ 99 MB.3. POST with `finalize=true` and the `import_job_id` to complete the upload and   start the sync. No catalog file is required in the finalization request.Part uploads are idempotent — retrying the same `part_number` does not createa duplicate. If a response is lost, retry with the same `part_number`.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class CatalogRequestBuilderPostQueryParameters 
-        {
-            /// <summary>Set to `true` to finalize a multipart upload session and start the catalog sync.No catalog file is required when finalizing. Set to `false` to upload a part ina multipart session. Omit entirely for a single-file upload.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("finalize")]
-            public string? Finalize { get; set; }
-#nullable restore
-#else
-            [QueryParameter("finalize")]
-            public string Finalize { get; set; }
-#endif
-            /// <summary>The import job ID returned from the first multipart upload request. Requiredwhen uploading subsequent parts (`part_number` ≥ 2) and when finalizinga multipart session (`finalize=true`).</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("import_job_id")]
-            public string? ImportJobId { get; set; }
-#nullable restore
-#else
-            [QueryParameter("import_job_id")]
-            public string ImportJobId { get; set; }
-#endif
-            /// <summary>The sequential part number for a multipart upload. Must be a positive integer.The server returns `next_part_number` in each response to guide the next request.Retrying the same `part_number` is safe and idempotent.</summary>
-            [QueryParameter("part_number")]
-            public int? PartNumber { get; set; }
         }
     }
 }

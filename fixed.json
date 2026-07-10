@@ -22512,32 +22512,6 @@
               "type": "string",
               "example": 42939
             }
-          },
-          {
-            "name": "import_job_id",
-            "in": "query",
-            "description": "The import job ID returned from the first multipart upload request. Required\nwhen uploading subsequent parts (\u0060part_number\u0060 \u2265 2) and when finalizing\na multipart session (\u0060finalize=true\u0060).\n",
-            "schema": {
-              "type": "string",
-              "example": "job_01abc123"
-            }
-          },
-          {
-            "name": "part_number",
-            "in": "query",
-            "description": "The sequential part number for a multipart upload. Must be a positive integer.\nThe server returns \u0060next_part_number\u0060 in each response to guide the next request.\nRetrying the same \u0060part_number\u0060 is safe and idempotent.\n",
-            "schema": {
-              "type": "integer",
-              "example": 2
-            }
-          },
-          {
-            "name": "finalize",
-            "in": "query",
-            "description": "Set to \u0060true\u0060 to finalize a multipart upload session and start the catalog sync.\nNo catalog file is required when finalizing. Set to \u0060false\u0060 to upload a part in\na multipart session. Omit entirely for a single-file upload.\n",
-            "schema": {
-              "$ref": "#/components/schemas/UploadEcommerceCatalogFinalizeParameter"
-            }
           }
         ],
         "requestBody": {
@@ -22545,6 +22519,37 @@
             "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/UploadEcommerceCatalogFormDataRequest"
+              },
+              "examples": {
+                "single_file_upload": {
+                  "summary": "Single-file upload",
+                  "value": {
+                    "catalog": "@products.json"
+                  }
+                },
+                "multipart_first_part": {
+                  "summary": "Multipart \u2014 Step 1: First part",
+                  "value": {
+                    "catalog": "@products_part1.json",
+                    "finalize": false
+                  }
+                },
+                "multipart_append_part": {
+                  "summary": "Multipart \u2014 Step 2: Append part",
+                  "value": {
+                    "catalog": "@products_part2.json",
+                    "finalize": false,
+                    "import_job_id": "job_01abc123",
+                    "part_number": 2
+                  }
+                },
+                "multipart_finalize": {
+                  "summary": "Multipart \u2014 Step 3: Finalize",
+                  "value": {
+                    "finalize": true,
+                    "import_job_id": "job_01abc123"
+                  }
+                }
               }
             }
           }
@@ -52729,6 +52734,22 @@
             "type": "string",
             "description": "The catalog JSON file. Required for all requests except finalization\n(\u0060finalize=true\u0060). Must be a valid JSON array of objects. Max 99 MB.\n",
             "format": "binary"
+          },
+          "finalize": {
+            "type": "boolean",
+            "additionalProperties": false,
+            "description": "Set to \u0060true\u0060 to finalize a multipart upload session and start the catalog sync.\nNo catalog file is required when finalizing. Set to \u0060false\u0060 to upload a part in\na multipart session. Omit entirely for a single-file upload.\n",
+            "example": false
+          },
+          "import_job_id": {
+            "type": "string",
+            "description": "The import job ID returned from the first multipart upload request. Required\nwhen uploading subsequent parts (\u0060part_number\u0060 \u2265 2) and when finalizing\na multipart session (\u0060finalize=true\u0060).\n",
+            "example": "job_01abc123"
+          },
+          "part_number": {
+            "type": "integer",
+            "description": "The sequential part number for a multipart upload. Must be a positive integer.\nThe server returns \u0060next_part_number\u0060 in each response to guide the next request.\nRetrying the same \u0060part_number\u0060 is safe and idempotent.\n",
+            "example": 2
           }
         }
       },
@@ -61397,15 +61418,6 @@
         ],
         "type": "string",
         "additionalProperties": false
-      },
-      "UploadEcommerceCatalogFinalizeParameter": {
-        "enum": [
-          true,
-          false
-        ],
-        "type": "string",
-        "additionalProperties": false,
-        "example": false
       }
     },
     "responses": {
