@@ -495,6 +495,7 @@
                       "event_types": [
                         "admin_conversation_assignment_limit_change",
                         "admin_ticket_assignment_limit_change",
+                        "admin_avatar_change",
                         "admin_away_mode_change",
                         "admin_deletion",
                         "admin_deprovisioned",
@@ -535,6 +536,7 @@
                         "campaign_deletion",
                         "campaign_state_change",
                         "conversation_part_deletion",
+                        "conversation_pdf_export",
                         "conversation_topic_change",
                         "conversation_topic_creation",
                         "conversation_topic_deletion",
@@ -54144,6 +54146,7 @@
         "enum": [
           "admin_conversation_assignment_limit_change",
           "admin_ticket_assignment_limit_change",
+          "admin_avatar_change",
           "admin_away_mode_change",
           "admin_deletion",
           "admin_deprovisioned",
@@ -54184,6 +54187,7 @@
           "campaign_deletion",
           "campaign_state_change",
           "conversation_part_deletion",
+          "conversation_pdf_export",
           "conversation_topic_change",
           "conversation_topic_creation",
           "conversation_topic_deletion",
@@ -54227,6 +54231,10 @@
             {
               "value": "admin_ticket_assignment_limit_change",
               "name": "AdminTicketAssignmentLimitChange"
+            },
+            {
+              "value": "admin_avatar_change",
+              "name": "AdminAvatarChange"
             },
             {
               "value": "admin_away_mode_change",
@@ -54387,6 +54395,10 @@
             {
               "value": "conversation_part_deletion",
               "name": "ConversationPartDeletion"
+            },
+            {
+              "value": "conversation_pdf_export",
+              "name": "ConversationPdfExport"
             },
             {
               "value": "conversation_topic_change",

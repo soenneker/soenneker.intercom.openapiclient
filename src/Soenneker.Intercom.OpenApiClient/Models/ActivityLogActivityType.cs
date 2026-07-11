@@ -16,6 +16,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AdminTicketAssignmentLimitChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "admin_avatar_change")]
+        #pragma warning disable CS1591
+        AdminAvatarChange,
+        #pragma warning restore CS1591
         [EnumMember(Value = "admin_away_mode_change")]
         #pragma warning disable CS1591
         AdminAwayModeChange,
@@ -175,6 +179,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "conversation_part_deletion")]
         #pragma warning disable CS1591
         ConversationPartDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_pdf_export")]
+        #pragma warning disable CS1591
+        ConversationPdfExport,
         #pragma warning restore CS1591
         [EnumMember(Value = "conversation_topic_change")]
         #pragma warning disable CS1591
