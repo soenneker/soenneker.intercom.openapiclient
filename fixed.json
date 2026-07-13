@@ -11542,6 +11542,138 @@
         }
       }
     },
+    "/contacts/merge/preview": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Preview a contact merge",
+        "description": "\u0022Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 (a \u0060lead\u0060) and \u0060into\u0060 (a \u0060user\u0060) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and the number of conversations, notes, and tags that would be reassigned.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Previewing non-duplicate contacts\\\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email, phone, or external ID). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t \u2014 the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060from\u0060 must be a lead and \u0060into\u0060 a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email, phone, or external ID. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n\u0022",
+        "operationId": "PreviewMergeContact",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MergePreviewRequest"
+              },
+              "examples": {
+                "allowed": {
+                  "summary": "successful",
+                  "value": {
+                    "from": "6762f0d51bb69f9f2193bb7f",
+                    "into": "6762f0d51bb69f9f2193bb80"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MergePreviewResponse"
+                },
+                "examples": {
+                  "allowed": {
+                    "summary": "Merge allowed",
+                    "value": {
+                      "allowed": true,
+                      "summary": {
+                        "attribute_changes": {
+                          "attributes": [
+                            {
+                              "field": "name",
+                              "outcome": "adopted",
+                              "from_value": "Jo",
+                              "new_into_value": "Jo"
+                            },
+                            {
+                              "field": "companies",
+                              "outcome": "merged",
+                              "from_value": [
+                                "Beta"
+                              ],
+                              "into_value": [
+                                "Acme"
+                              ],
+                              "new_into_value": [
+                                "Acme",
+                                "Beta"
+                              ]
+                            },
+                            {
+                              "field": "phone",
+                              "outcome": "discarded",
+                              "from_value": 1555,
+                              "into_value": 1999,
+                              "new_into_value": 1999
+                            }
+                          ],
+                          "total_count": 3
+                        },
+                        "reassignments": {
+                          "conversations": 14,
+                          "tags": 3,
+                          "notes": 2
+                        }
+                      }
+                    }
+                  },
+                  "blocked": {
+                    "summary": "Merge not allowed",
+                    "value": {
+                      "allowed": false,
+                      "reasons": [
+                        {
+                          "code": "no_shared_identifier",
+                          "message": "These contacts don\u0027t share a common identifier (email, phone, or external ID), so they aren\u0027t recognised as duplicates. Set skip_duplicate_validation to true to preview the merge anyway."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "ff328c7c-6140-48eb-84dd-bb8960b66cd0",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/contacts/search": {
       "post": {
         "tags": [
@@ -44512,6 +44644,192 @@
         },
         "description": "Merge contact data."
       },
+      "MergePreviewRequest": {
+        "title": "Merge preview request",
+        "required": [
+          "from",
+          "into"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "The unique identifier for the contact to merge away from. Must be a lead.",
+            "example": "6762f0d51bb69f9f2193bb7f"
+          },
+          "into": {
+            "type": "string",
+            "description": "The unique identifier for the contact to merge into. Must be a user.",
+            "example": "6762f0d51bb69f9f2193bb80"
+          },
+          "skip_duplicate_validation": {
+            "type": "boolean",
+            "description": "When true, previews the merge even if the contacts don\u0027t share a common identifier. Defaults to false.",
+            "default": false
+          }
+        },
+        "description": "Preview a contact merge."
+      },
+      "MergePreviewResponse": {
+        "title": "Merge preview response",
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/MergePreviewAllowed"
+          },
+          {
+            "$ref": "#/components/schemas/MergePreviewBlocked"
+          }
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Union discriminator"
+          }
+        },
+        "description": "The result of a merge preview. Either the merge is allowed (with a summary of the changes) or it is not (with reasons).",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "MergePreviewAllowed": "#/components/schemas/MergePreviewAllowed",
+            "MergePreviewBlocked": "#/components/schemas/MergePreviewBlocked"
+          }
+        }
+      },
+      "MergePreviewAllowed": {
+        "title": "Merge preview allowed",
+        "type": "object",
+        "properties": {
+          "allowed": {
+            "type": "boolean",
+            "additionalProperties": false,
+            "description": "Always true. The merge is allowed.",
+            "default": true
+          },
+          "summary": {
+            "$ref": "#/components/schemas/MergePreviewSummary"
+          }
+        },
+        "description": "Returned when the merge is allowed."
+      },
+      "MergePreviewBlocked": {
+        "title": "Merge preview not allowed",
+        "type": "object",
+        "properties": {
+          "allowed": {
+            "type": "boolean",
+            "additionalProperties": false,
+            "description": "Always false. The merge is not allowed.",
+            "default": false
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergePreviewReason"
+            },
+            "description": "One or more reasons the merge is not allowed."
+          }
+        },
+        "description": "Returned when the merge is not allowed."
+      },
+      "MergePreviewReason": {
+        "title": "Merge preview reason",
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/MergePreviewReasonCode"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable explanation. Display this to people; do not match on it, as the wording may change."
+          }
+        },
+        "description": "A reason a merge is not allowed."
+      },
+      "MergePreviewSummary": {
+        "title": "Merge preview summary",
+        "type": "object",
+        "properties": {
+          "attribute_changes": {
+            "$ref": "#/components/schemas/MergePreviewAttributeChanges"
+          },
+          "reassignments": {
+            "$ref": "#/components/schemas/MergePreviewReassignments"
+          }
+        },
+        "description": "A summary of the changes the merge would make to the surviving contact."
+      },
+      "MergePreviewAttributeChanges": {
+        "title": "Merge preview attribute changes",
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MergePreviewAttributeChange"
+            },
+            "description": "The individual attribute changes. Capped at 50 items; total_count reflects the full number of changes."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of attribute changes detected, which may exceed the number of items in attributes.",
+            "example": 3
+          }
+        },
+        "description": "The attribute changes the merge would make to the surviving contact."
+      },
+      "MergePreviewAttributeChange": {
+        "title": "Merge preview attribute change",
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "The contact field that would change.",
+            "example": "name"
+          },
+          "outcome": {
+            "$ref": "#/components/schemas/MergePreviewAttributeChangeOutcome"
+          },
+          "from_value": {
+            "description": "The source contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field.",
+            "nullable": true
+          },
+          "into_value": {
+            "description": "The target contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field.",
+            "nullable": true
+          },
+          "new_into_value": {
+            "description": "The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field.",
+            "nullable": true
+          }
+        },
+        "description": "A single attribute change on the surviving contact."
+      },
+      "MergePreviewReassignments": {
+        "title": "Merge preview reassignments",
+        "type": "object",
+        "properties": {
+          "conversations": {
+            "type": "integer",
+            "description": "The number of distinct conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in.",
+            "example": 14
+          },
+          "tags": {
+            "type": "integer",
+            "description": "The number of tags that would be reassigned.",
+            "example": 3
+          },
+          "notes": {
+            "type": "integer",
+            "description": "The number of notes that would be reassigned.",
+            "example": 2
+          }
+        },
+        "description": "The number of records that would be reassigned to the surviving contact, by type. Only types with reassignments are included."
+      },
       "MergeConversationsRequest": {
         "title": "Merge Conversations Request",
         "required": [
@@ -58461,6 +58779,72 @@
             {
               "value": "list",
               "name": "List"
+            }
+          ]
+        }
+      },
+      "MergePreviewReasonCode": {
+        "enum": [
+          "invalid_merge_role_pair",
+          "no_shared_identifier",
+          "facebook_user",
+          "external_lead_channel_not_allowed",
+          "mailing_list"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "A stable code identifying the reason. Branch on this value.",
+        "x-ms-enum": {
+          "name": "MergePreviewReasonCode",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "invalid_merge_role_pair",
+              "name": "InvalidMergeRolePair"
+            },
+            {
+              "value": "no_shared_identifier",
+              "name": "NoSharedIdentifier"
+            },
+            {
+              "value": "facebook_user",
+              "name": "FacebookUser"
+            },
+            {
+              "value": "external_lead_channel_not_allowed",
+              "name": "ExternalLeadChannelNotAllowed"
+            },
+            {
+              "value": "mailing_list",
+              "name": "MailingList"
+            }
+          ]
+        }
+      },
+      "MergePreviewAttributeChangeOutcome": {
+        "enum": [
+          "adopted",
+          "discarded",
+          "merged"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "How the value is resolved. adopted = the source\u0027s value is taken; discarded = the source\u0027s value is dropped and the target\u0027s kept; merged = the two values are combined.",
+        "x-ms-enum": {
+          "name": "MergePreviewAttributeChangeOutcome",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "adopted",
+              "name": "Adopted"
+            },
+            {
+              "value": "discarded",
+              "name": "Discarded"
+            },
+            {
+              "value": "merged",
+              "name": "Merged"
             }
           ]
         }

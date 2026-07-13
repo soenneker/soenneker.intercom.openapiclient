@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Contacts.Merge.Preview;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Merge
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class MergeRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The preview property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.Preview.PreviewRequestBuilder Preview
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.Preview.PreviewRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Merge.MergeRequestBuilder"/> and sets the default values.
         /// </summary>
