@@ -22627,7 +22627,7 @@
           "Ecommerce Connectors"
         ],
         "summary": "Upload a product catalog",
-        "description": "Upload a product catalog to an ecommerce connector. The catalog must be a JSON\narray of product objects. There are two upload modes:\n\n**Single-file upload** \u2014 POST a single catalog file (up to 99 MB per request).\nOmit \u0060finalize\u0060 and \u0060import_job_id\u0060. Returns \u0060202 Accepted\u0060 when sync has started.\n\n**Multipart upload** \u2014 For catalogs that must be split across multiple requests:\n\n1. POST the first part with \u0060finalize=false\u0060 (no \u0060import_job_id\u0060). The response\n   returns an \u0060import_job_id\u0060 and \u0060next_part_number\u0060.\n2. POST each subsequent part with \u0060finalize=false\u0060, the \u0060import_job_id\u0060 from step 1,\n   and the \u0060part_number\u0060 from the previous response. Each part must be \u2264 99 MB.\n3. POST with \u0060finalize=true\u0060 and the \u0060import_job_id\u0060 to complete the upload and\n   start the sync. No catalog file is required in the finalization request.\n\nPart uploads are idempotent \u2014 retrying the same \u0060part_number\u0060 does not create\na duplicate. If a response is lost, retry with the same \u0060part_number\u0060.\n",
+        "description": "\u0022Upload a product catalog to an ecommerce connector. The catalog must be a JSON\narray of product objects. There are two upload modes:\n\n**Single-file upload** \u2014 POST a single catalog file (up to 99 MB per request).\nOmit \u0060finalize\u0060 and \u0060import_job_id\u0060. Returns \u0060202 Accepted\u0060 when sync has started.\n\n**Multipart upload** \u2014 For catalogs that must be split across multiple requests:\n\n1. POST the first part with \u0060finalize=false\u0060 (no \u0060import_job_id\u0060). The response\n   returns an \u0060import_job_id\u0060 and \u0060next_part_number\u0060.\n2. POST each subsequent part with \u0060finalize=false\u0060, the \u0060import_job_id\u0060 from step 1,\n   and the \u0060part_number\u0060 from the previous response. Each part must be \u2264 99 MB.\n3. POST with \u0060finalize=true\u0060 and the \u0060import_job_id\u0060 to complete the upload and\n   start the sync. No catalog file is required in the finalization request.\n\nPart uploads are idempotent \u2014 retrying the same \u0060part_number\u0060 does not create\na duplicate. If a response is lost, retry with the same \u0060part_number\u0060.\n\n## Product object structure\n\nThe catalog file must be a JSON array where each element is a product object.\nOnly \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 are required \u2014 all other fields are optional.\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| \u0060id\u0060 | string | \u2713 | Your unique product identifier. Used to match products on re-upload so only changed products are re-indexed. Also the delete key \u2014 any product ID absent from a new upload is removed from Fin\u0027s knowledge. Must be stable across uploads. |\n| \u0060title\u0060 | string | \u2713 | Product name. Used by Fin when searching for and recommending products. |\n| \u0060url\u0060 | string | \u2713 | Canonical product page URL shown in Fin\u0027s product recommendations. Must be a valid \u0060https://\u0060 URL. |\n| \u0060description\u0060 | string | | Product description that Fin reads to understand what the product is. HTML formatting is supported and safely sanitized (\u0060description_html\u0060 takes precedence if both are provided). This is the primary field Fin uses to match products to shopper questions \u2014 a richer description leads to better recommendations. |\n| \u0060featured_image_url\u0060 | string | | Primary product image shown in Fin\u0027s recommendation cards. Falls back to the first entry of \u0060image_urls\u0060 if not provided. If no valid image can be resolved for a variant, that variant\u0027s card is not shown to the shopper. |\n| \u0060image_urls\u0060 | string[] | | Additional product images. Used as a fallback when \u0060featured_image_url\u0060 is absent or when a variant has no specific image. |\n| \u0060price_min\u0060 | number | | Lowest price across all variants. If omitted, derived automatically from variant prices. Fin uses this to filter products when a shopper mentions a budget (e.g. \\\u0022under $100\\\u0022). Displayed as a range alongside \u0060price_max\u0060, or as a single value if both are equal. |\n| \u0060price_max\u0060 | number | | Highest price across all variants. If omitted, derived from variant prices. Used alongside \u0060price_min\u0060 for budget filtering and price display. |\n| \u0060currency\u0060 | string | | ISO 4217 currency code (e.g. \u0060\\\u0022USD\\\u0022\u0060, \u0060\\\u0022EUR\\\u0022\u0060, \u0060\\\u0022GBP\\\u0022\u0060). Defaults to USD if omitted. Used to format prices with the correct symbol in Fin\u0027s responses and product cards. |\n| \u0060in_stock\u0060 | boolean | | Whether the product is available to purchase. If omitted, derived from variant stock \u2014 the product is in stock if at least one variant has \u0060in_stock: true\u0060. Products with no in-stock variants are hidden from Fin entirely. |\n| \u0060category_path\u0060 | string or string[] | Strongly recommended | Hierarchical category breadcrumb (e.g. \u0060[\\\u0022Clothing\\\u0022, \\\u0022Outerwear\\\u0022, \\\u0022Jackets\\\u0022]\u0060). Fin understands the hierarchy \u2014 a shopper asking about \\\u0022Clothing\\\u0022 sees products from all subcategories underneath it. The most specific category is shown in search results. |\n| \u0060collections\u0060 | string[] | Strongly recommended | Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog\u0027s structure and answer questions like \\\u0022what\u0027s in the sale collection?\\\u0022. |\n| \u0060tags\u0060 | string[] | | Free-form keywords matching how shoppers phrase needs in chat (e.g. \u0060[\\\u0022waterproof\\\u0022, \\\u0022gift\\\u0022, \\\u0022plus-size\\\u0022]\u0060). Complements \u0060category_path\u0060 and \u0060collections\u0060. |\n| \u0060available_options\u0060 | object[] | | Option types and their possible values (e.g. \u0060{\\\u0022name\\\u0022: \\\u0022Size\\\u0022, \\\u0022values\\\u0022: [\\\u0022S\\\u0022, \\\u0022M\\\u0022, \\\u0022L\\\u0022]}\u0060). Fin uses these to understand what choices a shopper can make and to correctly filter variants when asked for a specific size, colour, or other attribute. |\n| \u0060additional_data\u0060 | object | | Custom attributes for your business. Fin uses these to show each customer only relevant products. All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file. |\n| \u0060variants\u0060 | object[] | | Individual purchasable variants. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See the variant table below. |\n\n### Variant object structure\n\nEach object in the \u0060variants\u0060 array may contain:\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| \u0060id\u0060 | string | \u2713 | Unique identifier for this variant within the product. |\n| \u0060title\u0060 | string | | Variant display name shown to shoppers (e.g. \u0060\\\u0022Small / Blue\\\u0022\u0060). |\n| \u0060price\u0060 | number | | Price of this specific variant. Fin uses variant prices for precise budget filtering and displays the variant price in recommendation cards. |\n| \u0060compare_at_price\u0060 | number | | Original price before a discount. When provided, Fin will naturally mention the saving (e.g. \\\u0022down from $129 to $99\\\u0022). |\n| \u0060in_stock\u0060 | boolean | | Whether this variant is currently available. Out-of-stock variants are not shown in Fin\u0027s recommendation cards and Fin will not suggest them to shoppers. |\n| \u0060image_url\u0060 | string | | Image specific to this variant. Takes precedence over the product\u0027s \u0060featured_image_url\u0060. Falls back to \u0060featured_image_url\u0060, then \u0060image_urls\u0060. If no valid image can be resolved, this variant\u0027s recommendation card will not be shown. |\n| \u0060selected_options\u0060 | object[] | | The specific option values that define this variant (e.g. \u0060[{\\\u0022name\\\u0022: \\\u0022Size\\\u0022, \\\u0022value\\\u0022: \\\u0022Small\\\u0022}, {\\\u0022name\\\u0022: \\\u0022Color\\\u0022, \\\u0022value\\\u0022: \\\u0022Blue\\\u0022}]\u0060). Fin uses these to match shopper requests like \\\u0022do you have this in medium?\\\u0022 to the correct variant. |\n| \u0060url\u0060 | string | | Direct link to this variant\u0027s page. Takes precedence over the product URL in recommendation cards. If omitted, constructed automatically as \u0060{product_url}?variant={id}\u0060. |\n\n### Example catalog file\n\n\u0060\u0060\u0060json\n[\n  {\n    \\\u0022id\\\u0022: \\\u0022prod-12345\\\u0022,\n    \\\u0022title\\\u0022: \\\u0022Classic Cotton T-Shirt\\\u0022,\n    \\\u0022url\\\u0022: \\\u0022https://example.com/products/classic-cotton-t-shirt\\\u0022,\n    \\\u0022description\\\u0022: \\\u0022A comfortable everyday t-shirt.\\\u0022,\n    \\\u0022featured_image_url\\\u0022: \\\u0022https://cdn.example.com/images/t-shirt.jpg\\\u0022,\n    \\\u0022price_min\\\u0022: 19.99,\n    \\\u0022price_max\\\u0022: 29.99,\n    \\\u0022currency\\\u0022: \\\u0022USD\\\u0022,\n    \\\u0022in_stock\\\u0022: true,\n    \\\u0022tags\\\u0022: [\\\u0022organic\\\u0022, \\\u0022bestseller\\\u0022],\n    \\\u0022collections\\\u0022: [\\\u0022Summer Collection\\\u0022],\n    \\\u0022category_path\\\u0022: \\\u0022Clothing \u003E T-Shirts\\\u0022,\n    \\\u0022available_options\\\u0022: [\n      {\\\u0022name\\\u0022: \\\u0022Size\\\u0022, \\\u0022values\\\u0022: [\\\u0022S\\\u0022, \\\u0022M\\\u0022, \\\u0022L\\\u0022]},\n      {\\\u0022name\\\u0022: \\\u0022Color\\\u0022, \\\u0022values\\\u0022: [\\\u0022White\\\u0022, \\\u0022Blue\\\u0022]}\n    ],\n    \\\u0022variants\\\u0022: [\n      {\n        \\\u0022id\\\u0022: \\\u0022var-001\\\u0022,\n        \\\u0022title\\\u0022: \\\u0022S / White\\\u0022,\n        \\\u0022price\\\u0022: 19.99,\n        \\\u0022in_stock\\\u0022: true,\n        \\\u0022selected_options\\\u0022: [\n          {\\\u0022name\\\u0022: \\\u0022Size\\\u0022, \\\u0022value\\\u0022: \\\u0022S\\\u0022},\n          {\\\u0022name\\\u0022: \\\u0022Color\\\u0022, \\\u0022value\\\u0022: \\\u0022White\\\u0022}\n        ]\n      },\n      {\n        \\\u0022id\\\u0022: \\\u0022var-002\\\u0022,\n        \\\u0022title\\\u0022: \\\u0022M / Blue\\\u0022,\n        \\\u0022price\\\u0022: 29.99,\n        \\\u0022in_stock\\\u0022: true,\n        \\\u0022selected_options\\\u0022: [\n          {\\\u0022name\\\u0022: \\\u0022Size\\\u0022, \\\u0022value\\\u0022: \\\u0022M\\\u0022},\n          {\\\u0022name\\\u0022: \\\u0022Color\\\u0022, \\\u0022value\\\u0022: \\\u0022Blue\\\u0022}\n        ]\n      }\n    ],\n    \\\u0022additional_data\\\u0022: {\n      \\\u0022sku\\\u0022: \\\u0022TSHIRT-WHT-S\\\u0022,\n      \\\u0022vendor\\\u0022: \\\u0022Acme Apparel\\\u0022\n    }\n  }\n]\n\u0060\u0060\u0060\n\u0022",
         "operationId": "UploadEcommerceCatalog",
         "parameters": [
           {
@@ -39628,6 +39628,12 @@
             "description": "The contacts email",
             "example": "jdoe@example.com"
           },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact\u0027s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400.",
+            "nullable": true,
+            "example": true
+          },
           "phone": {
             "type": "string",
             "description": "The contacts phone",
@@ -42953,6 +42959,169 @@
         },
         "description": "Returned when a catalog upload is accepted and sync has started."
       },
+      "EcommerceCatalogVariant": {
+        "title": "Ecommerce Catalog Variant",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for this variant within the product.",
+            "example": "var-001"
+          },
+          "title": {
+            "type": "string",
+            "description": "Variant display name shown to shoppers (e.g. \u0022Small / Blue\u0022).",
+            "example": "Blue / Large"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of this specific variant. Fin uses variant prices for precise budget filtering and displays the variant price in recommendation cards.",
+            "nullable": true,
+            "example": 29.99
+          },
+          "compare_at_price": {
+            "type": "number",
+            "description": "Original price before a discount. When provided, Fin will naturally mention the saving to the shopper (e.g. \u0022down from $129 to $99\u0022).",
+            "nullable": true,
+            "example": 39.99
+          },
+          "in_stock": {
+            "type": "boolean",
+            "description": "Whether this variant is currently available. Out-of-stock variants are not shown in Fin\u0027s recommendation cards and Fin will not suggest them to shoppers.",
+            "example": true
+          },
+          "url": {
+            "type": "string",
+            "description": "Direct link to this variant\u0027s page. Takes precedence over the product URL in recommendation cards. If omitted, constructed automatically as \u0060{product_url}?variant={id}\u0060.",
+            "nullable": true,
+            "example": "https://example.com/products/t-shirt?variant=var-001"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image specific to this variant. Takes precedence over the product\u0027s \u0060featured_image_url\u0060. Falls back to \u0060featured_image_url\u0060, then \u0060image_urls\u0060. If no valid image can be resolved, this variant\u0027s recommendation card will not be shown.",
+            "nullable": true,
+            "example": "https://cdn.example.com/images/t-shirt-blue.jpg"
+          },
+          "selected_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogVariantSelectedOptionsItem"
+            },
+            "description": "The specific option values that define this variant (e.g. Size=Small, Color=Blue). Fin uses these to match shopper requests like \u0022do you have this in medium?\u0022 to the correct variant."
+          }
+        },
+        "description": "A product variant in an ecommerce catalog upload."
+      },
+      "EcommerceCatalogProduct": {
+        "title": "Ecommerce Catalog Product",
+        "required": [
+          "id",
+          "title",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Your unique product identifier. Used to match products on re-upload so only changed products are re-indexed. Also the delete key \u2014 any product ID absent from a new upload is removed from Fin\u0027s knowledge. Must be stable across uploads.",
+            "example": "prod-12345"
+          },
+          "title": {
+            "type": "string",
+            "description": "Product name. Used by Fin when searching for and recommending products.",
+            "example": "Classic Cotton T-Shirt"
+          },
+          "url": {
+            "type": "string",
+            "description": "Canonical product page URL shown in Fin\u0027s product recommendations. Must be a valid https:// URL.",
+            "example": "https://example.com/products/classic-cotton-t-shirt"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description that Fin reads to understand what the product is. HTML formatting is supported and safely sanitized (\u0060description_html\u0060 takes precedence if both are provided). This is the primary field Fin uses to match products to shopper questions \u2014 a richer description leads to better recommendations.",
+            "nullable": true,
+            "example": "A comfortable everyday t-shirt made from 100% organic cotton."
+          },
+          "description_html": {
+            "type": "string",
+            "description": "HTML product description. Takes precedence over \u0060description\u0060 when both are provided. HTML is safely sanitized before indexing.",
+            "nullable": true,
+            "example": "\u003Cp\u003EA comfortable everyday t-shirt made from \u003Cstrong\u003E100% organic cotton\u003C/strong\u003E.\u003C/p\u003E"
+          },
+          "featured_image_url": {
+            "type": "string",
+            "description": "Primary product image shown in Fin\u0027s recommendation cards. Falls back to the first entry of \u0060image_urls\u0060 if not provided. If no valid image can be resolved for a variant, that variant\u0027s recommendation card is not shown to the shopper.",
+            "nullable": true,
+            "example": "https://cdn.example.com/images/t-shirt-main.jpg"
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional product images. Used as a fallback image source when \u0060featured_image_url\u0060 is absent or when a variant has no specific image."
+          },
+          "price_min": {
+            "type": "number",
+            "description": "Lowest price across all variants. If omitted, derived automatically from variant prices. Fin uses this to filter products when a shopper mentions a budget (e.g. \u0022under $100\u0022). Displayed as a range alongside \u0060price_max\u0060, or as a single value if both are equal.",
+            "nullable": true,
+            "example": 19.99
+          },
+          "price_max": {
+            "type": "number",
+            "description": "Highest price across all variants. If omitted, derived from variant prices. Used alongside \u0060price_min\u0060 for budget filtering and price display.",
+            "nullable": true,
+            "example": 39.99
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code for all prices on this product (e.g. \u0022USD\u0022, \u0022EUR\u0022, \u0022GBP\u0022). Defaults to USD if omitted. Used to format prices with the correct symbol in Fin\u0027s responses and product cards.",
+            "nullable": true,
+            "example": "USD"
+          },
+          "in_stock": {
+            "type": "boolean",
+            "description": "\u0022Whether the product is available to purchase. If omitted, derived from variant stock \u2014 the\nproduct is in stock if at least one variant has \u0060in_stock: true\u0060. Products with no in-stock\nvariants are hidden from Fin entirely and will not be recommended to shoppers.\n\u0022",
+            "nullable": true,
+            "example": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Free-form keywords matching how shoppers phrase needs in chat (e.g. \u0022waterproof\u0022, \u0022gift\u0022, \u0022plus-size\u0022). Used by Fin to match fuzzy queries; complements \u0060category_path\u0060 and \u0060collections\u0060."
+          },
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogProductCollectionsItem"
+            },
+            "description": "Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog\u0027s structure and answer questions like \u0022what\u0027s in the sale collection?\u0022. Each element may be a plain string or an object with a \u0060title\u0060 field."
+          },
+          "category_path": {
+            "$ref": "#/components/schemas/EcommerceCatalogProductCategoryPath"
+          },
+          "available_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogProductAvailableOptionsItem"
+            },
+            "description": "\u0022Option types available for this product and their possible values\n(e.g. \u0060{\\\u0022name\\\u0022: \\\u0022Size\\\u0022, \\\u0022values\\\u0022: [\\\u0022S\\\u0022, \\\u0022M\\\u0022, \\\u0022L\\\u0022]}\u0060). Fin uses these to understand what\nchoices a shopper can make and to correctly filter variants when a shopper asks for a\nspecific size, colour, or other attribute.\n\u0022"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogVariant"
+            },
+            "description": "Individual purchasable variants of the product. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See \u0060ecommerce_catalog_variant\u0060 for the variant object schema."
+          },
+          "additional_data": {
+            "$ref": "#/components/schemas/EcommerceCatalogProductAdditionalData"
+          }
+        },
+        "description": "A product object in an ecommerce catalog upload. The catalog file must be a JSON\narray of these objects. The \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 fields are required; all\nothers are optional.\n"
+      },
       "EmailAddressHeader": {
         "title": "Email Address Header",
         "type": "object",
@@ -44794,16 +44963,13 @@
             "$ref": "#/components/schemas/MergePreviewAttributeChangeOutcome"
           },
           "from_value": {
-            "description": "The source contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field.",
-            "nullable": true
+            "$ref": "#/components/schemas/MergePreviewAttributeChangeFromValue"
           },
           "into_value": {
-            "description": "The target contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field.",
-            "nullable": true
+            "$ref": "#/components/schemas/MergePreviewAttributeChangeIntoValue"
           },
           "new_into_value": {
-            "description": "The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field.",
-            "nullable": true
+            "$ref": "#/components/schemas/MergePreviewAttributeChangeNewIntoValue"
           }
         },
         "description": "A single attribute change on the surviving contact."
@@ -47142,6 +47308,12 @@
             "description": "The contacts email",
             "example": "jdoe@example.com"
           },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact\u0027s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400.",
+            "nullable": true,
+            "example": true
+          },
           "phone": {
             "type": "string",
             "description": "The contacts phone",
@@ -48085,6 +48257,7 @@
         "description": "The unique identifiers to convert a single Visitor."
       },
       "CreateContentImportSourceRequestAudienceIds": {
+        "type": "object",
         "oneOf": [
           {
             "type": "integer"
@@ -48096,8 +48269,7 @@
             }
           }
         ],
-        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.",
-        "nullable": true
+        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers."
       },
       "CreateDataAttributeRequestListAttribute": {
         "title": "list attribute",
@@ -48474,6 +48646,53 @@
           }
         }
       },
+      "EcommerceCatalogProductCollectionsItem": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/EcommerceCatalogProductCollectionsItemBranch1"
+          },
+          {
+            "$ref": "#/components/schemas/EcommerceCatalogProductCollectionsItemOneOf2"
+          }
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Union discriminator"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "EcommerceCatalogProductCollectionsItem_1": "#/components/schemas/EcommerceCatalogProductCollectionsItemBranch1",
+            "EcommerceCatalogProductCollectionsItemOneOf2": "#/components/schemas/EcommerceCatalogProductCollectionsItemOneOf2"
+          }
+        }
+      },
+      "EcommerceCatalogProductCategoryPath": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "string",
+            "example": "Clothing \u003E T-Shirts"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Clothing",
+              "T-Shirts"
+            ]
+          }
+        ],
+        "description": "Hierarchical category breadcrumb for the product. Fin understands the hierarchy \u2014 a\nshopper asking about \u0022Clothing\u0022 will see products from all subcategories underneath it.\nThe most specific category is shown in search results. Strongly recommended. Provide as\na pre-formatted string (e.g. \u0060\u0022Clothing \u003E T-Shirts\u0022\u0060) or as an array of path segments\n(e.g. \u0060[\u0022Clothing\u0022, \u0022T-Shirts\u0022]\u0060). Array segments are joined with \u0060 \u003E \u0060.\n"
+      },
       "IdentityVerificationSecretWithMaterialAllOf2": {
         "type": "object",
         "properties": {
@@ -48610,6 +48829,7 @@
         }
       },
       "SingleFilterSearchRequestValue": {
+        "type": "object",
         "oneOf": [
           {
             "type": "string"
@@ -48628,7 +48848,6 @@
           }
         ],
         "description": "The value that you want to search on.",
-        "nullable": true,
         "example": 73732934
       },
       "TagAppliedBy": {
@@ -48774,6 +48993,7 @@
         ]
       },
       "UpdateContentImportSourceRequestAudienceIds": {
+        "type": "object",
         "oneOf": [
           {
             "type": "integer"
@@ -48785,8 +49005,7 @@
             }
           }
         ],
-        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences.",
-        "nullable": true
+        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences."
       },
       "UpdateDataAttributeRequestListAttribute": {
         "title": "list attribute",
@@ -48891,6 +49110,15 @@
           "email": {
             "type": "string",
             "description": "The email you have defined for the contact who is being added as a participant. If a contact with this email does not exist, one will be created."
+          }
+        }
+      },
+      "EcommerceCatalogProductCollectionsItemOneOf2": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Summer Collection"
           }
         }
       },
@@ -49797,9 +50025,7 @@
             "$ref": "#/components/schemas/DataConnectorDetailResponseFieldsItemType"
           },
           "example_value": {
-            "description": "An example value for this field.",
-            "nullable": true,
-            "example": "ok"
+            "$ref": "#/components/schemas/DataConnectorDetailResponseFieldsItemExampleValue"
           },
           "redacted": {
             "type": "boolean",
@@ -49888,6 +50114,47 @@
           }
         },
         "description": "Pagination"
+      },
+      "EcommerceCatalogVariantSelectedOptionsItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Option name.",
+            "example": "Size"
+          },
+          "value": {
+            "type": "string",
+            "description": "Selected option value.",
+            "example": "Large"
+          }
+        }
+      },
+      "EcommerceCatalogProductAvailableOptionsItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Option name (e.g. \u0022Size\u0022).",
+            "example": "Size"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All available values for this option."
+          }
+        }
+      },
+      "EcommerceCatalogProductAdditionalData": {
+        "type": "object",
+        "description": "Custom attributes for your business. Fin uses these to show each customer only the products relevant to them (e.g. regional availability or warehouse codes). All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file.",
+        "nullable": true,
+        "example": {
+          "sku": "TSHIRT-BLU-L",
+          "vendor": "Acme Apparel"
+        }
       },
       "ConversationAttributeUpdatedByWorkflowWorkflow": {
         "type": "object",
@@ -53052,7 +53319,7 @@
         "properties": {
           "catalog": {
             "type": "string",
-            "description": "The catalog JSON file. Required for all requests except finalization\n(\u0060finalize=true\u0060). Must be a valid JSON array of objects. Max 99 MB.\n",
+            "description": "The catalog JSON file. Required for all requests except finalization\n(\u0060finalize=true\u0060). Must be a valid JSON array of product objects. Max 99 MB.\n\nEach element in the array must conform to the\n[\u0060ecommerce_catalog_product\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_product) schema.\nThe \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 fields are required on every product;\nall other fields are optional. Variants, if provided, must conform to the\n[\u0060ecommerce_catalog_variant\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_variant) schema.\n",
             "format": "binary"
           },
           "finalize": {
@@ -53615,6 +53882,18 @@
           }
         }
       },
+      "EcommerceCatalogProductCollectionsItemBranch1": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "Summer Collection"
+          }
+        }
+      },
       "TicketCustomAttributesAdditionalPropertiesBranch1": {
         "required": [
           "value"
@@ -53936,6 +54215,18 @@
         "type": "object",
         "description": "A hash of attributes associated with the conversation.\nThese attributes can be used by Fin to provide more contextual responses.\nLimit to 10 attributes.\n"
       },
+      "MergePreviewAttributeChangeFromValue": {
+        "type": "object",
+        "description": "The source contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field."
+      },
+      "MergePreviewAttributeChangeIntoValue": {
+        "type": "object",
+        "description": "The target contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field."
+      },
+      "MergePreviewAttributeChangeNewIntoValue": {
+        "type": "object",
+        "description": "The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field."
+      },
       "BannerClientTargetingItemProperty": {
         "type": "object"
       },
@@ -53993,6 +54284,11 @@
         "type": "object",
         "description": "The value for this attribute. Must be type-compatible with the attribute\u0027s data_type from the webhook (e.g., boolean for boolean attributes, option ID string for list attributes).",
         "example": true
+      },
+      "DataConnectorDetailResponseFieldsItemExampleValue": {
+        "type": "object",
+        "description": "An example value for this field.",
+        "example": "ok"
       },
       "FinAgentAttributeErrorsUserAttributesProperty": {
         "type": "object",

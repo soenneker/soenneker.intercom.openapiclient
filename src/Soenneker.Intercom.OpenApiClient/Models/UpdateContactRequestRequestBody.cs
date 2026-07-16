@@ -38,6 +38,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Email { get; set; }
 #endif
+        /// <summary>Whether the contact&apos;s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400.</summary>
+        public bool? EmailVerified { get; set; }
         /// <summary>A unique identifier for the contact which is given to Intercom</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -128,6 +130,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "avatar", n => { Avatar = n.GetStringValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
+                { "email_verified", n => { EmailVerified = n.GetBoolValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
                 { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
@@ -150,6 +153,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("avatar", Avatar);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
+            writer.WriteBoolValue("email_verified", EmailVerified);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("language_override", LanguageOverride);
             writer.WriteIntValue("last_seen_at", LastSeenAt);

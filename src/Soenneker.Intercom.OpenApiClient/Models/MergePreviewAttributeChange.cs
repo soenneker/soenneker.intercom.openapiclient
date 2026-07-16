@@ -26,26 +26,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The source contact&apos;s value. Omitted when null. May be a string, array, or object depending on the field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? FromValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeFromValue? FromValue { get; set; }
 #nullable restore
 #else
-        public UntypedNode FromValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeFromValue FromValue { get; set; }
 #endif
         /// <summary>The target contact&apos;s value. Omitted when null. May be a string, array, or object depending on the field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? IntoValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeIntoValue? IntoValue { get; set; }
 #nullable restore
 #else
-        public UntypedNode IntoValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeIntoValue IntoValue { get; set; }
 #endif
         /// <summary>The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? NewIntoValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeNewIntoValue? NewIntoValue { get; set; }
 #nullable restore
 #else
-        public UntypedNode NewIntoValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeNewIntoValue NewIntoValue { get; set; }
 #endif
         /// <summary>How the value is resolved. adopted = the source&apos;s value is taken; discarded = the source&apos;s value is dropped and the target&apos;s kept; merged = the two values are combined.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome? Outcome { get; set; }
@@ -75,9 +75,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "field", n => { Field = n.GetStringValue(); } },
-                { "from_value", n => { FromValue = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
-                { "into_value", n => { IntoValue = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
-                { "new_into_value", n => { NewIntoValue = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "from_value", n => { FromValue = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeFromValue>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeFromValue.CreateFromDiscriminatorValue); } },
+                { "into_value", n => { IntoValue = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeIntoValue>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeIntoValue.CreateFromDiscriminatorValue); } },
+                { "new_into_value", n => { NewIntoValue = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeNewIntoValue>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeNewIntoValue.CreateFromDiscriminatorValue); } },
                 { "outcome", n => { Outcome = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome>(); } },
             };
         }
@@ -89,9 +89,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("field", Field);
-            writer.WriteObjectValue<UntypedNode>("from_value", FromValue);
-            writer.WriteObjectValue<UntypedNode>("into_value", IntoValue);
-            writer.WriteObjectValue<UntypedNode>("new_into_value", NewIntoValue);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeFromValue>("from_value", FromValue);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeIntoValue>("into_value", IntoValue);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeNewIntoValue>("new_into_value", NewIntoValue);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome>("outcome", Outcome);
             writer.WriteAdditionalData(AdditionalData);
         }

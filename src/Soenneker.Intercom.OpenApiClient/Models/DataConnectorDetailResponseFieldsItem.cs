@@ -17,10 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An example value for this field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? ExampleValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemExampleValue? ExampleValue { get; set; }
 #nullable restore
 #else
-        public UntypedNode ExampleValue { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemExampleValue ExampleValue { get; set; }
 #endif
         /// <summary>The JSON path of the response field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "example_value", n => { ExampleValue = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
+                { "example_value", n => { ExampleValue = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemExampleValue>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemExampleValue.CreateFromDiscriminatorValue); } },
                 { "path", n => { Path = n.GetStringValue(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemType>(); } },
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<UntypedNode>("example_value", ExampleValue);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemExampleValue>("example_value", ExampleValue);
             writer.WriteStringValue("path", Path);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItemType>("type", Type);
