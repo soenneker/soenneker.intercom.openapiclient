@@ -49755,9 +49755,6 @@
       },
       "CreateDataEventRequestMetadata": {
         "type": "object",
-        "additionalProperties": {
-          "type": "string"
-        },
         "description": "Optional metadata about the event.",
         "example": {
           "invite_code": "ADDAFRIEND"
@@ -50093,9 +50090,6 @@
       },
       "DataEventMetadata": {
         "type": "object",
-        "additionalProperties": {
-          "type": "string"
-        },
         "description": "Optional metadata about the event.",
         "example": {
           "invite_code": "ADDAFRIEND"
@@ -54145,9 +54139,6 @@
       },
       "CreateDataEventRequestMetadataProperty": {
         "type": "object",
-        "additionalProperties": {
-          "type": "string"
-        },
         "description": "Optional metadata about the event."
       },
       "CreateOrUpdateCompanyRequestCustomAttributesProperty": {
@@ -54188,9 +54179,6 @@
       },
       "DataEventMetadataProperty": {
         "type": "object",
-        "additionalProperties": {
-          "type": "string"
-        },
         "description": "Optional metadata about the event."
       },
       "ConversationSlaTargetMissedSlaStatesProperty": {
