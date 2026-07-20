@@ -14848,7 +14848,8 @@
                       "type": "user",
                       "id": "6762f11b1bb69f9f2193bba3"
                     },
-                    "body": "Hello there"
+                    "body": "Hello there",
+                    "brand_id": 123
                   }
                 },
                 "contact_not_found": {
@@ -15270,6 +15271,12 @@
                           {
                             "type": "to",
                             "email": "testing-workspace@email.com"
+                          }
+                        ],
+                        "reply_to": [
+                          {
+                            "email": "replies@example.com",
+                            "name": "Support Team"
                           }
                         ],
                         "author": {
@@ -39077,6 +39084,14 @@
             "description": "The recipients of the source message. Only present for email conversations.",
             "nullable": true
           },
+          "reply_to": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationSourceReplyToItem"
+            },
+            "description": "The Reply-To header addresses of the source message, where a reply will be routed. Can differ from the sender\u0027s From address. Only present for email conversations.",
+            "nullable": true
+          },
           "subject": {
             "type": "string",
             "description": "The message subject. Only present for email conversations.",
@@ -39750,6 +39765,11 @@
             "description": "The time the conversation was created as a UTC Unix timestamp. If not provided, the current time will be used. This field is only recommneded for migrating past conversations from another source into Intercom.",
             "format": "date-time",
             "example": 1671028894
+          },
+          "brand_id": {
+            "type": "string",
+            "description": "The unique identifier of the brand to associate with this conversation.",
+            "example": 123
           }
         },
         "description": "Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact."
@@ -49720,6 +49740,23 @@
             "description": "The reason this recipient was dropped, if applicable.",
             "nullable": true,
             "example": null
+          }
+        }
+      },
+      "ConversationSourceReplyToItem": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The Reply-To email address.",
+            "format": "email",
+            "example": "replies@example.com"
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name associated with the Reply-To address.",
+            "nullable": true,
+            "example": "Support Team"
           }
         }
       },

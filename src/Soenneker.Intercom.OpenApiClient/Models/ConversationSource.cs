@@ -73,6 +73,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether or not the source content has been redacted.</summary>
         public bool? Redacted { get; set; }
+        /// <summary>The Reply-To header addresses of the source message, where a reply will be routed. Can differ from the sender&apos;s From address. Only present for email conversations.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceReplyToItem>? ReplyTo { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceReplyToItem> ReplyTo { get; set; }
+#endif
         /// <summary>The message subject. Only present for email conversations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -130,6 +138,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "recipients", n => { Recipients = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
+                { "reply_to", n => { ReplyTo = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceReplyToItem>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceReplyToItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
@@ -150,6 +159,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("id", Id);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceRecipientsItem>("recipients", Recipients);
             writer.WriteBoolValue("redacted", Redacted);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceReplyToItem>("reply_to", ReplyTo);
             writer.WriteStringValue("subject", Subject);
             writer.WriteStringValue("type", Type);
             writer.WriteStringValue("url", Url);

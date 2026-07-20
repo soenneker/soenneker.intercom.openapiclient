@@ -31,6 +31,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
+        /// <summary>The unique identifier of the brand to associate with this conversation.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BrandId { get; set; }
+#nullable restore
+#else
+        public string BrandId { get; set; }
+#endif
         /// <summary>The time the conversation was created as a UTC Unix timestamp. If not provided, the current time will be used. This field is only recommneded for migrating past conversations from another source into Intercom.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The from property</summary>
@@ -76,6 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "brand_id", n => { BrandId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom>(global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom.CreateFromDiscriminatorValue); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
@@ -90,6 +99,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<string>("attachment_urls", AttachmentUrls);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("brand_id", BrandId);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom>("from", From);
             writer.WriteStringValue("subject", Subject);
