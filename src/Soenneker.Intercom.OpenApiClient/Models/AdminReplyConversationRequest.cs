@@ -59,6 +59,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption> ReplyOptions { get; set; }
 #endif
+        /// <summary>When true, prevents the reply from waking a snoozed conversation. Applies to &apos;comment&apos; and &apos;note&apos; message types. The part is still created and visible in the conversation thread.</summary>
+        public bool? SkipUnsnooze { get; set; }
         /// <summary>The type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType? Type { get; set; }
         /// <summary>
@@ -93,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>(); } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>(global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "skip_unsnooze", n => { SkipUnsnooze = n.GetBoolValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType>(); } },
             };
         }
@@ -110,6 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>("reply_options", ReplyOptions);
+            writer.WriteBoolValue("skip_unsnooze", SkipUnsnooze);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

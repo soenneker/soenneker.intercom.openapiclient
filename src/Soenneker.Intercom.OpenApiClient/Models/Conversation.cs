@@ -85,6 +85,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes CustomAttributes { get; set; }
 #endif
+        /// <summary>References linking this conversation to records in an external helpdesk or CRM system. Populated for Fin Standalone workspaces synced from an external platform; an empty array otherwise. Sorted alphabetically by `type` and capped at 20 entries.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference>? ExternalReferences { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference> ExternalReferences { get; set; }
+#endif
         /// <summary>An object containing information on the first users message. For a contact initiated message this will represent the users original message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -243,6 +251,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_rating", n => { ConversationRating = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes.CreateFromDiscriminatorValue); } },
+                { "external_references", n => { ExternalReferences = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "first_contact_reply", n => { FirstContactReply = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList.CreateFromDiscriminatorValue); } },
@@ -285,6 +294,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>("conversation_rating", ConversationRating);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes>("custom_attributes", CustomAttributes);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference>("external_references", ExternalReferences);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>("first_contact_reply", FirstContactReply);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>("linked_objects", LinkedObjects);

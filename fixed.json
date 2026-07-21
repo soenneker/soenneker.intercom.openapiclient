@@ -33994,6 +33994,11 @@
               "$ref": "#/components/schemas/ConversationAttachmentFiles"
             },
             "description": "A list of files that will be added as attachments. You can include up to 10 files"
+          },
+          "skip_unsnooze": {
+            "type": "boolean",
+            "description": "When true, prevents the reply from waking a snoozed conversation. Applies to \u0027comment\u0027 and \u0027note\u0027 message types. The part is still created and visible in the conversation thread.",
+            "example": true
           }
         },
         "description": "Payload of the request to reply on behalf of an admin"
@@ -38275,6 +38280,13 @@
           "channel": {
             "$ref": "#/components/schemas/ConversationListItemChannel"
           },
+          "external_references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationExternalReference"
+            },
+            "description": "References linking this conversation to records in an external helpdesk or CRM system. Populated for Fin Standalone workspaces synced from an external platform; an empty array otherwise. Sorted alphabetically by \u0060type\u0060 and capped at 20 entries."
+          },
           "monitor_evaluations": {
             "type": "array",
             "items": {
@@ -38424,6 +38436,13 @@
           },
           "channel": {
             "$ref": "#/components/schemas/ConversationChannelComposed"
+          },
+          "external_references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationExternalReference"
+            },
+            "description": "References linking this conversation to records in an external helpdesk or CRM system. Populated for Fin Standalone workspaces synced from an external platform; an empty array otherwise. Sorted alphabetically by \u0060type\u0060 and capped at 20 entries."
           },
           "monitor_evaluations": {
             "type": "array",
@@ -38652,6 +38671,23 @@
           }
         },
         "description": "The channel through which a conversation was originally initiated and its current channel."
+      },
+      "ConversationExternalReference": {
+        "title": "Conversation External Reference",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of external system the reference points to. Possible values include \u0060zendesk_ticket\u0060, \u0060zendesk_sunshine_conversation\u0060, \u0060salesforce_case\u0060, \u0060salesforce_in_app_message_conversation\u0060, \u0060freshdesk_ticket\u0060, \u0060freshchat_conversation\u0060, \u0060hubspot_conversation\u0060, \u0060custom_helpdesk_conversation\u0060, \u0060api_conversation\u0060.",
+            "example": "zendesk_ticket"
+          },
+          "id": {
+            "type": "string",
+            "description": "The identifier of the record in the external system. Always serialized as a string, since some external IDs exceed 32-bit integer range.",
+            "example": 3633338
+          }
+        },
+        "description": "A reference linking a conversation to a record in an external helpdesk or CRM system, surfaced for Fin Standalone workspaces."
       },
       "ConversationAttachmentFiles": {
         "title": "Conversation attachment files",
