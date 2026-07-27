@@ -15,12 +15,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The number of distinct conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in.</summary>
+        /// <summary>The number of distinct non-ticket conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.</summary>
         public int? Conversations { get; set; }
         /// <summary>The number of notes that would be reassigned.</summary>
         public int? Notes { get; set; }
+        /// <summary>The number of phone calls that would be reassigned to the surviving contact. Present only for phone-lead merges.</summary>
+        public int? PhoneCalls { get; set; }
         /// <summary>The number of tags that would be reassigned.</summary>
         public int? Tags { get; set; }
+        /// <summary>The number of tickets (conversations of any ticket type) that would be reassigned to the surviving contact. Counted separately from `conversations` so a single conversation is never counted twice.</summary>
+        public int? Tickets { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments"/> and sets the default values.
         /// </summary>
@@ -48,7 +52,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversations", n => { Conversations = n.GetIntValue(); } },
                 { "notes", n => { Notes = n.GetIntValue(); } },
+                { "phone_calls", n => { PhoneCalls = n.GetIntValue(); } },
                 { "tags", n => { Tags = n.GetIntValue(); } },
+                { "tickets", n => { Tickets = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -60,7 +66,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("conversations", Conversations);
             writer.WriteIntValue("notes", Notes);
+            writer.WriteIntValue("phone_calls", PhoneCalls);
             writer.WriteIntValue("tags", Tags);
+            writer.WriteIntValue("tickets", Tickets);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -11548,7 +11548,7 @@
           "Contacts"
         ],
         "summary": "Preview a contact merge",
-        "description": "\u0022Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 (a \u0060lead\u0060) and \u0060into\u0060 (a \u0060user\u0060) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and the number of conversations, notes, and tags that would be reassigned.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Previewing non-duplicate contacts\\\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email, phone, or external ID). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t \u2014 the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060from\u0060 must be a lead and \u0060into\u0060 a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email, phone, or external ID. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n\u0022",
+        "description": "\u0022Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 (a \u0060lead\u0060) and \u0060into\u0060 (a \u0060user\u0060) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and the number of conversations, tickets, phone calls, notes, and tags that would be reassigned. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-lead merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Previewing non-duplicate contacts\\\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email, phone, or external ID). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t \u2014 the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060from\u0060 must be a lead and \u0060into\u0060 a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email, phone, or external ID. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n\u0022",
         "operationId": "PreviewMergeContact",
         "parameters": [
           {
@@ -11624,7 +11624,9 @@
                           "total_count": 3
                         },
                         "reassignments": {
-                          "conversations": 14,
+                          "conversations": 12,
+                          "tickets": 2,
+                          "phone_calls": 1,
                           "tags": 3,
                           "notes": 2
                         }
@@ -45036,8 +45038,18 @@
         "properties": {
           "conversations": {
             "type": "integer",
-            "description": "The number of distinct conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in.",
-            "example": 14
+            "description": "The number of distinct non-ticket conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under \u0060tickets\u0060.",
+            "example": 12
+          },
+          "tickets": {
+            "type": "integer",
+            "description": "The number of tickets (conversations of any ticket type) that would be reassigned to the surviving contact. Counted separately from \u0060conversations\u0060 so a single conversation is never counted twice.",
+            "example": 2
+          },
+          "phone_calls": {
+            "type": "integer",
+            "description": "The number of phone calls that would be reassigned to the surviving contact. Present only for phone-lead merges.",
+            "example": 1
           },
           "tags": {
             "type": "integer",
