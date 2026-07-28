@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges AttributeChanges { get; set; }
 #endif
-        /// <summary>The number of records that would be reassigned to the surviving contact, by type. Only types with reassignments are included.</summary>
+        /// <summary>Two counts per object type — `from`, how many are on the lead and would move to the surviving contact, and `into`, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments? Reassignments { get; set; }

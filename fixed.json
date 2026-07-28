@@ -8876,6 +8876,133 @@
         }
       }
     },
+    "/companies/search": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Search companies",
+        "description": "\u0022You can search for companies by the value of their attributes in order to fetch exactly the companies you want.\n\nTo search for companies, send a \u0060POST\u0060 request to \u0060https://api.intercom.io/companies/search\u0060, with a query object in the body defining your filters.\n\nNote that the API does not include companies who have no associated users in search results.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Optimizing search queries\\\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006015\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiple\u0027s there can be:\n* There\u0027s a limit of max 2 nested filters\n* There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Companies Model are searchable. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\\\u0022foobar\\\u0022\u0060).\n\n| Field                              | Type                           |\n| ---------------------------------- | ------------------------------ |\n| company_id                         | String                         |\n| name                               | String                         |\n| created_at                         | Date (UNIX Timestamp)          |\n| updated_at                         | Date (UNIX Timestamp)          |\n| remote_created_at                  | Date (UNIX Timestamp)          |\n| last_request_at                    | Date (UNIX Timestamp)          |\n| monthly_spend                      | Integer                        |\n| session_count                      | Integer                        |\n| user_count                         | Integer                        |\n| tag_id                             | String                         |\n| custom_attributes.{attribute_name} | String                         |\n\nThe \u0060plan.id\u0060 and \u0060plan.name\u0060 fields are not searchable and return a \u0060400\u0060 error with code \u0060invalid_field\u0060.\n\n### Accepted Operators\n\nThe table below shows the operators you can use to define how you want to search for the value. The operator should be put in as a string (\u0060\\\u0022=\\\u0022\u0060). The operator has to be compatible with the field\u0027s type (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates). Searching by \u0060tag_id\u0060 supports only the \u0060=\u0060 and \u0060!=\u0060 operators. The \u0060IN\u0060 and \u0060NIN\u0060 operators are not supported for Date fields.\n\n| Operator | Valid Types                      | Description                                                      |\n| :------- | :------------------------------- | :--------------------------------------------------------------- |\n| =        | All                              | Equals                                                           |\n| !=       | All                              | Doesn\u0027t Equal                                                    |\n| IN       | All except Date and tag_id       | In\u003Cbr\u003EShortcut for \u0060OR\u0060 queries\u003Cbr\u003EValues must be in Array       |\n| NIN      | All except Date and tag_id       | Not In\u003Cbr\u003EShortcut for \u0060OR !\u0060 queries\u003Cbr\u003EValues must be in Array |\n| \u003E        | Integer\u003Cbr\u003EDate (UNIX Timestamp) | Greater than                                                     |\n| \u003C       | Integer\u003Cbr\u003EDate (UNIX Timestamp) | Lower than                                                       |\n| ~        | String                           | Contains                                                         |\n| !~       | String                           | Doesn\u0027t Contain                                                  |\n| ^        | String                           | Starts With                                                      |\n| $        | String                           | Ends With                                                        |\n\n### Sorting\n\nPass an optional \u0060sort\u0060 object with a \u0060field\u0060 and an \u0060order\u0060 (\u0060ascending\u0060 or \u0060descending\u0060; defaults to \u0060descending\u0060) to order the results. An invalid \u0060order\u0060 returns a \u0060400\u0060 error with code \u0060invalid_sort_order\u0060. \u0060tag_id\u0060 can be used as a filter but not as a sort field.\n\u0022",
+        "operationId": "SearchCompanies",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanySearchRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "successful",
+                  "value": {
+                    "query": {
+                      "operator": "AND",
+                      "value": [
+                        {
+                          "field": "name",
+                          "operator": "=",
+                          "value": "my-company"
+                        }
+                      ]
+                    },
+                    "sort": {
+                      "field": "name",
+                      "order": "ascending"
+                    },
+                    "pagination": {
+                      "per_page": 5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [],
+                      "total_count": 0,
+                      "pages": {
+                        "type": "pages",
+                        "page": 1,
+                        "per_page": 5,
+                        "total_pages": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "f0dc95f1-9e46-4e8d-8150-89365c2c5195",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unsupported field": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8d6c1f0a-3b2e-4a17-9c5d-1f0e2a3b4c5d",
+                      "errors": [
+                        {
+                          "code": "invalid_field",
+                          "message": "segment_id is not a valid search field"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/companies/list": {
       "post": {
         "tags": [
@@ -11548,7 +11675,7 @@
           "Contacts"
         ],
         "summary": "Preview a contact merge",
-        "description": "\u0022Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 (a \u0060lead\u0060) and \u0060into\u0060 (a \u0060user\u0060) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and the number of conversations, tickets, phone calls, notes, and tags that would be reassigned. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-lead merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Previewing non-duplicate contacts\\\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email, phone, or external ID). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t \u2014 the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060from\u0060 must be a lead and \u0060into\u0060 a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email, phone, or external ID. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n\u0022",
+        "description": "\u0022Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 (a \u0060lead\u0060) and \u0060into\u0060 (a \u0060user\u0060) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and, for each object type, two counts \u2014 \u0060from\u0060, how many are on the lead and would move to the user, and \u0060into\u0060, how many the user already has. Counts are reported for conversations, tickets, phone calls, notes, and tags. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-lead merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\\\u0022warning\\\u0022 name=\\\u0022Previewing non-duplicate contacts\\\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email, phone, or external ID). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t \u2014 the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060from\u0060 must be a lead and \u0060into\u0060 a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email, phone, or external ID. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n\u0022",
         "operationId": "PreviewMergeContact",
         "parameters": [
           {
@@ -11624,11 +11751,26 @@
                           "total_count": 3
                         },
                         "reassignments": {
-                          "conversations": 12,
-                          "tickets": 2,
-                          "phone_calls": 1,
-                          "tags": 3,
-                          "notes": 2
+                          "conversations": {
+                            "from": 12,
+                            "into": 5
+                          },
+                          "tickets": {
+                            "from": 2,
+                            "into": 1
+                          },
+                          "phone_calls": {
+                            "from": 1,
+                            "into": 0
+                          },
+                          "tags": {
+                            "from": 3,
+                            "into": 4
+                          },
+                          "notes": {
+                            "from": 2,
+                            "into": 6
+                          }
                         }
                       }
                     }
@@ -12686,6 +12828,219 @@
       }
     },
     "/contacts/bulk": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Bulk create contacts",
+        "description": "\u0022You can bulk create contacts by submitting an array of contact objects. This is a **strict create** and never updates an existing contact.\n\nThe endpoint creates an async job that processes the items in the background. Use the returned job ID with \u0060GET /contacts/bulk/{id}\u0060 to check the job status.\n\nOnly the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Handling existing contacts\\\u0022 %}\n  If a contact already exists with the given \u0060external_id\u0060 or \u0060email\u0060 (including an archived contact), that item is rejected and the job\u0027s \u0060state\u0060 ends as \u0060completed_with_errors\u0060. New contacts in the same request are still created. The job \u0060state\u0060 from \u0060GET /contacts/bulk/{id}\u0060 is the signal that one or more items were rejected.\n\n  Created contacts aren\u0027t returned with IDs in the response. Look them up afterwards with [Get a contact by External ID](/docs/references/preview/rest-api/api.intercom.io/contacts/showcontactbyexternalid) or [Search contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/searchcontacts).\n{% /admonition %}\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Limits\\\u0022 %}\n  - Maximum of 100 contacts per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.\n{% /admonition %}\n\u0022",
+        "operationId": "BulkCreateContacts",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateContactsRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Successful",
+                  "value": {
+                    "contacts": [
+                      {
+                        "external_id": "abc123",
+                        "email": "joe@bloggs.com",
+                        "name": "Joe Bloggs",
+                        "role": "user",
+                        "phone": 353871234567,
+                        "avatar": "https://www.example.com/avatar_image.jpg",
+                        "signed_up_at": 1571672154,
+                        "last_seen_at": 1571672154,
+                        "owner_id": 321,
+                        "unsubscribed_from_emails": false,
+                        "language_override": "fr",
+                        "custom_attributes": {
+                          "plan": "pro"
+                        },
+                        "companies": [
+                          {
+                            "company_id": 6,
+                            "name": "Blue Sun"
+                          }
+                        ],
+                        "tags": {
+                          "add": [
+                            {
+                              "id": 123
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "with_companies": {
+                  "summary": "Attach companies",
+                  "value": {
+                    "contacts": [
+                      {
+                        "external_id": "abc123",
+                        "email": "joe@bloggs.com",
+                        "companies": [
+                          {
+                            "company_id": 6,
+                            "name": "Blue Sun"
+                          },
+                          {
+                            "company_id": 7,
+                            "name": "Weyland-Yutani"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "with_tags": {
+                  "summary": "Add tags",
+                  "value": {
+                    "contacts": [
+                      {
+                        "name": "Contact Name",
+                        "external_id": "abc123",
+                        "tags": {
+                          "add": [
+                            {
+                              "id": 123
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "append_to_existing_job": {
+                  "summary": "Append to existing job",
+                  "value": {
+                    "contacts": [
+                      {
+                        "external_id": "abc123",
+                        "email": "joe@bloggs.com",
+                        "language_override": "de"
+                      }
+                    ],
+                    "job": {
+                      "id": "job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_2",
+                      "type": "contacts.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_2",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_2"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_contacts": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "contacts field must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "too_many_contacts": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "maximum number of contacts per request is 100"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Contacts"
@@ -12710,21 +13065,60 @@
               },
               "examples": {
                 "successful": {
-                  "summary": "Successful",
+                  "summary": "successful",
                   "value": {
                     "contacts": [
                       {
                         "id": "abc123",
-                        "language_override": "fr"
-                      },
+                        "external_id": "ext123",
+                        "email": "joe@bloggs.com",
+                        "name": "Joe Bloggs",
+                        "phone": 353871234567,
+                        "avatar": "https://www.example.com/avatar_image.jpg",
+                        "owner_id": 321,
+                        "unsubscribed_from_emails": false,
+                        "language_override": "fr",
+                        "custom_attributes": {
+                          "plan": "pro"
+                        },
+                        "companies": [
+                          {
+                            "company_id": 6,
+                            "name": "Blue Sun"
+                          }
+                        ],
+                        "tags": {
+                          "add": [
+                            {
+                              "id": 123
+                            }
+                          ],
+                          "remove": [
+                            {
+                              "id": 987
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "with_companies": {
+                  "summary": "Attach and detach companies",
+                  "value": {
+                    "contacts": [
                       {
-                        "id": "def456",
-                        "name": "Updated Name"
-                      },
-                      {
-                        "id": "ghi789",
-                        "language_override": "es",
-                        "name": "Mar\u00EDa Garc\u00EDa"
+                        "id": "abc123",
+                        "companies": [
+                          {
+                            "company_id": 6,
+                            "name": "Blue Sun"
+                          },
+                          {
+                            "company_id": 7,
+                            "remove": true
+                          }
+                        ]
                       }
                     ]
                   }
@@ -12842,7 +13236,7 @@
                       "request_id": "2859da57-c83f-405c-8166-240a312442a3",
                       "errors": [
                         {
-                          "code": "missing_field",
+                          "code": "field_not_found",
                           "message": "contacts field must be supplied"
                         }
                       ]
@@ -12854,7 +13248,7 @@
                       "request_id": "2859da57-c83f-405c-8166-240a312442a3",
                       "errors": [
                         {
-                          "code": "missing_field",
+                          "code": "field_not_found",
                           "message": "contacts must be identified by id"
                         }
                       ]
@@ -12866,7 +13260,170 @@
                       "request_id": "2859da57-c83f-405c-8166-240a312442a3",
                       "errors": [
                         {
-                          "code": "invalid_parameter",
+                          "code": "parameter_invalid",
+                          "message": "maximum number of contacts per request is 100"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/bulk/delete": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Bulk delete contacts",
+        "description": "You can delete contacts in bulk by submitting an array of contact \u0060id\u0060s.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /contacts/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Permanent deletion\u0022 %}\n  A contact that doesn\u0027t exist, or can\u0027t be deleted, fails that item and the job\u0027s \u0060state\u0060 ends as \u0060completed_with_errors\u0060 (visible via \u0060GET /contacts/bulk/{id}\u0060) without failing the rest of the batch.\n{% /admonition %}\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 100 contacts per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
+        "operationId": "BulkDeleteContacts",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkDeleteContactsRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Successful",
+                  "value": {
+                    "contacts": [
+                      {
+                        "id": "abc123"
+                      },
+                      {
+                        "id": "def456"
+                      }
+                    ]
+                  }
+                },
+                "append_to_existing_job": {
+                  "summary": "Append to existing job",
+                  "value": {
+                    "contacts": [
+                      {
+                        "id": "abc123"
+                      }
+                    ],
+                    "job": {
+                      "id": "job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_3",
+                      "type": "contacts.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_3",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_3"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_contacts": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "contacts field must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "missing_id": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "contacts must be identified by id"
+                        }
+                      ]
+                    }
+                  },
+                  "too_many_contacts": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
                           "message": "maximum number of contacts per request is 100"
                         }
                       ]
@@ -36144,6 +36701,48 @@
           "Brands"
         ]
       },
+      "BulkCreateContactsRequest": {
+        "title": "Bulk Create Contacts Request",
+        "required": [
+          "contacts"
+        ],
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkCreateContactsRequestContactsItem"
+            },
+            "description": "An array of contact objects to create. Maximum 100 contacts per request."
+          },
+          "job": {
+            "$ref": "#/components/schemas/BulkCreateContactsRequestJob"
+          }
+        },
+        "description": "Request body for bulk creating contacts."
+      },
+      "BulkDeleteContactsRequest": {
+        "title": "Bulk Delete Contacts Request",
+        "required": [
+          "contacts"
+        ],
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkDeleteContactsRequestContactsItem"
+            },
+            "description": "An array of contacts to delete, each identified by \u0060id\u0060. Maximum 100 contacts per request."
+          },
+          "job": {
+            "$ref": "#/components/schemas/BulkDeleteContactsRequestJob"
+          }
+        },
+        "description": "Request body for permanently bulk deleting contacts."
+      },
       "BulkUpdateContactsRequest": {
         "title": "Bulk Update Contacts Request",
         "required": [
@@ -43066,6 +43665,12 @@
               "$ref": "#/components/schemas/EcommerceCatalogVariantSelectedOptionsItem"
             },
             "description": "The specific option values that define this variant (e.g. Size=Small, Color=Blue). Fin uses these to match shopper requests like \u0022do you have this in medium?\u0022 to the correct variant."
+          },
+          "sku": {
+            "type": "string",
+            "description": "Stock-keeping unit for this specific variant. Fin uses this to resolve shopper requests like \u0022do you have this in size M?\u0022 to the exact variant, and can quote it back when a shopper asks for it directly.",
+            "nullable": true,
+            "example": "TSHIRT-BLU-L"
           }
         },
         "description": "A product variant in an ecommerce catalog upload."
@@ -45037,32 +45642,22 @@
         "type": "object",
         "properties": {
           "conversations": {
-            "type": "integer",
-            "description": "The number of distinct non-ticket conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under \u0060tickets\u0060.",
-            "example": 12
+            "$ref": "#/components/schemas/MergePreviewReassignmentsConversations"
           },
           "tickets": {
-            "type": "integer",
-            "description": "The number of tickets (conversations of any ticket type) that would be reassigned to the surviving contact. Counted separately from \u0060conversations\u0060 so a single conversation is never counted twice.",
-            "example": 2
+            "$ref": "#/components/schemas/MergePreviewReassignmentsTickets"
           },
           "phone_calls": {
-            "type": "integer",
-            "description": "The number of phone calls that would be reassigned to the surviving contact. Present only for phone-lead merges.",
-            "example": 1
+            "$ref": "#/components/schemas/MergePreviewReassignmentsPhoneCalls"
           },
           "tags": {
-            "type": "integer",
-            "description": "The number of tags that would be reassigned.",
-            "example": 3
+            "$ref": "#/components/schemas/MergePreviewReassignmentsTags"
           },
           "notes": {
-            "type": "integer",
-            "description": "The number of notes that would be reassigned.",
-            "example": 2
+            "$ref": "#/components/schemas/MergePreviewReassignmentsNotes"
           }
         },
-        "description": "The number of records that would be reassigned to the surviving contact, by type. Only types with reassignments are included."
+        "description": "Two counts per object type \u2014 \u0060from\u0060, how many are on the lead and would move to the surviving contact, and \u0060into\u0060, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included."
       },
       "MergeConversationsRequest": {
         "title": "Merge Conversations Request",
@@ -45918,6 +46513,25 @@
           }
         },
         "description": "Search using Intercoms Search APIs."
+      },
+      "CompanySearchRequest": {
+        "title": "Company search request",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/CompanySearchRequestQuery"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/StartingAfterPaging"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/CompanySearchRequestSort"
+          }
+        },
+        "description": "Search for companies using Intercom\u0027s Search API."
       },
       "Segment": {
         "title": "Segment",
@@ -48896,6 +49510,33 @@
           }
         }
       },
+      "CompanySearchRequestQuery": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SingleFilterSearchRequest"
+          },
+          {
+            "$ref": "#/components/schemas/MultipleFilterSearchRequest"
+          }
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Union discriminator"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "SingleFilterSearchRequest": "#/components/schemas/SingleFilterSearchRequest",
+            "MultipleFilterSearchRequest": "#/components/schemas/MultipleFilterSearchRequest"
+          }
+        }
+      },
       "SingleFilterSearchRequestValue": {
         "type": "object",
         "oneOf": [
@@ -49376,15 +50017,12 @@
           "_default_description_": "having a problem"
         }
       },
-      "BulkUpdateContactsRequestContactsItem": {
-        "required": [
-          "id"
-        ],
+      "BulkCreateContactsRequestContactsItem": {
         "type": "object",
         "properties": {
-          "id": {
+          "external_id": {
             "type": "string",
-            "description": "The unique identifier for the contact.",
+            "description": "A unique identifier for the contact which you have defined.",
             "example": "abc123"
           },
           "email": {
@@ -49397,35 +50035,142 @@
             "description": "The contact\u0027s name.",
             "example": "Joe Bloggs"
           },
+          "role": {
+            "type": "string",
+            "description": "The contact\u0027s role. One of \u0060user\u0060 or \u0060lead\u0060. Leads are exempt from the uniqueness check described above.",
+            "example": "user"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contact\u0027s phone number."
+          },
+          "avatar": {
+            "type": "string",
+            "description": "An image URL containing the avatar of the contact.",
+            "example": "https://www.example.com/avatar_image.jpg"
+          },
           "language_override": {
             "type": "string",
             "description": "A preferred language setting for the contact, used by the Intercom Messenger.",
             "example": "fr"
           },
-          "user_id": {
-            "type": "string",
-            "description": "A unique identifier for the contact that you provide. Maps to the contact\u0027s external user ID.",
-            "example": 25
+          "custom_attributes": {
+            "$ref": "#/components/schemas/BulkCreateContactsRequestContactsItemCustomAttributesProperty"
           },
-          "phone": {
-            "type": "string",
-            "description": "The contact\u0027s phone number.",
-            "example": 353871234567
+          "signed_up_at": {
+            "type": "integer",
+            "description": "The time the contact signed up, in Unix timestamp format."
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "The time the contact was last seen, in Unix timestamp format."
           },
           "owner_id": {
-            "type": "integer",
-            "description": "The ID of the teammate who owns the contact.",
-            "example": 123
+            "type": "string",
+            "description": "The ID of an admin that has been assigned account ownership of the contact.",
+            "example": 321
           },
           "unsubscribed_from_emails": {
             "type": "boolean",
             "description": "Whether the contact is unsubscribed from emails.",
             "example": true
           },
+          "companies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkCreateContactsRequestContactsItemCompaniesItem"
+            },
+            "description": "A list of companies to associate with the contact. Each company is identified by the \u0060company_id\u0060 you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it."
+          },
+          "tags": {
+            "$ref": "#/components/schemas/BulkCreateContactsRequestContactsItemTags"
+          }
+        }
+      },
+      "BulkCreateContactsRequestJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing bulk job to append to.",
+            "example": "job_v2_1"
+          }
+        },
+        "description": "Optional. Include to append tasks to an existing job."
+      },
+      "BulkDeleteContactsRequestContactsItem": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact.",
+            "example": "abc123"
+          }
+        }
+      },
+      "BulkDeleteContactsRequestJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing bulk job to append to.",
+            "example": "job_v2_1"
+          }
+        },
+        "description": "Optional. Include to append tasks to an existing job."
+      },
+      "BulkUpdateContactsRequestContactsItem": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact.",
+            "example": "abc123"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "A unique identifier for the contact which you have defined.",
+            "example": "abc123"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email address.",
+            "example": "joe@example.com"
+          },
+          "name": {
+            "type": "string",
+            "description": "The contact\u0027s name.",
+            "example": "Joe Bloggs"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The contact\u0027s phone number."
+          },
           "avatar": {
             "type": "string",
-            "description": "An image URL for the contact\u0027s avatar. You can also pass an object with an \u0060image_url\u0060 field.",
-            "example": "https://www.example.com/avatar.png"
+            "description": "An image URL containing the avatar of the contact.",
+            "example": "https://www.example.com/avatar_image.jpg"
+          },
+          "owner_id": {
+            "type": "string",
+            "description": "The ID of an admin that has been assigned account ownership of the contact.",
+            "example": 321
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from emails.",
+            "example": true
+          },
+          "language_override": {
+            "type": "string",
+            "description": "A preferred language setting for the contact, used by the Intercom Messenger.",
+            "example": "fr"
           },
           "custom_attributes": {
             "$ref": "#/components/schemas/BulkUpdateContactsRequestContactsItemCustomAttributesProperty"
@@ -49435,10 +50180,7 @@
             "items": {
               "$ref": "#/components/schemas/BulkUpdateContactsRequestContactsItemCompaniesItem"
             },
-            "description": "A list of companies to associate with the contact. Each company is identified by the \u0060company_id\u0060 you have defined. Companies that do not exist are created."
-          },
-          "company": {
-            "$ref": "#/components/schemas/BulkUpdateContactsRequestContactsItemCompany"
+            "description": "A list of companies to associate with the contact. Each company is identified by the \u0060company_id\u0060 you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it."
           },
           "tags": {
             "$ref": "#/components/schemas/BulkUpdateContactsRequestContactsItemTags"
@@ -50589,6 +51331,106 @@
         },
         "description": "Pagination information"
       },
+      "MergePreviewReassignmentsConversations": {
+        "required": [
+          "from",
+          "into"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "The number of non-ticket conversations on the lead that would be reassigned to the surviving contact.",
+            "example": 12
+          },
+          "into": {
+            "type": "integer",
+            "description": "The number of non-ticket conversations the surviving contact already has.",
+            "example": 5
+          }
+        },
+        "description": "Distinct non-ticket conversations, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under \u0060tickets\u0060."
+      },
+      "MergePreviewReassignmentsTickets": {
+        "required": [
+          "from",
+          "into"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "The number of tickets on the lead that would be reassigned to the surviving contact.",
+            "example": 2
+          },
+          "into": {
+            "type": "integer",
+            "description": "The number of tickets the surviving contact already has.",
+            "example": 1
+          }
+        },
+        "description": "Tickets, meaning conversations of any ticket type. Counted separately from \u0060conversations\u0060 so a single conversation is never counted twice."
+      },
+      "MergePreviewReassignmentsPhoneCalls": {
+        "required": [
+          "from",
+          "into"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "The number of phone calls on the lead that would be reassigned to the surviving contact.",
+            "example": 1
+          },
+          "into": {
+            "type": "integer",
+            "description": "The number of phone calls the surviving contact already has.",
+            "example": 0
+          }
+        },
+        "description": "Phone calls. Present only for phone-lead merges."
+      },
+      "MergePreviewReassignmentsTags": {
+        "required": [
+          "from",
+          "into"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "The number of tags on the lead that would be added to the surviving contact.",
+            "example": 3
+          },
+          "into": {
+            "type": "integer",
+            "description": "The number of tags the surviving contact already has.",
+            "example": 4
+          }
+        },
+        "description": "Tags. \u0060from\u0060 counts only tags the surviving contact does not already have."
+      },
+      "MergePreviewReassignmentsNotes": {
+        "required": [
+          "from",
+          "into"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "The number of notes on the lead that would be reassigned to the surviving contact.",
+            "example": 2
+          },
+          "into": {
+            "type": "integer",
+            "description": "The number of notes the surviving contact already has.",
+            "example": 6
+          }
+        },
+        "description": "Notes attached to the contact."
+      },
       "WhatsappMessageStatusListPages": {
         "required": [
           "type",
@@ -50766,6 +51608,20 @@
         },
         "description": "Represents the company that the note was created about.",
         "nullable": true
+      },
+      "CompanySearchRequestSort": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "The field to sort the results on.",
+            "example": "created_at"
+          },
+          "order": {
+            "$ref": "#/components/schemas/CompanySearchRequestSortOrder"
+          }
+        },
+        "description": "An optional object to sort the results by."
       },
       "SegmentListPages": {
         "type": "object",
@@ -51203,11 +52059,14 @@
           }
         }
       },
-      "BulkUpdateContactsRequestContactsItemCustomAttributes": {
+      "BulkCreateContactsRequestContactsItemCustomAttributes": {
         "type": "object",
-        "description": "Custom attributes to update on the contact."
+        "description": "Custom attributes to set on the contact."
       },
-      "BulkUpdateContactsRequestContactsItemCompaniesItem": {
+      "BulkCreateContactsRequestContactsItemCompaniesItem": {
+        "required": [
+          "company_id"
+        ],
         "type": "object",
         "properties": {
           "company_id": {
@@ -51222,7 +52081,27 @@
           }
         }
       },
-      "BulkUpdateContactsRequestContactsItemCompany": {
+      "BulkCreateContactsRequestContactsItemTags": {
+        "type": "object",
+        "properties": {
+          "add": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkCreateContactsRequestContactsItemTagsAddItem"
+            },
+            "description": "Tags to add to the contact."
+          }
+        },
+        "description": "\u0022Tags to add to the contact. Each tag is identified by its \u0060id\u0060, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.\n\u0022"
+      },
+      "BulkUpdateContactsRequestContactsItemCustomAttributes": {
+        "type": "object",
+        "description": "Custom attributes to update on the contact."
+      },
+      "BulkUpdateContactsRequestContactsItemCompaniesItem": {
+        "required": [
+          "company_id"
+        ],
         "type": "object",
         "properties": {
           "company_id": {
@@ -51234,9 +52113,13 @@
             "type": "string",
             "description": "The name of the company.",
             "example": "Blue Sun"
+          },
+          "remove": {
+            "type": "boolean",
+            "description": "Set to true to detach this company from the contact instead of attaching it.",
+            "example": true
           }
-        },
-        "description": "A single company to associate with the contact, identified by the \u0060company_id\u0060 you have defined. Created if it does not exist."
+        }
       },
       "BulkUpdateContactsRequestContactsItemTags": {
         "type": "object",
@@ -51469,6 +52352,19 @@
       "WorkflowExportWorkflowEmbeddedRulesItem": {
         "type": "object"
       },
+      "BulkCreateContactsRequestContactsItemTagsAddItem": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing tag to add to the contact.",
+            "example": 123
+          }
+        }
+      },
       "BulkUpdateContactsRequestContactsItemTagsAddItem": {
         "required": [
           "id"
@@ -51491,7 +52387,7 @@
           "id": {
             "type": "string",
             "description": "The ID of an existing tag to remove from the contact.",
-            "example": 456
+            "example": 789
           }
         }
       },
@@ -54348,6 +55244,10 @@
       },
       "AiCallResponseIntentItemProperty": {
         "type": "object"
+      },
+      "BulkCreateContactsRequestContactsItemCustomAttributesProperty": {
+        "type": "object",
+        "description": "Custom attributes to set on the contact."
       },
       "BulkUpdateContactsRequestContactsItemCustomAttributesProperty": {
         "type": "object",
@@ -61361,6 +62261,30 @@
             {
               "value": "broadcast_outbound",
               "name": "BroadcastOutbound"
+            }
+          ]
+        }
+      },
+      "CompanySearchRequestSortOrder": {
+        "enum": [
+          "ascending",
+          "descending"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The order to sort the results in. Defaults to \u0060descending\u0060 when omitted. Values other than \u0060ascending\u0060 or \u0060descending\u0060 return a \u0060400\u0060 error with code \u0060invalid_sort_order\u0060.",
+        "example": "descending",
+        "x-ms-enum": {
+          "name": "CompanySearchRequestSortOrder",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ascending",
+              "name": "Ascending"
+            },
+            {
+              "value": "descending",
+              "name": "Descending"
             }
           ]
         }

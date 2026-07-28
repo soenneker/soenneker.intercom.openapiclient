@@ -6252,6 +6252,144 @@ paths:
                 summary: Company not found
                 value:
                   body: Hello
+  "/companies/search":
+    post:
+      summary: Search companies
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - Companies
+      operationId: searchCompanies
+      description: |
+        You can search for companies by the value of their attributes in order to fetch exactly the companies you want.
+
+        To search for companies, send a `POST` request to `https://api.intercom.io/companies/search`, with a query object in the body defining your filters.
+
+        Note that the API does not include companies who have no associated users in search results.
+
+        {% admonition type="warning" name="Optimizing search queries" %}
+          Search queries can be complex, so optimizing them can help the performance of your search.
+          Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize
+          pagination to limit the number of results returned. The default is `15` results per page.
+          See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.
+        {% /admonition %}
+
+        ### Nesting & Limitations
+
+        You can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).
+        There are some limitations to the amount of multiple's there can be:
+        * There's a limit of max 2 nested filters
+        * There's a limit of max 15 filters for each AND or OR group
+
+        ### Accepted Fields
+
+        Most keys listed as part of the Companies Model are searchable. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `"foobar"`).
+
+        | Field                              | Type                           |
+        | ---------------------------------- | ------------------------------ |
+        | company_id                         | String                         |
+        | name                               | String                         |
+        | created_at                         | Date (UNIX Timestamp)          |
+        | updated_at                         | Date (UNIX Timestamp)          |
+        | remote_created_at                  | Date (UNIX Timestamp)          |
+        | last_request_at                    | Date (UNIX Timestamp)          |
+        | monthly_spend                      | Integer                        |
+        | session_count                      | Integer                        |
+        | user_count                         | Integer                        |
+        | tag_id                             | String                         |
+        | custom_attributes.{attribute_name} | String                         |
+
+        The `plan.id` and `plan.name` fields are not searchable and return a `400` error with code `invalid_field`.
+
+        ### Accepted Operators
+
+        The table below shows the operators you can use to define how you want to search for the value. The operator should be put in as a string (`"="`). The operator has to be compatible with the field's type (eg. you cannot search with `>` for a given string value as it's only compatible for integer's and dates). Searching by `tag_id` supports only the `=` and `!=` operators. The `IN` and `NIN` operators are not supported for Date fields.
+
+        | Operator | Valid Types                      | Description                                                      |
+        | :------- | :------------------------------- | :--------------------------------------------------------------- |
+        | =        | All                              | Equals                                                           |
+        | !=       | All                              | Doesn't Equal                                                    |
+        | IN       | All except Date and tag_id       | In<br>Shortcut for `OR` queries<br>Values must be in Array       |
+        | NIN      | All except Date and tag_id       | Not In<br>Shortcut for `OR !` queries<br>Values must be in Array |
+        | >        | Integer<br>Date (UNIX Timestamp) | Greater than                                                     |
+        | <       | Integer<br>Date (UNIX Timestamp) | Lower than                                                       |
+        | ~        | String                           | Contains                                                         |
+        | !~       | String                           | Doesn't Contain                                                  |
+        | ^        | String                           | Starts With                                                      |
+        | $        | String                           | Ends With                                                        |
+
+        ### Sorting
+
+        Pass an optional `sort` object with a `field` and an `order` (`ascending` or `descending`; defaults to `descending`) to order the results. An invalid `order` returns a `400` error with code `invalid_sort_order`. `tag_id` can be used as a filter but not as a sort field.
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    type: list
+                    data: []
+                    total_count: 0
+                    pages:
+                      type: pages
+                      page: 1
+                      per_page: 5
+                      total_pages: 0
+              schema:
+                "$ref": "#/components/schemas/company_list"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: f0dc95f1-9e46-4e8d-8150-89365c2c5195
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Unsupported field:
+                  value:
+                    type: error.list
+                    request_id: 8d6c1f0a-3b2e-4a17-9c5d-1f0e2a3b4c5d
+                    errors:
+                    - code: invalid_field
+                      message: "segment_id is not a valid search field"
+              schema:
+                "$ref": "#/components/schemas/error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/company_search_request"
+            examples:
+              successful:
+                summary: successful
+                value:
+                  query:
+                    operator: AND
+                    value:
+                    - field: name
+                      operator: "="
+                      value: my-company
+                  sort:
+                    field: name
+                    order: ascending
+                  pagination:
+                    per_page: 5
   "/companies/list":
     post:
       summary: List all companies
@@ -8251,7 +8389,7 @@ paths:
 
         Send the same `from` (a `lead`) and `into` (a `user`) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).
 
-        - When `allowed` is `true`, the response contains a `summary`: every attribute change (with the resulting value on the surviving contact) and the number of conversations, tickets, phone calls, notes, and tags that would be reassigned. `conversations` counts non-ticket conversations only; tickets are reported separately under `tickets`, and `phone_calls` is present only for phone-lead merges.
+        - When `allowed` is `true`, the response contains a `summary`: every attribute change (with the resulting value on the surviving contact) and, for each object type, two counts — `from`, how many are on the lead and would move to the user, and `into`, how many the user already has. Counts are reported for conversations, tickets, phone calls, notes, and tags. `conversations` counts non-ticket conversations only; tickets are reported separately under `tickets`, and `phone_calls` is present only for phone-lead merges.
         - When `allowed` is `false`, the response contains `reasons`. Each reason has a stable `code` you can branch on and a human-readable `message` you can display.
 
         {% admonition type="warning" name="Previewing non-duplicate contacts" %}
@@ -8300,11 +8438,21 @@ paths:
                           new_into_value: "+1999"
                         total_count: 3
                       reassignments:
-                        conversations: 12
-                        tickets: 2
-                        phone_calls: 1
-                        tags: 3
-                        notes: 2
+                        conversations:
+                          from: 12
+                          into: 5
+                        tickets:
+                          from: 2
+                          into: 1
+                        phone_calls:
+                          from: 1
+                          into: 0
+                        tags:
+                          from: 3
+                          into: 4
+                        notes:
+                          from: 2
+                          into: 6
                 blocked:
                   summary: Merge not allowed
                   value:
@@ -9194,6 +9342,151 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
   "/contacts/bulk":
+    post:
+      summary: Bulk create contacts
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - Contacts
+      operationId: BulkCreateContacts
+      description: |
+        You can bulk create contacts by submitting an array of contact objects. This is a **strict create** and never updates an existing contact.
+
+        The endpoint creates an async job that processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.
+
+        Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.
+
+        {% admonition type="info" name="Handling existing contacts" %}
+          If a contact already exists with the given `external_id` or `email` (including an archived contact), that item is rejected and the job's `state` ends as `completed_with_errors`. New contacts in the same request are still created. The job `state` from `GET /contacts/bulk/{id}` is the signal that one or more items were rejected.
+
+          Created contacts aren't returned with IDs in the response. Look them up afterwards with [Get a contact by External ID](/docs/references/preview/rest-api/api.intercom.io/contacts/showcontactbyexternalid) or [Search contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/searchcontacts).
+        {% /admonition %}
+
+        {% admonition type="info" name="Limits" %}
+          - Maximum of 100 contacts per request.
+          - You can append tasks to an existing job by including `job.id` in the request body.
+          - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.
+        {% /admonition %}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/bulk_create_contacts_request"
+            examples:
+              successful:
+                summary: Successful
+                value:
+                  contacts:
+                  - external_id: abc123
+                    email: joe@bloggs.com
+                    name: Joe Bloggs
+                    role: user
+                    phone: "+353871234567"
+                    avatar: https://www.example.com/avatar_image.jpg
+                    signed_up_at: 1571672154
+                    last_seen_at: 1571672154
+                    owner_id: "321"
+                    unsubscribed_from_emails: false
+                    language_override: fr
+                    custom_attributes:
+                      plan: pro
+                    companies:
+                    - company_id: '6'
+                      name: Blue Sun
+                    tags:
+                      add:
+                      - id: '123'
+              with_companies:
+                summary: Attach companies
+                value:
+                  contacts:
+                  - external_id: abc123
+                    email: joe@bloggs.com
+                    companies:
+                    - company_id: '6'
+                      name: Blue Sun
+                    - company_id: '7'
+                      name: Weyland-Yutani
+              with_tags:
+                summary: Add tags
+                value:
+                  contacts:
+                  - name: Contact Name
+                    external_id: abc123
+                    tags:
+                      add:
+                      - id: '123'
+              append_to_existing_job:
+                summary: Append to existing job
+                value:
+                  contacts:
+                  - external_id: abc123
+                    email: joe@bloggs.com
+                    language_override: de
+                  job:
+                    id: job_v2_1
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    id: job_v2_2
+                    type: contacts.bulk.job
+                    state: running
+                    created_at: 1713360000
+                    updated_at: 1713360060
+                    completed_at:
+                    tasks:
+                    - id: task_v2_2
+                      item_count: 2
+                      state: pending
+                      created_at: 1713360000
+                      started_at:
+                      completed_at:
+                    url: https://api.intercom.io/contacts/bulk/job_v2_2
+              schema:
+                "$ref": "#/components/schemas/contacts_bulk_job"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                missing_contacts:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: field_not_found
+                      message: contacts field must be supplied
+                too_many_contacts:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: parameter_invalid
+                      message: maximum number of contacts per request is 100
+              schema:
+                "$ref": "#/components/schemas/error"
     put:
       summary: Bulk update contacts
       parameters:
@@ -9223,16 +9516,38 @@ paths:
               "$ref": "#/components/schemas/bulk_update_contacts_request"
             examples:
               successful:
-                summary: Successful
+                summary: successful
                 value:
                   contacts:
                   - id: abc123
+                    external_id: ext123
+                    email: joe@bloggs.com
+                    name: Joe Bloggs
+                    phone: "+353871234567"
+                    avatar: https://www.example.com/avatar_image.jpg
+                    owner_id: "321"
+                    unsubscribed_from_emails: false
                     language_override: fr
-                  - id: def456
-                    name: Updated Name
-                  - id: ghi789
-                    language_override: es
-                    name: "María García"
+                    custom_attributes:
+                      plan: pro
+                    companies:
+                    - company_id: '6'
+                      name: Blue Sun
+                    tags:
+                      add:
+                      - id: '123'
+                      remove:
+                      - id: '987'
+              with_companies:
+                summary: Attach and detach companies
+                value:
+                  contacts:
+                  - id: abc123
+                    companies:
+                    - company_id: '6'
+                      name: Blue Sun
+                    - company_id: '7'
+                      remove: true
               with_tags:
                 summary: Add and remove tags
                 value:
@@ -9300,21 +9615,130 @@ paths:
                     type: error.list
                     request_id: 2859da57-c83f-405c-8166-240a312442a3
                     errors:
-                    - code: missing_field
+                    - code: field_not_found
                       message: contacts field must be supplied
                 missing_id:
                   value:
                     type: error.list
                     request_id: 2859da57-c83f-405c-8166-240a312442a3
                     errors:
-                    - code: missing_field
+                    - code: field_not_found
                       message: contacts must be identified by id
                 too_many_contacts:
                   value:
                     type: error.list
                     request_id: 2859da57-c83f-405c-8166-240a312442a3
                     errors:
-                    - code: invalid_parameter
+                    - code: parameter_invalid
+                      message: maximum number of contacts per request is 100
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/contacts/bulk/delete":
+    post:
+      summary: Bulk delete contacts
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - Contacts
+      operationId: BulkDeleteContacts
+      description: |
+        You can delete contacts in bulk by submitting an array of contact `id`s.
+
+        The endpoint creates an async job that processes the deletes in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.
+
+        {% admonition type="warning" name="Permanent deletion" %}
+          A contact that doesn't exist, or can't be deleted, fails that item and the job's `state` ends as `completed_with_errors` (visible via `GET /contacts/bulk/{id}`) without failing the rest of the batch.
+        {% /admonition %}
+
+        {% admonition type="info" name="Limits" %}
+          - Maximum of 100 contacts per request.
+          - You can append tasks to an existing job by including `job.id` in the request body.
+        {% /admonition %}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/bulk_delete_contacts_request"
+            examples:
+              successful:
+                summary: Successful
+                value:
+                  contacts:
+                  - id: abc123
+                  - id: def456
+              append_to_existing_job:
+                  summary: Append to existing job
+                  value:
+                    contacts:
+                    - id: abc123
+                    job:
+                      id: job_v2_1
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    id: job_v2_3
+                    type: contacts.bulk.job
+                    state: running
+                    created_at: 1713360000
+                    updated_at: 1713360060
+                    completed_at:
+                    tasks:
+                    - id: task_v2_3
+                      item_count: 2
+                      state: pending
+                      created_at: 1713360000
+                      started_at:
+                      completed_at:
+                    url: https://api.intercom.io/contacts/bulk/job_v2_3
+              schema:
+                "$ref": "#/components/schemas/contacts_bulk_job"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                missing_contacts:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: field_not_found
+                      message: contacts field must be supplied
+                missing_id:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: field_not_found
+                      message: contacts must be identified by id
+                too_many_contacts:
+                  value:
+                    type: error.list
+                    request_id: 2859da57-c83f-405c-8166-240a312442a3
+                    errors:
+                    - code: parameter_invalid
                       message: maximum number of contacts per request is 100
               schema:
                 "$ref": "#/components/schemas/error"
@@ -27193,6 +27617,143 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/brand"
+    bulk_create_contacts_request:
+      title: Bulk Create Contacts Request
+      type: object
+      description: Request body for bulk creating contacts.
+      required:
+      - contacts
+      properties:
+        contacts:
+          type: array
+          description: An array of contact objects to create. Maximum 100 contacts
+            per request.
+          maxItems: 100
+          items:
+            type: object
+            properties:
+              external_id:
+                type: string
+                description: A unique identifier for the contact which you have
+                  defined.
+                example: abc123
+              email:
+                type: string
+                description: The contact's email address.
+                example: joe@example.com
+              name:
+                type: string
+                description: The contact's name.
+                example: Joe Bloggs
+              role:
+                type: string
+                description: The contact's role. One of `user` or `lead`. Leads
+                  are exempt from the uniqueness check described above.
+                example: user
+              phone:
+                type: string
+                description: The contact's phone number.
+              avatar:
+                type: string
+                description: An image URL containing the avatar of the contact.
+                example: https://www.example.com/avatar_image.jpg
+              language_override:
+                type: string
+                description: A preferred language setting for the contact, used by
+                  the Intercom Messenger.
+                example: fr
+              custom_attributes:
+                type: object
+                description: Custom attributes to set on the contact.
+              signed_up_at:
+                type: integer
+                description: The time the contact signed up, in Unix timestamp format.
+              last_seen_at:
+                type: integer
+                description: The time the contact was last seen, in Unix timestamp
+                  format.
+              owner_id:
+                type: string
+                description: The ID of an admin that has been assigned account ownership
+                  of the contact.
+                example: "321"
+              unsubscribed_from_emails:
+                type: boolean
+                description: Whether the contact is unsubscribed from emails.
+                example: true
+              companies:
+                type: array
+                description: A list of companies to associate with the contact.
+                  Each company is identified by the `company_id` you have defined.
+                  A company that does not exist is created, and one that already
+                  exists has the supplied attributes applied to it.
+                items:
+                  type: object
+                  required:
+                  - company_id
+                  properties:
+                    company_id:
+                      type: string
+                      description: The company ID you have defined for the company.
+                      example: '6'
+                    name:
+                      type: string
+                      description: The name of the company.
+                      example: Blue Sun
+              tags:
+                type: object
+                description: |
+                  Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
+                properties:
+                  add:
+                    type: array
+                    description: Tags to add to the contact.
+                    items:
+                      type: object
+                      required:
+                      - id
+                      properties:
+                        id:
+                          type: string
+                          description: The ID of an existing tag to add to the contact.
+                          example: '123'
+        job:
+          type: object
+          description: Optional. Include to append tasks to an existing job.
+          properties:
+            id:
+              type: string
+              description: The ID of an existing bulk job to append to.
+              example: job_v2_1
+    bulk_delete_contacts_request:
+      title: Bulk Delete Contacts Request
+      type: object
+      description: Request body for permanently bulk deleting contacts.
+      required:
+      - contacts
+      properties:
+        contacts:
+          type: array
+          description: An array of contacts to delete, each identified by `id`.
+            Maximum 100 contacts per request.
+          maxItems: 100
+          items:
+            type: object
+            required:
+            - id
+            properties:
+              id:
+                type: string
+                description: The unique identifier for the contact.
+                example: abc123
+        job:
+          type: object
+          description: Optional. Include to append tasks to an existing job.
+          properties:
+            id:
+              type: string
+              description: The ID of an existing bulk job to append to.
+              example: job_v2_1
     bulk_update_contacts_request:
       title: Bulk Update Contacts Request
       type: object
@@ -27214,6 +27775,11 @@ components:
                 type: string
                 description: The unique identifier for the contact.
                 example: abc123
+              external_id:
+                type: string
+                description: A unique identifier for the contact which you have
+                  defined.
+                example: abc123
               email:
                 type: string
                 description: The contact's email address.
@@ -27222,39 +27788,40 @@ components:
                 type: string
                 description: The contact's name.
                 example: Joe Bloggs
+              phone:
+                type: string
+                description: The contact's phone number.
+              avatar:
+                type: string
+                description: An image URL containing the avatar of the contact.
+                example: https://www.example.com/avatar_image.jpg
+              owner_id:
+                type: string
+                description: The ID of an admin that has been assigned account ownership
+                  of the contact.
+                example: "321"
+              unsubscribed_from_emails:
+                type: boolean
+                description: Whether the contact is unsubscribed from emails.
+                example: true
               language_override:
                 type: string
                 description: A preferred language setting for the contact, used by
                   the Intercom Messenger.
                 example: fr
-              user_id:
-                type: string
-                description: A unique identifier for the contact that you provide. Maps to the contact's external user ID.
-                example: '25'
-              phone:
-                type: string
-                description: The contact's phone number.
-                example: "+353871234567"
-              owner_id:
-                type: integer
-                description: The ID of the teammate who owns the contact.
-                example: 123
-              unsubscribed_from_emails:
-                type: boolean
-                description: Whether the contact is unsubscribed from emails.
-                example: true
-              avatar:
-                type: string
-                description: An image URL for the contact's avatar. You can also pass an object with an `image_url` field.
-                example: https://www.example.com/avatar.png
               custom_attributes:
                 type: object
                 description: Custom attributes to update on the contact.
               companies:
                 type: array
-                description: A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. Companies that do not exist are created.
+                description: A list of companies to associate with the contact.
+                  Each company is identified by the `company_id` you have defined.
+                  A company that does not exist is created, and one that already
+                  exists has the supplied attributes applied to it.
                 items:
                   type: object
+                  required:
+                  - company_id
                   properties:
                     company_id:
                       type: string
@@ -27264,18 +27831,11 @@ components:
                       type: string
                       description: The name of the company.
                       example: Blue Sun
-              company:
-                type: object
-                description: A single company to associate with the contact, identified by the `company_id` you have defined. Created if it does not exist.
-                properties:
-                  company_id:
-                    type: string
-                    description: The company ID you have defined for the company.
-                    example: '6'
-                  name:
-                    type: string
-                    description: The name of the company.
-                    example: Blue Sun
+                    remove:
+                      type: boolean
+                      description: Set to true to detach this company from the contact
+                        instead of attaching it.
+                      example: true
               tags:
                 type: object
                 description: |
@@ -27304,7 +27864,7 @@ components:
                         id:
                           type: string
                           description: The ID of an existing tag to remove from the contact.
-                          example: '456'
+                          example: '789'
         job:
           type: object
           description: Optional. Include to append tasks to an existing job.
@@ -33512,6 +34072,11 @@ components:
                 type: string
                 description: Selected option value.
                 example: 'Large'
+        sku:
+          type: string
+          description: Stock-keeping unit for this specific variant. Fin uses this to resolve shopper requests like "do you have this in size M?" to the exact variant, and can quote it back when a shopper asks for it directly.
+          example: 'TSHIRT-BLU-L'
+          nullable: true
     ecommerce_catalog_product:
       title: Ecommerce Catalog Product
       type: object
@@ -35519,28 +36084,83 @@ components:
     merge_preview_reassignments:
       title: Merge preview reassignments
       type: object
-      description: The number of records that would be reassigned to the surviving contact, by type. Only types with reassignments are included.
+      description: Two counts per object type — `from`, how many are on the lead and would move to the surviving contact, and `into`, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included.
       properties:
         conversations:
-          type: integer
-          description: The number of distinct non-ticket conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.
-          example: 12
+          type: object
+          description: Distinct non-ticket conversations, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.
+          properties:
+            from:
+              type: integer
+              description: The number of non-ticket conversations on the lead that would be reassigned to the surviving contact.
+              example: 12
+            into:
+              type: integer
+              description: The number of non-ticket conversations the surviving contact already has.
+              example: 5
+          required:
+          - from
+          - into
         tickets:
-          type: integer
-          description: The number of tickets (conversations of any ticket type) that would be reassigned to the surviving contact. Counted separately from `conversations` so a single conversation is never counted twice.
-          example: 2
+          type: object
+          description: Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so a single conversation is never counted twice.
+          properties:
+            from:
+              type: integer
+              description: The number of tickets on the lead that would be reassigned to the surviving contact.
+              example: 2
+            into:
+              type: integer
+              description: The number of tickets the surviving contact already has.
+              example: 1
+          required:
+          - from
+          - into
         phone_calls:
-          type: integer
-          description: The number of phone calls that would be reassigned to the surviving contact. Present only for phone-lead merges.
-          example: 1
+          type: object
+          description: Phone calls. Present only for phone-lead merges.
+          properties:
+            from:
+              type: integer
+              description: The number of phone calls on the lead that would be reassigned to the surviving contact.
+              example: 1
+            into:
+              type: integer
+              description: The number of phone calls the surviving contact already has.
+              example: 0
+          required:
+          - from
+          - into
         tags:
-          type: integer
-          description: The number of tags that would be reassigned.
-          example: 3
+          type: object
+          description: Tags. `from` counts only tags the surviving contact does not already have.
+          properties:
+            from:
+              type: integer
+              description: The number of tags on the lead that would be added to the surviving contact.
+              example: 3
+            into:
+              type: integer
+              description: The number of tags the surviving contact already has.
+              example: 4
+          required:
+          - from
+          - into
         notes:
-          type: integer
-          description: The number of notes that would be reassigned.
-          example: 2
+          type: object
+          description: Notes attached to the contact.
+          properties:
+            from:
+              type: integer
+              description: The number of notes on the lead that would be reassigned to the surviving contact.
+              example: 2
+            into:
+              type: integer
+              description: The number of notes the surviving contact already has.
+              example: 6
+          required:
+          - from
+          - into
     merge_conversations_request:
       title: Merge Conversations Request
       type: object
@@ -36467,6 +37087,39 @@ components:
             title: multiple filter search request
         pagination:
           "$ref": "#/components/schemas/starting_after_paging"
+      required:
+      - query
+    company_search_request:
+      description: Search for companies using Intercom's Search API.
+      type: object
+      title: Company search request
+      properties:
+        query:
+          oneOf:
+          - "$ref": "#/components/schemas/single_filter_search_request"
+            title: Single filter search request
+          - "$ref": "#/components/schemas/multiple_filter_search_request"
+            title: multiple filter search request
+        pagination:
+          "$ref": "#/components/schemas/starting_after_paging"
+        sort:
+          type: object
+          description: An optional object to sort the results by.
+          properties:
+            field:
+              type: string
+              description: The field to sort the results on.
+              example: created_at
+            order:
+              type: string
+              description: The order to sort the results in. Defaults to `descending`
+                when omitted. Values other than `ascending` or `descending` return a
+                `400` error with code `invalid_sort_order`.
+              enum:
+              - ascending
+              - descending
+              default: descending
+              example: descending
       required:
       - query
     segment:

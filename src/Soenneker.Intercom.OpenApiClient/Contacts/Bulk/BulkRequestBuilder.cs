@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Contacts.Bulk.Delete;
 using Soenneker.Intercom.OpenApiClient.Contacts.Bulk.Item;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Bulk
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BulkRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The deletePath property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Bulk.Delete.DeleteRequestBuilder DeletePath
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Bulk.Delete.DeleteRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.contacts.bulk.item collection</summary>
         /// <param name="position">The unique identifier for the bulk job.</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Bulk.Item.BulkItemRequestBuilder"/></returns>
@@ -47,6 +53,33 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Bulk
         {
         }
         /// <summary>
+        /// &quot;You can bulk create contacts by submitting an array of contact objects. This is a **strict create** and never updates an existing contact.The endpoint creates an async job that processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.{% admonition type=\&quot;info\&quot; name=\&quot;Handling existing contacts\&quot; %}  If a contact already exists with the given `external_id` or `email` (including an archived contact), that item is rejected and the job&apos;s `state` ends as `completed_with_errors`. New contacts in the same request are still created. The job `state` from `GET /contacts/bulk/{id}` is the signal that one or more items were rejected.  Created contacts aren&apos;t returned with IDs in the response. Look them up afterwards with [Get a contact by External ID](/docs/references/preview/rest-api/api.intercom.io/contacts/showcontactbyexternalid) or [Search contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/searchcontacts).{% /admonition %}{% admonition type=\&quot;info\&quot; name=\&quot;Limits\&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.{% /admonition %}&quot;
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob"/></returns>
+        /// <param name="body">Request body for bulk creating contacts.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// &quot;You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update. You can also add or remove tags on each contact by including a `tags` object.Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.{% admonition type=\&quot;info\&quot; name=\&quot;Limits\&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.{% /admonition %}&quot;
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob"/></returns>
@@ -72,6 +105,28 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Bulk
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// &quot;You can bulk create contacts by submitting an array of contact objects. This is a **strict create** and never updates an existing contact.The endpoint creates an async job that processes the items in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.{% admonition type=\&quot;info\&quot; name=\&quot;Handling existing contacts\&quot; %}  If a contact already exists with the given `external_id` or `email` (including an archived contact), that item is rejected and the job&apos;s `state` ends as `completed_with_errors`. New contacts in the same request are still created. The job `state` from `GET /contacts/bulk/{id}` is the signal that one or more items were rejected.  Created contacts aren&apos;t returned with IDs in the response. Look them up afterwards with [Get a contact by External ID](/docs/references/preview/rest-api/api.intercom.io/contacts/showcontactbyexternalid) or [Search contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/searchcontacts).{% /admonition %}{% admonition type=\&quot;info\&quot; name=\&quot;Limits\&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.{% /admonition %}&quot;
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">Request body for bulk creating contacts.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
+            return requestInfo;
         }
         /// <summary>
         /// &quot;You can bulk update contacts by submitting an array of contact objects with the fields to update. Each contact must include an `id` field identifying the contact to update. You can also add or remove tags on each contact by including a `tags` object.Only the fields listed in the request schema below can be set. Any other fields in a contact object are ignored.The endpoint creates an async job that processes the updates in the background. Use the returned job ID with `GET /contacts/bulk/{id}` to check the job status.{% admonition type=\&quot;info\&quot; name=\&quot;Limits\&quot; %}  - Maximum of 100 contacts per request.  - You can append tasks to an existing job by including `job.id` in the request body.  - Tag application is best-effort and processed asynchronously: unknown tag IDs are skipped, and per-tag results are not returned in the job status.{% /admonition %}&quot;

@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Companies.Item;
 using Soenneker.Intercom.OpenApiClient.Companies.List;
 using Soenneker.Intercom.OpenApiClient.Companies.Scroll;
+using Soenneker.Intercom.OpenApiClient.Companies.Search;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         public global::Soenneker.Intercom.OpenApiClient.Companies.Scroll.ScrollRequestBuilder Scroll
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Companies.Scroll.ScrollRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The search property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Companies.Search.SearchRequestBuilder Search
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Companies.Search.SearchRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.companies.item collection</summary>
         /// <param name="position">The unique identifier for the company which is given by Intercom</param>

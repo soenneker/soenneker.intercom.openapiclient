@@ -9,7 +9,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class BulkUpdateContactsRequestContactsItem : IAdditionalDataHolder, IParsable
+    public partial class BulkCreateContactsRequestContactsItem : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,18 +25,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A list of companies to associate with the contact. Each company is identified by the `company_id` you have defined. A company that does not exist is created, and one that already exists has the supplied attributes applied to it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem>? Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCompaniesItem>? Companies { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem> Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCompaniesItem> Companies { get; set; }
 #endif
-        /// <summary>Custom attributes to update on the contact.</summary>
+        /// <summary>Custom attributes to set on the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCustomAttributesProperty? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCustomAttributesProperty CustomAttributes { get; set; }
 #endif
         /// <summary>The contact&apos;s email address.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -54,14 +54,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalId { get; set; }
 #endif
-        /// <summary>The unique identifier for the contact.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
         /// <summary>A preferred language setting for the contact, used by the Intercom Messenger.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -70,6 +62,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string LanguageOverride { get; set; }
 #endif
+        /// <summary>The time the contact was last seen, in Unix timestamp format.</summary>
+        public int? LastSeenAt { get; set; }
         /// <summary>The contact&apos;s name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -94,32 +88,42 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Phone { get; set; }
 #endif
-        /// <summary>&quot;Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.&quot;</summary>
+        /// <summary>The contact&apos;s role. One of `user` or `lead`. Leads are exempt from the uniqueness check described above.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags? Tags { get; set; }
+        public string? Role { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags Tags { get; set; }
+        public string Role { get; set; }
+#endif
+        /// <summary>The time the contact signed up, in Unix timestamp format.</summary>
+        public int? SignedUpAt { get; set; }
+        /// <summary>&quot;Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.&quot;</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTags? Tags { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTags Tags { get; set; }
 #endif
         /// <summary>Whether the contact is unsubscribed from emails.</summary>
         public bool? UnsubscribedFromEmails { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItem"/> and sets the default values.
         /// </summary>
-        public BulkUpdateContactsRequestContactsItem()
+        public BulkCreateContactsRequestContactsItem()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItem"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItem CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItem();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -130,16 +134,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "avatar", n => { Avatar = n.GetStringValue(); } },
-                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty.CreateFromDiscriminatorValue); } },
+                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
+                { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
-                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags.CreateFromDiscriminatorValue); } },
+                { "role", n => { Role = n.GetStringValue(); } },
+                { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTags>(global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTags.CreateFromDiscriminatorValue); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
             };
         }
@@ -151,16 +157,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("avatar", Avatar);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem>("companies", Companies);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty>("custom_attributes", CustomAttributes);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCompaniesItem>("companies", Companies);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("external_id", ExternalId);
-            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("language_override", LanguageOverride);
+            writer.WriteIntValue("last_seen_at", LastSeenAt);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags>("tags", Tags);
+            writer.WriteStringValue("role", Role);
+            writer.WriteIntValue("signed_up_at", SignedUpAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTags>("tags", Tags);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteAdditionalData(AdditionalData);
         }

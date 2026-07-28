@@ -8,23 +8,53 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The number of records that would be reassigned to the surviving contact, by type. Only types with reassignments are included.
+    /// Two counts per object type — `from`, how many are on the lead and would move to the surviving contact, and `into`, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class MergePreviewReassignments : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The number of distinct non-ticket conversations that would be reassigned to the surviving contact, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.</summary>
-        public int? Conversations { get; set; }
-        /// <summary>The number of notes that would be reassigned.</summary>
-        public int? Notes { get; set; }
-        /// <summary>The number of phone calls that would be reassigned to the surviving contact. Present only for phone-lead merges.</summary>
-        public int? PhoneCalls { get; set; }
-        /// <summary>The number of tags that would be reassigned.</summary>
-        public int? Tags { get; set; }
-        /// <summary>The number of tickets (conversations of any ticket type) that would be reassigned to the surviving contact. Counted separately from `conversations` so a single conversation is never counted twice.</summary>
-        public int? Tickets { get; set; }
+        /// <summary>Distinct non-ticket conversations, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations? Conversations { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations Conversations { get; set; }
+#endif
+        /// <summary>Notes attached to the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes? Notes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes Notes { get; set; }
+#endif
+        /// <summary>Phone calls. Present only for phone-lead merges.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls? PhoneCalls { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls PhoneCalls { get; set; }
+#endif
+        /// <summary>Tags. `from` counts only tags the surviving contact does not already have.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags? Tags { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags Tags { get; set; }
+#endif
+        /// <summary>Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so a single conversation is never counted twice.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets? Tickets { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets Tickets { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments"/> and sets the default values.
         /// </summary>
@@ -50,11 +80,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "conversations", n => { Conversations = n.GetIntValue(); } },
-                { "notes", n => { Notes = n.GetIntValue(); } },
-                { "phone_calls", n => { PhoneCalls = n.GetIntValue(); } },
-                { "tags", n => { Tags = n.GetIntValue(); } },
-                { "tickets", n => { Tickets = n.GetIntValue(); } },
+                { "conversations", n => { Conversations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations.CreateFromDiscriminatorValue); } },
+                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes.CreateFromDiscriminatorValue); } },
+                { "phone_calls", n => { PhoneCalls = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls.CreateFromDiscriminatorValue); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags.CreateFromDiscriminatorValue); } },
+                { "tickets", n => { Tickets = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -64,11 +94,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("conversations", Conversations);
-            writer.WriteIntValue("notes", Notes);
-            writer.WriteIntValue("phone_calls", PhoneCalls);
-            writer.WriteIntValue("tags", Tags);
-            writer.WriteIntValue("tickets", Tickets);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations>("conversations", Conversations);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes>("notes", Notes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls>("phone_calls", PhoneCalls);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags>("tags", Tags);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets>("tickets", Tickets);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
