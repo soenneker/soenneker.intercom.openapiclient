@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Fin.Ask;
 using Soenneker.Intercom.OpenApiClient.Fin.Capabilities;
+using Soenneker.Intercom.OpenApiClient.Fin.Escalate;
 using Soenneker.Intercom.OpenApiClient.Fin.Procedures;
 using Soenneker.Intercom.OpenApiClient.Fin.Reply;
 using Soenneker.Intercom.OpenApiClient.Fin.Start;
@@ -28,6 +29,11 @@ namespace Soenneker.Intercom.OpenApiClient.Fin
         public global::Soenneker.Intercom.OpenApiClient.Fin.Capabilities.CapabilitiesRequestBuilder Capabilities
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Fin.Capabilities.CapabilitiesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The escalate property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Fin.Escalate.EscalateRequestBuilder Escalate
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Fin.Escalate.EscalateRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The procedures property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Fin.Procedures.ProceduresRequestBuilder Procedures

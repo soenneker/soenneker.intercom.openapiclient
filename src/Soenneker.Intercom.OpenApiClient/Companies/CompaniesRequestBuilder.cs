@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Companies.Bulk;
 using Soenneker.Intercom.OpenApiClient.Companies.Item;
 using Soenneker.Intercom.OpenApiClient.Companies.List;
 using Soenneker.Intercom.OpenApiClient.Companies.Scroll;
@@ -21,6 +22,11 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompaniesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The bulk property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Companies.Bulk.BulkRequestBuilder Bulk
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Companies.Bulk.BulkRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The list property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Companies.List.ListRequestBuilder List
         {

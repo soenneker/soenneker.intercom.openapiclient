@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Ask
         {
         }
         /// <summary>
-        /// &quot;Ask Fin a single, self-contained question and receive one informational answer.Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-upquestions, will not run procedures, and will not escalate to a human.Fin&apos;s answer is delivered asynchronously via the `fin_replied` event. The conversationends with a `complete` status — there is no `awaiting_user_reply` cycle.&quot;
+        /// &quot;Ask Fin a single, self-contained question and receive one informational answer.Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-upquestions, will not run procedures, and will not escalate to a human on its own. You canstill escalate one yourself with `POST /fin/escalate`; the ask conversation stays closedand the handoff is routed separately.Fin&apos;s answer is delivered asynchronously via the `fin_replied` event. The conversationends with a `complete` status — there is no `awaiting_user_reply` cycle.&quot;
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AskFin200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Ask
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AskFin200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AskFin200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Ask Fin a single, self-contained question and receive one informational answer.Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-upquestions, will not run procedures, and will not escalate to a human.Fin&apos;s answer is delivered asynchronously via the `fin_replied` event. The conversationends with a `complete` status — there is no `awaiting_user_reply` cycle.&quot;
+        /// &quot;Ask Fin a single, self-contained question and receive one informational answer.Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-upquestions, will not run procedures, and will not escalate to a human on its own. You canstill escalate one yourself with `POST /fin/escalate`; the ask conversation stays closedand the handoff is routed separately.Fin&apos;s answer is delivered asynchronously via the `fin_replied` event. The conversationends with a `complete` status — there is no `awaiting_user_reply` cycle.&quot;
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

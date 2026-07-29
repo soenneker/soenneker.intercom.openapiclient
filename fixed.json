@@ -9691,6 +9691,814 @@
         }
       }
     },
+    "/companies/bulk": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Bulk create or update companies",
+        "description": "\u0022You can bulk create or update companies by submitting an array of company objects. Each company is matched on the \u0060company_id\u0060 you have defined for it: a new company is created if none exists with that \u0060company_id\u0060, otherwise the matching company is updated. This mirrors the single [Create or update a company](/docs/references/preview/rest-api/api.intercom.io/companies/createorupdatecompany) endpoint.\n\nThe endpoint creates an async job that processes the items in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Handling failures\\\u0022 %}\n  If an item fails validation, that item is rejected and the job\u0027s \u0060state\u0060 ends as \u0060completed_with_errors\u0060. The other companies in the same request are still processed. The job \u0060state\u0060 from \u0060GET /companies/bulk/{id}\u0060 is the signal that one or more items were rejected.\n{% /admonition %}\n\n{% admonition type=\\\u0022info\\\u0022 name=\\\u0022Limits\\\u0022 %}\n  - Maximum of 100 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n\u0022",
+        "operationId": "BulkCreateCompanies",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkCreateCompaniesRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Successful",
+                  "value": {
+                    "companies": [
+                      {
+                        "company_id": "abc123",
+                        "name": "Acme Corp",
+                        "plan": "Enterprise",
+                        "size": 100,
+                        "website": "https://www.example.com",
+                        "industry": "Manufacturing",
+                        "monthly_spend": 1000,
+                        "remote_created_at": 1394531169,
+                        "update_last_request_at": true,
+                        "custom_attributes": {
+                          "paid_subscriber": true,
+                          "team_mates": 9
+                        }
+                      },
+                      {
+                        "company_id": "def456",
+                        "name": "Example Inc",
+                        "industry": "Manufacturing"
+                      }
+                    ]
+                  }
+                },
+                "append_to_existing_job": {
+                  "summary": "Append to existing job",
+                  "value": {
+                    "companies": [
+                      {
+                        "company_id": "abc123",
+                        "monthly_spend": 1000
+                      }
+                    ],
+                    "job": {
+                      "id": "job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "job job_v2_1 is closed for new task updates"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "job_not_found",
+                          "message": "job job_v2_1 not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_companies": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "companies field must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "too_many_companies": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "maximum number of companies per request is 100"
+                        }
+                      ]
+                    }
+                  },
+                  "companies_not_an_array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "companies must be an array"
+                        }
+                      ]
+                    }
+                  },
+                  "company_not_an_object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "each company must be an object"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Bulk update companies",
+        "description": "You can bulk update companies by submitting an array of company objects with the fields to update. Each company must include an \u0060id\u0060 field identifying the company to update by its Intercom company \u0060id\u0060. An unknown \u0060id\u0060 fails that item and never creates a company.\n\nOnly the fields listed in the request schema below can be set. Any other fields in a company object are ignored.\n\nThe endpoint creates an async job that processes the updates in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 100 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
+        "operationId": "BulkUpdateCompanies",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateCompaniesRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Successful",
+                  "value": {
+                    "companies": [
+                      {
+                        "id": "531ee472cce572a6ec000006",
+                        "name": "Acme Corp",
+                        "plan": "Enterprise",
+                        "size": 100,
+                        "website": "https://www.example.com",
+                        "industry": "Manufacturing",
+                        "monthly_spend": 1000,
+                        "remote_created_at": 1394531169,
+                        "update_last_request_at": true,
+                        "custom_attributes": {
+                          "paid_subscriber": true,
+                          "team_mates": 9
+                        }
+                      },
+                      {
+                        "id": "531ee472cce572a6ec000007",
+                        "name": "Example Inc"
+                      }
+                    ]
+                  }
+                },
+                "append_to_existing_job": {
+                  "summary": "Append to existing job",
+                  "value": {
+                    "companies": [
+                      {
+                        "id": "531ee472cce572a6ec000006",
+                        "monthly_spend": 1000
+                      }
+                    ],
+                    "job": {
+                      "id": "job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "job job_v2_1 is closed for new task updates"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "job_not_found",
+                          "message": "job job_v2_1 not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_companies": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "companies field must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "missing_id": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "companies must be identified by id"
+                        }
+                      ]
+                    }
+                  },
+                  "too_many_companies": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "maximum number of companies per request is 100"
+                        }
+                      ]
+                    }
+                  },
+                  "companies_not_an_array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "companies must be an array"
+                        }
+                      ]
+                    }
+                  },
+                  "company_not_an_object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "each company must be an object"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/bulk/delete": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Bulk delete companies",
+        "description": "You can bulk delete companies by submitting an array of companies, each identified by its Intercom company \u0060id\u0060. Deleting a company detaches all of its associated contacts but keeps the company record itself \u2014 the same archival behaviour as the single [Delete a company](/docs/references/preview/rest-api/api.intercom.io/companies/deletecompany) endpoint.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 100 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
+        "operationId": "BulkDeleteCompanies",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkDeleteCompaniesRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Successful",
+                  "value": {
+                    "companies": [
+                      {
+                        "id": "531ee472cce572a6ec000006"
+                      },
+                      {
+                        "id": "531ee472cce572a6ec000007"
+                      }
+                    ]
+                  }
+                },
+                "append_to_existing_job": {
+                  "summary": "Append to existing job",
+                  "value": {
+                    "companies": [
+                      {
+                        "id": "531ee472cce572a6ec000006"
+                      }
+                    ],
+                    "job": {
+                      "id": "job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "job job_v2_1 is closed for new task updates"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "job_not_found",
+                          "message": "job job_v2_1 not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "missing_companies": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "companies field must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "missing_id": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "field_not_found",
+                          "message": "companies must be identified by id"
+                        }
+                      ]
+                    }
+                  },
+                  "too_many_companies": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "maximum number of companies per request is 100"
+                        }
+                      ]
+                    }
+                  },
+                  "companies_not_an_array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "companies must be an array"
+                        }
+                      ]
+                    }
+                  },
+                  "company_not_an_object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "each company must be an object"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/bulk/{id}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get a bulk companies job",
+        "description": "\u0022You can check the status of a bulk companies job. The \u0060state\u0060 field indicates the overall job progress: \u0060pending\u0060, \u0060running\u0060, \u0060completed\u0060, or \u0060completed_with_errors\u0060.\n\u0022",
+        "operationId": "ShowBulkCompaniesJob",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the bulk job.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "job_v2_1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "completed",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360120,
+                      "completed_at": 1713360120,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "completed",
+                          "created_at": 1713360000,
+                          "started_at": 1713360060,
+                          "completed_at": 1713360120
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/contacts/{id}/notes": {
       "get": {
         "tags": [
@@ -13003,6 +13811,54 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "job job_v2_1 is closed for new task updates"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "job_not_found",
+                          "message": "job job_v2_1 not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -13031,6 +13887,30 @@
                         {
                           "code": "parameter_invalid",
                           "message": "maximum number of contacts per request is 100"
+                        }
+                      ]
+                    }
+                  },
+                  "contacts_not_an_array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "contacts must be an array"
+                        }
+                      ]
+                    }
+                  },
+                  "contact_not_an_object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "each contact must be an object"
                         }
                       ]
                     }
@@ -13222,6 +14102,54 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "job job_v2_1 is closed for new task updates"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "job_not_found",
+                          "message": "job job_v2_1 not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -13262,6 +14190,30 @@
                         {
                           "code": "parameter_invalid",
                           "message": "maximum number of contacts per request is 100"
+                        }
+                      ]
+                    }
+                  },
+                  "contacts_not_an_array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "contacts must be an array"
+                        }
+                      ]
+                    }
+                  },
+                  "contact_not_an_object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "each contact must be an object"
                         }
                       ]
                     }
@@ -13385,6 +14337,54 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "job job_v2_1 is closed for new task updates"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "job_not_found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "job_not_found",
+                          "message": "job job_v2_1 not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity",
             "content": {
@@ -13425,6 +14425,30 @@
                         {
                           "code": "parameter_invalid",
                           "message": "maximum number of contacts per request is 100"
+                        }
+                      ]
+                    }
+                  },
+                  "contacts_not_an_array": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "contacts must be an array"
+                        }
+                      ]
+                    }
+                  },
+                  "contact_not_an_object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2859da57-c83f-405c-8166-240a312442a3",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "each contact must be an object"
                         }
                       ]
                     }
@@ -32918,7 +33942,7 @@
           "Fin Agent"
         ],
         "summary": "Ask Fin",
-        "description": "\u0022Ask Fin a single, self-contained question and receive one informational answer.\n\nUnlike a conversation, \u0060/fin/ask\u0060 is non-conversational: Fin will not ask follow-up\nquestions, will not run procedures, and will not escalate to a human.\n\nFin\u0027s answer is delivered asynchronously via the \u0060fin_replied\u0060 event. The conversation\nends with a \u0060complete\u0060 status \u2014 there is no \u0060awaiting_user_reply\u0060 cycle.\n\u0022",
+        "description": "\u0022Ask Fin a single, self-contained question and receive one informational answer.\n\nUnlike a conversation, \u0060/fin/ask\u0060 is non-conversational: Fin will not ask follow-up\nquestions, will not run procedures, and will not escalate to a human on its own. You can\nstill escalate one yourself with \u0060POST /fin/escalate\u0060; the ask conversation stays closed\nand the handoff is routed separately.\n\nFin\u0027s answer is delivered asynchronously via the \u0060fin_replied\u0060 event. The conversation\nends with a \u0060complete\u0060 status \u2014 there is no \u0060awaiting_user_reply\u0060 cycle.\n\u0022",
         "operationId": "AskFin",
         "parameters": [
           {
@@ -33444,6 +34468,139 @@
                         {
                           "code": "parameter_invalid",
                           "message": "Fin session already exists for this conversation. Please use /reply to continue the conversation."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fin/escalate": {
+      "post": {
+        "tags": [
+          "Fin Agent"
+        ],
+        "summary": "Escalate to a human",
+        "description": "Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the\nhandoff lands in your team inbox.\n\nProvide either \u0060conversation_id\u0060 or \u0060user\u0060:\n\n- \u0060conversation_id\u0060 \u2014 escalate an existing agent conversation, including one started\n  with \u0060/fin/ask\u0060. On the Intercom Helpdesk, Fin by default summarises the conversation\n  and opens a new Helpdesk conversation that carries the summary as an internal note;\n  the original agent conversation is not reassigned. Configure an escalation Operator\n  Workflow to change this default.\n- \u0060user\u0060 \u2014 escalate on behalf of a user with no prior agent conversation. On the Intercom\n  Helpdesk, a new Helpdesk conversation is created for the teammate. Include an optional\n  \u0060message\u0060 for its first message.\n\nIn both cases the optional \u0060context\u0060 is attached as an internal note (supplied by your\norchestrating agent, not generated by Fin) alongside any summary.\n\nEscalating an existing conversation also sets its AI Agent resolution state to\n\u0060escalated\u0060, readable as \u0060ai_agent.resolution_state\u0060 on the Conversations API. This is a\nresolution state, not a billable resolution.\n\nOn Fin for Platforms there is no Intercom inbox, so an escalation that no workflow\nhandles \u2014 whether by \u0060conversation_id\u0060 or \u0060user\u0060 \u2014 does not open a Helpdesk\nconversation for a teammate. You are notified with the \u0060escalated\u0060 status and hand the\nconversation to a human on your own platform. Escalating by \u0060user\u0060 still creates the\nFin conversation, returned as \u0060intercom_conversation_id\u0060.\n\nYou are notified over the existing webhook or SSE channel with an \u0060escalated\u0060 status\nfollowed by \u0060complete\u0060. The \u0060complete\u0060 status signals that Fin is done; it does not close\nthe conversation. On the Intercom Helpdesk it remains open in the human inbox; on Fin for\nPlatforms it remains open for whoever handles it on your own platform.\n",
+        "operationId": "EscalateFinConversation",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateFinConversationRequest"
+              },
+              "examples": {
+                "Escalate an existing conversation": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "context": "Customer is requesting a refund and is frustrated."
+                  }
+                },
+                "Escalate on behalf of a user": {
+                  "value": {
+                    "user": {
+                      "id": 123456,
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    },
+                    "message": "I need help with my billing issue"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conversation escalated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EscalateFinConversation200Response"
+                },
+                "examples": {
+                  "Existing conversation": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "status": "escalated",
+                      "sse_subscription_url": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
+                    }
+                  },
+                  "New conversation": {
+                    "value": {
+                      "intercom_conversation_id": 987654321,
+                      "status": "escalated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Neither identifier provided": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Either conversation_id or user must be provided"
+                        }
+                      ]
+                    }
+                  },
+                  "Conversation not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Conversation not found"
                         }
                       ]
                     }
@@ -36701,6 +37858,69 @@
           "Brands"
         ]
       },
+      "BulkCreateCompaniesRequest": {
+        "title": "Bulk Create Companies Request",
+        "required": [
+          "companies"
+        ],
+        "type": "object",
+        "properties": {
+          "companies": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkCreateCompaniesRequestCompaniesItem"
+            },
+            "description": "An array of company objects to create or update. Maximum 100 companies per request."
+          },
+          "job": {
+            "$ref": "#/components/schemas/BulkCreateCompaniesRequestJob"
+          }
+        },
+        "description": "Request body for bulk creating or updating companies."
+      },
+      "BulkDeleteCompaniesRequest": {
+        "title": "Bulk Delete Companies Request",
+        "required": [
+          "companies"
+        ],
+        "type": "object",
+        "properties": {
+          "companies": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkDeleteCompaniesRequestCompaniesItem"
+            },
+            "description": "An array of companies to delete, each identified by its Intercom company \u0060id\u0060. Maximum 100 companies per request."
+          },
+          "job": {
+            "$ref": "#/components/schemas/BulkDeleteCompaniesRequestJob"
+          }
+        },
+        "description": "Request body for bulk deleting companies."
+      },
+      "BulkUpdateCompaniesRequest": {
+        "title": "Bulk Update Companies Request",
+        "required": [
+          "companies"
+        ],
+        "type": "object",
+        "properties": {
+          "companies": {
+            "maxItems": 100,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkUpdateCompaniesRequestCompaniesItem"
+            },
+            "description": "An array of company objects to update. Each must include an \u0060id\u0060 and the fields to update. Maximum 100 companies per request."
+          },
+          "job": {
+            "$ref": "#/components/schemas/BulkUpdateCompaniesRequestJob"
+          }
+        },
+        "description": "Request body for bulk updating companies."
+      },
       "BulkCreateContactsRequest": {
         "title": "Bulk Create Contacts Request",
         "required": [
@@ -37440,6 +38660,58 @@
           }
         },
         "description": "Contacts are your users in Intercom."
+      },
+      "CompaniesBulkJob": {
+        "title": "Companies Bulk Job",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the bulk job.",
+            "example": "job_v2_1"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CompaniesBulkJobType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/CompaniesBulkJobState"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the job was created as a UNIX timestamp.",
+            "format": "date-time",
+            "example": 1713360000
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the job was last updated as a UNIX timestamp.",
+            "format": "date-time",
+            "example": 1713360060
+          },
+          "completed_at": {
+            "type": "integer",
+            "description": "The time the job completed as a UNIX timestamp. Null if not yet completed.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1713360120
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompaniesBulkJobTasksItem"
+            },
+            "description": "The tasks that make up this bulk job."
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL to check the job status.",
+            "example": "https://api.intercom.io/companies/bulk/job_v2_1"
+          }
+        },
+        "description": "A bulk job for creating, updating, or deleting companies asynchronously. Track the job status using the \u0060state\u0060 field.",
+        "x-tags": [
+          "Companies"
+        ]
       },
       "ContactsBulkJob": {
         "title": "Contacts Bulk Job",
@@ -44660,7 +45932,7 @@
             "example": "2025-01-24T10:00:00.123Z"
           }
         },
-        "description": "Event fired when Fin replies to a user.\nThe content of the response will be contained in the message object.\nIntermediate replies have status \u0027replying\u0027; a separate fin_status_updated\nevent with \u0027awaiting_user_reply\u0027 fires as a done signal.\n",
+        "description": "Event fired when Fin replies to a user.\nThe content of the response will be contained in the message object.\nIntermediate replies have status \u0027replying\u0027; a separate fin_status_updated\nevent with \u0027awaiting_user_reply\u0027 fires once Fin\u0027s reply is done.\n",
         "x-tags": [
           "Fin Agent"
         ]
@@ -50017,6 +51289,161 @@
           "_default_description_": "having a problem"
         }
       },
+      "BulkCreateCompaniesRequestCompaniesItem": {
+        "type": "object",
+        "properties": {
+          "company_id": {
+            "type": "string",
+            "description": "The company id you have defined for the company. Used to match an existing company; a new one is created if none matches.",
+            "example": "625e90fc55ab113b6d92175f"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the company.",
+            "example": "Acme Corp"
+          },
+          "plan": {
+            "type": "string",
+            "description": "The name of the plan you have associated with the company.",
+            "example": "Enterprise"
+          },
+          "size": {
+            "type": "integer",
+            "description": "The number of employees in this company.",
+            "example": 100
+          },
+          "website": {
+            "type": "string",
+            "description": "The URL for this company\u0027s website. Please note that the value specified here is not validated. Accepts any string.",
+            "example": "https://www.example.com"
+          },
+          "industry": {
+            "type": "string",
+            "description": "The industry that this company operates in.",
+            "example": "Manufacturing"
+          },
+          "custom_attributes": {
+            "$ref": "#/components/schemas/BulkCreateCompaniesRequestCompaniesItemCustomAttributesProperty"
+          },
+          "remote_created_at": {
+            "type": "integer",
+            "description": "The time the company was created by you, in Unix timestamp format.",
+            "example": 1394531169
+          },
+          "monthly_spend": {
+            "type": "integer",
+            "description": "How much revenue the company generates for your business. Note that this will truncate floats \u2014 only whole integers are stored, so 155.98 is truncated to 155, with an upper limit of 2147483647.",
+            "example": 1000
+          },
+          "update_last_request_at": {
+            "type": "boolean",
+            "description": "Set to true to update the company\u0027s last seen time to now.",
+            "example": true
+          }
+        }
+      },
+      "BulkCreateCompaniesRequestJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing bulk job to append to.",
+            "example": "job_v2_1"
+          }
+        },
+        "description": "Optional. Include to append tasks to an existing job."
+      },
+      "BulkDeleteCompaniesRequestCompaniesItem": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Intercom defined id representing the company.",
+            "example": "531ee472cce572a6ec000006"
+          }
+        }
+      },
+      "BulkDeleteCompaniesRequestJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing bulk job to append to.",
+            "example": "job_v2_1"
+          }
+        },
+        "description": "Optional. Include to append tasks to an existing job."
+      },
+      "BulkUpdateCompaniesRequestCompaniesItem": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The Intercom defined id representing the company to update.",
+            "example": "531ee472cce572a6ec000006"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the company.",
+            "example": "Acme Corp"
+          },
+          "plan": {
+            "type": "string",
+            "description": "The name of the plan you have associated with the company.",
+            "example": "Enterprise"
+          },
+          "size": {
+            "type": "integer",
+            "description": "The number of employees in this company.",
+            "example": 100
+          },
+          "website": {
+            "type": "string",
+            "description": "The URL for this company\u0027s website. Please note that the value specified here is not validated. Accepts any string.",
+            "example": "https://www.example.com"
+          },
+          "industry": {
+            "type": "string",
+            "description": "The industry that this company operates in.",
+            "example": "Manufacturing"
+          },
+          "custom_attributes": {
+            "$ref": "#/components/schemas/BulkUpdateCompaniesRequestCompaniesItemCustomAttributesProperty"
+          },
+          "remote_created_at": {
+            "type": "integer",
+            "description": "The time the company was created by you, in Unix timestamp format.",
+            "example": 1394531169
+          },
+          "monthly_spend": {
+            "type": "integer",
+            "description": "How much revenue the company generates for your business. Note that this will truncate floats \u2014 only whole integers are stored, so 155.98 is truncated to 155, with an upper limit of 2147483647.",
+            "example": 1000
+          },
+          "update_last_request_at": {
+            "type": "boolean",
+            "description": "Set to true to update the company\u0027s last seen time to now.",
+            "example": true
+          }
+        }
+      },
+      "BulkUpdateCompaniesRequestJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of an existing bulk job to append to.",
+            "example": "job_v2_1"
+          }
+        },
+        "description": "Optional. Include to append tasks to an existing job."
+      },
       "BulkCreateContactsRequestContactsItem": {
         "type": "object",
         "properties": {
@@ -50313,6 +51740,44 @@
           }
         },
         "nullable": true
+      },
+      "CompaniesBulkJobTasksItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the task.",
+            "example": "task_v2_1"
+          },
+          "item_count": {
+            "type": "integer",
+            "description": "The number of items in this task.",
+            "example": 2
+          },
+          "state": {
+            "$ref": "#/components/schemas/CompaniesBulkJobTasksItemState"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the task was created as a UNIX timestamp.",
+            "format": "date-time",
+            "example": 1713360000
+          },
+          "started_at": {
+            "type": "integer",
+            "description": "The time the task started as a UNIX timestamp. Null if not yet started.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1713360060
+          },
+          "completed_at": {
+            "type": "integer",
+            "description": "The time the task completed as a UNIX timestamp. Null if not yet completed.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1713360120
+          }
+        }
       },
       "ContactsBulkJobTasksItem": {
         "type": "object",
@@ -52058,6 +53523,14 @@
             "type": "string"
           }
         }
+      },
+      "BulkCreateCompaniesRequestCompaniesItemCustomAttributes": {
+        "type": "object",
+        "description": "A hash of key/value pairs containing any other data about the company you want Intercom to store."
+      },
+      "BulkUpdateCompaniesRequestCompaniesItemCustomAttributes": {
+        "type": "object",
+        "description": "A hash of key/value pairs containing any other data about the company you want Intercom to store."
       },
       "BulkCreateContactsRequestContactsItemCustomAttributes": {
         "type": "object",
@@ -54730,6 +56203,68 @@
           }
         }
       },
+      "EscalateFinConversationRequest": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "conversation_id"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "user"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The external ID of the conversation to escalate. Provide this or \u0060user\u0060.",
+            "example": "ext-123"
+          },
+          "user": {
+            "$ref": "#/components/schemas/FinAgentUser"
+          },
+          "message": {
+            "maxLength": 10000,
+            "type": "string",
+            "description": "Optional first message for the new conversation, used only when escalating on behalf of a \u0060user\u0060. Shown to the end-user (unlike \u0060context\u0060, which is an internal note), so don\u0027t include sensitive orchestration data. Defaults to \u0022Requesting human support\u0022.",
+            "example": "I\u0027d like to speak to a human about my refund."
+          },
+          "context": {
+            "maxLength": 10000,
+            "type": "string",
+            "description": "Optional context for the receiving teammate explaining why the conversation is being escalated. Attached as an internal note, never shown to the user. Avoid including credentials or unnecessary personal data \u2014 the note is visible to any teammate with access to the conversation.",
+            "example": "Customer is requesting a refund and is frustrated."
+          }
+        }
+      },
+      "EscalateFinConversation200Response": {
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The external ID of the conversation. Returned when you escalate an existing conversation by \u0060conversation_id\u0060 (echoed back). When you escalate a \u0060user\u0060, a new conversation is created and only \u0060intercom_conversation_id\u0060 is returned.",
+            "example": "ext-123"
+          },
+          "intercom_conversation_id": {
+            "type": "string",
+            "description": "The internal Intercom conversation ID. Returned when a new conversation was created for the escalation.",
+            "example": 987654321
+          },
+          "sse_subscription_url": {
+            "type": "string",
+            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. Includes a \u0060rewind\u0060 window so a subscriber that connects after the escalation is processed can still receive the \u0060escalated\u0060 and \u0060complete\u0060 events.\n",
+            "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EscalateFinConversation200ResponseStatus"
+          }
+        }
+      },
       "StartFinConversationRequest": {
         "required": [
           "conversation_id",
@@ -55245,6 +56780,14 @@
       "AiCallResponseIntentItemProperty": {
         "type": "object"
       },
+      "BulkCreateCompaniesRequestCompaniesItemCustomAttributesProperty": {
+        "type": "object",
+        "description": "A hash of key/value pairs containing any other data about the company you want Intercom to store."
+      },
+      "BulkUpdateCompaniesRequestCompaniesItemCustomAttributesProperty": {
+        "type": "object",
+        "description": "A hash of key/value pairs containing any other data about the company you want Intercom to store."
+      },
       "BulkCreateContactsRequestContactsItemCustomAttributesProperty": {
         "type": "object",
         "description": "Custom attributes to set on the contact."
@@ -55573,7 +57116,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "The kind of capability \u2014 \u0060procedure\u0060 for a runnable procedure, or a static action such as \u0060reply\u0060 or \u0060ask\u0060.",
+            "description": "The kind of capability \u2014 \u0060procedure\u0060 for a runnable procedure, or a static action such as \u0060reply\u0060, \u0060ask\u0060, or \u0060escalate\u0060.",
             "example": "procedure"
           },
           "id": {
@@ -57223,6 +58766,59 @@
             {
               "value": "list",
               "name": "List"
+            }
+          ]
+        }
+      },
+      "CompaniesBulkJobType": {
+        "enum": [
+          "companies.bulk.job"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of the object.",
+        "example": "companies.bulk.job",
+        "x-ms-enum": {
+          "name": "CompaniesBulkJobType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "companies.bulk.job",
+              "name": "CompaniesBulkJob"
+            }
+          ]
+        }
+      },
+      "CompaniesBulkJobState": {
+        "enum": [
+          "pending",
+          "running",
+          "completed",
+          "completed_with_errors"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The current state of the job.",
+        "example": "running",
+        "x-ms-enum": {
+          "name": "CompaniesBulkJobState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "running",
+              "name": "Running"
+            },
+            {
+              "value": "completed",
+              "name": "Completed"
+            },
+            {
+              "value": "completed_with_errors",
+              "name": "CompletedWithErrors"
             }
           ]
         }
@@ -59681,7 +61277,7 @@
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "\u0022Fin\u0027s current status.\n- replying: Intermediate reply part; more parts may follow\n- awaiting_user_reply: Legacy status; use fin_status_updated event as the done signal instead\n\u0022",
+        "description": "\u0022Fin\u0027s current status.\n- replying: Intermediate reply part; more parts may follow\n- awaiting_user_reply: Legacy status; instead use the fin_status_updated event with \u0027awaiting_user_reply\u0027, which fires once Fin\u0027s reply is done\n\u0022",
         "example": "replying",
         "x-ms-enum": {
           "name": "FinAgentRepliedEventStatus",
@@ -61723,6 +63319,40 @@
           ]
         }
       },
+      "CompaniesBulkJobTasksItemState": {
+        "enum": [
+          "pending",
+          "running",
+          "completed",
+          "completed_with_errors"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The current state of the task.",
+        "example": "pending",
+        "x-ms-enum": {
+          "name": "CompaniesBulkJobTasksItemState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "running",
+              "name": "Running"
+            },
+            {
+              "value": "completed",
+              "name": "Completed"
+            },
+            {
+              "value": "completed_with_errors",
+              "name": "CompletedWithErrors"
+            }
+          ]
+        }
+      },
       "ContactsBulkJobTasksItemState": {
         "enum": [
           "pending",
@@ -62611,6 +64241,25 @@
           ]
         }
       },
+      "EscalateFinConversation200ResponseStatus": {
+        "enum": [
+          "escalated"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The resulting status of the conversation.",
+        "example": "escalated",
+        "x-ms-enum": {
+          "name": "EscalateFinConversation200ResponseStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "escalated",
+              "name": "Escalated"
+            }
+          ]
+        }
+      },
       "AskFin200ResponseStatus": {
         "enum": [
           "thinking",
@@ -63372,7 +65021,7 @@
     },
     {
       "name": "Fin Agent",
-      "description": "Access Fin programmatically via the Fin Agent API endpoints.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access and tailored, hands-on support.\n{% /admonition %}\n\n\u0026nbsp;\n\nOrchestrate Fin from your own agent: discover what Fin can do with \u0060/fin/capabilities\u0060, ask a one-shot question with \u0060/fin/ask\u0060, run a specific procedure with \u0060/fin/procedures/{procedure_id}/run\u0060, and continue a conversation with \u0060/fin/reply\u0060. Fin notifies your application of its status and responses through a set of events, delivered via webhooks or Server-Sent Events (SSE).\n\n\u0026nbsp;\n\nStarting a standalone conversation with \u0060/fin/start\u0060 remains available for existing conversational integrations and is documented below.\n\n\u0026nbsp;\n\n**Events**\n\nConfigure a webhook endpoint in the Fin Agent API settings to receive events, or use the \u0060sse_subscription_url\u0060 from the API response to subscribe via SSE. See the [setup guide](/docs/guides/fin-agent-api/setup) for configuration details.\n\n- \u0060fin_status_updated\u0060 - Fired when Fin\u0027s status changes (awaiting_user_reply, escalated, resolved, complete)\n- \u0060fin_replied\u0060 - Fired when Fin sends a reply to the user\n- \u0060fin_reply_chunk\u0060 - SSE-only streaming event fired during reply generation (requires streaming enabled)\n\nAll webhook requests include an \u0060X-Fin-Agent-API-Webhook-Signature\u0060 header for request validation.\n"
+      "description": "Access Fin programmatically via the Fin Agent API endpoints.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access and tailored, hands-on support.\n{% /admonition %}\n\n\u0026nbsp;\n\nOrchestrate Fin from your own agent: discover what Fin can do with \u0060/fin/capabilities\u0060, ask a one-shot question with \u0060/fin/ask\u0060, run a specific procedure with \u0060/fin/procedures/{procedure_id}/run\u0060, continue a conversation with \u0060/fin/reply\u0060, and escalate to a human with \u0060/fin/escalate\u0060. Fin notifies your application of its status and responses through a set of events, delivered via webhooks or Server-Sent Events (SSE).\n\n\u0026nbsp;\n\nStarting a standalone conversation with \u0060/fin/start\u0060 remains available for existing conversational integrations and is documented below.\n\n\u0026nbsp;\n\n**Events**\n\nConfigure a webhook endpoint in the Fin Agent API settings to receive events, or use the \u0060sse_subscription_url\u0060 from the API response to subscribe via SSE. See the [setup guide](/docs/guides/fin-agent-api/setup) for configuration details.\n\n- \u0060fin_status_updated\u0060 - Fired when Fin\u0027s status changes (awaiting_user_reply, escalated, resolved, complete)\n- \u0060fin_replied\u0060 - Fired when Fin sends a reply to the user\n- \u0060fin_reply_chunk\u0060 - SSE-only streaming event fired during reply generation (requires streaming enabled)\n\nAll webhook requests include an \u0060X-Fin-Agent-API-Webhook-Signature\u0060 header for request validation.\n"
     },
     {
       "name": "Help Center",
