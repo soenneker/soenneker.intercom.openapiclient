@@ -34636,6 +34636,141 @@
         }
       }
     },
+    "/fin/csat": {
+      "post": {
+        "tags": [
+          "Fin Agent"
+        ],
+        "summary": "Submit a CSAT rating",
+        "description": "Record a customer\u0027s satisfaction rating for a conversation, with an optional free-text\nremark.\n\nFin decides *when* to ask for a rating \u2014 this reuses the CSAT settings on your Fin\nworkflow, not this API. When Fin asks, it fires a \u0060csat_requested\u0060 event over webhooks or\nSSE carrying the rating options to show the user. Present those options, then submit the\nuser\u0027s choice here.\n\nSubmitting the same rating again, with no new remark, is a no-op and stays successful,\nso an at-least-once client can safely retry. Submitting a *different* rating updates the\nstored rating while the update window is still open, and a first remark can be added to\nan already-rated survey. Once a remark has been recorded the rating is locked and can no\nlonger be changed.\n",
+        "operationId": "SubmitFinCsat",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitFinCsatRequest"
+              },
+              "examples": {
+                "Submit a rating": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "rating": "amazing"
+                  }
+                },
+                "Submit a rating with a remark": {
+                  "value": {
+                    "conversation_id": "ext-123",
+                    "rating": "amazing",
+                    "remark": "Fin solved my problem in seconds."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rating recorded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmitFinCsat200Response"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "conversation_id": "ext-123",
+                      "rating": "amazing",
+                      "status": "rated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "\u0022The rating could not be recorded. Common causes: no conversation exists for the given\n\u0060conversation_id\u0060, Fin never requested a rating for it, the rating window has closed,\nthe rating is locked because a remark was already submitted, or \u0060rating\u0060 is not one of\nthe supported values.\n\u0022",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmitFinCsat422Response"
+                },
+                "examples": {
+                  "Conversation not found": {
+                    "value": {
+                      "errors": {
+                        "external_conversation_id": "Conversation not found for the given external_conversation_id"
+                      }
+                    }
+                  },
+                  "No rating requested": {
+                    "value": {
+                      "errors": {
+                        "base": "No rating survey found for this conversation"
+                      }
+                    }
+                  },
+                  "Rating window closed": {
+                    "value": {
+                      "errors": {
+                        "base": "The rating window for this conversation has closed"
+                      }
+                    }
+                  },
+                  "Rating locked by a remark": {
+                    "value": {
+                      "errors": {
+                        "base": "This rating can no longer be changed because a remark has already been submitted"
+                      }
+                    }
+                  },
+                  "Invalid rating": {
+                    "value": {
+                      "errors": {
+                        "rating": "Rating isn\u0027t an option"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/fin/start": {
       "post": {
         "tags": [
@@ -45987,6 +46122,45 @@
           "Fin Agent"
         ]
       },
+      "FinAgentCsatRequestedEvent": {
+        "title": "Fin Agent CSAT Requested Event",
+        "required": [
+          "event_name",
+          "conversation_id",
+          "user_id",
+          "csat",
+          "created_at_ms"
+        ],
+        "type": "object",
+        "properties": {
+          "event_name": {
+            "$ref": "#/components/schemas/FinAgentCsatRequestedEventEventName"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation.",
+            "example": 123456
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user.",
+            "example": 7891
+          },
+          "csat": {
+            "$ref": "#/components/schemas/FinAgentCsatRequestedEventCsat"
+          },
+          "created_at_ms": {
+            "type": "string",
+            "description": "The timestamp the event was created at, with millisecond precision.",
+            "format": "date-time",
+            "example": "2025-01-24T10:00:00.123Z"
+          }
+        },
+        "description": "\u0022Event fired when Fin asks the user to rate the conversation.\nDelivered via webhooks or SSE. Carries the rating options to present to the user; submit\nthe user\u0027s choice with POST /fin/csat. Unlike the reply events it has no message \u2014 a\nrating survey is a set of options to choose from, not readable text.\nOver SSE this event arrives after Fin reaches \u0027complete\u0027. Because a survey is expected,\n\u0027complete\u0027 does not close the stream: the connection is held open so this event can be\ndelivered, and the token is revoked once it is sent.\n\u0022",
+        "x-tags": [
+          "Fin Agent"
+        ]
+      },
       "FileAttribute": {
         "title": "File",
         "type": "object",
@@ -52755,6 +52929,36 @@
         },
         "description": "Fin\u0027s answer to the user\u0027s query."
       },
+      "FinAgentCsatRequestedEventCsat": {
+        "required": [
+          "options"
+        ],
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinAgentCsatRequestedEventCsatOptionsItem"
+            },
+            "description": "The ordered rating options to show the user."
+          }
+        },
+        "description": "The rating survey to present to the user.",
+        "example": {
+          "options": [
+            {
+              "key": "good",
+              "emoji": "\uD83D\uDE03",
+              "label": "Great"
+            },
+            {
+              "key": "amazing",
+              "emoji": "\uD83E\uDD29",
+              "label": "Amazing"
+            }
+          ]
+        }
+      },
       "SideConversationListPages": {
         "type": "object",
         "properties": {
@@ -53707,6 +53911,29 @@
         "description": "Map of conversation attribute names to error messages.",
         "example": {
           "bad_attr": "Conversation attribute \u0027bad_attr\u0027 does not exist"
+        }
+      },
+      "FinAgentCsatRequestedEventCsatOptionsItem": {
+        "required": [
+          "key",
+          "emoji",
+          "label"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/FinAgentCsatRequestedEventCsatOptionsItemKey"
+          },
+          "emoji": {
+            "type": "string",
+            "description": "The emoji representing this rating.",
+            "example": "\uD83E\uDD29"
+          },
+          "label": {
+            "type": "string",
+            "description": "The human-readable label for this rating, localised to the conversation\u0027s\ndetected language. Distinct from \u0027key\u0027 \u2014 display the label, but send back\nthe key.\n",
+            "example": "Amazing"
+          }
         }
       },
       "MacroListPagesNext": {
@@ -56257,11 +56484,57 @@
           },
           "sse_subscription_url": {
             "type": "string",
-            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. Includes a \u0060rewind\u0060 window so a subscriber that connects after the escalation is processed can still receive the \u0060escalated\u0060 and \u0060complete\u0060 events.\n",
+            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. When CSAT is enabled and a survey will follow the resolution, \u0060complete\u0060 revocation is deferred until the \u0060csat_requested\u0060 event is delivered or the token expires. Includes a \u0060rewind\u0060 window so a subscriber that connects after the escalation is processed can still receive the \u0060escalated\u0060 and \u0060complete\u0060 events.\n",
             "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
           },
           "status": {
             "$ref": "#/components/schemas/EscalateFinConversation200ResponseStatus"
+          }
+        }
+      },
+      "SubmitFinCsatRequest": {
+        "required": [
+          "conversation_id",
+          "rating"
+        ],
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "Your external conversation ID \u2014 the same ID you started the conversation with, and the one echoed on the \u0060csat_requested\u0060 event.",
+            "example": "ext-123"
+          },
+          "rating": {
+            "$ref": "#/components/schemas/SubmitFinCsatRequestRating"
+          },
+          "remark": {
+            "type": "string",
+            "description": "Optional free-text comment the user left alongside the rating. Can be added to an already-rated survey, but only once \u2014 the rating locks after a remark is recorded.",
+            "example": "Fin solved my problem in seconds."
+          }
+        }
+      },
+      "SubmitFinCsat200Response": {
+        "type": "object",
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The external ID of the rated conversation.",
+            "example": "ext-123"
+          },
+          "rating": {
+            "$ref": "#/components/schemas/SubmitFinCsat200ResponseRating"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SubmitFinCsat200ResponseStatus"
+          }
+        }
+      },
+      "SubmitFinCsat422Response": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "$ref": "#/components/schemas/SubmitFinCsat422ResponseErrors"
           }
         }
       },
@@ -56499,7 +56772,7 @@
           },
           "sse_subscription_url": {
             "type": "string",
-            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status.\n",
+            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. When CSAT is enabled and a survey will follow the resolution, \u0060complete\u0060 revocation is deferred until the \u0060csat_requested\u0060 event is delivered or the token expires.\n",
             "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
           }
         }
@@ -56531,7 +56804,7 @@
           },
           "sse_subscription_url": {
             "type": "string",
-            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, \u0060complete\u0060 revocation is deferred until the \u0060csat_requested\u0060 event is delivered or the token expires.\n",
             "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG..."
           }
         }
@@ -56568,7 +56841,7 @@
           },
           "sse_subscription_url": {
             "type": "string",
-            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, \u0060complete\u0060 revocation is deferred until the \u0060csat_requested\u0060 event is delivered or the token expires.\n",
             "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
           }
         }
@@ -56600,7 +56873,7 @@
           },
           "sse_subscription_url": {
             "type": "string",
-            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status.\n",
+            "description": "Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, \u0060complete\u0060 revocation is deferred until the \u0060csat_requested\u0060 event is delivered or the token expires.\n",
             "example": "https://primary-realtime.intercom-messenger.com/event-stream?channels=fin_agent_api:app123:ext-123\u0026accessToken=eyJhbG...\u0026rewind=2m"
           }
         }
@@ -57166,6 +57439,16 @@
           }
         },
         "description": "Optional settings to control Fin\u0027s behaviour for this procedure run."
+      },
+      "SubmitFinCsat422ResponseErrors": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Validation messages keyed by the field they apply to, or \u0060base\u0060 for conversation-level failures.",
+        "example": {
+          "base": "The rating window for this conversation has closed"
+        }
       },
       "GetExportReportingDataGetDatasets200ResponseDataItemAttributesItem": {
         "type": "object",
@@ -61226,7 +61509,7 @@
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "\u0022Fin\u0027s current status.\n- awaiting_user_reply: Fin has finished replying and is waiting for the user to respond\n- escalated: The conversation has been escalated to a human\n- resolved: The user\u0027s query has been resolved\n- complete: Fin has completed its workflow\n\u0022",
+        "description": "\u0022Fin\u0027s current status.\n- awaiting_user_reply: Fin has finished replying and is waiting for the user to respond\n- escalated: The conversation has been escalated to a human\n- resolved: The user\u0027s query has been resolved\n- complete: Fin has completed its workflow. When CSAT is enabled a csat_requested event may follow, in which case the SSE stream is held open past complete until it is delivered or the token expires\n\u0022",
         "example": "escalated",
         "x-ms-enum": {
           "name": "FinAgentStatusUpdatedEventStatus",
@@ -61328,6 +61611,25 @@
             {
               "value": "replying",
               "name": "Replying"
+            }
+          ]
+        }
+      },
+      "FinAgentCsatRequestedEventEventName": {
+        "enum": [
+          "csat_requested"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The name of the event.",
+        "example": "csat_requested",
+        "x-ms-enum": {
+          "name": "FinAgentCsatRequestedEventEventName",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "csat_requested",
+              "name": "CsatRequested"
             }
           ]
         }
@@ -64166,6 +64468,45 @@
           ]
         }
       },
+      "FinAgentCsatRequestedEventCsatOptionsItemKey": {
+        "enum": [
+          "terrible",
+          "bad",
+          "ok",
+          "good",
+          "amazing"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The stable key to send back as \u0027rating\u0027 on POST /fin/csat.",
+        "example": "amazing",
+        "x-ms-enum": {
+          "name": "FinAgentCsatRequestedEventCsatOptionsItemKey",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "terrible",
+              "name": "Terrible"
+            },
+            {
+              "value": "bad",
+              "name": "Bad"
+            },
+            {
+              "value": "ok",
+              "name": "Ok"
+            },
+            {
+              "value": "good",
+              "name": "Good"
+            },
+            {
+              "value": "amazing",
+              "name": "Amazing"
+            }
+          ]
+        }
+      },
       "TicketPartUpdatedAttributeDataAttributeType": {
         "enum": [
           "attribute"
@@ -64256,6 +64597,103 @@
             {
               "value": "escalated",
               "name": "Escalated"
+            }
+          ]
+        }
+      },
+      "SubmitFinCsatRequestRating": {
+        "enum": [
+          "terrible",
+          "bad",
+          "ok",
+          "good",
+          "amazing"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The rating the user selected \u2014 one of the \u0060key\u0060 values from the \u0060csat_requested\u0060 event\u0027s options.",
+        "example": "amazing",
+        "x-ms-enum": {
+          "name": "SubmitFinCsatRequestRating",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "terrible",
+              "name": "Terrible"
+            },
+            {
+              "value": "bad",
+              "name": "Bad"
+            },
+            {
+              "value": "ok",
+              "name": "Ok"
+            },
+            {
+              "value": "good",
+              "name": "Good"
+            },
+            {
+              "value": "amazing",
+              "name": "Amazing"
+            }
+          ]
+        }
+      },
+      "SubmitFinCsat200ResponseRating": {
+        "enum": [
+          "terrible",
+          "bad",
+          "ok",
+          "good",
+          "amazing"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The rating now recorded on the conversation.",
+        "example": "amazing",
+        "x-ms-enum": {
+          "name": "SubmitFinCsat200ResponseRating",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "terrible",
+              "name": "Terrible"
+            },
+            {
+              "value": "bad",
+              "name": "Bad"
+            },
+            {
+              "value": "ok",
+              "name": "Ok"
+            },
+            {
+              "value": "good",
+              "name": "Good"
+            },
+            {
+              "value": "amazing",
+              "name": "Amazing"
+            }
+          ]
+        }
+      },
+      "SubmitFinCsat200ResponseStatus": {
+        "enum": [
+          "rated"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The result of the submission.",
+        "example": "rated",
+        "x-ms-enum": {
+          "name": "SubmitFinCsat200ResponseStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "rated",
+              "name": "Rated"
             }
           ]
         }
@@ -65021,7 +65459,7 @@
     },
     {
       "name": "Fin Agent",
-      "description": "Access Fin programmatically via the Fin Agent API endpoints.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access and tailored, hands-on support.\n{% /admonition %}\n\n\u0026nbsp;\n\nOrchestrate Fin from your own agent: discover what Fin can do with \u0060/fin/capabilities\u0060, ask a one-shot question with \u0060/fin/ask\u0060, run a specific procedure with \u0060/fin/procedures/{procedure_id}/run\u0060, continue a conversation with \u0060/fin/reply\u0060, and escalate to a human with \u0060/fin/escalate\u0060. Fin notifies your application of its status and responses through a set of events, delivered via webhooks or Server-Sent Events (SSE).\n\n\u0026nbsp;\n\nStarting a standalone conversation with \u0060/fin/start\u0060 remains available for existing conversational integrations and is documented below.\n\n\u0026nbsp;\n\n**Events**\n\nConfigure a webhook endpoint in the Fin Agent API settings to receive events, or use the \u0060sse_subscription_url\u0060 from the API response to subscribe via SSE. See the [setup guide](/docs/guides/fin-agent-api/setup) for configuration details.\n\n- \u0060fin_status_updated\u0060 - Fired when Fin\u0027s status changes (awaiting_user_reply, escalated, resolved, complete)\n- \u0060fin_replied\u0060 - Fired when Fin sends a reply to the user\n- \u0060fin_reply_chunk\u0060 - SSE-only streaming event fired during reply generation (requires streaming enabled)\n\nAll webhook requests include an \u0060X-Fin-Agent-API-Webhook-Signature\u0060 header for request validation.\n"
+      "description": "Access Fin programmatically via the Fin Agent API endpoints.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nPlease reach out to your accounts team to discuss access and tailored, hands-on support.\n{% /admonition %}\n\n\u0026nbsp;\n\nOrchestrate Fin from your own agent: discover what Fin can do with \u0060/fin/capabilities\u0060, ask a one-shot question with \u0060/fin/ask\u0060, run a specific procedure with \u0060/fin/procedures/{procedure_id}/run\u0060, continue a conversation with \u0060/fin/reply\u0060, escalate to a human with \u0060/fin/escalate\u0060, and record a satisfaction rating with \u0060/fin/csat\u0060. Fin notifies your application of its status and responses through a set of events, delivered via webhooks or Server-Sent Events (SSE).\n\n\u0026nbsp;\n\nStarting a standalone conversation with \u0060/fin/start\u0060 remains available for existing conversational integrations and is documented below.\n\n\u0026nbsp;\n\n**Events**\n\nConfigure a webhook endpoint in the Fin Agent API settings to receive events, or use the \u0060sse_subscription_url\u0060 from the API response to subscribe via SSE. See the [setup guide](/docs/guides/fin-agent-api/setup) for configuration details.\n\n- \u0060fin_status_updated\u0060 - Fired when Fin\u0027s status changes (awaiting_user_reply, escalated, resolved, complete)\n- \u0060fin_replied\u0060 - Fired when Fin sends a reply to the user\n- \u0060fin_reply_chunk\u0060 - SSE-only streaming event fired during reply generation (requires streaming enabled)\n- \u0060csat_requested\u0060 - Fired when Fin asks the user to rate the conversation (submit the choice with \u0060POST /fin/csat\u0060)\n\nAll webhook requests include an \u0060X-Fin-Agent-API-Webhook-Signature\u0060 header for request validation.\n"
     },
     {
       "name": "Help Center",
