@@ -28473,7 +28473,7 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ShowCallTranscript200ResponseResponsePlain"
+                  "$ref": "#/components/schemas/ShowCallTranscript200PlainResponseSchema"
                 },
                 "examples": {
                   "transcript_txt": {
@@ -33782,7 +33782,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CollectFinVoiceCallsByConversationId200ResponseResponseJson"
+                  "$ref": "#/components/schemas/CollectFinVoiceCallsByConversationId200ResponseSchema"
                 }
               }
             }
@@ -35061,7 +35061,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CollectProcedureAgentInput200ResponseResponseJson"
+                  "$ref": "#/components/schemas/CollectProcedureAgentInput200ResponseSchema"
                 },
                 "examples": {
                   "Successful response": {
@@ -56015,7 +56015,7 @@
           }
         }
       },
-      "ShowCallTranscript200Response": {
+      "ShowCallTranscript200PlainResponse": {
         "type": "string",
         "description": "Transcript text"
       },
@@ -56735,11 +56735,11 @@
         "type": "object",
         "description": "Default response schema"
       },
-      "ShowCallTranscript200ResponseResponsePlain": {
+      "ShowCallTranscript200PlainResponseSchema": {
         "type": "string",
         "description": "Transcript text"
       },
-      "CollectFinVoiceCallsByConversationId200ResponseResponseJson": {
+      "CollectFinVoiceCallsByConversationId200ResponseSchema": {
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/AiCallResponse"
@@ -56878,7 +56878,7 @@
           }
         }
       },
-      "CollectProcedureAgentInput200ResponseResponseJson": {
+      "CollectProcedureAgentInput200ResponseSchema": {
         "type": "object"
       },
       "ChangeTicketTypeRequestTicketAttributesProperty": {
