@@ -8,11 +8,19 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByAdmin"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByUser"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByWorkflow"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByRule"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflow"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPaused"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaRemoved"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaUnpaused"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationTagsUpdated"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinished"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomActionStarted"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OperatorWorkflowEvent"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Snoozed"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CallSummary"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByAdmin"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByUser"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByWorkflow"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByRule"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflow"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPaused"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaRemoved"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissed"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaUnpaused"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationTagsUpdated"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomActionFinished"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomActionStarted"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OperatorWorkflowEvent"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PriorityChanged"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Snoozed"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class EventDetails : IComposedTypeWrapper, IParsable
     {
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CallSummary"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.CallSummary? CallSummary { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.CallSummary CallSummary { get; set; }
+#endif
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByAdmin"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -142,6 +150,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.EventDetails();
+            result.CallSummary = new global::Soenneker.Intercom.OpenApiClient.Models.CallSummary();
             result.ConversationAttributeUpdatedByAdmin = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByAdmin();
             result.ConversationAttributeUpdatedByUser = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByUser();
             result.ConversationAttributeUpdatedByWorkflow = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByWorkflow();
@@ -165,9 +174,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(ConversationAttributeUpdatedByAdmin != null || ConversationAttributeUpdatedByUser != null || ConversationAttributeUpdatedByWorkflow != null || ConversationSlaAppliedByRule != null || ConversationSlaAppliedByWorkflow != null || ConversationSlaPaused != null || ConversationSlaRemoved != null || ConversationSlaTargetMissed != null || ConversationSlaUnpaused != null || ConversationTagsUpdated != null || CustomActionFinished != null || CustomActionStarted != null || OperatorWorkflowEvent != null || PriorityChanged != null || Snoozed != null)
+            if(CallSummary != null || ConversationAttributeUpdatedByAdmin != null || ConversationAttributeUpdatedByUser != null || ConversationAttributeUpdatedByWorkflow != null || ConversationSlaAppliedByRule != null || ConversationSlaAppliedByWorkflow != null || ConversationSlaPaused != null || ConversationSlaRemoved != null || ConversationSlaTargetMissed != null || ConversationSlaUnpaused != null || ConversationTagsUpdated != null || CustomActionFinished != null || CustomActionStarted != null || OperatorWorkflowEvent != null || PriorityChanged != null || Snoozed != null)
             {
-                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(ConversationAttributeUpdatedByAdmin, ConversationAttributeUpdatedByUser, ConversationAttributeUpdatedByWorkflow, ConversationSlaAppliedByRule, ConversationSlaAppliedByWorkflow, ConversationSlaPaused, ConversationSlaRemoved, ConversationSlaTargetMissed, ConversationSlaUnpaused, ConversationTagsUpdated, CustomActionFinished, CustomActionStarted, OperatorWorkflowEvent, PriorityChanged, Snoozed);
+                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(CallSummary, ConversationAttributeUpdatedByAdmin, ConversationAttributeUpdatedByUser, ConversationAttributeUpdatedByWorkflow, ConversationSlaAppliedByRule, ConversationSlaAppliedByWorkflow, ConversationSlaPaused, ConversationSlaRemoved, ConversationSlaTargetMissed, ConversationSlaUnpaused, ConversationTagsUpdated, CustomActionFinished, CustomActionStarted, OperatorWorkflowEvent, PriorityChanged, Snoozed);
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -178,7 +187,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeUpdatedByAdmin>(null, ConversationAttributeUpdatedByAdmin, ConversationAttributeUpdatedByUser, ConversationAttributeUpdatedByWorkflow, ConversationSlaAppliedByRule, ConversationSlaAppliedByWorkflow, ConversationSlaPaused, ConversationSlaRemoved, ConversationSlaTargetMissed, ConversationSlaUnpaused, ConversationTagsUpdated, CustomActionFinished, CustomActionStarted, OperatorWorkflowEvent, PriorityChanged, Snoozed);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CallSummary>(null, CallSummary, ConversationAttributeUpdatedByAdmin, ConversationAttributeUpdatedByUser, ConversationAttributeUpdatedByWorkflow, ConversationSlaAppliedByRule, ConversationSlaAppliedByWorkflow, ConversationSlaPaused, ConversationSlaRemoved, ConversationSlaTargetMissed, ConversationSlaUnpaused, ConversationTagsUpdated, CustomActionFinished, CustomActionStarted, OperatorWorkflowEvent, PriorityChanged, Snoozed);
         }
     }
 }

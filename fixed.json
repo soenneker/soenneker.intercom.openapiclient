@@ -16830,9 +16830,35 @@
                               }
                             },
                             "app_package_code": null
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": 5,
+                            "part_type": "call_summary",
+                            "body": "\u003Cp\u003EThe customer asked about a failed payroll run and was advised to re-submit it.\u003C/p\u003E",
+                            "created_at": 1740141860,
+                            "updated_at": 1740141902,
+                            "notified_at": 1740141860,
+                            "assigned_to": null,
+                            "author": {
+                              "type": "bot",
+                              "id": 278,
+                              "name": "Fin",
+                              "email": "operator\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": false,
+                            "email_message_metadata": null,
+                            "state": "closed",
+                            "tags": [],
+                            "event_details": {
+                              "call_id": 3822007689
+                            },
+                            "app_package_code": null
                           }
                         ],
-                        "total_count": 4
+                        "total_count": 5
                       }
                     }
                   },
@@ -45496,6 +45522,18 @@
         },
         "description": "Contains basic SLA information when removed for conversation part type \u003Ccode\u003Econversation_sla_removed\u003C/code\u003E."
       },
+      "CallSummary": {
+        "title": "Part type - call_summary",
+        "type": "object",
+        "properties": {
+          "call_id": {
+            "type": "string",
+            "description": "The id of the call the summary describes",
+            "example": 3822007689
+          }
+        },
+        "description": "Contains the id of the call the summary describes, for conversation part type \u003Ccode\u003Ecall_summary\u003C/code\u003E. A conversation can contain several calls, and therefore several call summaries, so this identifies which call each summary belongs to. The id matches the \u003Ccode\u003Eid\u003C/code\u003E returned by the Calls API and by the \u003Ccode\u003Ecall.started\u003C/code\u003E, \u003Ccode\u003Ecall.ended\u003C/code\u003E, \u003Ccode\u003Ecall.recording_available\u003C/code\u003E and \u003Ccode\u003Ecall.transcription_available\u003C/code\u003E webhook topics."
+      },
       "EventDetails": {
         "title": "Event details of Workflow \u0026 actions",
         "required": [
@@ -45547,6 +45585,9 @@
           },
           {
             "$ref": "#/components/schemas/ConversationSlaRemoved"
+          },
+          {
+            "$ref": "#/components/schemas/CallSummary"
           }
         ],
         "properties": {
@@ -45572,7 +45613,8 @@
             "ConversationSlaTargetMissed": "#/components/schemas/ConversationSlaTargetMissed",
             "ConversationSlaPaused": "#/components/schemas/ConversationSlaPaused",
             "ConversationSlaUnpaused": "#/components/schemas/ConversationSlaUnpaused",
-            "ConversationSlaRemoved": "#/components/schemas/ConversationSlaRemoved"
+            "ConversationSlaRemoved": "#/components/schemas/ConversationSlaRemoved",
+            "CallSummary": "#/components/schemas/CallSummary"
           }
         }
       },
