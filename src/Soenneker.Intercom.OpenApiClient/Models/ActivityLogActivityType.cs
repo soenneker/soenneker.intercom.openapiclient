@@ -64,6 +64,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AdminLogout,
         #pragma warning restore CS1591
+        [EnumMember(Value = "admin_occupancy_setting_change")]
+        #pragma warning disable CS1591
+        AdminOccupancySettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_occupancy_state_change")]
+        #pragma warning disable CS1591
+        AdminOccupancyStateChange,
+        #pragma warning restore CS1591
         [EnumMember(Value = "admin_password_reset_request")]
         #pragma warning disable CS1591
         AdminPasswordResetRequest,

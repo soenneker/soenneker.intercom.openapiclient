@@ -507,6 +507,8 @@
                         "admin_login_failure",
                         "admin_login_success",
                         "admin_logout",
+                        "admin_occupancy_setting_change",
+                        "admin_occupancy_state_change",
                         "admin_password_reset_request",
                         "admin_password_reset_success",
                         "admin_permission_change",
@@ -12751,6 +12753,143 @@
                         {
                           "code": "invalid_sort_order",
                           "message": "Invalid sort order \u0027desc\u0027. Must be one of: ascending, descending"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/activities": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "List all contact activities",
+        "description": "You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  You can use pagination to limit the number of results returned. The default is \u006050\u0060 results per page, with a maximum of \u0060150\u0060.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n",
+        "operationId": "ListContactActivities",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results to return per page. Defaults to 50, minimum 1, maximum 150.",
+            "schema": {
+              "maximum": 150,
+              "minimum": 1,
+              "type": "integer",
+              "default": 50
+            }
+          },
+          {
+            "name": "starting_after",
+            "in": "query",
+            "description": "The cursor value from \u0060pages.next.starting_after\u0060 in a previous response. Used to paginate through results.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactActivityList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "contact_activity",
+                          "id": "1717000000000.0000a1",
+                          "event_type": "contact.created",
+                          "contact_id": "6329bd9ffe4e2e91dc5d6a1e",
+                          "external_id": "user-42",
+                          "role": "lead",
+                          "created_at": 1717000000
+                        },
+                        {
+                          "type": "contact_activity",
+                          "id": "1717000100000.0000b2",
+                          "event_type": "contact.role_updated",
+                          "contact_id": "6329bd9ffe4e2e91dc5d6a1e",
+                          "external_id": "user-42",
+                          "role": "user",
+                          "created_at": 1717000100
+                        },
+                        {
+                          "type": "contact_activity",
+                          "id": "1717000200000.0000c3",
+                          "event_type": "contact.merged",
+                          "contact_id": "6329bd9ffe4e2e91dc5d6a1e",
+                          "external_id": "user-42",
+                          "role": "user",
+                          "merge_source_id": "5f7f0d217c3f2e001a4e8b12",
+                          "merge_target_id": "6329bd9ffe4e2e91dc5d6a1e",
+                          "created_at": 1717000200
+                        },
+                        {
+                          "type": "contact_activity",
+                          "id": "1717000300000.0000d4",
+                          "event_type": "contact.merge_failed",
+                          "contact_id": "5f7f0d217c3f2e001a4e8b12",
+                          "merge_source_id": "5f7f0d217c3f2e001a4e8b12",
+                          "merge_target_id": "6329bd9ffe4e2e91dc5d6a1e",
+                          "failure_reason": "Merge source_user cannot have role=\u0027user_role\u0027",
+                          "created_at": 1717000300
+                        },
+                        {
+                          "type": "contact_activity",
+                          "id": 171700050000000000,
+                          "event_type": "contact.deleted",
+                          "contact_id": "6329bd9ffe4e2e91dc5d6a1e",
+                          "role": "user",
+                          "created_at": 1717000400
+                        }
+                      ],
+                      "pages": {
+                        "type": "pages",
+                        "per_page": 50,
+                        "next": {
+                          "starting_after": 171700050000000000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e097e446-9ae6-44a8-8e13-2bf3008b87ef",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
                         }
                       ]
                     }
@@ -34535,7 +34674,7 @@
           "Fin Agent"
         ],
         "summary": "Escalate to a human",
-        "description": "Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the\nhandoff lands in your team inbox.\n\nProvide either \u0060conversation_id\u0060 or \u0060user\u0060:\n\n- \u0060conversation_id\u0060 \u2014 escalate an existing agent conversation, including one started\n  with \u0060/fin/ask\u0060. On the Intercom Helpdesk, Fin by default summarises the conversation\n  and opens a new Helpdesk conversation that carries the summary as an internal note;\n  the original agent conversation is not reassigned. Configure an escalation Operator\n  Workflow to change this default.\n- \u0060user\u0060 \u2014 escalate on behalf of a user with no prior agent conversation. On the Intercom\n  Helpdesk, a new Helpdesk conversation is created for the teammate. Include an optional\n  \u0060message\u0060 for its first message.\n\nIn both cases the optional \u0060context\u0060 is attached as an internal note (supplied by your\norchestrating agent, not generated by Fin) alongside any summary.\n\nEscalating an existing conversation also sets its AI Agent resolution state to\n\u0060escalated\u0060, readable as \u0060ai_agent.resolution_state\u0060 on the Conversations API. This is a\nresolution state, not a billable resolution.\n\nOn Fin for Platforms there is no Intercom inbox, so an escalation that no workflow\nhandles \u2014 whether by \u0060conversation_id\u0060 or \u0060user\u0060 \u2014 does not open a Helpdesk\nconversation for a teammate. You are notified with the \u0060escalated\u0060 status and hand the\nconversation to a human on your own platform. Escalating by \u0060user\u0060 still creates the\nFin conversation, returned as \u0060intercom_conversation_id\u0060.\n\nYou are notified over the existing webhook or SSE channel with an \u0060escalated\u0060 status\nfollowed by \u0060complete\u0060. The \u0060complete\u0060 status signals that Fin is done; it does not close\nthe conversation. On the Intercom Helpdesk it remains open in the human inbox; on Fin for\nPlatforms it remains open for whoever handles it on your own platform.\n",
+        "description": "Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the\nhandoff lands in your team inbox.\n\nProvide either \u0060conversation_id\u0060 or \u0060user\u0060:\n\n- \u0060conversation_id\u0060 \u2014 escalate an existing agent conversation, including one started\n  with \u0060/fin/ask\u0060. On the Intercom Helpdesk, Fin by default summarises the conversation\n  and opens a new Helpdesk conversation that carries the summary as an internal note;\n  the original agent conversation is not reassigned. Configure an escalation Operator\n  Workflow to change this default.\n- \u0060user\u0060 \u2014 escalate on behalf of a user with no prior agent conversation. On the Intercom\n  Helpdesk, a new Helpdesk conversation is created for the teammate. Include an optional\n  \u0060message\u0060 for its first message. Not supported on Fin for Platforms \u2014 see below.\n\nIn both cases the optional \u0060context\u0060 is attached as an internal note (supplied by your\norchestrating agent, not generated by Fin) alongside any summary.\n\nEscalating an existing conversation also sets its AI Agent resolution state to\n\u0060escalated\u0060, readable as \u0060ai_agent.resolution_state\u0060 on the Conversations API. This is a\nresolution state, not a billable resolution.\n\nOn Fin for Platforms, \u0060conversation_id\u0060 is required \u2014 \u0060user\u0060 is not supported and is\nrejected, because there is no Intercom Helpdesk in which to create a conversation. There\nis no Intercom inbox either, so an escalation that no workflow handles does not open a\nHelpdesk conversation for a teammate. You are notified with the \u0060escalated\u0060 status and\nhand the conversation to a human on your own platform.\n\nYou are notified over the existing webhook or SSE channel with an \u0060escalated\u0060 status\nfollowed by \u0060complete\u0060. The \u0060complete\u0060 status signals that Fin is done; it does not close\nthe conversation. On the Intercom Helpdesk it remains open in the human inbox; on Fin for\nPlatforms it remains open for whoever handles it on your own platform.\n",
         "operationId": "EscalateFinConversation",
         "parameters": [
           {
@@ -35656,6 +35795,46 @@
             "description": "The name of the Admin who initiated the activity.",
             "nullable": true,
             "example": "Joe Example"
+          },
+          "previous_state": {
+            "type": "string",
+            "description": "The state before the change. \u0060idle\u0060 or \u0060occupied\u0060, and null when the Admin had not been classified yet.",
+            "nullable": true,
+            "example": "idle"
+          },
+          "new_state": {
+            "type": "string",
+            "description": "The state after the change. \u0060idle\u0060 or \u0060occupied\u0060.",
+            "nullable": true,
+            "example": "occupied"
+          },
+          "threshold_minutes": {
+            "type": "integer",
+            "description": "The inactivity window, in minutes, used to classify the Admin.",
+            "nullable": true,
+            "example": 15
+          },
+          "last_activity_at": {
+            "type": "integer",
+            "description": "The time of the Admin\u0027s last recorded activity.",
+            "format": "date-time",
+            "nullable": true,
+            "example": 1671028894
+          },
+          "auto": {
+            "type": "boolean",
+            "description": "Indicates the state was derived automatically rather than set by an Admin.",
+            "nullable": true,
+            "example": true
+          },
+          "setting_type": {
+            "type": "string",
+            "description": "The group of workspace settings the change belongs to, for example \u0060teammate_occupancy\u0060 or \u0060automatic_away_mode\u0060.",
+            "nullable": true,
+            "example": "teammate_occupancy"
+          },
+          "changes": {
+            "$ref": "#/components/schemas/ActivityLogMetadataChanges"
           },
           "conversation_assignment_limit": {
             "type": "integer",
@@ -38796,6 +38975,85 @@
           }
         },
         "description": "deleted contact object"
+      },
+      "ContactActivity": {
+        "title": "Contact Activity",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContactActivityType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the activity event.",
+            "example": "1717000000000.0000a1"
+          },
+          "event_type": {
+            "$ref": "#/components/schemas/ContactActivityEventType"
+          },
+          "contact_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact the event relates to.",
+            "example": "6329bd9ffe4e2e91dc5d6a1e"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The external identifier of the contact, if one is set.",
+            "nullable": true,
+            "example": "user-42"
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the contact at the time of the event, either user, lead, or visitor.",
+            "nullable": true,
+            "example": "user"
+          },
+          "merge_source_id": {
+            "type": "string",
+            "description": "For merge events, the identifier of the contact that was merged away.",
+            "nullable": true,
+            "example": "5f7f0d217c3f2e001a4e8b12"
+          },
+          "merge_target_id": {
+            "type": "string",
+            "description": "For merge events, the identifier of the contact that was merged into.",
+            "nullable": true,
+            "example": "6329bd9ffe4e2e91dc5d6a1e"
+          },
+          "failure_reason": {
+            "type": "string",
+            "description": "For failed events, the reason the activity did not succeed.",
+            "nullable": true,
+            "example": "duplicate_external_id"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the activity event occurred, as a Unix timestamp in seconds.",
+            "format": "date-time",
+            "example": 1717000000
+          }
+        },
+        "description": "An activity event that occurred for a contact, such as creation, merge, or deletion."
+      },
+      "ContactActivityList": {
+        "title": "Contact Activity List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContactActivityListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContactActivity"
+            },
+            "description": "The list of contact activity objects."
+          },
+          "pages": {
+            "$ref": "#/components/schemas/ContactActivityListPages"
+          }
+        },
+        "description": "A paginated list of contact activity events."
       },
       "ContactList": {
         "title": "Contact List",
@@ -51356,6 +51614,20 @@
         },
         "description": "Details about the Admin involved in the activity."
       },
+      "ActivityLogMetadataChanges": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/ActivityLogMetadataChangesAdditionalProperties"
+        },
+        "description": "The settings altered by the change, keyed by setting name. Only settings whose value actually moved are included, so an unchanged setting is absent rather than present with equal values.",
+        "nullable": true,
+        "example": {
+          "occupancy_window_minutes": {
+            "before": 15,
+            "after": 30
+          }
+        }
+      },
       "AdminRole": {
         "type": "object",
         "properties": {
@@ -51956,6 +52228,23 @@
           }
         },
         "nullable": true
+      },
+      "ContactActivityListPages": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContactActivityListPagesType"
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "The number of results per page.",
+            "example": 10
+          },
+          "next": {
+            "$ref": "#/components/schemas/ContactActivityListPagesNext"
+          }
+        },
+        "description": "Pagination information."
       },
       "CompaniesBulkJobTasksItem": {
         "type": "object",
@@ -53770,6 +54059,17 @@
           }
         }
       },
+      "ActivityLogMetadataChangesAdditionalProperties": {
+        "type": "object",
+        "properties": {
+          "before": {
+            "$ref": "#/components/schemas/ActivityLogMetadataChangesAdditionalPropertiesBefore"
+          },
+          "after": {
+            "$ref": "#/components/schemas/ActivityLogMetadataChangesAdditionalPropertiesAfter"
+          }
+        }
+      },
       "BulkCreateCompaniesRequestCompaniesItemCustomAttributes": {
         "type": "object",
         "description": "A hash of key/value pairs containing any other data about the company you want Intercom to store."
@@ -53859,6 +54159,18 @@
           }
         },
         "description": "\u0022Tags to add to or remove from the contact. Each tag is identified by its \u0060id\u0060, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.\n\u0022"
+      },
+      "ContactActivityListPagesNext": {
+        "type": "object",
+        "properties": {
+          "starting_after": {
+            "type": "string",
+            "description": "The cursor value to use for the next page.",
+            "example": "1717000000000.0000a1"
+          }
+        },
+        "description": "Cursor for the next page of results.",
+        "nullable": true
       },
       "DataConnectorDetailObjectMappingsItemAttributeMappingsItem": {
         "type": "object",
@@ -56491,11 +56803,11 @@
         "properties": {
           "conversation_id": {
             "type": "string",
-            "description": "The external ID of the conversation to escalate. Provide this or \u0060user\u0060.",
+            "description": "The external ID of the conversation to escalate. Provide this or \u0060user\u0060. Required on Fin for Platforms, where \u0060user\u0060 is not supported.",
             "example": "ext-123"
           },
           "user": {
-            "$ref": "#/components/schemas/FinAgentUser"
+            "$ref": "#/components/schemas/EscalateFinConversationRequestUser"
           },
           "message": {
             "maxLength": 10000,
@@ -57141,6 +57453,14 @@
       "WorkflowExportWorkflowEmbeddedRulesItemProperty": {
         "type": "object"
       },
+      "ActivityLogMetadataChangesAdditionalPropertiesBefore": {
+        "type": "object",
+        "description": "The value before the change."
+      },
+      "ActivityLogMetadataChangesAdditionalPropertiesAfter": {
+        "type": "object",
+        "description": "The value after the change."
+      },
       "GetExportReportingDataGetDatasets200ResponseDataItem": {
         "type": "object",
         "properties": {
@@ -57482,6 +57802,34 @@
         },
         "description": "Optional settings to control Fin\u0027s behaviour for this procedure run."
       },
+      "EscalateFinConversationRequestUser": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the user. This value will be used to uniquely identify the user\nduring a conversation with Fin. Maps to the user_id field on the Intercom User object.\n",
+            "example": 123456
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the user.",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user.",
+            "format": "email",
+            "example": "john.doe@example.com"
+          },
+          "attributes": {
+            "$ref": "#/components/schemas/EscalateFinConversationRequestUserAttributes"
+          }
+        },
+        "description": "The user to escalate on behalf of, creating a new conversation. Provide this or \u0060conversation_id\u0060. Not supported on Fin for Platforms."
+      },
       "SubmitFinCsat422ResponseErrors": {
         "type": "object",
         "additionalProperties": {
@@ -57524,6 +57872,10 @@
         "example": {
           "order_id": 98765
         }
+      },
+      "EscalateFinConversationRequestUserAttributes": {
+        "type": "object",
+        "description": "A hash of attributes associated with the user.\nAttributes can be used by Fin to target content and responses.\nLimit to 10 attributes.\n"
       },
       "OfficeHoursExceptionExceptionType": {
         "enum": [
@@ -57613,6 +57965,8 @@
           "admin_login_failure",
           "admin_login_success",
           "admin_logout",
+          "admin_occupancy_setting_change",
+          "admin_occupancy_state_change",
           "admin_password_reset_request",
           "admin_password_reset_success",
           "admin_permission_change",
@@ -57734,6 +58088,14 @@
             {
               "value": "admin_logout",
               "name": "AdminLogout"
+            },
+            {
+              "value": "admin_occupancy_setting_change",
+              "name": "AdminOccupancySettingChange"
+            },
+            {
+              "value": "admin_occupancy_state_change",
+              "name": "AdminOccupancyStateChange"
             },
             {
               "value": "admin_password_reset_request",
@@ -59072,6 +59434,83 @@
             {
               "value": "contact",
               "name": "Contact"
+            }
+          ]
+        }
+      },
+      "ContactActivityType": {
+        "enum": [
+          "contact_activity"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Always contact_activity",
+        "example": "contact_activity",
+        "x-ms-enum": {
+          "name": "ContactActivityType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact_activity",
+              "name": "ContactActivity"
+            }
+          ]
+        }
+      },
+      "ContactActivityEventType": {
+        "enum": [
+          "contact.created",
+          "contact.role_updated",
+          "contact.deleted",
+          "contact.merged",
+          "contact.merge_failed"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of activity event.",
+        "example": "contact.created",
+        "x-ms-enum": {
+          "name": "ContactActivityEventType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "contact.created",
+              "name": "ContactCreated"
+            },
+            {
+              "value": "contact.role_updated",
+              "name": "ContactRoleUpdated"
+            },
+            {
+              "value": "contact.deleted",
+              "name": "ContactDeleted"
+            },
+            {
+              "value": "contact.merged",
+              "name": "ContactMerged"
+            },
+            {
+              "value": "contact.merge_failed",
+              "name": "ContactMergeFailed"
+            }
+          ]
+        }
+      },
+      "ContactActivityListType": {
+        "enum": [
+          "list"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Always list",
+        "example": "list",
+        "x-ms-enum": {
+          "name": "ContactActivityListType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "list",
+              "name": "List"
             }
           ]
         }
@@ -63659,6 +64098,24 @@
             {
               "value": "note.list",
               "name": "NoteList"
+            }
+          ]
+        }
+      },
+      "ContactActivityListPagesType": {
+        "enum": [
+          "pages"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "example": "pages",
+        "x-ms-enum": {
+          "name": "ContactActivityListPagesType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "pages",
+              "name": "Pages"
             }
           ]
         }

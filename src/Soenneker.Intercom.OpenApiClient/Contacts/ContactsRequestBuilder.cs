@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Contacts.Activities;
 using Soenneker.Intercom.OpenApiClient.Contacts.Bulk;
 using Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item;
@@ -22,6 +23,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContactsRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The activities property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Activities.ActivitiesRequestBuilder Activities
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Activities.ActivitiesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The bulk property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Bulk.BulkRequestBuilder Bulk
         {

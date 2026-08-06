@@ -15,6 +15,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Indicates the state was derived automatically rather than set by an Admin.</summary>
+        public bool? Auto { get; set; }
         /// <summary>Indicates if the status was changed automatically or manually.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -33,6 +35,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AwayStatusReason { get; set; }
 #endif
+        /// <summary>The settings altered by the change, keyed by setting name. Only settings whose value actually moved are included, so an unchanged setting is absent rather than present with equal values.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges? Changes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges Changes { get; set; }
+#endif
         /// <summary>The conversation assignment limit value for an admin.</summary>
         public int? ConversationAssignmentLimit { get; set; }
         /// <summary>The unique identifier for the contact which is provided by the Client.</summary>
@@ -43,8 +53,34 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalId { get; set; }
 #endif
+        /// <summary>The time of the Admin&apos;s last recorded activity.</summary>
+        public int? LastActivityAt { get; set; }
+        /// <summary>The state after the change. `idle` or `occupied`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? NewState { get; set; }
+#nullable restore
+#else
+        public string NewState { get; set; }
+#endif
+        /// <summary>The state before the change. `idle` or `occupied`, and null when the Admin had not been classified yet.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? PreviousState { get; set; }
+#nullable restore
+#else
+        public string PreviousState { get; set; }
+#endif
         /// <summary>Indicates if conversations should be reassigned while an Admin is away.</summary>
         public bool? ReassignConversations { get; set; }
+        /// <summary>The group of workspace settings the change belongs to, for example `teammate_occupancy` or `automatic_away_mode`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? SettingType { get; set; }
+#nullable restore
+#else
+        public string SettingType { get; set; }
+#endif
         /// <summary>The way the admin signed in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -61,6 +97,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Source { get; set; }
 #endif
+        /// <summary>The inactivity window, in minutes, used to classify the Admin.</summary>
+        public int? ThresholdMinutes { get; set; }
         /// <summary>The ticket assignment limit value for an admin.</summary>
         public int? TicketAssignmentLimit { get; set; }
         /// <summary>The ID of the Admin who initiated the activity.</summary>
@@ -98,14 +136,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "auto", n => { Auto = n.GetBoolValue(); } },
                 { "auto_changed", n => { AutoChanged = n.GetStringValue(); } },
                 { "away_mode", n => { AwayMode = n.GetBoolValue(); } },
                 { "away_status_reason", n => { AwayStatusReason = n.GetStringValue(); } },
+                { "changes", n => { Changes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges.CreateFromDiscriminatorValue); } },
                 { "conversation_assignment_limit", n => { ConversationAssignmentLimit = n.GetIntValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
+                { "last_activity_at", n => { LastActivityAt = n.GetIntValue(); } },
+                { "new_state", n => { NewState = n.GetStringValue(); } },
+                { "previous_state", n => { PreviousState = n.GetStringValue(); } },
                 { "reassign_conversations", n => { ReassignConversations = n.GetBoolValue(); } },
+                { "setting_type", n => { SettingType = n.GetStringValue(); } },
                 { "sign_in_method", n => { SignInMethod = n.GetStringValue(); } },
                 { "source", n => { Source = n.GetStringValue(); } },
+                { "threshold_minutes", n => { ThresholdMinutes = n.GetIntValue(); } },
                 { "ticket_assignment_limit", n => { TicketAssignmentLimit = n.GetIntValue(); } },
                 { "update_by", n => { UpdateBy = n.GetIntValue(); } },
                 { "update_by_name", n => { UpdateByName = n.GetStringValue(); } },
@@ -118,14 +163,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("auto", Auto);
             writer.WriteStringValue("auto_changed", AutoChanged);
             writer.WriteBoolValue("away_mode", AwayMode);
             writer.WriteStringValue("away_status_reason", AwayStatusReason);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges>("changes", Changes);
             writer.WriteIntValue("conversation_assignment_limit", ConversationAssignmentLimit);
             writer.WriteStringValue("external_id", ExternalId);
+            writer.WriteIntValue("last_activity_at", LastActivityAt);
+            writer.WriteStringValue("new_state", NewState);
+            writer.WriteStringValue("previous_state", PreviousState);
             writer.WriteBoolValue("reassign_conversations", ReassignConversations);
+            writer.WriteStringValue("setting_type", SettingType);
             writer.WriteStringValue("sign_in_method", SignInMethod);
             writer.WriteStringValue("source", Source);
+            writer.WriteIntValue("threshold_minutes", ThresholdMinutes);
             writer.WriteIntValue("ticket_assignment_limit", TicketAssignmentLimit);
             writer.WriteIntValue("update_by", UpdateBy);
             writer.WriteStringValue("update_by_name", UpdateByName);

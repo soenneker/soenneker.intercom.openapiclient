@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Context { get; set; }
 #endif
-        /// <summary>The external ID of the conversation to escalate. Provide this or `user`.</summary>
+        /// <summary>The external ID of the conversation to escalate. Provide this or `user`. Required on Fin for Platforms, where `user` is not supported.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ConversationId { get; set; }
@@ -38,13 +38,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Message { get; set; }
 #endif
-        /// <summary>A user object representing the user in a Fin Agent conversation.</summary>
+        /// <summary>The user to escalate on behalf of, creating a new conversation. Provide this or `conversation_id`. Not supported on Fin for Platforms.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser? User { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser? User { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser User { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser User { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequest"/> and sets the default values.
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "context", n => { Context = n.GetStringValue(); } },
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetStringValue(); } },
-                { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser.CreateFromDiscriminatorValue); } },
+                { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser>(global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -87,7 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("context", Context);
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteStringValue("message", Message);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>("user", User);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser>("user", User);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
