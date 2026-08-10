@@ -31,6 +31,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         GreaterThan,
         #pragma warning restore CS1591
+        [EnumMember(Value = "~")]
+        #pragma warning disable CS1591
+        Tilde,
+        #pragma warning restore CS1591
         [EnumMember(Value = "!~")]
         #pragma warning disable CS1591
         ExclamationTilde,

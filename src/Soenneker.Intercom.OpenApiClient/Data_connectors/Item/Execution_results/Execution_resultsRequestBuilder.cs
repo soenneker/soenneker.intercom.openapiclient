@@ -114,15 +114,8 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             [QueryParameter("error_type")]
             public global::Soenneker.Intercom.OpenApiClient.Models.ListDataConnectorExecutionResultsErrorTypeParameter? ErrorType { get; set; }
             /// <summary>Include request/response bodies in the response (default false).</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
             [QueryParameter("include_bodies")]
-            public string? IncludeBodies { get; set; }
-#nullable restore
-#else
-            [QueryParameter("include_bodies")]
-            public string IncludeBodies { get; set; }
-#endif
+            public global::Soenneker.Intercom.OpenApiClient.Models.ListDataConnectorExecutionResultsIncludeBodiesParameter? IncludeBodies { get; set; }
             /// <summary>The number of results per page (1-30, default 10).</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
@@ -140,15 +133,8 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             [QueryParameter("start_ts")]
             public int? StartTs { get; set; }
             /// <summary>Filter by success status. Use `true`, `false`, or omit for all.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
             [QueryParameter("success")]
-            public string? Success { get; set; }
-#nullable restore
-#else
-            [QueryParameter("success")]
-            public string Success { get; set; }
-#endif
+            public global::Soenneker.Intercom.OpenApiClient.Models.ListDataConnectorExecutionResultsSuccessParameter? Success { get; set; }
         }
     }
 }
