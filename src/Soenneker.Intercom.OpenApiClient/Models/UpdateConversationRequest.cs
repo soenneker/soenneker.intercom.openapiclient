@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The ID of the teammate to attribute the priority change to. Defaults to Operator when omitted, and is only used alongside priority.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AdminId { get; set; }
+#nullable restore
+#else
+        public string AdminId { get; set; }
+#endif
         /// <summary>The ID of the company that the conversation is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -31,6 +39,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes CustomAttributes { get; set; }
 #endif
+        /// <summary>The priority level to set on the conversation. Accepts one of none, low, medium, high, or urgent. Set none to clear an existing priority.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestPriority? Priority { get; set; }
         /// <summary>Mark a conversation as read within Intercom.</summary>
         public bool? Read { get; set; }
         /// <summary>The title given to the conversation</summary>
@@ -66,8 +76,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes.CreateFromDiscriminatorValue); } },
+                { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestPriority>(); } },
                 { "read", n => { Read = n.GetBoolValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -79,8 +91,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("admin_id", AdminId);
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes>("custom_attributes", CustomAttributes);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestPriority>("priority", Priority);
             writer.WriteBoolValue("read", Read);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

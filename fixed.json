@@ -17415,9 +17415,10 @@
                   "value": {
                     "read": true,
                     "title": "new conversation title",
+                    "priority": "high",
+                    "admin_id": "394051",
                     "custom_attributes": {
-                      "issue_type": "Billing",
-                      "priority": "high"
+                      "issue_type": "Billing"
                     }
                   }
                 },
@@ -17436,9 +17437,10 @@
                   "value": {
                     "read": true,
                     "title": "new conversation title",
+                    "priority": "high",
+                    "admin_id": "394051",
                     "custom_attributes": {
-                      "issue_type": "Billing",
-                      "priority": "high"
+                      "issue_type": "Billing"
                     }
                   }
                 }
@@ -17499,15 +17501,14 @@
                         "type": "tag.list",
                         "tags": []
                       },
-                      "priority": "none",
+                      "priority": "high",
                       "sla_applied": null,
                       "statistics": null,
                       "conversation_rating": null,
                       "teammates": null,
                       "title": null,
                       "custom_attributes": {
-                        "issue_type": "Billing",
-                        "priority": "high"
+                        "issue_type": "Billing"
                       },
                       "topics": {},
                       "ticket": null,
@@ -49933,6 +49934,14 @@
             "description": "The title given to the conversation",
             "example": "Conversation Title"
           },
+          "priority": {
+            "$ref": "#/components/schemas/UpdateConversationRequestPriority"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The ID of the teammate to attribute the priority change to. Defaults to Operator when omitted, and is only used alongside priority.",
+            "example": "394051"
+          },
           "custom_attributes": {
             "$ref": "#/components/schemas/UpdateConversationRequestCustomAttributes"
           },
@@ -51388,7 +51397,14 @@
           {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SingleFilterSearchRequestValueOneOf4Item"
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ]
             }
           }
         ],
@@ -51666,17 +51682,6 @@
             "example": "Summer Collection"
           }
         }
-      },
-      "SingleFilterSearchRequestValueOneOf4Item": {
-        "type": "object",
-        "oneOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "integer"
-          }
-        ]
       },
       "ActivityLogPerformedBy": {
         "type": "object",
@@ -58553,6 +58558,7 @@
       },
       "AiAgentLastAnswerType": {
         "enum": [
+          null,
           "ai_answer",
           "custom_answer"
         ],
@@ -58582,7 +58588,8 @@
           "confirmed_resolution",
           "escalated",
           "negative_feedback",
-          "procedure_handoff"
+          "procedure_handoff",
+          null
         ],
         "type": "string",
         "additionalProperties": false,
@@ -58805,6 +58812,7 @@
       },
       "ArticleContentType": {
         "enum": [
+          null,
           "article_content"
         ],
         "type": "string",
@@ -58987,6 +58995,7 @@
       },
       "ArticleTranslatedContentType": {
         "enum": [
+          null,
           "article_translated_content"
         ],
         "type": "string",
@@ -62204,6 +62213,7 @@
       },
       "GroupContentType": {
         "enum": [
+          null,
           "group_content"
         ],
         "type": "string",
@@ -62224,6 +62234,7 @@
       },
       "GroupTranslatedContentType": {
         "enum": [
+          null,
           "group_translated_content"
         ],
         "type": "string",
@@ -62397,7 +62408,8 @@
         "enum": [
           "Customer",
           "Back-office",
-          "Tracker"
+          "Tracker",
+          null
         ],
         "type": "string",
         "additionalProperties": false,
@@ -63655,6 +63667,45 @@
             {
               "value": "deactivated",
               "name": "Deactivated"
+            }
+          ]
+        }
+      },
+      "UpdateConversationRequestPriority": {
+        "enum": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "urgent"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The priority level to set on the conversation. Accepts one of none, low, medium, high, or urgent. Set none to clear an existing priority.",
+        "example": "high",
+        "x-ms-enum": {
+          "name": "UpdateConversationRequestPriority",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "none",
+              "name": "None"
+            },
+            {
+              "value": "low",
+              "name": "Low"
+            },
+            {
+              "value": "medium",
+              "name": "Medium"
+            },
+            {
+              "value": "high",
+              "name": "High"
+            },
+            {
+              "value": "urgent",
+              "name": "Urgent"
             }
           ]
         }

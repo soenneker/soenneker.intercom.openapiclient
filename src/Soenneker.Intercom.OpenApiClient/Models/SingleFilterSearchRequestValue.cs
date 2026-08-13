@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="bool"/>, <see cref="int"/>, <see cref="string"/>, List&lt;global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item&gt;
+    /// Composed type wrapper for classes <see cref="bool"/>, <see cref="int"/>, <see cref="string"/>, List&lt;global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1&gt;
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SingleFilterSearchRequestValue : IComposedTypeWrapper, IParsable
@@ -17,13 +17,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? Boolean { get; set; }
         /// <summary>Composed type representation for type <see cref="int"/></summary>
         public int? Integer { get; set; }
-        /// <summary>Composed type representation for type List&lt;global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item&gt;</summary>
+        /// <summary>Composed type representation for type List&lt;global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1&gt;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item>? SingleFilterSearchRequestValueOneOf4Item { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1>? SingleFilterSearchRequestValueMember1 { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item> SingleFilterSearchRequestValueOneOf4Item { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1> SingleFilterSearchRequestValueMember1 { get; set; }
 #endif
         /// <summary>Composed type representation for type <see cref="string"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -55,9 +55,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.String = stringValue;
             }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item> singleFilterSearchRequestValueOneOf4ItemValue)
+            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1> singleFilterSearchRequestValueMember1Value)
             {
-                result.SingleFilterSearchRequestValueOneOf4Item = singleFilterSearchRequestValueOneOf4ItemValue;
+                result.SingleFilterSearchRequestValueMember1 = singleFilterSearchRequestValueMember1Value;
             }
             return result;
         }
@@ -88,9 +88,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 writer.WriteStringValue(null, String);
             }
-            else if(SingleFilterSearchRequestValueOneOf4Item != null)
+            else if(SingleFilterSearchRequestValueMember1 != null)
             {
-                writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueOneOf4Item>(null, SingleFilterSearchRequestValueOneOf4Item);
+                writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1>(null, SingleFilterSearchRequestValueMember1);
             }
         }
     }
