@@ -34,14 +34,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem> Options { get; set; }
 #endif
-        /// <summary>Union discriminator</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
-#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequest"/> and sets the default values.
         /// </summary>
@@ -71,7 +63,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "messenger_writable", n => { MessengerWritable = n.GetBoolValue(); } },
                 { "options", n => { Options = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -85,7 +76,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("messenger_writable", MessengerWritable);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataAttributeRequestListAttributeOptionsItem>("options", Options);
-            writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

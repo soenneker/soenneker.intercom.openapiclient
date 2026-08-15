@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string SseSubscriptionUrl { get; set; }
 #endif
         /// <summary>The resulting status of the conversation.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversation200ResponseStatus? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EscalatedStatus? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversation200Response"/> and sets the default values.
         /// </summary>
@@ -68,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "intercom_conversation_id", n => { IntercomConversationId = n.GetStringValue(); } },
                 { "sse_subscription_url", n => { SseSubscriptionUrl = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversation200ResponseStatus>(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalatedStatus>(); } },
             };
         }
         /// <summary>
@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
             writer.WriteStringValue("sse_subscription_url", SseSubscriptionUrl);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversation200ResponseStatus>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalatedStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

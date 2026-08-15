@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string SourceId { get; set; }
 #endif
         /// <summary>The type of resource being redacted.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequestType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SourceType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest"/> and sets the default values.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "source_id", n => { SourceId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequestType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SourceType>(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteStringValue("source_id", SourceId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequestType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SourceType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

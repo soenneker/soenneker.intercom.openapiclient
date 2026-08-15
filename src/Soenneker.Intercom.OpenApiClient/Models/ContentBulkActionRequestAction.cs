@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>&quot;The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`  * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`, `file_source_content`, `internal_article`&quot;</summary>
+    /// <summary>The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`  * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`, `file_source_content`, `internal_article`</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ContentBulkActionRequestAction
     {

@@ -140,7 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<string> TokenIds { get; set; }
 #endif
         /// <summary>The type of object - `data_connector`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType? Type { get; set; }
         /// <summary>The time the data connector was last updated.</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>The ID of the admin who last updated this connector.</summary>
@@ -209,7 +209,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "response_fields", n => { ResponseFields = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailState>(); } },
                 { "token_ids", n => { TokenIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
                 { "updated_by_admin_id", n => { UpdatedByAdminId = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
@@ -246,7 +246,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem>("response_fields", ResponseFields);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailState>("state", State);
             writer.WriteCollectionOfPrimitiveValues<string>("token_ids", TokenIds);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>("type", Type);
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             writer.WriteStringValue("updated_by_admin_id", UpdatedByAdminId);
             writer.WriteStringValue("url", Url);

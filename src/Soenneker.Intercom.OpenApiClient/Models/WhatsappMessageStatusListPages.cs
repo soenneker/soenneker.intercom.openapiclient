@@ -26,8 +26,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? PerPage { get; set; }
         /// <summary>Total number of pages</summary>
         public int? TotalPages { get; set; }
-        /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesType? Type { get; set; }
+        /// <summary>the type of object `pages`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages"/> and sets the default values.
         /// </summary>
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext.CreateFromDiscriminatorValue); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
                 { "total_pages", n => { TotalPages = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>(); } },
             };
         }
         /// <summary>
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesNext>("next", Next);
             writer.WriteIntValue("per_page", PerPage);
             writer.WriteIntValue("total_pages", TotalPages);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPagesType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

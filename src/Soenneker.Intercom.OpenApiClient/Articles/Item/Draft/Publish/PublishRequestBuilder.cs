@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft.Publish
         {
         }
         /// <summary>
-        /// &quot;Publish a staged draft by making a POST request to`https://api.intercom.io/articles/&lt;id&gt;/draft/publish`, promoting the draftcontent to live.On a single-language workspace no body is required. On a multilingualworkspace you must list which locales to publish via the `locales` array;omitting it returns `422`. Returns `422` when there is no staged draft topublish, or when a requested locale has no pending changes.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Publish a staged draft by making a POST request to`https://api.intercom.io/articles/&lt;id&gt;/draft/publish`, promoting the draftcontent to live.On a single-language workspace no body is required. On a multilingualworkspace you must list which locales to publish via the `locales` array;omitting it returns `422`. Returns `422` when there is no staged draft topublish, or when a requested locale has no pending changes.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="body">Optional body for publishing a staged article draft. On a single-languageworkspace the body can be omitted. On a multilingual workspace, `locales`is required and lists which locales&apos; drafts to publish.</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft.Publish
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Publish a staged draft by making a POST request to`https://api.intercom.io/articles/&lt;id&gt;/draft/publish`, promoting the draftcontent to live.On a single-language workspace no body is required. On a multilingualworkspace you must list which locales to publish via the `locales` array;omitting it returns `422`. Returns `422` when there is no staged draft topublish, or when a requested locale has no pending changes.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Publish a staged draft by making a POST request to`https://api.intercom.io/articles/&lt;id&gt;/draft/publish`, promoting the draftcontent to live.On a single-language workspace no body is required. On a multilingualworkspace you must list which locales to publish via the `locales` array;omitting it returns `422`. Returns `422` when there is no staged draft topublish, or when a requested locale has no pending changes.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Optional body for publishing a staged article draft. On a single-languageworkspace the body can be omitted. On a multilingual workspace, `locales`is required and lists which locales&apos; drafts to publish.</param>

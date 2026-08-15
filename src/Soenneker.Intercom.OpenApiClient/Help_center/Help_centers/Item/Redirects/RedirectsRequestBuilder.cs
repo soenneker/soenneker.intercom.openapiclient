@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
         {
         }
         /// <summary>
-        /// &quot;You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Redirects are returned in descending order on the `updated_at` attribute.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Redirects are returned in descending order on the `updated_at` attribute.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can create a new URL redirect by making a POST request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can create a new URL redirect by making a POST request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirect"/></returns>
         /// <param name="body">You can create a help center redirect.</param>
@@ -105,7 +105,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirect>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirect.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Redirects are returned in descending order on the `updated_at` attribute.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Redirects are returned in descending order on the `updated_at` attribute.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -124,7 +124,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return requestInfo;
         }
         /// <summary>
-        /// &quot;You can create a new URL redirect by making a POST request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can create a new URL redirect by making a POST request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create a help center redirect.</param>
@@ -155,7 +155,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return new global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirects.RedirectsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Redirects are returned in descending order on the `updated_at` attribute.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.Redirects are returned in descending order on the `updated_at` attribute.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class RedirectsRequestBuilderGetQueryParameters 

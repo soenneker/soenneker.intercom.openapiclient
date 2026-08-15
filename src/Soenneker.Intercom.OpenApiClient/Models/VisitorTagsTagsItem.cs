@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItemType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TagType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem"/> and sets the default values.
         /// </summary>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItemType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TagType>(); } },
             };
         }
         /// <summary>
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItemType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TagType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

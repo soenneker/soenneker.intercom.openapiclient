@@ -34,20 +34,19 @@ namespace Soenneker.Intercom.OpenApiClient.Secure_mode_secrets.Item
         {
         }
         /// <summary>
-        /// &quot;Soft-deletes an identity verification secret. After deletion, any `user_hash` values signed with that secret will no longer verify — Messenger sessions depending on it will be rejected on their next request. Use this to complete a rotation: create a new secret, roll it out, then delete the old one.&quot;
+        /// Soft-deletes an identity verification secret. After deletion, any `user_hash` values signed with that secret will no longer verify — Messenger sessions depending on it will be rejected on their next request. Use this to complete a rotation: create a new secret, roll it out, then delete the old one.
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
@@ -56,10 +55,10 @@ namespace Soenneker.Intercom.OpenApiClient.Secure_mode_secrets.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Soft-deletes an identity verification secret. After deletion, any `user_hash` values signed with that secret will no longer verify — Messenger sessions depending on it will be rejected on their next request. Use this to complete a rotation: create a new secret, roll it out, then delete the old one.&quot;
+        /// Soft-deletes an identity verification secret. After deletion, any `user_hash` values signed with that secret will no longer verify — Messenger sessions depending on it will be rejected on their next request. Use this to complete a rotation: create a new secret, roll it out, then delete the old one.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

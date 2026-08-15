@@ -23,8 +23,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecret> Data { get; set; }
 #endif
-        /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretListType? Type { get; set; }
+        /// <summary>The type of the object.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretList"/> and sets the default values.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecret>(global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecret.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretListType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecret>("data", Data);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretListType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>&quot;The cardinality of the relationship: `one` or `many`.&quot;</summary>
+    /// <summary>The cardinality of the relationship: `one` or `many`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ConversationAttributeRelationshipTypeAllOf2ReferenceType
     {

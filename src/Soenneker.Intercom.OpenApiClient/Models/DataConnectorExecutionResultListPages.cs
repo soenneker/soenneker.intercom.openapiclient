@@ -25,8 +25,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The number of results per page.</summary>
         public int? PerPage { get; set; }
-        /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesType? Type { get; set; }
+        /// <summary>the type of object `pages`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPages"/> and sets the default values.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "next", n => { Next = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext.CreateFromDiscriminatorValue); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>(); } },
             };
         }
         /// <summary>
@@ -66,7 +66,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesNext>("next", Next);
             writer.WriteIntValue("per_page", PerPage);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultListPagesType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

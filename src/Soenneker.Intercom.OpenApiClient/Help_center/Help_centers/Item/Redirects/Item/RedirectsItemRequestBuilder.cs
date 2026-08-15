@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
         {
         }
         /// <summary>
-        /// &quot;You can delete a single redirect by making a DELETE request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can delete a single redirect by making a DELETE request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can fetch the details of a single redirect by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can fetch the details of a single redirect by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirect"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirect>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirect.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can delete a single redirect by making a DELETE request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can delete a single redirect by making a DELETE request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_write_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -103,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
             return requestInfo;
         }
         /// <summary>
-        /// &quot;You can fetch the details of a single redirect by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// You can fetch the details of a single redirect by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects/{id}`.Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

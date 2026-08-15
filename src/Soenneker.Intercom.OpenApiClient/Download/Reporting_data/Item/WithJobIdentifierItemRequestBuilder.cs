@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item
         {
         }
         /// <summary>
-        /// &quot;Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.&quot;
+        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.&quot;
+        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item
             return new global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.&quot;
+        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithJobIdentifierItemRequestBuilderGetQueryParameters 

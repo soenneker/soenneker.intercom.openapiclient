@@ -3,13 +3,13 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The type of object - `list`.</summary>
+    /// <summary>The type of the object</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum CompanyListType
     {
-        [EnumMember(Value = "list")]
+        [EnumMember(Value = "company.list")]
         #pragma warning disable CS1591
-        List,
+        CompanyList,
         #pragma warning restore CS1591
     }
 }

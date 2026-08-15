@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>&quot;Type of the contact: contact (lead) or user.&quot;</summary>
+    /// <summary>Type of the contact: contact (lead) or user.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum SegmentPersonType
     {

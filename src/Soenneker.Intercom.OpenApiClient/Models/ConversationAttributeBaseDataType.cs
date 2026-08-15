@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>&quot;The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.&quot;</summary>
+    /// <summary>The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ConversationAttributeBaseDataType
     {

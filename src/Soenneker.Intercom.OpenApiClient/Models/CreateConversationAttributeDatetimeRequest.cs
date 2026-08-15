@@ -14,7 +14,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>&quot;The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.&quot;</summary>
+        /// <summary>The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType? DataType { get; set; }
         /// <summary>Readable description of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

@@ -40,8 +40,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Total number of events</summary>
         public int? TotalCount { get; set; }
-        /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListType? Type { get; set; }
+        /// <summary>The type of the object.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList"/> and sets the default values.
         /// </summary>
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages>(global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages.CreateFromDiscriminatorValue); } },
                 { "ruleset_id", n => { RulesetId = n.GetStringValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
             };
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListPages>("pages", Pages);
             writer.WriteStringValue("ruleset_id", RulesetId);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

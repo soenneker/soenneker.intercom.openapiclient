@@ -37,9 +37,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc();
-            if("CreateMessageRequestBcc_2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("CreateMessageRequestBccBranch2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateMessageRequestBccBranch2 = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBccBranch2();
             }

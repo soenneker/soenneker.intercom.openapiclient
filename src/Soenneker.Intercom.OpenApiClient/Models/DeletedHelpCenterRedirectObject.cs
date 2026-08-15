@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>The type of object which was deleted. - `help_center_redirect`</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObjectObject? Object { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectObject? Object { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObject"/> and sets the default values.
         /// </summary>
@@ -54,7 +54,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObjectObject>(); } },
+                { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectObject>(); } },
             };
         }
         /// <summary>
@@ -66,7 +66,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("deleted", Deleted);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DeletedHelpCenterRedirectObjectObject>("object", Object);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectObject>("object", Object);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Body { get; set; }
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestMessageType? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType? MessageType { get; set; }
         /// <summary>The type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType? Type { get; set; }
         /// <summary>
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "assignee_id", n => { AssigneeId = n.GetStringValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestMessageType>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType>(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType>(); } },
             };
         }
@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("admin_id", AdminId);
             writer.WriteStringValue("assignee_id", AssigneeId);
             writer.WriteStringValue("body", Body);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestMessageType>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType>("message_type", MessageType);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

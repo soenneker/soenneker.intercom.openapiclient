@@ -3,13 +3,14 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>Always list</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+    #pragma warning disable CS1591
     public enum ContactListType
+    #pragma warning restore CS1591
     {
-        [EnumMember(Value = "list")]
+        [EnumMember(Value = "contact.list")]
         #pragma warning disable CS1591
-        List,
+        ContactList,
         #pragma warning restore CS1591
     }
 }

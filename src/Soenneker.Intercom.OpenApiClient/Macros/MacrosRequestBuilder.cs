@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Macros
         {
         }
         /// <summary>
-        /// &quot;You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=\&quot;user.name\&quot; default=\&quot;there\&quot;/&gt;`&quot;
+        /// You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=&quot;user.name&quot; default=&quot;there&quot;/&gt;`
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MacroList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Macros
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MacroList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MacroList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=\&quot;user.name\&quot; default=\&quot;there\&quot;/&gt;`&quot;
+        /// You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=&quot;user.name&quot; default=&quot;there&quot;/&gt;`
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -102,7 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Macros
             return new global::Soenneker.Intercom.OpenApiClient.Macros.MacrosRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=\&quot;user.name\&quot; default=\&quot;there\&quot;/&gt;`&quot;
+        /// You can fetch a list of all macros (saved replies) in your workspace for use in automating responses.The macros are returned in descending order by updated_at.**Pagination**This endpoint uses cursor-based pagination via the `starting_after` parameter. The cursor is a Base64-encoded JSON array containing `[updated_at, id]` of the last item from the previous page.**Placeholder Transformation**The API transforms Intercom placeholders to a more standard XML-like format:- From: `{{user.name | fallback: &apos;there&apos;}}`- To: `&lt;attribute key=&quot;user.name&quot; default=&quot;there&quot;/&gt;`
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class MacrosRequestBuilderGetQueryParameters 

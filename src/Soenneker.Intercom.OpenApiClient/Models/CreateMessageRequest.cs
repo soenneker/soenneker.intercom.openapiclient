@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom From { get; set; }
 #endif
-        /// <summary>&quot;The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`.&quot;</summary>
+        /// <summary>The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType? MessageType { get; set; }
         /// <summary>The title of the email.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

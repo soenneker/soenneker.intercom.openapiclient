@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The rating now recorded on the conversation.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200ResponseRating? Rating { get; set; }
         /// <summary>The result of the submission.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200ResponseStatus? Status { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RatedStatus? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200Response"/> and sets the default values.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "rating", n => { Rating = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200ResponseRating>(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200ResponseStatus>(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RatedStatus>(); } },
             };
         }
         /// <summary>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200ResponseRating>("rating", Rating);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsat200ResponseStatus>("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RatedStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

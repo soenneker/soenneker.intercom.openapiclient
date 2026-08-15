@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners
         {
         }
         /// <summary>
-        /// &quot;Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.&quot;
+        /// Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BannerList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.BannerList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.BannerList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.&quot;
+        /// Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

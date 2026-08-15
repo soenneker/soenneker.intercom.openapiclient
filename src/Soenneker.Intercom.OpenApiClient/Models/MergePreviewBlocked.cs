@@ -31,7 +31,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public MergePreviewBlocked()
         {
             AdditionalData = new Dictionary<string, object>();
-            Allowed = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

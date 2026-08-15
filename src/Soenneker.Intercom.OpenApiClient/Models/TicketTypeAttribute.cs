@@ -19,7 +19,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? Archived { get; set; }
         /// <summary>The date and time the ticket type attribute was created.</summary>
         public int? CreatedAt { get; set; }
-        /// <summary>&quot;The type of the data attribute (allowed values: \&quot;string list integer decimal boolean datetime files\&quot;)&quot;</summary>
+        /// <summary>The type of the data attribute (allowed values: &quot;string list integer decimal boolean datetime files&quot;)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DataType { get; set; }

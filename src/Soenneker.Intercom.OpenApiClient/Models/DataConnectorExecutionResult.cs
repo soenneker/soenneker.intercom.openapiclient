@@ -102,7 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether the execution was successful.</summary>
         public bool? Success { get; set; }
         /// <summary>The type of object - `data_connector.execution`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult"/> and sets the default values.
         /// </summary>
@@ -144,7 +144,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "source_id", n => { SourceId = n.GetStringValue(); } },
                 { "source_type", n => { SourceType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultSourceType>(); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionType>(); } },
             };
         }
         /// <summary>
@@ -170,7 +170,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("source_id", SourceId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultSourceType>("source_type", SourceType);
             writer.WriteBoolValue("success", Success);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

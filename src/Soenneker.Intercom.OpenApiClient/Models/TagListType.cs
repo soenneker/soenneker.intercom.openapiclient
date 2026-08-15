@@ -7,9 +7,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum TagListType
     {
-        [EnumMember(Value = "list")]
+        [EnumMember(Value = "tag.list")]
         #pragma warning disable CS1591
-        List,
+        TagList,
         #pragma warning restore CS1591
     }
 }

@@ -33,8 +33,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>A count of the total number of objects.</summary>
         public int? TotalCount { get; set; }
-        /// <summary>Always list</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactListType? Type { get; set; }
+        /// <summary>The type of the object.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactList"/> and sets the default values.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Contact>(global::Soenneker.Intercom.OpenApiClient.Models.Contact.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactListType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
             };
         }
         /// <summary>
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Contact>("data", Data);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactListType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

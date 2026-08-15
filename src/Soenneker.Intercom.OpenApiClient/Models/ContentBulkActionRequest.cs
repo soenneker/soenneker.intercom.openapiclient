@@ -12,7 +12,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public partial class ContentBulkActionRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>&quot;The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`  * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`, `file_source_content`, `internal_article`&quot;</summary>
+        /// <summary>The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`  * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`, `file_source_content`, `internal_article`</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction? Action { get; set; }
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }

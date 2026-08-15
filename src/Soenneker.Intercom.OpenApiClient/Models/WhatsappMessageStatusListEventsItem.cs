@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string TemplateName { get; set; }
 #endif
         /// <summary>Event type</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItemType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BroadcastOutboundType? Type { get; set; }
         /// <summary>Last update timestamp</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>WhatsApp&apos;s message identifier</summary>
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItemStatus>(); } },
                 { "template_name", n => { TemplateName = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItemType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.BroadcastOutboundType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "whatsapp_message_id", n => { WhatsappMessageId = n.GetStringValue(); } },
             };
@@ -101,7 +101,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItemStatus>("status", Status);
             writer.WriteStringValue("template_name", TemplateName);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusListEventsItemType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.BroadcastOutboundType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("whatsapp_message_id", WhatsappMessageId);
             writer.WriteAdditionalData(AdditionalData);

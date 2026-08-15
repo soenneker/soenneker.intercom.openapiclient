@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// &quot;Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.&quot;
+    /// Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BulkCreateContactsRequestContactsItemTags : IAdditionalDataHolder, IParsable

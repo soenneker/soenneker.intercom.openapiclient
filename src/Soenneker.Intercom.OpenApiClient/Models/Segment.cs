@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>&quot;Type of the contact: contact (lead) or user.&quot;</summary>
+        /// <summary>Type of the contact: contact (lead) or user.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.SegmentPersonType? PersonType { get; set; }
         /// <summary>The type of object.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.SegmentType? Type { get; set; }

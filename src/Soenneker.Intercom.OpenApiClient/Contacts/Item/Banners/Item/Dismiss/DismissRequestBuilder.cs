@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item.Dismiss
         {
         }
         /// <summary>
-        /// &quot;Records that a contact has dismissed a banner. Dismissals are shared acrosssurfaces, so a banner dismissed through this endpoint will also stop appearingin the web Messenger for that contact, and vice versa.The request is idempotent: dismissing an already-dismissed banner succeeds andreturns the same response.&quot;
+        /// Records that a contact has dismissed a banner. Dismissals are shared acrosssurfaces, so a banner dismissed through this endpoint will also stop appearingin the web Messenger for that contact, and vice versa.The request is idempotent: dismissing an already-dismissed banner succeeds andreturns the same response.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BannerDismiss"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item.Dismiss
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.BannerDismiss>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.BannerDismiss.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Records that a contact has dismissed a banner. Dismissals are shared acrosssurfaces, so a banner dismissed through this endpoint will also stop appearingin the web Messenger for that contact, and vice versa.The request is idempotent: dismissing an already-dismissed banner succeeds andreturns the same response.&quot;
+        /// Records that a contact has dismissed a banner. Dismissals are shared acrosssurfaces, so a banner dismissed through this endpoint will also stop appearingin the web Messenger for that contact, and vice versa.The request is idempotent: dismissing an already-dismissed banner succeeds andreturns the same response.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

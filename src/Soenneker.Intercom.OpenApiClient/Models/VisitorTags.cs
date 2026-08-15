@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem> Tags { get; set; }
 #endif
         /// <summary>The type of the object</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TagListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.VisitorTags"/> and sets the default values.
         /// </summary>
@@ -50,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TagListType>(); } },
             };
         }
         /// <summary>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsTagsItem>("tags", Tags);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorTagsType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TagListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

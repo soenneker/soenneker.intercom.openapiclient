@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Bulk.Item
         {
         }
         /// <summary>
-        /// &quot;You can check the status of a bulk companies job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.&quot;
+        /// You can check the status of a bulk companies job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompaniesBulkJob"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Bulk.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompaniesBulkJob>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompaniesBulkJob.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can check the status of a bulk companies job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.&quot;
+        /// You can check the status of a bulk companies job. The `state` field indicates the overall job progress: `pending`, `running`, `completed`, or `completed_with_errors`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

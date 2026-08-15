@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string IntercomUserId { get; set; }
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestMessageType? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CommentMessageType? MessageType { get; set; }
         /// <summary>The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -66,14 +66,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestReplyOptionsItem> ReplyOptions { get; set; }
 #endif
-        /// <summary>Union discriminator</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
-#endif
+        /// <summary>The type property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.UserType? Type { get; set; }
         /// <summary>The external_id you have defined for the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -113,9 +107,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "intercom_user_id", n => { IntercomUserId = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestMessageType>(); } },
+                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CommentMessageType>(); } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestReplyOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestReplyOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UserType>(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -132,9 +126,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("intercom_user_id", IntercomUserId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestMessageType>("message_type", MessageType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CommentMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyBaseRequestReplyOptionsItem>("reply_options", ReplyOptions);
-            writer.WriteStringValue("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UserType>("type", Type);
             writer.WriteStringValue("user_id", UserId);
             writer.WriteAdditionalData(AdditionalData);
         }

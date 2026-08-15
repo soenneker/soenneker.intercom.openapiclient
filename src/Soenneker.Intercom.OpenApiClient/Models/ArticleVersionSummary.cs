@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Title { get; set; }
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `article_version`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionSummaryType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionSummary"/> and sets the default values.
         /// </summary>
@@ -120,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionSummaryState>(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionSummaryType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionType>(); } },
             };
         }
         /// <summary>
@@ -140,7 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionSummaryState>("state", State);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionSummaryType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

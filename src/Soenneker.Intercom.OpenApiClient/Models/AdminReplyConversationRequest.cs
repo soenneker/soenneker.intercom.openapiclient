@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>When true, prevents the reply from waking a snoozed conversation. Applies to &apos;comment&apos; and &apos;note&apos; message types. The part is still created and visible in the conversation thread.</summary>
         public bool? SkipUnsnooze { get; set; }
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest"/> and sets the default values.
         /// </summary>
@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>(); } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>(global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "skip_unsnooze", n => { SkipUnsnooze = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>(); } },
             };
         }
         /// <summary>
@@ -114,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>("reply_options", ReplyOptions);
             writer.WriteBoolValue("skip_unsnooze", SkipUnsnooze);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

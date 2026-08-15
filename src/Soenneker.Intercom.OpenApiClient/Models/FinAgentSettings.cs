@@ -17,7 +17,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>When `true`, Fin formats its replies as email-style responses, suitable for sendingdirectly to users via email. This adjusts tone and structure to match email conventionsrather than chat.Defaults to `false`, which produces chat-style responses.</summary>
         public bool? Email { get; set; }
-        /// <summary>&quot;When `true` (default), Fin may ask clarifying questions and escalate to a human agentas needed.When `false`, Fin operates in non-conversational mode: it will not ask follow-upquestions and will not escalate to a human agent. Use this when you want Fin to respondwith a single, self-contained answer — for example, in asynchronous channels whereback-and-forth conversation is not practical.&quot;</summary>
+        /// <summary>When `true` (default), Fin may ask clarifying questions and escalate to a human agentas needed.When `false`, Fin operates in non-conversational mode: it will not ask follow-upquestions and will not escalate to a human agent. Use this when you want Fin to respondwith a single, self-contained answer — for example, in asynchronous channels whereback-and-forth conversation is not practical.</summary>
         public bool? FollowUpQuestions { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.FinAgentSettings"/> and sets the default values.

@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The data_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeDataType? DataType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType? DataType { get; set; }
         /// <summary>Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeDataType>(); } },
+                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType>(); } },
                 { "options", n => { Options = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeDataType>("data_type", DataType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType>("data_type", DataType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem>("options", Options);
             writer.WriteAdditionalData(AdditionalData);
         }

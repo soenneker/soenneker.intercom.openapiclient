@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem> ReplyOptions { get; set; }
 #endif
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/> and sets the default values.
         /// </summary>
@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "cross_post", n => { CrossPost = n.GetBoolValue(); } },
                 { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType>(); } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>(); } },
             };
         }
         /// <summary>
@@ -114,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("cross_post", CrossPost);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>("reply_options", ReplyOptions);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

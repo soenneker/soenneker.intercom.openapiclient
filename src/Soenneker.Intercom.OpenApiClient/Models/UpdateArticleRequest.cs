@@ -21,7 +21,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? AiCopilotAvailability { get; set; }
         /// <summary>Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language&apos;s availability.</summary>
         public bool? AiSalesAgentAvailability { get; set; }
-        /// <summary>&quot;The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. Sending `audience_ids: []` clears all audience memberships from every locale. For per-locale targeting, use `translated_content.&lt;locale&gt;.audience_ids` instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.&quot;</summary>
+        /// <summary>The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level `audience_ids` broadcasts the same set to every locale. Sending `audience_ids: []` clears all audience memberships from every locale. For per-locale targeting, use `translated_content.&lt;locale&gt;.audience_ids` instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? AudienceIds { get; set; }
@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ParentType { get; set; }
 #endif
-        /// <summary>&quot;ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: \&quot;published\&quot;`, the article is scheduled instead of published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Combining with `state: \&quot;draft\&quot;` returns 400 `parameter_invalid`. Sending in the same request as `scheduled_unpublish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.&quot;</summary>
+        /// <summary>ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: &quot;published&quot;`, the article is scheduled instead of published immediately. Setting `null` cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Combining with `state: &quot;draft&quot;` returns 400 `parameter_invalid`. Sending in the same request as `scheduled_unpublish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledPublishAt { get; set; }
         /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledUnpublishAt { get; set; }

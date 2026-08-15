@@ -139,7 +139,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Search
             public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentFinServiceStateParameter? FinServiceState { get; set; }
             /// <summary>Required when `folder_ids` is provided. Identifies the entity type the folder IDs refer to.</summary>
             [QueryParameter("folder_entity_type")]
-            public global::Soenneker.Intercom.OpenApiClient.Models.SearchContentFolderEntityTypeParameter? FolderEntityType { get; set; }
+            public global::Soenneker.Intercom.OpenApiClient.Models.FolderFolderEntityType? FolderEntityType { get; set; }
             /// <summary>Filter by folder IDs. Must be sent together with `folder_entity_type`. Accepts a comma-separated list or repeated params.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

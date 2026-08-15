@@ -42,7 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The type of message that was sent. Can be email, inapp, facebook, twitter, sms or whatsapp.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.MessageMessageType? MessageType { get; set; }
-        /// <summary>&quot;The subject of the message. Only present if message_type: email.&quot;</summary>
+        /// <summary>The subject of the message. Only present if message_type: email.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Subject { get; set; }

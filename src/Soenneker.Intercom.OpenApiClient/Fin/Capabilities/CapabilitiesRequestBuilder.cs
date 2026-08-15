@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
         {
         }
         /// <summary>
-        /// &quot;Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.&quot;
+        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.&quot;
+        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

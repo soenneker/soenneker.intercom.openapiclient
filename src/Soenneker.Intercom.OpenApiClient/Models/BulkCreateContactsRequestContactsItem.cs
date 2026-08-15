@@ -98,7 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time the contact signed up, in Unix timestamp format.</summary>
         public int? SignedUpAt { get; set; }
-        /// <summary>&quot;Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.&quot;</summary>
+        /// <summary>Tags to add to the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact create still applies. Per-tag results are not yet returned in the job status.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTags? Tags { get; set; }

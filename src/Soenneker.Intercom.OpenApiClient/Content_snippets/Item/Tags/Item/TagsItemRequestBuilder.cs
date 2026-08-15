@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Tags.Item
         {
         }
         /// <summary>
-        /// &quot;Remove a tag from a content snippet. Returns the tag that was removed, withnull `applied_at` and `applied_by`.The authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_content_snippets` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Remove a tag from a content snippet. Returns the tag that was removed, withnull `applied_at` and `applied_by`.The authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_content_snippets` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Tags.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Tag>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Tag.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Remove a tag from a content snippet. Returns the tag that was removed, withnull `applied_at` and `applied_by`.The authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_content_snippets` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Remove a tag from a content snippet. Returns the tag that was removed, withnull `applied_at` and `applied_by`.The authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_content_snippets` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions
         {
         }
         /// <summary>
-        /// &quot;Fetch the version history of an article by making a GET request to`https://api.intercom.io/articles/&lt;article_id&gt;/versions`. Versions arereturned newest-first as a paginated list of metadata. Use`GET /articles/{article_id}/versions/{id}` to retrieve a single versionwith its full content.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Fetch the version history of an article by making a GET request to`https://api.intercom.io/articles/&lt;article_id&gt;/versions`. Versions arereturned newest-first as a paginated list of metadata. Use`GET /articles/{article_id}/versions/{id}` to retrieve a single versionwith its full content.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ArticleVersionList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Fetch the version history of an article by making a GET request to`https://api.intercom.io/articles/&lt;article_id&gt;/versions`. Versions arereturned newest-first as a paginated list of metadata. Use`GET /articles/{article_id}/versions/{id}` to retrieve a single versionwith its full content.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Fetch the version history of an article by making a GET request to`https://api.intercom.io/articles/&lt;article_id&gt;/versions`. Versions arereturned newest-first as a paginated list of metadata. Use`GET /articles/{article_id}/versions/{id}` to retrieve a single versionwith its full content.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -102,7 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions
             return new global::Soenneker.Intercom.OpenApiClient.Articles.Item.Versions.VersionsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// &quot;Fetch the version history of an article by making a GET request to`https://api.intercom.io/articles/&lt;article_id&gt;/versions`. Versions arereturned newest-first as a paginated list of metadata. Use`GET /articles/{article_id}/versions/{id}` to retrieve a single versionwith its full content.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Fetch the version history of an article by making a GET request to`https://api.intercom.io/articles/&lt;article_id&gt;/versions`. Versions arereturned newest-first as a paginated list of metadata. Use`GET /articles/{article_id}/versions/{id}` to retrieve a single versionwith its full content.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VersionsRequestBuilderGetQueryParameters 

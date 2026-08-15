@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;You can create a new ticket type.&gt; 📘 Creating ticket types.&gt;&gt; Every ticket type will be created with two default attributes: _default_title_ and _default_description_.&gt; For the `icon` propery, use an emoji from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)&quot;
+        /// You can create a new ticket type.&gt; 📘 Creating ticket types.&gt;&gt; Every ticket type will be created with two default attributes: _default_title_ and _default_description_.&gt; For the `icon` propery, use an emoji from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketType"/></returns>
         /// <param name="body">The request payload for creating a ticket type.  You can copy the `icon` property for your ticket type from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)</param>
@@ -114,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
             return requestInfo;
         }
         /// <summary>
-        /// &quot;You can create a new ticket type.&gt; 📘 Creating ticket types.&gt;&gt; Every ticket type will be created with two default attributes: _default_title_ and _default_description_.&gt; For the `icon` propery, use an emoji from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)&quot;
+        /// You can create a new ticket type.&gt; 📘 Creating ticket types.&gt;&gt; Every ticket type will be created with two default attributes: _default_title_ and _default_description_.&gt; For the `icon` propery, use an emoji from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request payload for creating a ticket type.  You can copy the `icon` property for your ticket type from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)</param>

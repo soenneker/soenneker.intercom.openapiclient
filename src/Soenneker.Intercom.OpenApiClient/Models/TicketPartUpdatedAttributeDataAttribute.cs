@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Label { get; set; }
 #endif
         /// <summary>The type of the object. Always &apos;attribute&apos;.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeDataAttributeType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AttributeType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeDataAttribute"/> and sets the default values.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeDataAttributeType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AttributeType>(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("label", Label);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeDataAttributeType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AttributeType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

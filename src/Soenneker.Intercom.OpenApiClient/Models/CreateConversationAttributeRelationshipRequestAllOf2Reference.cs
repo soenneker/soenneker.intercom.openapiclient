@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ObjectTypeId { get; set; }
 #endif
-        /// <summary>&quot;The cardinality of the relationship: `one` or `many`.&quot;</summary>
+        /// <summary>The cardinality of the relationship: `one` or `many`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2ReferenceType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequestAllOf2Reference"/> and sets the default values.

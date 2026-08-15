@@ -92,14 +92,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
         public int? SignedUpAt { get; set; }
-        /// <summary>Union discriminator</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
-#endif
         /// <summary>Whether the contact is unsubscribed from emails</summary>
         public bool? UnsubscribedFromEmails { get; set; }
         /// <summary>
@@ -139,7 +131,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
             };
         }
@@ -162,7 +153,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
             writer.WriteIntValue("signed_up_at", SignedUpAt);
-            writer.WriteStringValue("type", Type);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteAdditionalData(AdditionalData);
         }

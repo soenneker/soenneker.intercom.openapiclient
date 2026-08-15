@@ -27,8 +27,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? HasMore { get; set; }
         /// <summary>The total number of linked objects.</summary>
         public int? TotalCount { get; set; }
-        /// <summary>Always list.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectListType? Type { get; set; }
+        /// <summary>The type of the object.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList"/> and sets the default values.
         /// </summary>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "has_more", n => { HasMore = n.GetBoolValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectListType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
             };
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObject>("data", Data);
             writer.WriteBoolValue("has_more", HasMore);
             writer.WriteIntValue("total_count", TotalCount);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectListType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

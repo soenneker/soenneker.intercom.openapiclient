@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>always contact</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactDeletedType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReference"/> and sets the default values.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeletedType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactType>(); } },
             };
         }
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("id", Id);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeletedType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -39,8 +39,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Title { get; set; }
 #endif
-        /// <summary>Always `article`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleItemType? Type { get; set; }
+        /// <summary>The type of object - `article`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleType? Type { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleItem"/> and sets the default values.
         /// </summary>
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "contents", n => { Contents = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleItemType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleType>(); } },
             };
         }
         /// <summary>
@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleContentItem>("contents", Contents);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleItemType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

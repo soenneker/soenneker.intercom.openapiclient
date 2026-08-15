@@ -149,7 +149,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard> Scorecards { get; set; }
 #endif
-        /// <summary>&quot;The SLA Applied object contains the details for which SLA has been applied to this conversation.Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.&quot;</summary>
+        /// <summary>The SLA Applied object contains the details for which SLA has been applied to this conversation.Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied? SlaApplied { get; set; }

@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
         {
         }
         /// <summary>
-        /// &quot;Fetch the staged draft of a published article by making a GET request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The response is the articlerendered with its draft content, leaving the live article untouched.A draft exists only when a published article has unpublished changes stagedon top of it. Returns `404` when the article has no staged draft.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Fetch the staged draft of a published article by making a GET request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The response is the articlerendered with its draft content, leaving the live article untouched.A draft exists only when a published article has unpublished changes stagedon top of it. Returns `404` when the article has no staged draft.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="body">You can Update an Article</param>
@@ -94,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// &quot;Fetch the staged draft of a published article by making a GET request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The response is the articlerendered with its draft content, leaving the live article untouched.A draft exists only when a published article has unpublished changes stagedon top of it. Returns `404` when the article has no staged draft.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Fetch the staged draft of a published article by making a GET request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The response is the articlerendered with its draft content, leaving the live article untouched.A draft exists only when a published article has unpublished changes stagedon top of it. Returns `404` when the article has no staged draft.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -113,7 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
             return requestInfo;
         }
         /// <summary>
-        /// &quot;Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.&quot;
+        /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can Update an Article</param>

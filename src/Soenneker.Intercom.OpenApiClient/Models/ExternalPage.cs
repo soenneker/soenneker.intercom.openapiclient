@@ -52,7 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time when the external page was last ingested.</summary>
         public int? LastIngestedAt { get; set; }
         /// <summary>Always en</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageLocale? Locale { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EnLocale? Locale { get; set; }
         /// <summary>The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.</summary>
         public int? SourceId { get; set; }
         /// <summary>The title of the external page.</summary>
@@ -109,7 +109,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "html", n => { Html = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "last_ingested_at", n => { LastIngestedAt = n.GetIntValue(); } },
-                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageLocale>(); } },
+                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EnLocale>(); } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>(); } },
@@ -133,7 +133,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("html", Html);
             writer.WriteStringValue("id", Id);
             writer.WriteIntValue("last_ingested_at", LastIngestedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageLocale>("locale", Locale);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EnLocale>("locale", Locale);
             writer.WriteIntValue("source_id", SourceId);
             writer.WriteStringValue("title", Title);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>("type", Type);
