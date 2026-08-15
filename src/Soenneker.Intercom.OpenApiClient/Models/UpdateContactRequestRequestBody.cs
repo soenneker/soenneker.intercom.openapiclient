@@ -25,10 +25,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The custom attributes which are set for the contact</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributesProperty? CustomAttributes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributesProperty CustomAttributes { get; set; }
 #endif
         /// <summary>The contacts email</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -128,7 +128,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "avatar", n => { Avatar = n.GetStringValue(); } },
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes.CreateFromDiscriminatorValue); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "email_verified", n => { EmailVerified = n.GetBoolValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
@@ -151,7 +151,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("avatar", Avatar);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributes>("custom_attributes", CustomAttributes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
             writer.WriteBoolValue("email_verified", EmailVerified);
             writer.WriteStringValue("external_id", ExternalId);

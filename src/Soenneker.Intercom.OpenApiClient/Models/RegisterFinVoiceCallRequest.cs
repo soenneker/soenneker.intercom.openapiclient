@@ -26,10 +26,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Additional metadata about the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData? Data { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty? Data { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData Data { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty Data { get; set; }
 #endif
         /// <summary>Phone number in E.164 format for the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "call_id", n => { CallId = n.GetStringValue(); } },
-                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData>(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData.CreateFromDiscriminatorValue); } },
+                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty.CreateFromDiscriminatorValue); } },
                 { "phone_number", n => { PhoneNumber = n.GetStringValue(); } },
                 { "source", n => { Source = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource>(); } },
             };
@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("call_id", CallId);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestData>("data", Data);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty>("data", Data);
             writer.WriteStringValue("phone_number", PhoneNumber);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource>("source", Source);
             writer.WriteAdditionalData(AdditionalData);

@@ -60,10 +60,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The current snapshot of workflow steps and configuration.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshot? Snapshot { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty? Snapshot { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshot Snapshot { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty Snapshot { get; set; }
 #endif
         /// <summary>The current state of the workflow.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState? State { get; set; }
@@ -78,10 +78,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The targeting rules for this workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargeting? Targeting { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty? Targeting { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargeting Targeting { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty Targeting { get; set; }
 #endif
         /// <summary>The title of the workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -132,10 +132,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "embedded_rules", n => { EmbeddedRules = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "preferred_devices", n => { PreferredDevices = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "snapshot", n => { Snapshot = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshot>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshot.CreateFromDiscriminatorValue); } },
+                { "snapshot", n => { Snapshot = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty.CreateFromDiscriminatorValue); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState>(); } },
                 { "target_channels", n => { TargetChannels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
-                { "targeting", n => { Targeting = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargeting>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargeting.CreateFromDiscriminatorValue); } },
+                { "targeting", n => { Targeting = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "trigger_type", n => { TriggerType = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
@@ -154,10 +154,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty>("embedded_rules", EmbeddedRules);
             writer.WriteStringValue("id", Id);
             writer.WriteCollectionOfPrimitiveValues<string>("preferred_devices", PreferredDevices);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshot>("snapshot", Snapshot);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty>("snapshot", Snapshot);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState>("state", State);
             writer.WriteCollectionOfPrimitiveValues<string>("target_channels", TargetChannels);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargeting>("targeting", Targeting);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty>("targeting", Targeting);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("trigger_type", TriggerType);
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);

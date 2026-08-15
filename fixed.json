@@ -35835,7 +35835,7 @@
             "example": "teammate_occupancy"
           },
           "changes": {
-            "$ref": "#/components/schemas/ActivityLogMetadataChanges"
+            "$ref": "#/components/schemas/ActivityLogMetadataChangesProperty"
           },
           "conversation_assignment_limit": {
             "type": "integer",
@@ -36261,7 +36261,7 @@
             "example": "enterprise_sales"
           },
           "collected_data": {
-            "$ref": "#/components/schemas/SalesAgentCollectedData"
+            "$ref": "#/components/schemas/SalesAgentCollectedDataProperty"
           }
         },
         "description": "Data related to Sales Agent involvement in the conversation.",
@@ -42029,7 +42029,7 @@
             "example": "en"
           },
           "custom_attributes": {
-            "$ref": "#/components/schemas/CreateContactRequestCustomAttributes"
+            "$ref": "#/components/schemas/CreateContactRequestCustomAttributesProperty"
           }
         },
         "description": "Payload to create a contact"
@@ -42506,7 +42506,7 @@
             "example": 1571672154
           },
           "custom_attributes": {
-            "$ref": "#/components/schemas/CreateOrUpdateCustomObjectInstanceRequestCustomAttributes"
+            "$ref": "#/components/schemas/CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty"
           }
         },
         "description": "Payload to create or update a Custom Object instance"
@@ -45472,7 +45472,7 @@
             "description": "Individual purchasable variants of the product. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See \u0060ecommerce_catalog_variant\u0060 for the variant object schema."
           },
           "additional_data": {
-            "$ref": "#/components/schemas/EcommerceCatalogProductAdditionalData"
+            "$ref": "#/components/schemas/EcommerceCatalogProductAdditionalDataProperty"
           }
         },
         "description": "A product object in an ecommerce catalog upload. The catalog file must be a JSON\narray of these objects. The \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 fields are required; all\nothers are optional.\n"
@@ -49884,7 +49884,7 @@
             "example": "en"
           },
           "custom_attributes": {
-            "$ref": "#/components/schemas/UpdateContactRequestCustomAttributes"
+            "$ref": "#/components/schemas/UpdateContactRequestCustomAttributesProperty"
           }
         },
         "description": "You can update a contact"
@@ -50548,7 +50548,7 @@
             "$ref": "#/components/schemas/RegisterFinVoiceCallRequestSource"
           },
           "data": {
-            "$ref": "#/components/schemas/RegisterFinVoiceCallRequestData"
+            "$ref": "#/components/schemas/RegisterFinVoiceCallRequestDataProperty"
           }
         },
         "description": "Register a Fin Voice call with Intercom",
@@ -50694,7 +50694,7 @@
         "type": "object",
         "properties": {
           "translations": {
-            "$ref": "#/components/schemas/ConversationPartMetadataQuickReplyOptionsItemTranslations"
+            "$ref": "#/components/schemas/ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty"
           },
           "text": {
             "type": "string",
@@ -54033,10 +54033,10 @@
             "example": "2026-01-20T14:45:00Z"
           },
           "targeting": {
-            "$ref": "#/components/schemas/WorkflowExportWorkflowTargeting"
+            "$ref": "#/components/schemas/WorkflowExportWorkflowTargetingProperty"
           },
           "snapshot": {
-            "$ref": "#/components/schemas/WorkflowExportWorkflowSnapshot"
+            "$ref": "#/components/schemas/WorkflowExportWorkflowSnapshotProperty"
           },
           "attributes": {
             "type": "array",
@@ -57327,6 +57327,20 @@
       "CollectProcedureAgentInput200ResponseSchema": {
         "type": "object"
       },
+      "ActivityLogMetadataChangesProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/ActivityLogMetadataChangesAdditionalProperties"
+        },
+        "description": "The settings altered by the change, keyed by setting name. Only settings whose value actually moved are included, so an unchanged setting is absent rather than present with equal values."
+      },
+      "SalesAgentCollectedDataProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A flat key-value map of memory fields collected by the sales agent during the conversation."
+      },
       "ChangeTicketTypeRequestTicketAttributesProperty": {
         "type": "object",
         "description": "The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values."
@@ -57372,6 +57386,10 @@
         },
         "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060)."
       },
+      "CreateContactRequestCustomAttributesProperty": {
+        "type": "object",
+        "description": "The custom attributes which are set for the contact"
+      },
       "CreateDataEventRequestMetadataProperty": {
         "type": "object",
         "description": "Optional metadata about the event."
@@ -57382,6 +57400,13 @@
           "type": "string"
         },
         "description": "A hash of key/value pairs containing any other data about the company you want Intercom to store."
+      },
+      "CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "The custom attributes which are set for the Custom Object instance."
       },
       "CreatePhoneSwitchRequestCustomAttributes": {
         "type": "object",
@@ -57415,6 +57440,10 @@
       "DataEventMetadataProperty": {
         "type": "object",
         "description": "Optional metadata about the event."
+      },
+      "EcommerceCatalogProductAdditionalDataProperty": {
+        "type": "object",
+        "description": "Custom attributes for your business. Fin uses these to show each customer only the products relevant to them (e.g. regional availability or warehouse codes). All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file."
       },
       "ConversationSlaTargetMissedSlaStatesProperty": {
         "type": "object",
@@ -57468,6 +57497,10 @@
         "type": "object",
         "description": "Input options for the attribute"
       },
+      "UpdateContactRequestCustomAttributesProperty": {
+        "type": "object",
+        "description": "The custom attributes which are set for the contact"
+      },
       "UpdateConversationRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
@@ -57498,6 +57531,14 @@
       },
       "AiCallResponseIntentItemProperty": {
         "type": "object"
+      },
+      "RegisterFinVoiceCallRequestDataProperty": {
+        "type": "object",
+        "description": "Additional metadata about the call"
+      },
+      "ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty": {
+        "type": "object",
+        "description": "The translations for the quick reply option."
       },
       "BulkCreateCompaniesRequestCompaniesItemCustomAttributesProperty": {
         "type": "object",
@@ -57538,6 +57579,14 @@
           "type": "string"
         },
         "description": "Map of conversation attribute names to error messages."
+      },
+      "WorkflowExportWorkflowTargetingProperty": {
+        "type": "object",
+        "description": "The targeting rules for this workflow."
+      },
+      "WorkflowExportWorkflowSnapshotProperty": {
+        "type": "object",
+        "description": "The current snapshot of workflow steps and configuration."
       },
       "WorkflowExportWorkflowAttributesItemProperty": {
         "type": "object"

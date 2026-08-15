@@ -38,10 +38,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The settings altered by the change, keyed by setting name. Only settings whose value actually moved are included, so an unchanged setting is absent rather than present with equal values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges? Changes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty? Changes { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges Changes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty Changes { get; set; }
 #endif
         /// <summary>The conversation assignment limit value for an admin.</summary>
         public int? ConversationAssignmentLimit { get; set; }
@@ -140,7 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "auto_changed", n => { AutoChanged = n.GetStringValue(); } },
                 { "away_mode", n => { AwayMode = n.GetBoolValue(); } },
                 { "away_status_reason", n => { AwayStatusReason = n.GetStringValue(); } },
-                { "changes", n => { Changes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges.CreateFromDiscriminatorValue); } },
+                { "changes", n => { Changes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty.CreateFromDiscriminatorValue); } },
                 { "conversation_assignment_limit", n => { ConversationAssignmentLimit = n.GetIntValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "last_activity_at", n => { LastActivityAt = n.GetIntValue(); } },
@@ -167,7 +167,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("auto_changed", AutoChanged);
             writer.WriteBoolValue("away_mode", AwayMode);
             writer.WriteStringValue("away_status_reason", AwayStatusReason);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChanges>("changes", Changes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty>("changes", Changes);
             writer.WriteIntValue("conversation_assignment_limit", ConversationAssignmentLimit);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteIntValue("last_activity_at", LastActivityAt);

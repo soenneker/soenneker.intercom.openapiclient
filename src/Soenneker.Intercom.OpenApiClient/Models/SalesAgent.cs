@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A flat key-value map of memory fields collected by the sales agent during the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedData? CollectedData { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty? CollectedData { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedData CollectedData { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty CollectedData { get; set; }
 #endif
         /// <summary>The fixed outcome of the sales agent interaction, used for billing and tracking.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome? Outcome { get; set; }
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "collected_data", n => { CollectedData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedData>(global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedData.CreateFromDiscriminatorValue); } },
+                { "collected_data", n => { CollectedData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty.CreateFromDiscriminatorValue); } },
                 { "outcome", n => { Outcome = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome>(); } },
                 { "routing_outcome", n => { RoutingOutcome = n.GetStringValue(); } },
             };
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedData>("collected_data", CollectedData);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty>("collected_data", CollectedData);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome>("outcome", Outcome);
             writer.WriteStringValue("routing_outcome", RoutingOutcome);
             writer.WriteAdditionalData(AdditionalData);

@@ -25,10 +25,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The translations for the quick reply option.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslations? Translations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty? Translations { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslations Translations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty Translations { get; set; }
 #endif
         /// <summary>A unique identifier for this quick reply option. This value will be available within the metadata of the comment conversation part that is created when a user clicks on this reply option.</summary>
         public Guid? Uuid { get; set; }
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "text", n => { Text = n.GetStringValue(); } },
-                { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslations>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslations.CreateFromDiscriminatorValue); } },
+                { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty.CreateFromDiscriminatorValue); } },
                 { "uuid", n => { Uuid = n.GetGuidValue(); } },
             };
         }
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("text", Text);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslations>("translations", Translations);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItemTranslationsProperty>("translations", Translations);
             writer.WriteGuidValue("uuid", Uuid);
             writer.WriteAdditionalData(AdditionalData);
         }
