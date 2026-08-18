@@ -65,6 +65,39 @@ namespace Soenneker.Intercom.OpenApiClient.Teams.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Team>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Team.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// You can replace the set of teammates who belong to a team. Send the full list ofteammates the team should end up with — any teammate currently on the team andmissing from the list is removed. This makes the endpoint safe to call on aschedule to keep Intercom in step with an external rota or workforce managementsystem, since sending an unchanged list makes no changes at all.A token that acts on behalf of a teammate carries that teammate&apos;s permissions:they must be able to manage teams, and any team or teammate their access isrestricted from remains out of reach here.
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Team"/></returns>
+        /// <param name="body">The request payload for updating a team&apos;s membership.`admin_ids` is the complete set of teammates who should be on the team oncethe request completes, not a list of changes to apply. Any teammate currentlyon the team but absent from `admin_ids` is removed.Membership is the only part of a team this endpoint writes, and the request isread from the body: a parameter sent in the query string is rejected rather thanapplied. A team read from the API can be sent back whole, since the other fieldsof the representation are accepted as long as they are unchanged. Trying tochange one of them returns a 400 rather than being ignored, as does any field ateam does not have.On a team that balances assignment across its members, teammates already on theteam keep their current priority level and teammates being added join as primarymembers. Priority levels cannot be set here, so `admin_priority_level` followsfrom `admin_ids`: it is accepted when sent back unchanged and returns a 400 whenthe request tries to change it.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 409 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTeamMembersRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Team> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTeamMembersRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPutRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Team>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Team.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// You can fetch the details of a single team, containing an array of admins that belong to this team.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -81,6 +114,28 @@ namespace Soenneker.Intercom.OpenApiClient.Teams.Item
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// You can replace the set of teammates who belong to a team. Send the full list ofteammates the team should end up with — any teammate currently on the team andmissing from the list is removed. This makes the endpoint safe to call on aschedule to keep Intercom in step with an external rota or workforce managementsystem, since sending an unchanged list makes no changes at all.A token that acts on behalf of a teammate carries that teammate&apos;s permissions:they must be able to manage teams, and any team or teammate their access isrestricted from remains out of reach here.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The request payload for updating a team&apos;s membership.`admin_ids` is the complete set of teammates who should be on the team oncethe request completes, not a list of changes to apply. Any teammate currentlyon the team but absent from `admin_ids` is removed.Membership is the only part of a team this endpoint writes, and the request isread from the body: a parameter sent in the query string is rejected rather thanapplied. A team read from the API can be sent back whole, since the other fieldsof the representation are accepted as long as they are unchanged. Trying tochange one of them returns a 400 rather than being ignored, as does any field ateam does not have.On a team that balances assignment across its members, teammates already on theteam keep their current priority level and teammates being added join as primarymembers. Priority levels cannot be set here, so `admin_priority_level` followsfrom `admin_ids`: it is accepted when sent back unchanged and returns a 400 whenthe request tries to change it.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTeamMembersRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTeamMembersRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>

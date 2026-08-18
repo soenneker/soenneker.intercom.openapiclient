@@ -29483,6 +29483,245 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Update a team\u0027s members",
+        "description": "You can replace the set of teammates who belong to a team. Send the full list of\nteammates the team should end up with \u2014 any teammate currently on the team and\nmissing from the list is removed. This makes the endpoint safe to call on a\nschedule to keep Intercom in step with an external rota or workforce management\nsystem, since sending an unchanged list makes no changes at all.\n\nA token that acts on behalf of a teammate carries that teammate\u0027s permissions:\nthey must be able to manage teams, and any team or teammate their access is\nrestricted from remains out of reach here.",
+        "operationId": "UpdateTeamMembers",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of a given team.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamMembersRequest"
+              },
+              "examples": {
+                "successful": {
+                  "value": {
+                    "admin_ids": [
+                      493881,
+                      493882
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "team",
+                      "id": "991267902",
+                      "name": "team 1",
+                      "admin_ids": [
+                        493881,
+                        493882
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid admin ids": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8ba1e2a4-3d6f-4a1e-9c07-52c8f5b0d1aa",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "admin_ids must contain only numeric admin ids"
+                        }
+                      ]
+                    }
+                  },
+                  "Field cannot be updated": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1c9d6f0b-7a24-4b8e-9f31-3e5a2c6b8d70",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Only admin_ids can be updated on a team, but the request changed name"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Two codes are returned here and they mean different things. \u0060api_plan_restricted\u0060\nmeans the endpoint is not available to this workspace at all, so no request will\nsucceed until it is enabled. \u0060forbidden\u0060 means the workspace has the endpoint but\nthe teammate this token acts for may not make this particular change.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Not available for this workspace": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2f7b9c04-8e15-4a63-b0d7-6c41e9a3f582",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Updating team memberships via the API is not available for this workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Forbidden": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4dd0f4f7-2d4b-4d2f-8b98-cf1e7ba1b2c5",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "You don\u0027t have permission to update the members of this team"
+                        }
+                      ]
+                    }
+                  },
+                  "Cannot manage teams": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6b2c8e1d-4f39-4d70-8a52-9c7e1f3b0a44",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "You don\u0027t have permission to manage teams in this workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Team not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Team not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9a3e0b1c-6f27-4f5e-8c31-0f2f4a7d9e88",
+                      "errors": [
+                        {
+                          "code": "team_not_found",
+                          "message": "Team not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Another request is already changing this team\u0027s members. Two cases are\ndistinguished by the message: the request was declined before anything was\nwritten, so the team is unchanged and the same request can simply be sent\nagain; or the members kept changing while the request was being applied, so\nit is partly applied and the team should be read again before retrying.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Conflict": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5e7a0c3f-8b16-4d92-a7c4-2f8b6d0e9137",
+                      "errors": [
+                        {
+                          "code": "conflict",
+                          "message": "The members of this team are being changed by another request. Try again."
+                        }
+                      ]
+                    }
+                  },
+                  "Partly applied": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5e7a0c3f-8b16-4d92-a7c4-2f8b6d0e9137",
+                      "errors": [
+                        {
+                          "code": "conflict",
+                          "message": "The members of this team kept being changed by other requests, so this one is partly applied. Read the team and try again."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6c1e2f83-5b47-4f0e-9d8a-3b2c1e4f7a90",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/ticket_states": {
@@ -50534,6 +50773,23 @@
           }
         },
         "description": "You can update an External Page in your Fin Content Library."
+      },
+      "UpdateTeamMembersRequest": {
+        "title": "Update Team Members Request Payload",
+        "required": [
+          "admin_ids"
+        ],
+        "type": "object",
+        "properties": {
+          "admin_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of every teammate who should be a member of the team. Must contain at least one id, and no more than 1000."
+          }
+        },
+        "description": "The request payload for updating a team\u0027s membership.\n\u0060admin_ids\u0060 is the complete set of teammates who should be on the team once\nthe request completes, not a list of changes to apply. Any teammate currently\non the team but absent from \u0060admin_ids\u0060 is removed.\n\nMembership is the only part of a team this endpoint writes, and the request is\nread from the body: a parameter sent in the query string is rejected rather than\napplied. A team read from the API can be sent back whole, since the other fields\nof the representation are accepted as long as they are unchanged. Trying to\nchange one of them returns a 400 rather than being ignored, as does any field a\nteam does not have.\n\nOn a team that balances assignment across its members, teammates already on the\nteam keep their current priority level and teammates being added join as primary\nmembers. Priority levels cannot be set here, so \u0060admin_priority_level\u0060 follows\nfrom \u0060admin_ids\u0060: it is accepted when sent back unchanged and returns a 400 when\nthe request tries to change it.\n"
       },
       "UpdateTicketRequest": {
         "title": "Update Ticket Request Payload",
