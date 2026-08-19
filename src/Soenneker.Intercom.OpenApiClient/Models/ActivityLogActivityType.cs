@@ -220,6 +220,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         InboxAccessChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "inbox_bulk_action")]
+        #pragma warning disable CS1591
+        InboxBulkAction,
+        #pragma warning restore CS1591
         [EnumMember(Value = "message_deletion")]
         #pragma warning disable CS1591
         MessageDeletion,

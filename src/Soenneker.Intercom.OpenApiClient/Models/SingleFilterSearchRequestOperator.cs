@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The accepted operators you can use to define how you want to search for the value.</summary>
+    /// <summary>The accepted operators you can use to define how you want to search for the value. Operator support depends on the field&apos;s data type. The breakdown below is for Contacts search; the other search endpoints that share this schema accept a different set per field:- `string` fields: `=`, `!=`, `IN`, `NIN`, `~`, `!~`, `^`, `$`- `tag_id`: `=` and `!=` only. Every other operator returns an error.- `boolean` fields: `=`, `!=`, `IN`, `NIN`- `integer` fields: `=`, `!=`, `IN`, `NIN`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`- `datetime` fields (standard contact timestamps such as `created_at` and `last_seen_at`): `=`, `!=`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`. Filtering is on the exact second, in UTC.- `date` fields (Date custom attributes): `=`, `&lt;`, `&gt;` only. `!=`, `&lt;=`, and `&gt;=` are not supported and return an error. Values are truncated to a whole UTC day.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum SingleFilterSearchRequestOperator
     {
@@ -27,9 +27,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         LessThan,
         #pragma warning restore CS1591
+        [EnumMember(Value = "<=")]
+        #pragma warning disable CS1591
+        LessThanOrEqual,
+        #pragma warning restore CS1591
         [EnumMember(Value = ">")]
         #pragma warning disable CS1591
         GreaterThan,
+        #pragma warning restore CS1591
+        [EnumMember(Value = ">=")]
+        #pragma warning disable CS1591
+        GreaterThanOrEqual,
         #pragma warning restore CS1591
         [EnumMember(Value = "~")]
         #pragma warning disable CS1591

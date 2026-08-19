@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Field { get; set; }
 #endif
-        /// <summary>The accepted operators you can use to define how you want to search for the value.</summary>
+        /// <summary>The accepted operators you can use to define how you want to search for the value. Operator support depends on the field&apos;s data type. The breakdown below is for Contacts search; the other search endpoints that share this schema accept a different set per field:- `string` fields: `=`, `!=`, `IN`, `NIN`, `~`, `!~`, `^`, `$`- `tag_id`: `=` and `!=` only. Every other operator returns an error.- `boolean` fields: `=`, `!=`, `IN`, `NIN`- `integer` fields: `=`, `!=`, `IN`, `NIN`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`- `datetime` fields (standard contact timestamps such as `created_at` and `last_seen_at`): `=`, `!=`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`. Filtering is on the exact second, in UTC.- `date` fields (Date custom attributes): `=`, `&lt;`, `&gt;` only. `!=`, `&lt;=`, and `&gt;=` are not supported and return an error. Values are truncated to a whole UTC day.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestOperator? Operator { get; set; }
         /// <summary>The value that you want to search on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
