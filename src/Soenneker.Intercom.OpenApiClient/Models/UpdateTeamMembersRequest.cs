@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The request payload for updating a team&apos;s membership.`admin_ids` is the complete set of teammates who should be on the team oncethe request completes, not a list of changes to apply. Any teammate currentlyon the team but absent from `admin_ids` is removed.Membership is the only part of a team this endpoint writes, and the request isread from the body: a parameter sent in the query string is rejected rather thanapplied. A team read from the API can be sent back whole, since the other fieldsof the representation are accepted as long as they are unchanged. Trying tochange one of them returns a 400 rather than being ignored, as does any field ateam does not have.On a team that balances assignment across its members, teammates already on theteam keep their current priority level and teammates being added join as primarymembers. Priority levels cannot be set here, so `admin_priority_level` followsfrom `admin_ids`: it is accepted when sent back unchanged and returns a 400 whenthe request tries to change it.
+    /// The request payload for updating a team&apos;s membership.`admin_ids` is the complete set of teammates who should be on the team oncethe request completes, not a list of changes to apply. Any teammate currentlyon the team but absent from `admin_ids` is removed.The team&apos;s members and their priority levels are the only parts of a team thisendpoint writes, and the request is read from the body: a parameter sent in thequery string is rejected rather than applied. A team read from the API can be sentback whole, since the other fields of the representation are accepted as long asthey are unchanged. Trying to change one of them returns a 400 rather than beingignored, as does any field a team does not have.`admin_priority_level` sets which teammates take work first. It is optional, andnames only the teammates whose level the request is setting: a teammate it leavesout keeps the level they already have, and one joining the team without a levelnamed becomes a primary member. A level named for a teammate the request removes isignored, so a team read from the API can still be sent back whole with only`admin_ids` changed.Naming an id that is on neither the team nor `admin_ids` returns a 400. So doesnaming the same id at both levels, unless the team really does hold that teammateat both: a read reports that shape, and sending it back settles them at a singlelevel rather than being refused.Only a team whose `distribution_method` is `load_balanced` can have secondarymembers, so `secondary_admin_ids` returns a 400 on any other team.`primary_admin_ids` is accepted on every team, but a team that does not balanceassignment does not report `admin_priority_level` back and does not use the levelsto decide who work goes to.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateTeamMembersRequest : IAdditionalDataHolder, IParsable
@@ -22,6 +22,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public List<int?> AdminIds { get; set; }
+#endif
+        /// <summary>The priority levels to set, naming only the teammates whose level is being set</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest? AdminPriorityLevel { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest AdminPriorityLevel { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateTeamMembersRequest"/> and sets the default values.
@@ -49,6 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_ids", n => { AdminIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
+                { "admin_priority_level", n => { AdminPriorityLevel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest>(global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -59,6 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<int?>("admin_ids", AdminIds);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest>("admin_priority_level", AdminPriorityLevel);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

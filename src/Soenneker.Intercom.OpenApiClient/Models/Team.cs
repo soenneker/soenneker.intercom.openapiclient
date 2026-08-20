@@ -31,6 +31,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel AdminPriorityLevel { get; set; }
 #endif
+        /// <summary>The assignment limit for the team. This field is only present when the team&apos;s distribution type is load balanced.</summary>
+        public int? AssignmentLimit { get; set; }
+        /// <summary>Describes how assignments are distributed among the team members</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DistributionMethod { get; set; }
+#nullable restore
+#else
+        public string DistributionMethod { get; set; }
+#endif
         /// <summary>The id of the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -82,6 +92,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "admin_ids", n => { AdminIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "admin_priority_level", n => { AdminPriorityLevel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel>(global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel.CreateFromDiscriminatorValue); } },
+                { "assignment_limit", n => { AssignmentLimit = n.GetIntValue(); } },
+                { "distribution_method", n => { DistributionMethod = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -96,6 +108,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<int?>("admin_ids", AdminIds);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevel>("admin_priority_level", AdminPriorityLevel);
+            writer.WriteIntValue("assignment_limit", AssignmentLimit);
+            writer.WriteStringValue("distribution_method", DistributionMethod);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("type", Type);

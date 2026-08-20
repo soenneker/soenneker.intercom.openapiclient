@@ -29523,7 +29523,15 @@
                     "admin_ids": [
                       493881,
                       493882
-                    ]
+                    ],
+                    "admin_priority_level": {
+                      "primary_admin_ids": [
+                        493881
+                      ],
+                      "secondary_admin_ids": [
+                        493882
+                      ]
+                    }
                   }
                 }
               }
@@ -29547,7 +29555,17 @@
                       "admin_ids": [
                         493881,
                         493882
-                      ]
+                      ],
+                      "admin_priority_level": {
+                        "primary_admin_ids": [
+                          493881
+                        ],
+                        "secondary_admin_ids": [
+                          493882
+                        ]
+                      },
+                      "assignment_limit": 10,
+                      "distribution_method": "load_balanced"
                     }
                   }
                 }
@@ -29581,7 +29599,31 @@
                       "errors": [
                         {
                           "code": "parameter_invalid",
-                          "message": "Only admin_ids can be updated on a team, but the request changed name"
+                          "message": "Only admin_ids and admin_priority_level can be updated on a team, but the request changed name"
+                        }
+                      ]
+                    }
+                  },
+                  "Priority level names someone off the team": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0d3a7e51-9c62-4b18-8f74-6a2e5c1b9d38",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "admin_priority_level names 814865, which is on neither the team nor admin_ids"
+                        }
+                      ]
+                    }
+                  },
+                  "Priority level given twice": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7f4b2a90-1e58-4c63-9a07-3d6f8b2e5c14",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "admin_priority_level gives 493881 more than one priority level"
                         }
                       ]
                     }
@@ -36454,6 +36496,30 @@
           }
         },
         "description": "Admin priority levels for the team",
+        "nullable": true
+      },
+      "AdminPriorityLevelRequest": {
+        "title": "Admin Priority Level Request",
+        "type": "object",
+        "properties": {
+          "primary_admin_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the teammates to make primary members of the team",
+            "nullable": true
+          },
+          "secondary_admin_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the teammates to make secondary members of the team",
+            "nullable": true
+          }
+        },
+        "description": "The priority levels to set, naming only the teammates whose level is being set",
         "nullable": true
       },
       "AdminReplyConversationRequest": {
@@ -49526,6 +49592,18 @@
           },
           "admin_priority_level": {
             "$ref": "#/components/schemas/AdminPriorityLevel"
+          },
+          "assignment_limit": {
+            "type": "integer",
+            "description": "The assignment limit for the team. This field is only present when the team\u0027s distribution type is load balanced.",
+            "nullable": true,
+            "example": 10
+          },
+          "distribution_method": {
+            "type": "string",
+            "description": "Describes how assignments are distributed among the team members",
+            "nullable": true,
+            "example": "round_robin"
           }
         },
         "description": "Teams are groups of admins in Intercom.",
@@ -50788,9 +50866,12 @@
               "type": "integer"
             },
             "description": "The ids of every teammate who should be a member of the team. Must contain at least one id, and no more than 1000."
+          },
+          "admin_priority_level": {
+            "$ref": "#/components/schemas/AdminPriorityLevelRequest"
           }
         },
-        "description": "The request payload for updating a team\u0027s membership.\n\u0060admin_ids\u0060 is the complete set of teammates who should be on the team once\nthe request completes, not a list of changes to apply. Any teammate currently\non the team but absent from \u0060admin_ids\u0060 is removed.\n\nMembership is the only part of a team this endpoint writes, and the request is\nread from the body: a parameter sent in the query string is rejected rather than\napplied. A team read from the API can be sent back whole, since the other fields\nof the representation are accepted as long as they are unchanged. Trying to\nchange one of them returns a 400 rather than being ignored, as does any field a\nteam does not have.\n\nOn a team that balances assignment across its members, teammates already on the\nteam keep their current priority level and teammates being added join as primary\nmembers. Priority levels cannot be set here, so \u0060admin_priority_level\u0060 follows\nfrom \u0060admin_ids\u0060: it is accepted when sent back unchanged and returns a 400 when\nthe request tries to change it.\n"
+        "description": "The request payload for updating a team\u0027s membership.\n\u0060admin_ids\u0060 is the complete set of teammates who should be on the team once\nthe request completes, not a list of changes to apply. Any teammate currently\non the team but absent from \u0060admin_ids\u0060 is removed.\n\nThe team\u0027s members and their priority levels are the only parts of a team this\nendpoint writes, and the request is read from the body: a parameter sent in the\nquery string is rejected rather than applied. A team read from the API can be sent\nback whole, since the other fields of the representation are accepted as long as\nthey are unchanged. Trying to change one of them returns a 400 rather than being\nignored, as does any field a team does not have.\n\n\u0060admin_priority_level\u0060 sets which teammates take work first. It is optional, and\nnames only the teammates whose level the request is setting: a teammate it leaves\nout keeps the level they already have, and one joining the team without a level\nnamed becomes a primary member. A level named for a teammate the request removes is\nignored, so a team read from the API can still be sent back whole with only\n\u0060admin_ids\u0060 changed.\n\nNaming an id that is on neither the team nor \u0060admin_ids\u0060 returns a 400. So does\nnaming the same id at both levels, unless the team really does hold that teammate\nat both: a read reports that shape, and sending it back settles them at a single\nlevel rather than being refused.\n\nOnly a team whose \u0060distribution_method\u0060 is \u0060load_balanced\u0060 can have secondary\nmembers, so \u0060secondary_admin_ids\u0060 returns a 400 on any other team.\n\u0060primary_admin_ids\u0060 is accepted on every team, but a team that does not balance\nassignment does not report \u0060admin_priority_level\u0060 back and does not use the levels\nto decide who work goes to.\n"
       },
       "UpdateTicketRequest": {
         "title": "Update Ticket Request Payload",
