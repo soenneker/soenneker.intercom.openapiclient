@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public DateTimeOffset? ScheduledPublishAt { get; set; }
         /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting `null` cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid` — the value must be strictly in the future. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledUnpublishAt { get; set; }
-        /// <summary>Whether the article will be `published` or will be a `draft`. Defaults to draft. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
+        /// <summary>Whether the article will be `published` or will be a `draft`. Omitting this field leaves the publish state unchanged, so a draft stays a draft and an edit to a published article goes live immediately unless that article already has a pending draft or a scheduled publish time is set in the same request. The `PUT /articles/{id}/draft` endpoint ignores this field and always stages a draft. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequestState? State { get; set; }
         /// <summary>The title of the article.For multilingual articles, this will be the title of the default language&apos;s content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

@@ -16956,7 +16956,12 @@
                               }
                             ],
                             "event_details": null,
-                            "app_package_code": null
+                            "app_package_code": null,
+                            "translations": {
+                              "original": "en",
+                              "en": "\u003Cp\u003EOkay!\u003C/p\u003E",
+                              "fr": "\u003Cp\u003ED\u0027accord!\u003C/p\u003E"
+                            }
                           },
                           {
                             "type": "conversation_part",
@@ -17217,7 +17222,12 @@
                               }
                             ],
                             "event_details": null,
-                            "app_package_code": null
+                            "app_package_code": null,
+                            "translations": {
+                              "original": "en",
+                              "en": "\u003Cp\u003EOkay!\u003C/p\u003E",
+                              "fr": "\u003Cp\u003ED\u0027accord!\u003C/p\u003E"
+                            }
                           },
                           {
                             "type": "conversation_part",
@@ -19378,7 +19388,12 @@
                       },
                       "attachments": [],
                       "external_id": null,
-                      "external_reply_send_state": "sent"
+                      "external_reply_send_state": "sent",
+                      "translations": {
+                        "original": "en",
+                        "en": "\u003Cp\u003EHello there!\u003C/p\u003E",
+                        "fr": "\u003Cp\u003EBonjour!\u003C/p\u003E"
+                      }
                     }
                   },
                   "Mark part as seen": {
@@ -19401,6 +19416,11 @@
                       "external_id": null,
                       "seen_state": {
                         "admin_seen": true
+                      },
+                      "translations": {
+                        "original": "en",
+                        "en": "\u003Cp\u003EHello there!\u003C/p\u003E",
+                        "fr": "\u003Cp\u003EBonjour!\u003C/p\u003E"
                       }
                     }
                   }
@@ -31128,6 +31148,30 @@
                   "$ref": "#/components/schemas/TicketReply"
                 },
                 "examples": {
+                  "Admin reply": {
+                    "value": {
+                      "type": "ticket_part",
+                      "id": "155",
+                      "part_type": "comment",
+                      "body": "\u003Cp\u003EThanks for reaching out, we\u0027re looking into it!\u003C/p\u003E",
+                      "created_at": 1734537880,
+                      "updated_at": 1734537880,
+                      "author": {
+                        "id": "991267940",
+                        "type": "admin",
+                        "name": "Ciaran418 Lee",
+                        "email": "admin418@email.com"
+                      },
+                      "attachments": [],
+                      "redacted": false,
+                      "app_package_code": "test-integration",
+                      "translations": {
+                        "original": "en",
+                        "en": "\u003Cp\u003EThanks for reaching out, we\u0027re looking into it!\u003C/p\u003E",
+                        "fr": "\u003Cp\u003EMerci de nous avoir contact\u00E9s, nous nous en occupons !\u003C/p\u003E"
+                      }
+                    }
+                  },
                   "Admin note reply": {
                     "value": {
                       "type": "ticket_part",
@@ -36577,6 +36621,11 @@
             },
             "description": "A list of files that will be added as attachments. You can include up to 10 files"
           },
+          "skip_notifications": {
+            "type": "boolean",
+            "description": "Option to disable notifications when replying to a conversation.",
+            "example": true
+          },
           "skip_unsnooze": {
             "type": "boolean",
             "description": "When true, prevents the reply from waking a snoozed conversation. Applies to \u0027comment\u0027 and \u0027note\u0027 message types. The part is still created and visible in the conversation thread.",
@@ -41843,6 +41892,9 @@
             "description": "The app package code if this part was created via API. null if the part was not created via API.",
             "nullable": true,
             "example": "test-integration"
+          },
+          "translations": {
+            "$ref": "#/components/schemas/ConversationPartTranslationsProperty"
           }
         },
         "description": "A Conversation Part represents a message in the conversation."
@@ -47795,6 +47847,7 @@
           "2.13",
           "2.14",
           "2.15",
+          "2.16",
           "Preview"
         ],
         "type": "string",
@@ -47888,6 +47941,10 @@
             {
               "value": "2.15",
               "name": "Value215"
+            },
+            {
+              "value": "2.16",
+              "name": "Value216"
             }
           ]
         }
@@ -49116,6 +49173,11 @@
             "description": "The id of the admin who is authoring the comment.",
             "example": "3156780"
           },
+          "skip_notifications": {
+            "type": "boolean",
+            "description": "Option to disable notifications when replying to a conversation.",
+            "example": true
+          },
           "skip_unsnooze": {
             "type": "boolean",
             "description": "When true, prevents the reply from waking a snoozed conversation. Applies to \u0027comment\u0027 and \u0027note\u0027 message types. The part is still created and visible in the conversation thread.",
@@ -49923,6 +49985,9 @@
             "description": "The app package code if this part was created via API. Note this field won\u0027t show if the part was not created via API.",
             "example": "text-integration"
           },
+          "translations": {
+            "$ref": "#/components/schemas/TicketPartTranslationsProperty"
+          },
           "updated_attribute_data": {
             "$ref": "#/components/schemas/TicketPartUpdatedAttributeData"
           }
@@ -50030,6 +50095,9 @@
             "type": "boolean",
             "description": "Whether or not the ticket part has been redacted.",
             "example": false
+          },
+          "translations": {
+            "$ref": "#/components/schemas/TicketReplyTranslationsProperty"
           }
         },
         "description": "A Ticket Part representing a note, comment, or quick_reply on a ticket"
@@ -53464,6 +53532,22 @@
       "ContentSnippetUpdateRequestJsonBlocksItem": {
         "type": "object"
       },
+      "ConversationPartTranslations": {
+        "required": [
+          "original"
+        ],
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060).",
+        "nullable": true,
+        "example": {
+          "original": "en",
+          "en": "\u003Cp\u003EHello\u003C/p\u003E",
+          "fr": "\u003Cp\u003EBonjour\u003C/p\u003E"
+        }
+      },
       "ConversationSourceRecipientsItem": {
         "type": "object",
         "properties": {
@@ -54635,6 +54719,22 @@
           }
         }
       },
+      "TicketPartTranslations": {
+        "required": [
+          "original"
+        ],
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060).",
+        "nullable": true,
+        "example": {
+          "original": "en",
+          "en": "\u003Cp\u003EHello\u003C/p\u003E",
+          "fr": "\u003Cp\u003EBonjour\u003C/p\u003E"
+        }
+      },
       "TicketPartUpdatedAttributeData": {
         "title": "Updated Attribute",
         "required": [
@@ -54652,6 +54752,22 @@
         },
         "description": "The updated attribute data of the ticket part. Only present for attribute update parts.",
         "nullable": true
+      },
+      "TicketReplyTranslations": {
+        "required": [
+          "original"
+        ],
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060).",
+        "nullable": true,
+        "example": {
+          "original": "en",
+          "en": "\u003Cp\u003EHello\u003C/p\u003E",
+          "fr": "\u003Cp\u003EBonjour\u003C/p\u003E"
+        }
       },
       "TicketStateDetailedTicketTypes": {
         "type": "object",
@@ -58435,6 +58551,13 @@
         },
         "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as \u0022CX Score rating\u0022 and \u0022CX Score explanation\u0022 may also be included."
       },
+      "ConversationPartTranslationsProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060)."
+      },
       "ConvertConversationToTicketRequestAttributes": {
         "type": "object",
         "additionalProperties": {
@@ -58548,6 +58671,20 @@
           "$ref": "#/components/schemas/TicketCustomAttributesAdditionalProperties"
         },
         "description": "An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are \u0060_default_title_\u0060 and \u0060_default_description_\u0060."
+      },
+      "TicketPartTranslationsProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060)."
+      },
+      "TicketReplyTranslationsProperty": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060)."
       },
       "TicketTypeAttributeInputOptionsProperty": {
         "type": "object",
@@ -63950,7 +64087,7 @@
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "Whether the article will be \u0060published\u0060 or will be a \u0060draft\u0060. Defaults to draft. For multilingual articles, this will be the state of the default language\u0027s content.",
+        "description": "Whether the article will be \u0060published\u0060 or will be a \u0060draft\u0060. Omitting this field leaves the publish state unchanged, so a draft stays a draft and an edit to a published article goes live immediately unless that article already has a pending draft or a scheduled publish time is set in the same request. The \u0060PUT /articles/{id}/draft\u0060 endpoint ignores this field and always stages a draft. For multilingual articles, this will be the state of the default language\u0027s content.",
         "example": "draft",
         "x-ms-enum": {
           "name": "UpdateArticleRequestState",

@@ -119,6 +119,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic> Tags { get; set; }
 #endif
+        /// <summary>A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `conversation.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty? Translations { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty Translations { get; set; }
+#endif
         /// <summary>Always conversation_part</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -170,6 +178,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>(); } },
                 { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>(global::Soenneker.Intercom.OpenApiClient.Models.TagBasic.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
@@ -197,6 +206,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>("state", State);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>("tags", Tags);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty>("translations", Translations);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
