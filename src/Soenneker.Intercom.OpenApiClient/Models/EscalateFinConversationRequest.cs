@@ -14,7 +14,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Optional context for the receiving teammate explaining why the conversation is being escalated. Attached as an internal note, never shown to the user. Avoid including credentials or unnecessary personal data — the note is visible to any teammate with access to the conversation.</summary>
+        /// <summary>Optional background for the receiving teammate, valid with either `conversation_id` or `user`. On the Intercom Helpdesk, it appears above the summary in the internal note of the new conversation the teammate picks up, and is never shown to the end user. Not surfaced on Fin for Platforms. Avoid including credentials or unnecessary personal data — it is visible to any teammate with access to the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Context { get; set; }
@@ -29,14 +29,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string ConversationId { get; set; }
-#endif
-        /// <summary>Optional first message for the new conversation, used only when escalating on behalf of a `user`. Shown to the end-user (unlike `context`, which is an internal note), so don&apos;t include sensitive orchestration data. Defaults to &quot;Requesting human support&quot;.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Message { get; set; }
-#nullable restore
-#else
-        public string Message { get; set; }
 #endif
         /// <summary>The user to escalate on behalf of, creating a new conversation. Provide this or `conversation_id`. Not supported on Fin for Platforms.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -73,7 +65,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "context", n => { Context = n.GetStringValue(); } },
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
-                { "message", n => { Message = n.GetStringValue(); } },
                 { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser>(global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser.CreateFromDiscriminatorValue); } },
             };
         }
@@ -86,7 +77,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("context", Context);
             writer.WriteStringValue("conversation_id", ConversationId);
-            writer.WriteStringValue("message", Message);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalateFinConversationRequestUser>("user", User);
             writer.WriteAdditionalData(AdditionalData);
         }
