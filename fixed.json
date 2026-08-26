@@ -826,6 +826,211 @@
         }
       }
     },
+    "/admins/remove": {
+      "delete": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "Remove an admin",
+        "description": "You can remove a single admin (teammate) from your workspace.\nRequires the \u0060remove_admins\u0060 OAuth scope.\n\nThis removes the admin\u0027s access to the workspace and reassigns their\nwork \u2014 auto-messages, ownership, article authorship, and conversation\nreplies \u2014 to the admins named by the \u0060reassign_*\u0060 parameters.",
+        "operationId": "RemoveAdmin",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "admin_id",
+            "in": "query",
+            "description": "The unique identifier of the admin to remove.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 123
+          },
+          {
+            "name": "reassign_messages_admin_id",
+            "in": "query",
+            "description": "The unique identifier of a human admin to reassign the removed admin\u0027s auto-message ownership to.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 456
+          },
+          {
+            "name": "reassign_owner_admin_id",
+            "in": "query",
+            "description": "The unique identifier of a human admin to reassign the removed admin\u0027s ownership (of users and leads) to.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 456
+          },
+          {
+            "name": "reassign_articles_author_id",
+            "in": "query",
+            "description": "The unique identifier of a human admin to reassign the removed admin\u0027s article authorship to.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 456
+          },
+          {
+            "name": "reassign_conversations_admin_id",
+            "in": "query",
+            "description": "The unique identifier of a human admin with Inbox access to reassign the removed admin\u0027s conversation replies to. Pass \u00600\u0060 to leave conversations unassigned.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 456
+          },
+          {
+            "name": "reassign_replies_teams",
+            "in": "query",
+            "description": "A list of teams and the admin each team\u0027s conversation replies should be reassigned to.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "team_id": {
+                    "type": "integer",
+                    "example": 789
+                  },
+                  "assignee_id": {
+                    "type": "integer",
+                    "example": 456
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveAdmin200Response"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "id": "123",
+                      "object": "admin",
+                      "removed": "true"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Admin not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Admin not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "efcd0531-798b-4c22-bccd-68877ed7faa4",
+                      "errors": [
+                        {
+                          "code": "admin_not_found",
+                          "message": "Admin for admin_id not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed. Returned when \u0060admin_id\u0060, or one of the \u0060reassign_*_admin_id\u0060 parameters, refers to a bot or a team rather than a human admin.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Method Not Allowed": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "action_forbidden",
+                          "message": "This method is not allowed for this type of Admin for admin_id"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. Returned when \u0060reassign_conversations_admin_id\u0060 refers to an admin without Inbox access for the workspace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Forbidden": {
+                    "value": {
+                      "type": "error.list",
+                      "errors": [
+                        {
+                          "code": "action_forbidden",
+                          "message": "The admin for reassign_conversations_admin_id does not have Inbox access permissions"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e76b2df0-2413-4215-8a5a-b5f6ebd4e642",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ai/content_import_sources": {
       "get": {
         "tags": [
@@ -27762,6 +27967,126 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Delete a note",
+        "description": "You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.",
+        "operationId": "DeleteNote",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of a given note",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedNoteObject"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "34",
+                      "type": "note",
+                      "deleted": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Note not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Note not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5c1ca6c7-6f5e-4d4b-9f52-3a2e1c9d7b64",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e3f0a9c1-2b4d-4e6a-8c7f-1d5b9a3e6f02",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Resource not available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Resource not available": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9a2d6e4b-7c1f-4a83-b6d0-2f8e5c1a9b37",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/secure_mode_secrets": {
@@ -34646,7 +34971,7 @@
           "Fin Agent"
         ],
         "summary": "Ask Fin",
-        "description": "Ask Fin a single, self-contained question and receive one informational answer.\n\nUnlike a conversation, \u0060/fin/ask\u0060 is non-conversational: Fin will not ask follow-up\nquestions, will not run procedures, and will not escalate to a human on its own. You can\nstill escalate one yourself with \u0060POST /fin/escalate\u0060; the ask conversation stays closed\nand the handoff is routed separately.\n\nFin\u0027s answer is delivered asynchronously via the \u0060fin_replied\u0060 event. The conversation\nends with a \u0060complete\u0060 status \u2014 there is no \u0060awaiting_user_reply\u0060 cycle.\n",
+        "description": "Ask Fin a single, self-contained question and receive one informational answer.\n\nUnlike a conversation, \u0060/fin/ask\u0060 is non-conversational: Fin will not ask follow-up\nquestions, will not run procedures, and will not escalate to a human on its own. You can\nstill escalate one yourself with \u0060POST /fin/escalate\u0060; the ask conversation is already\nclosed after its one-shot answer, and escalation leaves it closed while routing the\nhandoff separately.\n\nFin\u0027s answer is delivered asynchronously via the \u0060fin_replied\u0060 event. The conversation\nends with a \u0060complete\u0060 status \u2014 there is no \u0060awaiting_user_reply\u0060 cycle.\n",
         "operationId": "AskFin",
         "parameters": [
           {
@@ -35216,7 +35541,7 @@
           "Fin Agent"
         ],
         "summary": "Escalate to a human",
-        "description": "Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the\nhandoff lands in your team inbox.\n\nProvide either \u0060conversation_id\u0060 or \u0060user\u0060:\n\n- \u0060conversation_id\u0060 \u2014 escalate an existing agent conversation, including one started\n  with \u0060/fin/ask\u0060. On the Intercom Helpdesk, Fin by default summarises the conversation\n  and opens a new Helpdesk conversation that carries the summary as an internal note;\n  the original agent conversation is not reassigned or closed. Configure an escalation\n  Operator Workflow to change this default.\n- \u0060user\u0060 \u2014 escalate on behalf of a user with no prior agent conversation. On the Intercom\n  Helpdesk, a new Helpdesk conversation is created for the teammate. Not supported on Fin\n  for Platforms \u2014 see below.\n\nIn both cases, pass the optional \u0060context\u0060 to give the receiving teammate background your\norchestrating agent has and Fin does not. On the Intercom Helpdesk, it appears above the\nsummary in the internal note of the new conversation the teammate picks up. It is never\nshown to the end user.\n\nEscalating an existing conversation also sets its AI Agent resolution state to\n\u0060escalated\u0060, readable as \u0060ai_agent.resolution_state\u0060 on the Conversations API. This is a\nresolution state, not a billable resolution.\n\nOn Fin for Platforms, \u0060conversation_id\u0060 is required \u2014 \u0060user\u0060 is not supported and is\nrejected, because there is no Intercom Helpdesk in which to create a conversation. There\nis no Intercom inbox either, so an escalation that no workflow handles does not open a\nHelpdesk conversation for a teammate. \u0060context\u0060 is not surfaced, and the conversation is\nleft open for your platform to hand off and continue driving.\n\nYou are notified over the existing webhook or SSE channel with an \u0060escalated\u0060 status\nfollowed by \u0060complete\u0060. The \u0060complete\u0060 status signals that Fin is done; it does not close\nthe conversation. On the Intercom Helpdesk, the new human conversation remains open; on\nFin for Platforms, the conversation remains open for whoever handles it on your platform.\n",
+        "description": "Hand a conversation off to a human teammate. If you use the Intercom Helpdesk, the\nhandoff lands in your team inbox.\n\nProvide either \u0060conversation_id\u0060 or \u0060user\u0060:\n\n- \u0060conversation_id\u0060 \u2014 escalate an existing agent conversation, including one started\n  with \u0060/fin/ask\u0060. On the Intercom Helpdesk, Fin by default summarises the conversation\n  and opens a new Helpdesk conversation that carries the summary as an internal note.\n  Escalation does not change the original agent conversation\u0027s assignment or open/closed\n  state. Configure an escalation Operator Workflow to change this default.\n- \u0060user\u0060 \u2014 escalate on behalf of a user with no prior agent conversation. On the Intercom\n  Helpdesk, a new Helpdesk conversation is created for the teammate. Not supported on Fin\n  for Platforms \u2014 see below.\n\nIn both cases, pass the optional \u0060context\u0060 to give the receiving teammate background your\norchestrating agent has and Fin does not. On the Intercom Helpdesk, it appears above the\nsummary in the internal note of the new conversation the teammate picks up. It is never\nshown to the end user.\n\nEscalating an existing conversation also sets its AI Agent resolution state to\n\u0060escalated\u0060, readable as \u0060ai_agent.resolution_state\u0060 on the Conversations API. This is a\nresolution state, not a billable resolution.\n\nOn Fin for Platforms, \u0060conversation_id\u0060 is required \u2014 \u0060user\u0060 is not supported and is\nrejected, because there is no Intercom Helpdesk in which to create a conversation. There\nis no Intercom inbox either, so an escalation that no workflow handles does not open a\nHelpdesk conversation for a teammate. \u0060context\u0060 is not surfaced, and the conversation is\nleft open for your platform to hand off and continue driving.\n\nYou are notified over the existing webhook or SSE channel with an \u0060escalated\u0060 status\nfollowed by \u0060complete\u0060. The \u0060complete\u0060 status signals that Fin is done; it does not close\nthe conversation. On the Intercom Helpdesk, the new human conversation remains open; on\nFin for Platforms, the conversation remains open for whoever handles it on your platform.\n",
         "operationId": "EscalateFinConversation",
         "parameters": [
           {
@@ -46045,6 +46370,26 @@
         },
         "description": "Response returned when an object is deleted"
       },
+      "DeletedNoteObject": {
+        "title": "Deleted Note Object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the note which you provided in the URL.",
+            "example": "34"
+          },
+          "type": {
+            "$ref": "#/components/schemas/NoteType"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the note was deleted successfully or not.",
+            "example": true
+          }
+        },
+        "description": "Response returned when an object is deleted"
+      },
       "DetachContactFromConversationRequest": {
         "required": [
           "admin_id"
@@ -53540,7 +53885,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060).",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -54727,7 +55072,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060).",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -54761,7 +55106,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060).",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -55608,6 +55953,22 @@
             "description": "The number of results per page. Must be between 1 and 250.",
             "default": 20,
             "example": 20
+          }
+        }
+      },
+      "RemoveAdmin200Response": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the removed admin.",
+            "example": "123"
+          },
+          "object": {
+            "$ref": "#/components/schemas/AdminObject"
+          },
+          "removed": {
+            "$ref": "#/components/schemas/TrueValueRemoved"
           }
         }
       },
@@ -58550,7 +58911,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060)."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API."
       },
       "ConvertConversationToTicketRequestAttributes": {
         "type": "object",
@@ -58671,14 +59032,14 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060)."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API."
       },
       "TicketReplyTranslationsProperty": {
         "type": "object",
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060)."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API."
       },
       "TicketTypeAttributeInputOptionsProperty": {
         "type": "object",
@@ -62404,6 +62765,25 @@
           ]
         }
       },
+      "NoteType": {
+        "enum": [
+          "note"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of object which was deleted. - \u0060note\u0060",
+        "example": "note",
+        "x-ms-enum": {
+          "name": "NoteType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "note",
+              "name": "Note"
+            }
+          ]
+        }
+      },
       "ProcessingStatus": {
         "enum": [
           "processing"
@@ -65308,6 +65688,43 @@
             {
               "value": "tag",
               "name": "Tag"
+            }
+          ]
+        }
+      },
+      "AdminObject": {
+        "enum": [
+          "admin"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "AdminObject",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "admin",
+              "name": "Admin"
+            }
+          ]
+        }
+      },
+      "TrueValueRemoved": {
+        "enum": [
+          "true"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Whether the admin was removed. Returned as the string \u0060\u0022true\u0022\u0060.",
+        "example": "true",
+        "x-ms-enum": {
+          "name": "TrueValueRemoved",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "true",
+              "name": "TrueValue"
             }
           ]
         }

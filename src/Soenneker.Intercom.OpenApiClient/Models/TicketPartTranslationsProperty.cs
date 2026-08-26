@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `ticket.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`).
+    /// A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `ticket.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`). This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class TicketPartTranslationsProperty : IAdditionalDataHolder, IParsable

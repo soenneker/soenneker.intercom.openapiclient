@@ -7,30 +7,41 @@ using System.IO;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>
-    /// A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `conversation.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`). This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationPartTranslationsProperty : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class RemoveAdmin200Response : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The unique identifier of the removed admin.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The object property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminObject? Object { get; set; }
+        /// <summary>Whether the admin was removed. Returned as the string `&quot;true&quot;`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.TrueValueRemoved? Removed { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response"/> and sets the default values.
         /// </summary>
-        public ConversationPartTranslationsProperty()
+        public RemoveAdmin200Response()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +51,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminObject>(); } },
+                { "removed", n => { Removed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TrueValueRemoved>(); } },
             };
         }
         /// <summary>
@@ -49,6 +63,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("id", Id);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminObject>("object", Object);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TrueValueRemoved>("removed", Removed);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

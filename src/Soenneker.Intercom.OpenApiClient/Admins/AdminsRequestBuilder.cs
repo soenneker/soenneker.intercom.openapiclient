@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Admins.Activity_log_event_types;
 using Soenneker.Intercom.OpenApiClient.Admins.Activity_logs;
 using Soenneker.Intercom.OpenApiClient.Admins.Item;
+using Soenneker.Intercom.OpenApiClient.Admins.Remove;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -29,6 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Admins
         public global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder Activity_logs
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The remove property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Admins.Remove.RemoveRequestBuilder Remove
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Admins.Remove.RemoveRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.admins.item collection</summary>
         /// <param name="position">The unique identifier of a given admin</param>

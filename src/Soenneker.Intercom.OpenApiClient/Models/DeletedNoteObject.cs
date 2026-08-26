@@ -8,29 +8,41 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `conversation.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`). This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API.
+    /// Response returned when an object is deleted
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationPartTranslationsProperty : IAdditionalDataHolder, IParsable
+    public partial class DeletedNoteObject : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether the note was deleted successfully or not.</summary>
+        public bool? Deleted { get; set; }
+        /// <summary>The unique identifier for the note which you provided in the URL.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The type of object which was deleted. - `note`</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.NoteType? Type { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedNoteObject"/> and sets the default values.
         /// </summary>
-        public ConversationPartTranslationsProperty()
+        public DeletedNoteObject()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedNoteObject"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.DeletedNoteObject CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.DeletedNoteObject();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +52,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "deleted", n => { Deleted = n.GetBoolValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteType>(); } },
             };
         }
         /// <summary>
@@ -49,6 +64,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("deleted", Deleted);
+            writer.WriteStringValue("id", Id);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
