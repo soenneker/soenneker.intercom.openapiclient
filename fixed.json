@@ -13173,7 +13173,7 @@
           "Contacts"
         ],
         "summary": "List all contacts",
-        "description": "You can fetch a list of all contacts (ie. users or leads) in your workspace.\n{% admonition type=\u0022info\u0022 name=\u0022Merged contacts\u0022 %}\n  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.\n{% /admonition %}\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  You can use pagination to limit the number of results returned. The default is \u006050\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n",
+        "description": "You can fetch a list of all contacts (ie. users or leads) in your workspace.\n{% admonition type=\u0022info\u0022 name=\u0022Merged contacts\u0022 %}\n  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.\n{% /admonition %}\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  You can use pagination to limit the number of results returned. The default is \u006010\u0060 results per page, with a maximum of \u0060150\u0060.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n",
         "operationId": "ListContacts",
         "parameters": [
           {
@@ -17138,10 +17138,7 @@
                             "created_at": 1663597223,
                             "updated_at": 1663597260,
                             "notified_at": 1663597260,
-                            "assigned_to": {
-                              "type": "contact",
-                              "id": "1a2b3c"
-                            },
+                            "assigned_to": null,
                             "author": {
                               "type": "admin",
                               "id": "274",
@@ -17404,10 +17401,7 @@
                             "created_at": 1663597223,
                             "updated_at": 1663597260,
                             "notified_at": 1663597260,
-                            "assigned_to": {
-                              "type": "contact",
-                              "id": "1a2b3c"
-                            },
+                            "assigned_to": null,
                             "author": {
                               "type": "admin",
                               "id": "274",
@@ -19403,6 +19397,8 @@
                               "type": "admin",
                               "id": "991267715"
                             },
+                            "admin_assignee_id": 991267715,
+                            "team_assignee_id": 5017691,
                             "author": {
                               "id": "991267715",
                               "type": "admin",
@@ -32880,6 +32876,8 @@
                               "type": "admin",
                               "id": "991268013"
                             },
+                            "admin_assignee_id": 991268013,
+                            "team_assignee_id": null,
                             "author": {
                               "id": "991268011",
                               "type": "admin",
@@ -42170,6 +42168,18 @@
           "assigned_to": {
             "$ref": "#/components/schemas/Reference"
           },
+          "admin_assignee_id": {
+            "type": "integer",
+            "description": "The id of the teammate that this conversation_part assigned the conversation to, or 0 if the part removed the teammate. Null or absent when the part did not change the teammate, including an unassignment that did not name which assignee it cleared. A bot is reported here, because assignment treats anything that is not a team as a teammate.",
+            "nullable": true,
+            "example": 991267715
+          },
+          "team_assignee_id": {
+            "type": "integer",
+            "description": "The id of the team that this conversation_part assigned the conversation to, or 0 if the part removed the team. Null or absent when the part did not change the team, including an unassignment that did not name which assignee it cleared. A part can assign a team and a teammate at the same time, for example when the team uses Round Robin distribution and the teammate is resolved inline. In that case assigned_to reports only the teammate, and these two fields report each assignee separately.",
+            "nullable": true,
+            "example": 5017691
+          },
           "author": {
             "$ref": "#/components/schemas/ConversationPartAuthor"
           },
@@ -50302,6 +50312,18 @@
           },
           "assigned_to": {
             "$ref": "#/components/schemas/Reference"
+          },
+          "admin_assignee_id": {
+            "type": "integer",
+            "description": "The id of the teammate that this ticket_part assigned the ticket to, or 0 if the part removed the teammate. Null or absent when the part did not change the teammate, including an unassignment that did not name which assignee it cleared. A bot is reported here, because assignment treats anything that is not a team as a teammate.",
+            "nullable": true,
+            "example": 991268013
+          },
+          "team_assignee_id": {
+            "type": "integer",
+            "description": "The id of the team that this ticket_part assigned the ticket to, or 0 if the part removed the team. Null or absent when the part did not change the team, including an unassignment that did not name which assignee it cleared. A part can assign a team and a teammate at the same time, for example when the team uses Round Robin distribution and the teammate is resolved inline. In that case assigned_to reports only the teammate, and these two fields report each assignee separately.",
+            "nullable": true,
+            "example": 5017691
           },
           "author": {
             "$ref": "#/components/schemas/TicketPartAuthor"

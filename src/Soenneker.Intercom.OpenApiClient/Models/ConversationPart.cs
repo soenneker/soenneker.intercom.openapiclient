@@ -15,6 +15,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The id of the teammate that this conversation_part assigned the conversation to, or 0 if the part removed the teammate. Null or absent when the part did not change the teammate, including an unassignment that did not name which assignee it cleared. A bot is reported here, because assignment treats anything that is not a team as a teammate.</summary>
+        public int? AdminAssigneeId { get; set; }
         /// <summary>The app package code if this part was created via API. null if the part was not created via API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -119,6 +121,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic> Tags { get; set; }
 #endif
+        /// <summary>The id of the team that this conversation_part assigned the conversation to, or 0 if the part removed the team. Null or absent when the part did not change the team, including an unassignment that did not name which assignee it cleared. A part can assign a team and a teammate at the same time, for example when the team uses Round Robin distribution and the teammate is resolved inline. In that case assigned_to reports only the teammate, and these two fields report each assignee separately.</summary>
+        public int? TeamAssigneeId { get; set; }
         /// <summary>A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `conversation.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`). This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -162,6 +166,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "app_package_code", n => { AppPackageCode = n.GetStringValue(); } },
                 { "assigned_to", n => { AssignedTo = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Reference>(global::Soenneker.Intercom.OpenApiClient.Models.Reference.CreateFromDiscriminatorValue); } },
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -178,6 +183,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>(); } },
                 { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>(global::Soenneker.Intercom.OpenApiClient.Models.TagBasic.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "team_assignee_id", n => { TeamAssigneeId = n.GetIntValue(); } },
                 { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -190,6 +196,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteStringValue("app_package_code", AppPackageCode);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Reference>("assigned_to", AssignedTo);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>("attachments", Attachments);
@@ -206,6 +213,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>("state", State);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>("tags", Tags);
+            writer.WriteIntValue("team_assignee_id", TeamAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslationsProperty>("translations", Translations);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
