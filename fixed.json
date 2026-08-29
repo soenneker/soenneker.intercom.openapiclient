@@ -19905,37 +19905,25 @@
                 "detach_a_contact_from_a_group_conversation": {
                   "summary": "Detach a contact from a group conversation",
                   "value": {
-                    "admin_id": 991267739,
-                    "customer": {
-                      "intercom_user_id": "6762f1a61bb69f9f2193bbd8"
-                    }
+                    "admin_id": 991267739
                   }
                 },
                 "conversation_not_found": {
                   "summary": "Conversation not found",
                   "value": {
-                    "admin_id": 991267742,
-                    "customer": {
-                      "intercom_user_id": "6762f1b61bb69f9f2193bbe1"
-                    }
+                    "admin_id": 991267742
                   }
                 },
                 "contact_not_found": {
                   "summary": "Contact not found",
                   "value": {
-                    "admin_id": 991267745,
-                    "customer": {
-                      "intercom_user_id": "6762f1c41bb69f9f2193bbe9"
-                    }
+                    "admin_id": 991267745
                   }
                 },
                 "last_customer": {
                   "summary": "Last customer",
                   "value": {
-                    "admin_id": 991267748,
-                    "customer": {
-                      "intercom_user_id": "6762f1d11bb69f9f2193bbf1"
-                    }
+                    "admin_id": 991267748
                   }
                 }
               }
@@ -23835,7 +23823,11 @@
                       ],
                       "execution_type": "server_side",
                       "configuration_response_type": "test_response_type",
-                      "data_transformation_type": null,
+                      "data_transformation_type": "code_block_transformation",
+                      "transform_code_block": {
+                        "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n",
+                        "language": "python"
+                      },
                       "client_function_name": null,
                       "client_function_timeout_ms": null,
                       "data_inputs": [
@@ -32638,7 +32630,8 @@
                     "assignee_id": 991268013,
                     "open": true,
                     "snoozed_until": 1673609604,
-                    "ticket_state_id": 8498
+                    "ticket_state_id": 8498,
+                    "priority": "high"
                   }
                 },
                 "admin_not_found": {
@@ -32999,6 +32992,54 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Teammate without Inbox access": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8e4a1ee0-2a4c-4a9f-9c3f-1c2b6d7e5f01",
+                      "errors": [
+                        {
+                          "code": "action_forbidden",
+                          "message": "This admin does not have Inbox access permissions"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unrecognised priority level": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3f6c9b21-7d58-4e0a-8b44-5a9e2c1d7b03",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "priority must be one of: none, low, medium, high, urgent"
                         }
                       ]
                     }
@@ -38614,6 +38655,12 @@
             "type": "string",
             "description": "Optionally you can send a response in the conversation when it is assigned.",
             "example": "Let me pass you over to one of my colleagues."
+          },
+          "skip_reopen": {
+            "type": "boolean",
+            "description": "When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.",
+            "default": false,
+            "example": true
           }
         },
         "description": "Payload of the request to assign a conversation"
@@ -45759,6 +45806,9 @@
           "data_transformation_type": {
             "$ref": "#/components/schemas/DataConnectorDetailDataTransformationType"
           },
+          "transform_code_block": {
+            "$ref": "#/components/schemas/DataConnectorDetailTransformCodeBlock"
+          },
           "client_function_name": {
             "type": "string",
             "description": "The name of the client-side function, if applicable.",
@@ -51350,6 +51400,9 @@
             "type": "string",
             "description": "The ID of the admin or team to which the ticket is assigned. Set this 0 to unassign it.",
             "example": "123"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/UpdateTicketRequestPriority"
           }
         },
         "description": "You can update a Ticket"
@@ -54212,6 +54265,27 @@
             "description": "Always \u0060\u0022****\u0022\u0060 in responses.",
             "example": "****"
           }
+        }
+      },
+      "DataConnectorDetailTransformCodeBlock": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code of the transform code block.",
+            "example": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n"
+          },
+          "language": {
+            "type": "string",
+            "description": "The programming language of the transform code block. Currently always \u0060python\u0060.",
+            "example": "python"
+          }
+        },
+        "description": "The code block used to transform the connector\u0027s response when \u0060data_transformation_type\u0060 is\n\u0060code_block_transformation\u0060. Omitted if the connector has no transform code block configured.\n",
+        "nullable": true,
+        "example": {
+          "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n",
+          "language": "python"
         }
       },
       "DataConnectorDetailDataInputsItem": {
@@ -57945,6 +58019,12 @@
             "type": "string",
             "description": "The \u0060id\u0060 of the \u0060admin\u0060 or \u0060team\u0060 which will be assigned the conversation. A conversation can be assigned both an admin and a team.\\nSet \u00600\u0060 if you want this assign to no admin or team (ie. Unassigned).",
             "example": "4324241"
+          },
+          "skip_reopen": {
+            "type": "boolean",
+            "description": "When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.",
+            "default": false,
+            "example": true
           }
         }
       },
@@ -58309,6 +58389,9 @@
             "type": "string",
             "description": "The ID of the admin or team to which the ticket is assigned. Set this 0 to unassign it.",
             "example": "123"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/UpdateTicketRequestPriority"
           }
         }
       },
@@ -64567,6 +64650,45 @@
         "example": "high",
         "x-ms-enum": {
           "name": "UpdateConversationRequestPriority",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "none",
+              "name": "None"
+            },
+            {
+              "value": "low",
+              "name": "Low"
+            },
+            {
+              "value": "medium",
+              "name": "Medium"
+            },
+            {
+              "value": "high",
+              "name": "High"
+            },
+            {
+              "value": "urgent",
+              "name": "Urgent"
+            }
+          ]
+        }
+      },
+      "UpdateTicketRequestPriority": {
+        "enum": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "urgent"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The priority level to set on the ticket. Accepts one of none, low, medium, high, or urgent. Set none to clear an existing priority. The change is attributed to admin_id, or to Operator when admin_id is omitted.",
+        "example": "high",
+        "x-ms-enum": {
+          "name": "UpdateTicketRequestPriority",
           "modelAsString": false,
           "values": [
             {

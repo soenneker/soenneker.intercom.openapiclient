@@ -139,6 +139,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<string> TokenIds { get; set; }
 #endif
+        /// <summary>The code block used to transform the connector&apos;s response when `data_transformation_type` is`code_block_transformation`. Omitted if the connector has no transform code block configured.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock? TransformCodeBlock { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock TransformCodeBlock { get; set; }
+#endif
         /// <summary>The type of object - `data_connector`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType? Type { get; set; }
         /// <summary>The time the data connector was last updated.</summary>
@@ -209,6 +217,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "response_fields", n => { ResponseFields = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailState>(); } },
                 { "token_ids", n => { TokenIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "transform_code_block", n => { TransformCodeBlock = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
                 { "updated_by_admin_id", n => { UpdatedByAdminId = n.GetStringValue(); } },
@@ -246,6 +255,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem>("response_fields", ResponseFields);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailState>("state", State);
             writer.WriteCollectionOfPrimitiveValues<string>("token_ids", TokenIds);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock>("transform_code_block", TransformCodeBlock);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>("type", Type);
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             writer.WriteStringValue("updated_by_admin_id", UpdatedByAdminId);

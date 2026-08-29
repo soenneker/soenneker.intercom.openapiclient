@@ -41,6 +41,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The message_type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType? MessageType { get; set; }
+        /// <summary>When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.</summary>
+        public bool? SkipReopen { get; set; }
         /// <summary>The type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType? Type { get; set; }
         /// <summary>
@@ -49,6 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public AssignConversationRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            SkipReopen = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -72,6 +75,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "assignee_id", n => { AssigneeId = n.GetStringValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType>(); } },
+                { "skip_reopen", n => { SkipReopen = n.GetBoolValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType>(); } },
             };
         }
@@ -86,6 +90,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("assignee_id", AssigneeId);
             writer.WriteStringValue("body", Body);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType>("message_type", MessageType);
+            writer.WriteBoolValue("skip_reopen", SkipReopen);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

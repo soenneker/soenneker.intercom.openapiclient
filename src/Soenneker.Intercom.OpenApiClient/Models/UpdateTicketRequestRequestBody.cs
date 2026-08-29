@@ -36,6 +36,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? IsShared { get; set; }
         /// <summary>Specify if a ticket is open. Set to false to close a ticket. Closing a ticket will also unsnooze it.</summary>
         public bool? Open { get; set; }
+        /// <summary>The priority level to set on the ticket. Accepts one of none, low, medium, high, or urgent. Set none to clear an existing priority. The change is attributed to admin_id, or to Operator when admin_id is omitted.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority? Priority { get; set; }
         /// <summary>Option to disable notifications when a Ticket is updated.</summary>
         public bool? SkipNotifications { get; set; }
         /// <summary>The time you want the ticket to reopen.</summary>
@@ -86,6 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "is_shared", n => { IsShared = n.GetBoolValue(); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
+                { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>(); } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
                 { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes.CreateFromDiscriminatorValue); } },
@@ -104,6 +107,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteBoolValue("is_shared", IsShared);
             writer.WriteBoolValue("open", Open);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>("priority", Priority);
             writer.WriteBoolValue("skip_notifications", SkipNotifications);
             writer.WriteIntValue("snoozed_until", SnoozedUntil);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes>("ticket_attributes", TicketAttributes);
