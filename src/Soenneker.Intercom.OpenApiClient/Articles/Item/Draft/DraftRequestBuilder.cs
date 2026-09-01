@@ -68,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
         /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
-        /// <param name="body">You can Update an Article</param>
+        /// <param name="body">You can Stage a Draft for an Article</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
@@ -76,11 +76,11 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Article?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Article?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.StageArticleDraftRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Article> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Article> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.StageArticleDraftRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
@@ -116,15 +116,15 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
         /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">You can Update an Article</param>
+        /// <param name="body">You can Stage a Draft for an Article</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.StageArticleDraftRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.StageArticleDraftRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

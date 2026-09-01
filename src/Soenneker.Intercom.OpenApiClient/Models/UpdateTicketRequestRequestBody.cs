@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AssigneeId { get; set; }
 #endif
-        /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.</summary>
+        /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. The company must be associated with one of the contacts on the ticket, otherwise the request will fail with a `parameter_invalid` error. Set to nil to remove company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CompanyId { get; set; }

@@ -2703,7 +2703,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateArticleRequest"
+                "$ref": "#/components/schemas/StageArticleDraftRequestBody"
               },
               "examples": {
                 "Draft staged": {
@@ -50909,6 +50909,105 @@
         "description": "Optional body for publishing a staged article draft. On a single-language\nworkspace the body can be omitted. On a multilingual workspace, \u0060locales\u0060\nis required and lists which locales\u0027 drafts to publish.\n",
         "nullable": true
       },
+      "StageArticleDraftRequestBody": {
+        "title": "Stage Article Draft Request Payload",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the article.For multilingual articles, this will be the title of the default language\u0027s content.",
+            "example": "Thanks for everything"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the article. For multilingual articles, this will be the description of the default language\u0027s content.",
+            "example": "Description of the Article"
+          },
+          "body": {
+            "type": "string",
+            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060.",
+            "example": "\u003Cp\u003EThis is the body in html\u003C/p\u003E"
+          },
+          "body_markdown": {
+            "type": "string",
+            "description": "The content of the article in markdown. For multilingual articles, this will be the body of the default language\u0027s content. An alternative to \u0060body\u0060 \u2014 you can provide content as markdown instead of HTML. Mutually exclusive with \u0060body\u0060.",
+            "example": "## Updated heading\n\nNew content.\n"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "The id of the author of the article. For multilingual articles, this will be the id of the author of the default language\u0027s content. Must be a teammate on the help center\u0027s workspace.",
+            "example": 1295
+          },
+          "state": {
+            "$ref": "#/components/schemas/StageArticleDraftRequestBodyState"
+          },
+          "parent_id": {
+            "type": "string",
+            "description": "The id of the article\u0027s parent collection or section. An article without this field stands alone.",
+            "example": "18"
+          },
+          "parent_type": {
+            "type": "string",
+            "description": "The type of parent, which can either be a \u0060collection\u0060 or \u0060section\u0060.",
+            "example": "collection"
+          },
+          "parent_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the parent collections to place this article in. Send an empty array to remove the article from all collections. When provided, this takes precedence over \u0060parent_id\u0060 and \u0060parent_type\u0060."
+          },
+          "translated_content": {
+            "$ref": "#/components/schemas/ArticleTranslatedContent"
+          },
+          "folder_id": {
+            "type": "integer",
+            "description": "The ID of the folder to place this article in, or null to remove it from its folder.",
+            "nullable": true,
+            "example": 6
+          },
+          "audience_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The list of audience IDs to assign to this article for Fin AI Agent targeting. Sending a top-level \u0060audience_ids\u0060 broadcasts the same set to every locale. Sending \u0060audience_ids: []\u0060 clears all audience memberships from every locale. For per-locale targeting, use \u0060translated_content.\u003Clocale\u003E.audience_ids\u0060 instead. Sending both top-level and per-locale in the same request causes top-level to win. Unknown audience IDs return a 404 error. No partial commit occurs.",
+            "nullable": true
+          },
+          "ai_chatbot_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Chatbot (Fin). For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "ai_copilot_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Copilot. For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "ai_sales_agent_availability": {
+            "type": "boolean",
+            "description": "Whether the article should be available for AI Sales Agent. For multilingual articles, this sets the default language\u0027s availability.",
+            "example": true
+          },
+          "scheduled_publish_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp at which to schedule a future publish of the article. When set together with \u0060state: \u0022published\u0022\u0060, the article is scheduled instead of published immediately. Setting \u0060null\u0060 cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060 \u2014 the value must be strictly in the future. Combining with \u0060state: \u0022draft\u0022\u0060 returns 400 \u0060parameter_invalid\u0060. Sending in the same request as \u0060scheduled_unpublish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2026-12-31T09:00:00Z"
+          },
+          "scheduled_unpublish_at": {
+            "type": "string",
+            "description": "ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting \u0060null\u0060 cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060 \u2014 the value must be strictly in the future. Rejected with 400 \u0060parameter_invalid\u0060 if the article has never been published. Sending in the same request as \u0060scheduled_publish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2026-12-31T17:00:00Z"
+          }
+        },
+        "description": "You can Stage a Draft for an Article",
+        "nullable": true
+      },
       "UpdateArticleRequest": {
         "title": "Update Article Request Payload",
         "type": "object",
@@ -51372,7 +51471,7 @@
           },
           "company_id": {
             "type": "string",
-            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.",
+            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. The company must be associated with one of the contacts on the ticket, otherwise the request will fail with a \u0060parameter_invalid\u0060 error. Set to nil to remove company.",
             "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
           },
           "open": {
@@ -58361,7 +58460,7 @@
           },
           "company_id": {
             "type": "string",
-            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. Set to nil to remove company.",
+            "description": "The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. The company must be associated with one of the contacts on the ticket, otherwise the request will fail with a \u0060parameter_invalid\u0060 error. Set to nil to remove company.",
             "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
           },
           "open": {
@@ -64555,6 +64654,30 @@
             {
               "value": "Back-office",
               "name": "BackOffice"
+            }
+          ]
+        }
+      },
+      "StageArticleDraftRequestBodyState": {
+        "enum": [
+          "published",
+          "draft"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Whether the article will be \u0060published\u0060 or will be a \u0060draft\u0060. Omitting this field leaves the publish state unchanged, so a draft stays a draft and an edit to a published article goes live immediately unless that article already has a pending draft or a scheduled publish time is set in the same request. The \u0060PUT /articles/{id}/draft\u0060 endpoint ignores this field and always stages a draft. For multilingual articles, this will be the state of the default language\u0027s content.",
+        "example": "draft",
+        "x-ms-enum": {
+          "name": "StageArticleDraftRequestBodyState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "published",
+              "name": "Published"
+            },
+            {
+              "value": "draft",
+              "name": "Draft"
             }
           ]
         }
