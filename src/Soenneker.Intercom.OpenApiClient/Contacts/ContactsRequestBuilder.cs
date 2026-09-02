@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Contacts.Activities;
 using Soenneker.Intercom.OpenApiClient.Contacts.Bulk;
+using Soenneker.Intercom.OpenApiClient.Contacts.Deleted;
 using Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item;
 using Soenneker.Intercom.OpenApiClient.Contacts.Merge;
@@ -32,6 +33,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Bulk.BulkRequestBuilder Bulk
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Bulk.BulkRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The deleted property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Deleted.DeletedRequestBuilder Deleted
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Deleted.DeletedRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The find_by_external_id property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Find_by_external_idRequestBuilder Find_by_external_id

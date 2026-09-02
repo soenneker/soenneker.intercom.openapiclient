@@ -11947,6 +11947,150 @@
         }
       }
     },
+    "/contacts/deleted": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "List deleted contacts",
+        "description": "Fetch a paginated list of the contacts in your workspace that are no longer active,\nso you can recover ones whose \u0060id\u0060, \u0060email\u0060, or \u0060external_id\u0060 you no longer have and\nthen permanently delete them. Each entry carries a \u0060status\u0060 describing why the contact\nis inactive: \u0060archived\u0060, \u0060blocked\u0060, \u0060merged\u0060, \u0060pending_deletion\u0060, or \u0060permanently_deleted\u0060.\n\u0060merged_into_id\u0060 is present only when \u0060status\u0060 is \u0060merged\u0060, and \u0060external_id\u0060 and \u0060email\u0060\nare \u0060null\u0060 for \u0060permanently_deleted\u0060 contacts.\n",
+        "operationId": "ListDeletedContacts",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results per page. Defaults to \u006010\u0060, with a maximum of \u0060150\u0060.",
+            "schema": {
+              "maximum": 150,
+              "minimum": 1,
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of results to fetch. Defaults to \u00601\u0060.",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedContactList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "contact",
+                          "id": "5ba682d23d7cf92bef87bfd4",
+                          "external_id": "70",
+                          "email": "joe@example.com",
+                          "role": "user",
+                          "status": "archived",
+                          "updated_at": 1756636800
+                        },
+                        {
+                          "type": "contact",
+                          "id": "5ba682d23d7cf92bef87bfd5",
+                          "external_id": "71",
+                          "email": "jane@example.com",
+                          "role": "user",
+                          "status": "merged",
+                          "merged_into_id": "5ba682d23d7cf92bef87bfd9",
+                          "updated_at": 1756636800
+                        },
+                        {
+                          "type": "contact",
+                          "id": "5ba682d23d7cf92bef87bfd6",
+                          "external_id": null,
+                          "email": null,
+                          "role": "user",
+                          "status": "permanently_deleted",
+                          "updated_at": 1756636800
+                        }
+                      ],
+                      "total_count": 3,
+                      "pages": {
+                        "type": "pages",
+                        "page": 1,
+                        "per_page": 10,
+                        "total_pages": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Bad Request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+                      "errors": [
+                        {
+                          "code": "invalid_page",
+                          "message": "page must be a positive integer"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e097e446-9ae6-44a8-8e13-2bf3008b87ef",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/contacts/{id}": {
       "put": {
         "tags": [
@@ -40871,6 +41015,75 @@
         },
         "description": "unarchived contact object"
       },
+      "DeletedContact": {
+        "title": "Deleted Contact",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ContactType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is given by Intercom.",
+            "example": "5ba682d23d7cf92bef87bfd4"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact which is provided by the Client. \u0060null\u0060 for permanently deleted contacts.",
+            "nullable": true,
+            "example": "70"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email address. \u0060null\u0060 for permanently deleted contacts.",
+            "nullable": true,
+            "example": "joe@example.com"
+          },
+          "role": {
+            "$ref": "#/components/schemas/DeletedContactRole"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DeletedContactStatus"
+          },
+          "merged_into_id": {
+            "type": "string",
+            "description": "The id of the contact this one was merged into. Present only when \u0060status\u0060 is \u0060merged\u0060.",
+            "example": "5ba682d23d7cf92bef87bfd9"
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the contact record was last updated as a UNIX timestamp. This is a last-modified time, not a deletion time.",
+            "format": "date-time",
+            "example": 1756636800
+          }
+        },
+        "description": "A contact that is no longer active, returned by the list deleted contacts endpoint."
+      },
+      "DeletedContactList": {
+        "title": "Deleted Contact List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeletedContact"
+            },
+            "description": "The list of deleted contact objects."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "A count of the total number of deleted contacts.",
+            "example": 100
+          },
+          "pages": {
+            "$ref": "#/components/schemas/DeletedContactListPages"
+          }
+        },
+        "description": "A paginated list of deleted contacts."
+      },
       "ContactBlocked": {
         "title": "Contact Blocked",
         "type": "object",
@@ -53925,6 +54138,33 @@
         },
         "description": "An optional object to sort the results by."
       },
+      "DeletedContactListPages": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PagesType"
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "example": 10
+          },
+          "total_pages": {
+            "type": "integer",
+            "example": 1
+          }
+        },
+        "description": "Offset-based pagination metadata.",
+        "example": {
+          "type": "pages",
+          "page": 1,
+          "per_page": 10,
+          "total_pages": 1
+        }
+      },
       "ContentBulkActionRequestContentIdsItem": {
         "required": [
           "type",
@@ -54059,7 +54299,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API.",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -55267,7 +55507,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API.",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -55301,7 +55541,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API.",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -59115,7 +59355,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic."
       },
       "ConvertConversationToTicketRequestAttributes": {
         "type": "object",
@@ -59236,14 +59476,14 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic."
       },
       "TicketReplyTranslationsProperty": {
         "type": "object",
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic."
       },
       "TicketTypeAttributeInputOptionsProperty": {
         "type": "object",
@@ -61194,6 +61434,69 @@
             {
               "value": "user",
               "name": "User"
+            }
+          ]
+        }
+      },
+      "DeletedContactRole": {
+        "enum": [
+          "user",
+          "lead"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The role of the contact.",
+        "example": "user",
+        "x-ms-enum": {
+          "name": "DeletedContactRole",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "lead",
+              "name": "Lead"
+            }
+          ]
+        }
+      },
+      "DeletedContactStatus": {
+        "enum": [
+          "archived",
+          "blocked",
+          "merged",
+          "pending_deletion",
+          "permanently_deleted"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Why the contact is no longer active.",
+        "example": "archived",
+        "x-ms-enum": {
+          "name": "DeletedContactStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "archived",
+              "name": "Archived"
+            },
+            {
+              "value": "blocked",
+              "name": "Blocked"
+            },
+            {
+              "value": "merged",
+              "name": "Merged"
+            },
+            {
+              "value": "pending_deletion",
+              "name": "PendingDeletion"
+            },
+            {
+              "value": "permanently_deleted",
+              "name": "PermanentlyDeleted"
             }
           ]
         }

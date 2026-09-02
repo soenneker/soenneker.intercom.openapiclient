@@ -8,29 +8,37 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `ticket.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`). This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in `&lt;p&gt;` or another supported block element to avoid this; `&lt;div&gt;` is removed when the reply is saved, which leaves its text bare and still suppresses the topic.
+    /// Offset-based pagination metadata.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class TicketReplyTranslationsProperty : IAdditionalDataHolder, IParsable
+    public partial class DeletedContactListPages : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The page property</summary>
+        public int? Page { get; set; }
+        /// <summary>The per_page property</summary>
+        public int? PerPage { get; set; }
+        /// <summary>The total_pages property</summary>
+        public int? TotalPages { get; set; }
+        /// <summary>the type of object `pages`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesType? Type { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactListPages"/> and sets the default values.
         /// </summary>
-        public TicketReplyTranslationsProperty()
+        public DeletedContactListPages()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactListPages"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactListPages CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactListPages();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +48,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "page", n => { Page = n.GetIntValue(); } },
+                { "per_page", n => { PerPage = n.GetIntValue(); } },
+                { "total_pages", n => { TotalPages = n.GetIntValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>(); } },
             };
         }
         /// <summary>
@@ -49,6 +61,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("page", Page);
+            writer.WriteIntValue("per_page", PerPage);
+            writer.WriteIntValue("total_pages", TotalPages);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
