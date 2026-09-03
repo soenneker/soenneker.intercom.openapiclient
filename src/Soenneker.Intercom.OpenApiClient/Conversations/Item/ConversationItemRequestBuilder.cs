@@ -7,6 +7,7 @@ using Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.ConvertNamespace;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Handling_events;
+using Soenneker.Intercom.OpenApiClient.Conversations.Item.Hitl_events;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Merge;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply;
@@ -45,6 +46,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Handling_events.Handling_eventsRequestBuilder Handling_events
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Handling_events.Handling_eventsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The hitl_events property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Hitl_events.Hitl_eventsRequestBuilder Hitl_events
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Hitl_events.Hitl_eventsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The merge property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Merge.MergeRequestBuilder Merge

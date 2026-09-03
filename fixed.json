@@ -20298,6 +20298,149 @@
         }
       }
     },
+    "/conversations/{id}/hitl_events": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "List HITL events",
+        "description": "List the human-in-the-loop (HITL) events for a conversation. When Fin is unsure of an answer it can consult a teammate before replying, proposing a draft that the teammate approves, steers with free-text feedback, or takes over. Each consultation is returned as a series of events, oldest first, across every consultation on the conversation.\n\nRequires the \u0060read_conversations\u0060 OAuth scope, and the caller must be able to access the conversation.\n\nEvents are only recorded once a consultation has ended, so a consultation still awaiting a teammate does not appear.\n\nWhich fields appear in \u0060data\u0060 depends on \u0060event_type\u0060:\n\n| \u0060event_type\u0060 | \u0060data\u0060 fields |\n|---|---|\n| \u0060fin_consultation_started\u0060 | \u0060channel\u0060, \u0060rule_threshold_percent\u0060, \u0060confidence_percent\u0060, \u0060sharp_ask\u0060, \u0060ask_rationale\u0060, \u0060issue_summary\u0060, \u0060customer_question\u0060 |\n| \u0060fin_draft_proposed\u0060 | \u0060draft\u0060 |\n| \u0060fin_teammate_input_received\u0060 | \u0060round_index\u0060, \u0060teammate_input\u0060, \u0060reviewer_admin_id\u0060, \u0060regeneration_outcome\u0060 |\n| \u0060fin_draft_revised\u0060 | \u0060round_index\u0060, \u0060revised_draft\u0060, \u0060regeneration_outcome\u0060 |\n| \u0060fin_consultation_finished\u0060 | \u0060outcome\u0060, \u0060approved_draft_type\u0060, \u0060final_draft\u0060, \u0060sent_text\u0060, \u0060reviewer_admin_id\u0060, \u0060duration_seconds\u0060, \u0060rounds_count\u0060, \u0060payload_truncated\u0060 |\n\nA consultation always produces a \u0060fin_consultation_started\u0060 and a \u0060fin_consultation_finished\u0060 event. \u0060fin_draft_proposed\u0060 appears when Fin proposed a draft. \u0060fin_teammate_input_received\u0060 appears once per round of teammate feedback, and \u0060fin_draft_revised\u0060 once per round where Fin produced a revised draft in response.\n\nNotes on interpreting the response:\n\n- \u0060hitl_cycle_id\u0060 identifies the consultation, so it is the same on every event of one consultation. It is not unique per event. A conversation can hold several consultations \u2014 a consultation that replaces an outstanding one finishes with an \u0060outcome\u0060 of \u0060superseded\u0060.\n- \u0060conversation_part_id\u0060 links an event to a conversation part where one exists. It is \u0060null\u0060 in ordinary cases: teammate feedback given through the inbox creates no conversation part, a revised draft has no part of its own, and a consultation that escalated or was superseded sent no reply.\n- \u0060created_at\u0060 on \u0060fin_draft_proposed\u0060 is approximate. It reports when the consultation started, which is when the draft was proposed.\n- \u0060rule_id\u0060, \u0060rule_name\u0060 and \u0060rule_threshold_percent\u0060 are recorded when the consultation begins and are not updated afterwards, so a rule that has since been renamed or retuned will not match its current settings. They are \u0060null\u0060 for consultations not triggered by a rule.\n- \u0060reviewer_admin_id\u0060 identifies the teammate involved in that event: on \u0060fin_teammate_input_received\u0060 the teammate who gave the feedback, and on \u0060fin_consultation_finished\u0060 the teammate who approved the draft or took over. On a consultation with several rounds these can be different teammates.\n- \u0060rounds_count\u0060 counts every round of teammate feedback the consultation had. Only the ten most recent rounds are retained, so a heavily steered consultation returns fewer \u0060fin_teammate_input_received\u0060 events than \u0060rounds_count\u0060.\n- Redacting a conversation removes this data. Depending on how it was redacted, the conversation either returns no events or returns events whose text fields are all \u0060null\u0060.\n",
+        "operationId": "ListHitlEvents",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier for the conversation as given by Intercom.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HitlEventList"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "hitl_cycle_id": "3f2a91c4-8e77-4d61-9a2b-0c5d7e1f4a80",
+                          "event_type": "fin_consultation_started",
+                          "conversation_part_id": "4471002",
+                          "rule_id": "88",
+                          "rule_name": "Refunds over $100",
+                          "created_at": 1767225600,
+                          "data": {
+                            "channel": "email",
+                            "rule_threshold_percent": 60,
+                            "confidence_percent": 42,
+                            "sharp_ask": "How long do refunds take?",
+                            "ask_rationale": "No article covers refund timelines.",
+                            "issue_summary": "Customer chasing a refund.",
+                            "customer_question": "Where is my refund?"
+                          }
+                        },
+                        {
+                          "hitl_cycle_id": "3f2a91c4-8e77-4d61-9a2b-0c5d7e1f4a80",
+                          "event_type": "fin_draft_proposed",
+                          "conversation_part_id": "4471008",
+                          "rule_id": "88",
+                          "rule_name": "Refunds over $100",
+                          "created_at": 1767225600,
+                          "data": {
+                            "draft": "Refunds are processed within 30 days."
+                          }
+                        },
+                        {
+                          "hitl_cycle_id": "3f2a91c4-8e77-4d61-9a2b-0c5d7e1f4a80",
+                          "event_type": "fin_teammate_input_received",
+                          "conversation_part_id": null,
+                          "rule_id": "88",
+                          "rule_name": "Refunds over $100",
+                          "created_at": 1767225701,
+                          "data": {
+                            "round_index": 1,
+                            "teammate_input": "Tell them 5 business days.",
+                            "reviewer_admin_id": "4001",
+                            "regeneration_outcome": "answer"
+                          }
+                        },
+                        {
+                          "hitl_cycle_id": "3f2a91c4-8e77-4d61-9a2b-0c5d7e1f4a80",
+                          "event_type": "fin_draft_revised",
+                          "conversation_part_id": null,
+                          "rule_id": "88",
+                          "rule_name": "Refunds over $100",
+                          "created_at": 1767225760,
+                          "data": {
+                            "round_index": 1,
+                            "revised_draft": "Refunds take 5 business days.",
+                            "regeneration_outcome": "answer"
+                          }
+                        },
+                        {
+                          "hitl_cycle_id": "3f2a91c4-8e77-4d61-9a2b-0c5d7e1f4a80",
+                          "event_type": "fin_consultation_finished",
+                          "conversation_part_id": "4471029",
+                          "rule_id": "88",
+                          "rule_name": "Refunds over $100",
+                          "created_at": 1767225780,
+                          "data": {
+                            "outcome": "approved",
+                            "approved_draft_type": "revised",
+                            "final_draft": "Refunds take 5 business days.",
+                            "sent_text": "Refunds take 5 business days.",
+                            "reviewer_admin_id": "4001",
+                            "duration_seconds": 180,
+                            "rounds_count": 1,
+                            "payload_truncated": false
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Conversation not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/conversations/{id}/side_conversations": {
       "get": {
         "tags": [
@@ -48115,6 +48258,64 @@
         },
         "description": "A list of handling events for a conversation"
       },
+      "HitlEvent": {
+        "title": "HITL Event",
+        "type": "object",
+        "properties": {
+          "hitl_cycle_id": {
+            "type": "string",
+            "description": "Identifies the consultation this event belongs to. The same on every event of one consultation, so it is not unique per event.",
+            "example": "3f2a91c4-8e77-4d61-9a2b-0c5d7e1f4a80"
+          },
+          "event_type": {
+            "$ref": "#/components/schemas/HitlEventEventType"
+          },
+          "conversation_part_id": {
+            "type": "string",
+            "description": "The conversation part this event relates to, where one exists.",
+            "nullable": true,
+            "example": "4471002"
+          },
+          "rule_id": {
+            "type": "string",
+            "description": "The escalation rule that triggered the consultation, as recorded when it began. Null if no rule triggered it.",
+            "nullable": true,
+            "example": "88"
+          },
+          "rule_name": {
+            "type": "string",
+            "description": "The rule\u0027s name as recorded when the consultation began, which may differ from its current name.",
+            "nullable": true,
+            "example": "Refunds over $100"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "Unix timestamp for when the event occurred. Approximate on \u0060fin_draft_proposed\u0060.",
+            "example": 1767225600
+          },
+          "data": {
+            "$ref": "#/components/schemas/HitlEventData"
+          }
+        },
+        "description": "A single event in a Fin human-in-the-loop consultation on a conversation."
+      },
+      "HitlEventList": {
+        "title": "HITL Event List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HitlEvent"
+            },
+            "description": "An array of HITL event objects."
+          }
+        },
+        "description": "A list of human-in-the-loop events for a conversation, oldest first."
+      },
       "SideConversationSummary": {
         "title": "Side Conversation Summary",
         "type": "object",
@@ -55136,6 +55337,120 @@
             }
           ]
         }
+      },
+      "HitlEventData": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "$ref": "#/components/schemas/HitlEventDataChannel"
+          },
+          "rule_threshold_percent": {
+            "type": "integer",
+            "description": "The confidence threshold the rule required, as a percentage.",
+            "nullable": true,
+            "example": 60
+          },
+          "confidence_percent": {
+            "type": "integer",
+            "description": "How confident Fin was in its answer, as a percentage. Compare against \u0060rule_threshold_percent\u0060.",
+            "nullable": true,
+            "example": 42
+          },
+          "sharp_ask": {
+            "type": "string",
+            "description": "The question Fin put to the teammate.",
+            "nullable": true,
+            "example": "How long do refunds take?"
+          },
+          "ask_rationale": {
+            "type": "string",
+            "description": "Why Fin needed to ask.",
+            "nullable": true,
+            "example": "No article covers refund timelines."
+          },
+          "issue_summary": {
+            "type": "string",
+            "description": "Fin\u0027s summary of what the customer needs.",
+            "nullable": true,
+            "example": "Customer chasing a refund."
+          },
+          "customer_question": {
+            "type": "string",
+            "description": "The customer\u0027s message that prompted the consultation.",
+            "nullable": true,
+            "example": "Where is my refund?"
+          },
+          "draft": {
+            "type": "string",
+            "description": "The reply Fin proposed to the teammate.",
+            "nullable": true,
+            "example": "Refunds are processed within 30 days."
+          },
+          "round_index": {
+            "type": "integer",
+            "description": "Which round of teammate feedback this event belongs to, starting at 1.",
+            "example": 1
+          },
+          "teammate_input": {
+            "type": "string",
+            "description": "The feedback the teammate gave Fin.",
+            "nullable": true,
+            "example": "Tell them 5 business days."
+          },
+          "reviewer_admin_id": {
+            "type": "string",
+            "description": "The teammate involved in this event \u2014 who gave the feedback, or who approved the draft or took over.",
+            "nullable": true,
+            "example": "4001"
+          },
+          "regeneration_outcome": {
+            "type": "string",
+            "description": "How Fin responded to the feedback. \u0060answer\u0060 means it produced a revised draft, and is the only value accompanied by a \u0060fin_draft_revised\u0060 event. \u0060no_answer\u0060 means it had nothing to send, \u0060failed\u0060 that regeneration failed, \u0060consult_teammate\u0060 that it asked the teammate again, and \u0060pending\u0060 that the consultation ended before Fin responded.",
+            "nullable": true,
+            "example": "answer"
+          },
+          "revised_draft": {
+            "type": "string",
+            "description": "The reply Fin produced after the teammate\u0027s feedback.",
+            "nullable": true,
+            "example": "Refunds take 5 business days."
+          },
+          "outcome": {
+            "$ref": "#/components/schemas/HitlEventDataOutcome"
+          },
+          "approved_draft_type": {
+            "$ref": "#/components/schemas/HitlEventDataApprovedDraftType"
+          },
+          "final_draft": {
+            "type": "string",
+            "description": "The reply as it stood when the consultation ended.",
+            "nullable": true,
+            "example": "Refunds take 5 business days."
+          },
+          "sent_text": {
+            "type": "string",
+            "description": "What was sent to the customer. Null when nothing was sent.",
+            "nullable": true,
+            "example": "Refunds take 5 business days."
+          },
+          "duration_seconds": {
+            "type": "integer",
+            "description": "How long the consultation took, in seconds.",
+            "nullable": true,
+            "example": 180
+          },
+          "rounds_count": {
+            "type": "integer",
+            "description": "How many rounds of teammate feedback the consultation had. Only the ten most recent are returned as events, so this can exceed the number of \u0060fin_teammate_input_received\u0060 events.",
+            "example": 1
+          },
+          "payload_truncated": {
+            "type": "boolean",
+            "description": "Whether any text on this consultation was too long to store in full and was cut.",
+            "example": false
+          }
+        },
+        "description": "Fields specific to this event. Which are present depends on \u0060event_type\u0060 \u2014 see the endpoint description for the full mapping.\n"
       },
       "SideConversationListPages": {
         "type": "object",
@@ -63786,6 +64101,45 @@
           ]
         }
       },
+      "HitlEventEventType": {
+        "enum": [
+          "fin_consultation_started",
+          "fin_draft_proposed",
+          "fin_teammate_input_received",
+          "fin_draft_revised",
+          "fin_consultation_finished"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "What happened.",
+        "example": "fin_consultation_started",
+        "x-ms-enum": {
+          "name": "HitlEventEventType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "fin_consultation_started",
+              "name": "FinConsultationStarted"
+            },
+            {
+              "value": "fin_draft_proposed",
+              "name": "FinDraftProposed"
+            },
+            {
+              "value": "fin_teammate_input_received",
+              "name": "FinTeammateInputReceived"
+            },
+            {
+              "value": "fin_draft_revised",
+              "name": "FinDraftRevised"
+            },
+            {
+              "value": "fin_consultation_finished",
+              "name": "FinConsultationFinished"
+            }
+          ]
+        }
+      },
       "SideConversationListType": {
         "enum": [
           "side_conversation.list"
@@ -65878,6 +66232,104 @@
             {
               "value": "fin",
               "name": "Fin"
+            }
+          ]
+        }
+      },
+      "HitlEventDataChannel": {
+        "enum": [
+          "email",
+          "chat",
+          "voice",
+          "unknown"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The channel the conversation was on when Fin consulted a teammate.",
+        "example": "email",
+        "x-ms-enum": {
+          "name": "HitlEventDataChannel",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "chat",
+              "name": "Chat"
+            },
+            {
+              "value": "voice",
+              "name": "Voice"
+            },
+            {
+              "value": "unknown",
+              "name": "Unknown"
+            }
+          ]
+        }
+      },
+      "HitlEventDataOutcome": {
+        "enum": [
+          "approved",
+          "taken_over",
+          "timed_out_sent",
+          "timed_out_escalated",
+          "superseded"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "How the consultation ended.",
+        "example": "approved",
+        "x-ms-enum": {
+          "name": "HitlEventDataOutcome",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "approved",
+              "name": "Approved"
+            },
+            {
+              "value": "taken_over",
+              "name": "TakenOver"
+            },
+            {
+              "value": "timed_out_sent",
+              "name": "TimedOutSent"
+            },
+            {
+              "value": "timed_out_escalated",
+              "name": "TimedOutEscalated"
+            },
+            {
+              "value": "superseded",
+              "name": "Superseded"
+            }
+          ]
+        }
+      },
+      "HitlEventDataApprovedDraftType": {
+        "enum": [
+          "original",
+          "revised"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Whether the teammate approved Fin\u0027s original draft or the one it revised after their feedback.",
+        "nullable": true,
+        "example": "revised",
+        "x-ms-enum": {
+          "name": "HitlEventDataApprovedDraftType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "original",
+              "name": "Original"
+            },
+            {
+              "value": "revised",
+              "name": "Revised"
             }
           ]
         }
