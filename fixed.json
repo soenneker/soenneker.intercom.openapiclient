@@ -19910,7 +19910,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conversation"
+                  "$ref": "#/components/schemas/ConversationParticipantsResponse"
                 },
                 "examples": {
                   "Attach a contact to a conversation": {
@@ -20080,7 +20080,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Conversation"
+                  "$ref": "#/components/schemas/ConversationParticipantsResponse"
                 },
                 "examples": {
                   "Detach a contact from a group conversation": {
@@ -38967,6 +38967,23 @@
         },
         "description": "Payload of the request to assign a conversation"
       },
+      "ConversationParticipantsResponse": {
+        "title": "Conversation Participants Response",
+        "required": [
+          "customers"
+        ],
+        "type": "object",
+        "properties": {
+          "customers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationParticipantsResponseCustomersItem"
+            },
+            "description": "The conversation participants after the change"
+          }
+        },
+        "description": "The participants of the conversation, returned after attaching or detaching a contact"
+      },
       "TeamMetric": {
         "type": "object",
         "properties": {
@@ -41544,6 +41561,9 @@
       },
       "ContentSearchResult": {
         "title": "Content Search Result",
+        "required": [
+          "type"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -41570,6 +41590,9 @@
               "$ref": "#/components/schemas/ContentSearchArticleContentItem"
             },
             "description": "One entry per locale of the article."
+          },
+          "type": {
+            "type": "string"
           }
         },
         "description": "A single search result. The \u0060type\u0060 field discriminates between the flat shape used for snippets, external pages, files, and internal articles, and the nested shape used for help center articles.",
@@ -45194,6 +45217,9 @@
       },
       "ConversationAttribute": {
         "title": "Conversation Attribute",
+        "required": [
+          "data_type"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -45730,6 +45756,9 @@
       },
       "CreateConversationAttributeRequest": {
         "title": "Create Conversation Attribute Request",
+        "required": [
+          "data_type"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -53752,6 +53781,25 @@
           }
         },
         "description": "An object containing the results of the search."
+      },
+      "ConversationParticipantsResponseCustomersItem": {
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The role of the participant. Can be \u0022user\u0022 or \u0022lead\u0022",
+            "example": "user"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the participant",
+            "example": "6762f1a61bb69f9f2193bbd8"
+          }
+        }
       },
       "ChangeTicketTypeRequestTicketAttributes": {
         "type": "object",

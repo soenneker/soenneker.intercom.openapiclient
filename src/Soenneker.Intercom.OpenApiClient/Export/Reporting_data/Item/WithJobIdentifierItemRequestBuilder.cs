@@ -102,12 +102,16 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item
 #endif
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
+            #pragma warning disable CS1591
             [QueryParameter("client_id")]
             public string? ClientId { get; set; }
+            #pragma warning restore CS1591
 #nullable restore
 #else
+            #pragma warning disable CS1591
             [QueryParameter("client_id")]
             public string ClientId { get; set; }
+            #pragma warning restore CS1591
 #endif
             /// <summary>Unique identifier of the job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
