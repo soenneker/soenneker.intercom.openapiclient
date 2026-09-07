@@ -7,6 +7,7 @@ using Soenneker.Intercom.OpenApiClient.Contacts.Item.Archive;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Block;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies;
+using Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Notes;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Segments;
@@ -46,6 +47,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder Companies
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The granted_companies property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies.Granted_companiesRequestBuilder Granted_companies
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies.Granted_companiesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The merge_history property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history.Merge_historyRequestBuilder Merge_history
