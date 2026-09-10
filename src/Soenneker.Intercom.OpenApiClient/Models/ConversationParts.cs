@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart> ConversationPartsProp { get; set; }
 #endif
-        /// <summary>The total_count property</summary>
+        /// <summary>A count of the conversation parts in this response, after any `include_part_types` or `exclude_part_types` filter has been applied. This is not the conversation&apos;s total part count.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartListType? Type { get; set; }

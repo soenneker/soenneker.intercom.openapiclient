@@ -101,7 +101,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time the user was notified with the conversation part.</summary>
         public int? NotifiedAt { get; set; }
-        /// <summary>The type of conversation part.</summary>
+        /// <summary>The type of conversation part. On the Preview version a part type the API does not recognise is returned as `unknown`; on earlier versions those parts are returned as `comment`. Every value other than `unknown` is also accepted by the `include_part_types` and `exclude_part_types` query parameters when retrieving a conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PartType { get; set; }

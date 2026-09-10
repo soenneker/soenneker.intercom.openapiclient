@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}{?display_as*,include_email_history*,include_monitors*,include_scorecards*,include_translations*,retain_metrics*}", pathParameters)
+        public ConversationItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}{?display_as*,exclude_part_types,include_email_history*,include_monitors*,include_part_types,include_scorecards*,include_translations*,retain_metrics*}", pathParameters)
         {
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ConversationItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}{?display_as*,include_email_history*,include_monitors*,include_scorecards*,include_translations*,retain_metrics*}", rawUrl)
+        public ConversationItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}{?display_as*,exclude_part_types,include_email_history*,include_monitors*,include_part_types,include_scorecards*,include_translations*,retain_metrics*}", rawUrl)
         {
         }
         /// <summary>
@@ -119,7 +119,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
+        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. `include_part_types` and `exclude_part_types` are applied before this limit, so filtering returns the 500 most recent matching parts. `conversation_parts.total_count` counts the parts in this response, after filtering — it is not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -127,6 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Conversation?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Conversations.Item.ConversationItemRequestBuilder.ConversationItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -142,6 +143,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -194,7 +196,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
+        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. `include_part_types` and `exclude_part_types` are applied before this limit, so filtering returns the 500 most recent matching parts. `conversation_parts.total_count` counts the parts in this response, after filtering — it is not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -254,7 +256,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             public bool? RetainMetrics { get; set; }
         }
         /// <summary>
-        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
+        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. `include_part_types` and `exclude_part_types` are applied before this limit, so filtering returns the 500 most recent matching parts. `conversation_parts.total_count` counts the parts in this response, after filtering — it is not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConversationItemRequestBuilderGetQueryParameters 
@@ -269,12 +271,32 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             [QueryParameter("display_as")]
             public string DisplayAs { get; set; }
 #endif
+            /// <summary>A comma-separated list of conversation part types to drop; parts of these types are omitted and all others are returned. Values are the names this version returns in a part&apos;s `part_type` field, such as `assignment`, `note` or `snoozed`; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care — a part type this version does not recognise is returned as `unknown`, and `unknown` is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as `note_and_reopen` is named `note_and_unsnooze` here. Up to 50 values are accepted, and `include_part_types` cannot be combined with `exclude_part_types`; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("exclude_part_types")]
+            public string[]? ExcludePartTypes { get; set; }
+#nullable restore
+#else
+            [QueryParameter("exclude_part_types")]
+            public string[] ExcludePartTypes { get; set; }
+#endif
             /// <summary>If set to true, the source of the conversation will include the email history.</summary>
             [QueryParameter("include_email_history")]
             public bool? IncludeEmailHistory { get; set; }
             /// <summary>If set to true, the response will include a `monitor_evaluations` array with any QA monitor results that flagged this conversation.</summary>
             [QueryParameter("include_monitors")]
             public bool? IncludeMonitors { get; set; }
+            /// <summary>A comma-separated list of conversation part types to keep; only parts of these types are returned. Values are the names this version returns in a part&apos;s `part_type` field, such as `assignment`, `note` or `snoozed`; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care — a part type this version does not recognise is returned as `unknown`, and `unknown` is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as `note_and_reopen` is named `note_and_unsnooze` here. Up to 50 values are accepted, and `include_part_types` cannot be combined with `exclude_part_types`; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("include_part_types")]
+            public string[]? IncludePartTypes { get; set; }
+#nullable restore
+#else
+            [QueryParameter("include_part_types")]
+            public string[] IncludePartTypes { get; set; }
+#endif
             /// <summary>If set to true, the response will include a `scorecards` array with any QA scorecard results for this conversation.</summary>
             [QueryParameter("include_scorecards")]
             public bool? IncludeScorecards { get; set; }
