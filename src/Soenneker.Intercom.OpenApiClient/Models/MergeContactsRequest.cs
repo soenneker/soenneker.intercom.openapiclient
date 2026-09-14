@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The unique identifier for the contact to merge away from. Must be a lead.</summary>
+        /// <summary>The unique identifier for the contact to merge away from (the source contact). Can have a `role` of `lead` or `user`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? From { get; set; }
@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string From { get; set; }
 #endif
-        /// <summary>The unique identifier for the contact to merge into. Must be a user.</summary>
+        /// <summary>The unique identifier for the contact to merge into (the destination contact). Must have a `role` of `user`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Into { get; set; }
@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Into { get; set; }
 #endif
-        /// <summary>Set to `true` to merge two contacts that are not duplicates (they share no matching email or phone).</summary>
+        /// <summary>When `true`, bypasses the check that the two contacts must be duplicates (matching email or phone), allowing non-duplicate contacts to be merged. Must be a JSON boolean; the string `&quot;true&quot;` does not bypass the check.</summary>
         public bool? SkipDuplicateValidation { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeContactsRequest"/> and sets the default values.
@@ -39,6 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public MergeContactsRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            SkipDuplicateValidation = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value

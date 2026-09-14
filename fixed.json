@@ -13145,8 +13145,8 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Merge a lead and a user",
-        "description": "You can merge a contact with a \u0060role\u0060 of \u0060lead\u0060 into a contact with a \u0060role\u0060 of \u0060user\u0060.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts are not retrievable via the API\u0022 %}\n  Once a merge is completed, the source contact (\u0060from\u0060) is permanently removed from the active contact list. This means:\n  - **GET /contacts/{id}** \u2014 Requesting the source contact by its original ID will return \u0060410 Gone\u0060 with a \u0060Link\u0060 header pointing to the canonical (merged-into) contact.\n  - **POST /contacts/search** \u2014 The source contact will not appear in search results, including queries filtered by \u0060updated_at\u0060.\n  - **GET /contacts** \u2014 The source contact will not appear in list results.\n\n  Only the target contact (\u0060into\u0060) remains accessible. If your application stores contact IDs, update them to use the target contact\u0027s ID after a merge.\n{% /admonition %}\n",
+        "summary": "Merge two contacts",
+        "description": "You can merge one contact into another. Both lead-into-user and user-into-user merges are supported: the source contact (\u0060from\u0060) may have a \u0060role\u0060 of \u0060lead\u0060 or \u0060user\u0060, and the destination contact (\u0060into\u0060) must have a \u0060role\u0060 of \u0060user\u0060.\n\n{% admonition type=\u0022warning\u0022 name=\u0022User-to-user merges\u0022 %}\n  When you merge a user into another user, the source user\u0027s attribute values (standard and custom) are discarded and are not moved onto the target user. The target user keeps its own attribute values. Records associated with the source, such as conversations, notes, and tags, are still reassigned to the target.\n\n  Merging a user into another user requires the \u0060merge_users\u0060 OAuth scope on your access token, in addition to the scope required for lead-into-user merges. Tokens without this scope receive a \u0060401 Unauthorized\u0060 when the source contact is a user.\n{% /admonition %}\n\n{% admonition type=\u0022warning\u0022 name=\u0022Merged contacts are not retrievable via the API\u0022 %}\n  Once a merge is completed, the source contact (\u0060from\u0060) is permanently removed from the active contact list. This means:\n  - **GET /contacts/{id}** \u2014 Requesting the source contact by its original ID will return \u0060410 Gone\u0060 with a \u0060Link\u0060 header pointing to the canonical (merged-into) contact.\n  - **POST /contacts/search** \u2014 The source contact will not appear in search results, including queries filtered by \u0060updated_at\u0060.\n  - **GET /contacts** \u2014 The source contact will not appear in list results.\n\n  Only the target contact (\u0060into\u0060) remains accessible. If your application stores contact IDs, update them to use the target contact\u0027s ID after a merge.\n{% /admonition %}\n",
         "operationId": "MergeContact",
         "parameters": [
           {
@@ -13359,7 +13359,7 @@
           "Contacts"
         ],
         "summary": "Preview a contact merge",
-        "description": "Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 (a \u0060lead\u0060) and \u0060into\u0060 (a \u0060user\u0060) contact IDs you would pass to [Merge a lead and a user](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact).\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and, for each object type, two counts \u2014 \u0060from\u0060, how many are on the lead and would move to the user, and \u0060into\u0060, how many the user already has. Counts are reported for conversations, tickets, phone calls, notes, and tags. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-lead merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Previewing non-duplicate contacts\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email, phone, or external ID). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t \u2014 the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060from\u0060 must be a lead and \u0060into\u0060 a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email, phone, or external ID. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n",
+        "description": "Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 and \u0060into\u0060 contact IDs you would pass to [Merge two contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact). As with the merge endpoint, \u0060from\u0060 may have a \u0060role\u0060 of \u0060lead\u0060 or \u0060user\u0060, and \u0060into\u0060 must have a \u0060role\u0060 of \u0060user\u0060. You can optionally pass \u0060custom_attribute_names\u0060 to include specific custom attributes in the previewed attribute changes.\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and, for each object type, two counts \u2014 \u0060from\u0060, how many are on the source contact and would move to the destination, and \u0060into\u0060, how many the destination already has. Counts are reported for conversations, tickets, phone calls, notes, and tags. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-channel merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Previewing non-duplicate contacts\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email or phone). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t, the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060source_same_as_target\u0060 | The source contact (\u0060from\u0060) and the destination contact (\u0060into\u0060) are the same contact. A contact can\u0027t be merged into itself. |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060into\u0060 must be a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email or phone. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n| \u0060user_to_lead\u0060 | \u0060into\u0060 is a lead or visitor. A user can only be merged into another user. |\n| \u0060whatsapp_data_cannot_be_merged\u0060 | The WhatsApp number on the source contact can\u0027t be reassigned to the destination. |\n| \u0060telegram_data_cannot_be_merged\u0060 | The Telegram sender on the source contact can\u0027t be reassigned to the destination. |\n| \u0060source_has_telegram_data\u0060 | The source contact has Telegram data, which user-into-user merges don\u0027t yet support moving. |\n| \u0060phone_data_cannot_be_merged\u0060 | The phone data on the source contact can\u0027t be reassigned to the destination. |\n",
         "operationId": "PreviewMergeContact",
         "parameters": [
           {
@@ -13466,7 +13466,7 @@
                       "reasons": [
                         {
                           "code": "no_shared_identifier",
-                          "message": "These contacts don\u0027t share a common identifier (email, phone, or external ID), so they aren\u0027t recognised as duplicates. Set skip_duplicate_validation to true to preview the merge anyway."
+                          "message": "These contacts don\u0027t share a common identifier (email or phone), so they aren\u0027t recognised as duplicates. Set skip_duplicate_validation to true to preview the merge anyway."
                         }
                       ]
                     }
@@ -49592,18 +49592,19 @@
         "properties": {
           "from": {
             "type": "string",
-            "description": "The unique identifier for the contact to merge away from. Must be a lead.",
+            "description": "The unique identifier for the contact to merge away from (the source contact). Can have a \u0060role\u0060 of \u0060lead\u0060 or \u0060user\u0060.",
             "example": "5d70dd30de4efd54f42fd526"
           },
           "into": {
             "type": "string",
-            "description": "The unique identifier for the contact to merge into. Must be a user.",
+            "description": "The unique identifier for the contact to merge into (the destination contact). Must have a \u0060role\u0060 of \u0060user\u0060.",
             "example": "5ba682d23d7cf92bef87bfd4"
           },
           "skip_duplicate_validation": {
             "type": "boolean",
-            "description": "Set to \u0060true\u0060 to merge two contacts that are not duplicates (they share no matching email or phone).",
-            "example": true
+            "description": "When \u0060true\u0060, bypasses the check that the two contacts must be duplicates (matching email or phone), allowing non-duplicate contacts to be merged. Must be a JSON boolean; the string \u0060\u0022true\u0022\u0060 does not bypass the check.",
+            "default": false,
+            "example": false
           }
         },
         "description": "Merge contact data."
@@ -49618,18 +49619,25 @@
         "properties": {
           "from": {
             "type": "string",
-            "description": "The unique identifier for the contact to merge away from. Must be a lead.",
+            "description": "The unique identifier for the contact to merge away from (the source contact). Can have a \u0060role\u0060 of \u0060lead\u0060 or \u0060user\u0060.",
             "example": "6762f0d51bb69f9f2193bb7f"
           },
           "into": {
             "type": "string",
-            "description": "The unique identifier for the contact to merge into. Must be a user.",
+            "description": "The unique identifier for the contact to merge into (the destination contact). Must have a \u0060role\u0060 of \u0060user\u0060.",
             "example": "6762f0d51bb69f9f2193bb80"
           },
           "skip_duplicate_validation": {
             "type": "boolean",
-            "description": "When true, previews the merge even if the contacts don\u0027t share a common identifier. Defaults to false.",
+            "description": "When \u0060true\u0060, previews the merge even if the contacts don\u0027t share a common identifier. Must be a JSON boolean; the string \u0060\u0022true\u0022\u0060 does not bypass the check. Defaults to false.",
             "default": false
+          },
+          "custom_attribute_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Custom attribute names to include in the previewed attribute changes."
           }
         },
         "description": "Preview a contact merge."
@@ -62648,7 +62656,8 @@
           "article",
           "external_content",
           "content_snippet",
-          "workflow_connector_action"
+          "workflow_connector_action",
+          "internal_article"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -62677,6 +62686,10 @@
             {
               "value": "workflow_connector_action",
               "name": "WorkflowConnectorAction"
+            },
+            {
+              "value": "internal_article",
+              "name": "InternalArticle"
             }
           ]
         }
@@ -65045,11 +65058,17 @@
       },
       "MergePreviewReasonCode": {
         "enum": [
+          "source_same_as_target",
           "invalid_merge_role_pair",
           "no_shared_identifier",
           "facebook_user",
           "external_lead_channel_not_allowed",
-          "mailing_list"
+          "mailing_list",
+          "user_to_lead",
+          "whatsapp_data_cannot_be_merged",
+          "telegram_data_cannot_be_merged",
+          "source_has_telegram_data",
+          "phone_data_cannot_be_merged"
         ],
         "type": "string",
         "additionalProperties": false,
@@ -65058,6 +65077,10 @@
           "name": "MergePreviewReasonCode",
           "modelAsString": false,
           "values": [
+            {
+              "value": "source_same_as_target",
+              "name": "SourceSameAsTarget"
+            },
             {
               "value": "invalid_merge_role_pair",
               "name": "InvalidMergeRolePair"
@@ -65077,6 +65100,26 @@
             {
               "value": "mailing_list",
               "name": "MailingList"
+            },
+            {
+              "value": "user_to_lead",
+              "name": "UserToLead"
+            },
+            {
+              "value": "whatsapp_data_cannot_be_merged",
+              "name": "WhatsappDataCannotBeMerged"
+            },
+            {
+              "value": "telegram_data_cannot_be_merged",
+              "name": "TelegramDataCannotBeMerged"
+            },
+            {
+              "value": "source_has_telegram_data",
+              "name": "SourceHasTelegramData"
+            },
+            {
+              "value": "phone_data_cannot_be_merged",
+              "name": "PhoneDataCannotBeMerged"
             }
           ]
         }

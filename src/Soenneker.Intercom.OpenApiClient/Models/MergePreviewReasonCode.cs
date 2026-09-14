@@ -7,6 +7,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum MergePreviewReasonCode
     {
+        [EnumMember(Value = "source_same_as_target")]
+        #pragma warning disable CS1591
+        SourceSameAsTarget,
+        #pragma warning restore CS1591
         [EnumMember(Value = "invalid_merge_role_pair")]
         #pragma warning disable CS1591
         InvalidMergeRolePair,
@@ -26,6 +30,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "mailing_list")]
         #pragma warning disable CS1591
         MailingList,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_to_lead")]
+        #pragma warning disable CS1591
+        UserToLead,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "whatsapp_data_cannot_be_merged")]
+        #pragma warning disable CS1591
+        WhatsappDataCannotBeMerged,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "telegram_data_cannot_be_merged")]
+        #pragma warning disable CS1591
+        TelegramDataCannotBeMerged,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "source_has_telegram_data")]
+        #pragma warning disable CS1591
+        SourceHasTelegramData,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "phone_data_cannot_be_merged")]
+        #pragma warning disable CS1591
+        PhoneDataCannotBeMerged,
         #pragma warning restore CS1591
     }
 }

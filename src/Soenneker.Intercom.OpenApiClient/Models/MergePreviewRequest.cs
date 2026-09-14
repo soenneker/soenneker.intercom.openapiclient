@@ -15,7 +15,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The unique identifier for the contact to merge away from. Must be a lead.</summary>
+        /// <summary>Custom attribute names to include in the previewed attribute changes.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? CustomAttributeNames { get; set; }
+#nullable restore
+#else
+        public List<string> CustomAttributeNames { get; set; }
+#endif
+        /// <summary>The unique identifier for the contact to merge away from (the source contact). Can have a `role` of `lead` or `user`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? From { get; set; }
@@ -23,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string From { get; set; }
 #endif
-        /// <summary>The unique identifier for the contact to merge into. Must be a user.</summary>
+        /// <summary>The unique identifier for the contact to merge into (the destination contact). Must have a `role` of `user`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Into { get; set; }
@@ -31,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Into { get; set; }
 #endif
-        /// <summary>When true, previews the merge even if the contacts don&apos;t share a common identifier. Defaults to false.</summary>
+        /// <summary>When `true`, previews the merge even if the contacts don&apos;t share a common identifier. Must be a JSON boolean; the string `&quot;true&quot;` does not bypass the check. Defaults to false.</summary>
         public bool? SkipDuplicateValidation { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewRequest"/> and sets the default values.
@@ -59,6 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "custom_attribute_names", n => { CustomAttributeNames = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "from", n => { From = n.GetStringValue(); } },
                 { "into", n => { Into = n.GetStringValue(); } },
                 { "skip_duplicate_validation", n => { SkipDuplicateValidation = n.GetBoolValue(); } },
@@ -71,6 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfPrimitiveValues<string>("custom_attribute_names", CustomAttributeNames);
             writer.WriteStringValue("from", From);
             writer.WriteStringValue("into", Into);
             writer.WriteBoolValue("skip_duplicate_validation", SkipDuplicateValidation);

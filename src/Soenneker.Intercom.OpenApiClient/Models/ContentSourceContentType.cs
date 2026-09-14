@@ -27,5 +27,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         WorkflowConnectorAction,
         #pragma warning restore CS1591
+        [EnumMember(Value = "internal_article")]
+        #pragma warning disable CS1591
+        InternalArticle,
+        #pragma warning restore CS1591
     }
 }
