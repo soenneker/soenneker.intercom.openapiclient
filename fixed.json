@@ -24322,6 +24322,235 @@
         }
       }
     },
+    "/auth_tokens": {
+      "get": {
+        "tags": [
+          "Auth Tokens"
+        ],
+        "summary": "List all auth tokens",
+        "description": "Returns a paginated list of the workspace\u0027s stored third-party credentials. Use this to discover the id of a credential you want a data connector to authenticate with \u2014 that id is not otherwise available over REST. Only metadata is returned; credential values are never exposed. The list is not exhaustive: credentials a teammate created are listed, as are those created by some Intercom integrations, but credentials installed by an app package, those created by most other integrations, and those minted for an individual teammate\u0027s MCP access are not.\n",
+        "operationId": "ListAuthTokens",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results to return per page. Defaults to 20, minimum 1, maximum 50.",
+            "schema": {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "starting_after",
+            "in": "query",
+            "description": "The cursor value from \u0060pages.next.starting_after\u0060 in a previous response. Used to paginate through results.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthTokenList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "auth_token",
+                          "id": "12345",
+                          "name": "Fulfilment API key",
+                          "description": "Used by the order status connector",
+                          "token_type": "header",
+                          "request_header_key": "Authorization",
+                          "domain": "api.fulfilment.example.com",
+                          "created_at": "2025-11-15T09:30:00Z",
+                          "updated_at": "2026-01-20T14:22:15Z"
+                        }
+                      ],
+                      "pages": {
+                        "type": "pages",
+                        "per_page": 20,
+                        "next": {
+                          "starting_after": "WzE3MDc1OTQ3MTUuMCwxMjM0NV0="
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid cursor": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "client_error",
+                          "message": "Invalid starting_after param. Please try again using a starting_after value from a paginated response"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth_tokens/{id}": {
+      "get": {
+        "tags": [
+          "Auth Tokens"
+        ],
+        "summary": "Retrieve an auth token",
+        "description": "Returns the metadata for a single stored third-party credential. A credential that the list endpoint does not return is also not retrievable here, and responds with 404.\n",
+        "operationId": "RetrieveAuthToken",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the auth token.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthToken"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "auth_token",
+                      "id": "12345",
+                      "name": "Fulfilment API key",
+                      "description": "Used by the order status connector",
+                      "token_type": "header",
+                      "request_header_key": "Authorization",
+                      "domain": "api.fulfilment.example.com",
+                      "created_at": "2025-11-15T09:30:00Z",
+                      "updated_at": "2026-01-20T14:22:15Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Auth token not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/data_connectors": {
       "get": {
         "tags": [
@@ -39620,6 +39849,86 @@
         },
         "description": "A list of team metrics."
       },
+      "AuthToken": {
+        "title": "Auth Token",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AuthTokenType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the auth token.",
+            "example": "12345"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name given to the credential when it was created.",
+            "nullable": true,
+            "example": "Fulfilment API key"
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of what the credential is used for.",
+            "nullable": true,
+            "example": "Used by the order status connector"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "How the credential is presented to the external API, for example as a header value or an HMAC signature.",
+            "nullable": true,
+            "example": "header"
+          },
+          "request_header_key": {
+            "type": "string",
+            "description": "The request header the credential is sent in.",
+            "nullable": true,
+            "example": "Authorization"
+          },
+          "domain": {
+            "type": "string",
+            "description": "The domain the credential is scoped to, if one was set.",
+            "nullable": true,
+            "example": "api.fulfilment.example.com"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The time the credential was created, as an ISO 8601 timestamp.",
+            "nullable": true,
+            "example": "2025-11-15T09:30:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The time the credential was last updated, as an ISO 8601 timestamp.",
+            "nullable": true,
+            "example": "2026-01-20T14:22:15Z"
+          }
+        },
+        "description": "Metadata for a stored third-party credential that data connectors use to authenticate outbound requests. Only metadata is returned \u2014 the credential value itself, and its refresh and OAuth configuration, are never exposed.\n",
+        "x-tags": [
+          "Auth Tokens"
+        ]
+      },
+      "AuthTokenList": {
+        "title": "Auth Token List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuthToken"
+            },
+            "description": "An array of auth token objects."
+          },
+          "pages": {
+            "$ref": "#/components/schemas/AuthTokenListPages"
+          }
+        },
+        "description": "A paginated list of auth tokens."
+      },
       "AwayStatusReason": {
         "type": "object",
         "properties": {
@@ -54471,6 +54780,23 @@
           }
         }
       },
+      "AuthTokenListPages": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PagesType"
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "The number of results per page.",
+            "example": 20
+          },
+          "next": {
+            "$ref": "#/components/schemas/AuthTokenListPagesNext"
+          }
+        },
+        "description": "Pagination information."
+      },
       "ChangeTicketTypeRequestTicketAttributes": {
         "type": "object",
         "description": "The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values.",
@@ -56981,6 +57307,18 @@
             "$ref": "#/components/schemas/ActivityLogMetadataChangesAdditionalPropertiesAfter"
           }
         }
+      },
+      "AuthTokenListPagesNext": {
+        "type": "object",
+        "properties": {
+          "starting_after": {
+            "type": "string",
+            "description": "The cursor value to use for the next page.",
+            "example": "WzE3MDc1OTQ3MTUuMCwxMjM0NV0="
+          }
+        },
+        "description": "Cursor for the next page of results.",
+        "nullable": true
       },
       "BulkCreateCompaniesRequestCompaniesItemCustomAttributes": {
         "type": "object",
@@ -62103,6 +62441,25 @@
             {
               "value": "team",
               "name": "Team"
+            }
+          ]
+        }
+      },
+      "AuthTokenType": {
+        "enum": [
+          "auth_token"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of object - \u0060auth_token\u0060.",
+        "example": "auth_token",
+        "x-ms-enum": {
+          "name": "AuthTokenType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "auth_token",
+              "name": "AuthToken"
             }
           ]
         }
@@ -68370,6 +68727,10 @@
     {
       "name": "Audiences",
       "description": "Everything about your Audiences"
+    },
+    {
+      "name": "Auth Tokens",
+      "description": "Read the metadata of the third-party credentials stored in your workspace, so you can\nfind the id of the credential a data connector should authenticate with. These endpoints\nare part of the \u0060Preview\u0060 API version and require an OAuth token with the\n\u0060read_auth_tokens\u0060 scope. They are read-only and never return credential values, refresh\nconfiguration, or OAuth configuration.\n"
     },
     {
       "name": "Banners",
