@@ -5210,6 +5210,14 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "jobIdentifier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -5334,6 +5342,14 @@
           {
             "name": "job_identifier",
             "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "jobIdentifier",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -17916,9 +17932,43 @@
                               "call_id": "3822007689"
                             },
                             "app_package_code": null
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": 6,
+                            "part_type": "ai_agent_event",
+                            "body": null,
+                            "created_at": 1740141870,
+                            "updated_at": 1740141870,
+                            "notified_at": 1740141870,
+                            "assigned_to": null,
+                            "author": {
+                              "type": "bot",
+                              "id": "278",
+                              "name": "Fin",
+                              "email": "operator\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": false,
+                            "email_message_metadata": null,
+                            "state": "closed",
+                            "tags": [],
+                            "event_details": {
+                              "event": {
+                                "type": "otp_email_verification_failed",
+                                "value": "OTP email verification failed",
+                                "data": {
+                                  "otp_email_verification_failed": {
+                                    "reason": "no_email"
+                                  }
+                                }
+                              }
+                            },
+                            "app_package_code": null
                           }
                         ],
-                        "total_count": 5
+                        "total_count": 6
                       }
                     }
                   },
@@ -18153,9 +18203,43 @@
                               }
                             },
                             "app_package_code": null
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": 5,
+                            "part_type": "ai_agent_event",
+                            "body": null,
+                            "created_at": 1740141870,
+                            "updated_at": 1740141870,
+                            "notified_at": 1740141870,
+                            "assigned_to": null,
+                            "author": {
+                              "type": "bot",
+                              "id": "278",
+                              "name": "Fin",
+                              "email": "operator\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": false,
+                            "email_message_metadata": null,
+                            "state": "closed",
+                            "tags": [],
+                            "event_details": {
+                              "event": {
+                                "type": "otp_email_verification_failed",
+                                "value": "OTP email verification failed",
+                                "data": {
+                                  "otp_email_verification_failed": {
+                                    "reason": "no_email"
+                                  }
+                                }
+                              }
+                            },
+                            "app_package_code": null
                           }
                         ],
-                        "total_count": 4
+                        "total_count": 5
                       }
                     }
                   },
@@ -48269,6 +48353,16 @@
         },
         "description": "Contains the id of the call the summary describes, for conversation part type \u003Ccode\u003Ecall_summary\u003C/code\u003E. A conversation can contain several calls, and therefore several call summaries, so this identifies which call each summary belongs to. The id matches the \u003Ccode\u003Eid\u003C/code\u003E returned by the Calls API and by the \u003Ccode\u003Ecall.started\u003C/code\u003E, \u003Ccode\u003Ecall.ended\u003C/code\u003E, \u003Ccode\u003Ecall.recording_available\u003C/code\u003E and \u003Ccode\u003Ecall.transcription_available\u003C/code\u003E webhook topics."
       },
+      "AiAgentEventOtpEmailVerificationFailed": {
+        "title": "Part type - ai_agent_event (otp_email_verification_failed)",
+        "type": "object",
+        "properties": {
+          "event": {
+            "$ref": "#/components/schemas/AiAgentEventOtpEmailVerificationFailedEvent"
+          }
+        },
+        "description": "Contains the reason Fin could not verify a contact by one-time passcode email, for conversation part type \u003Ccode\u003Eai_agent_event\u003C/code\u003E when the event type is \u003Ccode\u003Eotp_email_verification_failed\u003C/code\u003E. Other \u003Ccode\u003Eai_agent_event\u003C/code\u003E event types are not described here."
+      },
       "EventDetails": {
         "title": "Event details of Workflow \u0026 actions",
         "type": "object",
@@ -48320,12 +48414,12 @@
           },
           {
             "$ref": "#/components/schemas/CallSummary"
+          },
+          {
+            "$ref": "#/components/schemas/AiAgentEventOtpEmailVerificationFailed"
           }
         ],
         "properties": {
-          "event": {
-            "$ref": "#/components/schemas/OperatorWorkflowEventEvent"
-          },
           "tags_added": {
             "type": "array",
             "items": {
@@ -55544,7 +55638,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic.",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060, \u0060\u003Cdiv\u003E\u0060, or another supported block element to avoid this.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -56263,6 +56357,34 @@
           }
         }
       },
+      "AiAgentEventOtpEmailVerificationFailedEvent": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The event type",
+            "example": "otp_email_verification_failed"
+          },
+          "value": {
+            "type": "string",
+            "description": "A readable label for the event",
+            "example": "OTP email verification failed"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AiAgentEventOtpEmailVerificationFailedEventData"
+          }
+        },
+        "description": "The event the part records",
+        "example": {
+          "type": "otp_email_verification_failed",
+          "value": "OTP email verification failed",
+          "data": {
+            "otp_email_verification_failed": {
+              "reason": "no_email"
+            }
+          }
+        }
+      },
       "ErrorErrorsItem": {
         "required": [
           "code"
@@ -56866,7 +56988,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic.",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060, \u0060\u003Cdiv\u003E\u0060, or another supported block element to avoid this.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -56900,7 +57022,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic.",
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060, \u0060\u003Cdiv\u003E\u0060, or another supported block element to avoid this.",
         "nullable": true,
         "example": {
           "original": "en",
@@ -57497,6 +57619,20 @@
           }
         }
       },
+      "AiAgentEventOtpEmailVerificationFailedEventData": {
+        "type": "object",
+        "properties": {
+          "otp_email_verification_failed": {
+            "$ref": "#/components/schemas/AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed"
+          }
+        },
+        "description": "Data recorded with the event. Empty when the failure was recorded without a reason.",
+        "example": {
+          "otp_email_verification_failed": {
+            "reason": "no_email"
+          }
+        }
+      },
       "FinAgentAttributeErrorsUserAttributes": {
         "type": "object",
         "additionalProperties": {
@@ -57693,6 +57829,20 @@
             "description": "The ID of an existing tag to remove from the contact.",
             "example": "789"
           }
+        }
+      },
+      "AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "description": "Why the one-time passcode email could not verify the contact. Treat this as a free-form string and fall back to \u003Ccode\u003Evalue\u003C/code\u003E for a reason you do not recognise. \u003Ccode\u003Eno_email\u003C/code\u003E means the contact has no email address on record.",
+            "example": "no_email"
+          }
+        },
+        "description": "Details of the failed verification",
+        "example": {
+          "reason": "no_email"
         }
       },
       "SetAwayAdminRequest": {
@@ -60726,7 +60876,7 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060conversation.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060, \u0060\u003Cdiv\u003E\u0060, or another supported block element to avoid this."
       },
       "ConvertConversationToTicketRequestAttributes": {
         "type": "object",
@@ -60847,14 +60997,14 @@
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060, \u0060\u003Cdiv\u003E\u0060, or another supported block element to avoid this."
       },
       "TicketReplyTranslationsProperty": {
         "type": "object",
         "additionalProperties": {
           "type": "string"
         },
-        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060 or another supported block element to avoid this; \u0060\u003Cdiv\u003E\u0060 is removed when the reply is saved, which leaves its text bare and still suppresses the topic."
+        "description": "A map of the reply text keyed by locale code. Only present on the Preview API version and backs the \u0060ticket.admin.replied.translated\u0060 webhook topic. The special \u0060original\u0060 key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as \u0060body\u0060. The \u0060body\u0060 field is unchanged and always stays in the original source language. Available in the Preview API version only (set \u0060Intercom-Version: Preview\u0060). This webhook topic is not sent for every translated reply: it is suppressed when the reply\u0027s \u0060body\u0060 contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in \u0060\u003Cp\u003E\u0060, \u0060\u003Cdiv\u003E\u0060, or another supported block element to avoid this."
       },
       "TicketTypeAttributeInputOptionsProperty": {
         "type": "object",
