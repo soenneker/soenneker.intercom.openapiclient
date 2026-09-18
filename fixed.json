@@ -9973,7 +9973,7 @@
           "Companies"
         ],
         "summary": "List granted companies for a contact (Preview)",
-        "description": "List the companies a contact has been granted access to.\n\nA granted company lets the contact read that company\u0027s tickets in the customer portal. It is separate from company membership \u2014 granting a company does not attach the contact to it, and [\u0060GET /contacts/{id}/companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listcompaniesforacontact) does not include grants.\n\n\u0060company_ids\u0060 holds the \u0060company_id\u0060 values you set on your companies, so the list round-trips with the \u0060company_ids\u0060 you send to \u0060PUT /contacts/{contact_id}/granted_companies\u0060. The list is sorted by company id and paginated.\n\nReturns an empty list when granted companies are not enabled for the workspace.\n\nRequires the \u0060read_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: preview\u0060.\n",
+        "description": "List the companies a contact has been granted access to.\n\nA granted company lets the contact read that company\u0027s tickets in the customer portal. It is separate from company membership \u2014 granting a company does not attach the contact to it, and [\u0060GET /contacts/{id}/companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listcompaniesforacontact) does not include grants.\n\n\u0060company_ids\u0060 holds the \u0060company_id\u0060 values you set on your companies, so the list round-trips with the \u0060company_ids\u0060 you send to \u0060PUT /contacts/{contact_id}/granted_companies\u0060. The list is sorted by company id and paginated.\n\nReturns an empty list when granted companies are not enabled for the workspace.\n\nRequires the \u0060read_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListGrantedCompaniesForAContact",
         "parameters": [
           {
@@ -10104,7 +10104,7 @@
           "Companies"
         ],
         "summary": "Replace granted companies for a contact (Preview)",
-        "description": "Replace the full set of companies a contact has been granted access to.\n\nThis is a replacement, not an append. The \u0060company_ids\u0060 you send become the contact\u0027s entire granted set \u2014 any company id you leave out is dropped. To add a company, send the existing ids plus the new one; to remove one, send the existing ids minus that one; to drop every grant, send an empty array.\n\nIdentify companies by the \u0060company_id\u0060 you set on them, the same values [\u0060GET /contacts/{contact_id}/granted_companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listgrantedcompaniesforacontact) returns. Duplicates in the request are collapsed. A contact can be granted at most 100 companies.\n\nThe response echoes the stored set, so a \u0060200\u0060 is confirmation of exactly what the contact can now read.\n\n{% admonition type=\u0022info\u0022 name=\u0022Requires granted companies to be enabled\u0022 %}\n  This endpoint returns \u0060404\u0060 with the code \u0060granted_companies_not_enabled\u0060 unless granted companies are enabled for the workspace. Contact Intercom Support to enable it.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: preview\u0060.\n",
+        "description": "Replace the full set of companies a contact has been granted access to.\n\nThis is a replacement, not an append. The \u0060company_ids\u0060 you send become the contact\u0027s entire granted set \u2014 any company id you leave out is dropped. To add a company, send the existing ids plus the new one; to remove one, send the existing ids minus that one; to drop every grant, send an empty array.\n\nIdentify companies by the \u0060company_id\u0060 you set on them, the same values [\u0060GET /contacts/{contact_id}/granted_companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listgrantedcompaniesforacontact) returns. Duplicates in the request are collapsed. A contact can be granted at most 100 companies.\n\nThe response echoes the stored set, so a \u0060200\u0060 is confirmation of exactly what the contact can now read.\n\n{% admonition type=\u0022info\u0022 name=\u0022Requires granted companies to be enabled\u0022 %}\n  This endpoint returns \u0060404\u0060 with the code \u0060granted_companies_not_enabled\u0060 unless granted companies are enabled for the workspace. Contact Intercom Support to enable it.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ReplaceGrantedCompaniesForAContact",
         "parameters": [
           {
@@ -10329,7 +10329,7 @@
           "Companies"
         ],
         "summary": "Remove a granted company from a contact (Preview)",
-        "description": "Remove a single company from a contact\u0027s granted set, leaving the contact\u0027s other grants in place.\n\nIdentify the company by the \u0060company_id\u0060 you set on it, the same value [\u0060GET /contacts/{contact_id}/granted_companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listgrantedcompaniesforacontact) returns. A \u0060company_id\u0060 containing a dot or a slash is supported \u2014 URL-encode a slash as \u0060%2F\u0060.\n\nThis endpoint is not idempotent. Removing a company the contact is not currently granted returns \u0060404\u0060 with the code \u0060company_not_found\u0060, so repeating a successful call returns \u0060404\u0060 rather than \u0060204\u0060. Treat the first \u0060204\u0060 as the confirmation.\n\n{% admonition type=\u0022info\u0022 name=\u0022Requires granted companies to be enabled\u0022 %}\n  This endpoint returns \u0060404\u0060 with the code \u0060granted_companies_not_enabled\u0060 unless granted companies are enabled for the workspace. Contact Intercom Support to enable it.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: preview\u0060.\n",
+        "description": "Remove a single company from a contact\u0027s granted set, leaving the contact\u0027s other grants in place.\n\nIdentify the company by the \u0060company_id\u0060 you set on it, the same value [\u0060GET /contacts/{contact_id}/granted_companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listgrantedcompaniesforacontact) returns. A \u0060company_id\u0060 containing a dot or a slash is supported \u2014 URL-encode a slash as \u0060%2F\u0060.\n\nThis endpoint is not idempotent. Removing a company the contact is not currently granted returns \u0060404\u0060 with the code \u0060company_not_found\u0060, so repeating a successful call returns \u0060404\u0060 rather than \u0060204\u0060. Treat the first \u0060204\u0060 as the confirmation.\n\n{% admonition type=\u0022info\u0022 name=\u0022Requires granted companies to be enabled\u0022 %}\n  This endpoint returns \u0060404\u0060 with the code \u0060granted_companies_not_enabled\u0060 unless granted companies are enabled for the workspace. Contact Intercom Support to enable it.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RemoveGrantedCompanyFromAContact",
         "parameters": [
           {
@@ -49855,22 +49855,12 @@
       },
       "IntercomVersionPreview": {
         "enum": [
-          "preview"
+          "Preview"
         ],
         "type": "string",
         "additionalProperties": false,
         "description": "Preview Intercom API version. Used for closed beta endpoints or other features under managed availability.",
-        "example": "preview",
-        "x-ms-enum": {
-          "name": "IntercomVersionPreview",
-          "modelAsString": false,
-          "values": [
-            {
-              "value": "preview",
-              "name": "Preview"
-            }
-          ]
-        }
+        "example": "Preview"
       },
       "LinkedObjectList": {
         "title": "Linked Objects",
