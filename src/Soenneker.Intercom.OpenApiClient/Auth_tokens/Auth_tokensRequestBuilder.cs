@@ -72,6 +72,35 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Only credentials with a `token_type` of `text` can be created here — the credential value is sent as a request header. The value you supply is stored encrypted and is never returned by any endpoint, including this one.
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AuthToken"/></returns>
+        /// <param name="body">The fields accepted when storing a new third-party credential. The credential is created with a `token_type` of `text`; no other type can be created over the API.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPostRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthToken.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// Returns a paginated list of the workspace&apos;s stored third-party credentials. Use this to discover the id of a credential you want a data connector to authenticate with — that id is not otherwise available over REST. Only metadata is returned; credential values are never exposed. The list is not exhaustive: credentials a teammate created are listed, as are those created by some Intercom integrations, but credentials installed by an app package, those created by most other integrations, and those minted for an individual teammate&apos;s MCP access are not.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -88,6 +117,28 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Only credentials with a `token_type` of `text` can be created here — the credential value is sent as a request header. The value you supply is stored encrypted and is never returned by any endpoint, including this one.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The fields accepted when storing a new third-party credential. The credential is created with a `token_type` of `text`; no other type can be created over the API.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPostRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.POST, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>

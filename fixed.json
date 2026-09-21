@@ -199,8 +199,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/SetAwayAdmin400Response"
                 },
                 "examples": {
                   "parameter_invalid": {
@@ -227,7 +226,8 @@
                       ]
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -24419,7 +24419,7 @@
             "name": "Intercom-Version",
             "in": "header",
             "schema": {
-              "$ref": "#/components/schemas/IntercomVersion"
+              "$ref": "#/components/schemas/IntercomVersionPreview"
             }
           },
           {
@@ -24460,8 +24460,9 @@
                           "id": "12345",
                           "name": "Fulfilment API key",
                           "description": "Used by the order status connector",
-                          "token_type": "header",
+                          "token_type": "text",
                           "request_header_key": "Authorization",
+                          "token_prefix": "Bearer",
                           "domain": "api.fulfilment.example.com",
                           "created_at": "2025-11-15T09:30:00Z",
                           "updated_at": "2026-01-20T14:22:15Z"
@@ -24529,6 +24530,157 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Auth Tokens"
+        ],
+        "summary": "Create an auth token",
+        "description": "Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Only credentials with a \u0060token_type\u0060 of \u0060text\u0060 can be created here \u2014 the credential value is sent as a request header. The value you supply is stored encrypted and is never returned by any endpoint, including this one.\n",
+        "operationId": "CreateAuthToken",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAuthTokenRequest"
+              },
+              "examples": {
+                "successful": {
+                  "value": {
+                    "name": "Fulfilment API key",
+                    "token_value": "sk_live_9f3c2a7b41e8",
+                    "request_header_key": "Authorization",
+                    "token_prefix": "Bearer",
+                    "description": "Used by the order status connector",
+                    "domain": "api.fulfilment.example.com"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthToken"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "auth_token",
+                      "id": "12345",
+                      "name": "Fulfilment API key",
+                      "description": "Used by the order status connector",
+                      "token_type": "text",
+                      "request_header_key": "Authorization",
+                      "token_prefix": "Bearer",
+                      "domain": "api.fulfilment.example.com",
+                      "created_at": "2025-11-15T09:30:00Z",
+                      "updated_at": "2025-11-15T09:30:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing required field": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "name parameter is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Rejected field value": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "domain must be a valid domain"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "No teammate associated with the access token": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Writing an auth token requires an access token associated with a teammate"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/auth_tokens/{id}": {
@@ -24544,7 +24696,7 @@
             "name": "Intercom-Version",
             "in": "header",
             "schema": {
-              "$ref": "#/components/schemas/IntercomVersion"
+              "$ref": "#/components/schemas/IntercomVersionPreview"
             }
           },
           {
@@ -24573,8 +24725,9 @@
                       "id": "12345",
                       "name": "Fulfilment API key",
                       "description": "Used by the order status connector",
-                      "token_type": "header",
+                      "token_type": "text",
                       "request_header_key": "Authorization",
+                      "token_prefix": "Bearer",
                       "domain": "api.fulfilment.example.com",
                       "created_at": "2025-11-15T09:30:00Z",
                       "updated_at": "2026-01-20T14:22:15Z"
@@ -24600,6 +24753,175 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Auth token not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Auth Tokens"
+        ],
+        "summary": "Update an auth token",
+        "description": "Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. Only credentials with a \u0060token_type\u0060 of \u0060text\u0060 can be updated; any other type responds with \u0060400\u0060. A credential the list endpoint does not return is also not updatable, and responds with \u0060404\u0060.\n",
+        "operationId": "UpdateAuthToken",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the auth token.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAuthTokenRequest"
+              },
+              "examples": {
+                "successful": {
+                  "value": {
+                    "name": "Fulfilment API key (rotated host)",
+                    "description": "Used by the order status connector"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthToken"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "auth_token",
+                      "id": "12345",
+                      "name": "Fulfilment API key (rotated host)",
+                      "description": "Used by the order status connector",
+                      "token_type": "text",
+                      "request_header_key": "Authorization",
+                      "token_prefix": "Bearer",
+                      "domain": "api.fulfilment.example.com",
+                      "created_at": "2025-11-15T09:30:00Z",
+                      "updated_at": "2026-01-20T14:22:15Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unsupported token type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Only auth tokens with token_type \u0022text\u0022 can be updated through the API"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "No teammate associated with the access token": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Writing an auth token requires an access token associated with a teammate"
                         }
                       ]
                     }
@@ -27191,7 +27513,25 @@
               }
             }
           }
-        }
+        },
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl -X GET \u0027https://api.intercom.io/macros?per_page=25\u0026starting_after=WzE3MTk0OTM3NTcuMCwgIjEyMyJd\u0027 \\\n  -H \u0027Authorization: Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027 \\\n  -H \u0027Accept: application/json\u0027 \\\n  -H \u0027Intercom-Version: Preview\u0027\n"
+          },
+          {
+            "lang": "Node.js",
+            "source": "const response = await fetch(\u0027https://api.intercom.io/macros?per_page=25\u0026starting_after=WzE3MTk0OTM3NTcuMCwgIjEyMyJd\u0027, {\n  headers: {\n    \u0027Authorization\u0027: \u0027Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027,\n    \u0027Accept\u0027: \u0027application/json\u0027,\n    \u0027Intercom-Version\u0027: \u0027Preview\u0027\n  }\n});\nconst macros = await response.json();\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nheaders = {\n    \u0027Authorization\u0027: \u0027Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027,\n    \u0027Accept\u0027: \u0027application/json\u0027,\n    \u0027Intercom-Version\u0027: \u0027Preview\u0027\n}\n\nparams = {\n    \u0027per_page\u0027: 25,\n    \u0027starting_after\u0027: \u0027WzE3MTk0OTM3NTcuMCwgIjEyMyJd\u0027\n}\n\nresponse = requests.get(\u0027https://api.intercom.io/macros\u0027,\n                      headers=headers,\n                      params=params)\nmacros = response.json()\n"
+          },
+          {
+            "lang": "Ruby",
+            "source": "require \u0027net/http\u0027\nrequire \u0027json\u0027\n\nuri = URI(\u0027https://api.intercom.io/macros\u0027)\nparams = {\n  per_page: 25,\n  starting_after: \u0027WzE3MTk0OTM3NTcuMCwgIjEyMyJd\u0027\n}\nuri.query = URI.encode_www_form(params)\n\nhttp = Net::HTTP.new(uri.host, uri.port)\nhttp.use_ssl = true\n\nrequest = Net::HTTP::Get.new(uri)\nrequest[\u0027Authorization\u0027] = \u0027Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027\nrequest[\u0027Accept\u0027] = \u0027application/json\u0027\nrequest[\u0027Intercom-Version\u0027] = \u0027Preview\u0027\n\nresponse = http.request(request)\nmacros = JSON.parse(response.body)\n"
+          }
+        ]
       }
     },
     "/macros/{id}": {
@@ -27383,7 +27723,25 @@
               }
             }
           }
-        }
+        },
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl -X GET \u0027https://api.intercom.io/macros/123\u0027 \\\n  -H \u0027Authorization: Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027 \\\n  -H \u0027Accept: application/json\u0027 \\\n  -H \u0027Intercom-Version: Preview\u0027\n"
+          },
+          {
+            "lang": "Node.js",
+            "source": "const response = await fetch(\u0027https://api.intercom.io/macros/123\u0027, {\n  headers: {\n    \u0027Authorization\u0027: \u0027Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027,\n    \u0027Accept\u0027: \u0027application/json\u0027,\n    \u0027Intercom-Version\u0027: \u0027Preview\u0027\n  }\n});\nconst macro = await response.json();\n"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nheaders = {\n    \u0027Authorization\u0027: \u0027Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027,\n    \u0027Accept\u0027: \u0027application/json\u0027,\n    \u0027Intercom-Version\u0027: \u0027Preview\u0027\n}\n\nresponse = requests.get(\u0027https://api.intercom.io/macros/123\u0027,\n                      headers=headers)\nmacro = response.json()\n"
+          },
+          {
+            "lang": "Ruby",
+            "source": "require \u0027net/http\u0027\nrequire \u0027json\u0027\n\nuri = URI(\u0027https://api.intercom.io/macros/123\u0027)\n\nhttp = Net::HTTP.new(uri.host, uri.port)\nhttp.use_ssl = true\n\nrequest = Net::HTTP::Get.new(uri)\nrequest[\u0027Authorization\u0027] = \u0027Bearer \u003CYOUR_ACCESS_TOKEN\u003E\u0027\nrequest[\u0027Accept\u0027] = \u0027application/json\u0027\nrequest[\u0027Intercom-Version\u0027] = \u0027Preview\u0027\n\nresponse = http.request(request)\nmacro = JSON.parse(response.body)\n"
+          }
+        ]
       }
     },
     "/messages": {
@@ -29907,8 +30265,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/CreatePhoneSwitch400Response"
                 },
                 "examples": {
                   "bad request - exception sending sms": {
@@ -29923,7 +30280,8 @@
                       "message": "Invalid phone number"
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -29932,8 +30290,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/CreatePhoneSwitch422Response"
                 },
                 "examples": {
                   "unprocessable entity": {
@@ -29941,7 +30298,8 @@
                       "error_key": "some_error"
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -32620,7 +32978,7 @@
         },
         "responses": {
           "400": {
-            "description": "User reply",
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
@@ -32635,6 +32993,30 @@
                         {
                           "code": "parameter_mismatch",
                           "message": "User replies are not allowed on Backoffice tickets"
+                        }
+                      ]
+                    }
+                  },
+                  "Admin comment on a back-office ticket": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7a1c9f02-5d3e-4b8a-9c21-6f0d84e5b713",
+                      "errors": [
+                        {
+                          "code": "parameter_mismatch",
+                          "message": "Comments are not allowed on Backoffice tickets not shared with user"
+                        }
+                      ]
+                    }
+                  },
+                  "Admin comment on a tracker ticket": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c4e2a980-31bf-4d76-8a05-2e9cb17f4d6a",
+                      "errors": [
+                        {
+                          "code": "parameter_mismatch",
+                          "message": "Comments are not allowed on Tracker tickets"
                         }
                       ]
                     }
@@ -34109,8 +34491,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/UpdateTicket404Response"
                 },
                 "examples": {
                   "Admin not found": {
@@ -34137,7 +34518,8 @@
                       ]
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -34146,8 +34528,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "description": "Fallback media schema"
+                  "$ref": "#/components/schemas/UpdateTicket400Response"
                 },
                 "examples": {
                   "Ticket state id is not valid or is not associated with the ticket type.": {
@@ -34162,7 +34543,8 @@
                       ]
                     }
                   }
-                }
+                },
+                "x-schema-inferred-from-examples": true
               }
             }
           },
@@ -37252,7 +37634,13 @@
               }
             }
           }
-        }
+        },
+        "x-badges": [
+          {
+            "name": "Legacy",
+            "color": "#6B7280"
+          }
+        ]
       }
     },
     "/procedures/{conversationId}/collect_agent_input": {
@@ -39961,13 +40349,19 @@
             "type": "string",
             "description": "How the credential is presented to the external API, for example as a header value or an HMAC signature.",
             "nullable": true,
-            "example": "header"
+            "example": "text"
           },
           "request_header_key": {
             "type": "string",
             "description": "The request header the credential is sent in.",
             "nullable": true,
             "example": "Authorization"
+          },
+          "token_prefix": {
+            "type": "string",
+            "description": "The prefix placed before the credential value in the header, for example \u0060Bearer\u0060.",
+            "nullable": true,
+            "example": "Bearer"
           },
           "domain": {
             "type": "string",
@@ -39989,6 +40383,86 @@
           }
         },
         "description": "Metadata for a stored third-party credential that data connectors use to authenticate outbound requests. Only metadata is returned \u2014 the credential value itself, and its refresh and OAuth configuration, are never exposed.\n",
+        "x-tags": [
+          "Auth Tokens"
+        ]
+      },
+      "CreateAuthTokenRequest": {
+        "title": "Create Auth Token Request",
+        "required": [
+          "name",
+          "token_value",
+          "request_header_key"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A name for the credential, so a teammate can identify it later.",
+            "example": "Fulfilment API key"
+          },
+          "token_value": {
+            "type": "string",
+            "description": "The credential value. Stored encrypted and never returned by any endpoint.",
+            "example": "sk_live_9f3c2a7b41e8"
+          },
+          "request_header_key": {
+            "type": "string",
+            "description": "The request header the credential is sent in.",
+            "example": "Authorization"
+          },
+          "token_prefix": {
+            "type": "string",
+            "description": "An optional prefix placed before the credential value in the header, for example \u0060Bearer\u0060.",
+            "example": "Bearer"
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of what the credential is used for.",
+            "example": "Used by the order status connector"
+          },
+          "domain": {
+            "type": "string",
+            "description": "An optional domain to scope the credential to.",
+            "example": "api.fulfilment.example.com"
+          }
+        },
+        "description": "The fields accepted when storing a new third-party credential. The credential is created with a \u0060token_type\u0060 of \u0060text\u0060; no other type can be created over the API.\n",
+        "x-tags": [
+          "Auth Tokens"
+        ]
+      },
+      "UpdateAuthTokenRequest": {
+        "title": "Update Auth Token Request",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A name for the credential, so a teammate can identify it later.",
+            "example": "Fulfilment API key"
+          },
+          "request_header_key": {
+            "type": "string",
+            "description": "The request header the credential is sent in.",
+            "example": "Authorization"
+          },
+          "token_prefix": {
+            "type": "string",
+            "description": "An optional prefix placed before the credential value in the header, for example \u0060Bearer\u0060.",
+            "example": "Bearer"
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description of what the credential is used for.",
+            "example": "Used by the order status connector"
+          },
+          "domain": {
+            "type": "string",
+            "description": "An optional domain to scope the credential to.",
+            "example": "api.fulfilment.example.com"
+          }
+        },
+        "description": "The fields accepted when updating a stored third-party credential. Every field is optional, and one you omit keeps its current value. The credential value cannot be changed here.\n",
         "x-tags": [
           "Auth Tokens"
         ]
@@ -57861,6 +58335,24 @@
           }
         }
       },
+      "SetAwayAdmin400Response": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetAwayAdmin400ResponseErrorsItem"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "The primary error message."
+          }
+        }
+      },
       "SearchActivityLogsRequest": {
         "required": [
           "created_at_after"
@@ -59901,6 +60393,25 @@
           }
         }
       },
+      "CreatePhoneSwitch400Response": {
+        "type": "object",
+        "properties": {
+          "error_key": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "CreatePhoneSwitch422Response": {
+        "type": "object",
+        "properties": {
+          "error_key": {
+            "type": "string"
+          }
+        }
+      },
       "ShowCallTranscript200PlainResponse": {
         "type": "string",
         "description": "Transcript text"
@@ -60242,6 +60753,48 @@
           },
           "priority": {
             "$ref": "#/components/schemas/UpdateTicketRequestPriority"
+          }
+        }
+      },
+      "UpdateTicket404Response": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "request_id": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateTicket404ResponseErrorsItem"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "The primary error message."
+          }
+        }
+      },
+      "UpdateTicket400Response": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "request_id": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateTicket400ResponseErrorsItem"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "The primary error message."
           }
         }
       },
@@ -61105,6 +61658,17 @@
         "type": "object",
         "description": "The value after the change."
       },
+      "SetAwayAdmin400ResponseErrorsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "GetExportReportingDataGetDatasets200ResponseDataItem": {
         "type": "object",
         "properties": {
@@ -61361,6 +61925,28 @@
       "UpdateTicketRequestRequestBodyTicketAttributes": {
         "type": "object",
         "description": "The attributes set on the ticket."
+      },
+      "UpdateTicket404ResponseErrorsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateTicket400ResponseErrorsItem": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
       },
       "ListFinCapabilitiesRequestUser": {
         "required": [
@@ -62035,6 +62621,7 @@
         ],
         "type": "string",
         "additionalProperties": false,
+        "description": "The type of reply. Tracker tickets and back-office tickets that are not shared with the customer do not support \u0060comment\u0060; use \u0060note\u0060 instead.",
         "example": "comment",
         "x-ms-enum": {
           "name": "AdminReplyTicketRequestMessageType",
@@ -68870,7 +69457,7 @@
     },
     {
       "name": "Auth Tokens",
-      "description": "Read the metadata of the third-party credentials stored in your workspace, so you can\nfind the id of the credential a data connector should authenticate with. These endpoints\nare part of the \u0060Preview\u0060 API version and require an OAuth token with the\n\u0060read_auth_tokens\u0060 scope. They are read-only and never return credential values, refresh\nconfiguration, or OAuth configuration.\n"
+      "description": "Read and write the third-party credentials stored in your workspace, so you can find the\nid of the credential a data connector should authenticate with, and store a new one\nwithout leaving your integration. These endpoints are part of the \u0060Preview\u0060 API version.\nReading requires an OAuth token with the \u0060read_auth_tokens\u0060 scope; creating and updating\nrequire the \u0060write_auth_tokens\u0060 scope and an access token associated with a teammate.\nOnly credentials with a \u0060token_type\u0060 of \u0060text\u0060 can be created or updated. No endpoint\never returns a credential value, refresh configuration, or OAuth configuration.\n"
     },
     {
       "name": "Banners",

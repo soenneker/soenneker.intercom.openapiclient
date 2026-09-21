@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? CreatedAt { get; set; }
         /// <summary>If set to true, the note will be cross-posted to all linked conversations. Only applicable to note message types on back-office tickets.</summary>
         public bool? CrossPost { get; set; }
-        /// <summary>The message_type property</summary>
+        /// <summary>The type of reply. Tracker tickets and back-office tickets that are not shared with the customer do not support `comment`; use `note` instead.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType? MessageType { get; set; }
         /// <summary>The quick reply options to display. Must be present for quick_reply message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

@@ -3,10 +3,9 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
+    /// <summary>The type of reply. Tracker tickets and back-office tickets that are not shared with the customer do not support `comment`; use `note` instead.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    #pragma warning disable CS1591
     public enum AdminReplyTicketRequestMessageType
-    #pragma warning restore CS1591
     {
         [EnumMember(Value = "comment")]
         #pragma warning disable CS1591

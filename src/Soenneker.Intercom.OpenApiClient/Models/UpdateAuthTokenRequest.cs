@@ -8,21 +8,13 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Metadata for a stored third-party credential that data connectors use to authenticate outbound requests. Only metadata is returned — the credential value itself, and its refresh and OAuth configuration, are never exposed.
+    /// The fields accepted when updating a stored third-party credential. Every field is optional, and one you omit keeps its current value. The credential value cannot be changed here.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class AuthToken : IAdditionalDataHolder, IParsable
+    public partial class UpdateAuthTokenRequest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The time the credential was created, as an ISO 8601 timestamp.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? CreatedAt { get; set; }
-#nullable restore
-#else
-        public string CreatedAt { get; set; }
-#endif
         /// <summary>An optional description of what the credential is used for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -31,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
-        /// <summary>The domain the credential is scoped to, if one was set.</summary>
+        /// <summary>An optional domain to scope the credential to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Domain { get; set; }
@@ -39,15 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Domain { get; set; }
 #endif
-        /// <summary>The unique identifier for the auth token.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
-        /// <summary>The name given to the credential when it was created.</summary>
+        /// <summary>A name for the credential, so a teammate can identify it later.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
@@ -63,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string RequestHeaderKey { get; set; }
 #endif
-        /// <summary>The prefix placed before the credential value in the header, for example `Bearer`.</summary>
+        /// <summary>An optional prefix placed before the credential value in the header, for example `Bearer`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TokenPrefix { get; set; }
@@ -71,40 +55,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string TokenPrefix { get; set; }
 #endif
-        /// <summary>How the credential is presented to the external API, for example as a header value or an HMAC signature.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? TokenType { get; set; }
-#nullable restore
-#else
-        public string TokenType { get; set; }
-#endif
-        /// <summary>The type of object - `auth_token`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenType? Type { get; set; }
-        /// <summary>The time the credential was last updated, as an ISO 8601 timestamp.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? UpdatedAt { get; set; }
-#nullable restore
-#else
-        public string UpdatedAt { get; set; }
-#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AuthToken"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest"/> and sets the default values.
         /// </summary>
-        public AuthToken()
+        public UpdateAuthTokenRequest()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AuthToken"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.AuthToken CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.AuthToken();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -114,16 +80,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at", n => { CreatedAt = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "domain", n => { Domain = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "request_header_key", n => { RequestHeaderKey = n.GetStringValue(); } },
                 { "token_prefix", n => { TokenPrefix = n.GetStringValue(); } },
-                { "token_type", n => { TokenType = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenType>(); } },
-                { "updated_at", n => { UpdatedAt = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -133,16 +94,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("created_at", CreatedAt);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("domain", Domain);
-            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("request_header_key", RequestHeaderKey);
             writer.WriteStringValue("token_prefix", TokenPrefix);
-            writer.WriteStringValue("token_type", TokenType);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenType>("type", Type);
-            writer.WriteStringValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

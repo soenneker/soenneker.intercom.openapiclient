@@ -59,6 +59,37 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthToken.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
+        /// Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. Only credentials with a `token_type` of `text` can be updated; any other type responds with `400`. A credential the list endpoint does not return is also not updatable, and responds with `404`.
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AuthToken"/></returns>
+        /// <param name="body">The fields accepted when updating a stored third-party credential. Every field is optional, and one you omit keeps its current value. The credential value cannot be changed here.</param>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken?> PatchAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken> PatchAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthToken.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// Returns the metadata for a single stored third-party credential. A credential that the list endpoint does not return is also not retrievable here, and responds with 404.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
@@ -75,6 +106,28 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens.Item
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
+        }
+        /// <summary>
+        /// Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. Only credentials with a `token_type` of `text` can be updated; any other type responds with `400`. A credential the list endpoint does not return is also not updatable, and responds with `404`.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="body">The fields accepted when updating a stored third-party credential. Every field is optional, and one you omit keeps its current value. The credential value cannot be changed here.</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToPatchRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToPatchRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
+            var requestInfo = new RequestInformation(Method.PATCH, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);
             return requestInfo;
         }
         /// <summary>
