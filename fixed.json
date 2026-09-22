@@ -17375,6 +17375,27 @@
                                 "type": "admin",
                                 "admin_id": "991267715"
                               },
+                              "reviewer": {
+                                "type": "admin",
+                                "admin_id": "884120017"
+                              },
+                              "review_status": "submitted",
+                              "notes": {
+                                "type": "note.list",
+                                "notes": [
+                                  {
+                                    "type": "note",
+                                    "id": "9001",
+                                    "created_at": 1734537900,
+                                    "updated_at": 1734537900,
+                                    "author": {
+                                      "type": "admin",
+                                      "admin_id": "884120017"
+                                    },
+                                    "body": "Great empathy in the second reply."
+                                  }
+                                ]
+                              },
                               "evaluators": [
                                 {
                                   "evaluator_id": "54321",
@@ -18282,6 +18303,27 @@
                             "type": "admin",
                             "admin_id": "991267715"
                           },
+                          "reviewer": {
+                            "type": "admin",
+                            "admin_id": "884120017"
+                          },
+                          "review_status": "submitted",
+                          "notes": {
+                            "type": "note.list",
+                            "notes": [
+                              {
+                                "type": "note",
+                                "id": "9001",
+                                "created_at": 1734537900,
+                                "updated_at": 1734537900,
+                                "author": {
+                                  "type": "admin",
+                                  "admin_id": "884120017"
+                                },
+                                "body": "Great empathy in the second reply."
+                              }
+                            ]
+                          },
                           "evaluators": [
                             {
                               "evaluator_id": "54321",
@@ -19156,6 +19198,27 @@
                               "reviewed_teammate": {
                                 "type": "admin",
                                 "admin_id": "991267715"
+                              },
+                              "reviewer": {
+                                "type": "admin",
+                                "admin_id": "884120017"
+                              },
+                              "review_status": "submitted",
+                              "notes": {
+                                "type": "note.list",
+                                "notes": [
+                                  {
+                                    "type": "note",
+                                    "id": "9001",
+                                    "created_at": 1734537900,
+                                    "updated_at": 1734537900,
+                                    "author": {
+                                      "type": "admin",
+                                      "admin_id": "884120017"
+                                    },
+                                    "body": "Great empathy in the second reply."
+                                  }
+                                ]
                               },
                               "evaluators": [
                                 {
@@ -43710,6 +43773,15 @@
           "reviewed_teammate": {
             "$ref": "#/components/schemas/ConversationScorecardReviewedTeammate"
           },
+          "reviewer": {
+            "$ref": "#/components/schemas/ConversationScorecardReviewer"
+          },
+          "review_status": {
+            "$ref": "#/components/schemas/ConversationScorecardReviewStatus"
+          },
+          "notes": {
+            "$ref": "#/components/schemas/ConversationScorecardNotes"
+          },
           "evaluators": {
             "type": "array",
             "items": {
@@ -43719,6 +43791,108 @@
           }
         },
         "description": "A QA scorecard result for this conversation. Returned in the \u0060scorecards\u0060 array on conversation responses when \u0060include_scorecards=true\u0060 is passed.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardReviewer": {
+        "title": "Reviewer",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationScorecardReviewerType"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The id of the admin who reviewed the scorecard. Present only when \u0060type\u0060 is \u0060admin\u0060.",
+            "nullable": true,
+            "example": "884120017"
+          }
+        },
+        "description": "Who reviewed this scorecard. \u0060ai\u0060 when Fin auto-reviewed it; \u0060admin\u0060 when a teammate did. Null when no review exists for this scorecard or no reviewer has been assigned yet.",
+        "nullable": true,
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardNotes": {
+        "title": "Scorecard Notes",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "String representing the object\u0027s type. Always has the value \u0060note.list\u0060.",
+            "example": "note.list"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationScorecardNote"
+            },
+            "description": "The notes on the linked review, oldest first."
+          }
+        },
+        "description": "The notes teammates left on the QA review linked to this scorecard entry. The list is empty when the scorecard has no linked review.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardNote": {
+        "title": "Scorecard Note",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "String representing the object\u0027s type. Always has the value \u0060note\u0060.",
+            "example": "note"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id of the note.",
+            "example": "9001"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the note was created.",
+            "format": "date-time",
+            "example": 1734537900
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the note was last edited. Equal to \u0060created_at\u0060 when the note has never been edited.",
+            "format": "date-time",
+            "example": 1734537900
+          },
+          "author": {
+            "$ref": "#/components/schemas/ConversationScorecardNoteAuthor"
+          },
+          "body": {
+            "type": "string",
+            "description": "The text of the note exactly as the teammate entered it. Plain text; it is not rendered as HTML.",
+            "example": "Great empathy in the second reply."
+          }
+        },
+        "description": "A note a teammate left on the QA review of this scorecard.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardNoteAuthor": {
+        "title": "Note Author",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationScorecardNoteAuthorType"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The id of the admin who wrote the note. Present only when \u0060type\u0060 is \u0060admin\u0060.",
+            "nullable": true,
+            "example": "884120017"
+          }
+        },
+        "description": "Who wrote the note. Null when the teammate who wrote it has since been deleted.",
+        "nullable": true,
         "x-tags": [
           "Conversations"
         ]
@@ -63981,6 +64155,99 @@
             {
               "value": "urgent",
               "name": "Urgent"
+            }
+          ]
+        }
+      },
+      "ConversationScorecardReviewStatus": {
+        "enum": [
+          "unreviewed",
+          "submitted",
+          "passed_review",
+          "needs_fix",
+          "wont_fix",
+          "fix_complete"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The status of the review of this scorecard, as shown in the QA reviews list in Intercom. \u0060unreviewed\u0060 while the review is waiting for a reviewer\u0027s verdict; \u0060submitted\u0060 once the review has been submitted; \u0060passed_review\u0060, \u0060needs_fix\u0060, \u0060wont_fix\u0060 or \u0060fix_complete\u0060 when a teammate set a specific outcome. Null when no review exists for this scorecard.",
+        "nullable": true,
+        "example": "submitted",
+        "x-ms-enum": {
+          "name": "ConversationScorecardReviewStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "unreviewed",
+              "name": "Unreviewed"
+            },
+            {
+              "value": "submitted",
+              "name": "Submitted"
+            },
+            {
+              "value": "passed_review",
+              "name": "PassedReview"
+            },
+            {
+              "value": "needs_fix",
+              "name": "NeedsFix"
+            },
+            {
+              "value": "wont_fix",
+              "name": "WontFix"
+            },
+            {
+              "value": "fix_complete",
+              "name": "FixComplete"
+            }
+          ]
+        }
+      },
+      "ConversationScorecardReviewerType": {
+        "enum": [
+          "ai",
+          "admin"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The kind of reviewer. \u0060ai\u0060 if Fin auto-reviewed the scorecard; \u0060admin\u0060 if a teammate reviewed it.",
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "ConversationScorecardReviewerType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ai",
+              "name": "Ai"
+            },
+            {
+              "value": "admin",
+              "name": "Admin"
+            }
+          ]
+        }
+      },
+      "ConversationScorecardNoteAuthorType": {
+        "enum": [
+          "ai",
+          "admin"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The kind of author. \u0060admin\u0060 when a teammate wrote the note; \u0060ai\u0060 when Fin did.",
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "ConversationScorecardNoteAuthorType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ai",
+              "name": "Ai"
+            },
+            {
+              "value": "admin",
+              "name": "Admin"
             }
           ]
         }

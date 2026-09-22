@@ -35,6 +35,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>The notes teammates left on the QA review linked to this scorecard entry. The list is empty when the scorecard has no linked review.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNotes? Notes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNotes Notes { get; set; }
+#endif
         /// <summary>Whether the conversation passed the scorecard. Null when the scorecard has not been scored.</summary>
         public bool? Passed { get; set; }
         /// <summary>The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.</summary>
@@ -45,6 +53,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate ReviewedTeammate { get; set; }
 #endif
+        /// <summary>Who reviewed this scorecard. `ai` when Fin auto-reviewed it; `admin` when a teammate did. Null when no review exists for this scorecard or no reviewer has been assigned yet.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer? Reviewer { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer Reviewer { get; set; }
+#endif
+        /// <summary>The status of the review of this scorecard, as shown in the QA reviews list in Intercom. `unreviewed` while the review is waiting for a reviewer&apos;s verdict; `submitted` once the review has been submitted; `passed_review`, `needs_fix`, `wont_fix` or `fix_complete` when a teammate set a specific outcome. Null when no review exists for this scorecard.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewStatus? ReviewStatus { get; set; }
         /// <summary>The numeric score for the scorecard. Null when the scorecard has not been scored.</summary>
         public double? Score { get; set; }
         /// <summary>The unique identifier of the scorecard definition.</summary>
@@ -100,8 +118,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "evaluated_at", n => { EvaluatedAt = n.GetIntValue(); } },
                 { "evaluators", n => { Evaluators = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNotes>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNotes.CreateFromDiscriminatorValue); } },
                 { "passed", n => { Passed = n.GetBoolValue(); } },
+                { "review_status", n => { ReviewStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewStatus>(); } },
                 { "reviewed_teammate", n => { ReviewedTeammate = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate.CreateFromDiscriminatorValue); } },
+                { "reviewer", n => { Reviewer = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer.CreateFromDiscriminatorValue); } },
                 { "score", n => { Score = n.GetDoubleValue(); } },
                 { "scorecard_id", n => { ScorecardId = n.GetStringValue(); } },
                 { "scorecard_type", n => { ScorecardType = n.GetStringValue(); } },
@@ -119,8 +140,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("evaluated_at", EvaluatedAt);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator>("evaluators", Evaluators);
             writer.WriteStringValue("name", Name);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNotes>("notes", Notes);
             writer.WriteBoolValue("passed", Passed);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate>("reviewed_teammate", ReviewedTeammate);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer>("reviewer", Reviewer);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewStatus>("review_status", ReviewStatus);
             writer.WriteDoubleValue("score", Score);
             writer.WriteStringValue("scorecard_id", ScorecardId);
             writer.WriteStringValue("scorecard_type", ScorecardType);
