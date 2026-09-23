@@ -41,14 +41,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>String representing the object&apos;s type. Always has the value `note`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
-#endif
         /// <summary>The time the note was last edited. Equal to `created_at` when the note has never been edited.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -80,7 +72,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -95,7 +86,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("body", Body);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
-            writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

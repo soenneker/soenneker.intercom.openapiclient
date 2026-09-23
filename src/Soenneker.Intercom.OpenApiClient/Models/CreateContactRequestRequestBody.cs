@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Email { get; set; }
 #endif
-        /// <summary>Whether the contact&apos;s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400.</summary>
+        /// <summary>Whether the contact&apos;s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400. Verifying a lead&apos;s email also makes that lead reusable whenever Intercom matches an email address to a contact. When inbound email arrives from an address no user has, or an outbound conversation or ticket is created for one, Intercom reuses a lead with that address whose email is verified, instead of creating a new lead. Leads with an unverified email are not matched this way.</summary>
         public bool? EmailVerified { get; set; }
         /// <summary>A unique identifier for the contact which is given to Intercom</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

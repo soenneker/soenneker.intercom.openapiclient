@@ -41,6 +41,7 @@ using Soenneker.Intercom.OpenApiClient.Notes;
 using Soenneker.Intercom.OpenApiClient.Office_hours_schedules;
 using Soenneker.Intercom.OpenApiClient.Phone_call_redirects;
 using Soenneker.Intercom.OpenApiClient.Procedures;
+using Soenneker.Intercom.OpenApiClient.Roles;
 using Soenneker.Intercom.OpenApiClient.Secure_mode_secrets;
 using Soenneker.Intercom.OpenApiClient.Segments;
 using Soenneker.Intercom.OpenApiClient.Subscription_types;
@@ -236,6 +237,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Procedures.ProceduresRequestBuilder Procedures
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Procedures.ProceduresRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The roles property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Roles.RolesRequestBuilder Roles
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Roles.RolesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The secure_mode_secrets property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Secure_mode_secrets.Secure_mode_secretsRequestBuilder Secure_mode_secrets
