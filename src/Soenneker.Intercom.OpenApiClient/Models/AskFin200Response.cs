@@ -32,6 +32,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors Errors { get; set; }
 #endif
+        /// <summary>The internal Intercom conversation ID, useful for matching this Agent API session to the conversation in Intercom.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IntercomConversationId { get; set; }
+#nullable restore
+#else
+        public string IntercomConversationId { get; set; }
+#endif
         /// <summary>Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -78,6 +86,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at_ms", n => { CreatedAtMs = n.GetDateTimeOffsetValue(); } },
                 { "errors", n => { Errors = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors.CreateFromDiscriminatorValue); } },
+                { "intercom_conversation_id", n => { IntercomConversationId = n.GetStringValue(); } },
                 { "sse_subscription_url", n => { SseSubscriptionUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AskFin200ResponseStatus>(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
@@ -93,6 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteDateTimeOffsetValue("created_at_ms", CreatedAtMs);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>("errors", Errors);
+            writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
             writer.WriteStringValue("sse_subscription_url", SseSubscriptionUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AskFin200ResponseStatus>("status", Status);
             writer.WriteStringValue("user_id", UserId);

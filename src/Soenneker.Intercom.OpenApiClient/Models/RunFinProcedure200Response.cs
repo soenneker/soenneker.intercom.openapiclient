@@ -32,6 +32,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors Errors { get; set; }
 #endif
+        /// <summary>The internal Intercom conversation ID, useful for matching this Agent API session to the conversation in Intercom.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? IntercomConversationId { get; set; }
+#nullable restore
+#else
+        public string IntercomConversationId { get; set; }
+#endif
         /// <summary>The ID of the procedure that was run.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -86,6 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at_ms", n => { CreatedAtMs = n.GetDateTimeOffsetValue(); } },
                 { "errors", n => { Errors = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors.CreateFromDiscriminatorValue); } },
+                { "intercom_conversation_id", n => { IntercomConversationId = n.GetStringValue(); } },
                 { "procedure_id", n => { ProcedureId = n.GetStringValue(); } },
                 { "sse_subscription_url", n => { SseSubscriptionUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200ResponseStatus>(); } },
@@ -102,6 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteDateTimeOffsetValue("created_at_ms", CreatedAtMs);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>("errors", Errors);
+            writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
             writer.WriteStringValue("procedure_id", ProcedureId);
             writer.WriteStringValue("sse_subscription_url", SseSubscriptionUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200ResponseStatus>("status", Status);
