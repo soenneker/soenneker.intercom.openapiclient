@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Locale { get; set; }
 #endif
-        /// <summary>The unique identifier of the target article or collection. The target must be a member of the help center.</summary>
+        /// <summary>The unique identifier of the target article, collection or help center. The target must be a member of the help center. Required unless `target_type` is `help_center`, where it defaults to the help center in the path and must match it if provided.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TargetId { get; set; }
@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string TargetId { get; set; }
 #endif
-        /// <summary>The type of the redirect target.</summary>
+        /// <summary>The type of the redirect target. `help_center` targets the help center&apos;s home page.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequestTargetType? TargetType { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequest"/> and sets the default values.

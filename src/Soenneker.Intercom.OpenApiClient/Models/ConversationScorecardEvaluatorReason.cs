@@ -8,22 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A single evaluator within a scorecard, including its result for this conversation.
+    /// A single structured reason assigned to an evaluator&apos;s result.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationScorecardEvaluator : IAdditionalDataHolder, IParsable
+    public partial class ConversationScorecardEvaluatorReason : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The unique identifier of the evaluator (criterion) within the scorecard.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? EvaluatorId { get; set; }
-#nullable restore
-#else
-        public string EvaluatorId { get; set; }
-#endif
-        /// <summary>The name of the evaluator (criterion). Null if the evaluator&apos;s name could not be resolved.</summary>
+        /// <summary>The name of the reason. Null if the reason&apos;s name could not be resolved.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
@@ -31,30 +23,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The evaluator&apos;s result for this conversation. Null if the evaluator was not scored.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed? Result { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed Result { get; set; }
-#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason"/> and sets the default values.
         /// </summary>
-        public ConversationScorecardEvaluator()
+        public ConversationScorecardEvaluatorReason()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -64,9 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "evaluator_id", n => { EvaluatorId = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "result", n => { Result = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -76,9 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("evaluator_id", EvaluatorId);
             writer.WriteStringValue("name", Name);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed>("result", Result);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

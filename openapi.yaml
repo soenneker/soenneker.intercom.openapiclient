@@ -3975,7 +3975,7 @@ paths:
                     request_id: 816186b3-3187-4b47-adf8-e201bea32209
                     errors:
                     - code: parameter_invalid
-                      message: target_type must be 'article' or 'collection'
+                      message: target_type must be 'article', 'collection' or 'help_center'
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -4018,6 +4018,13 @@ paths:
                     errors:
                     - code: data_invalid
                       message: from_url must be an absolute URL within this help center's URL space
+                Help center target mismatch:
+                  value:
+                    type: error.list
+                    request_id: 45d96ec2-641f-4354-b24e-83a85d33bd34
+                    errors:
+                    - code: data_invalid
+                      message: target_id must match the help center for a help_center redirect
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
@@ -4047,6 +4054,12 @@ paths:
                   locale: en
                   target_type: article
                   target_id: '11'
+              help_center_redirect_created:
+                summary: redirect to the help center home page
+                value:
+                  from_url: http://help-center.test/lovelyhelpcenter/en
+                  locale: en-us
+                  target_type: help_center
   "/help_center/help_centers/{help_center_id}/redirects/{id}":
     get:
       summary: Retrieve a redirect
@@ -12515,10 +12528,18 @@ paths:
                           body: Great empathy in the second reply.
                         evaluators:
                         - evaluator_id: '54321'
+                          name: Tone of voice
                           result:
                             value: pass
+                            value_label: Pass
                             source: ai
                             reasoning: The agent acknowledged the issue and resolved it within the same response.
+                            reason_ids:
+                            - '101'
+                            - '102'
+                            reasons:
+                            - name: Clear and concise
+                            - name: Empathetic tone
               schema:
                 "$ref": "#/components/schemas/conversation_list"
         '401':
@@ -12707,7 +12728,7 @@ paths:
       - name: include_part_types
         in: query
         required: false
-        description: A comma-separated list of conversation part types to keep; only parts of these types are returned. Values are the names this version returns in a part's `part_type` field, such as `assignment`, `note` or `snoozed`; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care — a part type this version does not recognise is returned as `unknown`, and `unknown` is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as `note_and_reopen` is named `note_and_unsnooze` here. Up to 50 values are accepted, and `include_part_types` cannot be combined with `exclude_part_types`; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.
+        description: A comma-separated list of conversation part types to return, such as `assignment`, `note` or `snoozed`. Cannot be combined with `exclude_part_types`.
         example: comment,note
         schema:
           type: array
@@ -12720,7 +12741,7 @@ paths:
       - name: exclude_part_types
         in: query
         required: false
-        description: A comma-separated list of conversation part types to drop; parts of these types are omitted and all others are returned. Values are the names this version returns in a part's `part_type` field, such as `assignment`, `note` or `snoozed`; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care — a part type this version does not recognise is returned as `unknown`, and `unknown` is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as `note_and_reopen` is named `note_and_unsnooze` here. Up to 50 values are accepted, and `include_part_types` cannot be combined with `exclude_part_types`; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.
+        description: A comma-separated list of conversation part types to leave out, such as `assignment`, `note` or `snoozed`. Cannot be combined with `include_part_types`.
         example: assignment
         schema:
           type: array
@@ -13227,10 +13248,18 @@ paths:
                         body: Great empathy in the second reply.
                       evaluators:
                       - evaluator_id: '54321'
+                        name: Tone of voice
                         result:
                           value: pass
+                          value_label: Pass
                           source: ai
                           reasoning: The agent acknowledged the issue and resolved it within the same response.
+                          reason_ids:
+                          - '101'
+                          - '102'
+                          reasons:
+                          - name: Clear and concise
+                          - name: Empathetic tone
               schema:
                 "$ref": "#/components/schemas/conversation"
         '404':
@@ -13286,7 +13315,7 @@ paths:
                     request_id: 1f2e3d4c-5b6a-4798-8c9d-0e1f2a3b4c5d
                     errors:
                     - code: parameter_invalid
-                      message: 'Unknown conversation part types: coment'
+                      message: 'Unknown conversation part types: foo'
                 Filtering on the unknown part type:
                   value:
                     type: error.list
@@ -13969,10 +13998,18 @@ paths:
                           body: Great empathy in the second reply.
                         evaluators:
                         - evaluator_id: '54321'
+                          name: Tone of voice
                           result:
                             value: pass
+                            value_label: Pass
                             source: ai
                             reasoning: The agent acknowledged the issue and resolved it within the same response.
+                            reason_ids:
+                            - '101'
+                            - '102'
+                            reasons:
+                            - name: Clear and concise
+                            - name: Empathetic tone
               schema:
                 "$ref": "#/components/schemas/conversation_list"
       requestBody:
@@ -30538,8 +30575,9 @@ components:
       x-tags:
       - Help Center
       description: |
-        A redirect maps a source URL (`from_url`) to an article or collection within a
-        help center, so that links to old or external URLs resolve to live content.
+        A redirect maps a source URL (`from_url`) to an article, a collection or the
+        home page of a help center, so that links to old or external URLs resolve to
+        live content.
       properties:
         id:
           type: string
@@ -30569,15 +30607,17 @@ components:
           example: '7'
         target_type:
           type: string
-          description: The type of the redirect target.
+          description: The type of the redirect target. `help_center` targets the
+            help center's home page.
           enum:
           - article
           - collection
+          - help_center
           example: article
         target_id:
           type: string
-          description: The unique identifier of the target article or collection. For
-            article targets this is the Article ID.
+          description: The unique identifier of the target article, collection or help
+            center. For article targets this is the Article ID.
           example: '11'
         created_at:
           type: integer
@@ -30626,21 +30666,24 @@ components:
           example: en
         target_type:
           type: string
-          description: The type of the redirect target.
+          description: The type of the redirect target. `help_center` targets the
+            help center's home page.
           enum:
           - article
           - collection
+          - help_center
           example: article
         target_id:
           type: string
-          description: The unique identifier of the target article or collection. The
-            target must be a member of the help center.
+          description: The unique identifier of the target article, collection or help
+            center. The target must be a member of the help center. Required unless
+            `target_type` is `help_center`, where it defaults to the help center in the
+            path and must match it if provided.
           example: '11'
       required:
       - from_url
       - locale
       - target_type
-      - target_id
     deleted_help_center_redirect_object:
       title: Deleted Help Center Redirect Object
       type: object
@@ -33750,6 +33793,11 @@ components:
           type: string
           description: The unique identifier of the evaluator (criterion) within the scorecard.
           example: '54321'
+        name:
+          type: string
+          nullable: true
+          description: The name of the evaluator (criterion). Null if the evaluator's name could not be resolved.
+          example: Tone of voice
         result:
           allOf:
             - "$ref": "#/components/schemas/conversation_scorecard_evaluator_result"
@@ -33767,6 +33815,10 @@ components:
           nullable: true
           description: The evaluator's selected value (typically a label such as `pass`, `fail`, or a category identifier).
           example: pass
+        value_label:
+          type: string
+          description: The label of the rating option matching `value` (for example `Needs improvement`). Omitted when the label could not be resolved.
+          example: Pass
         source:
           type: string
           nullable: true
@@ -33786,11 +33838,31 @@ components:
           example:
           - '101'
           - '102'
+        reasons:
+          type: array
+          description: The names of the structured reasons in `reason_ids`, one entry per id, in the same order. Omitted when the result has no `reason_ids`.
+          items:
+            "$ref": "#/components/schemas/conversation_scorecard_evaluator_reason"
+          example:
+          - name: Clear and concise
+          - name: Empathetic tone
         other_text:
           type: string
           nullable: true
           description: Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` — typically captured when the reviewer selects an "Other" option or adds a custom note. Null when not provided.
           example: Agent acknowledged the issue but missed the follow-up question about billing.
+    conversation_scorecard_evaluator_reason:
+      title: Evaluator Reason
+      type: object
+      x-tags:
+      - Conversations
+      description: A single structured reason assigned to an evaluator's result.
+      properties:
+        name:
+          type: string
+          nullable: true
+          description: The name of the reason. Null if the reason's name could not be resolved.
+          example: Clear and concise
     conversation_channel:
       title: Conversation Channel
       type: object

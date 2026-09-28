@@ -39,6 +39,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Reasoning { get; set; }
 #endif
+        /// <summary>The names of the structured reasons in `reason_ids`, one entry per id, in the same order. Omitted when the result has no `reason_ids`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason>? Reasons { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason> Reasons { get; set; }
+#endif
         /// <summary>The origin of the result (for example, `ai` or `human`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,6 +62,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Value { get; set; }
+#endif
+        /// <summary>The label of the rating option matching `value` (for example `Needs improvement`). Omitted when the label could not be resolved.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ValueLabel { get; set; }
+#nullable restore
+#else
+        public string ValueLabel { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorResultComposed"/> and sets the default values.
@@ -83,8 +99,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "other_text", n => { OtherText = n.GetStringValue(); } },
                 { "reason_ids", n => { ReasonIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "reasoning", n => { Reasoning = n.GetStringValue(); } },
+                { "reasons", n => { Reasons = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "source", n => { Source = n.GetStringValue(); } },
                 { "value", n => { Value = n.GetStringValue(); } },
+                { "value_label", n => { ValueLabel = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -97,8 +115,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("other_text", OtherText);
             writer.WriteCollectionOfPrimitiveValues<string>("reason_ids", ReasonIds);
             writer.WriteStringValue("reasoning", Reasoning);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason>("reasons", Reasons);
             writer.WriteStringValue("source", Source);
             writer.WriteStringValue("value", Value);
+            writer.WriteStringValue("value_label", ValueLabel);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -5561,6 +5561,14 @@
                     "target_type": "article",
                     "target_id": "11"
                   }
+                },
+                "help_center_redirect_created": {
+                  "summary": "redirect to the help center home page",
+                  "value": {
+                    "from_url": "http://help-center.test/lovelyhelpcenter/en",
+                    "locale": "en-us",
+                    "target_type": "help_center"
+                  }
                 }
               }
             }
@@ -5619,7 +5627,7 @@
                       "errors": [
                         {
                           "code": "parameter_invalid",
-                          "message": "target_type must be \u0027article\u0027 or \u0027collection\u0027"
+                          "message": "target_type must be \u0027article\u0027, \u0027collection\u0027 or \u0027help_center\u0027"
                         }
                       ]
                     }
@@ -5692,6 +5700,18 @@
                         {
                           "code": "data_invalid",
                           "message": "from_url must be an absolute URL within this help center\u0027s URL space"
+                        }
+                      ]
+                    }
+                  },
+                  "Help center target mismatch": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "45d96ec2-641f-4354-b24e-83a85d33bd34",
+                      "errors": [
+                        {
+                          "code": "data_invalid",
+                          "message": "target_id must match the help center for a help_center redirect"
                         }
                       ]
                     }
@@ -17395,10 +17415,24 @@
                               "evaluators": [
                                 {
                                   "evaluator_id": "54321",
+                                  "name": "Tone of voice",
                                   "result": {
                                     "value": "pass",
+                                    "value_label": "Pass",
                                     "source": "ai",
-                                    "reasoning": "The agent acknowledged the issue and resolved it within the same response."
+                                    "reasoning": "The agent acknowledged the issue and resolved it within the same response.",
+                                    "reason_ids": [
+                                      "101",
+                                      "102"
+                                    ],
+                                    "reasons": [
+                                      {
+                                        "name": "Clear and concise"
+                                      },
+                                      {
+                                        "name": "Empathetic tone"
+                                      }
+                                    ]
                                   }
                                 }
                               ]
@@ -17684,7 +17718,7 @@
           {
             "name": "include_part_types",
             "in": "query",
-            "description": "A comma-separated list of conversation part types to keep; only parts of these types are returned. Values are the names this version returns in a part\u0027s \u0060part_type\u0060 field, such as \u0060assignment\u0060, \u0060note\u0060 or \u0060snoozed\u0060; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care \u2014 a part type this version does not recognise is returned as \u0060unknown\u0060, and \u0060unknown\u0060 is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as \u0060note_and_reopen\u0060 is named \u0060note_and_unsnooze\u0060 here. Up to 50 values are accepted, and \u0060include_part_types\u0060 cannot be combined with \u0060exclude_part_types\u0060; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.",
+            "description": "A comma-separated list of conversation part types to return, such as \u0060assignment\u0060, \u0060note\u0060 or \u0060snoozed\u0060. Cannot be combined with \u0060exclude_part_types\u0060.",
             "explode": false,
             "schema": {
               "maxItems": 50,
@@ -17699,7 +17733,7 @@
           {
             "name": "exclude_part_types",
             "in": "query",
-            "description": "A comma-separated list of conversation part types to drop; parts of these types are omitted and all others are returned. Values are the names this version returns in a part\u0027s \u0060part_type\u0060 field, such as \u0060assignment\u0060, \u0060note\u0060 or \u0060snoozed\u0060; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care \u2014 a part type this version does not recognise is returned as \u0060unknown\u0060, and \u0060unknown\u0060 is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as \u0060note_and_reopen\u0060 is named \u0060note_and_unsnooze\u0060 here. Up to 50 values are accepted, and \u0060include_part_types\u0060 cannot be combined with \u0060exclude_part_types\u0060; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.",
+            "description": "A comma-separated list of conversation part types to leave out, such as \u0060assignment\u0060, \u0060note\u0060 or \u0060snoozed\u0060. Cannot be combined with \u0060include_part_types\u0060.",
             "explode": false,
             "schema": {
               "maxItems": 50,
@@ -18319,10 +18353,24 @@
                           "evaluators": [
                             {
                               "evaluator_id": "54321",
+                              "name": "Tone of voice",
                               "result": {
                                 "value": "pass",
+                                "value_label": "Pass",
                                 "source": "ai",
-                                "reasoning": "The agent acknowledged the issue and resolved it within the same response."
+                                "reasoning": "The agent acknowledged the issue and resolved it within the same response.",
+                                "reason_ids": [
+                                  "101",
+                                  "102"
+                                ],
+                                "reasons": [
+                                  {
+                                    "name": "Clear and concise"
+                                  },
+                                  {
+                                    "name": "Empathetic tone"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -18421,7 +18469,7 @@
                       "errors": [
                         {
                           "code": "parameter_invalid",
-                          "message": "Unknown conversation part types: coment"
+                          "message": "Unknown conversation part types: foo"
                         }
                       ]
                     }
@@ -19211,10 +19259,24 @@
                               "evaluators": [
                                 {
                                   "evaluator_id": "54321",
+                                  "name": "Tone of voice",
                                   "result": {
                                     "value": "pass",
+                                    "value_label": "Pass",
                                     "source": "ai",
-                                    "reasoning": "The agent acknowledged the issue and resolved it within the same response."
+                                    "reasoning": "The agent acknowledged the issue and resolved it within the same response.",
+                                    "reason_ids": [
+                                      "101",
+                                      "102"
+                                    ],
+                                    "reasons": [
+                                      {
+                                        "name": "Clear and concise"
+                                      },
+                                      {
+                                        "name": "Empathetic tone"
+                                      }
+                                    ]
                                   }
                                 }
                               ]
@@ -40939,7 +41001,7 @@
           },
           "target_id": {
             "type": "string",
-            "description": "The unique identifier of the target article or collection. For article targets this is the Article ID.",
+            "description": "The unique identifier of the target article, collection or help center. For article targets this is the Article ID.",
             "example": "11"
           },
           "created_at": {
@@ -40953,7 +41015,7 @@
             "example": 1781619405
           }
         },
-        "description": "A redirect maps a source URL (\u0060from_url\u0060) to an article or collection within a\nhelp center, so that links to old or external URLs resolve to live content.\n",
+        "description": "A redirect maps a source URL (\u0060from_url\u0060) to an article, a collection or the\nhome page of a help center, so that links to old or external URLs resolve to\nlive content.\n",
         "x-tags": [
           "Help Center"
         ]
@@ -40988,8 +41050,7 @@
         "required": [
           "from_url",
           "locale",
-          "target_type",
-          "target_id"
+          "target_type"
         ],
         "type": "object",
         "properties": {
@@ -41008,7 +41069,7 @@
           },
           "target_id": {
             "type": "string",
-            "description": "The unique identifier of the target article or collection. The target must be a member of the help center.",
+            "description": "The unique identifier of the target article, collection or help center. The target must be a member of the help center. Required unless \u0060target_type\u0060 is \u0060help_center\u0060, where it defaults to the help center in the path and must match it if provided.",
             "example": "11"
           }
         },
@@ -44067,6 +44128,12 @@
             "description": "The unique identifier of the evaluator (criterion) within the scorecard.",
             "example": "54321"
           },
+          "name": {
+            "type": "string",
+            "description": "The name of the evaluator (criterion). Null if the evaluator\u0027s name could not be resolved.",
+            "nullable": true,
+            "example": "Tone of voice"
+          },
           "result": {
             "$ref": "#/components/schemas/ConversationScorecardEvaluatorResultComposed"
           }
@@ -44085,6 +44152,11 @@
             "description": "The evaluator\u0027s selected value (typically a label such as \u0060pass\u0060, \u0060fail\u0060, or a category identifier).",
             "nullable": true,
             "example": "pass"
+          },
+          "value_label": {
+            "type": "string",
+            "description": "The label of the rating option matching \u0060value\u0060 (for example \u0060Needs improvement\u0060). Omitted when the label could not be resolved.",
+            "example": "Pass"
           },
           "source": {
             "type": "string",
@@ -44106,6 +44178,13 @@
             "description": "Identifiers for structured reasons assigned to the result, if any.",
             "nullable": true
           },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationScorecardEvaluatorReason"
+            },
+            "description": "The names of the structured reasons in \u0060reason_ids\u0060, one entry per id, in the same order. Omitted when the result has no \u0060reason_ids\u0060."
+          },
           "other_text": {
             "type": "string",
             "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reason_ids\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
@@ -44114,6 +44193,22 @@
           }
         },
         "description": "The outcome of a single evaluator within a scorecard.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardEvaluatorReason": {
+        "title": "Evaluator Reason",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the reason. Null if the reason\u0027s name could not be resolved.",
+            "nullable": true,
+            "example": "Clear and concise"
+          }
+        },
+        "description": "A single structured reason assigned to an evaluator\u0027s result.",
         "x-tags": [
           "Conversations"
         ]
@@ -54372,6 +54467,11 @@
             "nullable": true,
             "example": "pass"
           },
+          "value_label": {
+            "type": "string",
+            "description": "The label of the rating option matching \u0060value\u0060 (for example \u0060Needs improvement\u0060). Omitted when the label could not be resolved.",
+            "example": "Pass"
+          },
           "source": {
             "type": "string",
             "description": "The origin of the result (for example, \u0060ai\u0060 or \u0060human\u0060).",
@@ -54391,6 +54491,13 @@
             },
             "description": "Identifiers for structured reasons assigned to the result, if any.",
             "nullable": true
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationScorecardEvaluatorReason"
+            },
+            "description": "The names of the structured reasons in \u0060reason_ids\u0060, one entry per id, in the same order. Omitted when the result has no \u0060reason_ids\u0060."
           },
           "other_text": {
             "type": "string",
@@ -63618,11 +63725,12 @@
       "HelpCenterRedirectTargetType": {
         "enum": [
           "article",
-          "collection"
+          "collection",
+          "help_center"
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "The type of the redirect target.",
+        "description": "The type of the redirect target. \u0060help_center\u0060 targets the help center\u0027s home page.",
         "example": "article",
         "x-ms-enum": {
           "name": "HelpCenterRedirectTargetType",
@@ -63635,6 +63743,10 @@
             {
               "value": "collection",
               "name": "Collection"
+            },
+            {
+              "value": "help_center",
+              "name": "HelpCenter"
             }
           ]
         }
@@ -63642,11 +63754,12 @@
       "CreateHelpCenterRedirectRequestTargetType": {
         "enum": [
           "article",
-          "collection"
+          "collection",
+          "help_center"
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "The type of the redirect target.",
+        "description": "The type of the redirect target. \u0060help_center\u0060 targets the help center\u0027s home page.",
         "example": "article",
         "x-ms-enum": {
           "name": "CreateHelpCenterRedirectRequestTargetType",
@@ -63659,6 +63772,10 @@
             {
               "value": "collection",
               "name": "Collection"
+            },
+            {
+              "value": "help_center",
+              "name": "HelpCenter"
             }
           ]
         }

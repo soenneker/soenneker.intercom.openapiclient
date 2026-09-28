@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The type of the redirect target.</summary>
+    /// <summary>The type of the redirect target. `help_center` targets the help center&apos;s home page.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum CreateHelpCenterRedirectRequestTargetType
     {
@@ -14,6 +14,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "collection")]
         #pragma warning disable CS1591
         Collection,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "help_center")]
+        #pragma warning disable CS1591
+        HelpCenter,
         #pragma warning restore CS1591
     }
 }

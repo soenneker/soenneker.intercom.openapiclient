@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A redirect maps a source URL (`from_url`) to an article or collection within ahelp center, so that links to old or external URLs resolve to live content.
+    /// A redirect maps a source URL (`from_url`) to an article, a collection or thehome page of a help center, so that links to old or external URLs resolve tolive content.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class HelpCenterRedirect : IAdditionalDataHolder, IParsable
@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Locale { get; set; }
 #endif
-        /// <summary>The unique identifier of the target article or collection. For article targets this is the Article ID.</summary>
+        /// <summary>The unique identifier of the target article, collection or help center. For article targets this is the Article ID.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TargetId { get; set; }
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string TargetId { get; set; }
 #endif
-        /// <summary>The type of the redirect target.</summary>
+        /// <summary>The type of the redirect target. `help_center` targets the help center&apos;s home page.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectTargetType? TargetType { get; set; }
         /// <summary>The type of the object - `help_center_redirect`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterRedirectType? Type { get; set; }

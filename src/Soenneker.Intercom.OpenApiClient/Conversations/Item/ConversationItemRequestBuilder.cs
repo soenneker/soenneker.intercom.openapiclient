@@ -271,7 +271,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             [QueryParameter("display_as")]
             public string DisplayAs { get; set; }
 #endif
-            /// <summary>A comma-separated list of conversation part types to drop; parts of these types are omitted and all others are returned. Values are the names this version returns in a part&apos;s `part_type` field, such as `assignment`, `note` or `snoozed`; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care — a part type this version does not recognise is returned as `unknown`, and `unknown` is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as `note_and_reopen` is named `note_and_unsnooze` here. Up to 50 values are accepted, and `include_part_types` cannot be combined with `exclude_part_types`; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.</summary>
+            /// <summary>A comma-separated list of conversation part types to leave out, such as `assignment`, `note` or `snoozed`. Cannot be combined with `include_part_types`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("exclude_part_types")]
@@ -287,7 +287,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             /// <summary>If set to true, the response will include a `monitor_evaluations` array with any QA monitor results that flagged this conversation.</summary>
             [QueryParameter("include_monitors")]
             public bool? IncludeMonitors { get; set; }
-            /// <summary>A comma-separated list of conversation part types to keep; only parts of these types are returned. Values are the names this version returns in a part&apos;s `part_type` field, such as `assignment`, `note` or `snoozed`; an unrecognised name returns a 422 rather than being silently ignored, so a typo fails loudly instead of filtering nothing. Two names need care — a part type this version does not recognise is returned as `unknown`, and `unknown` is not itself an accepted filter value, so those parts are removed by naming the types you do want rather than by filtering them out directly; and the part type that versions below 2.6 return as `note_and_reopen` is named `note_and_unsnooze` here. Up to 50 values are accepted, and `include_part_types` cannot be combined with `exclude_part_types`; both cases return a 422. Supply one comma-separated value; repeating the parameter is not read as a combined list, and only the last occurrence is used. The filter is applied before the conversation parts limit, so the newest matching parts are returned. Available on the Preview version; a 422 is returned on any other version.</summary>
+            /// <summary>A comma-separated list of conversation part types to return, such as `assignment`, `note` or `snoozed`. Cannot be combined with `exclude_part_types`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("include_part_types")]
