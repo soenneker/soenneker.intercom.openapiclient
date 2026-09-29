@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Procedures.Item.Run
         {
         }
         /// <summary>
-        /// Deterministically run a specific procedure on a new conversation. Calling this endpointguarantees that the named procedure runs — there is no non-deterministic routing.Fin&apos;s progress is delivered asynchronously via events or Server-Sent Events. If theprocedure pauses for user input, the conversation status becomes `awaiting_user_reply` —send the user&apos;s response with [`/fin/reply`](/docs/references/preview/rest-api/api.intercom.io/fin-agent/replytofin).
+        /// Deterministically run a specific procedure on a new conversation. Calling this endpointguarantees that the named procedure runs — there is no non-deterministic routing.Fin&apos;s progress is delivered asynchronously via events or Server-Sent Events. If theprocedure pauses for user input, the conversation status becomes `awaiting_user_reply` —send the user&apos;s response with [`/fin/reply`](/docs/references/preview/rest-api/api.intercom.io/fin-agent/replytofin).{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, please [fill out this form](https://forms.gle/osy4uyiqyomRCsL2A).{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Procedures.Item.Run
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Deterministically run a specific procedure on a new conversation. Calling this endpointguarantees that the named procedure runs — there is no non-deterministic routing.Fin&apos;s progress is delivered asynchronously via events or Server-Sent Events. If theprocedure pauses for user input, the conversation status becomes `awaiting_user_reply` —send the user&apos;s response with [`/fin/reply`](/docs/references/preview/rest-api/api.intercom.io/fin-agent/replytofin).
+        /// Deterministically run a specific procedure on a new conversation. Calling this endpointguarantees that the named procedure runs — there is no non-deterministic routing.Fin&apos;s progress is delivered asynchronously via events or Server-Sent Events. If theprocedure pauses for user input, the conversation status becomes `awaiting_user_reply` —send the user&apos;s response with [`/fin/reply`](/docs/references/preview/rest-api/api.intercom.io/fin-agent/replytofin).{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, please [fill out this form](https://forms.gle/osy4uyiqyomRCsL2A).{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
