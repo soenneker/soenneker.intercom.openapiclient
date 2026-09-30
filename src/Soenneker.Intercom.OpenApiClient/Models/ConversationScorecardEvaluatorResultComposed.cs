@@ -15,21 +15,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Free-text entered by the reviewer to supplement or stand in for the structured `reason_ids` — typically captured when the reviewer selects an &quot;Other&quot; option or adds a custom note. Null when not provided.</summary>
+        /// <summary>Free-text entered by the reviewer to supplement or stand in for the structured `reasons` — typically captured when the reviewer selects an &quot;Other&quot; option or adds a custom note. Null when not provided.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? OtherText { get; set; }
 #nullable restore
 #else
         public string OtherText { get; set; }
-#endif
-        /// <summary>Identifiers for structured reasons assigned to the result, if any.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public List<string>? ReasonIds { get; set; }
-#nullable restore
-#else
-        public List<string> ReasonIds { get; set; }
 #endif
         /// <summary>A free-text explanation of the result.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -39,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Reasoning { get; set; }
 #endif
-        /// <summary>The names of the structured reasons in `reason_ids`, one entry per id, in the same order. Omitted when the result has no `reason_ids`.</summary>
+        /// <summary>The structured reasons chosen for this result. Omitted when none were chosen.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason>? Reasons { get; set; }
@@ -97,7 +89,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "other_text", n => { OtherText = n.GetStringValue(); } },
-                { "reason_ids", n => { ReasonIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "reasoning", n => { Reasoning = n.GetStringValue(); } },
                 { "reasons", n => { Reasons = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "source", n => { Source = n.GetStringValue(); } },
@@ -113,7 +104,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("other_text", OtherText);
-            writer.WriteCollectionOfPrimitiveValues<string>("reason_ids", ReasonIds);
             writer.WriteStringValue("reasoning", Reasoning);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluatorReason>("reasons", Reasons);
             writer.WriteStringValue("source", Source);

@@ -12673,6 +12673,7 @@
                       "external_id": "70",
                       "role": "user",
                       "email": "joebloggs@intercom.io",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": "joe bloggs",
@@ -12771,6 +12772,7 @@
                       "external_id": "70",
                       "role": "user",
                       "email": "joebloggs@intercom.io",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": "joe bloggs",
@@ -12960,6 +12962,7 @@
                       "external_id": "70",
                       "role": "user",
                       "email": "joe@bloggs.com",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": "Joe Bloggs",
@@ -13245,6 +13248,7 @@
                       "external_id": "70",
                       "role": "user",
                       "email": "joe@bloggs.com",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": "Joe Bloggs",
@@ -13939,6 +13943,7 @@
                       "external_id": null,
                       "role": "user",
                       "email": "joebloggs@intercom.io",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": null,
@@ -14113,6 +14118,7 @@
                       "external_id": "70",
                       "role": "user",
                       "email": "joe@bloggs.com",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": "Joe Bloggs",
@@ -17384,7 +17390,6 @@
                           "scorecards": [
                             {
                               "scorecard_id": "67890",
-                              "scorecard_version_id": "67891",
                               "name": "Standard QA Review",
                               "scorecard_type": "human",
                               "passed": true,
@@ -17421,10 +17426,6 @@
                                     "value_label": "Pass",
                                     "source": "ai",
                                     "reasoning": "The agent acknowledged the issue and resolved it within the same response.",
-                                    "reason_ids": [
-                                      "101",
-                                      "102"
-                                    ],
                                     "reasons": [
                                       {
                                         "name": "Clear and concise"
@@ -18322,7 +18323,6 @@
                       "scorecards": [
                         {
                           "scorecard_id": "67890",
-                          "scorecard_version_id": "67891",
                           "name": "Standard QA Review",
                           "scorecard_type": "human",
                           "passed": true,
@@ -18359,10 +18359,6 @@
                                 "value_label": "Pass",
                                 "source": "ai",
                                 "reasoning": "The agent acknowledged the issue and resolved it within the same response.",
-                                "reason_ids": [
-                                  "101",
-                                  "102"
-                                ],
                                 "reasons": [
                                   {
                                     "name": "Clear and concise"
@@ -19228,7 +19224,6 @@
                           "scorecards": [
                             {
                               "scorecard_id": "67890",
-                              "scorecard_version_id": "67891",
                               "name": "Standard QA Review",
                               "scorecard_type": "human",
                               "passed": true,
@@ -19265,10 +19260,6 @@
                                     "value_label": "Pass",
                                     "source": "ai",
                                     "reasoning": "The agent acknowledged the issue and resolved it within the same response.",
-                                    "reason_ids": [
-                                      "101",
-                                      "102"
-                                    ],
                                     "reasons": [
                                       {
                                         "name": "Clear and concise"
@@ -19299,7 +19290,7 @@
           "Conversations"
         ],
         "summary": "Reply to a conversation",
-        "description": "You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Bot replies to inbound email\u0022 %}\nBy default, bot or Operator replies to an inbound email conversation aren\u0027t sent to your customer. The reply is stored as an unnotifiable bot comment, and no \u0060seen\u0060 receipt is generated until an email is actually delivered.\n\nTo send these replies as outbound emails, reach out to your accounts team to enable the email-reply feature flag for your workspace.\n{% /admonition %}",
+        "description": "You can reply to a conversation with a message from an admin or on behalf of a contact, or with a note for admins.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Bot replies to inbound email\u0022 %}\nBy default, bot or Operator replies to an inbound email conversation aren\u0027t sent to your customer. The reply is stored as an unnotifiable bot comment, and no \u0060seen\u0060 receipt is generated until an email is actually delivered.\n\nTo send these replies as outbound emails, reach out to your accounts team to enable the email-reply feature flag for your workspace.\n{% /admonition %}\n\n{% admonition type=\u0022info\u0022 name=\u0022Managing a conversation\u0022 %}\nTo close, open, snooze or assign a conversation, use [Manage a conversation](/docs/references/preview/rest-api/api.intercom.io/conversations/manageconversation).\n{% /admonition %}",
         "operationId": "ReplyConversation",
         "parameters": [
           {
@@ -19876,7 +19867,7 @@
           "Conversations"
         ],
         "summary": "Manage a conversation",
-        "description": "For managing conversations you can:\n- Close a conversation\n- Snooze a conversation to reopen on a future date\n- Open a conversation which is \u0060snoozed\u0060 or \u0060closed\u0060\n- Assign a conversation to an admin and/or team.\n",
+        "description": "For managing conversations you can:\n- Close a conversation\n- Snooze a conversation to reopen on a future date\n- Open a conversation which is \u0060snoozed\u0060 or \u0060closed\u0060\n- Assign a conversation to an admin and/or team.\n\n{% admonition type=\u0022info\u0022 name=\u0022Sending messages\u0022 %}\nTo send a comment, note or quick reply, use [Reply to a conversation](/docs/references/preview/rest-api/api.intercom.io/conversations/replyconversation).\n{% /admonition %}\n",
         "operationId": "ManageConversation",
         "parameters": [
           {
@@ -36015,6 +36006,7 @@
                       "external_id": null,
                       "role": "user",
                       "email": "foo@bar.com",
+                      "email_verified": false,
                       "phone": null,
                       "formatted_phone": null,
                       "name": null,
@@ -41581,6 +41573,11 @@
             "description": "The contact\u0027s email domain.",
             "example": "example.com"
           },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact has proved they own their current email address. \u0060true\u0060 only when this address was marked verified through the Contacts API (\u0060email_verified: true\u0060 on create or update) and has not changed since; it becomes \u0060false\u0060 again if the contact\u0027s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.",
+            "example": true
+          },
           "phone": {
             "type": "string",
             "description": "The contacts phone.",
@@ -43956,11 +43953,6 @@
             "description": "The unique identifier of the scorecard definition.",
             "example": "67890"
           },
-          "scorecard_version_id": {
-            "type": "string",
-            "description": "The unique identifier of the specific scorecard version that produced this result.",
-            "example": "67891"
-          },
           "name": {
             "type": "string",
             "description": "The name of the scorecard.",
@@ -44170,24 +44162,16 @@
             "nullable": true,
             "example": "The agent acknowledged the issue and resolved it within the same response."
           },
-          "reason_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Identifiers for structured reasons assigned to the result, if any.",
-            "nullable": true
-          },
           "reasons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConversationScorecardEvaluatorReason"
             },
-            "description": "The names of the structured reasons in \u0060reason_ids\u0060, one entry per id, in the same order. Omitted when the result has no \u0060reason_ids\u0060."
+            "description": "The structured reasons chosen for this result. Omitted when none were chosen."
           },
           "other_text": {
             "type": "string",
-            "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reason_ids\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
+            "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reasons\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
             "nullable": true,
             "example": "Agent acknowledged the issue but missed the follow-up question about billing."
           }
@@ -45256,7 +45240,7 @@
           },
           "email_verified": {
             "type": "boolean",
-            "description": "Whether the contact\u0027s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400. Verifying a lead\u0027s email also makes that lead reusable whenever Intercom matches an email address to a contact. When inbound email arrives from an address no user has, or an outbound conversation or ticket is created for one, Intercom reuses a lead with that address whose email is verified, instead of creating a new lead. Leads with an unverified email are not matched this way.",
+            "description": "Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send \u0060email_verified\u0060 in the same request as \u0060email\u0060, for example \u0060{\u0022email\u0022: \u0022jane@example.com\u0022, \u0022email_verified\u0022: true}\u0060. A request that includes \u0060email_verified\u0060 without \u0060email\u0060 fails with a \u0060400\u0060.\n\n- \u0060true\u0060: ownership is proved.\n- \u0060false\u0060: ownership is not proved.\n- Omitted: the current verification status stays the same.\n\nNew contacts start unverified. If you change a verified contact\u0027s email, the new address is unverified until you verify it. Only send \u0060true\u0060 when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.",
             "nullable": true,
             "example": true
           },
@@ -53628,7 +53612,7 @@
           },
           "email_verified": {
             "type": "boolean",
-            "description": "Whether the contact\u0027s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400. Verifying a lead\u0027s email also makes that lead reusable whenever Intercom matches an email address to a contact. When inbound email arrives from an address no user has, or an outbound conversation or ticket is created for one, Intercom reuses a lead with that address whose email is verified, instead of creating a new lead. Leads with an unverified email are not matched this way.",
+            "description": "Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send \u0060email_verified\u0060 in the same request as \u0060email\u0060, for example \u0060{\u0022email\u0022: \u0022jane@example.com\u0022, \u0022email_verified\u0022: true}\u0060. A request that includes \u0060email_verified\u0060 without \u0060email\u0060 fails with a \u0060400\u0060.\n\n- \u0060true\u0060: ownership is proved.\n- \u0060false\u0060: ownership is not proved.\n- Omitted: the current verification status stays the same.\n\nNew contacts start unverified. If you change a verified contact\u0027s email, the new address is unverified until you verify it. Only send \u0060true\u0060 when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.",
             "nullable": true,
             "example": true
           },
@@ -54484,24 +54468,16 @@
             "nullable": true,
             "example": "The agent acknowledged the issue and resolved it within the same response."
           },
-          "reason_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Identifiers for structured reasons assigned to the result, if any.",
-            "nullable": true
-          },
           "reasons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConversationScorecardEvaluatorReason"
             },
-            "description": "The names of the structured reasons in \u0060reason_ids\u0060, one entry per id, in the same order. Omitted when the result has no \u0060reason_ids\u0060."
+            "description": "The structured reasons chosen for this result. Omitted when none were chosen."
           },
           "other_text": {
             "type": "string",
-            "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reason_ids\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
+            "description": "Free-text entered by the reviewer to supplement or stand in for the structured \u0060reasons\u0060 \u2014 typically captured when the reviewer selects an \u0022Other\u0022 option or adds a custom note. Null when not provided.",
             "nullable": true,
             "example": "Agent acknowledged the issue but missed the follow-up question about billing."
           }
@@ -59192,7 +59168,7 @@
           },
           "email_verified": {
             "type": "boolean",
-            "description": "Whether the contact\u0027s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400. Verifying a lead\u0027s email also makes that lead reusable whenever Intercom matches an email address to a contact. When inbound email arrives from an address no user has, or an outbound conversation or ticket is created for one, Intercom reuses a lead with that address whose email is verified, instead of creating a new lead. Leads with an unverified email are not matched this way.",
+            "description": "Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send \u0060email_verified\u0060 in the same request as \u0060email\u0060, for example \u0060{\u0022email\u0022: \u0022jane@example.com\u0022, \u0022email_verified\u0022: true}\u0060. A request that includes \u0060email_verified\u0060 without \u0060email\u0060 fails with a \u0060400\u0060.\n\n- \u0060true\u0060: ownership is proved.\n- \u0060false\u0060: ownership is not proved.\n- Omitted: the current verification status stays the same.\n\nNew contacts start unverified. If you change a verified contact\u0027s email, the new address is unverified until you verify it. Only send \u0060true\u0060 when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.",
             "nullable": true,
             "example": true
           },
@@ -59295,6 +59271,11 @@
             "type": "string",
             "description": "The contact\u0027s email domain.",
             "example": "example.com"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact has proved they own their current email address. \u0060true\u0060 only when this address was marked verified through the Contacts API (\u0060email_verified: true\u0060 on create or update) and has not changed since; it becomes \u0060false\u0060 again if the contact\u0027s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.",
+            "example": true
           },
           "phone": {
             "type": "string",
@@ -59569,6 +59550,11 @@
             "description": "The contact\u0027s email domain.",
             "example": "example.com"
           },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact has proved they own their current email address. \u0060true\u0060 only when this address was marked verified through the Contacts API (\u0060email_verified: true\u0060 on create or update) and has not changed since; it becomes \u0060false\u0060 again if the contact\u0027s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.",
+            "example": true
+          },
           "phone": {
             "type": "string",
             "description": "The contacts phone.",
@@ -59842,6 +59828,11 @@
             "description": "The contact\u0027s email domain.",
             "example": "example.com"
           },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact has proved they own their current email address. \u0060true\u0060 only when this address was marked verified through the Contacts API (\u0060email_verified: true\u0060 on create or update) and has not changed since; it becomes \u0060false\u0060 again if the contact\u0027s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.",
+            "example": true
+          },
           "phone": {
             "type": "string",
             "description": "The contacts phone.",
@@ -60095,7 +60086,7 @@
           },
           "email_verified": {
             "type": "boolean",
-            "description": "Whether the contact\u0027s email address has been verified. Set to true to indicate you have verified the contact owns this email address, or false to mark it as unverified. Must be supplied together with an email in the same request; sending it without an email returns a 400. Verifying a lead\u0027s email also makes that lead reusable whenever Intercom matches an email address to a contact. When inbound email arrives from an address no user has, or an outbound conversation or ticket is created for one, Intercom reuses a lead with that address whose email is verified, instead of creating a new lead. Leads with an unverified email are not matched this way.",
+            "description": "Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send \u0060email_verified\u0060 in the same request as \u0060email\u0060, for example \u0060{\u0022email\u0022: \u0022jane@example.com\u0022, \u0022email_verified\u0022: true}\u0060. A request that includes \u0060email_verified\u0060 without \u0060email\u0060 fails with a \u0060400\u0060.\n\n- \u0060true\u0060: ownership is proved.\n- \u0060false\u0060: ownership is not proved.\n- Omitted: the current verification status stays the same.\n\nNew contacts start unverified. If you change a verified contact\u0027s email, the new address is unverified until you verify it. Only send \u0060true\u0060 when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.",
             "nullable": true,
             "example": true
           },
@@ -60198,6 +60189,11 @@
             "type": "string",
             "description": "The contact\u0027s email domain.",
             "example": "example.com"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact has proved they own their current email address. \u0060true\u0060 only when this address was marked verified through the Contacts API (\u0060email_verified: true\u0060 on create or update) and has not changed since; it becomes \u0060false\u0060 again if the contact\u0027s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.",
+            "example": true
           },
           "phone": {
             "type": "string",
@@ -60471,6 +60467,11 @@
             "type": "string",
             "description": "The contact\u0027s email domain.",
             "example": "example.com"
+          },
+          "email_verified": {
+            "type": "boolean",
+            "description": "Whether the contact has proved they own their current email address. \u0060true\u0060 only when this address was marked verified through the Contacts API (\u0060email_verified: true\u0060 on create or update) and has not changed since; it becomes \u0060false\u0060 again if the contact\u0027s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.",
+            "example": true
           },
           "phone": {
             "type": "string",

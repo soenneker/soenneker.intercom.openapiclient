@@ -123,6 +123,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string EmailDomain { get; set; }
 #endif
+        /// <summary>Whether the contact has proved they own their current email address. `true` only when this address was marked verified through the Contacts API (`email_verified: true` on create or update) and has not changed since; it becomes `false` again if the contact&apos;s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.</summary>
+        public bool? EmailVerified { get; set; }
         /// <summary>The unique identifier for the contact which is provided by the Client.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -353,6 +355,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "email_domain", n => { EmailDomain = n.GetStringValue(); } },
+                { "email_verified", n => { EmailVerified = n.GetBoolValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "formatted_phone", n => { FormattedPhone = n.GetStringValue(); } },
                 { "has_hard_bounced", n => { HasHardBounced = n.GetBoolValue(); } },
@@ -409,6 +412,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("email_domain", EmailDomain);
+            writer.WriteBoolValue("email_verified", EmailVerified);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("formatted_phone", FormattedPhone);
             writer.WriteBoolValue("has_hard_bounced", HasHardBounced);

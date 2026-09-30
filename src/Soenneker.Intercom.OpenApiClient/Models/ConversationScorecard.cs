@@ -81,14 +81,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ScorecardType { get; set; }
 #endif
-        /// <summary>The unique identifier of the specific scorecard version that produced this result.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ScorecardVersionId { get; set; }
-#nullable restore
-#else
-        public string ScorecardVersionId { get; set; }
-#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard"/> and sets the default values.
         /// </summary>
@@ -126,7 +118,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "score", n => { Score = n.GetDoubleValue(); } },
                 { "scorecard_id", n => { ScorecardId = n.GetStringValue(); } },
                 { "scorecard_type", n => { ScorecardType = n.GetStringValue(); } },
-                { "scorecard_version_id", n => { ScorecardVersionId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -148,7 +139,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteDoubleValue("score", Score);
             writer.WriteStringValue("scorecard_id", ScorecardId);
             writer.WriteStringValue("scorecard_type", ScorecardType);
-            writer.WriteStringValue("scorecard_version_id", ScorecardVersionId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

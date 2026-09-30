@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts
         {
         }
         /// <summary>
-        /// For managing conversations you can:- Close a conversation- Snooze a conversation to reopen on a future date- Open a conversation which is `snoozed` or `closed`- Assign a conversation to an admin and/or team.
+        /// For managing conversations you can:- Close a conversation- Snooze a conversation to reopen on a future date- Open a conversation which is `snoozed` or `closed`- Assign a conversation to an admin and/or team.{% admonition type=&quot;info&quot; name=&quot;Sending messages&quot; %}To send a comment, note or quick reply, use [Reply to a conversation](/docs/references/preview/rest-api/api.intercom.io/conversations/replyconversation).{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="body">The request body</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// For managing conversations you can:- Close a conversation- Snooze a conversation to reopen on a future date- Open a conversation which is `snoozed` or `closed`- Assign a conversation to an admin and/or team.
+        /// For managing conversations you can:- Close a conversation- Snooze a conversation to reopen on a future date- Open a conversation which is `snoozed` or `closed`- Assign a conversation to an admin and/or team.{% admonition type=&quot;info&quot; name=&quot;Sending messages&quot; %}To send a comment, note or quick reply, use [Reply to a conversation](/docs/references/preview/rest-api/api.intercom.io/conversations/replyconversation).{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
