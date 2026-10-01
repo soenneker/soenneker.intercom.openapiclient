@@ -46,6 +46,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Email { get; set; }
 #endif
+        /// <summary>Whether the contact has proved they own this email address: `true` records that proof, `false` marks the address unverified, and omitting it leaves the current status unchanged. Send it in the same contact object as `email`; a contact object that includes `email_verified` without `email` is rejected. Behaves exactly like `email_verified` on [Update a contact](/docs/references/preview/rest-api/api.intercom.io/contacts/updatecontact), which describes the field in full.</summary>
+        public bool? EmailVerified { get; set; }
         /// <summary>A unique identifier for the contact which you have defined.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -133,6 +135,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
+                { "email_verified", n => { EmailVerified = n.GetBoolValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
@@ -154,6 +157,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem>("companies", Companies);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
+            writer.WriteBoolValue("email_verified", EmailVerified);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("language_override", LanguageOverride);
