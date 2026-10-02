@@ -153,10 +153,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The call transcript if available, otherwise an empty array.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200ResponseDataItemTranscriptItem>? Transcript { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn>? Transcript { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200ResponseDataItemTranscriptItem> Transcript { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn> Transcript { get; set; }
 #endif
         /// <summary>API URL to the call transcript if available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -235,7 +235,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "recording_url", n => { RecordingUrl = n.GetStringValue(); } },
                 { "state", n => { State = n.GetStringValue(); } },
                 { "talk_time", n => { TalkTime = n.GetIntValue(); } },
-                { "transcript", n => { Transcript = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200ResponseDataItemTranscriptItem>(global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200ResponseDataItemTranscriptItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "transcript", n => { Transcript = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn>(global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "transcript_status", n => { TranscriptStatus = n.GetStringValue(); } },
                 { "transcription_url", n => { TranscriptionUrl = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -269,7 +269,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("recording_url", RecordingUrl);
             writer.WriteStringValue("state", State);
             writer.WriteIntValue("talk_time", TalkTime);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200ResponseDataItemTranscriptItem>("transcript", Transcript);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn>("transcript", Transcript);
             writer.WriteStringValue("transcription_url", TranscriptionUrl);
             writer.WriteStringValue("transcript_status", TranscriptStatus);
             writer.WriteStringValue("type", Type);

@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Email { get; set; }
 #endif
-        /// <summary>Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send `email_verified` in the same request as `email`, for example `{&quot;email&quot;: &quot;jane@example.com&quot;, &quot;email_verified&quot;: true}`. A request that includes `email_verified` without `email` fails with a `400`.- `true`: ownership is proved.- `false`: ownership is not proved.- Omitted: the current verification status stays the same.New contacts start unverified. If you change a verified contact&apos;s email, the new address is unverified until you verify it. Only send `true` when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.</summary>
+        /// <summary>Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected.Changing a contact&apos;s email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.</summary>
         public bool? EmailVerified { get; set; }
         /// <summary>A unique identifier for the contact which is given to Intercom</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

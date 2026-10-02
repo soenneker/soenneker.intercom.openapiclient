@@ -6052,9 +6052,7 @@ paths:
       description: |
         Delete a single company.
 
-        This endpoint does not permanently remove the company. It archives the company record and detaches any contacts attached to it; the contacts themselves are not deleted. A `company.deleted` webhook is sent once archival completes.
-
-        The endpoint returns `200` with `"deleted": true` as soon as the request is accepted — archival is processed asynchronously.
+        The company record is kept in your workspace, but all contacts are detached. The contacts themselves are not deleted. Detaching contacts is permanent and can't be reversed. A `company.deleted` webhook is sent when the company is deleted. These changes may take some time to be reflected in your workspace.
 
         {% admonition type="warning" %}
         Third-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.
@@ -22299,33 +22297,42 @@ paths:
       - Calls
       operationId: showCallTranscript
       description: |
-        Returns the transcript for the specified call as a downloadable text file.
+        Returns the transcript for the specified call as a JSON array of turns. Each turn carries a `speaker_name` when the speaker could be resolved. Clients should fall back to `speaker_label` when `speaker_name` is absent.
       responses:
         '200':
           description: successful
-          headers:
-            Content-Disposition:
-              description: File attachment directive and suggested filename for the transcript
-              schema:
-                type: string
-                example: "attachment; filename=transcription_data-2025-07-17.txt"
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                description: Transcript text
+                type: array
+                items:
+                  "$ref": "#/components/schemas/call_transcript_turn"
               examples:
-                transcript_txt:
-                  value: |-
-                    [00:00:03] Teammate 1: "Hello, thanks for calling. How can I help today?"
-                    [00:00:09] User: "I need help recovering access to my account."
-                    [00:00:15] Teammate 1: "I can help with that. For security, I’ll ask a few generic verification questions."
-                    [00:00:22] User: "Okay."
-                    [00:00:28] Teammate 1: "Please confirm general details on the account (no sensitive data over this call)."
-                    [00:00:35] User: "I can provide non-sensitive info."
-                    [00:00:41] Teammate 1: "Thank you. I’ll initiate a standard account recovery process and send the next steps."
-                    [00:00:48] User: "Great, thanks."
-                    [00:00:53] Teammate 1: "You should receive a message shortly with instructions to complete recovery."
+                transcript:
+                  value:
+                  - start_time: "0.0"
+                    end_time: "3.00"
+                    speaker_label: "Teammate 1"
+                    speaker: "Teammate 1"
+                    content: "Hello, thanks for calling. How can I help today?"
+                    speaker_type: admin
+                    speaker_id: "789"
+                    speaker_name: Jane Doe
+                  - start_time: "3.00"
+                    end_time: "9.00"
+                    speaker_label: User
+                    speaker: User
+                    content: I need help recovering access to my account.
+                    speaker_type: user
+                    speaker_id: "6762f0dd1bb69f9f2193bb83"
+                    speaker_name: John Smith
+                  - start_time: "9.00"
+                    end_time: "15.00"
+                    speaker_label: User
+                    speaker: User
+                    content: I can provide non-sensitive info to verify.
+                    speaker_type: user
+                    speaker_id: "6762f0dd1bb69f9f2193bb84"
         '404':
           description: Not Found
           content:
@@ -22390,7 +22397,14 @@ paths:
                       id: "123"
                       conversation_id: "64619700005694"
                       transcript:
-                      - {}
+                      - start_time: "0.0"
+                        end_time: "3.00"
+                        speaker_label: "Teammate 1"
+                        speaker: "Teammate 1"
+                        content: "Hello, thanks for calling. How can I help today?"
+                        speaker_type: admin
+                        speaker_id: "789"
+                        speaker_name: Jane Doe
                       transcript_status: completed
               schema:
                 type: object
@@ -22409,8 +22423,7 @@ paths:
                             type: array
                             description: The call transcript if available, otherwise an empty array.
                             items:
-                              type: object
-                              additionalProperties: true
+                              "$ref": "#/components/schemas/call_transcript_turn"
                           transcript_status:
                             type: string
                             nullable: true
@@ -31007,7 +31020,9 @@ components:
                 type: boolean
                 nullable: true
                 description: |-
-                  Whether the contact has proved they own this email address: `true` records that proof, `false` marks the address unverified, and omitting it leaves the current status unchanged. Send it in the same contact object as `email`; a contact object that includes `email_verified` without `email` is rejected. Behaves exactly like `email_verified` on [Create a contact](/docs/references/preview/rest-api/api.intercom.io/contacts/createcontact), which describes the field in full.
+                  Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected.
+
+                  Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
                 example: true
               name:
                 type: string
@@ -31156,7 +31171,9 @@ components:
                 type: boolean
                 nullable: true
                 description: |-
-                  Whether the contact has proved they own this email address: `true` records that proof, `false` marks the address unverified, and omitting it leaves the current status unchanged. Send it in the same contact object as `email`; a contact object that includes `email_verified` without `email` is rejected. Behaves exactly like `email_verified` on [Update a contact](/docs/references/preview/rest-api/api.intercom.io/contacts/updatecontact), which describes the field in full.
+                  Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected.
+
+                  Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
                 example: true
               name:
                 type: string
@@ -34945,13 +34962,9 @@ components:
           type: boolean
           nullable: true
           description: |-
-            Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send `email_verified` in the same request as `email`, for example `{"email": "jane@example.com", "email_verified": true}`. A request that includes `email_verified` without `email` fails with a `400`.
+            Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected.
 
-            - `true`: ownership is proved.
-            - `false`: ownership is not proved.
-            - Omitted: the current verification status stays the same.
-
-            New contacts start unverified. If you change a verified contact's email, the new address is unverified until you verify it. Only send `true` when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.
+            Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
           example: true
         phone:
           type: string
@@ -35941,6 +35954,93 @@ components:
           example: 0
         pages:
           "$ref": "#/components/schemas/cursor_pages"
+    call_transcript_turn:
+      title: Call Transcript Turn
+      type: object
+      x-tags:
+      - Calls
+      description: A single turn in a call transcript.
+      properties:
+        start_time:
+          oneOf:
+          - type: string
+          - type: number
+          description: The start time of the turn, as a seconds offset from the start of the call. A string on calls transcribed by Amazon Transcribe, a number on Fin Voice calls.
+          example: "0.0"
+        end_time:
+          oneOf:
+          - type: string
+          - type: number
+          description: The end time of the turn, as a seconds offset from the start of the call. A string on calls transcribed by Amazon Transcribe, a number on Fin Voice calls.
+          example: "3.00"
+        speaker_label:
+          type: string
+          description: The diarization label for the speaker.
+          example: "Teammate 1"
+        speaker:
+          type: string
+          description: The diarization label for the speaker. Same value as `speaker_label`.
+          example: "Teammate 1"
+        content:
+          type: string
+          description: The transcribed text spoken during this turn.
+          example: Hello, thanks for calling. How can I help today?
+        speaker_type:
+          type: string
+          description: The type of the speaker - either `admin` for a teammate or `user` for a contact. Absent on Fin Voice call transcripts and on calls transcribed before speaker attribution shipped, where only `speaker_label` identifies the speaker.
+          example: admin
+        speaker_id:
+          type: string
+          description: The id of the teammate or contact who is the speaker. `-1` when the teammate who spoke has since been deleted, in which case `speaker_name` is `Deleted teammate`.
+          example: "789"
+        speaker_name:
+          type: string
+          description: The resolved display name of the speaker. A contact who has been merged into another resolves to the name on the surviving record. Omitted when the speaker cannot be resolved or has no name, for example a contact whose record was scrambled by a GDPR deletion request. Clients should fall back to `speaker_label` when this is absent.
+          example: Jane Doe
+        article_sources:
+          type: array
+          description: Sources Fin cited during this turn. Only present on Fin Voice call transcripts.
+          example:
+          - title: Password Reset Guide
+            entity_type: 120
+            entity_id: "8185560"
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The title of the cited source.
+                example: Password Reset Guide
+              entity_type:
+                type: integer
+                description: The type of the cited entity.
+                example: 120
+              entity_id:
+                type: string
+                description: The id of the cited entity.
+                example: "8185560"
+        triggered_guidance:
+          type: array
+          description: Guidance rules that Fin matched during this turn. Only present on Fin Voice call transcripts.
+          example:
+          - match_type: clarification
+            rule_id: "3"
+            rule_text: If the customer asks about pricing, ask which plan they're interested in before answering
+          items:
+            type: object
+            properties:
+              match_type:
+                type: string
+                description: How the rule was matched.
+                example: clarification
+              rule_id:
+                type: string
+                description: The id of the matched guidance rule.
+                example: "3"
+              rule_text:
+                type: string
+                description: The text of the matched guidance rule.
+                example: If the customer asks about pricing, ask which plan they're interested in before answering
     custom_attributes:
       title: Custom Attributes
       type: object
@@ -39109,6 +39209,37 @@ components:
               format: date-time
               description: The timestamp the message was created at, with millisecond precision.
               example: '2025-01-24T09:01:00.456Z'
+            sources:
+              type: array
+              description: |
+                The content sources Fin used to generate this reply, in the same order as the
+                [n] citation markers in the body. Present only when Fin cited content.
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    description: The title of the source.
+                    example: Managing your account
+                  type:
+                    type: string
+                    enum:
+                    - article
+                    - external
+                    description: Whether the source is an Intercom article or external content.
+                    example: article
+                  url:
+                    type: string
+                    description: The URL of the source.
+                    example: https://www.example.com/help/en/articles/1-managing-your-account
+                required:
+                - title
+                - type
+                - url
+              example:
+              - title: Managing your account
+                type: article
+                url: https://www.example.com/help/en/articles/1-managing-your-account
           required:
           - author
           - body
@@ -43228,13 +43359,9 @@ components:
           type: boolean
           nullable: true
           description: |-
-            Whether the contact has proved they own this email address, for example by completing a confirmation link or one-time code you sent to it. Send `email_verified` in the same request as `email`, for example `{"email": "jane@example.com", "email_verified": true}`. A request that includes `email_verified` without `email` fails with a `400`.
+            Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected.
 
-            - `true`: ownership is proved.
-            - `false`: ownership is not proved.
-            - Omitted: the current verification status stays the same.
-
-            New contacts start unverified. If you change a verified contact's email, the new address is unverified until you verify it. Only send `true` when you have that proof. When an inbound email, outbound conversation, or ticket matches a verified address, Intercom reuses that lead instead of creating a new one.
+            Changing a contact's email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.
           example: true
         phone:
           type: string

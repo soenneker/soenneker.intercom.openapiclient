@@ -46,7 +46,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Email { get; set; }
 #endif
-        /// <summary>Whether the contact has proved they own this email address: `true` records that proof, `false` marks the address unverified, and omitting it leaves the current status unchanged. Send it in the same contact object as `email`; a contact object that includes `email_verified` without `email` is rejected. Behaves exactly like `email_verified` on [Create a contact](/docs/references/preview/rest-api/api.intercom.io/contacts/createcontact), which describes the field in full.</summary>
+        /// <summary>Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with `email`. `email_verified` without `email` is rejected.Changing a contact&apos;s email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.</summary>
         public bool? EmailVerified { get; set; }
         /// <summary>A unique identifier for the contact which you have defined.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
