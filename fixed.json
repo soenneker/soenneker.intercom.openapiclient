@@ -18018,9 +18018,38 @@
                               }
                             },
                             "app_package_code": null
+                          },
+                          {
+                            "type": "conversation_part",
+                            "id": 7,
+                            "part_type": "standalone_platform_handoff",
+                            "body": null,
+                            "created_at": 1740141910,
+                            "updated_at": 1740141910,
+                            "notified_at": 1740141910,
+                            "assigned_to": null,
+                            "author": {
+                              "type": "bot",
+                              "id": "278",
+                              "name": "Fin",
+                              "email": "operator\u002Babcd1234@intercom.io"
+                            },
+                            "attachments": [],
+                            "external_id": null,
+                            "redacted": false,
+                            "email_message_metadata": null,
+                            "state": "closed",
+                            "tags": [],
+                            "event_details": {
+                              "handoff": {
+                                "type": "zendesk_ticket",
+                                "success": true
+                              }
+                            },
+                            "app_package_code": null
                           }
                         ],
-                        "total_count": 6
+                        "total_count": 7
                       }
                     }
                   },
@@ -21055,6 +21084,117 @@
           },
           "401": {
             "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Conversation not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{id}/team_handling_segments": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "List team handling segments",
+        "description": "List the periods teammates actively handled a conversation, attributed to the team assigned to the conversation at the time. A period is split where the team changes. Teammate identity is not included; join with List handling events by time to recover it.\n\nPeriods with no team assigned are returned with \u0060team\u0060 set to \u0060null\u0060. \u0060ended_at\u0060 is \u0060null\u0060 while a period is still open.\n\nRequires the \u0060read_conversations\u0060 OAuth scope, and the caller must be able to access the conversation.\n",
+        "operationId": "ListTeamHandlingSegments",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The identifier for the conversation as given by Intercom.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamHandlingSegmentList"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "team_handling_segments": [
+                        {
+                          "team": {
+                            "type": "team",
+                            "id": "111",
+                            "name": "Billing"
+                          },
+                          "started_at": "2026-01-20T13:10:05Z",
+                          "ended_at": "2026-01-20T13:20:00Z",
+                          "start_reason": null,
+                          "end_reason": "team_change"
+                        },
+                        {
+                          "team": {
+                            "type": "team",
+                            "id": "113",
+                            "name": "Refunds"
+                          },
+                          "started_at": "2026-01-20T13:20:00Z",
+                          "ended_at": "2026-01-20T13:31:44Z",
+                          "start_reason": "team_change",
+                          "end_reason": "assignment"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Intercom-Version is not Preview",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The teammate cannot access the conversation",
             "content": {
               "application/json": {
                 "schema": {
@@ -49340,6 +49480,16 @@
         },
         "description": "Contains the reason Fin could not verify a contact by one-time passcode email, for conversation part type \u003Ccode\u003Eai_agent_event\u003C/code\u003E when the event type is \u003Ccode\u003Eotp_email_verification_failed\u003C/code\u003E. Other \u003Ccode\u003Eai_agent_event\u003C/code\u003E event types are not described here."
       },
+      "StandalonePlatformHandoff": {
+        "title": "Part type - standalone_platform_handoff",
+        "type": "object",
+        "properties": {
+          "handoff": {
+            "$ref": "#/components/schemas/StandalonePlatformHandoffHandoff"
+          }
+        },
+        "description": "Contains the escalation target Fin handed the conversation off to, for conversation part type \u003Ccode\u003Estandalone_platform_handoff\u003C/code\u003E. Only present for handoffs to Zendesk; for any other handoff target \u003Ccode\u003Eevent_details\u003C/code\u003E is an empty object."
+      },
       "EventDetails": {
         "title": "Event details of Workflow \u0026 actions",
         "type": "object",
@@ -49394,6 +49544,9 @@
           },
           {
             "$ref": "#/components/schemas/AiAgentEventOtpEmailVerificationFailed"
+          },
+          {
+            "$ref": "#/components/schemas/StandalonePlatformHandoff"
           }
         ],
         "properties": {
@@ -49441,6 +49594,9 @@
             "type": "string",
             "description": "The id of the call the summary describes",
             "example": "3822007689"
+          },
+          "handoff": {
+            "$ref": "#/components/schemas/StandalonePlatformHandoffHandoff"
           }
         }
       },
@@ -52584,6 +52740,57 @@
         "x-tags": [
           "Teams"
         ]
+      },
+      "TeamHandlingSegment": {
+        "title": "Team Handling Segment",
+        "required": [
+          "team",
+          "started_at",
+          "ended_at"
+        ],
+        "type": "object",
+        "properties": {
+          "team": {
+            "$ref": "#/components/schemas/TeamHandlingSegmentTeam"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-09-28T10:10:00Z"
+          },
+          "ended_at": {
+            "type": "string",
+            "description": "Null while the period is still open",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2026-09-28T10:20:00Z"
+          },
+          "start_reason": {
+            "type": "string",
+            "description": "team_change when the period starts at a team reassignment",
+            "nullable": true,
+            "example": "team_change"
+          },
+          "end_reason": {
+            "type": "string",
+            "description": "Why the period ended (assignment, snooze, close, away, auto_away, session_drop, team_change)",
+            "nullable": true,
+            "example": "assignment"
+          }
+        },
+        "description": "A period one teammate actively handled the conversation, attributed to the team assigned to it at the time. Teammate identity is not included."
+      },
+      "TeamHandlingSegmentList": {
+        "title": "Team Handling Segment List",
+        "type": "object",
+        "properties": {
+          "team_handling_segments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamHandlingSegment"
+            }
+          }
+        }
       },
       "TeamList": {
         "title": "Team List",
@@ -57459,6 +57666,20 @@
           }
         }
       },
+      "StandalonePlatformHandoffHandoff": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/StandalonePlatformHandoffHandoffType"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Whether the handoff completed. A handoff that did not complete falls back to a live agent, which is reported in a separate successful part.",
+            "example": true
+          }
+        },
+        "description": "The escalation Fin attempted. Omitted when the handoff target is not Zendesk."
+      },
       "ErrorErrorsItem": {
         "required": [
           "code"
@@ -58060,6 +58281,29 @@
             "example": "5f7f0d217289f8d2f4262080"
           }
         }
+      },
+      "TeamHandlingSegmentTeam": {
+        "required": [
+          "type",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TeamType"
+          },
+          "id": {
+            "type": "string",
+            "example": "814865"
+          },
+          "name": {
+            "type": "string",
+            "example": "Billing"
+          }
+        },
+        "description": "The team assigned when the period ran, or null if no team was assigned",
+        "nullable": true
       },
       "TicketPartTranslations": {
         "required": [
@@ -68843,6 +69087,30 @@
           ]
         }
       },
+      "StandalonePlatformHandoffHandoffType": {
+        "enum": [
+          "zendesk_ticket",
+          "zendesk_agent"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Where Fin handed the conversation off to. \u003Ccode\u003Ezendesk_ticket\u003C/code\u003E means a Zendesk ticket was created, and \u003Ccode\u003Ezendesk_agent\u003C/code\u003E means the conversation was handed over to a Zendesk agent for live chat.",
+        "example": "zendesk_ticket",
+        "x-ms-enum": {
+          "name": "StandalonePlatformHandoffHandoffType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "zendesk_ticket",
+              "name": "ZendeskTicket"
+            },
+            {
+              "value": "zendesk_agent",
+              "name": "ZendeskAgent"
+            }
+          ]
+        }
+      },
       "FinAuthor": {
         "enum": [
           "fin"
@@ -69031,6 +69299,24 @@
             {
               "value": "descending",
               "name": "Descending"
+            }
+          ]
+        }
+      },
+      "TeamType": {
+        "enum": [
+          "team"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "example": "team",
+        "x-ms-enum": {
+          "name": "TeamType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "team",
+              "name": "Team"
             }
           ]
         }

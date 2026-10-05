@@ -13,6 +13,7 @@ using Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags;
+using Soenneker.Intercom.OpenApiClient.Conversations.Item.Team_handling_segments;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -76,6 +77,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags.TagsRequestBuilder Tags
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags.TagsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The team_handling_segments property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Team_handling_segments.Team_handling_segmentsRequestBuilder Team_handling_segments
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Team_handling_segments.Team_handling_segmentsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Item.ConversationItemRequestBuilder"/> and sets the default values.
