@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
         {
         }
         /// <summary>
-        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, please [fill out this form](https://forms.gle/osy4uyiqyomRCsL2A).{% /admonition %}
+        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, please [fill out this form](https://forms.gle/osy4uyiqyomRCsL2A).{% /admonition %}
+        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Reply
         {
         }
         /// <summary>
-        /// Send a follow-up message in an existing conversation. When Fin needs more information tocomplete an action, it sets the conversation to `awaiting_user_reply` — send the user&apos;sresponse so Fin can continue.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, please [fill out this form](https://forms.gle/osy4uyiqyomRCsL2A).{% /admonition %}
+        /// Send a follow-up message in an existing conversation. When Fin needs more information tocomplete an action, it sets the conversation to `awaiting_user_reply` — send the user&apos;sresponse so Fin can continue.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ReplyToFin200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Reply
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ReplyToFin200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ReplyToFin200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Send a follow-up message in an existing conversation. When Fin needs more information tocomplete an action, it sets the conversation to `awaiting_user_reply` — send the user&apos;sresponse so Fin can continue.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, please [fill out this form](https://forms.gle/osy4uyiqyomRCsL2A).{% /admonition %}
+        /// Send a follow-up message in an existing conversation. When Fin needs more information tocomplete an action, it sets the conversation to `awaiting_user_reply` — send the user&apos;sresponse so Fin can continue.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
