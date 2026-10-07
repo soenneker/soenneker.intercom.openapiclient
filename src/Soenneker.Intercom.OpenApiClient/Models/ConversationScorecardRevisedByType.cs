@@ -3,9 +3,9 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The kind of reviewer. `ai` if the review is assigned to Fin; `admin` if it is assigned to a teammate.</summary>
+    /// <summary>The kind of reviser. `ai` if Fin changed the review; `admin` if a teammate did.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public enum ConversationScorecardReviewerType
+    public enum ConversationScorecardRevisedByType
     {
         [EnumMember(Value = "ai")]
         #pragma warning disable CS1591

@@ -8,10 +8,10 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The code block used to transform the connector&apos;s response when `data_transformation_type` is`code_block_transformation`. Omitted if the connector has no transform code block configured.
+    /// The code block to use when `data_transformation_type` is `code_block_transformation` (on this request, or already configured on the connector). For a live connector already in code mode, changing `code` runs the connector&apos;s code block test — against its mock response, or its last successful test response — before saving; if the test fails, or can&apos;t start, the request fails with a 422 and nothing is saved. Draft connectors are not tested. `null` is the same as omitting this field.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class DataConnectorDetailTransformCodeBlock : IAdditionalDataHolder, IParsable
+    public partial class UpdateDataConnectorRequestTransformCodeBlock : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
@@ -23,30 +23,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Code { get; set; }
 #endif
-        /// <summary>The programming language of the transform code block. Currently always `python`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Language { get; set; }
-#nullable restore
-#else
-        public string Language { get; set; }
-#endif
+        /// <summary>The programming language of the transform code block. Must be `python` if provided.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.PythonLanguage? Language { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock"/> and sets the default values.
         /// </summary>
-        public DataConnectorDetailTransformCodeBlock()
+        public UpdateDataConnectorRequestTransformCodeBlock()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -57,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "code", n => { Code = n.GetStringValue(); } },
-                { "language", n => { Language = n.GetStringValue(); } },
+                { "language", n => { Language = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PythonLanguage>(); } },
             };
         }
         /// <summary>
@@ -68,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("code", Code);
-            writer.WriteStringValue("language", Language);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PythonLanguage>("language", Language);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

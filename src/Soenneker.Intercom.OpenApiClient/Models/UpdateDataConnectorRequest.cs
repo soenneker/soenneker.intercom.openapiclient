@@ -43,6 +43,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem> DataInputs { get; set; }
 #endif
+        /// <summary>The type of data transformation to apply to the response. Setting this to `code_block_transformation` requires `transform_code_block` to be set on this request, or already configured on the connector.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataTransformationType? DataTransformationType { get; set; }
         /// <summary>A description of what this data connector does.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -89,6 +91,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<string> TokenIds { get; set; }
 #endif
+        /// <summary>The code block to use when `data_transformation_type` is `code_block_transformation` (on this request, or already configured on the connector). For a live connector already in code mode, changing `code` runs the connector&apos;s code block test — against its mock response, or its last successful test response — before saving; if the test fails, or can&apos;t start, the request fails with a 422 and nothing is saved. Draft connectors are not tested. `null` is the same as omitting this field.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock? TransformCodeBlock { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock TransformCodeBlock { get; set; }
+#endif
         /// <summary>The URL of the external API endpoint. Supports template variables like `{{order_id}}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -129,6 +139,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "bypass_authentication", n => { BypassAuthentication = n.GetBoolValue(); } },
                 { "customer_authentication", n => { CustomerAuthentication = n.GetBoolValue(); } },
                 { "data_inputs", n => { DataInputs = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data_transformation_type", n => { DataTransformationType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataTransformationType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
                 { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -137,6 +148,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestState>(); } },
                 { "token_ids", n => { TokenIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "transform_code_block", n => { TransformCodeBlock = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock.CreateFromDiscriminatorValue); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "validate_missing_attributes", n => { ValidateMissingAttributes = n.GetBoolValue(); } },
             };
@@ -153,6 +165,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("bypass_authentication", BypassAuthentication);
             writer.WriteBoolValue("customer_authentication", CustomerAuthentication);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataInputsItem>("data_inputs", DataInputs);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestDataTransformationType>("data_transformation_type", DataTransformationType);
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestHeadersItem>("headers", Headers);
@@ -161,6 +174,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestState>("state", State);
             writer.WriteCollectionOfPrimitiveValues<string>("token_ids", TokenIds);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateDataConnectorRequestTransformCodeBlock>("transform_code_block", TransformCodeBlock);
             writer.WriteStringValue("url", Url);
             writer.WriteBoolValue("validate_missing_attributes", ValidateMissingAttributes);
             writer.WriteAdditionalData(AdditionalData);

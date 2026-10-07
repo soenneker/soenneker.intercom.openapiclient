@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.
+    /// Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class ConversationScorecardReviewer : IAdditionalDataHolder, IParsable
+    public partial class ConversationScorecardRevisedBy : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id of the admin the review is assigned to. Present only when `type` is `admin`.</summary>
+        /// <summary>The id of the admin who last changed the review. Present only when `type` is `admin`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? AdminId { get; set; }
@@ -23,24 +23,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AdminId { get; set; }
 #endif
-        /// <summary>The kind of reviewer. `ai` if the review is assigned to Fin; `admin` if it is assigned to a teammate.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewerType? Type { get; set; }
+        /// <summary>The kind of reviser. `ai` if Fin changed the review; `admin` if a teammate did.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedByType? Type { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy"/> and sets the default values.
         /// </summary>
-        public ConversationScorecardReviewer()
+        public ConversationScorecardRevisedBy()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewerType>(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedByType>(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewerType>("type", Type);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedByType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -17405,6 +17405,11 @@
                                 "admin_id": "884120017"
                               },
                               "review_status": "submitted",
+                              "submitted_by": {
+                                "type": "admin",
+                                "admin_id": "884120017"
+                              },
+                              "revised_by": null,
                               "notes": [
                                 {
                                   "id": "9001",
@@ -18367,6 +18372,11 @@
                             "admin_id": "884120017"
                           },
                           "review_status": "submitted",
+                          "submitted_by": {
+                            "type": "admin",
+                            "admin_id": "884120017"
+                          },
+                          "revised_by": null,
                           "notes": [
                             {
                               "id": "9001",
@@ -19268,6 +19278,11 @@
                                 "admin_id": "884120017"
                               },
                               "review_status": "submitted",
+                              "submitted_by": {
+                                "type": "admin",
+                                "admin_id": "884120017"
+                              },
+                              "revised_by": null,
                               "notes": [
                                 {
                                   "id": "9001",
@@ -21111,7 +21126,7 @@
           "Conversations"
         ],
         "summary": "List team handling segments",
-        "description": "List the periods teammates actively handled a conversation, attributed to the team assigned to the conversation at the time. A period is split where the team changes. Teammate identity is not included; join with List handling events by time to recover it.\n\nPeriods with no team assigned are returned with \u0060team\u0060 set to \u0060null\u0060. \u0060ended_at\u0060 is \u0060null\u0060 while a period is still open.\n\nRequires the \u0060read_conversations\u0060 OAuth scope, and the caller must be able to access the conversation.\n",
+        "description": "Shows the time teammates spent actively working on a conversation, and which team the conversation was assigned to while they did. Each period covers a single team assignment, and never continues across a team change. \u0060team\u0060 is \u0060null\u0060 for time when no team was assigned. The response doesn\u0027t say which teammate did the work.\n\nMoving a conversation to another team usually unassigns the teammate as well. Their period then ends with an \u0060end_reason\u0060 of \u0060assignment\u0060, and the next period starts, with a \u0060start_reason\u0060 of \u0060null\u0060, when a teammate picks the conversation up again. You\u0027ll only see \u0060team_change\u0060 when the team changes and the same teammate keeps working without a break, for example when round robin assigns the conversation back to the teammate who already had it.\n\nPeriods with no team assigned are returned with \u0060team\u0060 set to \u0060null\u0060. \u0060ended_at\u0060 is \u0060null\u0060 while a period is still open.\n\nRequires the \u0060read_conversations\u0060 OAuth scope, and the caller must be able to access the conversation.\n",
         "operationId": "ListTeamHandlingSegments",
         "parameters": [
           {
@@ -21153,7 +21168,7 @@
                           "started_at": "2026-01-20T13:10:05Z",
                           "ended_at": "2026-01-20T13:20:00Z",
                           "start_reason": null,
-                          "end_reason": "team_change"
+                          "end_reason": "assignment"
                         },
                         {
                           "team": {
@@ -21161,10 +21176,10 @@
                             "id": "113",
                             "name": "Refunds"
                           },
-                          "started_at": "2026-01-20T13:20:00Z",
+                          "started_at": "2026-01-20T13:24:30Z",
                           "ended_at": "2026-01-20T13:31:44Z",
-                          "start_reason": "team_change",
-                          "end_reason": "assignment"
+                          "start_reason": null,
+                          "end_reason": "close"
                         }
                       ]
                     }
@@ -25488,6 +25503,54 @@
                         }
                       ]
                     }
+                  },
+                  "Code block missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8f901234-5678-5576-0718-293041526374",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "transform_code_block.code is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid code block language": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "90123456-7890-6687-1829-304152637485",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "transform_code_block.language must be \u0027python\u0027"
+                        }
+                      ]
+                    }
+                  },
+                  "Code sent without code mode": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a1234567-8901-7798-2930-415263748596",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "transform_code_block requires data_transformation_type \u0027code_block_transformation\u0027"
+                        }
+                      ]
+                    }
+                  },
+                  "Code mode set without code": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b2345678-9012-8809-3041-526374859607",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "data_transformation_type \u0027code_block_transformation\u0027 requires transform_code_block"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -25581,7 +25644,7 @@
                       "configuration_response_type": "test_response_type",
                       "data_transformation_type": "code_block_transformation",
                       "transform_code_block": {
-                        "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n",
+                        "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n",
                         "language": "python"
                       },
                       "client_function_name": null,
@@ -25887,6 +25950,15 @@
                       }
                     }
                   }
+                },
+                "Set the transform code block": {
+                  "summary": "Switch to code block transformation",
+                  "value": {
+                    "data_transformation_type": "code_block_transformation",
+                    "transform_code_block": {
+                      "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n"
+                    }
+                  }
                 }
               }
             }
@@ -26033,6 +26105,78 @@
                         {
                           "code": "parameter_invalid",
                           "message": "Invalid state. Must be one of: draft, live"
+                        }
+                      ]
+                    }
+                  },
+                  "Code block missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2f3a4b5c-6d7e-8f90-a1b2-c3d4e5f60718",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "transform_code_block.code is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid code block language": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3a4b5c6d-7e8f-9021-b2c3-d4e5f6071829",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "transform_code_block.language must be \u0027python\u0027"
+                        }
+                      ]
+                    }
+                  },
+                  "Code sent without code mode": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4b5c6d7e-8f90-1132-c3d4-e5f607182930",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "transform_code_block requires data_transformation_type \u0027code_block_transformation\u0027"
+                        }
+                      ]
+                    }
+                  },
+                  "Code mode set without code": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5c6d7e8f-9012-2243-d4e5-f60718293041",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "data_transformation_type \u0027code_block_transformation\u0027 requires transform_code_block"
+                        }
+                      ]
+                    }
+                  },
+                  "Code block never tested": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6d7e8f90-1234-3354-e5f6-071829304152",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Test this data connector in Intercom, or set a mock_response, before setting transform_code_block"
+                        }
+                      ]
+                    }
+                  },
+                  "Code block test failed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7e8f9012-3456-4465-f607-182930415263",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Code block test failed: KeyError: \u0027order_status\u0027"
                         }
                       ]
                     }
@@ -44167,6 +44311,12 @@
           "review_status": {
             "$ref": "#/components/schemas/ConversationScorecardReviewStatus"
           },
+          "submitted_by": {
+            "$ref": "#/components/schemas/ConversationScorecardSubmittedBy"
+          },
+          "revised_by": {
+            "$ref": "#/components/schemas/ConversationScorecardRevisedBy"
+          },
           "notes": {
             "type": "array",
             "items": {
@@ -44196,12 +44346,52 @@
           },
           "admin_id": {
             "type": "string",
-            "description": "The id of the admin who reviewed the scorecard. Present only when \u0060type\u0060 is \u0060admin\u0060.",
+            "description": "The id of the admin the review is assigned to. Present only when \u0060type\u0060 is \u0060admin\u0060.",
             "nullable": true,
             "example": "884120017"
           }
         },
-        "description": "Who reviewed this scorecard. \u0060ai\u0060 when Fin auto-reviewed it; \u0060admin\u0060 when a teammate did. Null when no review exists for this scorecard or no reviewer has been assigned yet.",
+        "description": "Who the review of this scorecard is assigned to. \u0060ai\u0060 when it is assigned to Fin; \u0060admin\u0060 when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.",
+        "nullable": true,
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardSubmittedBy": {
+        "title": "Submitted By",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationScorecardSubmittedByType"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The id of the admin who submitted the review. Present only when \u0060type\u0060 is \u0060admin\u0060.",
+            "nullable": true,
+            "example": "884120017"
+          }
+        },
+        "description": "Who last submitted the review of this scorecard, which can differ from the \u0060reviewer\u0060 it is assigned to. \u0060ai\u0060 when Fin submitted it; \u0060admin\u0060 when a teammate did. Null while the review is unreviewed or when no review exists for this scorecard.",
+        "nullable": true,
+        "x-tags": [
+          "Conversations"
+        ]
+      },
+      "ConversationScorecardRevisedBy": {
+        "title": "Revised By",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationScorecardRevisedByType"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The id of the admin who last changed the review. Present only when \u0060type\u0060 is \u0060admin\u0060.",
+            "nullable": true,
+            "example": "884120017"
+          }
+        },
+        "description": "Who last changed the review of this scorecard after it was submitted. \u0060ai\u0060 when Fin made the change; \u0060admin\u0060 when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.",
         "nullable": true,
         "x-tags": [
           "Conversations"
@@ -48069,6 +48259,12 @@
               "type": "string"
             },
             "description": "IDs of authentication tokens to attach to this data connector."
+          },
+          "data_transformation_type": {
+            "$ref": "#/components/schemas/CreateDataConnectorRequestDataTransformationType"
+          },
+          "transform_code_block": {
+            "$ref": "#/components/schemas/CreateDataConnectorRequestTransformCodeBlock"
           }
         },
         "description": "You can create a data connector by providing the required parameters."
@@ -48152,6 +48348,12 @@
               "type": "string"
             },
             "description": "IDs of authentication tokens to attach to this data connector. An empty array removes all tokens."
+          },
+          "data_transformation_type": {
+            "$ref": "#/components/schemas/UpdateDataConnectorRequestDataTransformationType"
+          },
+          "transform_code_block": {
+            "$ref": "#/components/schemas/UpdateDataConnectorRequestTransformCodeBlock"
           }
         },
         "description": "Update an existing data connector. All fields are optional \u2014 only provided fields will be updated. Set \u0060state\u0060 to \u0060live\u0060 or \u0060draft\u0060 to change the connector\u0027s state.\n"
@@ -52767,13 +52969,13 @@
           },
           "start_reason": {
             "type": "string",
-            "description": "team_change when the period starts at a team reassignment",
+            "description": "team_change when the team changed while the teammate kept handling without a break, otherwise null",
             "nullable": true,
             "example": "team_change"
           },
           "end_reason": {
             "type": "string",
-            "description": "Why the period ended (assignment, snooze, close, away, auto_away, session_drop, team_change)",
+            "description": "Why the period ended (switch, assignment, reassign, snooze, close, away, auto_away, session_drop, team_change). Null while the period is still open.",
             "nullable": true,
             "example": "assignment"
           }
@@ -57159,6 +57361,28 @@
           }
         }
       },
+      "CreateDataConnectorRequestTransformCodeBlock": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code of the transform code block. The API response body is available as \u0060inputs[\u0027data\u0027]\u0060, and the code must end with a top-level \u0060return\u0060 of the transformed value.",
+            "example": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n"
+          },
+          "language": {
+            "$ref": "#/components/schemas/PythonLanguage"
+          }
+        },
+        "description": "The code block to use when \u0060data_transformation_type\u0060 is \u0060code_block_transformation\u0060. New connectors are created in \u0060draft\u0060 state, so the code block test described on [Update a data connector](/docs/references/preview/rest-api/api.intercom.io/data-connectors/updatedataconnector) does not run until the connector is published. \u0060null\u0060 is the same as omitting this field.\n",
+        "nullable": true,
+        "example": {
+          "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n",
+          "language": "python"
+        }
+      },
       "UpdateDataConnectorRequestHeadersItem": {
         "type": "object",
         "properties": {
@@ -57211,6 +57435,28 @@
           }
         }
       },
+      "UpdateDataConnectorRequestTransformCodeBlock": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code of the transform code block. The API response body is available as \u0060inputs[\u0027data\u0027]\u0060, and the code must end with a top-level \u0060return\u0060 of the transformed value.",
+            "example": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n"
+          },
+          "language": {
+            "$ref": "#/components/schemas/PythonLanguage"
+          }
+        },
+        "description": "The code block to use when \u0060data_transformation_type\u0060 is \u0060code_block_transformation\u0060 (on this request, or already configured on the connector). For a live connector already in code mode, changing \u0060code\u0060 runs the connector\u0027s code block test \u2014 against its mock response, or its last successful test response \u2014 before saving; if the test fails, or can\u0027t start, the request fails with a 422 and nothing is saved. Draft connectors are not tested. \u0060null\u0060 is the same as omitting this field.\n",
+        "nullable": true,
+        "example": {
+          "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n",
+          "language": "python"
+        }
+      },
       "DataConnectorDetailHeadersItem": {
         "type": "object",
         "properties": {
@@ -57231,8 +57477,8 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "The source code of the transform code block.",
-            "example": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n"
+            "description": "The source code of the transform code block. The API response body is available as \u0060inputs[\u0027data\u0027]\u0060, and the code must end with a top-level \u0060return\u0060 of the transformed value.",
+            "example": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n"
           },
           "language": {
             "type": "string",
@@ -57243,7 +57489,7 @@
         "description": "The code block used to transform the connector\u0027s response when \u0060data_transformation_type\u0060 is\n\u0060code_block_transformation\u0060. Omitted if the connector has no transform code block configured.\n",
         "nullable": true,
         "example": {
-          "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n",
+          "code": "def transform(response):\n    return {\u0022status\u0022: response[\u0022order_status\u0022]}\n\nreturn transform(inputs[\u0027data\u0027])\n",
           "language": "python"
         }
       },
@@ -64977,10 +65223,58 @@
         ],
         "type": "string",
         "additionalProperties": false,
-        "description": "The kind of reviewer. \u0060ai\u0060 if Fin auto-reviewed the scorecard; \u0060admin\u0060 if a teammate reviewed it.",
+        "description": "The kind of reviewer. \u0060ai\u0060 if the review is assigned to Fin; \u0060admin\u0060 if it is assigned to a teammate.",
         "example": "admin",
         "x-ms-enum": {
           "name": "ConversationScorecardReviewerType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ai",
+              "name": "Ai"
+            },
+            {
+              "value": "admin",
+              "name": "Admin"
+            }
+          ]
+        }
+      },
+      "ConversationScorecardSubmittedByType": {
+        "enum": [
+          "ai",
+          "admin"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The kind of submitter. \u0060ai\u0060 if Fin submitted the review; \u0060admin\u0060 if a teammate did.",
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "ConversationScorecardSubmittedByType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "ai",
+              "name": "Ai"
+            },
+            {
+              "value": "admin",
+              "name": "Admin"
+            }
+          ]
+        }
+      },
+      "ConversationScorecardRevisedByType": {
+        "enum": [
+          "ai",
+          "admin"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The kind of reviser. \u0060ai\u0060 if Fin changed the review; \u0060admin\u0060 if a teammate did.",
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "ConversationScorecardRevisedByType",
           "modelAsString": false,
           "values": [
             {
@@ -65684,6 +65978,36 @@
           ]
         }
       },
+      "CreateDataConnectorRequestDataTransformationType": {
+        "enum": [
+          "full_access",
+          "redacted_access",
+          "code_block_transformation"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of data transformation to apply to the response. Setting this to \u0060code_block_transformation\u0060 requires \u0060transform_code_block\u0060 to also be set.",
+        "nullable": true,
+        "example": "code_block_transformation",
+        "x-ms-enum": {
+          "name": "CreateDataConnectorRequestDataTransformationType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "full_access",
+              "name": "FullAccess"
+            },
+            {
+              "value": "redacted_access",
+              "name": "RedactedAccess"
+            },
+            {
+              "value": "code_block_transformation",
+              "name": "CodeBlockTransformation"
+            }
+          ]
+        }
+      },
       "UpdateDataConnectorRequestState": {
         "enum": [
           "draft",
@@ -65769,6 +66093,36 @@
             {
               "value": "visitors",
               "name": "Visitors"
+            }
+          ]
+        }
+      },
+      "UpdateDataConnectorRequestDataTransformationType": {
+        "enum": [
+          "full_access",
+          "redacted_access",
+          "code_block_transformation"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of data transformation to apply to the response. Setting this to \u0060code_block_transformation\u0060 requires \u0060transform_code_block\u0060 to be set on this request, or already configured on the connector.",
+        "nullable": true,
+        "example": "code_block_transformation",
+        "x-ms-enum": {
+          "name": "UpdateDataConnectorRequestDataTransformationType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "full_access",
+              "name": "FullAccess"
+            },
+            {
+              "value": "redacted_access",
+              "name": "RedactedAccess"
+            },
+            {
+              "value": "code_block_transformation",
+              "name": "CodeBlockTransformation"
             }
           ]
         }
@@ -68925,6 +69279,25 @@
             {
               "value": "boolean",
               "name": "Boolean"
+            }
+          ]
+        }
+      },
+      "PythonLanguage": {
+        "enum": [
+          "python"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The programming language of the transform code block. Must be \u0060python\u0060 if provided.",
+        "example": "python",
+        "x-ms-enum": {
+          "name": "PythonLanguage",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "python",
+              "name": "Python"
             }
           ]
         }

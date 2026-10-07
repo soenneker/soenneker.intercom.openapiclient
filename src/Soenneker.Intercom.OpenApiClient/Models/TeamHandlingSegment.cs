@@ -17,7 +17,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Null while the period is still open</summary>
         public DateTimeOffset? EndedAt { get; set; }
-        /// <summary>Why the period ended (assignment, snooze, close, away, auto_away, session_drop, team_change)</summary>
+        /// <summary>Why the period ended (switch, assignment, reassign, snooze, close, away, auto_away, session_drop, team_change). Null while the period is still open.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? EndReason { get; set; }
@@ -27,7 +27,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The started_at property</summary>
         public DateTimeOffset? StartedAt { get; set; }
-        /// <summary>team_change when the period starts at a team reassignment</summary>
+        /// <summary>team_change when the team changed while the teammate kept handling without a break, otherwise null</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? StartReason { get; set; }
