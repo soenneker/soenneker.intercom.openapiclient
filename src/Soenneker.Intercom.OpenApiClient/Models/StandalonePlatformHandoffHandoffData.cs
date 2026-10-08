@@ -8,29 +8,45 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A hash of conversation attributes. Limit to 20 attributes.
+    /// Details of the handoff. Always present. For a successful &lt;code&gt;salesforce_case&lt;/code&gt; handoff it holds the created Case&apos;s &lt;code&gt;case_id&lt;/code&gt; and &lt;code&gt;case_number&lt;/code&gt;; otherwise it is an empty object.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RunFinProcedureRequestConversationMetadataAttributes : IAdditionalDataHolder, IParsable
+    public partial class StandalonePlatformHandoffHandoffData : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The ID of the Salesforce Case created by the handoff.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CaseId { get; set; }
+#nullable restore
+#else
+        public string CaseId { get; set; }
+#endif
+        /// <summary>The number of the Salesforce Case created by the handoff.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CaseNumber { get; set; }
+#nullable restore
+#else
+        public string CaseNumber { get; set; }
+#endif
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData"/> and sets the default values.
         /// </summary>
-        public RunFinProcedureRequestConversationMetadataAttributes()
+        public StandalonePlatformHandoffHandoffData()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +56,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "case_id", n => { CaseId = n.GetStringValue(); } },
+                { "case_number", n => { CaseNumber = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -49,6 +67,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("case_id", CaseId);
+            writer.WriteStringValue("case_number", CaseNumber);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

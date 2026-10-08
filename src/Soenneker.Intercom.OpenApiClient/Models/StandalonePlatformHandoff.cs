@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Contains the escalation target Fin handed the conversation off to, for conversation part type &lt;code&gt;standalone_platform_handoff&lt;/code&gt;. Only present for handoffs to Zendesk; for any other handoff target &lt;code&gt;event_details&lt;/code&gt; is an empty object.
+    /// Contains the handoff Fin attempted to an external platform, for conversation part type &lt;code&gt;standalone_platform_handoff&lt;/code&gt;.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class StandalonePlatformHandoff : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The escalation Fin attempted. Omitted when the handoff target is not Zendesk.</summary>
+        /// <summary>The handoff Fin attempted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff? Handoff { get; set; }

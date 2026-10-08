@@ -7,30 +7,29 @@ using System.IO;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>
-    /// A hash of conversation attributes. Limit to 20 attributes.
-    /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RunFinProcedureRequestConversationMetadataAttributes : IAdditionalDataHolder, IParsable
+    #pragma warning disable CS1591
+    public partial class DynamicContentVariationJsonBlocksItemProperty : IAdditionalDataHolder, IParsable
+    #pragma warning restore CS1591
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty"/> and sets the default values.
         /// </summary>
-        public RunFinProcedureRequestConversationMetadataAttributes()
+        public DynamicContentVariationJsonBlocksItemProperty()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty();
         }
         /// <summary>
         /// The deserialization information for the current model

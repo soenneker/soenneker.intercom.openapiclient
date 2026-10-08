@@ -35,13 +35,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Remark { get; set; }
 #endif
-        /// <summary>reference to another object</summary>
+        /// <summary>The teammate, bot or workflow the rating is attributed to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Reference? Teammate { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate? Teammate { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Reference Teammate { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate Teammate { get; set; }
 #endif
         /// <summary>The time the rating was last updated.</summary>
         public int? UpdatedAt { get; set; }
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "rating", n => { Rating = n.GetIntValue(); } },
                 { "remark", n => { Remark = n.GetStringValue(); } },
-                { "teammate", n => { Teammate = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Reference>(global::Soenneker.Intercom.OpenApiClient.Models.Reference.CreateFromDiscriminatorValue); } },
+                { "teammate", n => { Teammate = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate.CreateFromDiscriminatorValue); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -89,7 +89,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteIntValue("rating", Rating);
             writer.WriteStringValue("remark", Remark);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Reference>("teammate", Teammate);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate>("teammate", Teammate);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

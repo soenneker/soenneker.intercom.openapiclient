@@ -8,29 +8,39 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A hash of conversation attributes. Limit to 20 attributes.
+    /// The teammate, bot or workflow the rating is attributed to.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class RunFinProcedureRequestConversationMetadataAttributes : IAdditionalDataHolder, IParsable
+    public partial class ConversationRatingTeammate : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The unique identifier for the rated actor.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
+        /// <summary>The type of the rated actor. `workflow` when a workflow requested the rating and no teammate took part.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammateType? Type { get; set; }
         /// <summary>
-        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes"/> and sets the default values.
+        /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate"/> and sets the default values.
         /// </summary>
-        public RunFinProcedureRequestConversationMetadataAttributes()
+        public ConversationRatingTeammate()
         {
             AdditionalData = new Dictionary<string, object>();
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes();
+            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammate();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,6 +50,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "id", n => { Id = n.GetStringValue(); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammateType>(); } },
             };
         }
         /// <summary>
@@ -49,6 +61,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("id", Id);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRatingTeammateType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

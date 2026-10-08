@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A hash of conversation attributes. Limit to 10 attributes.</summary>
+        /// <summary>A hash of conversation attributes. Limit to 20 attributes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadataAttributes? Attributes { get; set; }

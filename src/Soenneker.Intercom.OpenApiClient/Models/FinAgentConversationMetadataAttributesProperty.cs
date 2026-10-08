@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A hash of attributes associated with the conversation.These attributes can be used by Fin to provide more contextual responses.Limit to 10 attributes.
+    /// A hash of attributes associated with the conversation.These attributes can be used by Fin to provide more contextual responses.Limit to 20 attributes.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class FinAgentConversationMetadataAttributesProperty : IAdditionalDataHolder, IParsable

@@ -16924,6 +16924,793 @@
         }
       }
     },
+    "/dynamic_contents": {
+      "get": {
+        "tags": [
+          "Dynamic Content"
+        ],
+        "summary": "List all dynamic content",
+        "description": "You can fetch a list of all dynamic content for a workspace, most recently updated first. Requires the \u0060read_dynamic_content\u0060 scope.",
+        "operationId": "ListDynamicContents",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of results to fetch.",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results to return per page. Max value of 50.",
+            "schema": {
+              "type": "integer",
+              "example": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicContentList"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "dynamic_content",
+                          "id": "123",
+                          "name": "Support phone number",
+                          "key": "support-phone-number",
+                          "content_type": "inline",
+                          "default_locale": "en",
+                          "variations": [
+                            {
+                              "type": "dynamic_content_variation",
+                              "id": "456",
+                              "locale": "en",
+                              "brand_id": null,
+                              "text_content": "\u002B1-555-0100",
+                              "json_blocks": null,
+                              "intentionally_empty": false,
+                              "created_at": 1663597223,
+                              "updated_at": 1663597223
+                            }
+                          ],
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        }
+                      ],
+                      "total_count": 1,
+                      "page": 1,
+                      "per_page": 50,
+                      "total_pages": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Dynamic content is not enabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content is not enabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "591a0c2f-78b3-41bb-bfa7-f1fae15107b9",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Dynamic content is not enabled for this workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dynamic Content"
+        ],
+        "summary": "Create dynamic content",
+        "description": "You can create dynamic content. Requires the \u0060read_write_dynamic_content\u0060 scope.",
+        "operationId": "CreateDynamicContent",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DynamicContentCreateRequest"
+              },
+              "examples": {
+                "Create inline dynamic content": {
+                  "value": {
+                    "name": "Support phone number",
+                    "content_type": "inline",
+                    "default_locale": "en",
+                    "variations": [
+                      {
+                        "locale": "en",
+                        "text_content": "\u002B1-555-0100"
+                      },
+                      {
+                        "locale": "fr",
+                        "text_content": "\u002B33 1 23 45 67 89"
+                      }
+                    ]
+                  }
+                },
+                "Create inline dynamic content with a brand override": {
+                  "value": {
+                    "name": "Support phone number",
+                    "content_type": "inline",
+                    "default_locale": "en",
+                    "variations": [
+                      {
+                        "locale": "en",
+                        "text_content": "\u002B1-555-0100"
+                      },
+                      {
+                        "locale": "en",
+                        "brand_id": "42",
+                        "text_content": "\u002B44 20 7946 0000"
+                      }
+                    ]
+                  }
+                },
+                "Create block dynamic content": {
+                  "value": {
+                    "name": "Refund policy",
+                    "content_type": "block",
+                    "default_locale": "en",
+                    "variations": [
+                      {
+                        "locale": "en",
+                        "body": "\u003Cp\u003EYou can request a refund within 30 days of purchase.\u003C/p\u003E"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Dynamic content created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicContent"
+                },
+                "examples": {
+                  "Dynamic content created": {
+                    "value": {
+                      "type": "dynamic_content",
+                      "id": "123",
+                      "name": "Support phone number",
+                      "key": "support-phone-number",
+                      "content_type": "inline",
+                      "default_locale": "en",
+                      "variations": [
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "456",
+                          "locale": "en",
+                          "brand_id": null,
+                          "text_content": "\u002B1-555-0100",
+                          "json_blocks": null,
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        },
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "457",
+                          "locale": "fr",
+                          "brand_id": null,
+                          "text_content": "\u002B33 1 23 45 67 89",
+                          "json_blocks": null,
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        }
+                      ],
+                      "created_at": 1663597223,
+                      "updated_at": 1663597223
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Dynamic content is not enabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content is not enabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "591a0c2f-78b3-41bb-bfa7-f1fae15107b9",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Dynamic content is not enabled for this workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Name already in use": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "A dynamic content named \u0027Support phone number\u0027 already exists"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing default locale variation": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Variations must include a brand-agnostic variation for the default locale \u0027en\u0027"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing text content": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Inline-type variations require text_content"
+                        }
+                      ]
+                    }
+                  },
+                  "Unknown brand": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Variations must reference a brand in the same workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dynamic_contents/{id}": {
+      "get": {
+        "tags": [
+          "Dynamic Content"
+        ],
+        "summary": "Retrieve dynamic content",
+        "description": "You can fetch a single dynamic content by its id. Requires the \u0060read_dynamic_content\u0060 scope.",
+        "operationId": "GetDynamicContent",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the dynamic content.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicContent"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "dynamic_content",
+                      "id": "124",
+                      "name": "Refund policy",
+                      "key": "refund-policy",
+                      "content_type": "block",
+                      "default_locale": "en",
+                      "variations": [
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "458",
+                          "locale": "en",
+                          "brand_id": null,
+                          "text_content": null,
+                          "json_blocks": [
+                            {
+                              "type": "paragraph",
+                              "text": "You can request a refund within 30 days of purchase."
+                            }
+                          ],
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        },
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "459",
+                          "locale": "en",
+                          "brand_id": "42",
+                          "text_content": null,
+                          "json_blocks": [
+                            {
+                              "type": "paragraph",
+                              "text": "You can request a refund within 60 days of purchase."
+                            }
+                          ],
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        }
+                      ],
+                      "created_at": 1663597223,
+                      "updated_at": 1663597223
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Dynamic content is not enabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content is not enabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "591a0c2f-78b3-41bb-bfa7-f1fae15107b9",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Dynamic content is not enabled for this workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dynamic content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Dynamic content not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dynamic Content"
+        ],
+        "summary": "Update dynamic content",
+        "description": "You can update existing dynamic content. Only the fields you provide are changed. Requires the \u0060read_write_dynamic_content\u0060 scope.",
+        "operationId": "UpdateDynamicContent",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the dynamic content.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DynamicContentUpdateRequest"
+              },
+              "examples": {
+                "Update dynamic content": {
+                  "value": {
+                    "variations": [
+                      {
+                        "locale": "en",
+                        "text_content": "\u002B1-555-0199"
+                      },
+                      {
+                        "locale": "fr",
+                        "text_content": "\u002B33 1 23 45 67 89"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Dynamic content updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicContent"
+                },
+                "examples": {
+                  "Dynamic content updated": {
+                    "value": {
+                      "type": "dynamic_content",
+                      "id": "123",
+                      "name": "Support phone number",
+                      "key": "support-phone-number",
+                      "content_type": "inline",
+                      "default_locale": "en",
+                      "variations": [
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "456",
+                          "locale": "en",
+                          "brand_id": null,
+                          "text_content": "\u002B1-555-0199",
+                          "json_blocks": null,
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597300
+                        },
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "457",
+                          "locale": "fr",
+                          "brand_id": null,
+                          "text_content": "\u002B33 1 23 45 67 89",
+                          "json_blocks": null,
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        }
+                      ],
+                      "created_at": 1663597223,
+                      "updated_at": 1663597300
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Dynamic content is not enabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content is not enabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "591a0c2f-78b3-41bb-bfa7-f1fae15107b9",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Dynamic content is not enabled for this workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dynamic content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Dynamic content not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Content type cannot change": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "content_type is immutable after creation"
+                        }
+                      ]
+                    }
+                  },
+                  "Key cannot change": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "key is immutable after creation"
+                        }
+                      ]
+                    }
+                  },
+                  "Empty variations": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "At least one variation is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing default locale variation": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Variations must include a brand-agnostic variation for the default locale \u0027en\u0027"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dynamic Content"
+        ],
+        "summary": "Delete dynamic content",
+        "description": "You can delete a single dynamic content by its id. Dynamic content that is still used in an article can\u0027t be deleted. Requires the \u0060read_write_dynamic_content\u0060 scope.",
+        "operationId": "DeleteDynamicContent",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the dynamic content.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "123"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Dynamic content deleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Dynamic content is not enabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content is not enabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "591a0c2f-78b3-41bb-bfa7-f1fae15107b9",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "Dynamic content is not enabled for this workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Dynamic content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Dynamic content not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Dynamic content is still in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Dynamic content is still in use": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": null,
+                      "errors": [
+                        {
+                          "code": "validation_error",
+                          "message": "Cannot delete \u0027Support phone number\u0027 because it is still used in 2 articles"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/conversations/{conversationId}/tags": {
       "post": {
         "tags": [
@@ -18048,7 +18835,8 @@
                             "event_details": {
                               "handoff": {
                                 "type": "zendesk_ticket",
-                                "success": true
+                                "success": true,
+                                "data": {}
                               }
                             },
                             "app_package_code": null
@@ -37392,25 +38180,6 @@
                     }
                   }
                 },
-                "Reply with settings": {
-                  "value": {
-                    "conversation_id": "ext-123",
-                    "message": {
-                      "author": "user",
-                      "body": "Thanks, here is my order number.",
-                      "timestamp": "2025-01-24T09:01:00.000Z"
-                    },
-                    "user": {
-                      "id": "123456",
-                      "name": "Jane Smith",
-                      "email": "jane.smith@example.com"
-                    },
-                    "settings": {
-                      "follow_up_questions": false,
-                      "email": true
-                    }
-                  }
-                },
                 "Reply with attachments": {
                   "value": {
                     "conversation_id": "ext-123",
@@ -37588,9 +38357,6 @@
                       "attributes": {
                         "order_id": "98765"
                       }
-                    },
-                    "settings": {
-                      "email": true
                     }
                   }
                 }
@@ -38046,25 +38812,6 @@
                       "id": "123456",
                       "name": "John Doe",
                       "email": "john.doe@example.com"
-                    }
-                  }
-                },
-                "Request with settings": {
-                  "value": {
-                    "conversation_id": "ext-123",
-                    "message": {
-                      "author": "user",
-                      "body": "How can I resolve my outstanding invoice?",
-                      "timestamp": "2025-01-24T10:01:20.000Z"
-                    },
-                    "user": {
-                      "id": "123456",
-                      "name": "Jane Smith",
-                      "email": "jane.smith@example.com"
-                    },
-                    "settings": {
-                      "follow_up_questions": false,
-                      "email": true
                     }
                   }
                 },
@@ -43905,6 +44652,260 @@
         },
         "description": "The request payload for updating a content snippet. All fields are optional \u2014 only provided fields will be updated. \u0060json_blocks\u0060 and \u0060body_markdown\u0060 are mutually exclusive."
       },
+      "DynamicContent": {
+        "title": "Dynamic Content",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "String representing the object\u0027s type. Always has the value \u0060dynamic_content\u0060.",
+            "example": "dynamic_content"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the dynamic content.",
+            "example": "123"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the dynamic content.",
+            "example": "Support phone number"
+          },
+          "key": {
+            "type": "string",
+            "description": "The identifier that articles use to reference the dynamic content. Derived from the name when the dynamic content is created, and never changes.",
+            "example": "support-phone-number"
+          },
+          "content_type": {
+            "$ref": "#/components/schemas/DynamicContentContentType"
+          },
+          "default_locale": {
+            "type": "string",
+            "description": "The locale whose variation is used when there\u0027s no variation for the requested locale.",
+            "example": "en"
+          },
+          "variations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DynamicContentVariation"
+            },
+            "description": "The variations of the dynamic content."
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the dynamic content was created as a Unix timestamp.",
+            "format": "date-time",
+            "example": 1663597223
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the dynamic content was last updated as a Unix timestamp.",
+            "format": "date-time",
+            "example": 1663597223
+          }
+        },
+        "description": "Dynamic content is a reusable piece of content that you can insert into Help Center articles. It holds one variation per locale, and optionally per brand.",
+        "x-tags": [
+          "Dynamic Content"
+        ]
+      },
+      "DynamicContentVariation": {
+        "title": "Dynamic Content Variation",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "String representing the object\u0027s type. Always has the value \u0060dynamic_content_variation\u0060.",
+            "example": "dynamic_content_variation"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the variation.",
+            "example": "456"
+          },
+          "locale": {
+            "type": "string",
+            "description": "The locale of the variation.",
+            "example": "en"
+          },
+          "brand_id": {
+            "type": "string",
+            "description": "The unique identifier for the brand the variation applies to. \u0060null\u0060 for a variation that applies to all brands.",
+            "nullable": true,
+            "example": "42"
+          },
+          "text_content": {
+            "type": "string",
+            "description": "The value of an inline variation. \u0060null\u0060 for block dynamic content.",
+            "nullable": true,
+            "example": "\u002B1-555-0100"
+          },
+          "json_blocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DynamicContentVariationJsonBlocksItemProperty"
+            },
+            "description": "The content blocks of a block variation. \u0060null\u0060 for inline dynamic content.",
+            "nullable": true
+          },
+          "intentionally_empty": {
+            "type": "boolean",
+            "description": "Whether the variation is intentionally empty. An intentionally empty variation shows nothing instead of falling back to the default content, and has an empty \u0060text_content\u0060 or \u0060json_blocks\u0060.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the variation was created as a Unix timestamp.",
+            "format": "date-time",
+            "example": 1663597223
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the variation was last updated as a Unix timestamp.",
+            "format": "date-time",
+            "example": 1663597223
+          }
+        },
+        "description": "The value of a dynamic content for one locale, and optionally one brand.",
+        "x-tags": [
+          "Dynamic Content"
+        ]
+      },
+      "DynamicContentList": {
+        "title": "Dynamic Content List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DynamicContent"
+            },
+            "description": "An array of dynamic content objects."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of dynamic content.",
+            "example": 1
+          },
+          "page": {
+            "type": "integer",
+            "description": "The current page number.",
+            "example": 1
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "The number of results per page.",
+            "example": 50
+          },
+          "total_pages": {
+            "type": "integer",
+            "description": "The total number of pages.",
+            "example": 1
+          }
+        },
+        "description": "A paginated list of dynamic content."
+      },
+      "DynamicContentVariationRequest": {
+        "title": "Dynamic Content Variation Request",
+        "required": [
+          "locale"
+        ],
+        "type": "object",
+        "properties": {
+          "locale": {
+            "type": "string",
+            "description": "The locale of the variation. Each locale can appear once per brand.",
+            "example": "en"
+          },
+          "brand_id": {
+            "type": "string",
+            "description": "The unique identifier for the brand the variation applies to. Omit for a variation that applies to all brands.",
+            "nullable": true,
+            "example": "42"
+          },
+          "text_content": {
+            "type": "string",
+            "description": "The value of an inline variation.",
+            "example": "\u002B1-555-0100"
+          },
+          "body": {
+            "type": "string",
+            "description": "The content of a block variation in HTML.",
+            "example": "\u003Cp\u003EYou can request a refund within 30 days of purchase.\u003C/p\u003E"
+          },
+          "intentionally_empty": {
+            "type": "boolean",
+            "description": "Set to \u0060true\u0060 to make the variation show nothing instead of falling back to the default content. Any \u0060text_content\u0060 or \u0060body\u0060 sent with it is ignored.",
+            "default": false,
+            "example": false
+          }
+        },
+        "description": "A variation of a dynamic content. Provide \u0060text_content\u0060 for inline dynamic content, or \u0060body\u0060 for block dynamic content."
+      },
+      "DynamicContentCreateRequest": {
+        "title": "Create Dynamic Content Request",
+        "required": [
+          "name",
+          "content_type",
+          "default_locale",
+          "variations"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The name of the dynamic content. Must be unique in the workspace.",
+            "example": "Support phone number"
+          },
+          "content_type": {
+            "$ref": "#/components/schemas/DynamicContentCreateRequestContentType"
+          },
+          "default_locale": {
+            "type": "string",
+            "description": "The locale whose variation is used when there\u0027s no variation for the requested locale. \u0060variations\u0060 must include a variation for this locale that applies to all brands.",
+            "example": "en"
+          },
+          "variations": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DynamicContentVariationRequest"
+            },
+            "description": "The variations of the dynamic content, one per locale and optionally per brand. Set \u0060brand_id\u0060 on a variation to override the all-brands value for that brand. At least one is required."
+          }
+        },
+        "description": "The request payload for creating dynamic content."
+      },
+      "DynamicContentUpdateRequest": {
+        "title": "Update Dynamic Content Request",
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "The name of the dynamic content. Must be unique in the workspace. Renaming doesn\u0027t change the \u0060key\u0060.",
+            "example": "Support phone number"
+          },
+          "default_locale": {
+            "type": "string",
+            "description": "The locale whose variation is used when there\u0027s no variation for the requested locale. The dynamic content must have a variation for this locale that applies to all brands.",
+            "example": "en"
+          },
+          "variations": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DynamicContentVariationRequest"
+            },
+            "description": "The full set of variations. Existing variations that aren\u0027t included are deleted."
+          }
+        },
+        "description": "The request payload for updating dynamic content. All fields are optional \u2014 only provided fields are updated."
+      },
       "ConversationListItem": {
         "title": "Conversation List Item",
         "type": "object",
@@ -44983,7 +45984,7 @@
             "$ref": "#/components/schemas/ContactReference"
           },
           "teammate": {
-            "$ref": "#/components/schemas/Reference"
+            "$ref": "#/components/schemas/ConversationRatingTeammate"
           }
         },
         "description": "The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.",
@@ -49690,7 +50691,7 @@
             "$ref": "#/components/schemas/StandalonePlatformHandoffHandoff"
           }
         },
-        "description": "Contains the escalation target Fin handed the conversation off to, for conversation part type \u003Ccode\u003Estandalone_platform_handoff\u003C/code\u003E. Only present for handoffs to Zendesk; for any other handoff target \u003Ccode\u003Eevent_details\u003C/code\u003E is an empty object."
+        "description": "Contains the handoff Fin attempted to an external platform, for conversation part type \u003Ccode\u003Estandalone_platform_handoff\u003C/code\u003E."
       },
       "EventDetails": {
         "title": "Event details of Workflow \u0026 actions",
@@ -50180,28 +51181,6 @@
           }
         },
         "description": "Contains error details if any user or conversation attribute updates failed.",
-        "x-tags": [
-          "Fin Agent"
-        ]
-      },
-      "FinAgentSettings": {
-        "title": "Fin Agent Settings",
-        "type": "object",
-        "properties": {
-          "follow_up_questions": {
-            "type": "boolean",
-            "description": "When \u0060true\u0060 (default), Fin may ask clarifying questions and escalate to a human agent\nas needed.\n\nWhen \u0060false\u0060, Fin operates in non-conversational mode: it will not ask follow-up\nquestions and will not escalate to a human agent. Use this when you want Fin to respond\nwith a single, self-contained answer \u2014 for example, in asynchronous channels where\nback-and-forth conversation is not practical.\n",
-            "default": true,
-            "example": true
-          },
-          "email": {
-            "type": "boolean",
-            "description": "When \u0060true\u0060, Fin formats its replies as email-style responses, suitable for sending\ndirectly to users via email. This adjusts tone and structure to match email conventions\nrather than chat.\n\nDefaults to \u0060false\u0060, which produces chat-style responses.\n",
-            "default": false,
-            "example": true
-          }
-        },
-        "description": "Optional settings to control Fin\u0027s behaviour for this request.",
         "x-tags": [
           "Fin Agent"
         ]
@@ -54839,6 +55818,12 @@
             },
             "description": "Array of intent classifications for the call",
             "example": []
+          },
+          "language": {
+            "type": "string",
+            "description": "The language of the call\u0027s conversation, as a locale code. Null until the call is matched to a conversation or while no language has been set.",
+            "nullable": true,
+            "example": "fr"
           }
         },
         "description": "Response containing information about a Fin Voice call"
@@ -57073,6 +58058,9 @@
       "ContentSnippetUpdateRequestJsonBlocksItem": {
         "type": "object"
       },
+      "DynamicContentVariationJsonBlocksItem": {
+        "type": "object"
+      },
       "ConversationPartTranslations": {
         "required": [
           "original"
@@ -57088,6 +58076,22 @@
           "en": "\u003Cp\u003EHello\u003C/p\u003E",
           "fr": "\u003Cp\u003EBonjour\u003C/p\u003E"
         }
+      },
+      "ConversationRatingTeammate": {
+        "title": "Conversation Rating Teammate",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationRatingTeammateType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the rated actor.",
+            "example": "123"
+          }
+        },
+        "description": "The teammate, bot or workflow the rating is attributed to.",
+        "nullable": true
       },
       "ConversationSourceRecipientsItem": {
         "type": "object",
@@ -57916,15 +58920,29 @@
         "type": "object",
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/StandalonePlatformHandoffHandoffType"
+            "type": "string",
+            "description": "The handoff type. One of \u003Ccode\u003Ezendesk_ticket\u003C/code\u003E, \u003Ccode\u003Ezendesk_agent\u003C/code\u003E, \u003Ccode\u003Esalesforce_case\u003C/code\u003E, \u003Ccode\u003Esalesforce_in_app_messaging\u003C/code\u003E, \u003Ccode\u003Esalesforce_team\u003C/code\u003E, \u003Ccode\u003Eexternal_agent\u003C/code\u003E or \u003Ccode\u003Eexternal_ticket\u003C/code\u003E. Older parts can also return \u003Ccode\u003Esalesforce_chat\u003C/code\u003E.",
+            "example": "salesforce_case"
           },
           "success": {
             "type": "boolean",
-            "description": "Whether the handoff completed. A handoff that did not complete falls back to a live agent, which is reported in a separate successful part.",
+            "description": "\u003Ccode\u003Etrue\u003C/code\u003E when the handoff completed and \u003Ccode\u003Efalse\u003C/code\u003E when it failed. \u003Ccode\u003Enull\u003C/code\u003E means no outcome was recorded on this part, for example a Salesforce in-app messaging handoff that was only initiated.",
+            "nullable": true,
             "example": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/StandalonePlatformHandoffHandoffData"
           }
         },
-        "description": "The escalation Fin attempted. Omitted when the handoff target is not Zendesk."
+        "description": "The handoff Fin attempted.",
+        "example": {
+          "type": "salesforce_case",
+          "success": true,
+          "data": {
+            "case_id": "500XX0000001",
+            "case_number": "00001234"
+          }
+        }
       },
       "ErrorErrorsItem": {
         "required": [
@@ -57960,8 +58978,9 @@
         }
       },
       "FinAgentConversationMetadataAttributes": {
+        "maxProperties": 20,
         "type": "object",
-        "description": "A hash of attributes associated with the conversation.\nThese attributes can be used by Fin to provide more contextual responses.\nLimit to 10 attributes.\n",
+        "description": "A hash of attributes associated with the conversation.\nThese attributes can be used by Fin to provide more contextual responses.\nLimit to 20 attributes.\n",
         "example": {
           "priority_level": "high",
           "department": "sales"
@@ -59202,6 +60221,26 @@
           "otp_email_verification_failed": {
             "reason": "no_email"
           }
+        }
+      },
+      "StandalonePlatformHandoffHandoffData": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "description": "The ID of the Salesforce Case created by the handoff.",
+            "example": "500XX0000001"
+          },
+          "case_number": {
+            "type": "string",
+            "description": "The number of the Salesforce Case created by the handoff.",
+            "example": "00001234"
+          }
+        },
+        "description": "Details of the handoff. Always present. For a successful \u003Ccode\u003Esalesforce_case\u003C/code\u003E handoff it holds the created Case\u0027s \u003Ccode\u003Ecase_id\u003C/code\u003E and \u003Ccode\u003Ecase_number\u003C/code\u003E; otherwise it is an empty object.",
+        "example": {
+          "case_id": "500XX0000001",
+          "case_number": "00001234"
         }
       },
       "FinAgentAttributeErrorsUserAttributes": {
@@ -62047,9 +63086,6 @@
               "$ref": "#/components/schemas/FinAgentAttachment"
             },
             "description": "An array of attachments to include with the message. Maximum of 10 attachments."
-          },
-          "settings": {
-            "$ref": "#/components/schemas/FinAgentSettings"
           }
         }
       },
@@ -62073,9 +63109,6 @@
           },
           "conversation_metadata": {
             "$ref": "#/components/schemas/RunFinProcedureRequestConversationMetadata"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/RunFinProcedureRequestSettings"
           }
         }
       },
@@ -62210,9 +63243,6 @@
           },
           "conversation_metadata": {
             "$ref": "#/components/schemas/FinAgentConversationMetadata"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/FinAgentSettings"
           }
         }
       },
@@ -62579,6 +63609,9 @@
       "ContentSnippetUpdateRequestJsonBlocksItemProperty": {
         "type": "object"
       },
+      "DynamicContentVariationJsonBlocksItemProperty": {
+        "type": "object"
+      },
       "ConversationListItemCustomAttributes": {
         "type": "object",
         "additionalProperties": {
@@ -62686,7 +63719,7 @@
       },
       "FinAgentConversationMetadataAttributesProperty": {
         "type": "object",
-        "description": "A hash of attributes associated with the conversation.\nThese attributes can be used by Fin to provide more contextual responses.\nLimit to 10 attributes.\n"
+        "description": "A hash of attributes associated with the conversation.\nThese attributes can be used by Fin to provide more contextual responses.\nLimit to 20 attributes.\n"
       },
       "MergePreviewAttributeChangeFromValue": {
         "type": "object",
@@ -63199,18 +64232,6 @@
         },
         "description": "Metadata about the conversation. Only attributes are accepted (no history)."
       },
-      "RunFinProcedureRequestSettings": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "boolean",
-            "description": "When \u0060true\u0060, Fin formats its replies as email-style responses. Defaults to \u0060false\u0060 (chat-style).\n",
-            "default": false,
-            "example": true
-          }
-        },
-        "description": "Optional settings to control Fin\u0027s behaviour for this procedure run."
-      },
       "EscalateFinConversationRequestUser": {
         "required": [
           "id"
@@ -63273,8 +64294,9 @@
         "description": "A hash of attributes associated with the user.\nAttributes can be used by Fin to target content and responses.\nLimit to 10 attributes.\n"
       },
       "RunFinProcedureRequestConversationMetadataAttributes": {
+        "maxProperties": 20,
         "type": "object",
-        "description": "A hash of conversation attributes. Limit to 10 attributes.\n",
+        "description": "A hash of conversation attributes. Limit to 20 attributes.\n",
         "example": {
           "order_id": "98765"
         }
@@ -65031,6 +66053,54 @@
             {
               "value": "internal_article",
               "name": "InternalArticle"
+            }
+          ]
+        }
+      },
+      "DynamicContentContentType": {
+        "enum": [
+          "inline",
+          "block"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Whether the dynamic content is a short inline value (\u0060inline\u0060) or one or more blocks of content (\u0060block\u0060).",
+        "example": "inline",
+        "x-ms-enum": {
+          "name": "DynamicContentContentType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "inline",
+              "name": "Inline"
+            },
+            {
+              "value": "block",
+              "name": "Block"
+            }
+          ]
+        }
+      },
+      "DynamicContentCreateRequestContentType": {
+        "enum": [
+          "inline",
+          "block"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "Whether the dynamic content is a short inline value (\u0060inline\u0060) or one or more blocks of content (\u0060block\u0060). Can\u0027t be changed later.",
+        "example": "inline",
+        "x-ms-enum": {
+          "name": "DynamicContentCreateRequestContentType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "inline",
+              "name": "Inline"
+            },
+            {
+              "value": "block",
+              "name": "Block"
             }
           ]
         }
@@ -69197,6 +70267,40 @@
           ]
         }
       },
+      "ConversationRatingTeammateType": {
+        "enum": [
+          "admin",
+          "team",
+          "bot",
+          "workflow"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of the rated actor. \u0060workflow\u0060 when a workflow requested the rating and no teammate took part.",
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "ConversationRatingTeammateType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "admin",
+              "name": "Admin"
+            },
+            {
+              "value": "team",
+              "name": "Team"
+            },
+            {
+              "value": "bot",
+              "name": "Bot"
+            },
+            {
+              "value": "workflow",
+              "name": "Workflow"
+            }
+          ]
+        }
+      },
       "CreateConversationRequestFromType": {
         "enum": [
           "lead",
@@ -69456,30 +70560,6 @@
             {
               "value": "failed",
               "name": "Failed"
-            }
-          ]
-        }
-      },
-      "StandalonePlatformHandoffHandoffType": {
-        "enum": [
-          "zendesk_ticket",
-          "zendesk_agent"
-        ],
-        "type": "string",
-        "additionalProperties": false,
-        "description": "Where Fin handed the conversation off to. \u003Ccode\u003Ezendesk_ticket\u003C/code\u003E means a Zendesk ticket was created, and \u003Ccode\u003Ezendesk_agent\u003C/code\u003E means the conversation was handed over to a Zendesk agent for live chat.",
-        "example": "zendesk_ticket",
-        "x-ms-enum": {
-          "name": "StandalonePlatformHandoffHandoffType",
-          "modelAsString": false,
-          "values": [
-            {
-              "value": "zendesk_ticket",
-              "name": "ZendeskTicket"
-            },
-            {
-              "value": "zendesk_agent",
-              "name": "ZendeskAgent"
             }
           ]
         }
@@ -71002,6 +72082,10 @@
     {
       "name": "Ecommerce Connectors",
       "description": "Upload and manage product catalogs via ecommerce connectors. Supports single-file\nuploads (up to 99 MB) and multipart uploads for larger catalogs.\n"
+    },
+    {
+      "name": "Dynamic Content",
+      "description": "Everything about your Dynamic Content"
     },
     {
       "name": "Emails",

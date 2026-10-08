@@ -67,6 +67,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string IntercomConversationId { get; set; }
 #endif
+        /// <summary>The language of the call&apos;s conversation, as a locale code. Null until the call is matched to a conversation or while no language has been set.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Language { get; set; }
+#nullable restore
+#else
+        public string Language { get; set; }
+#endif
         /// <summary>Status of the call. Can be &quot;registered&quot;, &quot;in-progress&quot;, or a resolution state</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -116,6 +124,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "intent", n => { Intent = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "intercom_call_id", n => { IntercomCallId = n.GetStringValue(); } },
                 { "intercom_conversation_id", n => { IntercomConversationId = n.GetStringValue(); } },
+                { "language", n => { Language = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "user_phone_number", n => { UserPhoneNumber = n.GetStringValue(); } },
             };
@@ -135,6 +144,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty>("intent", Intent);
             writer.WriteStringValue("intercom_call_id", IntercomCallId);
             writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
+            writer.WriteStringValue("language", Language);
             writer.WriteStringValue("status", Status);
             writer.WriteStringValue("user_phone_number", UserPhoneNumber);
             writer.WriteAdditionalData(AdditionalData);

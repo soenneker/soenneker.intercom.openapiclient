@@ -8,17 +8,31 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The escalation Fin attempted. Omitted when the handoff target is not Zendesk.
+    /// The handoff Fin attempted.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class StandalonePlatformHandoffHandoff : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Whether the handoff completed. A handoff that did not complete falls back to a live agent, which is reported in a separate successful part.</summary>
+        /// <summary>Details of the handoff. Always present. For a successful &lt;code&gt;salesforce_case&lt;/code&gt; handoff it holds the created Case&apos;s &lt;code&gt;case_id&lt;/code&gt; and &lt;code&gt;case_number&lt;/code&gt;; otherwise it is an empty object.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData? Data { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData Data { get; set; }
+#endif
+        /// <summary>&lt;code&gt;true&lt;/code&gt; when the handoff completed and &lt;code&gt;false&lt;/code&gt; when it failed. &lt;code&gt;null&lt;/code&gt; means no outcome was recorded on this part, for example a Salesforce in-app messaging handoff that was only initiated.</summary>
         public bool? Success { get; set; }
-        /// <summary>Where Fin handed the conversation off to. &lt;code&gt;zendesk_ticket&lt;/code&gt; means a Zendesk ticket was created, and &lt;code&gt;zendesk_agent&lt;/code&gt; means the conversation was handed over to a Zendesk agent for live chat.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffType? Type { get; set; }
+        /// <summary>The handoff type. One of &lt;code&gt;zendesk_ticket&lt;/code&gt;, &lt;code&gt;zendesk_agent&lt;/code&gt;, &lt;code&gt;salesforce_case&lt;/code&gt;, &lt;code&gt;salesforce_in_app_messaging&lt;/code&gt;, &lt;code&gt;salesforce_team&lt;/code&gt;, &lt;code&gt;external_agent&lt;/code&gt; or &lt;code&gt;external_ticket&lt;/code&gt;. Older parts can also return &lt;code&gt;salesforce_chat&lt;/code&gt;.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff"/> and sets the default values.
         /// </summary>
@@ -44,8 +58,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData>(global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData.CreateFromDiscriminatorValue); } },
                 { "success", n => { Success = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffType>(); } },
+                { "type", n => { Type = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -55,8 +70,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffData>("data", Data);
             writer.WriteBoolValue("success", Success);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoffType>("type", Type);
+            writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
