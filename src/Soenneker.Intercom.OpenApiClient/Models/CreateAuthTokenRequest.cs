@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The fields accepted when storing a new third-party credential. The credential is created with a `token_type` of `text`; no other type can be created over the API.
+    /// The fields accepted when storing a new third-party credential. Set `token_type` to `text` (the default) to store a plain credential value, or to `oauth` to have Intercom obtain and manage an access token via the OAuth client-credentials grant.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateAuthTokenRequest : IAdditionalDataHolder, IParsable
@@ -23,14 +23,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
-        /// <summary>An optional domain to scope the credential to.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Domain { get; set; }
-#nullable restore
-#else
-        public string Domain { get; set; }
-#endif
         /// <summary>A name for the credential, so a teammate can identify it later.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -39,7 +31,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The request header the credential is sent in.</summary>
+        /// <summary>The OAuth client-credentials configuration Intercom uses to obtain and refresh an access token. Required when `token_type` is `oauth`. Must be omitted when `token_type` is `text`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration? OauthConfiguration { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration OauthConfiguration { get; set; }
+#endif
+        /// <summary>The request header the credential is sent in. Required when `token_type` is `text`. Must be omitted when `token_type` is `oauth`, where it is fixed to `Authorization`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RequestHeaderKey { get; set; }
@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string RequestHeaderKey { get; set; }
 #endif
-        /// <summary>An optional prefix placed before the credential value in the header, for example `Bearer`.</summary>
+        /// <summary>An optional prefix placed before the credential value in the header, for example `Bearer`. Must be omitted when `token_type` is `oauth`, where it is fixed to `Bearer`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TokenPrefix { get; set; }
@@ -55,7 +55,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string TokenPrefix { get; set; }
 #endif
-        /// <summary>The credential value. Stored encrypted and never returned by any endpoint.</summary>
+        /// <summary>The type of credential to store. Defaults to `text`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType? TokenType { get; set; }
+        /// <summary>The credential value. Required when `token_type` is `text`. Must be omitted when `token_type` is `oauth`. Stored encrypted and never returned by any endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? TokenValue { get; set; }
@@ -89,10 +91,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "domain", n => { Domain = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "oauth_configuration", n => { OauthConfiguration = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration>(global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration.CreateFromDiscriminatorValue); } },
                 { "request_header_key", n => { RequestHeaderKey = n.GetStringValue(); } },
                 { "token_prefix", n => { TokenPrefix = n.GetStringValue(); } },
+                { "token_type", n => { TokenType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType>(); } },
                 { "token_value", n => { TokenValue = n.GetStringValue(); } },
             };
         }
@@ -104,10 +107,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("description", Description);
-            writer.WriteStringValue("domain", Domain);
             writer.WriteStringValue("name", Name);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration>("oauth_configuration", OauthConfiguration);
             writer.WriteStringValue("request_header_key", RequestHeaderKey);
             writer.WriteStringValue("token_prefix", TokenPrefix);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType>("token_type", TokenType);
             writer.WriteStringValue("token_value", TokenValue);
             writer.WriteAdditionalData(AdditionalData);
         }

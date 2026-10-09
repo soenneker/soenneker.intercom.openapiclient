@@ -72,15 +72,16 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthTokenList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Only credentials with a `token_type` of `text` can be created here — the credential value is sent as a request header. The value you supply is stored encrypted and is never returned by any endpoint, including this one.
+        /// Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Set `token_type` to `text` (the default) to send the credential value as a request header yourself, or to `oauth` to have Intercom exchange OAuth client credentials for an access token and keep it refreshed. The value you supply is stored encrypted and is never returned by any endpoint, including this one.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AuthToken"/></returns>
-        /// <param name="body">The fields accepted when storing a new third-party credential. The credential is created with a `token_type` of `text`; no other type can be created over the API.</param>
+        /// <param name="body">The fields accepted when storing a new third-party credential. Set `token_type` to `text` (the default) to store a plain credential value, or to `oauth` to have Intercom obtain and manage an access token via the OAuth client-credentials grant.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 429 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -97,6 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "429", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthToken.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -120,10 +122,10 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens
             return requestInfo;
         }
         /// <summary>
-        /// Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Only credentials with a `token_type` of `text` can be created here — the credential value is sent as a request header. The value you supply is stored encrypted and is never returned by any endpoint, including this one.
+        /// Stores a third-party credential in your workspace so a data connector can authenticate outbound requests with it. Set `token_type` to `text` (the default) to send the credential value as a request header yourself, or to `oauth` to have Intercom exchange OAuth client credentials for an access token and keep it refreshed. The value you supply is stored encrypted and is never returned by any endpoint, including this one.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The fields accepted when storing a new third-party credential. The credential is created with a `token_type` of `text`; no other type can be created over the API.</param>
+        /// <param name="body">The fields accepted when storing a new third-party credential. Set `token_type` to `text` (the default) to store a plain credential value, or to `oauth` to have Intercom obtain and manage an access token via the OAuth client-credentials grant.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

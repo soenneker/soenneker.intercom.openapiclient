@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AuthToken>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AuthToken.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. Only credentials with a `token_type` of `text` can be updated; any other type responds with `400`. A credential the list endpoint does not return is also not updatable, and responds with `404`.
+        /// Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. The `domain` is read-only, and `request_header_key` cannot be changed on a credential that has a domain. Only credentials with a `token_type` of `text` can be updated; any other type responds with `400`. A credential the list endpoint does not return is also not updatable, and responds with `404`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AuthToken"/></returns>
         /// <param name="body">The fields accepted when updating a stored third-party credential. Every field is optional, and one you omit keeps its current value. The credential value cannot be changed here.</param>
@@ -109,7 +109,7 @@ namespace Soenneker.Intercom.OpenApiClient.Auth_tokens.Item
             return requestInfo;
         }
         /// <summary>
-        /// Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. Only credentials with a `token_type` of `text` can be updated; any other type responds with `400`. A credential the list endpoint does not return is also not updatable, and responds with `404`.
+        /// Updates the metadata of a stored third-party credential. A field you omit keeps its current value. The credential value itself cannot be changed here and is never returned. The `domain` is read-only, and `request_header_key` cannot be changed on a credential that has a domain. Only credentials with a `token_type` of `text` can be updated; any other type responds with `400`. A credential the list endpoint does not return is also not updatable, and responds with `404`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The fields accepted when updating a stored third-party credential. Every field is optional, and one you omit keeps its current value. The credential value cannot be changed here.</param>

@@ -23,14 +23,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
-        /// <summary>An optional domain to scope the credential to.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Domain { get; set; }
-#nullable restore
-#else
-        public string Domain { get; set; }
-#endif
         /// <summary>A name for the credential, so a teammate can identify it later.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -81,7 +73,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "domain", n => { Domain = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "request_header_key", n => { RequestHeaderKey = n.GetStringValue(); } },
                 { "token_prefix", n => { TokenPrefix = n.GetStringValue(); } },
@@ -95,7 +86,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("description", Description);
-            writer.WriteStringValue("domain", Domain);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("request_header_key", RequestHeaderKey);
             writer.WriteStringValue("token_prefix", TokenPrefix);

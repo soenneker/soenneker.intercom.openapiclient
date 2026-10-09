@@ -30,6 +30,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata ConversationMetadata { get; set; }
 #endif
+        /// <summary>The identifier of the environment to start the conversation in, if your Fin for Platforms workspace has environments. Use the same value as `messenger_environment` in your Messenger installation. Defaults to the workspace&apos;s default environment; an identifier that matches no environment is rejected.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Environment { get; set; }
+#nullable restore
+#else
+        public string Environment { get; set; }
+#endif
         /// <summary>A message exchanged within a Fin Agent conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,6 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "conversation_metadata", n => { ConversationMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata.CreateFromDiscriminatorValue); } },
+                { "environment", n => { Environment = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage.CreateFromDiscriminatorValue); } },
                 { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser.CreateFromDiscriminatorValue); } },
             };
@@ -86,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata>("conversation_metadata", ConversationMetadata);
+            writer.WriteStringValue("environment", Environment);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>("message", Message);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>("user", User);
             writer.WriteAdditionalData(AdditionalData);
