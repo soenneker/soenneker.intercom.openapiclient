@@ -2,7 +2,7 @@
   "descriptionHash": "F908894D4371526610F58B40A083C5135CFB569F00DCEE6D3989CD2362DFFF8D4EFE8AB6998F2F246427546D30E37B47760904E42A90A5101B4AB80B31CA2791",
   "descriptionLocation": "../../fixed.json",
   "lockFileVersion": "1.0.0",
-  "kiotaVersion": "1.35.0",
+  "kiotaVersion": "1.36.0",
   "clientClassName": "IntercomOpenApiClient",
   "typeAccessModifier": "Public",
   "clientNamespaceName": "Soenneker.Intercom.OpenApiClient",
