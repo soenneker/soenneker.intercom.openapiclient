@@ -7652,7 +7652,6 @@
             "in": "query",
             "description": "Number of results per page",
             "schema": {
-              "maximum": 150,
               "type": "integer",
               "example": 50
             }
@@ -7987,7 +7986,7 @@
                   "$ref": "#/components/schemas/DeletedFolderObject"
                 },
                 "example": {
-                  "id": 6,
+                  "id": "6",
                   "object": "folder",
                   "deleted": true
                 }
@@ -13399,7 +13398,7 @@
           "Contacts"
         ],
         "summary": "Preview a contact merge",
-        "description": "Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 and \u0060into\u0060 contact IDs you would pass to [Merge two contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact). As with the merge endpoint, \u0060from\u0060 may have a \u0060role\u0060 of \u0060lead\u0060 or \u0060user\u0060, and \u0060into\u0060 must have a \u0060role\u0060 of \u0060user\u0060. You can optionally pass \u0060custom_attribute_names\u0060 to include specific custom attributes in the previewed attribute changes.\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and, for each object type, two counts \u2014 \u0060from\u0060, how many are on the source contact and would move to the destination, and \u0060into\u0060, how many the destination already has. Counts are reported for conversations, tickets, phone calls, notes, and tags. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-channel merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Previewing non-duplicate contacts\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email or phone). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t, the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060source_same_as_target\u0060 | The source contact (\u0060from\u0060) and the destination contact (\u0060into\u0060) are the same contact. A contact can\u0027t be merged into itself. |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060into\u0060 must be a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email or phone. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n| \u0060user_to_lead\u0060 | \u0060into\u0060 is a lead or visitor. A user can only be merged into another user. |\n| \u0060whatsapp_data_cannot_be_merged\u0060 | The WhatsApp number on the source contact can\u0027t be reassigned to the destination. |\n| \u0060telegram_data_cannot_be_merged\u0060 | The Telegram sender on the source contact can\u0027t be reassigned to the destination. |\n| \u0060source_has_telegram_data\u0060 | The source contact has Telegram data, which user-into-user merges don\u0027t yet support moving. |\n| \u0060phone_data_cannot_be_merged\u0060 | The phone data on the source contact can\u0027t be reassigned to the destination. |\n",
+        "description": "Preview the result of merging one contact into another without applying the merge. This is a read-only dry run: it reports whether the merge is allowed and, if so, exactly what would change, **without modifying any data**.\n\nSend the same \u0060from\u0060 and \u0060into\u0060 contact IDs you would pass to [Merge two contacts](/docs/references/preview/rest-api/api.intercom.io/contacts/mergecontact). As with the merge endpoint, \u0060from\u0060 may have a \u0060role\u0060 of \u0060lead\u0060 or \u0060user\u0060, and \u0060into\u0060 must have a \u0060role\u0060 of \u0060user\u0060. You can optionally pass \u0060custom_attribute_names\u0060 to include specific custom attributes in the previewed attribute changes.\n\n- When \u0060allowed\u0060 is \u0060true\u0060, the response contains a \u0060summary\u0060: every attribute change (with the resulting value on the surviving contact) and, for each object type, two counts \u2014 \u0060from\u0060, how many are on the source contact and would move to the destination, and \u0060into\u0060, how many the destination already has. Counts are reported for conversations, tickets, phone calls, notes, and tags. \u0060conversations\u0060 counts non-ticket conversations only; tickets are reported separately under \u0060tickets\u0060, and \u0060phone_calls\u0060 is present only for phone-channel merges.\n- When \u0060allowed\u0060 is \u0060false\u0060, the response contains \u0060reasons\u0060. Each reason has a stable \u0060code\u0060 you can branch on and a human-readable \u0060message\u0060 you can display.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Previewing non-duplicate contacts\u0022 %}\nBy default a merge requires the two contacts to share an identifier (email or phone). Set \u0060skip_duplicate_validation\u0060 to \u0060true\u0060 to preview a merge of contacts that don\u0027t, the same rule the merge endpoint enforces.\n{% /admonition %}\n\nWhen \u0060allowed\u0060 is \u0060false\u0060, \u0060reasons[].code\u0060 is one of:\n\n| code | meaning |\n| --- | --- |\n| \u0060source_same_as_target\u0060 | The source contact (\u0060from\u0060) and the destination contact (\u0060into\u0060) are the same contact. A contact can\u0027t be merged into itself. |\n| \u0060invalid_merge_role_pair\u0060 | The \u0060from\u0060/\u0060into\u0060 roles aren\u0027t mergeable. \u0060into\u0060 must be a user. |\n| \u0060no_shared_identifier\u0060 | The contacts share no email or phone. Set \u0060skip_duplicate_validation\u0060 to preview anyway. |\n| \u0060facebook_user\u0060 | Facebook contacts can\u0027t be merged. |\n| \u0060external_lead_channel_not_allowed\u0060 | The source is an external-channel lead that isn\u0027t eligible for merging. |\n| \u0060mailing_list\u0060 | Contacts created from a mailing list can\u0027t be merged. |\n| \u0060user_to_lead\u0060 | \u0060into\u0060 is a lead or visitor. A user can only be merged into another user. |\n| \u0060whatsapp_data_cannot_be_merged\u0060 | The WhatsApp number on the source contact can\u0027t be reassigned to the destination. |\n| \u0060telegram_data_cannot_be_merged\u0060 | The Telegram sender on the source contact can\u0027t be reassigned to the destination. |\n| \u0060ms_teams_data_cannot_be_merged\u0060 | The destination contact already has a Microsoft Teams sender for the same team as the source contact, so the source\u0027s sender can\u0027t be reassigned to it. |\n| \u0060source_has_telegram_data\u0060 | The source contact has Telegram data, which user-into-user merges don\u0027t yet support moving. |\n| \u0060phone_data_cannot_be_merged\u0060 | The phone data on the source contact can\u0027t be reassigned to the destination. |\n",
         "operationId": "PreviewMergeContact",
         "parameters": [
           {
@@ -27420,6 +27419,658 @@
         }
       }
     },
+    "/data_connectors/{id}/versions": {
+      "get": {
+        "tags": [
+          "Data Connectors"
+        ],
+        "summary": "List versions of a data connector",
+        "description": "Retrieve the version history of a data connector, newest first. Each entry is a point-in-time snapshot of the connector\u0027s configuration, with the status it has today and an optional note.\n\nResults are paginated. \u0060pages.next\u0060 is omitted on the last page. A data connector that has never been published returns an empty \u0060data\u0060 list.\n\nRequires the \u0060read_data_connector_versions\u0060 or \u0060read_write_data_connector_versions\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "ListDataConnectorVersions",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the data connector.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of results per page (1-50, default 20). Values outside this range are clamped, so values below 1 are treated as 1. A non-integer value falls back to the default of 20.",
+            "schema": {
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "starting_after",
+            "in": "query",
+            "description": "Cursor for pagination. Use the value from \u0060pages.next.starting_after\u0060 in a previous response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectorVersionList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "data_connector_version",
+                          "status": "live",
+                          "note": "Switched to the v2 orders endpoint",
+                          "author": {
+                            "id": 456,
+                            "name": "Alice Admin"
+                          },
+                          "created_at": "2026-09-14T10:02:11Z",
+                          "entity_version_id": 9821,
+                          "definition": {
+                            "name": "Order Status Service",
+                            "description": "Fetches order status from external fulfillment API",
+                            "internal_description": "Fetches order status from external fulfillment API",
+                            "state": "live",
+                            "url": "https://api.example.com/v2/orders/{{order_id}}/status",
+                            "body": "",
+                            "headers": [
+                              {
+                                "name": "Authorization",
+                                "value": "****"
+                              }
+                            ],
+                            "http_method": "get",
+                            "direct_fin_usage": false,
+                            "audiences": [
+                              "users"
+                            ],
+                            "execution_type": "server_side",
+                            "configuration_response_type": "test_response_type",
+                            "data_transformation_type": "full_access",
+                            "client_function_name": null,
+                            "client_function_timeout_ms": null,
+                            "data_inputs": [
+                              {
+                                "name": "order_id",
+                                "type": "string",
+                                "description": "The order to look up",
+                                "required": true,
+                                "default_value": null
+                              }
+                            ],
+                            "response_fields": [
+                              {
+                                "path": "status",
+                                "type": "string",
+                                "example_value": "shipped",
+                                "redacted": false
+                              }
+                            ],
+                            "object_mappings": [],
+                            "token_ids": [],
+                            "customer_authentication": false,
+                            "bypass_authentication": false,
+                            "enforce_auth": false,
+                            "validate_missing_attributes": false
+                          }
+                        },
+                        {
+                          "type": "data_connector_version",
+                          "status": "previously_live",
+                          "note": null,
+                          "author": {
+                            "id": 456,
+                            "name": "Alice Admin"
+                          },
+                          "created_at": "2026-08-02T08:40:05Z",
+                          "entity_version_id": 9710,
+                          "definition": null
+                        }
+                      ],
+                      "pages": {
+                        "type": "pages",
+                        "per_page": 20,
+                        "next": {
+                          "starting_after": "WzQ0MDksNDQwOSxudWxsXQ=="
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "12a938a3-314e-4939-b773-5cd45738bd21",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e5b8e2-1234-5678-9abc-def012345678",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid cursor": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "client_error",
+                          "message": "Invalid starting_after param. Please try again using a starting_after value from a paginated response"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data connector not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Data connector not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "data_connector_not_found",
+                          "message": "Data connector not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data_connectors/{id}/versions/{versionId}": {
+      "get": {
+        "tags": [
+          "Data Connectors"
+        ],
+        "summary": "Retrieve a version of a data connector",
+        "description": "Retrieve a single version of a data connector, including the connector configuration as it was at that version.\n\nRequires the \u0060read_data_connector_versions\u0060 or \u0060read_write_data_connector_versions\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "RetrieveDataConnectorVersion",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the data connector.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345"
+            }
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The \u0060entity_version_id\u0060 of the version, as returned by [List versions of a data connector](/docs/references/preview/rest-api/api.intercom.io/data-connectors/listdataconnectorversions).",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 9821
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectorVersion"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "data_connector_version",
+                      "status": "live",
+                      "note": "Switched to the v2 orders endpoint",
+                      "author": {
+                        "id": 456,
+                        "name": "Alice Admin"
+                      },
+                      "created_at": "2026-09-14T10:02:11Z",
+                      "entity_version_id": 9821,
+                      "definition": {
+                        "name": "Order Status Service",
+                        "description": "Fetches order status from external fulfillment API",
+                        "internal_description": "Fetches order status from external fulfillment API",
+                        "state": "live",
+                        "url": "https://api.example.com/v2/orders/{{order_id}}/status",
+                        "body": "",
+                        "headers": [
+                          {
+                            "name": "Authorization",
+                            "value": "****"
+                          }
+                        ],
+                        "http_method": "get",
+                        "direct_fin_usage": false,
+                        "audiences": [
+                          "users"
+                        ],
+                        "execution_type": "server_side",
+                        "configuration_response_type": "test_response_type",
+                        "data_transformation_type": "full_access",
+                        "client_function_name": null,
+                        "client_function_timeout_ms": null,
+                        "data_inputs": [
+                          {
+                            "name": "order_id",
+                            "type": "string",
+                            "description": "The order to look up",
+                            "required": true,
+                            "default_value": null
+                          }
+                        ],
+                        "response_fields": [
+                          {
+                            "path": "status",
+                            "type": "string",
+                            "example_value": "shipped",
+                            "redacted": false
+                          }
+                        ],
+                        "object_mappings": [],
+                        "token_ids": [],
+                        "customer_authentication": false,
+                        "bypass_authentication": false,
+                        "enforce_auth": false,
+                        "validate_missing_attributes": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "12a938a3-314e-4939-b773-5cd45738bd21",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e5b8e2-1234-5678-9abc-def012345678",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data connector or version not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Data connector not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "data_connector_not_found",
+                          "message": "Data connector not found"
+                        }
+                      ]
+                    }
+                  },
+                  "Version not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Data Connectors"
+        ],
+        "summary": "Update the note on a data connector version",
+        "description": "Update the note on a data connector version. The note is the only field that can be changed. This does not publish the version or roll the connector back to it.\n\nSend an empty string to clear the note.\n\nRequires the \u0060read_write_data_connector_versions\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "UpdateDataConnectorVersion",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the data connector.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345"
+            }
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The \u0060entity_version_id\u0060 of the version, as returned by [List versions of a data connector](/docs/references/preview/rest-api/api.intercom.io/data-connectors/listdataconnectorversions).",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 9821
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDataConnectorVersionRequest"
+              },
+              "examples": {
+                "Set a note": {
+                  "summary": "Annotate a version",
+                  "value": {
+                    "note": "Switched to the v2 orders endpoint"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Version updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectorVersion"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "data_connector_version",
+                      "status": "live",
+                      "note": "Switched to the v2 orders endpoint",
+                      "author": {
+                        "id": 456,
+                        "name": "Alice Admin"
+                      },
+                      "created_at": "2026-09-14T10:02:11Z",
+                      "entity_version_id": 9821,
+                      "definition": {
+                        "name": "Order Status Service",
+                        "description": "Fetches order status from external fulfillment API",
+                        "internal_description": "Fetches order status from external fulfillment API",
+                        "state": "live",
+                        "url": "https://api.example.com/v2/orders/{{order_id}}/status",
+                        "body": "",
+                        "headers": [
+                          {
+                            "name": "Authorization",
+                            "value": "****"
+                          }
+                        ],
+                        "http_method": "get",
+                        "direct_fin_usage": false,
+                        "audiences": [
+                          "users"
+                        ],
+                        "execution_type": "server_side",
+                        "configuration_response_type": "test_response_type",
+                        "data_transformation_type": "full_access",
+                        "client_function_name": null,
+                        "client_function_timeout_ms": null,
+                        "data_inputs": [
+                          {
+                            "name": "order_id",
+                            "type": "string",
+                            "description": "The order to look up",
+                            "required": true,
+                            "default_value": null
+                          }
+                        ],
+                        "response_fields": [
+                          {
+                            "path": "status",
+                            "type": "string",
+                            "example_value": "shipped",
+                            "redacted": false
+                          }
+                        ],
+                        "object_mappings": [],
+                        "token_ids": [],
+                        "customer_authentication": false,
+                        "bypass_authentication": false,
+                        "enforce_auth": false,
+                        "validate_missing_attributes": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "12a938a3-314e-4939-b773-5cd45738bd21",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e5b8e2-1234-5678-9abc-def012345678",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Note missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "note parameter is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Note has the wrong type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "note must be a string"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data connector or version not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Data connector not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "data_connector_not_found",
+                          "message": "Data connector not found"
+                        }
+                      ]
+                    }
+                  },
+                  "Version not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ecommerce/connectors/{id}/catalog": {
       "post": {
         "tags": [
@@ -35310,7 +35961,8 @@
                     "ticket_attributes": {
                       "_default_title_": "example",
                       "_default_description_": "there is a problem"
-                    }
+                    },
+                    "channel": "email"
                   }
                 }
               }
@@ -35443,7 +36095,8 @@
                         "has_more": false
                       },
                       "category": "Back-office",
-                      "is_shared": false
+                      "is_shared": false,
+                      "channel": "messenger"
                     }
                   }
                 }
@@ -35513,7 +36166,8 @@
                     "ticket_attributes": {
                       "_default_title_": "example",
                       "_default_description_": "there is a problem"
-                    }
+                    },
+                    "channel": "email"
                   }
                 }
               }
@@ -40865,9 +41519,9 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "The unique identifier for the deleted folder",
-            "example": 6
+            "example": "6"
           },
           "object": {
             "$ref": "#/components/schemas/FolderObject"
@@ -47382,6 +48036,9 @@
           },
           "assignment": {
             "$ref": "#/components/schemas/CreateTicketRequestAssignment"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/EmailChannel"
           }
         },
         "description": "You can create a Ticket"
@@ -49822,6 +50479,81 @@
         },
         "description": "A paginated list of data connectors."
       },
+      "DataConnectorVersionList": {
+        "title": "Data Connector Version List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersion"
+            },
+            "description": "An array of data connector version objects."
+          },
+          "pages": {
+            "$ref": "#/components/schemas/DataConnectorVersionListPages"
+          }
+        },
+        "description": "A paginated list of data connector versions, newest first."
+      },
+      "DataConnectorVersion": {
+        "title": "Data Connector Version",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/DataConnectorVersionType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/DataConnectorVersionStatus"
+          },
+          "note": {
+            "type": "string",
+            "description": "A note describing this version, if one has been set.",
+            "nullable": true,
+            "example": "Switched to the v2 orders endpoint"
+          },
+          "author": {
+            "$ref": "#/components/schemas/DataConnectorVersionAuthor"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The time this version was created.",
+            "format": "date-time",
+            "example": "2026-09-14T10:02:11Z"
+          },
+          "entity_version_id": {
+            "type": "integer",
+            "description": "The identifier of this version. Use it as \u0060version_id\u0060 when retrieving or updating a version.",
+            "example": 9821
+          },
+          "definition": {
+            "$ref": "#/components/schemas/DataConnectorVersionDefinition"
+          }
+        },
+        "description": "A point-in-time snapshot of a data connector\u0027s configuration, with the version\u0027s status and an optional note.",
+        "x-tags": [
+          "Data Connectors"
+        ]
+      },
+      "UpdateDataConnectorVersionRequest": {
+        "title": "Update Data Connector Version Request",
+        "required": [
+          "note"
+        ],
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string",
+            "description": "The new note for the version. Sending \u0060null\u0060, an empty string, or a whitespace-only string clears the note.",
+            "nullable": true,
+            "example": "Switched to the v2 orders endpoint"
+          }
+        },
+        "description": "Payload for updating a data connector version."
+      },
       "DeletedDataConnectorObject": {
         "title": "Deleted Data Connector Object",
         "type": "object",
@@ -52147,6 +52879,7 @@
           "2.14",
           "2.15",
           "2.16",
+          "2.17",
           "Preview"
         ],
         "type": "string",
@@ -52244,6 +52977,10 @@
             {
               "value": "2.16",
               "name": "Value216"
+            },
+            {
+              "value": "2.17",
+              "name": "Value217"
             }
           ]
         }
@@ -54164,6 +54901,12 @@
           },
           "category": {
             "$ref": "#/components/schemas/TicketCategory"
+          },
+          "channel": {
+            "type": "string",
+            "description": "The channel the ticket was created through. Defaults to messenger when no channel is specified at creation.",
+            "nullable": true,
+            "example": "messenger"
           },
           "ticket_attributes": {
             "$ref": "#/components/schemas/TicketTicketAttributes"
@@ -58701,6 +59444,171 @@
         },
         "description": "Pagination information."
       },
+      "DataConnectorVersionListPages": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PagesType"
+          },
+          "per_page": {
+            "type": "integer",
+            "description": "The number of results per page.",
+            "example": 20
+          },
+          "next": {
+            "$ref": "#/components/schemas/DataConnectorVersionListPagesNext"
+          }
+        },
+        "description": "Pagination information. \u0060next\u0060 is omitted on the last page."
+      },
+      "DataConnectorVersionAuthor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier of the teammate.",
+            "example": 456
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the teammate.",
+            "example": "Alice Admin"
+          }
+        },
+        "description": "The teammate who created this version.",
+        "nullable": true
+      },
+      "DataConnectorVersionDefinition": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the data connector.",
+            "example": "Order Status Service"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what this data connector does.",
+            "nullable": true
+          },
+          "internal_description": {
+            "type": "string",
+            "description": "The internal description of the data connector.",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "The state of the data connector at this version.",
+            "example": "live"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the external API endpoint. Supports template variables like \u0060{{order_id}}\u0060.",
+            "nullable": true
+          },
+          "body": {
+            "type": "string",
+            "description": "The request body template. Supports template variables.",
+            "nullable": true
+          },
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersionDefinitionHeadersItem"
+            },
+            "description": "HTTP headers for the request. Header values are always redacted as \u0060\u0022****\u0022\u0060."
+          },
+          "http_method": {
+            "type": "string",
+            "description": "The HTTP method used by the data connector.",
+            "example": "get"
+          },
+          "direct_fin_usage": {
+            "type": "boolean",
+            "description": "Whether this connector is used directly by Fin."
+          },
+          "audiences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The audience types this connector targets."
+          },
+          "execution_type": {
+            "type": "string",
+            "description": "How the connector executes, for example \u0060server_side\u0060 or \u0060client_side\u0060.",
+            "nullable": true
+          },
+          "configuration_response_type": {
+            "type": "string",
+            "description": "The expected response format from the connector.",
+            "nullable": true
+          },
+          "data_transformation_type": {
+            "type": "string",
+            "description": "The type of data transformation applied to the response.",
+            "nullable": true
+          },
+          "client_function_name": {
+            "type": "string",
+            "description": "The name of the client-side function, if applicable.",
+            "nullable": true
+          },
+          "client_function_timeout_ms": {
+            "type": "integer",
+            "description": "Timeout in milliseconds for the client function, if applicable.",
+            "nullable": true
+          },
+          "data_inputs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersionDefinitionDataInputsItem"
+            },
+            "description": "The input parameters accepted by this data connector."
+          },
+          "response_fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersionDefinitionResponseFieldsItem"
+            },
+            "description": "The fields returned in the connector response."
+          },
+          "object_mappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersionDefinitionObjectMappingsItem"
+            },
+            "description": "Mappings from connector response objects to Intercom objects."
+          },
+          "token_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of authentication tokens associated with this connector."
+          },
+          "customer_authentication": {
+            "type": "boolean",
+            "description": "Whether OTP authentication is enabled for this connector."
+          },
+          "bypass_authentication": {
+            "type": "boolean",
+            "description": "Whether authentication is bypassed for this connector."
+          },
+          "enforce_auth": {
+            "type": "boolean",
+            "description": "Whether authentication is enforced for this connector.",
+            "nullable": true
+          },
+          "validate_missing_attributes": {
+            "type": "boolean",
+            "description": "Whether to validate missing attributes before execution.",
+            "nullable": true
+          }
+        },
+        "description": "The data connector\u0027s configuration at this version. \u0060null\u0060 if the snapshot is no longer available. Mirrors the response of [Retrieve a data connector](/docs/references/preview/rest-api/api.intercom.io/data-connectors/retrievedataconnector), without \u0060id\u0060, \u0060type\u0060, \u0060created_by_admin_id\u0060, \u0060updated_by_admin_id\u0060, \u0060created_at\u0060, \u0060updated_at\u0060, \u0060execution_results_url\u0060 and \u0060transform_code_block\u0060.",
+        "nullable": true
+      },
       "DataEventMetadata": {
         "type": "object",
         "description": "Optional metadata about the event.",
@@ -60282,6 +61190,92 @@
         "description": "Cursor for the next page of results.",
         "nullable": true
       },
+      "DataConnectorVersionListPagesNext": {
+        "type": "object",
+        "properties": {
+          "starting_after": {
+            "type": "string",
+            "description": "The cursor value to use for the next page.",
+            "example": "WzQ0MDksNDQwOSxudWxsXQ=="
+          }
+        },
+        "description": "Cursor for the next page of results."
+      },
+      "DataConnectorVersionDefinitionHeadersItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Authorization"
+          },
+          "value": {
+            "type": "string",
+            "description": "Always \u0060\u0022****\u0022\u0060 in responses.",
+            "example": "****"
+          }
+        }
+      },
+      "DataConnectorVersionDefinitionDataInputsItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "default_value": {
+            "$ref": "#/components/schemas/DataConnectorVersionDefinitionDataInputsItemDefaultValue"
+          }
+        }
+      },
+      "DataConnectorVersionDefinitionResponseFieldsItem": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "example_value": {
+            "$ref": "#/components/schemas/DataConnectorVersionDefinitionResponseFieldsItemExampleValue"
+          },
+          "redacted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DataConnectorVersionDefinitionObjectMappingsItem": {
+        "type": "object",
+        "properties": {
+          "response_object_path": {
+            "type": "string"
+          },
+          "intercom_object_type": {
+            "type": "string"
+          },
+          "attribute_mappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem"
+            }
+          },
+          "reference_mappings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem"
+            }
+          }
+        }
+      },
       "ConversationSlaTargetMissedSlaStatesAdditionalProperties": {
         "type": "object",
         "properties": {
@@ -60560,6 +61554,31 @@
             "type": "string",
             "description": "The ID of an existing tag to remove from the contact.",
             "example": "789"
+          }
+        }
+      },
+      "DataConnectorVersionDefinitionObjectMappingsItemAttributeMappingsItem": {
+        "type": "object",
+        "properties": {
+          "response_attribute_path": {
+            "type": "string"
+          },
+          "intercom_attribute_identifier": {
+            "type": "string"
+          },
+          "mapping_type": {
+            "type": "string"
+          }
+        }
+      },
+      "DataConnectorVersionDefinitionObjectMappingsItemReferenceMappingsItem": {
+        "type": "object",
+        "properties": {
+          "intercom_object_type": {
+            "type": "string"
+          },
+          "intercom_attribute_identifier": {
+            "type": "string"
           }
         }
       },
@@ -60851,7 +61870,7 @@
             "example": 2
           },
           "pages": {
-            "$ref": "#/components/schemas/CursorPages"
+            "$ref": "#/components/schemas/PagesLink"
           }
         }
       },
@@ -62949,6 +63968,9 @@
           },
           "assignment": {
             "$ref": "#/components/schemas/CreateTicketRequestAssignment"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/EmailChannel"
           }
         }
       },
@@ -62996,6 +64018,9 @@
           },
           "assignment": {
             "$ref": "#/components/schemas/CreateTicketRequestAssignment"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/EmailChannel"
           }
         }
       },
@@ -63983,6 +65008,12 @@
       "ActivityLogMetadataChangesAdditionalPropertiesAfter": {
         "type": "object",
         "description": "The value after the change."
+      },
+      "DataConnectorVersionDefinitionDataInputsItemDefaultValue": {
+        "type": "object"
+      },
+      "DataConnectorVersionDefinitionResponseFieldsItemExampleValue": {
+        "type": "object"
       },
       "SetAwayAdmin400ResponseErrorsItem": {
         "type": "object",
@@ -66841,6 +67872,25 @@
           ]
         }
       },
+      "EmailChannel": {
+        "enum": [
+          "email"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The channel for the ticket. Only supported for customer ticket types. Defaults to messenger if not provided.",
+        "example": "email",
+        "x-ms-enum": {
+          "name": "EmailChannel",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "email",
+              "name": "Email"
+            }
+          ]
+        }
+      },
       "CreateTicketTypeAttributeRequestDataType": {
         "enum": [
           "string",
@@ -67794,6 +68844,59 @@
             {
               "value": "fin",
               "name": "Fin"
+            }
+          ]
+        }
+      },
+      "DataConnectorVersionType": {
+        "enum": [
+          "data_connector_version"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The type of object - \u0060data_connector_version\u0060.",
+        "example": "data_connector_version",
+        "x-ms-enum": {
+          "name": "DataConnectorVersionType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "data_connector_version",
+              "name": "DataConnectorVersion"
+            }
+          ]
+        }
+      },
+      "DataConnectorVersionStatus": {
+        "enum": [
+          "live",
+          "paused",
+          "draft",
+          "previously_live"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The status of this version today.",
+        "example": "live",
+        "x-ms-enum": {
+          "name": "DataConnectorVersionStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "live",
+              "name": "Live"
+            },
+            {
+              "value": "paused",
+              "name": "Paused"
+            },
+            {
+              "value": "draft",
+              "name": "Draft"
+            },
+            {
+              "value": "previously_live",
+              "name": "PreviouslyLive"
             }
           ]
         }
@@ -68770,6 +69873,7 @@
           "user_to_lead",
           "whatsapp_data_cannot_be_merged",
           "telegram_data_cannot_be_merged",
+          "ms_teams_data_cannot_be_merged",
           "source_has_telegram_data",
           "phone_data_cannot_be_merged"
         ],
@@ -68815,6 +69919,10 @@
             {
               "value": "telegram_data_cannot_be_merged",
               "name": "TelegramDataCannotBeMerged"
+            },
+            {
+              "value": "ms_teams_data_cannot_be_merged",
+              "name": "MsTeamsDataCannotBeMerged"
             },
             {
               "value": "source_has_telegram_data",

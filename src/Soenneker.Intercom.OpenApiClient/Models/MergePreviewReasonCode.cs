@@ -43,6 +43,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         TelegramDataCannotBeMerged,
         #pragma warning restore CS1591
+        [EnumMember(Value = "ms_teams_data_cannot_be_merged")]
+        #pragma warning disable CS1591
+        MsTeamsDataCannotBeMerged,
+        #pragma warning restore CS1591
         [EnumMember(Value = "source_has_telegram_data")]
         #pragma warning disable CS1591
         SourceHasTelegramData,

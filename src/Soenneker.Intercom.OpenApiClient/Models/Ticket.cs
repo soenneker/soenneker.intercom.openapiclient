@@ -19,6 +19,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? AdminAssigneeId { get; set; }
         /// <summary>Category of the Ticket.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketCategory? Category { get; set; }
+        /// <summary>The channel the ticket was created through. Defaults to messenger when no channel is specified at creation.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Channel { get; set; }
+#nullable restore
+#else
+        public string Channel { get; set; }
+#endif
         /// <summary>The list of contacts affected by a ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -132,6 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketCategory>(); } },
+                { "channel", n => { Channel = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -159,6 +168,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketCategory>("category", Category);
+            writer.WriteStringValue("channel", Channel);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>("contacts", Contacts);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);

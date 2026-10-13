@@ -22,6 +22,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment Assignment { get; set; }
 #endif
+        /// <summary>The channel for the ticket. Only supported for customer ticket types. Defaults to messenger if not provided.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel? Channel { get; set; }
         /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -92,6 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "assignment", n => { Assignment = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment.CreateFromDiscriminatorValue); } },
+                { "channel", n => { Channel = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel>(); } },
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItem>(global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "conversation_to_link_id", n => { ConversationToLinkId = n.GetStringValue(); } },
@@ -109,6 +112,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment>("assignment", Assignment);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel>("channel", Channel);
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItem>("contacts", Contacts);
             writer.WriteStringValue("conversation_to_link_id", ConversationToLinkId);

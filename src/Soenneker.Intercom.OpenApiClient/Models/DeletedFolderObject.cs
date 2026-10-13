@@ -18,7 +18,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether the folder was successfully deleted.</summary>
         public bool? Deleted { get; set; }
         /// <summary>The unique identifier for the deleted folder</summary>
-        public int? Id { get; set; }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The type of object - `folder`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.FolderObject? Object { get; set; }
         /// <summary>
@@ -47,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
-                { "id", n => { Id = n.GetIntValue(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FolderObject>(); } },
             };
         }
@@ -59,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("deleted", Deleted);
-            writer.WriteIntValue("id", Id);
+            writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FolderObject>("object", Object);
             writer.WriteAdditionalData(AdditionalData);
         }
