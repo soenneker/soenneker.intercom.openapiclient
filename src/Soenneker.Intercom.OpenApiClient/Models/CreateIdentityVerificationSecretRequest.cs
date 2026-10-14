@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Limit this secret to one environment, using the `messenger_environment` value from your Messenger installation code. Omit it for a secret that works in every environment.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EnvironmentId { get; set; }
+#nullable restore
+#else
+        public string EnvironmentId { get; set; }
+#endif
         /// <summary>Human-readable name for the secret.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,6 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "environment_id", n => { EnvironmentId = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "supports_android", n => { SupportsAndroid = n.GetBoolValue(); } },
                 { "supports_ios", n => { SupportsIos = n.GetBoolValue(); } },
@@ -67,6 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("environment_id", EnvironmentId);
             writer.WriteStringValue("name", Name);
             writer.WriteBoolValue("supports_android", SupportsAndroid);
             writer.WriteBoolValue("supports_ios", SupportsIos);

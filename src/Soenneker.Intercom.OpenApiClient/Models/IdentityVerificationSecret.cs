@@ -17,6 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the secret was created, as a Unix timestamp</summary>
         public int? CreatedAt { get; set; }
+        /// <summary>The `messenger_environment` value of the environment the secret is limited to, or `null` if the secret works in every environment</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? EnvironmentId { get; set; }
+#nullable restore
+#else
+        public string EnvironmentId { get; set; }
+#endif
         /// <summary>The id of the secret</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -73,6 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "environment_id", n => { EnvironmentId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "supports_android", n => { SupportsAndroid = n.GetBoolValue(); } },
@@ -89,6 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteStringValue("environment_id", EnvironmentId);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteBoolValue("supports_android", SupportsAndroid);

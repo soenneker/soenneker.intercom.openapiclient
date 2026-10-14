@@ -31720,7 +31720,8 @@
                           "supports_android": false,
                           "supports_ios": false,
                           "supports_web": true,
-                          "created_at": 1734537243
+                          "created_at": 1734537243,
+                          "environment_id": null
                         }
                       ]
                     }
@@ -31793,6 +31794,14 @@
                     "supports_ios": true,
                     "supports_android": true
                   }
+                },
+                "single_environment": {
+                  "summary": "Create a web secret for one environment",
+                  "value": {
+                    "name": "Sandbox Web",
+                    "supports_web": true,
+                    "environment_id": "k3x9q2m7pa"
+                  }
                 }
               }
             }
@@ -31816,7 +31825,8 @@
                       "supports_android": false,
                       "supports_ios": false,
                       "supports_web": true,
-                      "created_at": 1734537500
+                      "created_at": 1734537500,
+                      "environment_id": null
                     }
                   }
                 }
@@ -31839,6 +31849,30 @@
                         {
                           "code": "parameter_invalid",
                           "message": "name is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Unknown environment": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7c3e9a41-0b5d-4f62-9e18-4d2a6b8c1f03",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "environment_id must reference an environment in this workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Environments not available": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0e4b7d92-3c1a-4a85-b6f0-9d2e5c7a8b14",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "environment_id is not supported for this workspace"
                         }
                       ]
                     }
@@ -52751,6 +52785,12 @@
             "type": "integer",
             "description": "The time the secret was created, as a Unix timestamp",
             "example": 1734537243
+          },
+          "environment_id": {
+            "type": "string",
+            "description": "The \u0060messenger_environment\u0060 value of the environment the secret is limited to, or \u0060null\u0060 if the secret works in every environment",
+            "nullable": true,
+            "example": "k3x9q2m7pa"
           }
         },
         "description": "Metadata for an HMAC secret used to sign \u0060user_hash\u0060 values for Messenger identity verification. The \u0060secret\u0060 field is intentionally omitted \u2014 it is only returned once, in the response to \u0060POST /secure_mode_secrets\u0060.",
@@ -52796,6 +52836,12 @@
             "type": "integer",
             "description": "The time the secret was created, as a Unix timestamp",
             "example": 1734537243
+          },
+          "environment_id": {
+            "type": "string",
+            "description": "The \u0060messenger_environment\u0060 value of the environment the secret is limited to, or \u0060null\u0060 if the secret works in every environment",
+            "nullable": true,
+            "example": "k3x9q2m7pa"
           },
           "secret": {
             "type": "string",
@@ -52851,6 +52897,11 @@
             "type": "boolean",
             "description": "Enable this secret for the Messenger on web.",
             "example": true
+          },
+          "environment_id": {
+            "type": "string",
+            "description": "Limit this secret to one environment, using the \u0060messenger_environment\u0060 value from your Messenger installation code. Omit it for a secret that works in every environment.",
+            "example": "k3x9q2m7pa"
           }
         },
         "description": "Request payload for creating a new identity verification secret. At least one platform flag must be \u0060true\u0060."
