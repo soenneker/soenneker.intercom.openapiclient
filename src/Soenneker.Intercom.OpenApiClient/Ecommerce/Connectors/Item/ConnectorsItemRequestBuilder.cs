@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog;
+using Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Events;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item
         public global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder Catalog
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Catalog.CatalogRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The events property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Events.EventsRequestBuilder Events
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.Events.EventsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.ConnectorsItemRequestBuilder"/> and sets the default values.

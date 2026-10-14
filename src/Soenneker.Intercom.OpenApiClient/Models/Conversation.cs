@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time the conversation was created.</summary>
         public int? CreatedAt { get; set; }
-        /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as &quot;CX Score rating&quot; and &quot;CX Score explanation&quot; may also be included.</summary>
+        /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. Attributes that Intercom generates — such as &quot;CX Score rating&quot;, &quot;CX Score explanation&quot;, &quot;AI Topic and Subtopic&quot; and &quot;CX Score reasons&quot; — may also be included. Two of them, &quot;AI Topic and Subtopic&quot; and &quot;CX Score reasons&quot;, carry lists of objects as their values, and are returned in responses only — they cannot be set on a write request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationCustomAttributes? CustomAttributes { get; set; }

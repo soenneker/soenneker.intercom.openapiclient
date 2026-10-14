@@ -15102,6 +15102,18 @@
                       "id": "job_v2_1"
                     }
                   }
+                },
+                "convert_lead_to_user": {
+                  "summary": "Convert a lead to a user",
+                  "value": {
+                    "contacts": [
+                      {
+                        "id": "abc123",
+                        "role": "user",
+                        "external_id": "ext123"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -28422,6 +28434,294 @@
         }
       }
     },
+    "/ecommerce/connectors/{id}/events": {
+      "post": {
+        "tags": [
+          "Ecommerce Connectors"
+        ],
+        "summary": "Submit a product event",
+        "description": "Send a single product change to an ecommerce connector. Use product events to keep\nFin\u0027s product knowledge current between full catalog uploads. Each request carries\none event.\n\nA full catalog must be uploaded with\n[Upload a product catalog](/docs/references/preview/rest-api/api.intercom.io/ecommerce-connectors/uploadecommercecatalog)\nbefore you send events. Until then, this endpoint returns \u0060409 Conflict\u0060.\n\n## Event types\n\n| \u0060type\u0060 | \u0060data\u0060 | Effect |\n|---|---|---|\n| \u0060product.created\u0060 | \u0060product\u0060 | Adds the product, or updates it if a product with the same \u0060id\u0060 already exists. |\n| \u0060product.updated\u0060 | \u0060product\u0060 | Updates the product with the same \u0060id\u0060, or adds it if it does not exist yet. |\n| \u0060product.deleted\u0060 | \u0060product_id\u0060 | Removes the product from Fin\u0027s knowledge. |\n\nFor \u0060product.created\u0060 and \u0060product.updated\u0060, send the full product object, not only the\nfields that changed. It uses the same fields as a catalog product\n([\u0060ecommerce_catalog_product\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_product)),\nplus a required \u0060updated_at\u0060 timestamp. The product is matched by \u0060id\u0060. The serialized\nproduct must be 60 KB or smaller.\n\nFor \u0060product.deleted\u0060, send only \u0060data.product_id\u0060.\n\n\u0060occurred_at\u0060 is required on every event and must be an ISO 8601 timestamp.\n\n## Ordering\n\nEvents can arrive out of order. The newest version of a product wins:\n\n- If the stored product has a newer \u0060updated_at\u0060 than the product in a\n  \u0060product.created\u0060 or \u0060product.updated\u0060 event, the event is ignored.\n- If the stored product has a newer \u0060updated_at\u0060 than a \u0060product.deleted\u0060 event\u0027s\n  \u0060occurred_at\u0060, the delete is ignored.\n- Once a product is deleted, an update with an older \u0060updated_at\u0060 than the delete\u0027s\n  \u0060occurred_at\u0060 does not bring it back.\n- Events sent while a full catalog upload is running are kept.\n\n## Processing\n\nThe endpoint returns \u0060202 Accepted\u0060 with an \u0060event_id\u0060 once the event is queued.\nProcessing is asynchronous, so the change may take a short time to reach Fin.\n",
+        "operationId": "SubmitEcommerceProductEvent",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the ecommerce connector.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "42939"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EcommerceProductEventRequest"
+              },
+              "examples": {
+                "product_created": {
+                  "summary": "Product created",
+                  "value": {
+                    "type": "product.created",
+                    "occurred_at": "2026-10-14T09:30:00Z",
+                    "data": {
+                      "product": {
+                        "id": "tent-2p-ultralight",
+                        "title": "Ridgeline 2-Person Ultralight Tent",
+                        "url": "https://example.com/products/ridgeline-2p-tent",
+                        "description": "A freestanding two-person backpacking tent that weighs under 1.5 kg.",
+                        "featured_image_url": "https://cdn.example.com/images/ridgeline-2p.jpg",
+                        "price_min": 349,
+                        "price_max": 379,
+                        "currency": "USD",
+                        "in_stock": true,
+                        "category_path": [
+                          "Camping",
+                          "Tents"
+                        ],
+                        "collections": [
+                          "Backpacking"
+                        ],
+                        "tags": [
+                          "ultralight",
+                          "freestanding"
+                        ],
+                        "available_options": [
+                          {
+                            "name": "Color",
+                            "values": [
+                              "Green",
+                              "Orange"
+                            ]
+                          }
+                        ],
+                        "variants": [
+                          {
+                            "id": "tent-2p-ultralight-green",
+                            "title": "Green",
+                            "price": 349,
+                            "in_stock": true,
+                            "selected_options": [
+                              {
+                                "name": "Color",
+                                "value": "Green"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "tent-2p-ultralight-orange",
+                            "title": "Orange",
+                            "price": 379,
+                            "in_stock": true,
+                            "selected_options": [
+                              {
+                                "name": "Color",
+                                "value": "Orange"
+                              }
+                            ]
+                          }
+                        ],
+                        "created_at": "2026-10-14T09:30:00Z",
+                        "updated_at": "2026-10-14T09:30:00Z"
+                      }
+                    }
+                  }
+                },
+                "product_updated": {
+                  "summary": "Product updated",
+                  "value": {
+                    "type": "product.updated",
+                    "occurred_at": "2026-10-15T14:05:00Z",
+                    "data": {
+                      "product": {
+                        "id": "tent-2p-ultralight",
+                        "title": "Ridgeline 2-Person Ultralight Tent",
+                        "url": "https://example.com/products/ridgeline-2p-tent",
+                        "description": "A freestanding two-person backpacking tent that weighs under 1.5 kg.",
+                        "featured_image_url": "https://cdn.example.com/images/ridgeline-2p.jpg",
+                        "price_min": 299,
+                        "price_max": 379,
+                        "currency": "USD",
+                        "in_stock": true,
+                        "category_path": [
+                          "Camping",
+                          "Tents"
+                        ],
+                        "collections": [
+                          "Backpacking",
+                          "Sale"
+                        ],
+                        "tags": [
+                          "ultralight",
+                          "freestanding"
+                        ],
+                        "available_options": [
+                          {
+                            "name": "Color",
+                            "values": [
+                              "Green",
+                              "Orange"
+                            ]
+                          }
+                        ],
+                        "variants": [
+                          {
+                            "id": "tent-2p-ultralight-green",
+                            "title": "Green",
+                            "price": 299,
+                            "compare_at_price": 349,
+                            "in_stock": true,
+                            "selected_options": [
+                              {
+                                "name": "Color",
+                                "value": "Green"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "tent-2p-ultralight-orange",
+                            "title": "Orange",
+                            "price": 379,
+                            "in_stock": false,
+                            "selected_options": [
+                              {
+                                "name": "Color",
+                                "value": "Orange"
+                              }
+                            ]
+                          }
+                        ],
+                        "created_at": "2026-10-14T09:30:00Z",
+                        "updated_at": "2026-10-15T14:05:00Z"
+                      }
+                    }
+                  }
+                },
+                "product_deleted": {
+                  "summary": "Product deleted",
+                  "value": {
+                    "type": "product.deleted",
+                    "occurred_at": "2026-10-20T08:00:00Z",
+                    "data": {
+                      "product_id": "tent-2p-ultralight"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Event accepted and queued for processing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceProductEventResponse"
+                },
+                "examples": {
+                  "Event accepted": {
+                    "value": {
+                      "event_id": 81273
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The event is invalid. All validation errors are returned in \u0060message\u0060, separated by \u0060; \u0060.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceProductEventError"
+                },
+                "examples": {
+                  "Invalid type": {
+                    "value": {
+                      "type": "invalid_event",
+                      "message": "type must be one of product.created, product.updated, product.deleted"
+                    }
+                  },
+                  "Invalid product": {
+                    "value": {
+                      "type": "invalid_event",
+                      "message": "data.product.title is required; data.product.updated_at must be an ISO 8601 timestamp"
+                    }
+                  },
+                  "Missing product id on delete": {
+                    "value": {
+                      "type": "invalid_event",
+                      "message": "data.product_id is required"
+                    }
+                  },
+                  "Product too large": {
+                    "value": {
+                      "type": "invalid_event",
+                      "message": "data.product exceeds 60KB"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceProductEventError"
+                },
+                "examples": {
+                  "Connector not found": {
+                    "value": {
+                      "type": "import_source_not_found",
+                      "message": "No connector found with the provided import_source_id."
+                    }
+                  },
+                  "Feature not available": {
+                    "value": {
+                      "type": "not_found",
+                      "message": "The events API is not available for this workspace."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No full catalog has been uploaded to this connector yet.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceProductEventError"
+                },
+                "examples": {
+                  "Catalog not uploaded": {
+                    "value": {
+                      "type": "catalog_not_uploaded",
+                      "message": "Upload a full catalog before sending product events."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/events": {
       "post": {
         "tags": [
@@ -39487,7 +39787,7 @@
                   "Conversation not found": {
                     "value": {
                       "errors": {
-                        "external_conversation_id": "Conversation not found for the given external_conversation_id"
+                        "conversation_id": "Conversation not found for the given conversation_id"
                       }
                     }
                   },
@@ -46676,14 +46976,15 @@
           },
           "name": {
             "type": "string",
-            "description": "The name of the author",
+            "description": "The name of the author. \u0060null\u0060 if the author is a contact that has since been archived or deleted.",
             "nullable": true,
             "example": "Operator"
           },
           "email": {
             "type": "string",
-            "description": "The email of the author",
+            "description": "The email of the author. \u0060null\u0060 if the author is a contact that has since been archived or deleted.",
             "format": "email",
+            "nullable": true,
             "example": "operator\u002Babcd1234@intercom.io"
           },
           "from_ai_agent": {
@@ -48441,13 +48742,31 @@
           "Calls"
         ]
       },
+      "AiTopicSubtopicList": {
+        "title": "AI Topic and Subtopic",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AiTopicSubtopicListItem"
+        },
+        "description": "The topics Fin detected in a conversation, returned under the \u0022AI Topic and Subtopic\u0022 key of a conversation\u0027s custom attributes. Generated by Fin and returned in responses only; it cannot be set on a request.",
+        "readOnly": true
+      },
+      "CxScoreReasonList": {
+        "title": "CX Score reasons",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/CxScoreReasonListItem"
+        },
+        "description": "The reasons behind a conversation\u0027s CX Score, returned under the \u0022CX Score reasons\u0022 key of a conversation\u0027s custom attributes. Generated by Fin and returned in responses only; it cannot be set on a request.",
+        "readOnly": true
+      },
       "CustomAttributes": {
         "title": "Custom Attributes",
         "type": "object",
         "additionalProperties": {
           "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
-        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as \u0022CX Score rating\u0022 and \u0022CX Score explanation\u0022 may also be included.",
+        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. Attributes that Intercom generates \u2014 such as \u0022CX Score rating\u0022, \u0022CX Score explanation\u0022, \u0022AI Topic and Subtopic\u0022 and \u0022CX Score reasons\u0022 \u2014 may also be included. Two of them, \u0022AI Topic and Subtopic\u0022 and \u0022CX Score reasons\u0022, carry lists of objects as their values, and are returned in responses only \u2014 they cannot be set on a write request.",
         "example": {
           "paid_subscriber": true,
           "monthly_spend": 155.5,
@@ -48455,7 +48774,35 @@
           "start_date_iso8601": "2023-03-04T09:46:14Z",
           "end_date_timestamp": 1677923174,
           "CX Score rating": 4,
-          "CX Score explanation": "The conversation was resolved quickly and the customer expressed satisfaction with the outcome."
+          "CX Score explanation": "The conversation was resolved quickly and the customer expressed satisfaction with the outcome.",
+          "AI Topic and Subtopic": [
+            {
+              "topic_name": "Billing",
+              "subtopic_name": "Refund request",
+              "id": 12345
+            }
+          ],
+          "CX Score reasons": [
+            {
+              "name": "Resolution speed",
+              "value": "Fast"
+            }
+          ]
+        }
+      },
+      "CustomAttributesRequest": {
+        "title": "Custom Attributes (write)",
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/CustomAttributesRequestAdditionalProperties"
+        },
+        "description": "The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here \u2014 attributes Intercom generates are returned in responses only.",
+        "example": {
+          "paid_subscriber": true,
+          "monthly_spend": 155.5,
+          "team_mates": 9,
+          "start_date_iso8601": "2023-03-04T09:46:14Z",
+          "end_date_timestamp": 1677923174
         }
       },
       "CustomObjectInstance": {
@@ -51221,6 +51568,181 @@
           }
         },
         "description": "A product object in an ecommerce catalog upload. The catalog file must be a JSON\narray of these objects. The \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 fields are required; all\nothers are optional.\n"
+      },
+      "EcommerceProductEventError": {
+        "title": "Ecommerce Product Event Error",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EcommerceProductEventErrorType"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable description of the error. For \u0060invalid_event\u0060, every validation error is listed, separated by \u0060; \u0060.",
+            "example": "data.product.id is required"
+          }
+        },
+        "description": "Returned when a product event is rejected."
+      },
+      "EcommerceProductEventProduct": {
+        "title": "Ecommerce Product Event Product",
+        "required": [
+          "id",
+          "title",
+          "url",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Your unique product identifier. Used to match products on re-upload so only changed products are re-indexed. Also the delete key \u2014 any product ID absent from a new upload is removed from Fin\u0027s knowledge. Must be stable across uploads.",
+            "example": "prod-12345"
+          },
+          "title": {
+            "type": "string",
+            "description": "Product name. Used by Fin when searching for and recommending products.",
+            "example": "Classic Cotton T-Shirt"
+          },
+          "url": {
+            "type": "string",
+            "description": "Canonical product page URL shown in Fin\u0027s product recommendations. Must be a valid https:// URL.",
+            "example": "https://example.com/products/classic-cotton-t-shirt"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description that Fin reads to understand what the product is. HTML formatting is supported and safely sanitized (\u0060description_html\u0060 takes precedence if both are provided). This is the primary field Fin uses to match products to shopper questions \u2014 a richer description leads to better recommendations.",
+            "nullable": true,
+            "example": "A comfortable everyday t-shirt made from 100% organic cotton."
+          },
+          "description_html": {
+            "type": "string",
+            "description": "HTML product description. Takes precedence over \u0060description\u0060 when both are provided. HTML is safely sanitized before indexing.",
+            "nullable": true,
+            "example": "\u003Cp\u003EA comfortable everyday t-shirt made from \u003Cstrong\u003E100% organic cotton\u003C/strong\u003E.\u003C/p\u003E"
+          },
+          "featured_image_url": {
+            "type": "string",
+            "description": "Primary product image shown in Fin\u0027s recommendation cards. Falls back to the first entry of \u0060image_urls\u0060 if not provided. If no valid image can be resolved for a variant, that variant\u0027s recommendation card is not shown to the shopper.",
+            "nullable": true,
+            "example": "https://cdn.example.com/images/t-shirt-main.jpg"
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional product images. Used as a fallback image source when \u0060featured_image_url\u0060 is absent or when a variant has no specific image."
+          },
+          "price_min": {
+            "type": "number",
+            "description": "Lowest price across all variants. If omitted, derived automatically from variant prices. Fin uses this to filter products when a shopper mentions a budget (e.g. \u0022under $100\u0022). Displayed as a range alongside \u0060price_max\u0060, or as a single value if both are equal.",
+            "nullable": true,
+            "example": 19.99
+          },
+          "price_max": {
+            "type": "number",
+            "description": "Highest price across all variants. If omitted, derived from variant prices. Used alongside \u0060price_min\u0060 for budget filtering and price display.",
+            "nullable": true,
+            "example": 39.99
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code for all prices on this product (e.g. \u0022USD\u0022, \u0022EUR\u0022, \u0022GBP\u0022). Defaults to USD if omitted. Used to format prices with the correct symbol in Fin\u0027s responses and product cards.",
+            "nullable": true,
+            "example": "USD"
+          },
+          "in_stock": {
+            "type": "boolean",
+            "description": "Whether the product is available to purchase. If omitted, derived from variant stock \u2014 the\nproduct is in stock if at least one variant has \u0060in_stock: true\u0060. Products with no in-stock\nvariants are hidden from Fin entirely and will not be recommended to shoppers.\n",
+            "nullable": true,
+            "example": true
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Free-form keywords matching how shoppers phrase needs in chat (e.g. \u0022waterproof\u0022, \u0022gift\u0022, \u0022plus-size\u0022). Used by Fin to match fuzzy queries; complements \u0060category_path\u0060 and \u0060collections\u0060."
+          },
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogProductCollectionsItem"
+            },
+            "description": "Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog\u0027s structure and answer questions like \u0022what\u0027s in the sale collection?\u0022. Each element may be a plain string or an object with a \u0060title\u0060 field."
+          },
+          "category_path": {
+            "$ref": "#/components/schemas/EcommerceCatalogProductCategoryPath"
+          },
+          "available_options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogProductAvailableOptionsItem"
+            },
+            "description": "Option types available for this product and their possible values\n(e.g. \u0060{\u0022name\u0022: \u0022Size\u0022, \u0022values\u0022: [\u0022S\u0022, \u0022M\u0022, \u0022L\u0022]}\u0060). Fin uses these to understand what\nchoices a shopper can make and to correctly filter variants when a shopper asks for a\nspecific size, colour, or other attribute.\n"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceCatalogVariant"
+            },
+            "description": "Individual purchasable variants of the product. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See \u0060ecommerce_catalog_variant\u0060 for the variant object schema."
+          },
+          "additional_data": {
+            "$ref": "#/components/schemas/EcommerceProductEventProductAdditionalData"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "When the product was created in your store, as an ISO 8601 timestamp.",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2026-10-14T09:30:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "When the product was last changed in your store, as an ISO 8601 timestamp. Used to order events, so an older version never overwrites a newer one.",
+            "format": "date-time",
+            "example": "2026-10-15T14:05:00Z"
+          }
+        },
+        "description": "The full product sent in a \u0060product.created\u0060 or \u0060product.updated\u0060 event. It uses the same\nfields as \u0060ecommerce_catalog_product\u0060, plus \u0060updated_at\u0060, which is required. The serialized\nproduct must be 60 KB or smaller.\n"
+      },
+      "EcommerceProductEventRequest": {
+        "title": "Ecommerce Product Event Request",
+        "required": [
+          "type",
+          "occurred_at",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/EcommerceProductEventRequestType"
+          },
+          "occurred_at": {
+            "type": "string",
+            "description": "When the change happened, as an ISO 8601 timestamp. For \u0060product.deleted\u0060, this is compared with the stored product\u0027s \u0060updated_at\u0060 to decide whether the delete applies.",
+            "format": "date-time",
+            "example": "2026-10-15T14:05:00Z"
+          },
+          "data": {
+            "$ref": "#/components/schemas/EcommerceProductEventRequestData"
+          }
+        },
+        "description": "A single product event."
+      },
+      "EcommerceProductEventResponse": {
+        "title": "Ecommerce Product Event Response",
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "integer",
+            "description": "The unique identifier for the queued event.",
+            "example": 81273
+          }
+        },
+        "description": "Returned when a product event is accepted and queued."
       },
       "EmailAddressHeader": {
         "title": "Email Address Header",
@@ -56749,6 +57271,43 @@
         "description": "Register a Fin Voice call with Intercom",
         "nullable": true
       },
+      "AiTopicSubtopicListItem": {
+        "type": "object",
+        "properties": {
+          "topic_name": {
+            "type": "string",
+            "description": "The name of the topic.",
+            "example": "Billing"
+          },
+          "subtopic_name": {
+            "type": "string",
+            "description": "The name of the subtopic, where the topic has one.",
+            "nullable": true,
+            "example": "Refund request"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the subtopic.",
+            "nullable": true,
+            "example": 12345
+          }
+        }
+      },
+      "CxScoreReasonListItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the reason.",
+            "example": "Resolution speed"
+          },
+          "value": {
+            "type": "string",
+            "description": "The value recorded for the reason.",
+            "example": "Fast"
+          }
+        }
+      },
       "AttachContactToConversationRequestCustomer": {
         "type": "object",
         "oneOf": [
@@ -57163,6 +57722,54 @@
             "$ref": "#/components/schemas/CustomAttributesAdditionalPropertiesBranch2"
           },
           {
+            "$ref": "#/components/schemas/CustomAttributesAdditionalPropertiesBranch3"
+          },
+          {
+            "$ref": "#/components/schemas/CustomAttributesAdditionalPropertiesBranch4"
+          },
+          {
+            "$ref": "#/components/schemas/Datetime"
+          },
+          {
+            "$ref": "#/components/schemas/CustomObjectInstanceList"
+          },
+          {
+            "$ref": "#/components/schemas/AiTopicSubtopicListWrapper"
+          },
+          {
+            "$ref": "#/components/schemas/CxScoreReasonListWrapper"
+          }
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "order.list"
+          },
+          "instances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomObjectInstance"
+            },
+            "description": "The list of associated custom object instances for a given reference attribute on the parent object."
+          }
+        }
+      },
+      "CustomAttributesRequestAdditionalProperties": {
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/CustomAttributesRequestAdditionalPropertiesBranch1"
+          },
+          {
+            "$ref": "#/components/schemas/CustomAttributesRequestAdditionalPropertiesBranch2"
+          },
+          {
+            "$ref": "#/components/schemas/CustomAttributesRequestAdditionalPropertiesBranch3"
+          },
+          {
+            "$ref": "#/components/schemas/CustomAttributesRequestAdditionalPropertiesBranch4"
+          },
+          {
             "$ref": "#/components/schemas/Datetime"
           },
           {
@@ -57423,6 +58030,27 @@
           }
         ],
         "description": "Hierarchical category breadcrumb for the product. Fin understands the hierarchy \u2014 a\nshopper asking about \u0022Clothing\u0022 will see products from all subcategories underneath it.\nThe most specific category is shown in search results. Strongly recommended. Provide as\na pre-formatted string (e.g. \u0060\u0022Clothing \u003E T-Shirts\u0022\u0060) or as an array of path segments\n(e.g. \u0060[\u0022Clothing\u0022, \u0022T-Shirts\u0022]\u0060). Array segments are joined with \u0060 \u003E \u0060.\n"
+      },
+      "EcommerceProductEventProductAllOf2": {
+        "required": [
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "description": "When the product was created in your store, as an ISO 8601 timestamp.",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2026-10-14T09:30:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "When the product was last changed in your store, as an ISO 8601 timestamp. Used to order events, so an older version never overwrites a newer one.",
+            "format": "date-time",
+            "example": "2026-10-15T14:05:00Z"
+          }
+        }
       },
       "GrantedCompanyListPages": {
         "type": "object",
@@ -58484,6 +59112,11 @@
             "type": "string",
             "description": "The unique identifier for the contact.",
             "example": "abc123"
+          },
+          "role": {
+            "type": "string",
+            "description": "The updated contact\u0027s role (optional).",
+            "example": "user"
           },
           "external_id": {
             "type": "string",
@@ -59721,6 +60354,20 @@
           "sku": "TSHIRT-BLU-L",
           "vendor": "Acme Apparel"
         }
+      },
+      "EcommerceProductEventRequestData": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/EcommerceProductEventProduct"
+          },
+          "product_id": {
+            "type": "string",
+            "description": "The \u0060id\u0060 of the product to delete. Required for \u0060product.deleted\u0060.",
+            "example": "tent-2p-ultralight"
+          }
+        },
+        "description": "The event payload. Send \u0060product\u0060 for \u0060product.created\u0060 and \u0060product.updated\u0060, and \u0060product_id\u0060 for \u0060product.deleted\u0060."
       },
       "ConversationAttributeUpdatedByWorkflowWorkflow": {
         "type": "object",
@@ -64532,6 +65179,102 @@
           }
         }
       },
+      "CustomAttributesAdditionalPropertiesBranch3": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          }
+        }
+      },
+      "CustomAttributesAdditionalPropertiesBranch4": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AiTopicSubtopicListWrapper": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AiTopicSubtopicListItem"
+            },
+            "description": "The topics Fin detected in a conversation, returned under the \u0022AI Topic and Subtopic\u0022 key of a conversation\u0027s custom attributes. Generated by Fin and returned in responses only; it cannot be set on a request."
+          }
+        }
+      },
+      "CxScoreReasonListWrapper": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CxScoreReasonListItem"
+            },
+            "description": "The reasons behind a conversation\u0027s CX Score, returned under the \u0022CX Score reasons\u0022 key of a conversation\u0027s custom attributes. Generated by Fin and returned in responses only; it cannot be set on a request."
+          }
+        }
+      },
+      "CustomAttributesRequestAdditionalPropertiesBranch1": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "CustomAttributesRequestAdditionalPropertiesBranch2": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer"
+          }
+        }
+      },
+      "CustomAttributesRequestAdditionalPropertiesBranch3": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          }
+        }
+      },
+      "CustomAttributesRequestAdditionalPropertiesBranch4": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "boolean"
+          }
+        }
+      },
       "EcommerceCatalogProductCollectionsItemBranch1": {
         "required": [
           "value"
@@ -64807,14 +65550,14 @@
         "additionalProperties": {
           "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
-        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as \u0022CX Score rating\u0022 and \u0022CX Score explanation\u0022 may also be included."
+        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. Attributes that Intercom generates \u2014 such as \u0022CX Score rating\u0022, \u0022CX Score explanation\u0022, \u0022AI Topic and Subtopic\u0022 and \u0022CX Score reasons\u0022 \u2014 may also be included. Two of them, \u0022AI Topic and Subtopic\u0022 and \u0022CX Score reasons\u0022, carry lists of objects as their values, and are returned in responses only \u2014 they cannot be set on a write request."
       },
       "ConversationCustomAttributes": {
         "type": "object",
         "additionalProperties": {
           "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
-        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as \u0022CX Score rating\u0022 and \u0022CX Score explanation\u0022 may also be included."
+        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. Attributes that Intercom generates \u2014 such as \u0022CX Score rating\u0022, \u0022CX Score explanation\u0022, \u0022AI Topic and Subtopic\u0022 and \u0022CX Score reasons\u0022 \u2014 may also be included. Two of them, \u0022AI Topic and Subtopic\u0022 and \u0022CX Score reasons\u0022, carry lists of objects as their values, and are returned in responses only \u2014 they cannot be set on a write request."
       },
       "ConversationPartTranslationsProperty": {
         "type": "object",
@@ -64855,9 +65598,9 @@
       "CreatePhoneSwitchRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CustomAttributesRequestAdditionalProperties"
         },
-        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as \u0022CX Score rating\u0022 and \u0022CX Score explanation\u0022 may also be included."
+        "description": "The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here \u2014 attributes Intercom generates are returned in responses only."
       },
       "CreateTicketRequestTicketAttributes": {
         "type": "object",
@@ -64886,6 +65629,10 @@
         "description": "Optional metadata about the event."
       },
       "EcommerceCatalogProductAdditionalDataProperty": {
+        "type": "object",
+        "description": "Custom attributes for your business. Fin uses these to show each customer only the products relevant to them (e.g. regional availability or warehouse codes). All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file."
+      },
+      "EcommerceProductEventProductAdditionalData": {
         "type": "object",
         "description": "Custom attributes for your business. Fin uses these to show each customer only the products relevant to them (e.g. regional availability or warehouse codes). All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file."
       },
@@ -64962,9 +65709,9 @@
       "UpdateConversationRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CustomAttributesRequestAdditionalProperties"
         },
-        "description": "An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as \u0022CX Score rating\u0022 and \u0022CX Score explanation\u0022 may also be included."
+        "description": "The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here \u2014 attributes Intercom generates are returned in responses only."
       },
       "UpdateTicketRequestTicketAttributesProperty": {
         "type": "object",
@@ -69201,6 +69948,69 @@
             {
               "value": "processing",
               "name": "Processing"
+            }
+          ]
+        }
+      },
+      "EcommerceProductEventErrorType": {
+        "enum": [
+          "invalid_event",
+          "import_source_not_found",
+          "not_found",
+          "catalog_not_uploaded"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The error code.",
+        "example": "invalid_event",
+        "x-ms-enum": {
+          "name": "EcommerceProductEventErrorType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "invalid_event",
+              "name": "InvalidEvent"
+            },
+            {
+              "value": "import_source_not_found",
+              "name": "ImportSourceNotFound"
+            },
+            {
+              "value": "not_found",
+              "name": "NotFound"
+            },
+            {
+              "value": "catalog_not_uploaded",
+              "name": "CatalogNotUploaded"
+            }
+          ]
+        }
+      },
+      "EcommerceProductEventRequestType": {
+        "enum": [
+          "product.created",
+          "product.updated",
+          "product.deleted"
+        ],
+        "type": "string",
+        "additionalProperties": false,
+        "description": "The kind of product change.",
+        "example": "product.updated",
+        "x-ms-enum": {
+          "name": "EcommerceProductEventRequestType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "product.created",
+              "name": "ProductCreated"
+            },
+            {
+              "value": "product.updated",
+              "name": "ProductUpdated"
+            },
+            {
+              "value": "product.deleted",
+              "name": "ProductDeleted"
             }
           ]
         }

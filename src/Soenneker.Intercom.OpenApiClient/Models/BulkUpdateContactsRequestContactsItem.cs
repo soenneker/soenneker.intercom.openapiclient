@@ -96,6 +96,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Phone { get; set; }
 #endif
+        /// <summary>The updated contact&apos;s role (optional).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Role { get; set; }
+#nullable restore
+#else
+        public string Role { get; set; }
+#endif
         /// <summary>Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -142,6 +150,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "role", n => { Role = n.GetStringValue(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags.CreateFromDiscriminatorValue); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
             };
@@ -164,6 +173,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteStringValue("role", Role);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags>("tags", Tags);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteAdditionalData(AdditionalData);

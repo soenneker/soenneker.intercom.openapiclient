@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string CompanyId { get; set; }
 #endif
-        /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models. System-defined attributes such as &quot;CX Score rating&quot; and &quot;CX Score explanation&quot; may also be included.</summary>
+        /// <summary>The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set are accepted here — attributes Intercom generates are returned in responses only.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateConversationRequestCustomAttributes? CustomAttributes { get; set; }
