@@ -119,7 +119,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Title { get; set; }
 #endif
-        /// <summary>When the product was last changed in your store, as an ISO 8601 timestamp. Used to order events, so an older version never overwrites a newer one.</summary>
+        /// <summary>When the product was last changed in your store, as an ISO 8601 timestamp.</summary>
         public DateTimeOffset? UpdatedAt { get; set; }
         /// <summary>Canonical product page URL shown in Fin&apos;s product recommendations. Must be a valid https:// URL.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

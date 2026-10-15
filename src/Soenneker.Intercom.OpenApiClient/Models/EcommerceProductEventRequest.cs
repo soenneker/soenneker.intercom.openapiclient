@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventRequestData Data { get; set; }
 #endif
-        /// <summary>When the change happened, as an ISO 8601 timestamp. For `product.deleted`, this is compared with the stored product&apos;s `updated_at` to decide whether the delete applies.</summary>
+        /// <summary>When the change happened, as an ISO 8601 timestamp.</summary>
         public DateTimeOffset? OccurredAt { get; set; }
         /// <summary>The kind of product change.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventRequestType? Type { get; set; }

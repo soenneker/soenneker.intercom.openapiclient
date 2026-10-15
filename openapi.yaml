@@ -1426,10 +1426,18 @@ paths:
                       state: published
                       created_at: 1734537283
                       updated_at: 1734537283
+                      has_unpublished_changes: false
+                      draft_updated_at: null
                       url: http://help-center.test/myapp-64/en/articles/39-this-is-the-article-title
                       ai_chatbot_availability: true
                       ai_copilot_availability: true
                       ai_sales_agent_availability: true
+                      created_by_id: 5017691
+                      updated_by_id: 5017691
+                      exclude_from_article_suggestions: false
+                      help_center_audience: everyone
+                      scheduled_publish_at: null
+                      scheduled_unpublish_at: null
               schema:
                 "$ref": "#/components/schemas/article_list"
         '401':
@@ -1480,6 +1488,9 @@ paths:
                       happy_reaction_percentage: 0
                       neutral_reaction_percentage: 0
                       sad_reaction_percentage: 0
+                      fin_involvements: 0
+                      fin_resolutions: 0
+                      fin_resolution_rate: 0
                     tags:
                       type: tag.list
                       tags: []
@@ -1491,10 +1502,18 @@ paths:
                     state: published
                     created_at: 1734537288
                     updated_at: 1734537288
+                    has_unpublished_changes: false
+                    draft_updated_at: null
                     url: http://help-center.test/myapp-68/en/articles/42-thanks-for-everything
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_by_id: 5017691
+                    updated_by_id: 5017691
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '400':
@@ -1613,6 +1632,9 @@ paths:
                       happy_reaction_percentage: 0
                       neutral_reaction_percentage: 0
                       sad_reaction_percentage: 0
+                      fin_involvements: 0
+                      fin_resolutions: 0
+                      fin_resolution_rate: 0
                     tags:
                       type: tag.list
                       tags: []
@@ -1624,10 +1646,18 @@ paths:
                     state: published
                     created_at: 1734537292
                     updated_at: 1734537292
+                    has_unpublished_changes: false
+                    draft_updated_at: null
                     url: http://help-center.test/myapp-74/en/articles/45-this-is-the-article-title
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_by_id: 5017691
+                    updated_by_id: 5017691
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '404':
@@ -1700,6 +1730,9 @@ paths:
                       happy_reaction_percentage: 0
                       neutral_reaction_percentage: 0
                       sad_reaction_percentage: 0
+                      fin_involvements: 0
+                      fin_resolutions: 0
+                      fin_resolution_rate: 0
                     tags:
                       type: tag.list
                       tags: []
@@ -1711,10 +1744,18 @@ paths:
                     state: published
                     created_at: 1734537297
                     updated_at: 1734537298
+                    has_unpublished_changes: false
+                    draft_updated_at: null
                     url: http://help-center.test/myapp-80/en/articles/48-christmas-is-here
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_by_id: 5017691
+                    updated_by_id: 5017691
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '400':
@@ -2558,6 +2599,12 @@ paths:
                         ai_chatbot_availability: true
                         ai_copilot_availability: true
                         ai_sales_agent_availability: true
+                        created_by_id: 5017691
+                        updated_by_id: 5017691
+                        exclude_from_article_suggestions: false
+                        help_center_audience: everyone
+                        scheduled_publish_at: null
+                        scheduled_unpublish_at: null
                       highlights: []
                     pages:
                       type: pages
@@ -20554,18 +20601,6 @@ paths:
 
         `occurred_at` is required on every event and must be an ISO 8601 timestamp.
 
-        ## Ordering
-
-        Events can arrive out of order. The newest version of a product wins:
-
-        - If the stored product has a newer `updated_at` than the product in a
-          `product.created` or `product.updated` event, the event is ignored.
-        - If the stored product has a newer `updated_at` than a `product.deleted` event's
-          `occurred_at`, the delete is ignored.
-        - Once a product is deleted, an update with an older `updated_at` than the delete's
-          `occurred_at` does not bring it back.
-        - Events sent while a full catalog upload is running are kept.
-
         ## Processing
 
         The endpoint returns `202 Accepted` with an `event_id` once the event is queued.
@@ -21729,7 +21764,7 @@ paths:
         the Message model that has been created.\n\n> \U0001F6A7 Retrieving Associated
         Conversations\n>\n> As this is a message, there will be no conversation present
         until the contact responds. Once they do, you will have to search for a contact's
-        conversations with the id of the message.\n"
+        conversations with the id of the message.\n\n{% admonition type=\"warning\" name=\"Messages from contacts\" %}\n`from` should be an admin. A request with a user or lead as `from` is not rejected: it creates a conversation initiated by that contact, as the Create a conversation endpoint (`POST /conversations`) does, and the `to`, `cc` and `bcc` fields are ignored. To create a conversation initiated by a contact, use `POST /conversations`.\n{% /admonition %}\n"
       responses:
         '200':
           description: admin message created
@@ -23382,6 +23417,158 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/sla_rules":
+    get:
+      summary: List all SLA rules
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      tags:
+      - SLA Rules
+      operationId: listSlaRules
+      description: |
+        You can fetch a list of all SLA rules for the workspace.
+
+        The list is not paginated and is ordered by `id`, lowest first. It includes archived SLA rules; deleted SLA rules are not returned.
+
+        Requires the `read_conversations` OAuth scope.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                Successful response:
+                  value:
+                    type: sla_rule.list
+                    data:
+                    - type: sla_rule
+                      id: '12'
+                      name: VIP customers
+                      created_at: 1717200000
+                      updated_at: 1719800000
+                      archived: false
+                      archived_at:
+                      first_reply_time_in_seconds: 3600
+                      next_reply_time_in_seconds:
+                      time_to_close_in_seconds:
+                      resolution_time_in_seconds: 86400
+                      speed_of_answer_in_seconds:
+                      office_hours_schedule_id: '123'
+                      pause_on_waiting_on_customer: true
+                      pause_on_snooze: false
+                    - type: sla_rule
+                      id: '15'
+                      name: Priority billing
+                      created_at: 1718000000
+                      updated_at: 1721000000
+                      archived: true
+                      archived_at: 1721000000
+                      first_reply_time_in_seconds: 1800
+                      next_reply_time_in_seconds: 3600
+                      time_to_close_in_seconds:
+                      resolution_time_in_seconds:
+                      speed_of_answer_in_seconds:
+                      office_hours_schedule_id:
+                      pause_on_waiting_on_customer: false
+                      pause_on_snooze: false
+              schema:
+                "$ref": "#/components/schemas/sla_rule_list"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          description: SLA rules are not available on the workspace's plan
+          content:
+            application/json:
+              examples:
+                SLA rules are not available on the workspace's plan:
+                  value:
+                    type: error.list
+                    request_id: 7c1e5a9d-3b42-4f68-9d05-e2a8b4c6f713
+                    errors:
+                    - code: api_plan_restricted
+                      message: SLA rules are not available on your current plan.
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/sla_rules/{id}":
+    get:
+      summary: Retrieve an SLA rule
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier for the SLA rule.
+        example: '12'
+        schema:
+          type: string
+      tags:
+      - SLA Rules
+      operationId: getSlaRule
+      description: |
+        You can fetch the details of a single SLA rule, including archived SLA rules.
+
+        Requires the `read_conversations` OAuth scope.
+      responses:
+        '200':
+          description: SLA rule found
+          content:
+            application/json:
+              examples:
+                SLA rule found:
+                  value:
+                    type: sla_rule
+                    id: '12'
+                    name: VIP customers
+                    created_at: 1717200000
+                    updated_at: 1719800000
+                    archived: false
+                    archived_at:
+                    first_reply_time_in_seconds: 3600
+                    next_reply_time_in_seconds:
+                    time_to_close_in_seconds:
+                    resolution_time_in_seconds: 86400
+                    speed_of_answer_in_seconds:
+                    office_hours_schedule_id: '123'
+                    pause_on_waiting_on_customer: true
+                    pause_on_snooze: false
+              schema:
+                "$ref": "#/components/schemas/sla_rule"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          description: SLA rules are not available on the workspace's plan
+          content:
+            application/json:
+              examples:
+                SLA rules are not available on the workspace's plan:
+                  value:
+                    type: error.list
+                    request_id: 5a2f8c14-9e63-4b07-a1d9-0c7e3b5f2a86
+                    errors:
+                    - code: api_plan_restricted
+                      message: SLA rules are not available on your current plan.
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: SLA rule not found
+          content:
+            application/json:
+              examples:
+                SLA rule not found:
+                  value:
+                    type: error.list
+                    request_id: 9e4d1b72-6c35-4a80-8f29-b3d7a0e5c164
+                    errors:
+                    - code: sla_rule_not_found
+                      message: SLA rule not found
               schema:
                 "$ref": "#/components/schemas/error"
   "/subscription_types":
@@ -29804,13 +29991,16 @@ components:
         previous_state:
           type: string
           nullable: true
-          description: The state before the change. `idle` or `occupied`, and null
-            when the Admin had not been classified yet.
+          description: The state before the change. `idle` or `occupied` for an
+            occupancy change, and null when the Admin had not been classified
+            yet; `enabled` or `disabled` for an IP allowlist change.
           example: idle
         new_state:
           type: string
           nullable: true
-          description: The state after the change. `idle` or `occupied`.
+          description: The state after the change. `idle` or `occupied` for an
+            occupancy change; `enabled` or `disabled` for an IP allowlist
+            change.
           example: occupied
         threshold_minutes:
           type: integer
@@ -36588,13 +36778,12 @@ components:
           description: >-
             ISO 8601 timestamp at which to schedule a future publish of the article.
             When set together with `state: "published"`, the article is scheduled
-            instead of published immediately. Setting `null` cancels a pending
-            publish schedule. Timestamps in the past or equal to the current time
-            are rejected with 400 `parameter_invalid` — the value must be strictly
-            in the future. Combining with `state: "draft"` returns 400
-            `parameter_invalid`. Sending in the same request as
-            `scheduled_unpublish_at` returns 400 — only one pending schedule per
-            article. Empty string returns 400 `parameter_invalid`.
+            instead of published immediately. The value must be strictly in the future —
+            timestamps in the past or equal to the current time are rejected with 400
+            `parameter_invalid`. Setting `null` cancels a pending publish schedule.
+            Combining with `state: "draft"` returns 400 `parameter_invalid`. Sending in
+            the same request as `scheduled_unpublish_at` returns 400 — only one pending
+            schedule per article. Empty string returns 400 `parameter_invalid`.
           example: '2026-12-31T09:00:00Z'
         scheduled_unpublish_at:
           type: string
@@ -36602,13 +36791,12 @@ components:
           nullable: true
           description: >-
             ISO 8601 timestamp at which to schedule a future unpublish of the article.
-            Setting `null` cancels a pending unpublish schedule. Timestamps in the
-            past or equal to the current time are rejected with 400
-            `parameter_invalid` — the value must be strictly in the future. Rejected
-            with 400 `parameter_invalid` if the article has never been published.
-            Sending in the same request as `scheduled_publish_at` returns 400 — only
-            one pending schedule per article. Empty string returns 400
-            `parameter_invalid`.
+            The value must be strictly in the future — timestamps in the past or equal to
+            the current time are rejected with 400 `parameter_invalid`. Setting `null`
+            cancels a pending unpublish schedule. Rejected with 400 `parameter_invalid`
+            if the article has never been published. Sending in the same request as
+            `scheduled_publish_at` returns 400 — only one pending schedule per article.
+            Empty string returns 400 `parameter_invalid`.
           example: '2026-12-31T17:00:00Z'
       required:
       - title
@@ -40425,7 +40613,7 @@ components:
           updated_at:
             type: string
             format: date-time
-            description: When the product was last changed in your store, as an ISO 8601 timestamp. Used to order events, so an older version never overwrites a newer one.
+            description: When the product was last changed in your store, as an ISO 8601 timestamp.
             example: '2026-10-15T14:05:00Z'
     ecommerce_product_event_request:
       title: Ecommerce Product Event Request
@@ -40447,7 +40635,7 @@ components:
         occurred_at:
           type: string
           format: date-time
-          description: When the change happened, as an ISO 8601 timestamp. For `product.deleted`, this is compared with the stored product's `updated_at` to decide whether the delete applies.
+          description: When the change happened, as an ISO 8601 timestamp.
           example: '2026-10-15T14:05:00Z'
         data:
           type: object
@@ -43997,6 +44185,108 @@ components:
                         - `missed`: If there are any missed sla_events for the conversation and no canceled events. If there’s even a single missed sla event, the status will always be missed. A missed status is not applied when the SLA expires, only the next time a teammate replies.
                         - `active`: An SLA has been applied to a conversation, but has not yet been fulfilled. SLA status is active only if there are no “hit, “missed”, or “canceled” events.
           example: hit
+    sla_rule:
+      title: SLA Rule
+      type: object
+      x-tags:
+      - SLA Rules
+      description: An SLA rule is a workspace's service-level agreement definition.
+        It sets the response-time targets a conversation is measured against.
+      properties:
+        type:
+          type: string
+          description: The type of the object - always `sla_rule`.
+          example: sla_rule
+        id:
+          type: string
+          description: The unique identifier for the SLA rule.
+          example: '12'
+        name:
+          type: string
+          description: The name of the SLA rule. It is unique within the workspace.
+          example: VIP customers
+        created_at:
+          type: integer
+          description: The time the SLA rule was created as a Unix timestamp.
+          example: 1717200000
+        updated_at:
+          type: integer
+          description: The time the SLA rule was last updated as a Unix timestamp.
+          example: 1719800000
+        archived:
+          type: boolean
+          description: Whether the SLA rule is archived.
+          example: false
+        archived_at:
+          type: integer
+          nullable: true
+          description: The time the SLA rule was archived as a Unix timestamp, or
+            `null` if it is not archived.
+          example: 1721000000
+        first_reply_time_in_seconds:
+          type: integer
+          nullable: true
+          description: The target time in seconds for the first reply, or `null`
+            if no target is set.
+          example: 3600
+        next_reply_time_in_seconds:
+          type: integer
+          nullable: true
+          description: The target time in seconds for a teammate to reply to each
+            subsequent customer message, or `null` if no target is set.
+          example: 7200
+        time_to_close_in_seconds:
+          type: integer
+          nullable: true
+          description: The target time in seconds for closing the conversation, or
+            `null` if no target is set.
+          example: 172800
+        resolution_time_in_seconds:
+          type: integer
+          nullable: true
+          description: The target time in seconds for a ticket to be resolved, or
+            `null` if no target is set.
+          example: 86400
+        speed_of_answer_in_seconds:
+          type: integer
+          nullable: true
+          description: The target time in seconds to answer an inbound phone call,
+            or `null` if no target is set. This timer does not pause.
+          example: 120
+        office_hours_schedule_id:
+          type: string
+          nullable: true
+          description: The unique identifier for the [office hours schedule](/docs/references/preview/rest-api/api.intercom.io/office-hours/getofficehoursschedule)
+            the SLA rule's timers count against. This is the SLA rule's own schedule
+            if it has one, otherwise the workspace's default schedule. It is `null`
+            if neither exists.
+          example: '123'
+        pause_on_waiting_on_customer:
+          type: boolean
+          description: Whether the SLA rule's timers pause while the conversation
+            is waiting on the customer.
+          example: true
+        pause_on_snooze:
+          type: boolean
+          description: Whether the SLA rule's timers pause while the conversation
+            is snoozed.
+          example: false
+    sla_rule_list:
+      title: SLA Rule List
+      type: object
+      x-tags:
+      - SLA Rules
+      description: A list of SLA rules for the workspace.
+      properties:
+        type:
+          type: string
+          description: The type of the object - always `sla_rule.list`.
+          example: sla_rule.list
+        data:
+          type: array
+          description: An array of SLA rules.
+          items:
+            "$ref": "#/components/schemas/sla_rule"
     snooze_conversation_request:
       title: Snooze Conversation Request
       type: object
@@ -45600,13 +45890,12 @@ components:
           description: >-
             ISO 8601 timestamp at which to schedule a future publish of the article.
             When set together with `state: "published"`, the article is scheduled
-            instead of published immediately. Setting `null` cancels a pending
-            publish schedule. Timestamps in the past or equal to the current time
-            are rejected with 400 `parameter_invalid` — the value must be strictly
-            in the future. Combining with `state: "draft"` returns 400
-            `parameter_invalid`. Sending in the same request as
-            `scheduled_unpublish_at` returns 400 — only one pending schedule per
-            article. Empty string returns 400 `parameter_invalid`.
+            instead of published immediately. The value must be strictly in the future —
+            timestamps in the past or equal to the current time are rejected with 400
+            `parameter_invalid`. Setting `null` cancels a pending publish schedule.
+            Combining with `state: "draft"` returns 400 `parameter_invalid`. Sending in
+            the same request as `scheduled_unpublish_at` returns 400 — only one pending
+            schedule per article. Empty string returns 400 `parameter_invalid`.
           example: '2026-12-31T09:00:00Z'
         scheduled_unpublish_at:
           type: string
@@ -45614,13 +45903,12 @@ components:
           nullable: true
           description: >-
             ISO 8601 timestamp at which to schedule a future unpublish of the article.
-            Setting `null` cancels a pending unpublish schedule. Timestamps in the
-            past or equal to the current time are rejected with 400
-            `parameter_invalid` — the value must be strictly in the future. Rejected
-            with 400 `parameter_invalid` if the article has never been published.
-            Sending in the same request as `scheduled_publish_at` returns 400 — only
-            one pending schedule per article. Empty string returns 400
-            `parameter_invalid`.
+            The value must be strictly in the future — timestamps in the past or equal to
+            the current time are rejected with 400 `parameter_invalid`. Setting `null`
+            cancels a pending unpublish schedule. Rejected with 400 `parameter_invalid`
+            if the article has never been published. Sending in the same request as
+            `scheduled_publish_at` returns 400 — only one pending schedule per article.
+            Empty string returns 400 `parameter_invalid`.
           example: '2026-12-31T17:00:00Z'
     update_internal_article_request:
       description: You can Update an Internal Article
@@ -46896,6 +47184,9 @@ tags:
   description: Everything about your Roles
 - name: Segments
   description: Everything about your Segments
+- name: SLA Rules
+  description: |
+    Read the SLA rules defined in your workspace. An SLA rule is a service-level agreement definition: the response-time targets a conversation is measured against.
 - name: Subscription Types
   description: Everything about subscription types
 - name: Switch

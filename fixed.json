@@ -1962,10 +1962,18 @@
                           "state": "published",
                           "created_at": 1734537283,
                           "updated_at": 1734537283,
+                          "has_unpublished_changes": false,
+                          "draft_updated_at": null,
                           "url": "http://help-center.test/myapp-64/en/articles/39-this-is-the-article-title",
                           "ai_chatbot_availability": true,
                           "ai_copilot_availability": true,
-                          "ai_sales_agent_availability": true
+                          "ai_sales_agent_availability": true,
+                          "created_by_id": 5017691,
+                          "updated_by_id": 5017691,
+                          "exclude_from_article_suggestions": false,
+                          "help_center_audience": "everyone",
+                          "scheduled_publish_at": null,
+                          "scheduled_unpublish_at": null
                         }
                       ]
                     }
@@ -2080,7 +2088,10 @@
                         "reactions": 0,
                         "happy_reaction_percentage": 0,
                         "neutral_reaction_percentage": 0,
-                        "sad_reaction_percentage": 0
+                        "sad_reaction_percentage": 0,
+                        "fin_involvements": 0,
+                        "fin_resolutions": 0,
+                        "fin_resolution_rate": 0
                       },
                       "tags": {
                         "type": "tag.list",
@@ -2094,10 +2105,18 @@
                       "state": "published",
                       "created_at": 1734537288,
                       "updated_at": 1734537288,
+                      "has_unpublished_changes": false,
+                      "draft_updated_at": null,
                       "url": "http://help-center.test/myapp-68/en/articles/42-thanks-for-everything",
                       "ai_chatbot_availability": true,
                       "ai_copilot_availability": true,
-                      "ai_sales_agent_availability": true
+                      "ai_sales_agent_availability": true,
+                      "created_by_id": 5017691,
+                      "updated_by_id": 5017691,
+                      "exclude_from_article_suggestions": false,
+                      "help_center_audience": "everyone",
+                      "scheduled_publish_at": null,
+                      "scheduled_unpublish_at": null
                     }
                   }
                 }
@@ -2230,7 +2249,10 @@
                         "reactions": 0,
                         "happy_reaction_percentage": 0,
                         "neutral_reaction_percentage": 0,
-                        "sad_reaction_percentage": 0
+                        "sad_reaction_percentage": 0,
+                        "fin_involvements": 0,
+                        "fin_resolutions": 0,
+                        "fin_resolution_rate": 0
                       },
                       "tags": {
                         "type": "tag.list",
@@ -2244,10 +2266,18 @@
                       "state": "published",
                       "created_at": 1734537292,
                       "updated_at": 1734537292,
+                      "has_unpublished_changes": false,
+                      "draft_updated_at": null,
                       "url": "http://help-center.test/myapp-74/en/articles/45-this-is-the-article-title",
                       "ai_chatbot_availability": true,
                       "ai_copilot_availability": true,
-                      "ai_sales_agent_availability": true
+                      "ai_sales_agent_availability": true,
+                      "created_by_id": 5017691,
+                      "updated_by_id": 5017691,
+                      "exclude_from_article_suggestions": false,
+                      "help_center_audience": "everyone",
+                      "scheduled_publish_at": null,
+                      "scheduled_unpublish_at": null
                     }
                   }
                 }
@@ -2381,7 +2411,10 @@
                         "reactions": 0,
                         "happy_reaction_percentage": 0,
                         "neutral_reaction_percentage": 0,
-                        "sad_reaction_percentage": 0
+                        "sad_reaction_percentage": 0,
+                        "fin_involvements": 0,
+                        "fin_resolutions": 0,
+                        "fin_resolution_rate": 0
                       },
                       "tags": {
                         "type": "tag.list",
@@ -2395,10 +2428,18 @@
                       "state": "published",
                       "created_at": 1734537297,
                       "updated_at": 1734537298,
+                      "has_unpublished_changes": false,
+                      "draft_updated_at": null,
                       "url": "http://help-center.test/myapp-80/en/articles/48-christmas-is-here",
                       "ai_chatbot_availability": true,
                       "ai_copilot_availability": true,
-                      "ai_sales_agent_availability": true
+                      "ai_sales_agent_availability": true,
+                      "created_by_id": 5017691,
+                      "updated_by_id": 5017691,
+                      "exclude_from_article_suggestions": false,
+                      "help_center_audience": "everyone",
+                      "scheduled_publish_at": null,
+                      "scheduled_unpublish_at": null
                     }
                   }
                 }
@@ -3524,7 +3565,13 @@
                             "url": null,
                             "ai_chatbot_availability": true,
                             "ai_copilot_availability": true,
-                            "ai_sales_agent_availability": true
+                            "ai_sales_agent_availability": true,
+                            "created_by_id": 5017691,
+                            "updated_by_id": 5017691,
+                            "exclude_from_article_suggestions": false,
+                            "help_center_audience": "everyone",
+                            "scheduled_publish_at": null,
+                            "scheduled_unpublish_at": null
                           }
                         ],
                         "highlights": []
@@ -28440,7 +28487,7 @@
           "Ecommerce Connectors"
         ],
         "summary": "Submit a product event",
-        "description": "Send a single product change to an ecommerce connector. Use product events to keep\nFin\u0027s product knowledge current between full catalog uploads. Each request carries\none event.\n\nA full catalog must be uploaded with\n[Upload a product catalog](/docs/references/preview/rest-api/api.intercom.io/ecommerce-connectors/uploadecommercecatalog)\nbefore you send events. Until then, this endpoint returns \u0060409 Conflict\u0060.\n\n## Event types\n\n| \u0060type\u0060 | \u0060data\u0060 | Effect |\n|---|---|---|\n| \u0060product.created\u0060 | \u0060product\u0060 | Adds the product, or updates it if a product with the same \u0060id\u0060 already exists. |\n| \u0060product.updated\u0060 | \u0060product\u0060 | Updates the product with the same \u0060id\u0060, or adds it if it does not exist yet. |\n| \u0060product.deleted\u0060 | \u0060product_id\u0060 | Removes the product from Fin\u0027s knowledge. |\n\nFor \u0060product.created\u0060 and \u0060product.updated\u0060, send the full product object, not only the\nfields that changed. It uses the same fields as a catalog product\n([\u0060ecommerce_catalog_product\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_product)),\nplus a required \u0060updated_at\u0060 timestamp. The product is matched by \u0060id\u0060. The serialized\nproduct must be 60 KB or smaller.\n\nFor \u0060product.deleted\u0060, send only \u0060data.product_id\u0060.\n\n\u0060occurred_at\u0060 is required on every event and must be an ISO 8601 timestamp.\n\n## Ordering\n\nEvents can arrive out of order. The newest version of a product wins:\n\n- If the stored product has a newer \u0060updated_at\u0060 than the product in a\n  \u0060product.created\u0060 or \u0060product.updated\u0060 event, the event is ignored.\n- If the stored product has a newer \u0060updated_at\u0060 than a \u0060product.deleted\u0060 event\u0027s\n  \u0060occurred_at\u0060, the delete is ignored.\n- Once a product is deleted, an update with an older \u0060updated_at\u0060 than the delete\u0027s\n  \u0060occurred_at\u0060 does not bring it back.\n- Events sent while a full catalog upload is running are kept.\n\n## Processing\n\nThe endpoint returns \u0060202 Accepted\u0060 with an \u0060event_id\u0060 once the event is queued.\nProcessing is asynchronous, so the change may take a short time to reach Fin.\n",
+        "description": "Send a single product change to an ecommerce connector. Use product events to keep\nFin\u0027s product knowledge current between full catalog uploads. Each request carries\none event.\n\nA full catalog must be uploaded with\n[Upload a product catalog](/docs/references/preview/rest-api/api.intercom.io/ecommerce-connectors/uploadecommercecatalog)\nbefore you send events. Until then, this endpoint returns \u0060409 Conflict\u0060.\n\n## Event types\n\n| \u0060type\u0060 | \u0060data\u0060 | Effect |\n|---|---|---|\n| \u0060product.created\u0060 | \u0060product\u0060 | Adds the product, or updates it if a product with the same \u0060id\u0060 already exists. |\n| \u0060product.updated\u0060 | \u0060product\u0060 | Updates the product with the same \u0060id\u0060, or adds it if it does not exist yet. |\n| \u0060product.deleted\u0060 | \u0060product_id\u0060 | Removes the product from Fin\u0027s knowledge. |\n\nFor \u0060product.created\u0060 and \u0060product.updated\u0060, send the full product object, not only the\nfields that changed. It uses the same fields as a catalog product\n([\u0060ecommerce_catalog_product\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_product)),\nplus a required \u0060updated_at\u0060 timestamp. The product is matched by \u0060id\u0060. The serialized\nproduct must be 60 KB or smaller.\n\nFor \u0060product.deleted\u0060, send only \u0060data.product_id\u0060.\n\n\u0060occurred_at\u0060 is required on every event and must be an ISO 8601 timestamp.\n\n## Processing\n\nThe endpoint returns \u0060202 Accepted\u0060 with an \u0060event_id\u0060 once the event is queued.\nProcessing is asynchronous, so the change may take a short time to reach Fin.\n",
         "operationId": "SubmitEcommerceProductEvent",
         "parameters": [
           {
@@ -29939,7 +29986,7 @@
           "Messages"
         ],
         "summary": "Create a message",
-        "description": "You can create a message that has been initiated by an admin. The conversation can be either an in-app message, an email, sms or whatsapp.\n\n\u003E \uD83D\uDEA7 Sending for visitors\n\u003E\n\u003E There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case.\n\nThis will return the Message model that has been created.\n\n\u003E \uD83D\uDEA7 Retrieving Associated Conversations\n\u003E\n\u003E As this is a message, there will be no conversation present until the contact responds. Once they do, you will have to search for a contact\u0027s conversations with the id of the message.\n",
+        "description": "You can create a message that has been initiated by an admin. The conversation can be either an in-app message, an email, sms or whatsapp.\n\n\u003E \uD83D\uDEA7 Sending for visitors\n\u003E\n\u003E There can be a short delay between when a contact is created and when a contact becomes available to be messaged through the API. A 404 Not Found error will be returned in this case.\n\nThis will return the Message model that has been created.\n\n\u003E \uD83D\uDEA7 Retrieving Associated Conversations\n\u003E\n\u003E As this is a message, there will be no conversation present until the contact responds. Once they do, you will have to search for a contact\u0027s conversations with the id of the message.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Messages from contacts\u0022 %}\n\u0060from\u0060 should be an admin. A request with a user or lead as \u0060from\u0060 is not rejected: it creates a conversation initiated by that contact, as the Create a conversation endpoint (\u0060POST /conversations\u0060) does, and the \u0060to\u0060, \u0060cc\u0060 and \u0060bcc\u0060 fields are ignored. To create a conversation initiated by a contact, use \u0060POST /conversations\u0060.\n{% /admonition %}\n",
         "operationId": "CreateMessage",
         "parameters": [
           {
@@ -32469,6 +32516,220 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sla_rules": {
+      "get": {
+        "tags": [
+          "SLA Rules"
+        ],
+        "summary": "List all SLA rules",
+        "description": "You can fetch a list of all SLA rules for the workspace.\n\nThe list is not paginated and is ordered by \u0060id\u0060, lowest first. It includes archived SLA rules; deleted SLA rules are not returned.\n\nRequires the \u0060read_conversations\u0060 OAuth scope.\n",
+        "operationId": "ListSlaRules",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlaRuleList"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "type": "sla_rule.list",
+                      "data": [
+                        {
+                          "type": "sla_rule",
+                          "id": "12",
+                          "name": "VIP customers",
+                          "created_at": 1717200000,
+                          "updated_at": 1719800000,
+                          "archived": false,
+                          "archived_at": null,
+                          "first_reply_time_in_seconds": 3600,
+                          "next_reply_time_in_seconds": null,
+                          "time_to_close_in_seconds": null,
+                          "resolution_time_in_seconds": 86400,
+                          "speed_of_answer_in_seconds": null,
+                          "office_hours_schedule_id": "123",
+                          "pause_on_waiting_on_customer": true,
+                          "pause_on_snooze": false
+                        },
+                        {
+                          "type": "sla_rule",
+                          "id": "15",
+                          "name": "Priority billing",
+                          "created_at": 1718000000,
+                          "updated_at": 1721000000,
+                          "archived": true,
+                          "archived_at": 1721000000,
+                          "first_reply_time_in_seconds": 1800,
+                          "next_reply_time_in_seconds": 3600,
+                          "time_to_close_in_seconds": null,
+                          "resolution_time_in_seconds": null,
+                          "speed_of_answer_in_seconds": null,
+                          "office_hours_schedule_id": null,
+                          "pause_on_waiting_on_customer": false,
+                          "pause_on_snooze": false
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "SLA rules are not available on the workspace\u0027s plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "SLA rules are not available on the workspace\u0027s plan": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7c1e5a9d-3b42-4f68-9d05-e2a8b4c6f713",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "SLA rules are not available on your current plan."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sla_rules/{id}": {
+      "get": {
+        "tags": [
+          "SLA Rules"
+        ],
+        "summary": "Retrieve an SLA rule",
+        "description": "You can fetch the details of a single SLA rule, including archived SLA rules.\n\nRequires the \u0060read_conversations\u0060 OAuth scope.\n",
+        "operationId": "GetSlaRule",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the SLA rule.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SLA rule found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlaRule"
+                },
+                "examples": {
+                  "SLA rule found": {
+                    "value": {
+                      "type": "sla_rule",
+                      "id": "12",
+                      "name": "VIP customers",
+                      "created_at": 1717200000,
+                      "updated_at": 1719800000,
+                      "archived": false,
+                      "archived_at": null,
+                      "first_reply_time_in_seconds": 3600,
+                      "next_reply_time_in_seconds": null,
+                      "time_to_close_in_seconds": null,
+                      "resolution_time_in_seconds": 86400,
+                      "speed_of_answer_in_seconds": null,
+                      "office_hours_schedule_id": "123",
+                      "pause_on_waiting_on_customer": true,
+                      "pause_on_snooze": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "SLA rules are not available on the workspace\u0027s plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "SLA rules are not available on the workspace\u0027s plan": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5a2f8c14-9e63-4b07-a1d9-0c7e3b5f2a86",
+                      "errors": [
+                        {
+                          "code": "api_plan_restricted",
+                          "message": "SLA rules are not available on your current plan."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "SLA rule not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "SLA rule not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9e4d1b72-6c35-4a80-8f29-b3d7a0e5c164",
+                      "errors": [
+                        {
+                          "code": "sla_rule_not_found",
+                          "message": "SLA rule not found"
                         }
                       ]
                     }
@@ -40679,13 +40940,13 @@
           },
           "previous_state": {
             "type": "string",
-            "description": "The state before the change. \u0060idle\u0060 or \u0060occupied\u0060, and null when the Admin had not been classified yet.",
+            "description": "The state before the change. \u0060idle\u0060 or \u0060occupied\u0060 for an occupancy change, and null when the Admin had not been classified yet; \u0060enabled\u0060 or \u0060disabled\u0060 for an IP allowlist change.",
             "nullable": true,
             "example": "idle"
           },
           "new_state": {
             "type": "string",
-            "description": "The state after the change. \u0060idle\u0060 or \u0060occupied\u0060.",
+            "description": "The state after the change. \u0060idle\u0060 or \u0060occupied\u0060 for an occupancy change; \u0060enabled\u0060 or \u0060disabled\u0060 for an IP allowlist change.",
             "nullable": true,
             "example": "occupied"
           },
@@ -47524,14 +47785,14 @@
           },
           "scheduled_publish_at": {
             "type": "string",
-            "description": "ISO 8601 timestamp at which to schedule a future publish of the article. When set together with \u0060state: \u0022published\u0022\u0060, the article is scheduled instead of published immediately. Setting \u0060null\u0060 cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060 \u2014 the value must be strictly in the future. Combining with \u0060state: \u0022draft\u0022\u0060 returns 400 \u0060parameter_invalid\u0060. Sending in the same request as \u0060scheduled_unpublish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
+            "description": "ISO 8601 timestamp at which to schedule a future publish of the article. When set together with \u0060state: \u0022published\u0022\u0060, the article is scheduled instead of published immediately. The value must be strictly in the future \u2014 timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060. Setting \u0060null\u0060 cancels a pending publish schedule. Combining with \u0060state: \u0022draft\u0022\u0060 returns 400 \u0060parameter_invalid\u0060. Sending in the same request as \u0060scheduled_unpublish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
             "format": "date-time",
             "nullable": true,
             "example": "2026-12-31T09:00:00Z"
           },
           "scheduled_unpublish_at": {
             "type": "string",
-            "description": "ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting \u0060null\u0060 cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060 \u2014 the value must be strictly in the future. Rejected with 400 \u0060parameter_invalid\u0060 if the article has never been published. Sending in the same request as \u0060scheduled_publish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
+            "description": "ISO 8601 timestamp at which to schedule a future unpublish of the article. The value must be strictly in the future \u2014 timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060. Setting \u0060null\u0060 cancels a pending unpublish schedule. Rejected with 400 \u0060parameter_invalid\u0060 if the article has never been published. Sending in the same request as \u0060scheduled_publish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
             "format": "date-time",
             "nullable": true,
             "example": "2026-12-31T17:00:00Z"
@@ -51701,7 +51962,7 @@
           },
           "updated_at": {
             "type": "string",
-            "description": "When the product was last changed in your store, as an ISO 8601 timestamp. Used to order events, so an older version never overwrites a newer one.",
+            "description": "When the product was last changed in your store, as an ISO 8601 timestamp.",
             "format": "date-time",
             "example": "2026-10-15T14:05:00Z"
           }
@@ -51722,7 +51983,7 @@
           },
           "occurred_at": {
             "type": "string",
-            "description": "When the change happened, as an ISO 8601 timestamp. For \u0060product.deleted\u0060, this is compared with the stored product\u0027s \u0060updated_at\u0060 to decide whether the delete applies.",
+            "description": "When the change happened, as an ISO 8601 timestamp.",
             "format": "date-time",
             "example": "2026-10-15T14:05:00Z"
           },
@@ -54978,6 +55239,120 @@
         "description": "The SLA Applied object contains the details for which SLA has been applied to this conversation.\nImportant: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.\n",
         "nullable": true
       },
+      "SlaRule": {
+        "title": "SLA Rule",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the object - always \u0060sla_rule\u0060.",
+            "example": "sla_rule"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the SLA rule.",
+            "example": "12"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the SLA rule. It is unique within the workspace.",
+            "example": "VIP customers"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the SLA rule was created as a Unix timestamp.",
+            "example": 1717200000
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the SLA rule was last updated as a Unix timestamp.",
+            "example": 1719800000
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the SLA rule is archived.",
+            "example": false
+          },
+          "archived_at": {
+            "type": "integer",
+            "description": "The time the SLA rule was archived as a Unix timestamp, or \u0060null\u0060 if it is not archived.",
+            "nullable": true,
+            "example": 1721000000
+          },
+          "first_reply_time_in_seconds": {
+            "type": "integer",
+            "description": "The target time in seconds for the first reply, or \u0060null\u0060 if no target is set.",
+            "nullable": true,
+            "example": 3600
+          },
+          "next_reply_time_in_seconds": {
+            "type": "integer",
+            "description": "The target time in seconds for a teammate to reply to each subsequent customer message, or \u0060null\u0060 if no target is set.",
+            "nullable": true,
+            "example": 7200
+          },
+          "time_to_close_in_seconds": {
+            "type": "integer",
+            "description": "The target time in seconds for closing the conversation, or \u0060null\u0060 if no target is set.",
+            "nullable": true,
+            "example": 172800
+          },
+          "resolution_time_in_seconds": {
+            "type": "integer",
+            "description": "The target time in seconds for a ticket to be resolved, or \u0060null\u0060 if no target is set.",
+            "nullable": true,
+            "example": 86400
+          },
+          "speed_of_answer_in_seconds": {
+            "type": "integer",
+            "description": "The target time in seconds to answer an inbound phone call, or \u0060null\u0060 if no target is set. This timer does not pause.",
+            "nullable": true,
+            "example": 120
+          },
+          "office_hours_schedule_id": {
+            "type": "string",
+            "description": "The unique identifier for the [office hours schedule](/docs/references/preview/rest-api/api.intercom.io/office-hours/getofficehoursschedule) the SLA rule\u0027s timers count against. This is the SLA rule\u0027s own schedule if it has one, otherwise the workspace\u0027s default schedule. It is \u0060null\u0060 if neither exists.",
+            "nullable": true,
+            "example": "123"
+          },
+          "pause_on_waiting_on_customer": {
+            "type": "boolean",
+            "description": "Whether the SLA rule\u0027s timers pause while the conversation is waiting on the customer.",
+            "example": true
+          },
+          "pause_on_snooze": {
+            "type": "boolean",
+            "description": "Whether the SLA rule\u0027s timers pause while the conversation is snoozed.",
+            "example": false
+          }
+        },
+        "description": "An SLA rule is a workspace\u0027s service-level agreement definition. It sets the response-time targets a conversation is measured against.",
+        "x-tags": [
+          "SLA Rules"
+        ]
+      },
+      "SlaRuleList": {
+        "title": "SLA Rule List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the object - always \u0060sla_rule.list\u0060.",
+            "example": "sla_rule.list"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlaRule"
+            },
+            "description": "An array of SLA rules."
+          }
+        },
+        "description": "A list of SLA rules for the workspace.",
+        "x-tags": [
+          "SLA Rules"
+        ]
+      },
       "SnoozeConversationRequest": {
         "title": "Snooze Conversation Request",
         "required": [
@@ -56401,14 +56776,14 @@
           },
           "scheduled_publish_at": {
             "type": "string",
-            "description": "ISO 8601 timestamp at which to schedule a future publish of the article. When set together with \u0060state: \u0022published\u0022\u0060, the article is scheduled instead of published immediately. Setting \u0060null\u0060 cancels a pending publish schedule. Timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060 \u2014 the value must be strictly in the future. Combining with \u0060state: \u0022draft\u0022\u0060 returns 400 \u0060parameter_invalid\u0060. Sending in the same request as \u0060scheduled_unpublish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
+            "description": "ISO 8601 timestamp at which to schedule a future publish of the article. When set together with \u0060state: \u0022published\u0022\u0060, the article is scheduled instead of published immediately. The value must be strictly in the future \u2014 timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060. Setting \u0060null\u0060 cancels a pending publish schedule. Combining with \u0060state: \u0022draft\u0022\u0060 returns 400 \u0060parameter_invalid\u0060. Sending in the same request as \u0060scheduled_unpublish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
             "format": "date-time",
             "nullable": true,
             "example": "2026-12-31T09:00:00Z"
           },
           "scheduled_unpublish_at": {
             "type": "string",
-            "description": "ISO 8601 timestamp at which to schedule a future unpublish of the article. Setting \u0060null\u0060 cancels a pending unpublish schedule. Timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060 \u2014 the value must be strictly in the future. Rejected with 400 \u0060parameter_invalid\u0060 if the article has never been published. Sending in the same request as \u0060scheduled_publish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
+            "description": "ISO 8601 timestamp at which to schedule a future unpublish of the article. The value must be strictly in the future \u2014 timestamps in the past or equal to the current time are rejected with 400 \u0060parameter_invalid\u0060. Setting \u0060null\u0060 cancels a pending unpublish schedule. Rejected with 400 \u0060parameter_invalid\u0060 if the article has never been published. Sending in the same request as \u0060scheduled_publish_at\u0060 returns 400 \u2014 only one pending schedule per article. Empty string returns 400 \u0060parameter_invalid\u0060.",
             "format": "date-time",
             "nullable": true,
             "example": "2026-12-31T17:00:00Z"
@@ -58046,7 +58421,7 @@
           },
           "updated_at": {
             "type": "string",
-            "description": "When the product was last changed in your store, as an ISO 8601 timestamp. Used to order events, so an older version never overwrites a newer one.",
+            "description": "When the product was last changed in your store, as an ISO 8601 timestamp.",
             "format": "date-time",
             "example": "2026-10-15T14:05:00Z"
           }
@@ -74282,6 +74657,10 @@
     {
       "name": "Segments",
       "description": "Everything about your Segments"
+    },
+    {
+      "name": "SLA Rules",
+      "description": "Read the SLA rules defined in your workspace. An SLA rule is a service-level agreement definition: the response-time targets a conversation is measured against.\n"
     },
     {
       "name": "Subscription Types",

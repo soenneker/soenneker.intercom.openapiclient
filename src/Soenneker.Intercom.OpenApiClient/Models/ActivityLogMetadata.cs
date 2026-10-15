@@ -55,7 +55,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time of the Admin&apos;s last recorded activity.</summary>
         public int? LastActivityAt { get; set; }
-        /// <summary>The state after the change. `idle` or `occupied`.</summary>
+        /// <summary>The state after the change. `idle` or `occupied` for an occupancy change; `enabled` or `disabled` for an IP allowlist change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? NewState { get; set; }
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string NewState { get; set; }
 #endif
-        /// <summary>The state before the change. `idle` or `occupied`, and null when the Admin had not been classified yet.</summary>
+        /// <summary>The state before the change. `idle` or `occupied` for an occupancy change, and null when the Admin had not been classified yet; `enabled` or `disabled` for an IP allowlist change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? PreviousState { get; set; }

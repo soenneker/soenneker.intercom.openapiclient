@@ -45,6 +45,7 @@ using Soenneker.Intercom.OpenApiClient.Procedures;
 using Soenneker.Intercom.OpenApiClient.Roles;
 using Soenneker.Intercom.OpenApiClient.Secure_mode_secrets;
 using Soenneker.Intercom.OpenApiClient.Segments;
+using Soenneker.Intercom.OpenApiClient.Sla_rules;
 using Soenneker.Intercom.OpenApiClient.Subscription_types;
 using Soenneker.Intercom.OpenApiClient.Tags;
 using Soenneker.Intercom.OpenApiClient.Teams;
@@ -258,6 +259,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Segments.SegmentsRequestBuilder Segments
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Segments.SegmentsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The sla_rules property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Sla_rules.Sla_rulesRequestBuilder Sla_rules
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Sla_rules.Sla_rulesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The subscription_types property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Subscription_types.Subscription_typesRequestBuilder Subscription_types
