@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>Whether this version is the currently published version of the article (`published`) or an earlier non-live version (`draft`).</summary>
+    /// <summary>`published` if this is the version that is currently live; `draft` for every other version, including earlier versions that are no longer live and staged changes that have not been published.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ArticleVersionSummaryState
     {

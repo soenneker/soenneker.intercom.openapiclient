@@ -24,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItem> QuickReplyOptions { get; set; }
 #endif
         /// <summary>The unique identifier for the quick reply option that was clicked by the end user.</summary>
-        public Guid? QuickReplyUuid { get; set; }
+        public Guid? QuickReplyOptionUuid { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata"/> and sets the default values.
         /// </summary>
@@ -50,8 +50,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "quick_reply_option_uuid", n => { QuickReplyOptionUuid = n.GetGuidValue(); } },
                 { "quick_reply_options", n => { QuickReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "quick_reply_uuid", n => { QuickReplyUuid = n.GetGuidValue(); } },
             };
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadataQuickReplyOptionsItem>("quick_reply_options", QuickReplyOptions);
-            writer.WriteGuidValue("quick_reply_uuid", QuickReplyUuid);
+            writer.WriteGuidValue("quick_reply_option_uuid", QuickReplyOptionUuid);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

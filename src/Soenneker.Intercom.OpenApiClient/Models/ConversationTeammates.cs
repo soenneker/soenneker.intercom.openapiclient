@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The list of teammates who participated in the conversation (wrote at least one conversation part).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Reference>? Teammates { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Reference>? Admins { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Reference> Teammates { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Reference> Admins { get; set; }
 #endif
         /// <summary>The type of the object - `admin.list`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "teammates", n => { Teammates = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Reference>(global::Soenneker.Intercom.OpenApiClient.Models.Reference.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "admins", n => { Admins = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Reference>(global::Soenneker.Intercom.OpenApiClient.Models.Reference.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Reference>("teammates", Teammates);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Reference>("admins", Admins);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

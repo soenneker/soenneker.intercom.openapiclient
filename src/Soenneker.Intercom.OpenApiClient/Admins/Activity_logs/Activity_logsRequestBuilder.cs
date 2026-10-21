@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Activity_logsRequestBuilderGetQueryParameters 
         {
-            /// <summary>The start date that you request data for. It must be formatted as a UNIX timestamp.</summary>
+            /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("created_at_after")]
@@ -106,7 +106,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
             [QueryParameter("created_at_after")]
             public string CreatedAtAfter { get; set; }
 #endif
-            /// <summary>The end date that you request data for. It must be formatted as a UNIX timestamp.</summary>
+            /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("created_at_before")]

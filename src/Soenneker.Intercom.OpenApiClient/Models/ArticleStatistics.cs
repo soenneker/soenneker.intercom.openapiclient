@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The number of conversations started from the article.</summary>
-        public int? Conversions { get; set; }
+        public int? Conversations { get; set; }
         /// <summary>The number of conversations in which Fin AI Agent used this article, summed across all of the article&apos;s locales.</summary>
         public int? FinInvolvements { get; private set; }
         /// <summary>The percentage of Fin AI Agent involvements that resulted in a resolution (fin_resolutions / fin_involvements * 100).</summary>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "conversions", n => { Conversions = n.GetIntValue(); } },
+                { "conversations", n => { Conversations = n.GetIntValue(); } },
                 { "fin_involvements", n => { FinInvolvements = n.GetIntValue(); } },
                 { "fin_resolution_rate", n => { FinResolutionRate = n.GetFloatValue(); } },
                 { "fin_resolutions", n => { FinResolutions = n.GetIntValue(); } },
@@ -79,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("conversions", Conversions);
+            writer.WriteIntValue("conversations", Conversations);
             writer.WriteFloatValue("happy_reaction_percentage", HappyReactionPercentage);
             writer.WriteFloatValue("neutral_reaction_percentage", NeutralReactionPercentage);
             writer.WriteIntValue("reactions", Reactions);

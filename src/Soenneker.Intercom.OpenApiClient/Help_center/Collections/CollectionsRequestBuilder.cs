@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CollectionsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/collections", pathParameters)
+        public CollectionsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/collections{?help_center_id*,page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,34 +43,36 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CollectionsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/collections", rawUrl)
+        public CollectionsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/collections{?help_center_id*,page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Collections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated collections first.
+        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CollectionList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder.CollectionsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder.CollectionsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CollectionList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections.`
+        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Collection"/></returns>
         /// <param name="body">You can create a collection</param>
@@ -97,17 +99,17 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Collection>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Collection.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Collections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated collections first.
+        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder.CollectionsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder.CollectionsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -116,7 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections.`
+        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create a collection</param>
@@ -145,6 +147,22 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
         public global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class CollectionsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Only return collections that belong to this Help Center.</summary>
+            [QueryParameter("help_center_id")]
+            public int? HelpCenterId { get; set; }
+            /// <summary>The page of results to fetch. Defaults to the first page.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results to return per page. Defaults to 20. Maximum is 250.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

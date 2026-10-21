@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string CompanyId { get; set; }
 #endif
-        /// <summary>A hash of key/value pairs containing any other data about the company you want Intercom to store.</summary>
+        /// <summary>Values for custom attributes that already exist in your workspace. Each value can be a string, integer, number, boolean or null. Arrays and objects aren&apos;t accepted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty? CustomAttributes { get; set; }

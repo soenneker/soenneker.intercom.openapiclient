@@ -52,13 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The ID of the folder this article belongs to, or null if not in a folder.</summary>
         public int? FolderId { get; set; }
         /// <summary>The unique identifier for the article which is given by Intercom.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Id { get; set; }
-#nullable restore
-#else
-        public string Id { get; set; }
-#endif
+        public int? Id { get; set; }
         /// <summary>The default locale of the article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -85,8 +79,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Title { get; set; }
 #endif
-        /// <summary>The type of object - `internal_article`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleType? Type { get; set; }
         /// <summary>The time when the article was last updated.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>
@@ -123,12 +115,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
+                { "id", n => { Id = n.GetIntValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetIntValue(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
@@ -148,12 +139,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteIntValue("folder_id", FolderId);
-            writer.WriteStringValue("id", Id);
+            writer.WriteIntValue("id", Id);
             writer.WriteStringValue("locale", Locale);
             writer.WriteIntValue("owner_id", OwnerId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }

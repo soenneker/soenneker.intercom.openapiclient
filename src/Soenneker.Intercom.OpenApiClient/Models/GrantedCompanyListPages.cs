@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A link to the next page of results. A response that does not contain a next link does not have further data to fetch.</summary>
+        /// <summary>A link to the next page of results. Omitted on the last page. Some lists never include `next` or `prev`, so compare `page` with `total_pages` to tell whether more pages remain.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Next { get; set; }
@@ -27,6 +27,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? Page { get; set; }
         /// <summary>The per_page property</summary>
         public int? PerPage { get; set; }
+        /// <summary>A link to the previous page of results. Omitted on the first page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Prev { get; set; }
+#nullable restore
+#else
+        public string Prev { get; set; }
+#endif
         /// <summary>The total_pages property</summary>
         public int? TotalPages { get; set; }
         /// <summary>the type of object `pages`.</summary>
@@ -59,6 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "next", n => { Next = n.GetStringValue(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
+                { "prev", n => { Prev = n.GetStringValue(); } },
                 { "total_pages", n => { TotalPages = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>(); } },
             };
@@ -73,6 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("next", Next);
             writer.WriteIntValue("page", Page);
             writer.WriteIntValue("per_page", PerPage);
+            writer.WriteStringValue("prev", Prev);
             writer.WriteIntValue("total_pages", TotalPages);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);

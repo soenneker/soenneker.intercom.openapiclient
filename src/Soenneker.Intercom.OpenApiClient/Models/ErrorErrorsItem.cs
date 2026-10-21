@@ -22,13 +22,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Code { get; set; }
 #endif
-        /// <summary>Optional. Used to identify a particular field or query parameter that was in error.</summary>
+        /// <summary>Optional. Extra detail about the error, for example `required_permissions` on a 403 `action_forbidden` error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Field { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItemDataProperty? Data { get; set; }
 #nullable restore
 #else
-        public string Field { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItemDataProperty Data { get; set; }
 #endif
         /// <summary>Optional. Human readable description of the error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -64,7 +64,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "code", n => { Code = n.GetStringValue(); } },
-                { "field", n => { Field = n.GetStringValue(); } },
+                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItemDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItemDataProperty.CreateFromDiscriminatorValue); } },
                 { "message", n => { Message = n.GetStringValue(); } },
             };
         }
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("code", Code);
-            writer.WriteStringValue("field", Field);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ErrorErrorsItemDataProperty>("data", Data);
             writer.WriteStringValue("message", Message);
             writer.WriteAdditionalData(AdditionalData);
         }

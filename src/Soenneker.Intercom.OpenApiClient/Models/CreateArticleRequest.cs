@@ -29,7 +29,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<int?> AudienceIds { get; set; }
 #endif
-        /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace.</summary>
+        /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace. Required unless an `author_id` is provided in `translated_content` under the workspace&apos;s default Help Center locale.</summary>
         public int? AuthorId { get; set; }
         /// <summary>The content of the article in HTML. For multilingual articles, this will be the body of the default language&apos;s content. Mutually exclusive with `body_markdown`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -57,9 +57,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The ID of the folder to place this article in, or null to leave it without a folder.</summary>
         public int? FolderId { get; set; }
+        /// <summary>The locale of the article&apos;s default content, for example `en`. Defaults to the locale of the help center that the parent collection belongs to when `parent_id` is sent, and otherwise to the default Help Center locale. Must be a locale supported by the workspace&apos;s Help Center.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
         /// <summary>The id of the article&apos;s parent collection or section. An article without this field stands alone.</summary>
         public int? ParentId { get; set; }
-        /// <summary>The ids of the parent collections to place this article in. Send an empty array to leave the article without a collection. When provided, this takes precedence over `parent_id` and `parent_type`.</summary>
+        /// <summary>The ids of the parent collections to place this article in. Send an empty array to leave the article without a collection. When provided, this takes precedence over `parent_id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? ParentIds { get; set; }
@@ -67,21 +75,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<int?> ParentIds { get; set; }
 #endif
-        /// <summary>The type of parent, which can either be a `collection` or `section`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ParentType { get; set; }
-#nullable restore
-#else
-        public string ParentType { get; set; }
-#endif
         /// <summary>ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: &quot;published&quot;`, the article is scheduled instead of published immediately. The value must be strictly in the future — timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid`. Setting `null` cancels a pending publish schedule. Combining with `state: &quot;draft&quot;` returns 400 `parameter_invalid`. Sending in the same request as `scheduled_unpublish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledPublishAt { get; set; }
-        /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. The value must be strictly in the future — timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid`. Setting `null` cancels a pending unpublish schedule. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
+        /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. The same request must also publish the article (`state: &quot;published&quot;`), otherwise it returns 400 `parameter_invalid`. The value must be strictly in the future; timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid`. Setting `null` cancels a pending unpublish schedule. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledUnpublishAt { get; set; }
         /// <summary>Whether the article will be `published` or will be a `draft`. Defaults to draft. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequestState? State { get; set; }
-        /// <summary>The title of the article.For multilingual articles, this will be the title of the default language&apos;s content.</summary>
+        /// <summary>The title of the article. For multilingual articles, this will be the title of the default language&apos;s content. Required unless a title is provided in `translated_content` under the workspace&apos;s default Help Center locale.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get; set; }
@@ -131,9 +131,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "parent_id", n => { ParentId = n.GetIntValue(); } },
                 { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "parent_type", n => { ParentType = n.GetStringValue(); } },
                 { "scheduled_publish_at", n => { ScheduledPublishAt = n.GetDateTimeOffsetValue(); } },
                 { "scheduled_unpublish_at", n => { ScheduledUnpublishAt = n.GetDateTimeOffsetValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequestState>(); } },
@@ -157,9 +157,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteStringValue("description", Description);
             writer.WriteIntValue("folder_id", FolderId);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteIntValue("parent_id", ParentId);
             writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
-            writer.WriteStringValue("parent_type", ParentType);
             writer.WriteDateTimeOffsetValue("scheduled_publish_at", ScheduledPublishAt);
             writer.WriteDateTimeOffsetValue("scheduled_unpublish_at", ScheduledUnpublishAt);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequestState>("state", State);

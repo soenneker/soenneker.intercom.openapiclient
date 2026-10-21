@@ -194,7 +194,7 @@ paths:
         in: query
         required: true
         description: The start date that you request data for. It must be formatted
-          as a UNIX timestamp.
+          as a Unix timestamp.
         example: '1677253093'
         schema:
           type: string
@@ -202,7 +202,7 @@ paths:
         in: query
         required: false
         description: The end date that you request data for. It must be formatted
-          as a UNIX timestamp.
+          as a Unix timestamp.
         example: '1677861493'
         schema:
           type: string
@@ -300,13 +300,13 @@ paths:
                   type: integer
                   format: date-time
                   description: The start date that you request data for. It must
-                    be formatted as a UNIX timestamp.
+                    be formatted as a Unix timestamp.
                   example: 1677253093
                 created_at_before:
                   type: integer
                   format: date-time
                   description: The end date that you request data for. It must
-                    be formatted as a UNIX timestamp.
+                    be formatted as a Unix timestamp.
                   example: 1677861493
                 event_types:
                   type: array
@@ -1084,6 +1084,9 @@ paths:
                       created_at: 1734537269
                       updated_at: 1734537269
                       last_ingested_at: 1734537269
+                      audience_ids:
+                      - 1
+                      - 2
                     - id: '18'
                       type: external_page
                       title: My External Content
@@ -1173,6 +1176,9 @@ paths:
                     created_at: 1734537273
                     updated_at: 1734537274
                     last_ingested_at: 1734537274
+                    audience_ids:
+                    - 1
+                    - 2
               schema:
                 "$ref": "#/components/schemas/external_page"
         '401':
@@ -1187,6 +1193,19 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Unknown audience IDs
+          content:
+            application/json:
+              examples:
+                Unknown audience IDs:
+                  value:
+                    type: error.list
+                    errors:
+                    - code: parameter_invalid
+                      message: 'audience_ids contains unknown audience IDs: 999'
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -1204,6 +1223,9 @@ paths:
                   source_id: 44
                   title: Test
                   url: https://www.example.com
+                  audience_ids:
+                  - 1
+                  - 2
   "/ai/external_pages/{id}":
     parameters:
     - name: id
@@ -1247,6 +1269,9 @@ paths:
                     created_at: 1734537276
                     updated_at: 1734537276
                     last_ingested_at: 1734537276
+                    audience_ids:
+                    - 1
+                    - 2
               schema:
                 "$ref": "#/components/schemas/external_page"
         '401':
@@ -1297,6 +1322,9 @@ paths:
                     created_at: 1734537278
                     updated_at: 1734537278
                     last_ingested_at: 1734537278
+                    audience_ids:
+                    - 1
+                    - 2
               schema:
                 "$ref": "#/components/schemas/external_page"
         '401':
@@ -1348,6 +1376,9 @@ paths:
                     created_at: 1734537280
                     updated_at: 1734537281
                     last_ingested_at: 1734537281
+                    audience_ids:
+                    - 1
+                    - 2
               schema:
                 "$ref": "#/components/schemas/external_page"
         '401':
@@ -1362,6 +1393,19 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Unknown audience IDs
+          content:
+            application/json:
+              examples:
+                Unknown audience IDs:
+                  value:
+                    type: error.list
+                    errors:
+                    - code: parameter_invalid
+                      message: 'audience_ids contains unknown audience IDs: 999'
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -1379,6 +1423,9 @@ paths:
                   source_id: 47
                   title: Test
                   url: https://www.example.com
+                  audience_ids:
+                  - 1
+                  - 2
   "/articles":
     get:
       summary: List all articles
@@ -1387,6 +1434,21 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch. Defaults to the first page.
+        example: 1
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of results to return per page. Defaults to 25. Maximum is 250.
+        example: 25
+        schema:
+          type: integer
+          maximum: 250
       tags:
       - Articles
       operationId: listArticles
@@ -1394,7 +1456,7 @@ paths:
         `https://api.intercom.io/articles`.\n\n> \U0001F4D8 How are the articles sorted
         and ordered?\n>\n> Articles will be returned in descending order on the `updated_at`
         attribute. This means if you need to iterate through results then we'll show
-        the most recently updated articles first.\n"
+        the most recently updated articles first.\n\nRequires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.\n"
       responses:
         '200':
           description: successful
@@ -1415,9 +1477,15 @@ paths:
                       type: article
                       workspace_id: this_is_an_id64_that_should_be_at_least_4
                       parent_ids: []
+                      folder_id: null
                       tags:
                         type: tag.list
                         tags: []
+                      exclude_from_article_suggestions: false
+                      help_center_audience: everyone
+                      scheduled_publish_at: null
+                      scheduled_unpublish_at: null
+                      content_id: '61'
                       title: This is the article title
                       description: ''
                       body: ''
@@ -1426,20 +1494,31 @@ paths:
                       state: published
                       created_at: 1734537283
                       updated_at: 1734537283
-                      has_unpublished_changes: false
-                      draft_updated_at: null
                       url: http://help-center.test/myapp-64/en/articles/39-this-is-the-article-title
+                      audience_ids: []
                       ai_chatbot_availability: true
                       ai_copilot_availability: true
                       ai_sales_agent_availability: true
                       created_by_id: 5017691
                       updated_by_id: 5017691
-                      exclude_from_article_suggestions: false
-                      help_center_audience: everyone
-                      scheduled_publish_at: null
-                      scheduled_unpublish_at: null
+                      has_unpublished_changes: false
+                      draft_updated_at: null
               schema:
                 "$ref": "#/components/schemas/article_list"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Per page too large:
+                  value:
+                    type: error.list
+                    request_id: ea1a3101-3e36-5689-ada2-68bd7a32748a
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too big
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -1465,9 +1544,10 @@ paths:
       - Articles
       operationId: createArticle
       description: "You can create a new article by making a POST request to `https://api.intercom.io/articles`.\n\n>
-        \U0001F4D8 Tags cannot be managed via the Articles API\n>\n> Article tags are
-        read-only in responses. To create, update, or delete tags, use the Intercom
-        UI or the Tags API endpoints.\n"
+        \U0001F4D8 Tags are managed separately\n>\n> Tags are returned in article responses
+        but cannot be set in the request body. To add or remove an article's tags,
+        use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}`
+        endpoints.\n\nRequires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.\n"
       responses:
         '200':
           description: article created
@@ -1479,7 +1559,9 @@ paths:
                     id: '42'
                     type: article
                     workspace_id: this_is_an_id68_that_should_be_at_least_4
-                    parent_ids: []
+                    parent_ids:
+                    - 145
+                    folder_id: null
                     statistics:
                       type: article_statistics
                       views: 0
@@ -1494,6 +1576,11 @@ paths:
                     tags:
                       type: tag.list
                       tags: []
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
+                    content_id: '69'
                     title: Thanks for everything
                     description: Description of the Article
                     body: <p class="no-margin">Body of the Article</p>
@@ -1502,22 +1589,19 @@ paths:
                     state: published
                     created_at: 1734537288
                     updated_at: 1734537288
-                    has_unpublished_changes: false
-                    draft_updated_at: null
                     url: http://help-center.test/myapp-68/en/articles/42-thanks-for-everything
+                    audience_ids: []
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
                     created_by_id: 5017691
                     updated_by_id: 5017691
-                    exclude_from_article_suggestions: false
-                    help_center_audience: everyone
-                    scheduled_publish_at: null
-                    scheduled_unpublish_at: null
+                    has_unpublished_changes: false
+                    draft_updated_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '400':
-          description: Bad Request
+          description: Bad Request. A JSON request whose body is an empty object returns `400` with no response body.
           content:
             application/json:
               examples:
@@ -1546,6 +1630,48 @@ paths:
                       field: scheduled_unpublish_at
                       message: Cannot set scheduled_publish_at and scheduled_unpublish_at
                         in the same request
+                Missing title:
+                  value:
+                    type: error.list
+                    request_id: b052ee5c-f602-5d9a-8356-94544cd9b12a
+                    errors:
+                    - code: parameter_not_found
+                      message: Title is a required parameter
+                Unsupported locale:
+                  value:
+                    type: error.list
+                    request_id: 00e07e24-9182-5d6a-8830-4a977fd902c9
+                    errors:
+                    - code: data_invalid
+                      message: Locale 'xx' isn't supported.
+                Collection not found:
+                  value:
+                    type: error.list
+                    request_id: 4c9f130d-bfb7-5cab-9a98-7c9fa6650ea9
+                    errors:
+                    - code: parameter_invalid
+                      message: Collection not found
+                Publish time in the past:
+                  value:
+                    type: error.list
+                    request_id: b0015de0-8628-523f-bca1-780ed3bdcc75
+                    errors:
+                    - code: parameter_invalid
+                      message: scheduled_publish_at must be in the future
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: 'Not found: the author, an audience, the folder or a collection in `parent_ids` does not exist.'
+          content:
+            application/json:
+              examples:
+                Author not found:
+                  value:
+                    type: error.list
+                    request_id: e1650d39-7d30-554f-aeb1-b4aa32837f1a
+                    errors:
+                    - code: not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -1560,6 +1686,34 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Author not authorised:
+                  value:
+                    type: error.list
+                    request_id: 4be1f5b3-3590-5eb7-83df-6d852559f097
+                    errors:
+                    - code: action_forbidden
+                      message: author_id 991267497 is not authorised on this workspace
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                Body and body_markdown both provided:
+                  value:
+                    type: error.list
+                    request_id: a560a2a1-1b69-5178-8953-b3d8c982eb29
+                    errors:
+                    - code: parameter_invalid
+                      message: body and body_markdown are mutually exclusive - please provide only one
+                Invalid availability value:
+                  value:
+                    type: error.list
+                    request_id: 3a0b96f7-6f76-5b2e-899a-776192cb6235
+                    errors:
+                    - code: parameter_invalid
+                      message: ai_chatbot_availability must be true or false
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -1610,8 +1764,10 @@ paths:
       tags:
       - Articles
       operationId: retrieveArticle
-      description: You can fetch the details of a single article by making a GET request
-        to `https://api.intercom.io/articles/<id>`.
+      description: |
+        You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/<id>`.
+
+        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Article found
@@ -1624,6 +1780,7 @@ paths:
                     type: article
                     workspace_id: this_is_an_id74_that_should_be_at_least_4
                     parent_ids: []
+                    folder_id: null
                     statistics:
                       type: article_statistics
                       views: 0
@@ -1638,6 +1795,11 @@ paths:
                     tags:
                       type: tag.list
                       tags: []
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
+                    content_id: '73'
                     title: This is the article title
                     description: ''
                     body: ''
@@ -1646,18 +1808,15 @@ paths:
                     state: published
                     created_at: 1734537292
                     updated_at: 1734537292
-                    has_unpublished_changes: false
-                    draft_updated_at: null
                     url: http://help-center.test/myapp-74/en/articles/45-this-is-the-article-title
+                    audience_ids: []
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
                     created_by_id: 5017691
                     updated_by_id: 5017691
-                    exclude_from_article_suggestions: false
-                    help_center_audience: everyone
-                    scheduled_publish_at: null
-                    scheduled_unpublish_at: null
+                    has_unpublished_changes: false
+                    draft_updated_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '404':
@@ -1706,10 +1865,10 @@ paths:
       - Articles
       operationId: updateArticle
       description: "You can update the details of a single article by making a PUT
-        request to `https://api.intercom.io/articles/<id>`.\n\n> \U0001F4D8 Tags cannot be
-        managed via the Articles API\n>\n> Article tags are read-only in responses.
-        To create, update, or delete tags, use the Intercom UI or the Tags API
-        endpoints.\n"
+        request to `https://api.intercom.io/articles/<id>`.\n\n> \U0001F4D8 Tags are managed separately\n>\n> Tags are returned in article responses
+        but cannot be set in the request body. To add or remove an article's tags,
+        use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}`
+        endpoints.\n\nRequires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.\n"
       responses:
         '200':
           description: successful
@@ -1722,6 +1881,7 @@ paths:
                     type: article
                     workspace_id: this_is_an_id80_that_should_be_at_least_4
                     parent_ids: []
+                    folder_id: null
                     statistics:
                       type: article_statistics
                       views: 0
@@ -1736,6 +1896,11 @@ paths:
                     tags:
                       type: tag.list
                       tags: []
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
+                    content_id: '79'
                     title: Christmas is here!
                     description: ''
                     body: <p class="no-margin">New gifts in store for the jolly season</p>
@@ -1744,51 +1909,57 @@ paths:
                     state: published
                     created_at: 1734537297
                     updated_at: 1734537298
-                    has_unpublished_changes: false
-                    draft_updated_at: null
                     url: http://help-center.test/myapp-80/en/articles/48-christmas-is-here
+                    audience_ids: []
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
                     created_by_id: 5017691
                     updated_by_id: 5017691
-                    exclude_from_article_suggestions: false
-                    help_center_audience: everyone
-                    scheduled_publish_at: null
-                    scheduled_unpublish_at: null
+                    has_unpublished_changes: false
+                    draft_updated_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '400':
-          description: Bad Request
+          description: Bad Request. A JSON request whose body is an empty object returns `400` with no response body.
           content:
             application/json:
               examples:
-                Scheduling conflict:
+                Publish and unpublish in the same request:
                   value:
                     type: error.list
-                    request_id: 8d11c1f4-0a55-4f7f-8e2f-4f6c1f3b2c11
+                    request_id: 884b59c8-2bae-51de-b300-e9b78dfa793c
                     errors:
                     - code: parameter_invalid
-                      field: scheduled_publish_at
-                      message: Cannot schedule a publish while setting state to draft
-                Conflicting pending schedules:
+                      message: Cannot schedule a publish and unpublish in the same request
+                Publish time in the past:
                   value:
                     type: error.list
-                    request_id: 0a82a3a4-94f1-4f1a-bea1-aaf41a8d3c22
+                    request_id: 9936f252-ad05-5bf2-b681-c94d83904f71
                     errors:
                     - code: parameter_invalid
-                      field: scheduled_unpublish_at
-                      message: Cannot set scheduled_publish_at and scheduled_unpublish_at
-                        in the same request
-                Unpublish before publish:
+                      message: scheduled_publish_at must be in the future
+                Unpublish on an article that is not published:
                   value:
                     type: error.list
-                    request_id: 11aa22bb-33cc-44dd-55ee-66ff77889900
+                    request_id: 4d09d60a-6f62-5b5e-b71a-92c949fad184
                     errors:
                     - code: parameter_invalid
-                      field: scheduled_unpublish_at
-                      message: Cannot schedule unpublish for an article that has never
-                        been published
+                      message: Cannot schedule an unpublish on an article that is not currently published
+                Unsupported locale:
+                  value:
+                    type: error.list
+                    request_id: bf534ebb-919e-5f80-91d0-35de1deffc4a
+                    errors:
+                    - code: data_invalid
+                      message: Locale 'xx' isn't supported.
+                Collection not found:
+                  value:
+                    type: error.list
+                    request_id: f1c380ad-c52e-50ba-a678-70a258799efe
+                    errors:
+                    - code: parameter_invalid
+                      message: Collection not found
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
@@ -1803,6 +1974,13 @@ paths:
                     errors:
                     - code: not_found
                       message: Resource Not Found
+                Author not found:
+                  value:
+                    type: error.list
+                    request_id: da7836a0-95a1-5926-969c-6bc26f5a6633
+                    errors:
+                    - code: not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -1817,6 +1995,34 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Author not authorised:
+                  value:
+                    type: error.list
+                    request_id: f62b30e2-5b2e-561d-b1e8-01a84a380ee2
+                    errors:
+                    - code: action_forbidden
+                      message: author_id 991267508 is not authorised on this workspace
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                Body and body_markdown both provided:
+                  value:
+                    type: error.list
+                    request_id: 2ee5920d-5fd3-5adc-8a58-d3e0cf3723c1
+                    errors:
+                    - code: parameter_invalid
+                      message: body and body_markdown are mutually exclusive - please provide only one
+                Invalid availability value:
+                  value:
+                    type: error.list
+                    request_id: f504af40-1675-56e1-8d06-28eae3412526
+                    errors:
+                    - code: parameter_invalid
+                      message: ai_chatbot_availability must be true or false
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -1855,7 +2061,10 @@ paths:
       tags:
       - Articles
       operationId: deleteArticle
-      description: You can delete a single article by making a DELETE request to `https://api.intercom.io/articles/<id>`.
+      description: |
+        You can delete a single article by making a DELETE request to `https://api.intercom.io/articles/<id>`.
+
+        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: successful
@@ -1897,6 +2106,27 @@ paths:
                       message: Access Token Invalid
               schema:
                 "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                Article has dependent procedures:
+                  value:
+                    type: error.list
+                    request_id: d3212011-eabc-5be0-8011-9eb5ff048813
+                    errors:
+                    - code: content_has_procedure_dependencies
+                      message: Article has dependent procedures and cannot be deleted
+                Article is referenced elsewhere:
+                  value:
+                    type: error.list
+                    request_id: ade54c49-399e-52cd-8cc7-951307c40e06
+                    errors:
+                    - code: dependent_references_blocked
+                      message: Can't delete this public article because it is used by "Refund policy" in Main Fin. Remove those references first.
+              schema:
+                "$ref": "#/components/schemas/error"
   "/articles/{id}/draft":
     get:
       summary: Retrieve an article draft
@@ -1936,6 +2166,26 @@ paths:
                     type: article
                     workspace_id: this_is_an_id74_that_should_be_at_least_4
                     parent_ids: []
+                    folder_id: null
+                    statistics:
+                      type: article_statistics
+                      views: 0
+                      conversations: 0
+                      reactions: 0
+                      happy_reaction_percentage: 0
+                      neutral_reaction_percentage: 0
+                      sad_reaction_percentage: 0
+                      fin_involvements: 0
+                      fin_resolutions: 0
+                      fin_resolution_rate: 0
+                    tags:
+                      type: tag.list
+                      tags: []
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
+                    content_id: '73'
                     title: This is the draft title
                     description: ''
                     body: <p class="no-margin">Unpublished changes staged as a draft</p>
@@ -1944,12 +2194,15 @@ paths:
                     state: published
                     created_at: 1734537292
                     updated_at: 1734537292
-                    has_unpublished_changes: true
-                    draft_updated_at: 1734537292
                     url: http://help-center.test/myapp-74/en/articles/45-this-is-the-article-title
+                    audience_ids: []
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_by_id: 5017691
+                    updated_by_id: 5017691
+                    has_unpublished_changes: true
+                    draft_updated_at: 1734537292
               schema:
                 "$ref": "#/components/schemas/article"
         '404':
@@ -1981,9 +2234,11 @@ paths:
         The article must already be published; staging a draft on an article that
         has never been published returns `422`.
 
-        Only versioned text content (such as `title` and `body`) is staged.
-        Non-versioned fields like AI availability are ignored, leaving the live
-        values untouched.
+        Only text content is staged: `title`, `description`, `body` or
+        `body_markdown`, and `author_id`, including per-locale values in
+        `translated_content`. Any other field in the request body, such as `state`,
+        `parent_id`, `folder_id`, `audience_ids`, the AI availability fields or the
+        scheduling fields, is still validated but not applied, so the live article is left untouched.
 
         Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
@@ -1998,6 +2253,26 @@ paths:
                     type: article
                     workspace_id: this_is_an_id80_that_should_be_at_least_4
                     parent_ids: []
+                    folder_id: null
+                    statistics:
+                      type: article_statistics
+                      views: 0
+                      conversations: 0
+                      reactions: 0
+                      happy_reaction_percentage: 0
+                      neutral_reaction_percentage: 0
+                      sad_reaction_percentage: 0
+                      fin_involvements: 0
+                      fin_resolutions: 0
+                      fin_resolution_rate: 0
+                    tags:
+                      type: tag.list
+                      tags: []
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
+                    content_id: '79'
                     title: Christmas is here!
                     description: ''
                     body: <p class="no-margin">New gifts in store for the jolly season</p>
@@ -2006,18 +2281,21 @@ paths:
                     state: published
                     created_at: 1734537297
                     updated_at: 1734537298
-                    has_unpublished_changes: true
-                    draft_updated_at: 1734537298
                     url: http://help-center.test/myapp-80/en/articles/48-christmas-is-here
+                    audience_ids: []
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_by_id: 5017691
+                    updated_by_id: 5017691
+                    has_unpublished_changes: true
+                    draft_updated_at: 1734537298
               schema:
                 "$ref": "#/components/schemas/article"
         '404':
           "$ref": "#/components/responses/ObjectNotFound"
         '422':
-          description: Article must be published before a draft can be staged
+          description: Article is not published, or a requested locale is not published
           content:
             application/json:
               examples:
@@ -2084,6 +2362,26 @@ paths:
                     type: article
                     workspace_id: this_is_an_id80_that_should_be_at_least_4
                     parent_ids: []
+                    folder_id: null
+                    statistics:
+                      type: article_statistics
+                      views: 0
+                      conversations: 0
+                      reactions: 0
+                      happy_reaction_percentage: 0
+                      neutral_reaction_percentage: 0
+                      sad_reaction_percentage: 0
+                      fin_involvements: 0
+                      fin_resolutions: 0
+                      fin_resolution_rate: 0
+                    tags:
+                      type: tag.list
+                      tags: []
+                    exclude_from_article_suggestions: false
+                    help_center_audience: everyone
+                    scheduled_publish_at: null
+                    scheduled_unpublish_at: null
+                    content_id: '79'
                     title: Christmas is here!
                     description: ''
                     body: <p class="no-margin">New gifts in store for the jolly season</p>
@@ -2092,12 +2390,15 @@ paths:
                     state: published
                     created_at: 1734537297
                     updated_at: 1734537299
-                    has_unpublished_changes: false
-                    draft_updated_at: null
                     url: http://help-center.test/myapp-80/en/articles/48-christmas-is-here
+                    audience_ids: []
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_by_id: 5017691
+                    updated_by_id: 5017691
+                    has_unpublished_changes: false
+                    draft_updated_at: null
               schema:
                 "$ref": "#/components/schemas/article"
         '404':
@@ -2171,15 +2472,15 @@ paths:
       - name: per_page
         in: query
         required: false
-        description: The number of results to return per page.
-        example: 25
+        description: The number of results to return per page. Defaults to 10.
+        example: 10
         schema:
           type: integer
       - name: locale
         in: query
         required: false
         description: Filter versions to a specific locale. Use the locale identifier
-          (for example `en`, `fr`). If the locale is not configured for the workspace,
+          (for example `en`, `fr`). If the article has no content in that locale,
           a `400` is returned.
         example: en
         schema:
@@ -2207,7 +2508,7 @@ paths:
                     pages:
                       type: pages
                       page: 1
-                      per_page: 25
+                      per_page: 10
                       total_pages: 1
                     total_count: 2
                     data:
@@ -2236,17 +2537,17 @@ paths:
               schema:
                 "$ref": "#/components/schemas/article_version_list"
         '400':
-          description: Unknown locale
+          description: No content for the requested locale
           content:
             application/json:
               examples:
-                Unknown locale:
+                No content for locale:
                   value:
                     type: error.list
                     request_id: 6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f
                     errors:
                     - code: parameter_invalid
-                      message: Unknown locale
+                      message: No content found for locale 'fr' on article 123
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
@@ -2278,8 +2579,8 @@ paths:
       - name: locale
         in: query
         required: false
-        description: Return the version's content for a specific locale. If the locale
-          is not configured for the workspace, a `400` is returned.
+        description: Return the version's content for a specific locale. If the article
+          has no content in that locale, a `400` is returned.
         example: en
         schema:
           type: string
@@ -2318,17 +2619,17 @@ paths:
               schema:
                 "$ref": "#/components/schemas/article_version"
         '400':
-          description: Unknown locale
+          description: No content for the requested locale
           content:
             application/json:
               examples:
-                Unknown locale:
+                No content for locale:
                   value:
                     type: error.list
                     request_id: 6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f
                     errors:
                     - code: parameter_invalid
-                      message: Unknown locale
+                      message: No content found for locale 'fr' on article 123
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
@@ -2418,7 +2719,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
-          description: Article or tag not found
+          description: Article, tag or teammate not found
           content:
             application/json:
               examples:
@@ -2436,6 +2737,13 @@ paths:
                     errors:
                     - code: tag_not_found
                       message: Tag not found
+                Admin not found:
+                  value:
+                    type: error.list
+                    request_id: 7a34a204-9fae-5335-b818-1da0df3b5234
+                    errors:
+                    - code: admin_not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -2537,18 +2845,24 @@ paths:
       - name: phrase
         in: query
         required: false
-        description: The phrase within your articles to search for.
+        description: The phrase within your articles to search for. Maximum length is 500 characters.
         example: Getting started
         schema:
           type: string
+          maxLength: 500
       - name: state
         in: query
         required: false
         description: The state of the Articles returned. One of `published`, `draft`
-          or `all`.
+          or `all`. Defaults to `published`.
         example: published
         schema:
           type: string
+          enum:
+          - published
+          - draft
+          - all
+          default: published
       - name: help_center_id
         in: query
         required: false
@@ -2564,10 +2878,29 @@ paths:
         example: false
         schema:
           type: boolean
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch. Defaults to the first page.
+        example: 1
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of results to return per page. Defaults to 10.
+        example: 10
+        schema:
+          type: integer
       tags:
       - Articles
       operationId: searchArticles
-      description: You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.
+      description: |
+        You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.
+
+        If no articles match the search, `data` is an empty array rather than an object.
+
+        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Search successful
@@ -2584,9 +2917,15 @@ paths:
                         type: article
                         workspace_id: this_is_an_id92_that_should_be_at_least_4
                         parent_ids: []
+                        folder_id: null
                         tags:
                           type: tag.list
                           tags: []
+                        exclude_from_article_suggestions: false
+                        help_center_audience: everyone
+                        scheduled_publish_at: null
+                        scheduled_unpublish_at: null
+                        content_id: '91'
                         title: Title 1
                         description: ''
                         body: ''
@@ -2596,16 +2935,25 @@ paths:
                         created_at: 1734537306
                         updated_at: 1734537306
                         url:
+                        audience_ids: []
                         ai_chatbot_availability: true
                         ai_copilot_availability: true
                         ai_sales_agent_availability: true
                         created_by_id: 5017691
                         updated_by_id: 5017691
-                        exclude_from_article_suggestions: false
-                        help_center_audience: everyone
-                        scheduled_publish_at: null
-                        scheduled_unpublish_at: null
+                        has_unpublished_changes: false
+                        draft_updated_at: null
                       highlights: []
+                    pages:
+                      type: pages
+                      page: 1
+                      total_pages: 1
+                      per_page: 10
+                No results:
+                  value:
+                    type: list
+                    total_count: 0
+                    data: []
                     pages:
                       type: pages
                       page: 1
@@ -2613,6 +2961,41 @@ paths:
                       per_page: 10
               schema:
                 "$ref": "#/components/schemas/article_search_response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Phrase too long:
+                  value:
+                    type: error.list
+                    request_id: 1bc9b60b-0786-5071-8f02-7a1774b9e60c
+                    errors:
+                    - code: parameter_invalid
+                      message: Phrase is too long
+                Invalid state:
+                  value:
+                    type: error.list
+                    request_id: 45ab1896-953a-51ff-ab2a-208ae54fd42c
+                    errors:
+                    - code: parameter_mismatch
+                      message: Article state must be one of published, draft, all
+                Invalid help center:
+                  value:
+                    type: error.list
+                    request_id: 4a19af49-61cb-5405-a03e-240ff7d4e685
+                    errors:
+                    - code: invalid_help_center_id
+                      message: Invalid Help Center ID
+                Invalid pagination:
+                  value:
+                    type: error.list
+                    request_id: a88426cc-4cdd-5084-baf4-4db7b55bd4f9
+                    errors:
+                    - code: data_invalid
+                      message: Pagination data must be a number greater than 0
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -3906,7 +4289,7 @@ paths:
       description: |
         You can fetch a list of all URL redirects for a help center by making a GET request to `https://api.intercom.io/help_center/help_centers/{help_center_id}/redirects`.
 
-        Redirects are returned in descending order on the `updated_at` attribute.
+        Redirects are returned in ascending alphabetical order of `from_url`.
 
         Requires the `read_help_center_redirects_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
@@ -4260,13 +4643,35 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch. Defaults to the first page.
+        example: 1
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of results to return per page. Defaults to 20. Maximum is 250.
+        example: 20
+        schema:
+          type: integer
+          maximum: 250
+      - name: help_center_id
+        in: query
+        required: false
+        description: Only return collections that belong to this Help Center.
+        example: 123
+        schema:
+          type: integer
       tags:
       - Help Center
       operationId: listAllCollections
       description: |
         You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.
 
-        Collections will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we'll show the most recently updated collections first.
+        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Successful
@@ -4278,9 +4683,10 @@ paths:
                     type: list
                     data:
                     - id: '159'
+                      type: collection
                       workspace_id: this_is_an_id96_that_should_be_at_least_4
                       name: English collection title
-                      url: http://help-center.test/myapp-96/collection-17
+                      url: http://help-center.test/myapp-96/en/collections/159-english-collection-title
                       order: 17
                       created_at: 1734537309
                       updated_at: 1734537309
@@ -4289,9 +4695,10 @@ paths:
                       parent_id:
                       help_center_id: 79
                     - id: '160'
+                      type: collection
                       workspace_id: this_is_an_id96_that_should_be_at_least_4
                       name: English section title
-                      url: http://help-center.test/myapp-96/section-1
+                      url: http://help-center.test/myapp-96/en/collections/160-english-section-title
                       order: 1
                       created_at: 1734537309
                       updated_at: 1734537309
@@ -4307,6 +4714,27 @@ paths:
                       total_pages: 1
               schema:
                 "$ref": "#/components/schemas/collection_list"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Per page too large:
+                  value:
+                    type: error.list
+                    request_id: a53bbddf-0c1f-5347-ad35-6e77920c9856
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too big
+                Invalid help center:
+                  value:
+                    type: error.list
+                    request_id: 806bb340-2357-544e-8fc2-8500543d72bd
+                    errors:
+                    - code: invalid_help_center_id
+                      message: Invalid help center id
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -4331,7 +4759,10 @@ paths:
       tags:
       - Help Center
       operationId: createCollection
-      description: You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections.`
+      description: |
+        You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.
+
+        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: collection created
@@ -4341,9 +4772,10 @@ paths:
                 collection created:
                   value:
                     id: '165'
+                    type: collection
                     workspace_id: this_is_an_id100_that_should_be_at_least_
                     name: Thanks for everything
-                    url: http://help-center.test/myapp-100/
+                    url: http://help-center.test/myapp-100/en/collections/165-thanks-for-everything
                     order: 1
                     created_at: 1734537312
                     updated_at: 1734537312
@@ -4365,6 +4797,20 @@ paths:
                     errors:
                     - code: parameter_not_found
                       message: Name is a required parameter.
+                Invalid help center:
+                  value:
+                    type: error.list
+                    request_id: 68bc842d-927f-5ac0-a16c-27cfa23c2f2f
+                    errors:
+                    - code: invalid_help_center_id
+                      message: Invalid help center id
+                Parent collection not found:
+                  value:
+                    type: error.list
+                    request_id: aefba0b8-1416-5186-9b13-2d2ea4c4eedd
+                    errors:
+                    - code: parameter_invalid
+                      message: Parent collection doesn't exist
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -4413,8 +4859,10 @@ paths:
       tags:
       - Help Center
       operationId: retrieveCollection
-      description: You can fetch the details of a single collection by making a GET
-        request to `https://api.intercom.io/help_center/collections/<id>`.
+      description: |
+        You can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/<id>`.
+
+        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Collection found
@@ -4424,9 +4872,10 @@ paths:
                 Collection found:
                   value:
                     id: '170'
+                    type: collection
                     workspace_id: this_is_an_id106_that_should_be_at_least_
                     name: English collection title
-                    url: http://help-center.test/myapp-106/collection-22
+                    url: http://help-center.test/myapp-106/en/collections/170-english-collection-title
                     order: 22
                     created_at: 1734537315
                     updated_at: 1734537315
@@ -4481,8 +4930,10 @@ paths:
       tags:
       - Help Center
       operationId: updateCollection
-      description: You can update the details of a single collection by making a PUT
-        request to `https://api.intercom.io/collections/<id>`.
+      description: |
+        You can update the details of a single collection by making a PUT request to `https://api.intercom.io/help_center/collections/<id>`.
+
+        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: successful
@@ -4492,9 +4943,10 @@ paths:
                 successful:
                   value:
                     id: '176'
+                    type: collection
                     workspace_id: this_is_an_id112_that_should_be_at_least_
                     name: Update collection name
-                    url: http://help-center.test/myapp-112/collection-25
+                    url: http://help-center.test/myapp-112/en/collections/176-update-collection-name
                     order: 25
                     created_at: 1734537318
                     updated_at: 1734537319
@@ -4504,6 +4956,34 @@ paths:
                     help_center_id: 87
               schema:
                 "$ref": "#/components/schemas/collection"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Help center mismatch:
+                  value:
+                    type: error.list
+                    request_id: 9bd76817-9f0d-5cc1-9ea0-bba489c1469c
+                    errors:
+                    - code: invalid_help_center_id
+                      message: Supplied help center id doesn't match the collection's help center id.
+                Parent collection not found:
+                  value:
+                    type: error.list
+                    request_id: 9a35a830-4e68-528c-bf1b-7f1d3c689edf
+                    errors:
+                    - code: parameter_invalid
+                      message: Parent collection doesn't exist
+                Unsupported locale:
+                  value:
+                    type: error.list
+                    request_id: 0ff611e4-cde8-52c8-8665-1f307615e359
+                    errors:
+                    - code: data_invalid
+                      message: Locale 'xx' isn't supported.
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Collection Not Found
           content:
@@ -4563,8 +5043,10 @@ paths:
       tags:
       - Help Center
       operationId: deleteCollection
-      description: You can delete a single collection by making a DELETE request to
-        `https://api.intercom.io/collections/<id>`.
+      description: |
+        You can delete a single collection by making a DELETE request to `https://api.intercom.io/help_center/collections/<id>`.
+
+        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: successful
@@ -4617,22 +5099,24 @@ paths:
       - name: id
         in: path
         required: true
-        description: The unique identifier for the collection which is given by Intercom.
+        description: The unique identifier for the Help Center which is given by Intercom.
         example: 123
         schema:
           type: integer
       tags:
       - Help Center
       operationId: retrieveHelpCenter
-      description: You can fetch the details of a single Help Center by making a GET
-        request to `https://api.intercom.io/help_center/help_center/<id>`.
+      description: |
+        You can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_centers/<id>`.
+
+        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
-          description: Collection found
+          description: Help Center found
           content:
             application/json:
               examples:
-                Collection found:
+                Help Center found:
                   value:
                     id: '93'
                     workspace_id: this_is_an_id124_that_should_be_at_least_
@@ -4649,11 +5133,11 @@ paths:
               schema:
                 "$ref": "#/components/schemas/help_center"
         '404':
-          description: Collection not found
+          description: Help Center not found
           content:
             application/json:
               examples:
-                Collection not found:
+                Help Center not found:
                   value:
                     type: error.list
                     request_id: bbd5de60-49c4-4850-afff-1226cdaa0beb
@@ -4687,7 +5171,10 @@ paths:
       tags:
       - Help Center
       operationId: listHelpCenters
-      description: You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.
+      description: |
+        You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.
+
+        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Help Centers found
@@ -4743,7 +5230,7 @@ paths:
                       total_pages: 1
                     total_count: 1
                     data:
-                    - id: '39'
+                    - id: 39
                       title: Thanks for everything
                       body: Body of the Article
                       body_markdown: "Body of the Article\n"
@@ -4791,7 +5278,7 @@ paths:
               examples:
                 internal article created:
                   value:
-                    id: '42'
+                    id: 42
                     title: Thanks for everything
                     body: Body of the Article
                     body_markdown: "Body of the Article\n"
@@ -4898,7 +5385,7 @@ paths:
               examples:
                 Internal article found:
                   value:
-                    id: '45'
+                    id: 45
                     body: Body of the Article
                     body_markdown: "Body of the Article\n"
                     owner_id: 991266252
@@ -4967,7 +5454,7 @@ paths:
               examples:
                 successful:
                   value:
-                    id: '48'
+                    id: 48
                     body: Body of the Article
                     body_markdown: "Body of the Article\n"
                     owner_id: 991266252
@@ -5315,14 +5802,13 @@ paths:
                   value:
                     type: list
                     total_count: 1
-                    data:
-                      internal_articles:
-                      - id: '55'
-                        body: Body of the Article
-                        owner_id: 991266252
-                        author_id: 991266252
-                        locale: en
-                        folder_id: 123
+                    internal_articles:
+                    - id: 55
+                      body: Body of the Article
+                      owner_id: 991266252
+                      author_id: 991266252
+                      locale: en
+                      folder_id: 123
                     pages:
                       type: pages
                       page: 1
@@ -5673,6 +6159,119 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/error"
+  "/ip_allowlist":
+    get:
+      summary: Get IP allowlist settings
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - IP Allowlist
+      operationId: getIpAllowlist
+      description: Retrieve the current IP allowlist configuration for the workspace.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                Successful:
+                  value:
+                    type: ip_allowlist
+                    enabled: true
+                    ip_allowlist:
+                    - "192.168.1.0/24"
+                    - "10.0.0.1"
+              schema:
+                "$ref": "#/components/schemas/ip_allowlist"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+    put:
+      summary: Update IP allowlist settings
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      tags:
+      - IP Allowlist
+      operationId: updateIpAllowlist
+      description: |
+        Update the IP allowlist configuration for the workspace.
+
+        {% admonition type="warning" name="Lockout Protection" %}
+          The API will reject updates that would lock out the caller's IP address. Ensure your current IP is included in the allowlist when enabling the feature.
+        {% /admonition %}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                Successful:
+                  value:
+                    type: ip_allowlist
+                    enabled: true
+                    ip_allowlist:
+                    - "192.168.1.0/24"
+                    - "10.0.0.1"
+              schema:
+                "$ref": "#/components/schemas/ip_allowlist"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              examples:
+                Lockout Protection:
+                  value:
+                    type: error.list
+                    request_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    errors:
+                    - code: parameter_invalid
+                      message: Your IP (1.2.3.4) is not on the allowlist. Saving would lock you out of this workspace.
+              schema:
+                "$ref": "#/components/schemas/error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ip_allowlist"
+            examples:
+              successful:
+                summary: Enable IP allowlist
+                value:
+                  enabled: true
+                  ip_allowlist:
+                  - "192.168.1.0/24"
+                  - "10.0.0.1"
   "/companies":
     post:
       summary: Create or Update a company
@@ -5844,7 +6443,7 @@ paths:
           content:
             application/json:
               examples:
-                Successful:
+                List of companies:
                   value:
                     type: list
                     data:
@@ -5880,8 +6479,37 @@ paths:
                       per_page: 15
                       total_pages: 1
                     total_count: 1
+                Single company (company_id or name):
+                  value:
+                    type: company
+                    company_id: '1'
+                    id: 6762f07f1bb69f9f2193baf5
+                    app_id: this_is_an_id159_that_should_be_at_least_
+                    name: company1
+                    remote_created_at: 1734537343
+                    created_at: 1734537343
+                    updated_at: 1734537343
+                    monthly_spend: 0
+                    session_count: 0
+                    user_count: 1
+                    tags:
+                      type: tag.list
+                      tags: []
+                    segments:
+                      type: segment.list
+                      segments: []
+                    notes:
+                      type: note.list
+                      data: []
+                      url: "/companies/6762f0761bb69f9f2193bae2/notes"
+                      total_count: 0
+                      has_more: false
+                    plan: {}
+                    custom_attributes: {}
               schema:
-                "$ref": "#/components/schemas/company_list"
+                oneOf:
+                - "$ref": "#/components/schemas/company"
+                - "$ref": "#/components/schemas/company_list"
         '404':
           description: Company Not Found
           content:
@@ -6015,6 +6643,17 @@ paths:
         {% admonition type="warning" name="Using `company_id`" %}
           When updating a company it is not possible to update `company_id`. This can only be set once upon creation of the company.
         {% /admonition %}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_company_request"
+            examples:
+              successful:
+                summary: Successful
+                value:
+                  name: my company
+                  website: http://www.mycompany.com/
       responses:
         '200':
           description: Successful
@@ -8938,6 +9577,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name: joe bloggs
                     avatar:
                     owner_id:
@@ -9028,6 +9668,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name: joe bloggs
                     avatar:
                     owner_id:
@@ -9223,6 +9864,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name: Joe Bloggs
                     avatar:
                     owner_id:
@@ -9438,6 +10080,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name: Joe Bloggs
                     avatar:
                     owner_id:
@@ -10079,6 +10722,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name:
                     avatar:
                     owner_id:
@@ -10241,6 +10885,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name: Joe Bloggs
                     avatar:
                     owner_id:
@@ -10443,7 +11088,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/contact_blocked"
-  "/contacts/{id}/merge_history":
+  "/contacts/{id}/merge_histories":
     get:
       summary: Get contact merge history
       parameters:
@@ -11717,8 +12362,8 @@ paths:
                       - type: paragraph
                         text: Navigate to Settings > Security > Reset password.
                       body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
-                      chatbot_availability: 1
-                      copilot_availability: 1
+                      chatbot_availability: 2
+                      copilot_availability: 2
                       ai_chatbot_availability: true
                       ai_copilot_availability: true
                       ai_sales_agent_availability: true
@@ -11777,8 +12422,8 @@ paths:
                     - type: paragraph
                       text: Navigate to Settings > Security > Reset password.
                     body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
-                    chatbot_availability: 1
-                    copilot_availability: 1
+                    chatbot_availability: 2
+                    copilot_availability: 2
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
@@ -11850,8 +12495,8 @@ paths:
                     - type: paragraph
                       text: Navigate to Settings > Security > Reset password.
                     body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
-                    chatbot_availability: 1
-                    copilot_availability: 1
+                    chatbot_availability: 2
+                    copilot_availability: 2
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
@@ -11925,8 +12570,8 @@ paths:
                     - type: paragraph
                       text: Go to Settings > Security > Reset password and follow the steps.
                     body_markdown: "# How to reset your password (updated)\n\nGo to Settings > Security > Reset password and follow the steps.\n"
-                    chatbot_availability: 1
-                    copilot_availability: 1
+                    chatbot_availability: 2
+                    copilot_availability: 2
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
@@ -13010,6 +13655,7 @@ paths:
                         contacts:
                         - type: contact
                           id: 6762f0f31bb69f9f2193bb8b
+                          email: joe@example.com
                           external_id: '70'
                       first_contact_reply:
                       admin_assignee_id: 991267715
@@ -13034,7 +13680,6 @@ paths:
                         data: []
                         total_count: 0
                         has_more: false
-                      ai_topics:
                       ai_agent:
                       ai_agent_participated: false
                       channel:
@@ -13366,6 +14011,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1261bb69f9f2193bba7
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -13397,7 +14043,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -13625,6 +14270,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1261bb69f9f2193bba7
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -13656,7 +14302,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -13997,7 +14642,7 @@ paths:
 
         To resolve, rename or archive the duplicate attribute so each name is unique, then retry the request. You can do this through:
 
-        - The Conversation Attributes API — list with `GET /conversations/attributes`, then rename with `PUT /conversations/attributes/{id}` or archive with `DELETE /conversations/attributes/{id}`
+        - The [Conversation Attributes API](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) — list with `GET /conversations/attributes`, then rename with `PUT /conversations/attributes/{id}` or archive with `DELETE /conversations/attributes/{id}`
         - Your workspace settings (Settings → Data → Conversations)
         {% /admonition %}
 
@@ -14035,6 +14680,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1301bb69f9f2193bbab
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -14060,7 +14706,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -14135,6 +14780,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1341bb69f9f2193bbac
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -14170,7 +14816,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -14392,8 +15037,8 @@ paths:
         | Field                                     | Type                                                                                                                                                   |
         | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
         | id                                        | String                                                                                                                                                 |
-        | created_at                                | Date (UNIX timestamp)                                                                                                                                  |
-        | updated_at                                | Date (UNIX timestamp)                                                                                                                                  |
+        | created_at                                | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | updated_at                                | Date (Unix timestamp in seconds)                                                                                                                                  |
         | source.type                               | String<br>Accepted fields are `conversation`, `email`, `facebook`, `instagram`, `phone_call`, `phone_switch`, `push`, `sms`, `twitter` and `whatsapp`. |
         | source.id                                 | String                                                                                                                                                 |
         | source.delivered_as                       | String                                                                                                                                                 |
@@ -14412,8 +15057,8 @@ paths:
         | open                                      | Boolean                                                                                                                                                |
         | read                                      | Boolean                                                                                                                                                |
         | state                                     | String                                                                                                                                                 |
-        | waiting_since                             | Date (UNIX timestamp)                                                                                                                                  |
-        | snoozed_until                             | Date (UNIX timestamp)                                                                                                                                  |
+        | waiting_since                             | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | snoozed_until                             | Date (Unix timestamp in seconds)                                                                                                                                  |
         | tag_ids                                   | String                                                                                                                                                 |
         | priority                                  | String                                                                                                                                                 |
         | statistics.time_to_assignment             | Integer                                                                                                                                                |
@@ -14421,21 +15066,21 @@ paths:
         | statistics.time_to_first_close            | Integer                                                                                                                                                |
         | statistics.time_to_last_close             | Integer                                                                                                                                                |
         | statistics.median_time_to_reply           | Integer                                                                                                                                                |
-        | statistics.first_contact_reply_at         | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.first_assignment_at            | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.first_admin_reply_at           | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.first_close_at                 | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.last_assignment_at             | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.last_assignment_admin_reply_at | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.last_contact_reply_at          | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.last_admin_reply_at            | Date (UNIX timestamp)                                                                                                                                  |
-        | statistics.last_close_at                  | Date (UNIX timestamp)                                                                                                                                  |
+        | statistics.first_contact_reply_at         | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.first_assignment_at            | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.first_admin_reply_at           | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.first_close_at                 | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.last_assignment_at             | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.last_assignment_admin_reply_at | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.last_contact_reply_at          | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.last_admin_reply_at            | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | statistics.last_close_at                  | Date (Unix timestamp in seconds)                                                                                                                                  |
         | statistics.last_closed_by_id              | String                                                                                                                                                 |
         | statistics.count_reopens                  | Integer                                                                                                                                                |
         | statistics.count_assignments              | Integer                                                                                                                                                |
         | statistics.count_conversation_parts       | Integer                                                                                                                                                |
-        | conversation_rating.requested_at          | Date (UNIX timestamp)                                                                                                                                  |
-        | conversation_rating.replied_at            | Date (UNIX timestamp)                                                                                                                                  |
+        | conversation_rating.requested_at          | Date (Unix timestamp in seconds)                                                                                                                                  |
+        | conversation_rating.replied_at            | Date (Unix timestamp in seconds)                                                                                                                                  |
         | conversation_rating.score                 | Integer                                                                                                                                                |
         | conversation_rating.remark                | String                                                                                                                                                 |
         | conversation_rating.contact_id            | String                                                                                                                                                 |
@@ -14458,8 +15103,8 @@ paths:
         | !=       | All                            | Doesn't Equal                                                |
         | IN       | All                            | In  Shortcut for `OR` queries  Values most be in Array       |
         | NIN      | All                            | Not In  Shortcut for `OR !` queries  Values must be in Array |
-        | >        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |
-        | <       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |
+        | >        | Integer  Date (Unix timestamp in seconds) | Greater (or equal) than                                      |
+        | <       | Integer  Date (Unix timestamp in seconds) | Lower (or equal) than                                        |
         | ~        | String                         | Contains                                                     |
         | !~       | String                         | Doesn't Contain                                              |
         | ^        | String                         | Starts With                                                  |
@@ -14505,6 +15150,7 @@ paths:
                         contacts:
                         - type: contact
                           id: 6762f14a1bb69f9f2193bbb3
+                          email: joe@example.com
                           external_id: '70'
                       first_contact_reply:
                       admin_assignee_id: 991267715
@@ -14529,7 +15175,6 @@ paths:
                         data: []
                         total_count: 0
                         has_more: false
-                      ai_topics:
                       ai_agent:
                       ai_agent_participated: false
                       channel:
@@ -14686,6 +15331,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1571bb69f9f2193bbbb
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                       created_at: 1734537561
@@ -14713,7 +15359,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -14769,6 +15414,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f15b1bb69f9f2193bbbc
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -14793,7 +15439,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -14861,6 +15506,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f15e1bb69f9f2193bbbd
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -14885,7 +15531,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -14941,6 +15586,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1621bb69f9f2193bbbe
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                       created_at: 1734537572
@@ -14968,7 +15614,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -15152,6 +15797,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f16e1bb69f9f2193bbc2
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -15176,7 +15822,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -15204,6 +15849,10 @@ paths:
                         metadata: {}
                         email_message_metadata:
                         app_package_code: null
+                        translations:
+                          original: en
+                          en: "<p>Goodbye :)</p>"
+                          fr: "<p>Au revoir :)</p>"
                       total_count: 1
                 Snooze a conversation:
                   value:
@@ -15232,6 +15881,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1711bb69f9f2193bbc3
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -15256,7 +15906,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -15312,6 +15961,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1781bb69f9f2193bbc8
+                        email: joe@example.com
                         external_id: '74'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -15336,7 +15986,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -15392,6 +16041,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1831bb69f9f2193bbcc
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                     admin_assignee_id: 991267715
@@ -15416,7 +16066,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -16308,6 +16957,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1f81bb69f9f2193bc09
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                       created_at: 1734537722
@@ -16335,7 +16985,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     channel:
@@ -16470,6 +17119,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1571bb69f9f2193bbbb
+                        email: joe@example.com
                         external_id: '70'
                     first_contact_reply:
                       created_at: 1734537561
@@ -16497,7 +17147,6 @@ paths:
                       data: []
                       total_count: 0
                       has_more: false
-                    ai_topics:
                     ai_agent:
                     ai_agent_participated: false
                     conversation_parts:
@@ -16662,6 +17311,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f2041bb69f9f2193bc0c
+                        email: joe@example.com
                         external_id: '70'
                     admin_assignee_id: 0
                     team_assignee_id: 0
@@ -17815,7 +18465,7 @@ paths:
       description: Fetch a Custom Object Instance by id.
       responses:
         '200':
-          description: successful
+          description: "successful. If the custom object type exists but no instance matches, the response is still `200` with `found: false`."
           content:
             application/json:
               examples:
@@ -17831,12 +18481,26 @@ paths:
                     external_updated_at:
                     created_at: 1734537750
                     updated_at: 1734537750
+                not_found_instance:
+                  summary: Instance not found
+                  value:
+                    id: '999999'
+                    type: Order
+                    custom_attributes: {}
+                    external_id:
+                    external_created_at:
+                    external_updated_at:
+                    created_at:
+                    updated_at:
+                    found: false
               schema:
-                "$ref": "#/components/schemas/custom_object_instance"
+                oneOf:
+                - "$ref": "#/components/schemas/custom_object_instance"
+                - "$ref": "#/components/schemas/custom_object_instance_not_found"
         '401':
           $ref: "#/components/responses/Unauthorized"
         '404':
-          $ref: "#/components/responses/ObjectNotFound"
+          $ref: "#/components/responses/TypeNotFound"
     delete:
       summary: Delete a Custom Object Instance by ID
       parameters:
@@ -20895,7 +21559,7 @@ paths:
       - name: summary
         in: query
         required: false
-        description: summary flag
+        description: Set to `true` (or `1`) to return an event summary (`event.summary`) instead of the list of events. Omit for the paginated event list (`event.list`).
         schema:
           type: boolean
       tags:
@@ -20919,17 +21583,32 @@ paths:
           content:
             application/json:
               examples:
-                Successful response:
+                Summary (summary=true):
                   value:
                     type: event.summary
                     events: []
-                    pages:
-                      next: http://api.intercom.test/events?next page
                     email: user26@email.com
                     intercom_user_id: 6762f22b1bb69f9f2193bc12
                     user_id: 3ecf64d0-9ed1-4e9f-88e1-da7d6e6782f3
+                Event list (default):
+                  value:
+                    type: event.list
+                    events:
+                    - type: event
+                      id: 2fc69404-91a6-11e7-be05-4fc6091e296e
+                      created_at: 1389913941
+                      event_name: invited-friend
+                      user_id: '314159'
+                      email: frodo.baggins@example.com
+                      intercom_user_id: 63a0979a5eeebeaf28dd56ba
+                      metadata: {}
+                    pages:
+                      next: https://api.intercom.io/events?per_page=1&before=1389913941064&intercom_user_id=63a0979a5eeebeaf28dd56ba&type=user
+                      since: https://api.intercom.io/events?intercom_user_id=63a0979a5eeebeaf28dd56ba&type=user&since=1389913941065
               schema:
-                "$ref": "#/components/schemas/data_event_summary"
+                oneOf:
+                - "$ref": "#/components/schemas/data_event_list"
+                - "$ref": "#/components/schemas/data_event_summary"
         '401':
           description: Unauthorized
           content:
@@ -23624,6 +24303,78 @@ paths:
                       message: Access Token Invalid
               schema:
                 "$ref": "#/components/schemas/error"
+  "/subscription_types/{id}":
+    get:
+      summary: Retrieve a subscription type
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier for the subscription type.
+        example: '123'
+        schema:
+          type: string
+      tags:
+      - Subscription Types
+      operationId: getSubscriptionType
+      description: You can fetch the details of a single subscription type by making
+        a GET request to `https://api.intercom.io/subscription_types/<id>`.
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              examples:
+                Successful:
+                  value:
+                    type: subscription
+                    id: '135'
+                    state: live
+                    consent_type: opt_out
+                    default_translation:
+                      name: Newsletters
+                      description: Lorem ipsum dolor sit amet
+                      locale: en
+                    translations:
+                    - name: Newsletters
+                      description: Lorem ipsum dolor sit amet
+                      locale: en
+                    content_types:
+                    - email
+              schema:
+                "$ref": "#/components/schemas/subscription_type"
+        '404':
+          description: Subscription type not found
+          content:
+            application/json:
+              examples:
+                Subscription type not found:
+                  value:
+                    type: error.list
+                    request_id: 5c1d8f0e-3b7a-4a52-9c21-7e6d4b8f2a10
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 06d15b1f-19b0-42cc-aff9-a9d9db39402b
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
   "/phone_call_redirects":
     post:
       summary: Create a phone Switch
@@ -24448,7 +25199,7 @@ paths:
       - name: Intercom-Version
         in: header
         schema:
-          "$ref": "#/components/schemas/intercom_version"
+          "$ref": "#/components/schemas/intercom_version_preview"
       - name: id
         in: path
         required: true
@@ -24470,6 +25221,7 @@ paths:
         they must be able to manage teams, and any team or teammate their access is
         restricted from remains out of reach here.
       requestBody:
+        required: true
         content:
           application/json:
             examples:
@@ -25996,6 +26748,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1261bb69f9f2193bba7
+                        email: joe@example.com
                         external_id: '70'
                     open: true
                     state: open
@@ -26161,6 +26914,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f1261bb69f9f2193bba7
+                        email: joe@example.com
                         external_id: '70'
                     open: true
                     state: open
@@ -26306,6 +27060,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f2d81bb69f9f2193bc54
+                        email: joe@example.com
                         external_id: '70'
                     admin_assignee_id: 0
                     team_assignee_id: 0
@@ -26551,6 +27306,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f2dd1bb69f9f2193bc55
+                        email: joe@example.com
                         external_id: 8df1fa21-b41d-4621-9229-d6f7a3a590ce
                     admin_assignee_id: 991268013
                     team_assignee_id: 0
@@ -26888,6 +27644,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 6762f2f61bb69f9f2193bc59
+                        email: joe@example.com
                         external_id: b16afa36-2637-4880-adee-a46d145bc27f
                     admin_assignee_id: 0
                     team_assignee_id: 0
@@ -27073,6 +27830,7 @@ paths:
                       contacts:
                       - type: contact
                         id: 667d61c88a68186f43bafe93
+                        email: joe@example.com
                         external_id: '71'
                     admin_assignee_id: 0
                     team_assignee_id: 0
@@ -27210,7 +27968,7 @@ paths:
         {% admonition type="warning" name="Optimizing search queries" %}
           Search queries can be complex, so optimizing them can help the performance of your search.
           Use the `AND` and `OR` operators to combine multiple filters to get the exact results you need and utilize
-          pagination to limit the number of results returned. The default is `20` results per page.
+          pagination to limit the number of results returned. The default is `20` results per page and maximum is `150`.
           See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the `starting_after` param.
         {% /admonition %}
 
@@ -27224,25 +27982,24 @@ paths:
         ### Accepted Fields
 
         Most keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as `created_at` accepts a date, the `value` cannot be a string such as `"foobar"`).
-        The `source.body` field is unique as the search will not be performed against the entire value, but instead against every element of the value separately. For example, when searching for a conversation with a `"I need support"` body - the query should contain a `=` operator with the value `"support"` for such conversation to be returned. A query with a `=` operator and a `"need support"` value will not yield a result.
+        Fields not in the table below, such as `source.body`, are rejected with a `400` error.
 
         | Field                                     | Type                                                                                     |
         | :---------------------------------------- | :--------------------------------------------------------------------------------------- |
-        | id                                        | String                                                                                   |
-        | created_at                                | Date (UNIX timestamp)                                                                    |
-        | updated_at                                | Date (UNIX timestamp)                                                                    |
+        | id                                        | Integer                                                                                  |
+        | created_at                                | Date (Unix timestamp in seconds)                                                                    |
+        | updated_at                                | Date (Unix timestamp in seconds)                                                                    |
         | title                           | String                                                                                   |
         | description                     | String                                                                                   |
         | category                                  | String                                                                                   |
-        | ticket_type_id                            | String                                                                                   |
+        | ticket_type_id                            | Integer                                                                                  |
         | contact_ids                               | String                                                                                   |
-        | teammate_ids                              | String                                                                                   |
         | admin_assignee_id                         | Integer                                                                                  |
         | team_assignee_id                          | Integer                                                                                  |
         | open                                      | Boolean                                                                                  |
         | state                                     | String                                                                                   |
-        | snoozed_until                             | Date (UNIX timestamp)                                                                    |
-        | ticket_attribute.{id}                     | String or Boolean or Date (UNIX timestamp) or Float or Integer                           |
+        | snoozed_until                             | Date (Unix timestamp in seconds)                                                                    |
+        | ticket_attribute.{id}                     | String or Boolean or Date (Unix timestamp in seconds) or Float or Integer                           |
 
         {% admonition type="info" name="Searching by Category" %}
         When searching for tickets by the **`category`** field, specific terms must be used instead of the category names:
@@ -27250,6 +28007,10 @@ paths:
         * For **Back-office** category tickets, use the term `task`.
         * For **Tracker** category tickets, use the term `tracker`.
         {% /admonition %}
+
+        ### Sorting
+
+        You can sort the results with a `sort` object, for example `{"field": "created_at", "order": "ascending"}`. `field` must be one of the fields in the table above, other than `ticket_attribute.{id}`, `title` and `description`. `order` is `ascending` or `descending`, and any other value is treated as `descending`. Without `sort`, results are sorted by `updated_at`, newest first.
 
         ### Accepted Operators
 
@@ -27265,8 +28026,8 @@ paths:
         | !=       | All                            | Doesn't Equal                                                |
         | IN       | All                            | In  Shortcut for `OR` queries  Values most be in Array       |
         | NIN      | All                            | Not In  Shortcut for `OR !` queries  Values must be in Array |
-        | >        | Integer  Date (UNIX Timestamp) | Greater (or equal) than                                      |
-        | <       | Integer  Date (UNIX Timestamp) | Lower (or equal) than                                        |
+        | >        | Integer  Date (Unix timestamp in seconds) | Greater (or equal) than                                      |
+        | <       | Integer  Date (Unix timestamp in seconds) | Lower (or equal) than                                        |
         | ~        | String                         | Contains                                                     |
         | !~       | String                         | Doesn't Contain                                              |
         | ^        | String                         | Starts With                                                  |
@@ -27353,6 +28114,7 @@ paths:
                         contacts:
                         - type: contact
                           id: 6762f3061bb69f9f2193bc5b
+                          email: joe@example.com
                           external_id: 9b913927-c084-4391-b1db-098341b5ffe3
                       admin_assignee_id: 0
                       team_assignee_id: 0
@@ -27648,6 +28410,7 @@ paths:
                     email_verified: false
                     phone:
                     formatted_phone:
+                    whatsapp_number:
                     name:
                     avatar:
                     owner_id:
@@ -28097,6 +28860,12 @@ paths:
           schema:
             type: string
       responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ai_call_response"
         '401':
           description: Unauthorized
           content:
@@ -30194,7 +30963,6 @@ components:
     admin_priority_level_request:
       title: Admin Priority Level Request
       type: object
-      nullable: true
       description: The priority levels to set, naming only the teammates whose level
         is being set
       properties:
@@ -30562,57 +31330,6 @@ components:
           example:
             email: user@example.com
             company.name: Acme Inc
-    ai_subtopic:
-      title: AI Subtopic
-      type: object
-      description: An AI-generated subtopic under a topic.
-      properties:
-        type:
-          type: string
-          description: Always ai_subtopic.
-          example: ai_subtopic
-        name:
-          type: string
-          description: The name of the subtopic.
-          example: Payment Issues
-        id:
-          type: integer
-          description: The ID of the subtopic.
-          example: 42
-    ai_topic:
-      title: AI Topic
-      type: object
-      description: An AI-generated topic assigned to the conversation.
-      properties:
-        type:
-          type: string
-          description: Always ai_topic.
-          example: ai_topic
-        topic_name:
-          type: string
-          description: The name of the AI-generated topic.
-          example: Billing
-        subtopics:
-          type: array
-          description: The subtopics under this topic.
-          items:
-            $ref: '#/components/schemas/ai_subtopic'
-    ai_topics:
-      title: AI Topics
-      type: object
-      x-tags:
-      - AI Topics
-      description: AI-generated topics and subtopics for the conversation.
-      properties:
-        type:
-          type: string
-          description: Always ai_topics.
-          example: ai_topics
-        topics:
-          type: array
-          description: The list of AI-generated topics for this conversation.
-          items:
-            $ref: '#/components/schemas/ai_topic'
     app:
       title: App
       type: object
@@ -30793,6 +31510,11 @@ components:
           - article_content
           example: article_content
           nullable: true
+        content_id:
+          type: string
+          readOnly: true
+          description: The unique identifier for the article's content in this locale.
+          example: '6871120'
         title:
           type: string
           description: The title of the article.
@@ -30898,7 +31620,7 @@ components:
           - list
           example: list
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
           description: A count of the total number of internal articles.
@@ -30983,7 +31705,7 @@ components:
           - list
           example: list
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
           description: A count of the total number of articles.
@@ -31015,6 +31737,11 @@ components:
           type: string
           description: The id of the workspace which the article belongs to.
           example: hfi1bx4l
+        content_id:
+          type: string
+          description: The unique identifier for the article's content. For multilingual articles,
+            this will be the identifier of the default language's content.
+          example: '6871120'
         title:
           type: string
           description: The title of the article. For multilingual articles, this will
@@ -31097,6 +31824,19 @@ components:
           example:
           - 18
           - 19
+        audience_ids:
+          type: array
+          nullable: true
+          description: >-
+            The list of audience IDs this article is targeted to for Fin AI Agent.
+            This field is only returned for single-language help centers. For
+            multilingual help centers it appears per locale inside `translated_content`.
+            Empty array means no audience targeting is set.
+          items:
+            type: integer
+          example:
+          - 1
+          - 2
         default_locale:
           type: string
           description: The default locale of the help center. This field is only returned
@@ -31188,17 +31928,10 @@ components:
       - Internal Articles
       description: The data returned about your internal articles when you list them.
       properties:
-        type:
-          type: string
-          description: The type of object - `internal_article`.
-          enum:
-          - internal_article
-          default: internal_article
-          example: internal_article
         id:
-          type: string
+          type: integer
           description: The unique identifier for the article which is given by Intercom.
-          example: '6871119'
+          example: 6871119
         title:
           type: string
           description: The title of the article.
@@ -31335,7 +32068,8 @@ components:
           example: 5
         data:
           type: object
-          description: An object containing the results of the search.
+          description: An object containing the results of the search. When no articles
+            match, this is an empty array instead.
           properties:
             articles:
               type: array
@@ -31348,7 +32082,7 @@ components:
               items:
                 "$ref": "#/components/schemas/article_search_highlights"
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
     internal_article_search_response:
       title: Internal Article Search Response
       type: object
@@ -31366,17 +32100,13 @@ components:
           type: integer
           description: The total number of Internal Articles matching the search query
           example: 5
-        data:
-          type: object
-          description: An object containing the results of the search.
-          properties:
-            internal_articles:
-              type: array
-              description: An array of Internal Article objects
-              items:
-                "$ref": "#/components/schemas/internal_article"
+        internal_articles:
+          type: array
+          description: An array of Internal Article objects
+          items:
+            "$ref": "#/components/schemas/internal_article"
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
     article_statistics:
       title: Article Statistics
       type: object
@@ -31394,7 +32124,7 @@ components:
           type: integer
           description: The number of total views the article has received.
           example: 10
-        conversions:
+        conversations:
           type: integer
           description: The number of conversations started from the article.
           example: 0
@@ -31629,8 +32359,9 @@ components:
           example: '300'
         state:
           type: string
-          description: Whether this version is the currently published version of
-            the article (`published`) or an earlier non-live version (`draft`).
+          description: '`published` if this is the version that is currently live;
+            `draft` for every other version, including earlier versions that are
+            no longer live and staged changes that have not been published.'
           enum:
           - published
           - draft
@@ -31657,7 +32388,7 @@ components:
           - list
           example: list
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
           description: A count of the total number of versions.
@@ -31722,8 +32453,9 @@ components:
           example: '300'
         state:
           type: string
-          description: Whether this version is the currently published version of
-            the article (`published`) or an earlier non-live version (`draft`).
+          description: '`published` if this is the version that is currently live;
+            `draft` for every other version, including earlier versions that are
+            no longer live and staged changes that have not been published.'
           enum:
           - published
           - draft
@@ -32106,14 +32838,16 @@ components:
           type: boolean
           description: "Whether the status reason has been soft deleted"
           example: false
-        created_at:
-          type: integer
-          description: "The Unix timestamp when the status reason was created"
-          example: 1734537243
-        updated_at:
-          type: integer
-          description: "The Unix timestamp when the status reason was last updated"
-          example: 1734537243
+        associated_to_phone_status:
+          type: string
+          nullable: true
+          description: "The phone status this away status reason is configured for, or null if it is not associated with one."
+          enum:
+          - wrap_up
+          - on_a_call
+          - coaching
+          - null
+          example: wrap_up
     away_status_reason_list:
       title: Away Status Reasons
       type: object
@@ -32191,6 +32925,12 @@ components:
       description: Collections are top level containers for Articles within the Help
         Center.
       properties:
+        type:
+          type: string
+          description: The type of object - `collection`.
+          enum:
+          - collection
+          example: collection
         id:
           type: string
           description: The unique identifier for the collection which is given by
@@ -32283,8 +33023,9 @@ components:
           example: help_center_redirect
         from_url:
           type: string
-          description: The source URL that is redirected. An absolute URL within the
-            help center's URL space.
+          description: The source URL that is redirected. This is an absolute URL within
+            the help center's URL space, or a relative path such as `/old-page` for
+            some existing redirects.
           example: http://help-center.test/lovelyhelpcenter/old-page
         locale:
           type: string
@@ -32331,7 +33072,7 @@ components:
           - list
           example: list
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
           description: A count of the total number of redirects.
@@ -32408,7 +33149,7 @@ components:
           - list
           example: list
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
           description: A count of the total number of collections.
@@ -33043,7 +33784,12 @@ components:
           type: object
           description: The custom attributes you have set on the company.
           additionalProperties:
-            type: string
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
           example:
             paid_subscriber: true
             monthly_spend: 155.5
@@ -33230,6 +33976,11 @@ components:
           nullable: true
           description: The contacts phone number normalized to the E164 format
           example: "+1123456789"
+        whatsapp_number:
+          type: string
+          nullable: true
+          description: The contact's WhatsApp number. It is read-only; sending it when creating or updating a contact has no effect.
+          example: "+34666666666"
         name:
           type: string
           nullable: true
@@ -33932,6 +34683,11 @@ components:
           description: The unique identifier for the contact which is provided by
             the Client.
           example: "70"
+        email:
+          type: string
+          nullable: true
+          description: The contact's email.
+          example: joe@example.com
     contact_reply_base_request:
       title: Contact Reply Base Object
       type: object
@@ -34802,15 +35558,13 @@ components:
         chatbot_availability:
           type: integer
           deprecated: true
-          description: Deprecated. Use ai_chatbot_availability instead. Whether this
-            snippet is available for Fin (1 = on, 0 = off).
-          example: 1
+          description: Deprecated. Use ai_chatbot_availability instead.
+          example: 2
         copilot_availability:
           type: integer
           deprecated: true
-          description: Deprecated. Use ai_copilot_availability instead. Whether this
-            snippet is available for Copilot (1 = on, 0 = off).
-          example: 1
+          description: Deprecated. Use ai_copilot_availability instead.
+          example: 2
         ai_chatbot_availability:
           type: boolean
           description: Whether the content snippet is available for AI Chatbot (Fin).
@@ -34924,20 +35678,20 @@ components:
         ai_chatbot_availability:
           type: boolean
           description: Whether the content snippet should be available for AI Chatbot
-            (Fin). Defaults to false.
-          default: false
+            (Fin). Defaults to true.
+          default: true
           example: true
         ai_copilot_availability:
           type: boolean
           description: Whether the content snippet should be available for AI Copilot.
-            Defaults to false.
-          default: false
+            Defaults to true.
+          default: true
           example: true
         ai_sales_agent_availability:
           type: boolean
           description: Whether the content snippet should be available for AI Sales
-            Agent. Defaults to false.
-          default: false
+            Agent. Defaults to true.
+          default: true
           example: true
     content_snippet_update_request:
       title: Update Content Snippet Request
@@ -35503,8 +36257,6 @@ components:
           "$ref": "#/components/schemas/conversation_parts"
         linked_objects:
           "$ref": "#/components/schemas/linked_object_list"
-        ai_topics:
-          "$ref": "#/components/schemas/ai_topics"
         ai_agent_participated:
           type: boolean
           description: Indicates whether the AI Agent participated in the conversation.
@@ -36144,21 +36896,23 @@ components:
           type: object
           nullable: true
           description: >-
-            A map of the reply text keyed by locale code. Only present on the
-            Preview API version and backs the `conversation.admin.replied.translated`
-            webhook topic. The special `original` key holds the source locale code
-            of the reply; every other key is a locale code whose value is the reply
-            text translated into that locale, as HTML in the same format as `body`.
-            The `body` field is unchanged and always
-            stays in the original source language. Available in the Preview API version
-            only (set `Intercom-Version: Preview`). This webhook topic is not sent for
-            every translated reply: it is suppressed when the reply's `body` contains
-            any text outside an HTML block element, which includes plain-text replies
-            created through the REST API.
+            A map of the reply text keyed by locale code, with values in the
+            same format as `body` (HTML by default). Backs the
+            `conversation.admin.replied.translated` webhook topic. The special
+            `original` key holds the source locale code of the reply when it is
+            known; every other key is a locale code whose value is the reply text
+            translated into that locale. The `translations` field does not modify
+            `body`. Available from API version 2.16.
+            This webhook topic is not sent for every translated reply: it is
+            suppressed when the reply's `body` contains any text outside an HTML block
+            element, which includes plain-text replies created through the REST API.
             Wrap the body in `<p>`, `<div>`, or another supported block element to
             avoid this.
-          required:
-            - original
+          properties:
+            original:
+              type: string
+              description: The locale code identifying the language the reply was originally written in.
+              example: en
           additionalProperties:
             type: string
           example:
@@ -36242,7 +36996,7 @@ components:
                 nullable: true
                 description: The translations for the quick reply option.
                 example: { "en": "Hello", "fr": "Bonjour" }
-        quick_reply_uuid:
+        quick_reply_option_uuid:
           type: string
           format: uuid
           description: The unique identifier for the quick reply option that was clicked by the end user.
@@ -36557,7 +37311,7 @@ components:
           type: string
           description: The type of the object - `admin.list`.
           example: admin.list
-        teammates:
+        admins:
           type: array
           description: The list of teammates who participated in the conversation
             (wrote at least one conversation part).
@@ -36682,8 +37436,9 @@ components:
       properties:
         title:
           type: string
-          description: The title of the article.For multilingual articles, this will
-            be the title of the default language's content.
+          description: The title of the article. For multilingual articles, this will
+            be the title of the default language's content. Required unless a title
+            is provided in `translated_content` under the workspace's default Help Center locale.
           example: Thanks for everything
         description:
           type: string
@@ -36705,7 +37460,8 @@ components:
           type: integer
           description: The id of the author of the article. For multilingual articles,
             this will be the id of the author of the default language's content. Must
-            be a teammate on the help center's workspace.
+            be a teammate on the help center's workspace. Required unless an `author_id`
+            is provided in `translated_content` under the workspace's default Help Center locale.
           example: 1295
         state:
           type: string
@@ -36721,21 +37477,27 @@ components:
           description: The id of the article's parent collection or section. An article
             without this field stands alone.
           example: 18
-        parent_type:
-          type: string
-          description: The type of parent, which can either be a `collection` or `section`.
-          example: collection
         parent_ids:
           type: array
           description: The ids of the parent collections to place this article in.
             Send an empty array to leave the article without a collection. When
-            provided, this takes precedence over `parent_id` and `parent_type`.
+            provided, this takes precedence over `parent_id`.
           items:
             type: integer
           example:
           - 18
           - 19
+        locale:
+          type: string
+          description: The locale of the article's default content, for example `en`.
+            Defaults to the locale of the help center that the parent collection belongs
+            to when `parent_id` is sent, and otherwise to the default Help Center locale.
+            Must be a locale supported by the workspace's Help Center.
+          example: en
         translated_content:
+          description: Content for other locales, keyed by locale code. Content for the
+            article's default locale can also be given here instead of at the top level.
+            If it is given in both places, the values must match.
           "$ref": "#/components/schemas/article_translated_content"
         folder_id:
           type: integer
@@ -36791,16 +37553,14 @@ components:
           nullable: true
           description: >-
             ISO 8601 timestamp at which to schedule a future unpublish of the article.
-            The value must be strictly in the future — timestamps in the past or equal to
-            the current time are rejected with 400 `parameter_invalid`. Setting `null`
-            cancels a pending unpublish schedule. Rejected with 400 `parameter_invalid`
-            if the article has never been published. Sending in the same request as
-            `scheduled_publish_at` returns 400 — only one pending schedule per article.
-            Empty string returns 400 `parameter_invalid`.
+            The same request must also publish the article (`state: "published"`),
+            otherwise it returns 400 `parameter_invalid`. The value must be strictly in
+            the future; timestamps in the past or equal to the current time are rejected
+            with 400 `parameter_invalid`. Setting `null` cancels a pending unpublish
+            schedule. Sending in the same request as `scheduled_publish_at` returns 400
+            — only one pending schedule per article. Empty string returns 400
+            `parameter_invalid`.
           example: '2026-12-31T17:00:00Z'
-      required:
-      - title
-      - author_id
     create_internal_article_request:
       description: You can create an Internal Article
       type: object
@@ -36875,13 +37635,19 @@ components:
         name:
           type: string
           description: The name of the collection. For multilingual collections, this
-            will be the name of the default language's content.
+            will be the name of the default language's content. Required unless a
+            name is provided in `translated_content` under the workspace's default Help Center locale.
           example: collection 51
         description:
           type: string
           description: The description of the collection. For multilingual collections,
             this will be the description of the default language's content.
           example: English description
+        icon:
+          type: string
+          description: The icon of the collection, for example `book-bookmark`. Defaults
+            to `book-bookmark`.
+          example: book-bookmark
         translated_content:
           nullable: true
           "$ref": "#/components/schemas/group_translated_content"
@@ -36897,8 +37663,6 @@ components:
           description: The id of the help center where the collection will be created.
             If `null` then it will be created in the default help center.
           example: '123'
-      required:
-      - name
     create_contact_request:
       description: Payload to create a contact
       type: object
@@ -37206,33 +37970,50 @@ components:
           type: string
           description: Your identifier for the user.
           example: '314159'
+        id:
+          type: string
+          description: The Intercom defined id of the user. Takes precedence over `user_id` and `email`.
+          example: 63a0979a5eeebeaf28dd56ba
+        email:
+          type: string
+          description: The user's email address. Only used when neither `id` nor `user_id` is supplied.
+          example: frodo.baggins@example.com
         event_summaries:
-          type: object
+          type: array
           description: A list of event summaries for the user. Each event summary
             should contain the event name, the time the event occurred, and the number
             of times the event occurred. The event name should be a past tense 'verb-noun'
             combination, to improve readability, for example `updated-plan`.
-          properties:
-            event_name:
-              type: string
-              description: The name of the event that occurred. A good event name
-                is typically a past tense 'verb-noun' combination, to improve readability,
-                for example `updated-plan`.
-              example: invited-friend
-            count:
-              type: integer
-              description: The number of times the event occurred.
-              example: 1
-            first:
-              type: integer
-              format: date-time
-              description: The first time the event was sent
-              example: 1671028894
-            last:
-              type: integer
-              format: date-time
-              description: The last time the event was sent
-              example: 1671028894
+          items:
+            type: object
+            required:
+            - event_name
+            - count
+            - first
+            - last
+            properties:
+              event_name:
+                type: string
+                description: The name of the event that occurred. A good event name
+                  is typically a past tense 'verb-noun' combination, to improve readability,
+                  for example `updated-plan`.
+                example: invited-friend
+              count:
+                type: integer
+                description: The number of times the event occurred.
+                example: 1
+              first:
+                type: integer
+                format: date-time
+                description: The first time the event was sent
+                example: 1671028894
+              last:
+                type: integer
+                format: date-time
+                description: The last time the event was sent
+                example: 1671028894
+      required:
+      - event_summaries
     create_data_exports_request:
       description: Request for creating a data export
       type: object
@@ -37310,6 +38091,20 @@ components:
           description: The identifier for the external page which was given by the
             source. Must be unique for the source.
           example: '5678'
+        audience_ids:
+          type: array
+          nullable: true
+          description: >-
+            The list of audience IDs to target this external page to for Fin AI Agent.
+            Omitting the field preserves any default audience segments inherited from the parent content import source.
+            Pass an explicit array to override inherited defaults with the given set.
+            Pass `[]` to clear all audience memberships (even if the source has defaults).
+            Unknown audience IDs return a `404` error with no partial commit.
+          items:
+            type: integer
+          example:
+          - 1
+          - 2
       required:
       - title
       - html
@@ -37473,7 +38268,7 @@ components:
         size:
           type: integer
           description: The number of employees in this company.
-          example: '100'
+          example: 100
         website:
           type: string
           description: The URL for this company's website. Please note that the value
@@ -37485,10 +38280,74 @@ components:
           example: Manufacturing
         custom_attributes:
           type: object
-          description: A hash of key/value pairs containing any other data about the
-            company you want Intercom to store.
+          description: Values for custom attributes that already exist in your workspace.
+            Each value can be a string, integer, number, boolean or null. Arrays and
+            objects aren't accepted.
           additionalProperties:
-            type: string
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
+          example:
+            paid_subscriber: true
+            monthly_spend: 155.5
+            team_mates: 9
+        remote_created_at:
+          type: integer
+          description: The time the company was created by you.
+          example: 1394531169
+        monthly_spend:
+          type: integer
+          description: How much revenue the company generates for your business. Note
+            that this will truncate floats. i.e. it only allow for whole integers,
+            155.98 will be truncated to 155. Note that this has an upper limit of
+            2**31-1 or 2147483647..
+          example: 1000
+        update_last_request_at:
+          type: boolean
+          description: Set to true to update the company's last seen time to now.
+          example: true
+    update_company_request:
+      type: object
+      title: Update Company Request Payload
+      description: You can update a Company
+      nullable: true
+      properties:
+        name:
+          type: string
+          description: The name of the Company
+          example: Intercom
+        plan:
+          type: string
+          description: The name of the plan you have associated with the company.
+          example: Enterprise
+        size:
+          type: integer
+          description: The number of employees in this company.
+          example: 100
+        website:
+          type: string
+          description: The URL for this company's website. Please note that the value
+            specified here is not validated. Accepts any string.
+          example: https://www.example.com
+        industry:
+          type: string
+          description: The industry that this company operates in.
+          example: Manufacturing
+        custom_attributes:
+          type: object
+          description: Values for custom attributes that already exist in your workspace.
+            Each value can be a string, integer, number, boolean or null. Arrays and
+            objects aren't accepted.
+          additionalProperties:
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
           example:
             paid_subscriber: true
             monthly_spend: 155.5
@@ -37766,6 +38625,7 @@ components:
           default: false
       required:
       - name
+      - category
     cursor_pages:
       title: Cursor based pages
       type: object
@@ -37785,7 +38645,20 @@ components:
           description: The current page
           example: 1
         next:
-          "$ref": "#/components/schemas/starting_after_paging"
+          type: object
+          nullable: true
+          description: Fetch the next page by sending this `starting_after` cursor.
+            Omitted on the last page.
+          properties:
+            page:
+              type: integer
+              description: The number of the next page
+              example: 2
+            starting_after:
+              type: string
+              description: The cursor to send in the next request to get the next
+                page of results.
+              example: your-cursor-from-response
         per_page:
           type: integer
           description: Number of results per page
@@ -38005,59 +38878,80 @@ components:
                 type: string
                 description: The text of the matched guidance rule.
                 example: If the customer asks about pricing, ask which plan they're interested in before answering
-    ai_topic_subtopic_list:
+    ai_topic_subtopic:
       title: AI Topic and Subtopic
-      type: array
-      readOnly: true
-      description: The topics Fin detected in a conversation, returned under the "AI
-        Topic and Subtopic" key of a conversation's custom attributes. Generated by
-        Fin and returned in responses only; it cannot be set on a request.
-      items:
-        type: object
-        properties:
-          topic_name:
-            type: string
-            description: The name of the topic.
-            example: Billing
-          subtopic_name:
-            type: string
-            nullable: true
-            description: The name of the subtopic, where the topic has one.
-            example: Refund request
-          id:
-            type: integer
-            nullable: true
-            description: The unique identifier for the subtopic.
-            example: 12345
-    cx_score_reason_list:
-      title: CX Score reasons
-      type: array
-      readOnly: true
-      description: The reasons behind a conversation's CX Score, returned under the
-        "CX Score reasons" key of a conversation's custom attributes. Generated by
-        Fin and returned in responses only; it cannot be set on a request.
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            description: The name of the reason.
-            example: Resolution speed
-          value:
-            type: string
-            description: The value recorded for the reason.
-            example: Fast
+      type: object
+      description: >-
+        A single AI-generated topic and subtopic classification for a
+        conversation. Surfaced inside `custom_attributes` under the "AI Topic
+        and Subtopic" key as an array of these objects. Requires the AI add-on;
+        the key is omitted when the conversation has no classification.
+      properties:
+        topic_name:
+          type: string
+          description: The name of the AI-generated topic.
+          example: Billing
+        subtopic_name:
+          type: string
+          nullable: true
+          description: The name of the AI-generated subtopic, if any.
+          example: Payment Issues
+        id:
+          type: integer
+          nullable: true
+          description: The id of the subtopic.
+          example: 42
+    cx_score_reason:
+      title: CX Score reason
+      type: object
+      description: >-
+        A single reason behind a conversation's CX Score. Surfaced inside
+        `custom_attributes` under the "CX Score reasons" key as an array of
+        these objects.
+      properties:
+        name:
+          type: string
+          description: The name of the reason.
+          example: Resolution speed
+        value:
+          type: string
+          description: The value recorded for the reason.
+          example: Fast
     custom_attributes:
       title: Custom Attributes
       type: object
-      description: An object containing the different custom attributes associated
-        to the conversation as key-value pairs. For relationship attributes the value
-        will be a list of custom object instance models. Attributes that Intercom
-        generates — such as "CX Score rating", "CX Score explanation", "AI
-        Topic and Subtopic" and "CX Score reasons" — may also be included. Two of
-        them, "AI Topic and Subtopic" and "CX Score reasons", carry lists of objects
-        as their values, and are returned in responses only — they cannot be set on
-        a write request.
+      description: >-
+        An object containing the custom attributes on a conversation as key-value
+        pairs. For relationship attributes the value is a list of custom object
+        instance models. System-defined attributes such as "AI Topic and Subtopic",
+        "CX Score rating", "CX Score explanation" and "CX Score reasons" may also be
+        included.
+      properties:
+        "AI Topic and Subtopic":
+          type: array
+          readOnly: true
+          description: >-
+            Read-only AI Insights classification of the conversation. Present
+            only with the AI add-on; omitted when the conversation has no
+            classification.
+          example:
+          - topic_name: Billing
+            subtopic_name: Payment Issues
+            id: 42
+          items:
+            "$ref": "#/components/schemas/ai_topic_subtopic"
+        "CX Score reasons":
+          type: array
+          readOnly: true
+          description: >-
+            Read-only reasons behind the conversation's CX Score. Intercom
+            generates this attribute, so it cannot be set. Omitted when the
+            conversation has no CX Score reasons.
+          example:
+          - name: Resolution speed
+            value: Fast
+          items:
+            "$ref": "#/components/schemas/cx_score_reason"
       additionalProperties:
         anyOf:
         - type: string
@@ -38066,8 +38960,6 @@ components:
         - type: boolean
         - $ref: "#/components/schemas/datetime"
         - "$ref": "#/components/schemas/custom_object_instance_list"
-        - "$ref": "#/components/schemas/ai_topic_subtopic_list"
-        - "$ref": "#/components/schemas/cx_score_reason_list"
       example:
         paid_subscriber: true
         monthly_spend: 155.5
@@ -38079,8 +38971,8 @@ components:
           expressed satisfaction with the outcome.
         AI Topic and Subtopic:
         - topic_name: Billing
-          subtopic_name: Refund request
-          id: 12345
+          subtopic_name: Payment Issues
+          id: 42
         CX Score reasons:
         - name: Resolution speed
           value: Fast
@@ -38089,7 +38981,7 @@ components:
       type: object
       description: The custom attributes which are set on this object, as key-value
         pairs. For relationship attributes the value should be a list of custom object
-        instance models. Only attributes a caller may set are accepted here — attributes
+        instance models. Only attributes a caller may set should be sent here — attributes
         Intercom generates are returned in responses only.
       additionalProperties:
         anyOf:
@@ -38191,6 +39083,44 @@ components:
             reference attribute on the parent object.
           items:
             "$ref": "#/components/schemas/custom_object_instance"
+    custom_object_instance_not_found:
+      title: Custom Object Instance Not Found
+      type: object
+      description: Returned with HTTP 200 (not 404) when the custom object type exists but no instance matches the requested id or external_id.
+      required:
+      - found
+      properties:
+        found:
+          type: boolean
+          description: Always `false`. Only present on this response.
+          example: false
+        id:
+          type: string
+          nullable: true
+          description: The requested id, echoed back. Null when looked up by `external_id`.
+        external_id:
+          type: string
+          nullable: true
+          description: The requested external_id, echoed back. Null when looked up by `id`.
+        type:
+          type: string
+          description: The identifier of the custom object type that was queried.
+          example: Order
+        custom_attributes:
+          type: object
+          description: Always an empty object.
+        external_created_at:
+          type: integer
+          nullable: true
+        external_updated_at:
+          type: integer
+          nullable: true
+        created_at:
+          type: integer
+          nullable: true
+        updated_at:
+          type: integer
+          nullable: true
     custom_object_instances_paginated_list:
       title: Custom Object Instances
       type: object
@@ -41262,12 +42192,15 @@ components:
                 nullable: true
                 description: Optional. Human readable description of the error.
                 example: Access Token Invalid
-              field:
-                type: string
+              data:
+                type: object
                 nullable: true
-                description: Optional. Used to identify a particular field or query
-                  parameter that was in error.
-                example: email
+                additionalProperties: true
+                description: Optional. Extra detail about the error, for example
+                  `required_permissions` on a 403 `action_forbidden` error.
+                example:
+                  required_permissions:
+                  - read_conversations
             required:
             - code
       required:
@@ -41362,6 +42295,17 @@ components:
           format: date-time
           description: The time when the external page was last ingested.
           example: 1672928610
+        audience_ids:
+          type: array
+          nullable: true
+          description: >-
+            The list of audience IDs this external page is targeted to for Fin AI Agent.
+            Empty array means no audience targeting is set.
+          items:
+            type: integer
+          example:
+          - 1
+          - 2
       required:
       - id
       - type
@@ -42613,12 +43557,36 @@ components:
           example: k3x9q2m7pa
       required:
       - name
+    ip_allowlist:
+      title: IP Allowlist
+      type: object
+      description: IP allowlist settings for the workspace.
+      properties:
+        type:
+          type: string
+          description: String representing the object's type. Always has the value `ip_allowlist`.
+          example: ip_allowlist
+        enabled:
+          type: boolean
+          description: Whether the IP allowlist is enabled for the workspace.
+          example: true
+        ip_allowlist:
+          type: array
+          description: |
+            List of allowed IP addresses and/or IP ranges in CIDR notation.
+            Examples:
+            - Single IP: `192.168.0.1`
+            - IP range: `192.168.0.1/24` (allows 192.168.0.0 - 192.168.0.255)
+          items:
+            type: string
+          example:
+          - "192.168.1.0/24"
+          - "10.0.0.1"
     intercom_version:
-      description: Intercom API version.</br>By default, it's equal to the version
-        set in the app package.
+      description: Intercom API version.</br>If you omit the header, the API uses the
+        version set in your app package, and 1.0 if none is set.
       type: string
       example: Preview
-      default: Preview
       enum:
       - '1.0'
       - '1.1'
@@ -43338,6 +44306,13 @@ components:
           format: timestamp
           description: Timestamp for when the news item was last updated.
           example: 1610589632
+        published_at:
+          type: integer
+          format: timestamp
+          nullable: true
+          description: Timestamp for when the news item last went live. Null if the
+            news item has never been live.
+          example: 1610589632
     news_item_request:
       description: A News Item is a content type in Intercom enabling you to announce
         product updates, company news, promotions, events and more with your customers.
@@ -43748,8 +44723,15 @@ components:
         next:
           type: string
           format: uri
-          description: A link to the next page of results. A response that does not
-            contain a next link does not have further data to fetch.
+          description: A link to the next page of results. Omitted on the last page.
+            Some lists never include `next` or `prev`, so compare `page` with `total_pages`
+            to tell whether more pages remain.
+          nullable: true
+        prev:
+          type: string
+          format: uri
+          description: A link to the previous page of results. Omitted on the first
+            page.
           nullable: true
         per_page:
           type: integer
@@ -43828,11 +44810,10 @@ components:
           - phone_call_redirect
           default: phone_call_redirect
           example: phone_call_redirect
-        phone:
+        url:
           type: string
-          description: Phone number in E.164 format, that has received the SMS to
-            continue the conversation in the Messenger.
-          example: "+1 1234567890"
+          description: The Messenger link for the phone call redirect, which is also the link sent by SMS to the phone number.
+          example: http://via.intercom.io/msgr/1add3dd1-a75e-4a96-96fd-984d16aba059
     quick_reply_option:
       title: Quick Reply Option
       type: object
@@ -44177,7 +45158,7 @@ components:
           enum:
           - hit
           - missed
-          - cancelled
+          - canceled
           - active
           description: |-
             SLA statuses:
@@ -45025,21 +46006,23 @@ components:
           type: object
           nullable: true
           description: >-
-            A map of the reply text keyed by locale code. Only present on the
-            Preview API version and backs the `ticket.admin.replied.translated`
-            webhook topic. The special `original` key holds the source locale code
-            of the reply; every other key is a locale code whose value is the reply
-            text translated into that locale, as HTML in the same format as `body`.
-            The `body` field is unchanged and always
-            stays in the original source language. Available in the Preview API version
-            only (set `Intercom-Version: Preview`). This webhook topic is not sent for
-            every translated reply: it is suppressed when the reply's `body` contains
-            any text outside an HTML block element, which includes plain-text replies
-            created through the REST API.
+            A map of the reply text keyed by locale code, with values in the
+            same format as `body` (HTML by default). Backs the
+            `ticket.admin.replied.translated` webhook topic. The special
+            `original` key holds the source locale code of the reply when it is
+            known; every other key is a locale code whose value is the reply text
+            translated into that locale. The `translations` field does not modify
+            `body`. Available from API version 2.16.
+            This webhook topic is not sent for every translated reply: it is
+            suppressed when the reply's `body` contains any text outside an HTML block
+            element, which includes plain-text replies created through the REST API.
             Wrap the body in `<p>`, `<div>`, or another supported block element to
             avoid this.
-          required:
-            - original
+          properties:
+            original:
+              type: string
+              description: The locale code identifying the language the reply was originally written in.
+              example: en
           additionalProperties:
             type: string
           example:
@@ -45219,21 +46202,23 @@ components:
           type: object
           nullable: true
           description: >-
-            A map of the reply text keyed by locale code. Only present on the
-            Preview API version and backs the `ticket.admin.replied.translated`
-            webhook topic. The special `original` key holds the source locale code
-            of the reply; every other key is a locale code whose value is the reply
-            text translated into that locale, as HTML in the same format as `body`.
-            The `body` field is unchanged and always
-            stays in the original source language. Available in the Preview API version
-            only (set `Intercom-Version: Preview`). This webhook topic is not sent for
-            every translated reply: it is suppressed when the reply's `body` contains
-            any text outside an HTML block element, which includes plain-text replies
-            created through the REST API.
+            A map of the reply text keyed by locale code, with values in the
+            same format as `body` (HTML by default). Backs the
+            `ticket.admin.replied.translated` webhook topic. The special
+            `original` key holds the source locale code of the reply when it is
+            known; every other key is a locale code whose value is the reply text
+            translated into that locale. The `translations` field does not modify
+            `body`. Available from API version 2.16.
+            This webhook topic is not sent for every translated reply: it is
+            suppressed when the reply's `body` contains any text outside an HTML block
+            element, which includes plain-text replies created through the REST API.
             Wrap the body in `<p>`, `<div>`, or another supported block element to
             avoid this.
-          required:
-            - original
+          properties:
+            original:
+              type: string
+              description: The locale code identifying the language the reply was originally written in.
+              example: en
           additionalProperties:
             type: string
           example:
@@ -45529,8 +46514,9 @@ components:
         type:
           type: string
           description: String representing the object's type. Always has the value
-            `ticket_type_attributes.list`.
-        ticket_type_attributes:
+            `list`.
+          example: list
+        data:
           type: array
           description: A list of ticket type attributes associated with a given ticket
             type.
@@ -45650,137 +46636,51 @@ components:
           example:
           - en
           - fr
+        author_id:
+          type: integer
+          description: The id of the teammate to publish as. This is only used when the
+            access token is not associated with a teammate, and is then required; omitting
+            it returns 400 `parameter_not_found`. Otherwise the authenticating teammate
+            is used. Must be a teammate on the workspace.
+          example: 1295
     stage_article_draft_request_body:
-      description: You can Stage a Draft for an Article
+      description: You can stage a draft for a published article. Only the fields below
+        are staged; any other field in the request body is validated but not applied.
       type: object
       title: Stage Article Draft Request Payload
       nullable: true
       properties:
         title:
           type: string
-          description: The title of the article.For multilingual articles, this will
+          description: The title of the draft. For multilingual articles, this will
             be the title of the default language's content.
           example: Thanks for everything
         description:
           type: string
-          description: The description of the article. For multilingual articles,
+          description: The description of the draft. For multilingual articles,
             this will be the description of the default language's content.
           example: Description of the Article
         body:
           type: string
-          description: The content of the article in HTML. For multilingual articles, this
+          description: The content of the draft in HTML. For multilingual articles, this
             will be the body of the default language's content. Mutually exclusive with `body_markdown`.
           example: "<p>This is the body in html</p>"
         body_markdown:
           type: string
-          description: The content of the article in markdown. For multilingual articles, this
-            will be the body of the default language's content. An alternative to `body` — you
-            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+          description: The content of the draft in markdown. For multilingual articles, this
+            will be the body of the default language's content. Mutually exclusive with `body`.
           example: "## Updated heading\n\nNew content.\n"
         author_id:
           type: integer
-          description: The id of the author of the article. For multilingual articles,
+          description: The id of the author of the draft. For multilingual articles,
             this will be the id of the author of the default language's content. Must
             be a teammate on the help center's workspace.
           example: 1295
-        state:
-          type: string
-          description: Whether the article will be `published` or will be a `draft`.
-            Omitting this field leaves the publish state unchanged, so a draft stays
-            a draft and an edit to a published article goes live immediately unless
-            that article already has a pending draft or a scheduled publish time is
-            set in the same request. The `PUT /articles/{id}/draft` endpoint ignores
-            this field and always stages a draft. For multilingual articles, this
-            will be the state of the default language's content.
-          enum:
-          - published
-          - draft
-          example: draft
-        parent_id:
-          type: string
-          description: The id of the article's parent collection or section. An article
-            without this field stands alone.
-          example: '18'
-        parent_type:
-          type: string
-          description: The type of parent, which can either be a `collection` or `section`.
-          example: collection
-        parent_ids:
-          type: array
-          description: The ids of the parent collections to place this article in.
-            Send an empty array to remove the article from all collections. When
-            provided, this takes precedence over `parent_id` and `parent_type`.
-          items:
-            type: integer
-          example:
-          - 18
-          - 19
         translated_content:
+          description: Draft content for other locales, keyed by locale code. Each locale
+            must already be published on the article.
           "$ref": "#/components/schemas/article_translated_content"
-        folder_id:
-          type: integer
-          nullable: true
-          description: The ID of the folder to place this article in, or null to remove it from its folder.
-          example: 6
-        audience_ids:
-          type: array
-          nullable: true
-          description: >-
-            The list of audience IDs to assign to this article for Fin AI Agent targeting.
-            Sending a top-level `audience_ids` broadcasts the same set to every locale.
-            Sending `audience_ids: []` clears all audience memberships from every locale.
-            For per-locale targeting, use `translated_content.<locale>.audience_ids` instead.
-            Sending both top-level and per-locale in the same request causes top-level to win.
-            Unknown audience IDs return a 404 error. No partial commit occurs.
-          items:
-            type: integer
-          example:
-          - 1
-          - 2
-        ai_chatbot_availability:
-          type: boolean
-          description: Whether the article should be available for AI Chatbot (Fin).
-            For multilingual articles, this sets the default language's availability.
-          example: true
-        ai_copilot_availability:
-          type: boolean
-          description: Whether the article should be available for AI Copilot. For
-            multilingual articles, this sets the default language's availability.
-          example: true
-        ai_sales_agent_availability:
-          type: boolean
-          description: Whether the article should be available for AI Sales Agent.
-            For multilingual articles, this sets the default language's availability.
-          example: true
-        scheduled_publish_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: >-
-            ISO 8601 timestamp at which to schedule a future publish of the article.
-            When set together with `state: "published"`, the article is scheduled
-            instead of published immediately. Setting `null` cancels a pending
-            publish schedule. Timestamps in the past or equal to the current time
-            are rejected with 400 `parameter_invalid` — the value must be strictly
-            in the future. Combining with `state: "draft"` returns 400
-            `parameter_invalid`. Sending in the same request as
-            `scheduled_unpublish_at` returns 400 — only one pending schedule per
-            article. Empty string returns 400 `parameter_invalid`.
-          example: '2026-12-31T09:00:00Z'
-        scheduled_unpublish_at:
-          type: string
-          format: date-time
-          nullable: true
-          description: >-
-            ISO 8601 timestamp at which to schedule a future unpublish of the article.
-            Setting `null` cancels a pending unpublish schedule. Timestamps in the
-            past or equal to the current time are rejected with 400
-            `parameter_invalid` — the value must be strictly in the future. Rejected
-            with 400 `parameter_invalid` if the article has never been published.
-            Sending in the same request as `scheduled_publish_at` returns 400 — only
-            one pending schedule per article. Empty string returns 400
-            `parameter_invalid`.
-          example: '2026-12-31T17:00:00Z'
+
     update_article_request:
       description: You can Update an Article
       type: object
@@ -45789,7 +46689,7 @@ components:
       properties:
         title:
           type: string
-          description: The title of the article.For multilingual articles, this will
+          description: The title of the article. For multilingual articles, this will
             be the title of the default language's content.
           example: Thanks for everything
         description:
@@ -45820,27 +46720,25 @@ components:
             Omitting this field leaves the publish state unchanged, so a draft stays
             a draft and an edit to a published article goes live immediately unless
             that article already has a pending draft or a scheduled publish time is
-            set in the same request. The `PUT /articles/{id}/draft` endpoint ignores
-            this field and always stages a draft. For multilingual articles, this
-            will be the state of the default language's content.
+            set in the same request. For multilingual articles, this will be the state
+            of the default language's content.
           enum:
           - published
           - draft
           example: draft
         parent_id:
           type: string
-          description: The id of the article's parent collection or section. An article
-            without this field stands alone.
+          nullable: true
+          description: >-
+            The id of the collection or section to move the article into. Omitting this
+            field or sending `null` leaves the article's parent unchanged. Send `home` to
+            remove the article from its collection so that it stands alone.
           example: '18'
-        parent_type:
-          type: string
-          description: The type of parent, which can either be a `collection` or `section`.
-          example: collection
         parent_ids:
           type: array
           description: The ids of the parent collections to place this article in.
             Send an empty array to remove the article from all collections. When
-            provided, this takes precedence over `parent_id` and `parent_type`.
+            provided, this takes precedence over `parent_id`.
           items:
             type: integer
           example:
@@ -45903,12 +46801,13 @@ components:
           nullable: true
           description: >-
             ISO 8601 timestamp at which to schedule a future unpublish of the article.
-            The value must be strictly in the future — timestamps in the past or equal to
-            the current time are rejected with 400 `parameter_invalid`. Setting `null`
-            cancels a pending unpublish schedule. Rejected with 400 `parameter_invalid`
-            if the article has never been published. Sending in the same request as
-            `scheduled_publish_at` returns 400 — only one pending schedule per article.
-            Empty string returns 400 `parameter_invalid`.
+            The article must already be published; setting `state: "published"` in the
+            same request does not count, and the request returns 400 `parameter_invalid`.
+            Combining with `state: "draft"` also returns 400 `parameter_invalid`. The value must be strictly in the future;
+            timestamps in the past or equal to the current time are rejected with 400
+            `parameter_invalid`. Setting `null` cancels a pending unpublish schedule.
+            Sending in the same request as `scheduled_publish_at` returns 400 — only one
+            pending schedule per article. Empty string returns 400 `parameter_invalid`.
           example: '2026-12-31T17:00:00Z'
     update_internal_article_request:
       description: You can Update an Internal Article
@@ -45983,15 +46882,28 @@ components:
           description: The description of the collection. For multilingual collections,
             this will be the description of the default language's content.
           example: English description
+        icon:
+          type: string
+          description: The icon of the collection, for example `book-bookmark`.
+          example: book-bookmark
         translated_content:
           nullable: true
           "$ref": "#/components/schemas/group_translated_content"
         parent_id:
           type: string
           nullable: true
-          description: The id of the parent collection. If `null` then it will be
-            updated as the first level collection.
+          description: >-
+            The id of the parent collection to move the collection into. Omitting this
+            field or sending `null` leaves the collection where it is. Send `home` to move
+            it to the first level.
           example: '6871118'
+        help_center_id:
+          type: integer
+          nullable: true
+          description: Checked against the collection's Help Center but not applied, so it
+            can't move the collection to another Help Center.
+          example: 123
+
     update_contact_request:
       description: You can update a contact
       type: object
@@ -46078,7 +46990,7 @@ components:
             this should be set to `api`. You can not change the value to or from api.
           enum:
           - api
-          - automated
+          - automatic
           - manual
           example: api
         status:
@@ -46243,6 +47155,19 @@ components:
           description: The identifier for the external page which was given by the
             source. Must be unique for the source.
           example: '5678'
+        audience_ids:
+          type: array
+          nullable: true
+          description: >-
+            The list of audience IDs to target this external page to for Fin AI Agent.
+            Omitting the field leaves existing audience memberships unchanged (PATCH semantics).
+            Pass `[]` to clear all audience memberships.
+            Unknown audience IDs return a `404` error with no partial commit.
+          items:
+            type: integer
+          example:
+          - 1
+          - 2
       required:
       - title
       - html
@@ -46261,7 +47186,9 @@ components:
         query string is rejected rather than applied. A team read from the API can be sent
         back whole, since the other fields of the representation are accepted as long as
         they are unchanged. Trying to change one of them returns a 400 rather than being
-        ignored, as does any field a team does not have.
+        ignored, as does any field a team does not have. `admin_ids` cannot be empty, so
+        the endpoint will not empty a team, and a team with no members cannot be sent back
+        as it reads.
 
         `admin_priority_level` sets which teammates take work first. It is optional, and
         names only the teammates whose level the request is setting: a teammate it leaves
@@ -46276,7 +47203,7 @@ components:
         level rather than being refused.
 
         Only a team whose `distribution_method` is `load_balanced` can have secondary
-        members, so `secondary_admin_ids` returns a 400 on any other team.
+        members, so making a teammate secondary returns a 400 on any other team.
         `primary_admin_ids` is accepted on every team, but a team that does not balance
         assignment does not report `admin_priority_level` back and does not use the levels
         to decide who work goes to.
@@ -46287,6 +47214,8 @@ components:
           type: array
           description: The ids of every teammate who should be a member of the team.
             Must contain at least one id, and no more than 1000.
+          minItems: 1
+          maxItems: 1000
           items:
             type: integer
           example:
@@ -46598,7 +47527,7 @@ components:
               type: string
               description: The timezone of the visitor.
               example: Europe/Dublin
-        las_request_at:
+        last_request_at:
           type: integer
           description: The time the Lead last recorded making a request.
           example: 1663597260
@@ -46889,6 +47818,12 @@ components:
           items:
             type: object
           example: []
+        data:
+          type: object
+          description: The metadata object supplied when the call was registered, returned verbatim. Empty object when none was supplied.
+          example:
+            masterContactID: 'abc123'
+            DNIS: '+18005551212'
         language:
           type: string
           nullable: true
@@ -46982,7 +47917,7 @@ components:
                 type: error.list
                 request_id: 12a938a3-314e-4939-b773-5cd45738bd21
                 errors:
-                  - code: data_invalid
+                  - code: not_found
                     message: Integration not found
           schema:
             "$ref": "#/components/schemas/error"
@@ -46996,7 +47931,7 @@ components:
                 type: error.list
                 request_id: 12a938a3-314e-4939-b773-5cd45738bd21
                 errors:
-                  - code: data_invalid
+                  - code: parameter_invalid
                     message: Invalid or duplicated record reference
           schema:
             "$ref": "#/components/schemas/error"
@@ -47010,8 +47945,8 @@ components:
                 type: error.list
                 request_id: 12a938a3-314e-4939-b773-5cd45738bd21
                 errors:
-                  - code: data_invalid
-                    message: Contact not found or could not be created
+                  - code: parameter_invalid
+                    message: Parameter invalid
           schema:
             "$ref": "#/components/schemas/error"
 servers:
@@ -47147,6 +48082,15 @@ tags:
   description: Manage HMAC signing secrets for Messenger identity verification — list, create, and rotate out. Signing material is returned only once, at creation time.
 - name: Internal Articles
   description: Everything about your Internal Articles
+- name: IP Allowlist
+  description: |
+    Manage IP allowlist settings for your workspace.
+
+    The IP Allowlist API allows you to configure which IP addresses are allowed to access the Intercom API and web application for your workspace. This is useful for restricting access to your Intercom workspace to specific corporate networks or VPNs.
+
+    {% admonition type="info" name="Authentication" %}
+      This endpoint requires the `manage_ip_allowlist` OAuth scope.
+    {% /admonition %}
 - name: Jobs
   description: Everything about jobs
 - name: Macros

@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A hash of key/value pairs containing any other data about the company you want Intercom to store.
+    /// Values for custom attributes that already exist in your workspace. Each value can be a string, integer, number, boolean or null. Arrays and objects aren&apos;t accepted.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateOrUpdateCompanyRequestCustomAttributesProperty : IAdditionalDataHolder, IParsable

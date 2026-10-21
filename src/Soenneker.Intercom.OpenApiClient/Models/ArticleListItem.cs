@@ -21,6 +21,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? AiCopilotAvailability { get; set; }
         /// <summary>Whether the article is available for AI Sales Agent. For multilingual articles, this will be the value of the default language&apos;s content.</summary>
         public bool? AiSalesAgentAvailability { get; set; }
+        /// <summary>The list of audience IDs this article is targeted to for Fin AI Agent. This field is only returned for single-language help centers. For multilingual help centers it appears per locale inside `translated_content`. Empty array means no audience targeting is set.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? AudienceIds { get; set; }
+#nullable restore
+#else
+        public List<int?> AudienceIds { get; set; }
+#endif
         /// <summary>The id of the author of the article. For multilingual articles, this will be the id of the author of the default language&apos;s content. Must be a teammate on the help center&apos;s workspace.</summary>
         public int? AuthorId { get; set; }
         /// <summary>The body of the article in HTML. For multilingual articles, this will be the body of the default language&apos;s content.</summary>
@@ -38,6 +46,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string BodyMarkdown { get; set; }
+#endif
+        /// <summary>The unique identifier for the article&apos;s content. For multilingual articles, this will be the identifier of the default language&apos;s content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ContentId { get; set; }
+#nullable restore
+#else
+        public string ContentId { get; set; }
 #endif
         /// <summary>The time when the article was created. For multilingual articles, this will be the timestamp of creation of the default language&apos;s content in seconds.</summary>
         public int? CreatedAt { get; set; }
@@ -165,9 +181,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ai_chatbot_availability", n => { AiChatbotAvailability = n.GetBoolValue(); } },
                 { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
                 { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
+                { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
+                { "content_id", n => { ContentId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "created_by_id", n => { CreatedById = n.GetIntValue(); } },
                 { "default_locale", n => { DefaultLocale = n.GetStringValue(); } },
@@ -202,9 +220,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("ai_chatbot_availability", AiChatbotAvailability);
             writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
             writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
+            writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);
+            writer.WriteStringValue("content_id", ContentId);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("default_locale", DefaultLocale);
             writer.WriteStringValue("description", Description);

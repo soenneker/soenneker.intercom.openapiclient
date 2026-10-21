@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Id { get; set; }
 #endif
         /// <summary>The time the Lead last recorded making a request.</summary>
-        public int? LasRequestAt { get; set; }
+        public int? LastRequestAt { get; set; }
         /// <summary>The location_data property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -249,7 +249,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "has_hard_bounced", n => { HasHardBounced = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "las_request_at", n => { LasRequestAt = n.GetIntValue(); } },
+                { "last_request_at", n => { LastRequestAt = n.GetIntValue(); } },
                 { "location_data", n => { LocationData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData.CreateFromDiscriminatorValue); } },
                 { "marked_email_as_spam", n => { MarkedEmailAsSpam = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -291,7 +291,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("email", Email);
             writer.WriteBoolValue("has_hard_bounced", HasHardBounced);
             writer.WriteStringValue("id", Id);
-            writer.WriteIntValue("las_request_at", LasRequestAt);
+            writer.WriteIntValue("last_request_at", LastRequestAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.VisitorLocationData>("location_data", LocationData);
             writer.WriteBoolValue("marked_email_as_spam", MarkedEmailAsSpam);
             writer.WriteStringValue("name", Name);

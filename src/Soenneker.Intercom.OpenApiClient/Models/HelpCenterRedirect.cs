@@ -17,7 +17,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the redirect was created as a UTC Unix timestamp.</summary>
         public int? CreatedAt { get; set; }
-        /// <summary>The source URL that is redirected. An absolute URL within the help center&apos;s URL space.</summary>
+        /// <summary>The source URL that is redirected. This is an absolute URL within the help center&apos;s URL space, or a relative path such as `/old-page` for some existing redirects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? FromUrl { get; set; }

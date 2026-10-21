@@ -15,21 +15,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>An object containing the results of the search.</summary>
+        /// <summary>An array of Internal Article objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponseData? Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle>? InternalArticles { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponseData Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle> InternalArticles { get; set; }
 #endif
-        /// <summary>Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data.A &quot;cursor&quot; or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or &quot;pages&quot; as needed.</summary>
+        /// <summary>The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests.Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CursorPages? Pages { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesLink? Pages { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CursorPages Pages { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesLink Pages { get; set; }
 #endif
         /// <summary>The total number of Internal Articles matching the search query</summary>
         public int? TotalCount { get; set; }
@@ -60,8 +60,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponseData>(global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponseData.CreateFromDiscriminatorValue); } },
-                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
+                { "internal_articles", n => { InternalArticles = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle>(global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesLink>(global::Soenneker.Intercom.OpenApiClient.Models.PagesLink.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
             };
@@ -73,8 +73,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponseData>("data", Data);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle>("internal_articles", InternalArticles);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesLink>("pages", Pages);
             writer.WriteIntValue("total_count", TotalCount);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);

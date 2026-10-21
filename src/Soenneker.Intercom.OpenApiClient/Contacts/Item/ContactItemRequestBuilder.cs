@@ -8,7 +8,7 @@ using Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Block;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies;
-using Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history;
+using Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Notes;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Segments;
 using Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions;
@@ -53,10 +53,10 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies.Granted_companiesRequestBuilder(PathParameters, RequestAdapter);
         }
-        /// <summary>The merge_history property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history.Merge_historyRequestBuilder Merge_history
+        /// <summary>The merge_histories property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories.Merge_historiesRequestBuilder Merge_histories
         {
-            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_history.Merge_historyRequestBuilder(PathParameters, RequestAdapter);
+            get => new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories.Merge_historiesRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The notes property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Notes.NotesRequestBuilder Notes

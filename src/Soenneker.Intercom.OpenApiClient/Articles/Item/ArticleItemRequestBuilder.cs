@@ -52,13 +52,14 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
         {
         }
         /// <summary>
-        /// You can delete a single article by making a DELETE request to `https://api.intercom.io/articles/&lt;id&gt;`.
+        /// You can delete a single article by making a DELETE request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedArticleObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedArticleObject?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -73,11 +74,12 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedArticleObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedArticleObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.
+        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -102,7 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags cannot be managed via the Articles API&gt;&gt; Article tags are read-only in responses. To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
+        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="body">You can Update an Article</param>
@@ -111,6 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Article?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -127,11 +130,12 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single article by making a DELETE request to `https://api.intercom.io/articles/&lt;id&gt;`.
+        /// You can delete a single article by making a DELETE request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -150,7 +154,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.
+        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -169,7 +173,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags cannot be managed via the Articles API&gt;&gt; Article tags are read-only in responses. To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
+        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can Update an Article</param>

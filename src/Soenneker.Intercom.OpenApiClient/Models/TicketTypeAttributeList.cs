@@ -18,12 +18,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A list of ticket type attributes associated with a given ticket type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute>? TicketTypeAttributes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute>? Data { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute> TicketTypeAttributes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute> Data { get; set; }
 #endif
-        /// <summary>String representing the object&apos;s type. Always has the value `ticket_type_attributes.list`.</summary>
+        /// <summary>String representing the object&apos;s type. Always has the value `list`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Type { get; set; }
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "ticket_type_attributes", n => { TicketTypeAttributes = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute>("ticket_type_attributes", TicketTypeAttributes);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttribute>("data", Data);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

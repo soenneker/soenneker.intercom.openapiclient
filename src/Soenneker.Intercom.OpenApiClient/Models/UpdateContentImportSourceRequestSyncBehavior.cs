@@ -11,9 +11,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         Api,
         #pragma warning restore CS1591
-        [EnumMember(Value = "automated")]
+        [EnumMember(Value = "automatic")]
         #pragma warning disable CS1591
-        Automated,
+        Automatic,
         #pragma warning restore CS1591
         [EnumMember(Value = "manual")]
         #pragma warning disable CS1591

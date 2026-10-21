@@ -33,6 +33,7 @@ using Soenneker.Intercom.OpenApiClient.Fin_voice;
 using Soenneker.Intercom.OpenApiClient.Folders;
 using Soenneker.Intercom.OpenApiClient.Help_center;
 using Soenneker.Intercom.OpenApiClient.Internal_articles;
+using Soenneker.Intercom.OpenApiClient.Ip_allowlist;
 using Soenneker.Intercom.OpenApiClient.Jobs;
 using Soenneker.Intercom.OpenApiClient.Macros;
 using Soenneker.Intercom.OpenApiClient.Me;
@@ -199,6 +200,11 @@ namespace Soenneker.Intercom.OpenApiClient
         public global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder Internal_articles
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The ip_allowlist property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Ip_allowlist.Ip_allowlistRequestBuilder Ip_allowlist
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Ip_allowlist.Ip_allowlistRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The jobs property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Jobs.JobsRequestBuilder Jobs

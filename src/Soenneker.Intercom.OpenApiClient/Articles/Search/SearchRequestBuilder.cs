@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,phrase*,state*}", pathParameters)
+        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,page*,per_page*,phrase*,state*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,15 +30,16 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,phrase*,state*}", rawUrl)
+        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,page*,per_page*,phrase*,state*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.
+        /// You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.If no articles match the search, `data` is an empty array rather than an object.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,12 +53,13 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.
+        /// You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.If no articles match the search, `data` is an empty array rather than an object.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -85,7 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
             return new global::Soenneker.Intercom.OpenApiClient.Articles.Search.SearchRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.
+        /// You can search for articles by making a GET request to `https://api.intercom.io/articles/search`.If no articles match the search, `data` is an empty array rather than an object.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SearchRequestBuilderGetQueryParameters 
@@ -96,7 +98,13 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
             /// <summary>Return a highlighted version of the matching content within your articles. Refer to the response schema for more details.</summary>
             [QueryParameter("highlight")]
             public bool? Highlight { get; set; }
-            /// <summary>The phrase within your articles to search for.</summary>
+            /// <summary>The page of results to fetch. Defaults to the first page.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results to return per page. Defaults to 10.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
+            /// <summary>The phrase within your articles to search for. Maximum length is 500 characters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("phrase")]
@@ -106,16 +114,9 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
             [QueryParameter("phrase")]
             public string Phrase { get; set; }
 #endif
-            /// <summary>The state of the Articles returned. One of `published`, `draft` or `all`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
+            /// <summary>The state of the Articles returned. One of `published`, `draft` or `all`. Defaults to `published`.</summary>
             [QueryParameter("state")]
-            public string? State { get; set; }
-#nullable restore
-#else
-            [QueryParameter("state")]
-            public string State { get; set; }
-#endif
+            public global::Soenneker.Intercom.OpenApiClient.Models.SearchArticlesStateParameter? State { get; set; }
         }
     }
 }

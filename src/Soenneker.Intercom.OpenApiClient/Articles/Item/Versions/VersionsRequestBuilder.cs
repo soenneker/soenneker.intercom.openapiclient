@@ -107,7 +107,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VersionsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Filter versions to a specific locale. Use the locale identifier (for example `en`, `fr`). If the locale is not configured for the workspace, a `400` is returned.</summary>
+            /// <summary>Filter versions to a specific locale. Use the locale identifier (for example `en`, `fr`). If the article has no content in that locale, a `400` is returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("locale")]
@@ -120,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions
             /// <summary>The page of results to fetch. Defaults to the first page.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>The number of results to return per page.</summary>
+            /// <summary>The number of results to return per page. Defaults to 10.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }

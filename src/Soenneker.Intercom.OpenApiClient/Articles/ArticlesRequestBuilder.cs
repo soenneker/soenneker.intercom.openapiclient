@@ -41,7 +41,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ArticlesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles", pathParameters)
+        public ArticlesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles{?page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,34 +49,36 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ArticlesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles", rawUrl)
+        public ArticlesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles{?page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.
+        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ArticleList?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ArticleList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder.ArticlesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ArticleList> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ArticleList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder.ArticlesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ArticleList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ArticleList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags cannot be managed via the Articles API&gt;&gt; Article tags are read-only in responses. To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
+        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="body">You can create an Article</param>
@@ -84,6 +86,8 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Article?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -99,21 +103,23 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
             {
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.
+        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder.ArticlesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder.ArticlesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -122,7 +128,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags cannot be managed via the Articles API&gt;&gt; Article tags are read-only in responses. To create, update, or delete tags, use the Intercom UI or the Tags API endpoints.
+        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create an Article</param>
@@ -151,6 +157,19 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
         public global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class ArticlesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>The page of results to fetch. Defaults to the first page.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results to return per page. Defaults to 25. Maximum is 250.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

@@ -33,6 +33,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty> CallTranscript { get; set; }
 #endif
+        /// <summary>The metadata object supplied when the call was registered, returned verbatim. Empty object when none was supplied.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty? Data { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty Data { get; set; }
+#endif
         /// <summary>The external call identifier from the call provider</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -119,6 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "app_id", n => { AppId = n.GetIntValue(); } },
                 { "call_summary", n => { CallSummary = n.GetStringValue(); } },
                 { "call_transcript", n => { CallTranscript = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty.CreateFromDiscriminatorValue); } },
                 { "external_call_id", n => { ExternalCallId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "intent", n => { Intent = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -139,6 +148,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("app_id", AppId);
             writer.WriteStringValue("call_summary", CallSummary);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty>("call_transcript", CallTranscript);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty>("data", Data);
             writer.WriteStringValue("external_call_id", ExternalCallId);
             writer.WriteIntValue("id", Id);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty>("intent", Intent);

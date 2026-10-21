@@ -15,9 +15,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         Missed,
         #pragma warning restore CS1591
-        [EnumMember(Value = "cancelled")]
+        [EnumMember(Value = "canceled")]
         #pragma warning disable CS1591
-        Cancelled,
+        Canceled,
         #pragma warning restore CS1591
         [EnumMember(Value = "active")]
         #pragma warning disable CS1591

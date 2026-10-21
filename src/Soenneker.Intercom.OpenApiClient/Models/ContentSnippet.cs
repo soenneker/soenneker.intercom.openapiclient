@@ -37,10 +37,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string BodyMarkdown { get; set; }
 #endif
-        /// <summary>Deprecated. Use ai_chatbot_availability instead. Whether this snippet is available for Fin (1 = on, 0 = off).</summary>
+        /// <summary>Deprecated. Use ai_chatbot_availability instead.</summary>
         [Obsolete("")]
         public int? ChatbotAvailability { get; set; }
-        /// <summary>Deprecated. Use ai_copilot_availability instead. Whether this snippet is available for Copilot (1 = on, 0 = off).</summary>
+        /// <summary>Deprecated. Use ai_copilot_availability instead.</summary>
         [Obsolete("")]
         public int? CopilotAvailability { get; set; }
         /// <summary>The time the snippet was created as a UNIX timestamp.</summary>

@@ -77,6 +77,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent TranslatedContent { get; set; }
 #endif
+        /// <summary>The type of object - `collection`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.CollectionType? Type { get; set; }
         /// <summary>The time when the article was last updated (seconds). For multilingual articles, this will be the timestamp of last update of the default language&apos;s content.</summary>
         public int? UpdatedAt { get; set; }
         /// <summary>The URL of the collection. For multilingual help centers, this will be the URL of the collection for the default language.</summary>
@@ -130,6 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "order", n => { Order = n.GetIntValue(); } },
                 { "parent_id", n => { ParentId = n.GetStringValue(); } },
                 { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent>(global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent.CreateFromDiscriminatorValue); } },
+                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectionType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
@@ -152,6 +155,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("order", Order);
             writer.WriteStringValue("parent_id", ParentId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent>("translated_content", TranslatedContent);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectionType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteStringValue("workspace_id", WorkspaceId);

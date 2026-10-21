@@ -308,6 +308,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? UnsubscribedFromEmails { get; set; }
         /// <summary>(Unix timestamp in seconds) The time when the contact was last updated.</summary>
         public int? UpdatedAt { get; set; }
+        /// <summary>The contact&apos;s WhatsApp number. It is read-only; sending it when creating or updating a contact has no effect.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WhatsappNumber { get; set; }
+#nullable restore
+#else
+        public string WhatsappNumber { get; set; }
+#endif
         /// <summary>The id of the workspace which the contact belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -389,6 +397,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "whatsapp_number", n => { WhatsappNumber = n.GetStringValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
         }
@@ -447,6 +456,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("type", Type);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteStringValue("whatsapp_number", WhatsappNumber);
             writer.WriteStringValue("workspace_id", WorkspaceId);
             writer.WriteAdditionalData(AdditionalData);
         }

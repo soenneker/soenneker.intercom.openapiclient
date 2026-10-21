@@ -15,13 +15,29 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The user&apos;s email address. Only used when neither `id` nor `user_id` is supplied.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Email { get; set; }
+#nullable restore
+#else
+        public string Email { get; set; }
+#endif
         /// <summary>A list of event summaries for the user. Each event summary should contain the event name, the time the event occurred, and the number of times the event occurred. The event name should be a past tense &apos;verb-noun&apos; combination, to improve readability, for example `updated-plan`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummaries? EventSummaries { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummariesItem>? EventSummaries { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummaries EventSummaries { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummariesItem> EventSummaries { get; set; }
+#endif
+        /// <summary>The Intercom defined id of the user. Takes precedence over `user_id` and `email`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
 #endif
         /// <summary>Your identifier for the user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +72,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "event_summaries", n => { EventSummaries = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummaries>(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummaries.CreateFromDiscriminatorValue); } },
+                { "email", n => { Email = n.GetStringValue(); } },
+                { "event_summaries", n => { EventSummaries = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummariesItem>(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummariesItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
         }
@@ -67,7 +85,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummaries>("event_summaries", EventSummaries);
+            writer.WriteStringValue("email", Email);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummariesItem>("event_summaries", EventSummaries);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("user_id", UserId);
             writer.WriteAdditionalData(AdditionalData);
         }

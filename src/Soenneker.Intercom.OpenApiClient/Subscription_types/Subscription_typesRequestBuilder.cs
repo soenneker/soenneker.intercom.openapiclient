@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Models;
+using Soenneker.Intercom.OpenApiClient.Subscription_types.Item;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +18,18 @@ namespace Soenneker.Intercom.OpenApiClient.Subscription_types
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Subscription_typesRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.subscription_types.item collection</summary>
+        /// <param name="position">The unique identifier for the subscription type.</param>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Subscription_types.Item.Subscription_typesItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Subscription_types.Item.Subscription_typesItemRequestBuilder this[string position]
+        {
+            get
+            {
+                var urlTplParams = new Dictionary<string, object>(PathParameters);
+                urlTplParams.Add("id", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Subscription_types.Item.Subscription_typesItemRequestBuilder(urlTplParams, RequestAdapter);
+            }
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Subscription_types.Subscription_typesRequestBuilder"/> and sets the default values.
         /// </summary>

@@ -65,10 +65,10 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only text content is staged: `title`, `description`, `body` or`body_markdown`, and `author_id`, including per-locale values in`translated_content`. Any other field in the request body, such as `state`,`parent_id`, `folder_id`, `audience_ids`, the AI availability fields or thescheduling fields, is still validated but not applied, so the live article is left untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
-        /// <param name="body">You can Stage a Draft for an Article</param>
+        /// <param name="body">You can stage a draft for a published article. Only the fields below are staged; any other field in the request body is validated but not applied.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
@@ -113,10 +113,10 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Draft
             return requestInfo;
         }
         /// <summary>
-        /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only versioned text content (such as `title` and `body`) is staged.Non-versioned fields like AI availability are ignored, leaving the livevalues untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// Stage changes to a published article as a draft by making a PUT request to`https://api.intercom.io/articles/&lt;id&gt;/draft`. The live article remainsunchanged until the draft is published.The article must already be published; staging a draft on an article thathas never been published returns `422`.Only text content is staged: `title`, `description`, `body` or`body_markdown`, and `author_id`, including per-locale values in`translated_content`. Any other field in the request body, such as `state`,`parent_id`, `folder_id`, `audience_ids`, the AI availability fields or thescheduling fields, is still validated but not applied, so the live article is left untouched.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">You can Stage a Draft for an Article</param>
+        /// <param name="body">You can stage a draft for a published article. Only the fields below are staged; any other field in the request body is validated but not applied.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

@@ -15,16 +15,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Phone number in E.164 format, that has received the SMS to continue the conversation in the Messenger.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Phone { get; set; }
-#nullable restore
-#else
-        public string Phone { get; set; }
-#endif
         /// <summary>The type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.PhoneCallRedirectType? Type { get; set; }
+        /// <summary>The Messenger link for the phone call redirect, which is also the link sent by SMS to the phone number.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PhoneSwitch"/> and sets the default values.
         /// </summary>
@@ -50,8 +50,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "phone", n => { Phone = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PhoneCallRedirectType>(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -61,8 +61,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("phone", Phone);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.PhoneCallRedirectType>("type", Type);
+            writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

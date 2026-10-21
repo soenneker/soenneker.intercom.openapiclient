@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The ID of the folder to place this article in, or null to remove it from its folder.</summary>
         public int? FolderId { get; set; }
-        /// <summary>The id of the article&apos;s parent collection or section. An article without this field stands alone.</summary>
+        /// <summary>The id of the collection or section to move the article into. Omitting this field or sending `null` leaves the article&apos;s parent unchanged. Send `home` to remove the article from its collection so that it stands alone.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ParentId { get; set; }
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ParentId { get; set; }
 #endif
-        /// <summary>The ids of the parent collections to place this article in. Send an empty array to remove the article from all collections. When provided, this takes precedence over `parent_id` and `parent_type`.</summary>
+        /// <summary>The ids of the parent collections to place this article in. Send an empty array to remove the article from all collections. When provided, this takes precedence over `parent_id`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? ParentIds { get; set; }
@@ -73,21 +73,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<int?> ParentIds { get; set; }
 #endif
-        /// <summary>The type of parent, which can either be a `collection` or `section`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ParentType { get; set; }
-#nullable restore
-#else
-        public string ParentType { get; set; }
-#endif
         /// <summary>ISO 8601 timestamp at which to schedule a future publish of the article. When set together with `state: &quot;published&quot;`, the article is scheduled instead of published immediately. The value must be strictly in the future — timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid`. Setting `null` cancels a pending publish schedule. Combining with `state: &quot;draft&quot;` returns 400 `parameter_invalid`. Sending in the same request as `scheduled_unpublish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledPublishAt { get; set; }
-        /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. The value must be strictly in the future — timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid`. Setting `null` cancels a pending unpublish schedule. Rejected with 400 `parameter_invalid` if the article has never been published. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
+        /// <summary>ISO 8601 timestamp at which to schedule a future unpublish of the article. The article must already be published; setting `state: &quot;published&quot;` in the same request does not count, and the request returns 400 `parameter_invalid`. Combining with `state: &quot;draft&quot;` also returns 400 `parameter_invalid`. The value must be strictly in the future; timestamps in the past or equal to the current time are rejected with 400 `parameter_invalid`. Setting `null` cancels a pending unpublish schedule. Sending in the same request as `scheduled_publish_at` returns 400 — only one pending schedule per article. Empty string returns 400 `parameter_invalid`.</summary>
         public DateTimeOffset? ScheduledUnpublishAt { get; set; }
-        /// <summary>Whether the article will be `published` or will be a `draft`. Omitting this field leaves the publish state unchanged, so a draft stays a draft and an edit to a published article goes live immediately unless that article already has a pending draft or a scheduled publish time is set in the same request. The `PUT /articles/{id}/draft` endpoint ignores this field and always stages a draft. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
+        /// <summary>Whether the article will be `published` or will be a `draft`. Omitting this field leaves the publish state unchanged, so a draft stays a draft and an edit to a published article goes live immediately unless that article already has a pending draft or a scheduled publish time is set in the same request. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequestState? State { get; set; }
-        /// <summary>The title of the article.For multilingual articles, this will be the title of the default language&apos;s content.</summary>
+        /// <summary>The title of the article. For multilingual articles, this will be the title of the default language&apos;s content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get; set; }
@@ -139,7 +131,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "parent_id", n => { ParentId = n.GetStringValue(); } },
                 { "parent_ids", n => { ParentIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "parent_type", n => { ParentType = n.GetStringValue(); } },
                 { "scheduled_publish_at", n => { ScheduledPublishAt = n.GetDateTimeOffsetValue(); } },
                 { "scheduled_unpublish_at", n => { ScheduledUnpublishAt = n.GetDateTimeOffsetValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequestState>(); } },
@@ -165,7 +156,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteStringValue("parent_id", ParentId);
             writer.WriteCollectionOfPrimitiveValues<int?>("parent_ids", ParentIds);
-            writer.WriteStringValue("parent_type", ParentType);
             writer.WriteDateTimeOffsetValue("scheduled_publish_at", ScheduledPublishAt);
             writer.WriteDateTimeOffsetValue("scheduled_unpublish_at", ScheduledUnpublishAt);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateArticleRequestState>("state", State);

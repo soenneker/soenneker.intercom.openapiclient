@@ -19,7 +19,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers
     public partial class Help_centersRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.help_center.help_centers.item collection</summary>
-        /// <param name="position">The unique identifier for the collection which is given by Intercom.</param>
+        /// <param name="position">The unique identifier for the Help Center which is given by Intercom.</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.HelpCenterItemRequestBuilder"/></returns>
         public global::Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.HelpCenterItemRequestBuilder this[int position]
         {
@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers
         {
         }
         /// <summary>
-        /// You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.
+        /// You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.HelpCenterList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.
+        /// You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

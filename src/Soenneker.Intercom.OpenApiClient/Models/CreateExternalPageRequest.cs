@@ -21,6 +21,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? AiCopilotAvailability { get; set; }
         /// <summary>Whether the external page should be used to answer questions by AI Sales Agent. Will not default when updating an existing external page.</summary>
         public bool? AiSalesAgentAvailability { get; set; }
+        /// <summary>The list of audience IDs to target this external page to for Fin AI Agent. Omitting the field preserves any default audience segments inherited from the parent content import source. Pass an explicit array to override inherited defaults with the given set. Pass `[]` to clear all audience memberships (even if the source has defaults). Unknown audience IDs return a `404` error with no partial commit.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? AudienceIds { get; set; }
+#nullable restore
+#else
+        public List<int?> AudienceIds { get; set; }
+#endif
         /// <summary>The identifier for the external page which was given by the source. Must be unique for the source.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,6 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ai_agent_availability", n => { AiAgentAvailability = n.GetBoolValue(); } },
                 { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
                 { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
+                { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "html", n => { Html = n.GetStringValue(); } },
                 { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EnLocale>(); } },
@@ -106,6 +115,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("ai_agent_availability", AiAgentAvailability);
             writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
             writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
+            writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("html", Html);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EnLocale>("locale", Locale);

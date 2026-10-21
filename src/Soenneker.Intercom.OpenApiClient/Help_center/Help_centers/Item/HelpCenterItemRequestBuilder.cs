@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item
         {
         }
         /// <summary>
-        /// You can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_center/&lt;id&gt;`.
+        /// You can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_centers/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.HelpCenter"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.HelpCenter>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.HelpCenter.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_center/&lt;id&gt;`.
+        /// You can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_centers/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -21,6 +21,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? AiCopilotAvailability { get; set; }
         /// <summary>Whether the external page should be used to answer questions by AI Sales Agent.</summary>
         public bool? AiSalesAgentAvailability { get; set; }
+        /// <summary>The list of audience IDs this external page is targeted to for Fin AI Agent. Empty array means no audience targeting is set.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<int?>? AudienceIds { get; set; }
+#nullable restore
+#else
+        public List<int?> AudienceIds { get; set; }
+#endif
         /// <summary>The time when the external page was created.</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The identifier for the external page which was given by the source. Must be unique for the source.</summary>
@@ -103,6 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ai_agent_availability", n => { AiAgentAvailability = n.GetBoolValue(); } },
                 { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
                 { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
+                { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "fin_availability", n => { FinAvailability = n.GetBoolValue(); } },
@@ -127,6 +136,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("ai_agent_availability", AiAgentAvailability);
             writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
             writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
+            writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteBoolValue("fin_availability", FinAvailability);

@@ -14,8 +14,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The Unix timestamp when the status reason was created</summary>
-        public int? CreatedAt { get; set; }
+        /// <summary>The phone status this away status reason is configured for, or null if it is not associated with one.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus? AssociatedToPhoneStatus { get; set; }
         /// <summary>Whether the status reason has been soft deleted</summary>
         public bool? Deleted { get; set; }
         /// <summary>The emoji associated with the status reason</summary>
@@ -52,8 +52,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Type { get; set; }
 #endif
-        /// <summary>The Unix timestamp when the status reason was last updated</summary>
-        public int? UpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReason"/> and sets the default values.
         /// </summary>
@@ -79,14 +77,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "associated_to_phone_status", n => { AssociatedToPhoneStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus>(); } },
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
                 { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "label", n => { Label = n.GetStringValue(); } },
                 { "order", n => { Order = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }
         /// <summary>
@@ -96,14 +93,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus>("associated_to_phone_status", AssociatedToPhoneStatus);
             writer.WriteBoolValue("deleted", Deleted);
             writer.WriteStringValue("emoji", Emoji);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("label", Label);
             writer.WriteIntValue("order", Order);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

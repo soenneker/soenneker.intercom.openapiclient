@@ -15,6 +15,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The id of the teammate to publish as. This is only used when the access token is not associated with a teammate, and is then required; omitting it returns 400 `parameter_not_found`. Otherwise the authenticating teammate is used. Must be a teammate on the workspace.</summary>
+        public int? AuthorId { get; set; }
         /// <summary>The locales whose staged drafts should be published. Required onmultilingual workspaces; each locale must have a pending draft.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,6 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "locales", n => { Locales = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
             };
         }
@@ -58,6 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteIntValue("author_id", AuthorId);
             writer.WriteCollectionOfPrimitiveValues<string>("locales", Locales);
             writer.WriteAdditionalData(AdditionalData);
         }

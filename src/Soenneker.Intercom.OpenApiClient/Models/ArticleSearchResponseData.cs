@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// An object containing the results of the search.
+    /// An object containing the results of the search. When no articles match, this is an empty array instead.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ArticleSearchResponseData : IAdditionalDataHolder, IParsable

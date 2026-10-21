@@ -23,6 +23,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Description { get; set; }
 #endif
+        /// <summary>Checked against the collection&apos;s Help Center but not applied, so it can&apos;t move the collection to another Help Center.</summary>
+        public int? HelpCenterId { get; set; }
+        /// <summary>The icon of the collection, for example `book-bookmark`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Icon { get; set; }
+#nullable restore
+#else
+        public string Icon { get; set; }
+#endif
         /// <summary>The name of the collection. For multilingual collections, this will be the name of the default language&apos;s content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -31,7 +41,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The id of the parent collection. If `null` then it will be updated as the first level collection.</summary>
+        /// <summary>The id of the parent collection to move the collection into. Omitting this field or sending `null` leaves the collection where it is. Send `home` to move it to the first level.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ParentId { get; set; }
@@ -73,6 +83,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "description", n => { Description = n.GetStringValue(); } },
+                { "help_center_id", n => { HelpCenterId = n.GetIntValue(); } },
+                { "icon", n => { Icon = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "parent_id", n => { ParentId = n.GetStringValue(); } },
                 { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent>(global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent.CreateFromDiscriminatorValue); } },
@@ -86,6 +98,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("description", Description);
+            writer.WriteIntValue("help_center_id", HelpCenterId);
+            writer.WriteStringValue("icon", Icon);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("parent_id", ParentId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GroupTranslatedContent>("translated_content", TranslatedContent);

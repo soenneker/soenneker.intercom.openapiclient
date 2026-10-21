@@ -94,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions.Item
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VersionsItemRequestBuilderGetQueryParameters 
         {
-            /// <summary>Return the version&apos;s content for a specific locale. If the locale is not configured for the workspace, a `400` is returned.</summary>
+            /// <summary>Return the version&apos;s content for a specific locale. If the article has no content in that locale, a `400` is returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("locale")]

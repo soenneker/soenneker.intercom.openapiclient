@@ -47,6 +47,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string BodyMarkdown { get; set; }
 #endif
+        /// <summary>The unique identifier for the article&apos;s content in this locale.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ContentId { get; private set; }
+#nullable restore
+#else
+        public string ContentId { get; private set; }
+#endif
         /// <summary>The time when the article was created (seconds).</summary>
         public int? CreatedAt { get; set; }
         /// <summary>The ID of the teammate who created this content version.</summary>
@@ -119,6 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
+                { "content_id", n => { ContentId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "created_by_id", n => { CreatedById = n.GetIntValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },

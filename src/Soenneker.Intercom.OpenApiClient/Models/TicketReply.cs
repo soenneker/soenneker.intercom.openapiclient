@@ -53,13 +53,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyPartType? PartType { get; set; }
         /// <summary>Whether or not the ticket part has been redacted.</summary>
         public bool? Redacted { get; set; }
-        /// <summary>A map of the reply text keyed by locale code. Only present on the Preview API version and backs the `ticket.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply; every other key is a locale code whose value is the reply text translated into that locale, as HTML in the same format as `body`. The `body` field is unchanged and always stays in the original source language. Available in the Preview API version only (set `Intercom-Version: Preview`). This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in `&lt;p&gt;`, `&lt;div&gt;`, or another supported block element to avoid this.</summary>
+        /// <summary>A map of the reply text keyed by locale code, with values in the same format as `body` (HTML by default). Backs the `ticket.admin.replied.translated` webhook topic. The special `original` key holds the source locale code of the reply when it is known; every other key is a locale code whose value is the reply text translated into that locale. The `translations` field does not modify `body`. Available from API version 2.16. This webhook topic is not sent for every translated reply: it is suppressed when the reply&apos;s `body` contains any text outside an HTML block element, which includes plain-text replies created through the REST API. Wrap the body in `&lt;p&gt;`, `&lt;div&gt;`, or another supported block element to avoid this.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty? Translations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslations? Translations { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty Translations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslations Translations { get; set; }
 #endif
         /// <summary>Always ticket_part</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketPartType? Type { get; set; }
@@ -97,7 +97,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "part_type", n => { PartType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyPartType>(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
-                { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty>(global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty.CreateFromDiscriminatorValue); } },
+                { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslations>(global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslations.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
@@ -116,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("id", Id);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyPartType>("part_type", PartType);
             writer.WriteBoolValue("redacted", Redacted);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslationsProperty>("translations", Translations);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketReplyTranslations>("translations", Translations);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteAdditionalData(AdditionalData);

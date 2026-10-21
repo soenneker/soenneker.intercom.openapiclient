@@ -15,11 +15,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Whether the content snippet should be available for AI Chatbot (Fin). Defaults to false.</summary>
+        /// <summary>Whether the content snippet should be available for AI Chatbot (Fin). Defaults to true.</summary>
         public bool? AiChatbotAvailability { get; set; }
-        /// <summary>Whether the content snippet should be available for AI Copilot. Defaults to false.</summary>
+        /// <summary>Whether the content snippet should be available for AI Copilot. Defaults to true.</summary>
         public bool? AiCopilotAvailability { get; set; }
-        /// <summary>Whether the content snippet should be available for AI Sales Agent. Defaults to false.</summary>
+        /// <summary>Whether the content snippet should be available for AI Sales Agent. Defaults to true.</summary>
         public bool? AiSalesAgentAvailability { get; set; }
         /// <summary>The list of audience IDs to target this content snippet to for Fin AI Agent. Pass an empty array or omit the field for no audience targeting. Unknown audience IDs return a `404` error with no partial commit.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -67,9 +67,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public ContentSnippetCreateRequest()
         {
             AdditionalData = new Dictionary<string, object>();
-            AiChatbotAvailability = false;
-            AiCopilotAvailability = false;
-            AiSalesAgentAvailability = false;
+            AiChatbotAvailability = true;
+            AiCopilotAvailability = true;
+            AiSalesAgentAvailability = true;
             Locale = "en";
         }
         /// <summary>
