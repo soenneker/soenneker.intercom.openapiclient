@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Cursor for the next page of results.
+    /// Cursor for the next page of results. Omitted on the last page.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContactActivityListPagesNext : IAdditionalDataHolder, IParsable

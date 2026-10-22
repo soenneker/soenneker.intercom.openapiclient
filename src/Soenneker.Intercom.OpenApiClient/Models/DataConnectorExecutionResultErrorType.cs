@@ -51,5 +51,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         ClientSideActionError,
         #pragma warning restore CS1591
+        [EnumMember(Value = "code_block_transformation_error")]
+        #pragma warning disable CS1591
+        CodeBlockTransformationError,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "otp_preview_not_supported_error")]
+        #pragma warning disable CS1591
+        OtpPreviewNotSupportedError,
+        #pragma warning restore CS1591
     }
 }

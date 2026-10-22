@@ -18,10 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array containing Company Objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Company>? Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Company>? Data { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Company> Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Company> Data { get; set; }
 #endif
         /// <summary>The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests.Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesLink>(global::Soenneker.Intercom.OpenApiClient.Models.PagesLink.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>("companies", Companies);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>("data", Data);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesLink>("pages", Pages);
             writer.WriteIntValue("total_count", TotalCount);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);

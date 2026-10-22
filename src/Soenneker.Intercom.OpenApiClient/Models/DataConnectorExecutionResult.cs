@@ -33,7 +33,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string DataConnectorId { get; set; }
 #endif
-        /// <summary>A human-readable error message. Query parameters, userinfo, and fragments in URLs are redacted.</summary>
+        /// <summary>A human-readable error message. Any http or https URLs in it are redacted the same way as `request_url`; the rest of the message is returned as is.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ErrorMessage { get; set; }
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string RequestBody { get; set; }
 #endif
-        /// <summary>The request URL. Query parameters, userinfo, and fragments are redacted.</summary>
+        /// <summary>The request URL. Query parameters, userinfo, and fragments are redacted. For some hosts that put credentials in the path, the path is removed too. A suffix such as ` [query params redacted]` or ` [credentials redacted]` is appended when anything is redacted, and a URL that cannot be parsed becomes `[invalid URL redacted]`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? RequestUrl { get; set; }

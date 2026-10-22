@@ -56,13 +56,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AndroidSdkVersion { get; set; }
 #endif
-        /// <summary>The avatar property</summary>
+        /// <summary>An image URL containing the avatar of a contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar? Avatar { get; set; }
+        public string? Avatar { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar Avatar { get; set; }
+        public string Avatar { get; set; }
 #endif
         /// <summary>The name of the browser which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -122,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string EmailDomain { get; set; }
 #endif
-        /// <summary>Whether the contact has proved they own their current email address. `true` only when this address was marked verified through the Contacts API (`email_verified: true` on create or update) and has not changed since; it becomes `false` again if the contact&apos;s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. Only returned on the Preview version; not present on any released API version.</summary>
+        /// <summary>Whether the contact has proved they own their current email address. `true` only when this address was marked verified through the Contacts API (`email_verified: true` on create or update) and has not changed since; it becomes `false` again if the contact&apos;s email changes, until the new address is verified. Intercom reuses a lead with a verified email when it later matches an inbound email, or an outbound conversation or ticket, to that address, instead of creating a new lead. In List contacts and Search contacts responses it is left out only if the contact can&apos;t be loaded, for example when it is deleted while the request runs.</summary>
         public bool? EmailVerified { get; set; }
         /// <summary>If the user has enabled push messaging.</summary>
         public bool? EnabledPushMessaging { get; set; }
@@ -222,7 +222,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether the contact has marked an email sent to them as spam.</summary>
         public bool? MarkedEmailAsSpam { get; set; }
-        /// <summary>A list of contacts that were merged into this contact. Only included in the response when `include_merge_history=true` is passed as a query parameter. Only available for contacts with a `user` role.</summary>
+        /// <summary>A list of contacts that were merged into this contact, most recent first, capped at 10. Only included in the response when `include_merge_history=true` is passed as a query parameter.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>? MergeHistory { get; set; }
@@ -245,6 +245,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes Notes { get; set; }
+#endif
+        /// <summary>An object containing Subscription Types meta data about the SubscriptionTypes that a contact has.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes? OptedInSubscriptionTypes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes OptedInSubscriptionTypes { get; set; }
+#endif
+        /// <summary>An object containing Subscription Types meta data about the SubscriptionTypes that a contact has.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes? OptedOutSubscriptionTypes { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes OptedOutSubscriptionTypes { get; set; }
 #endif
         /// <summary>The operating system which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -270,6 +286,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Phone { get; set; }
 #endif
+        /// <summary>The URL of the page the contact came from, as recorded by the Messenger.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Referrer { get; set; }
+#nullable restore
+#else
+        public string Referrer { get; set; }
+#endif
         /// <summary>The role of the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -280,6 +304,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
         public int? SignedUpAt { get; set; }
+        /// <summary>Whether the contact has consented to receive SMS messages.</summary>
+        public bool? SmsConsent { get; set; }
         /// <summary>An object containing social profiles that a contact has.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -306,8 +332,50 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether the contact is unsubscribed from emails.</summary>
         public bool? UnsubscribedFromEmails { get; set; }
+        /// <summary>Whether the contact is unsubscribed from SMS messages.</summary>
+        public bool? UnsubscribedFromSms { get; set; }
         /// <summary>(Unix timestamp in seconds) The time when the contact was last updated.</summary>
         public int? UpdatedAt { get; set; }
+        /// <summary>The `utm_campaign` value recorded for the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmCampaign { get; set; }
+#nullable restore
+#else
+        public string UtmCampaign { get; set; }
+#endif
+        /// <summary>The `utm_content` value recorded for the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmContent { get; set; }
+#nullable restore
+#else
+        public string UtmContent { get; set; }
+#endif
+        /// <summary>The `utm_medium` value recorded for the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmMedium { get; set; }
+#nullable restore
+#else
+        public string UtmMedium { get; set; }
+#endif
+        /// <summary>The `utm_source` value recorded for the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmSource { get; set; }
+#nullable restore
+#else
+        public string UtmSource { get; set; }
+#endif
+        /// <summary>The `utm_term` value recorded for the contact.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmTerm { get; set; }
+#nullable restore
+#else
+        public string UtmTerm { get; set; }
+#endif
         /// <summary>The contact&apos;s WhatsApp number. It is read-only; sending it when creating or updating a contact has no effect.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -355,7 +423,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "android_last_seen_at", n => { AndroidLastSeenAt = n.GetIntValue(); } },
                 { "android_os_version", n => { AndroidOsVersion = n.GetStringValue(); } },
                 { "android_sdk_version", n => { AndroidSdkVersion = n.GetStringValue(); } },
-                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar.CreateFromDiscriminatorValue); } },
+                { "avatar", n => { Avatar = n.GetStringValue(); } },
                 { "browser", n => { Browser = n.GetStringValue(); } },
                 { "browser_language", n => { BrowserLanguage = n.GetStringValue(); } },
                 { "browser_version", n => { BrowserVersion = n.GetStringValue(); } },
@@ -387,16 +455,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "merge_history", n => { MergeHistory = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>(global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes.CreateFromDiscriminatorValue); } },
+                { "opted_in_subscription_types", n => { OptedInSubscriptionTypes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes.CreateFromDiscriminatorValue); } },
+                { "opted_out_subscription_types", n => { OptedOutSubscriptionTypes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes>(global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes.CreateFromDiscriminatorValue); } },
                 { "os", n => { Os = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "referrer", n => { Referrer = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
+                { "sms_consent", n => { SmsConsent = n.GetBoolValue(); } },
                 { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>(global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles.CreateFromDiscriminatorValue); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>(global::Soenneker.Intercom.OpenApiClient.Models.ContactTags.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
+                { "unsubscribed_from_sms", n => { UnsubscribedFromSms = n.GetBoolValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "utm_campaign", n => { UtmCampaign = n.GetStringValue(); } },
+                { "utm_content", n => { UtmContent = n.GetStringValue(); } },
+                { "utm_medium", n => { UtmMedium = n.GetStringValue(); } },
+                { "utm_source", n => { UtmSource = n.GetStringValue(); } },
+                { "utm_term", n => { UtmTerm = n.GetStringValue(); } },
                 { "whatsapp_number", n => { WhatsappNumber = n.GetStringValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
@@ -414,7 +492,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("android_last_seen_at", AndroidLastSeenAt);
             writer.WriteStringValue("android_os_version", AndroidOsVersion);
             writer.WriteStringValue("android_sdk_version", AndroidSdkVersion);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactAvatar>("avatar", Avatar);
+            writer.WriteStringValue("avatar", Avatar);
             writer.WriteStringValue("browser", Browser);
             writer.WriteStringValue("browser_language", BrowserLanguage);
             writer.WriteStringValue("browser_version", BrowserVersion);
@@ -446,16 +524,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>("merge_history", MergeHistory);
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactNotes>("notes", Notes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes>("opted_in_subscription_types", OptedInSubscriptionTypes);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSubscriptionTypes>("opted_out_subscription_types", OptedOutSubscriptionTypes);
             writer.WriteStringValue("os", Os);
             writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteStringValue("referrer", Referrer);
             writer.WriteStringValue("role", Role);
             writer.WriteIntValue("signed_up_at", SignedUpAt);
+            writer.WriteBoolValue("sms_consent", SmsConsent);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>("social_profiles", SocialProfiles);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>("tags", Tags);
             writer.WriteStringValue("type", Type);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
+            writer.WriteBoolValue("unsubscribed_from_sms", UnsubscribedFromSms);
             writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteStringValue("utm_campaign", UtmCampaign);
+            writer.WriteStringValue("utm_content", UtmContent);
+            writer.WriteStringValue("utm_medium", UtmMedium);
+            writer.WriteStringValue("utm_source", UtmSource);
+            writer.WriteStringValue("utm_term", UtmTerm);
             writer.WriteStringValue("whatsapp_number", WhatsappNumber);
             writer.WriteStringValue("workspace_id", WorkspaceId);
             writer.WriteAdditionalData(AdditionalData);

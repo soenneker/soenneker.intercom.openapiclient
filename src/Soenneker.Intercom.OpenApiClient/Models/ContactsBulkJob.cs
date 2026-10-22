@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The time the job completed as a UNIX timestamp. Null if not yet completed.</summary>
+        /// <summary>The time the most recent task completed as a Unix timestamp. Set as soon as any task completes, so check `state` to know whether the whole job has finished. Null until a task completes.</summary>
         public int? CompletedAt { get; set; }
         /// <summary>The time the job was created as a UNIX timestamp.</summary>
         public int? CreatedAt { get; set; }

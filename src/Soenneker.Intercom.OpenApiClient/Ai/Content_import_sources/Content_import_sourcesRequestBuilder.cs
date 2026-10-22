@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Content_import_sourcesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/content_import_sources", pathParameters)
+        public Content_import_sourcesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/content_import_sources{?page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,39 +43,42 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Content_import_sourcesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/content_import_sources", rawUrl)
+        public Content_import_sourcesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/content_import_sources{?page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can retrieve a list of all content import sources for a workspace.
+        /// You can retrieve a list of all content import sources for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder.Content_import_sourcesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder.Content_import_sourcesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new content import source by sending a POST request to this endpoint.
+        /// You can create a new content import source by sending a POST request to this endpoint.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource"/></returns>
         /// <param name="body">You can add an Content Import Source to your Fin Content Library.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -90,22 +93,23 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can retrieve a list of all content import sources for a workspace.
+        /// You can retrieve a list of all content import sources for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder.Content_import_sourcesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder.Content_import_sourcesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -114,7 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new content import source by sending a POST request to this endpoint.
+        /// You can create a new content import source by sending a POST request to this endpoint.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can add an Content Import Source to your Fin Content Library.</param>
@@ -143,6 +147,19 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
         public global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can retrieve a list of all content import sources for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class Content_import_sourcesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>The page of results to fetch. Defaults to the first page.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results to return per page. Maximum 150.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

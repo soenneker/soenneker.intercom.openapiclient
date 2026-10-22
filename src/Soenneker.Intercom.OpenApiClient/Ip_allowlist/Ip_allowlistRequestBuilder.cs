@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ip_allowlist
         {
         }
         /// <summary>
-        /// Retrieve the current IP allowlist configuration for the workspace.
+        /// Retrieve the current IP allowlist configuration for the workspace.Requires the `manage_ip_allowlist` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.IpAllowlist"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ip_allowlist
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.IpAllowlist>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.IpAllowlist.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update the IP allowlist configuration for the workspace.{% admonition type=&quot;warning&quot; name=&quot;Lockout Protection&quot; %}  The API will reject updates that would lock out the caller&apos;s IP address. Ensure your current IP is included in the allowlist when enabling the feature.{% /admonition %}
+        /// Update the IP allowlist configuration for the workspace.Both `enabled` and `ip_allowlist` are optional. A field you omit is left unchanged, and a request with neither returns the current settings without changing anything. Sending `null` for a field is the same as omitting it.Every non-blank `ip_allowlist` entry must be an IPv4 address or an IPv4 range in CIDR notation. Blank entries are ignored and surrounding whitespace is trimmed. Any other entry, including an IPv6 address, returns a 422 `parameter_invalid` error.Requires the `manage_ip_allowlist` OAuth scope.{% admonition type=&quot;warning&quot; name=&quot;Lockout Protection&quot; %}  The API will reject updates that would lock out the caller&apos;s IP address. Ensure your current IP is included in the allowlist when enabling the feature.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.IpAllowlist"/></returns>
         /// <param name="body">IP allowlist settings for the workspace.</param>
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ip_allowlist
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.IpAllowlist>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.IpAllowlist.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve the current IP allowlist configuration for the workspace.
+        /// Retrieve the current IP allowlist configuration for the workspace.Requires the `manage_ip_allowlist` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -103,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ip_allowlist
             return requestInfo;
         }
         /// <summary>
-        /// Update the IP allowlist configuration for the workspace.{% admonition type=&quot;warning&quot; name=&quot;Lockout Protection&quot; %}  The API will reject updates that would lock out the caller&apos;s IP address. Ensure your current IP is included in the allowlist when enabling the feature.{% /admonition %}
+        /// Update the IP allowlist configuration for the workspace.Both `enabled` and `ip_allowlist` are optional. A field you omit is left unchanged, and a request with neither returns the current settings without changing anything. Sending `null` for a field is the same as omitting it.Every non-blank `ip_allowlist` entry must be an IPv4 address or an IPv4 range in CIDR notation. Blank entries are ignored and surrounding whitespace is trimmed. Any other entry, including an IPv6 address, returns a 422 `parameter_invalid` error.Requires the `manage_ip_allowlist` OAuth scope.{% admonition type=&quot;warning&quot; name=&quot;Lockout Protection&quot; %}  The API will reject updates that would lock out the caller&apos;s IP address. Ensure your current IP is included in the allowlist when enabling the feature.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">IP allowlist settings for the workspace.</param>

@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in:  1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type.  2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type.This will return a subscription type model for the subscription type that was added to the contact.
+        /// You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in:  1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type.  2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type.This will return a subscription type model for the subscription type that was added to the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType"/></returns>
         /// <param name="body">The request body</param>
@@ -118,7 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions
             return requestInfo;
         }
         /// <summary>
-        /// You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in:  1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type.  2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type.This will return a subscription type model for the subscription type that was added to the contact.
+        /// You can add a specific subscription to a contact. In Intercom, we have two different subscription types based on user consent - opt-out and opt-in:  1.Attaching a contact to an opt-out subscription type will opt that user out from receiving messages related to that subscription type.  2.Attaching a contact to an opt-in subscription type will opt that user in to receiving messages related to that subscription type.This will return a subscription type model for the subscription type that was added to the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

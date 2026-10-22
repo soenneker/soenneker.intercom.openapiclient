@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?company_id*,name*,page*,per_page*,segment_id*,tag_id*}", pathParameters)
+        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?company_id*,name*,page*,per_page*,segment_id*,tag_id*,type*}", pathParameters)
         {
         }
         /// <summary>
@@ -67,17 +67,19 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?company_id*,name*,page*,per_page*,segment_id*,tag_id*}", rawUrl)
+        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/companies{?company_id*,name*,page*,per_page*,segment_id*,tag_id*,type*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`
+        /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`The list is paged by page number. There is a limit of 10,000 companies; beyond that the request returns a `400` error and you should use the scroll endpoint instead.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompany200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 503 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompany200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -90,20 +92,23 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "503", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompany200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompany200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create or update a company.Companies will be only visible in Intercom when there is at least one associated user.Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated.{% admonition type=&quot;warning&quot; name=&quot;Using `company_id`&quot; %}  You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set a unique value once upon creation of the company.{% /admonition %}
+        /// You can create or update a company.Companies will be only visible in Intercom when there is at least one associated user.Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated.You must send either `company_id` or `id`. A request with neither returns a `400` error.Every custom attribute you send must already exist in your workspace. Sending one that doesn&apos;t returns a `400` error.{% admonition type=&quot;warning&quot; name=&quot;Using `company_id`&quot; %}  You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set a unique value once upon creation of the company.{% /admonition %}Requires the `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company"/></returns>
-        /// <param name="body">You can create or update a Company</param>
+        /// <param name="body">You can create or update a Company. Send either `company_id` or `id`; a request with neither returns a `400` error.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Company?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -119,11 +124,12 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
             {
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`
+        /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`The list is paged by page number. There is a limit of 10,000 companies; beyond that the request returns a `400` error and you should use the scroll endpoint instead.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -142,10 +148,10 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
             return requestInfo;
         }
         /// <summary>
-        /// You can create or update a company.Companies will be only visible in Intercom when there is at least one associated user.Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated.{% admonition type=&quot;warning&quot; name=&quot;Using `company_id`&quot; %}  You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set a unique value once upon creation of the company.{% /admonition %}
+        /// You can create or update a company.Companies will be only visible in Intercom when there is at least one associated user.Companies are looked up via `company_id` in a `POST` request, if not found via `company_id`, the new company will be created, if found, that company will be updated.You must send either `company_id` or `id`. A request with neither returns a `400` error.Every custom attribute you send must already exist in your workspace. Sending one that doesn&apos;t returns a `400` error.{% admonition type=&quot;warning&quot; name=&quot;Using `company_id`&quot; %}  You can set a unique `company_id` value when creating a company. However, it is not possible to update `company_id`. Be sure to set a unique value once upon creation of the company.{% /admonition %}Requires the `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">You can create or update a Company</param>
+        /// <param name="body">You can create or update a Company. Send either `company_id` or `id`; a request with neither returns a `400` error.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -173,7 +179,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
             return new global::Soenneker.Intercom.OpenApiClient.Companies.CompaniesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`
+        /// You can fetch a single company by passing in `company_id` or `name`.  `https://api.intercom.io/companies?name={name}`  `https://api.intercom.io/companies?company_id={company_id}`You can fetch all companies and filter by `segment_id` or `tag_id` as a query parameter.  `https://api.intercom.io/companies?tag_id={tag_id}`  `https://api.intercom.io/companies?segment_id={segment_id}`The list is paged by page number. There is a limit of 10,000 companies; beyond that the request returns a `400` error and you should use the scroll endpoint instead.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class CompaniesRequestBuilderGetQueryParameters 
@@ -201,7 +207,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
             /// <summary>The page of results to fetch. Defaults to first page</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>How many results to display per page. Defaults to 15</summary>
+            /// <summary>How many results to display per page. Defaults to 15. A value above 60 returns a `400` error with code `parameter_invalid`.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
             /// <summary>The `segment_id` of the company to filter by.</summary>
@@ -224,6 +230,9 @@ namespace Soenneker.Intercom.OpenApiClient.Companies
             [QueryParameter("tag_id")]
             public string TagId { get; set; }
 #endif
+            /// <summary>Set to `user` or `users`, together with `company_id` or `name`, to return that company&apos;s users instead of the company. The response is then a `user.list` object with a `users` array in the legacy user format, paged with `page` and `per_page` (default 50).</summary>
+            [QueryParameter("type")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompanyTypeParameter? Type { get; set; }
         }
     }
 }

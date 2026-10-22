@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Phone { get; set; }
 #endif
-        /// <summary>The role of the contact.</summary>
+        /// <summary>The role of the contact. `lead` creates a lead; any other value creates a user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Role { get; set; }
@@ -92,8 +92,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
         public int? SignedUpAt { get; set; }
+        /// <summary>Whether the contact has consented to receive SMS messages.</summary>
+        public bool? SmsConsent { get; set; }
         /// <summary>Whether the contact is unsubscribed from emails</summary>
         public bool? UnsubscribedFromEmails { get; set; }
+        /// <summary>Whether the contact is unsubscribed from SMS messages.</summary>
+        public bool? UnsubscribedFromSms { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateContactRequestRequestBody"/> and sets the default values.
         /// </summary>
@@ -131,7 +135,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
                 { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
+                { "sms_consent", n => { SmsConsent = n.GetBoolValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
+                { "unsubscribed_from_sms", n => { UnsubscribedFromSms = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -153,7 +159,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
             writer.WriteIntValue("signed_up_at", SignedUpAt);
+            writer.WriteBoolValue("sms_consent", SmsConsent);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
+            writer.WriteBoolValue("unsubscribed_from_sms", UnsubscribedFromSms);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

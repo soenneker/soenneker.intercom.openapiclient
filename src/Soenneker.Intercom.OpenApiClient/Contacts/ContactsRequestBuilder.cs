@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?include_merge_history*}", pathParameters)
+        public ContactsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?escape_identity*,include_merge_history*,per_page*,starting_after*}", pathParameters)
         {
         }
         /// <summary>
@@ -79,15 +79,16 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?include_merge_history*}", rawUrl)
+        public ContactsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts{?escape_identity*,include_merge_history*,per_page*,starting_after*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -101,18 +102,22 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new contact (ie. user or lead).
+        /// You can create a new contact (ie. user or lead).Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateContactRequestRequestBody body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -126,12 +131,15 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -150,7 +158,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new contact (ie. user or lead).
+        /// You can create a new contact (ie. user or lead).Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -181,14 +189,30 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.ContactsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of all contacts (ie. users or leads) in your workspace.{% admonition type=&quot;info&quot; name=&quot;Merged contacts&quot; %}  Contacts that have been merged (via POST /contacts/merge) will not appear in list results. Only the target contact from the merge remains accessible.{% /admonition %}{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `10` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ContactsRequestBuilderGetQueryParameters 
         {
-            /// <summary>Pass `true` to include a `merge_history` array on each contact in the response. Only returned for contacts with a `user` role.</summary>
+            /// <summary>By default, `name` and `email` values in the response, including nested ones such as social profile names, are HTML-escaped (for example, `&amp;` is returned as `&amp;amp;`). Custom attributes and tags are never escaped. Pass `false` to return them unescaped.</summary>
+            [QueryParameter("escape_identity")]
+            public bool? EscapeIdentity { get; set; }
+            /// <summary>Pass `true` to include a `merge_history` array on each contact in the response. Returned for contacts of any role, with at most the 10 most recent merges.</summary>
             [QueryParameter("include_merge_history")]
             public bool? IncludeMergeHistory { get; set; }
+            /// <summary>The number of results per page. Defaults to `10`, with a maximum of `150`; larger values are treated as `150`. Only the leading digits are read, so `1.5` is treated as `1`. A value that doesn&apos;t start with a positive integer, such as `0` or `abc`, returns a `400` error with code `invalid_per_page`.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
+            /// <summary>The cursor value from `pages.next.starting_after` in a previous response. An empty value is ignored. A value that isn&apos;t a valid cursor returns a `400` error with code `client_error`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("starting_after")]
+            public string? StartingAfter { get; set; }
+#nullable restore
+#else
+            [QueryParameter("starting_after")]
+            public string StartingAfter { get; set; }
+#endif
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Whether the company was deleted successfully or not.</summary>
+        /// <summary>Always `true`. The contacts are detached after the response is sent.</summary>
         public bool? Deleted { get; set; }
         /// <summary>The unique identifier for the company which is given by Intercom.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

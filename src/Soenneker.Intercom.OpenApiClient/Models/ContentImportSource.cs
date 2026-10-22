@@ -29,11 +29,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? Id { get; set; }
         /// <summary>The time when the content import source was last synced.</summary>
         public int? LastSyncedAt { get; set; }
-        /// <summary>The status of the content import source.</summary>
+        /// <summary>The status of the content import source. A source that is being deleted has the status `deletion_in_progress`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus? Status { get; set; }
         /// <summary>If you intend to create or update External Pages via the API, this should be set to `api`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceSyncBehavior? SyncBehavior { get; set; }
-        /// <summary>Always external_page</summary>
+        /// <summary>Always content_import_source</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType? Type { get; set; }
         /// <summary>The time when the content import source was last updated.</summary>
         public int? UpdatedAt { get; set; }

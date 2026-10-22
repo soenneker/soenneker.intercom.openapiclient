@@ -8,21 +8,13 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Notes allow you to annotate and comment on companies.
+    /// A note as it appears inside a company&apos;s `notes` list. Fetch the full note with the retrieve note endpoint.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompanyNote : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Admins are teammate accounts that have access to a workspace.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin? Author { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin Author { get; set; }
-#endif
         /// <summary>The body text of the note.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -31,16 +23,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>Represents the company that the note was created about.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany? Company { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany Company { get; set; }
-#endif
-        /// <summary>The time the note was created.</summary>
-        public int? CreatedAt { get; set; }
         /// <summary>The id of the note.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,6 +38,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Type { get; set; }
+#endif
+        /// <summary>The relative URL of the note.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote"/> and sets the default values.
@@ -82,12 +72,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>(global::Soenneker.Intercom.OpenApiClient.Models.Admin.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany.CreateFromDiscriminatorValue); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -97,12 +85,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>("author", Author);
             writer.WriteStringValue("body", Body);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNoteCompany>("company", Company);
-            writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("type", Type);
+            writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

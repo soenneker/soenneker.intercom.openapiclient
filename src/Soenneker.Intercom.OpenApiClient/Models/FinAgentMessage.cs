@@ -15,9 +15,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The author that created the message.</summary>
+        /// <summary>The author that created the message. In `conversation_metadata.history`, only `user` and `agent` are accepted.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessageAuthor? Author { get; set; }
-        /// <summary>The body of the message. Accepts both plain text and HTML format.When sending a message to Fin, this should contain the user&apos;s message.Fin&apos;s response will be returned as HTML.</summary>
+        /// <summary>The body of the message. Accepts both plain text and HTML format.For the message you send to Fin, this is the user&apos;s message. For an `agent` item in `conversation_metadata.history`, it is the agent&apos;s message.Fin&apos;s response is returned in the format set by `response_format` (HTML by default).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get; set; }
@@ -25,9 +25,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>The timestamp when the message was created.Used to deduplicate messages sent within a 5 minute window.Ideally should include milliseconds for higher precision.</summary>
+        /// <summary>The timestamp when the message was created.Used to deduplicate messages sent within a 5 minute window.Ideally should include milliseconds for higher precision.Send `timestamp` or `timestamp_ms`; at least one is required. If you send both, `timestamp_ms` is used.On the top-level `message`, sending neither fails with a 422 error (`message: timestamp_ms is required`). In `conversation_metadata.history`, an item with neither causes the whole history to be ignored.</summary>
         public DateTimeOffset? Timestamp { get; set; }
-        /// <summary>The timestamp when the message was created, with millisecond precision.Only present in event responses (fin_replied).</summary>
+        /// <summary>The timestamp when the message was created, with millisecond precision.Accepted in place of `timestamp` when you send a message, and also present in event responses (fin_replied). At least one of `timestamp` or `timestamp_ms` is required.</summary>
         public DateTimeOffset? TimestampMs { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage"/> and sets the default values.

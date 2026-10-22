@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyList"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyList"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class RetrieveCompany200Response : IComposedTypeWrapper, IParsable
@@ -29,6 +29,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.CompanyList CompanyList { get; set; }
 #endif
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList"/></summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList? CompanyUserList { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList CompanyUserList { get; set; }
+#endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -47,6 +55,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.CompanyList = new global::Soenneker.Intercom.OpenApiClient.Models.CompanyList();
             }
+            else if("CompanyUserList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            {
+                result.CompanyUserList = new global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList();
+            }
             return result;
         }
         /// <summary>
@@ -62,6 +74,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if(CompanyList != null)
             {
                 return CompanyList.GetFieldDeserializers();
+            }
+            else if(CompanyUserList != null)
+            {
+                return CompanyUserList.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -79,6 +95,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if(CompanyList != null)
             {
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList>(null, CompanyList);
+            }
+            else if(CompanyUserList != null)
+            {
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList>(null, CompanyUserList);
             }
         }
     }

@@ -7,10 +7,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ContactsBulkJobState
     {
-        [EnumMember(Value = "pending")]
-        #pragma warning disable CS1591
-        Pending,
-        #pragma warning restore CS1591
         [EnumMember(Value = "running")]
         #pragma warning disable CS1591
         Running,

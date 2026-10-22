@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.Item
         {
         }
         /// <summary>
-        /// You can detach a company from a single contact.
+        /// You can detach a company from a single contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Company>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can detach a company from a single contact.
+        /// You can detach a company from a single contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

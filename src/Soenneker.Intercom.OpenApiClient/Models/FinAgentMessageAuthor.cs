@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The author that created the message.</summary>
+    /// <summary>The author that created the message. In `conversation_metadata.history`, only `user` and `agent` are accepted.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum FinAgentMessageAuthor
     {

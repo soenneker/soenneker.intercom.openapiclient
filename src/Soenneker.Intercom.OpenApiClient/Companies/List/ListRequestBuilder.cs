@@ -34,11 +34,12 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.List
         {
         }
         /// <summary>
-        /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies). Going past that limit returns a `400` error with code `bad_request`.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  This endpoint pages by page number, not by cursor. Use the `page` and `per_page` query parameters, and the `page`, `total_pages` and `next` values in the `pages` object of the response. The default is `15` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details.{% /admonition %}Requires the `write_users_companies` OAuth scope. A token with only read scopes cannot call this endpoint.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,12 +53,13 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.List
             var requestInfo = ToPostRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompanyList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompanyList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies). Going past that limit returns a `400` error with code `bad_request`.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  This endpoint pages by page number, not by cursor. Use the `page` and `per_page` query parameters, and the `page`, `total_pages` and `next` values in the `pages` object of the response. The default is `15` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details.{% /admonition %}Requires the `write_users_companies` OAuth scope. A token with only read scopes cannot call this endpoint.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -85,25 +87,18 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.List
             return new global::Soenneker.Intercom.OpenApiClient.Companies.List.ListRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies).{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can list companies. The company list is sorted by the `last_request_at` field and by default is ordered descending, most recently requested first.Note that the API does not include companies who have no associated users in list responses.When using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies). Going past that limit returns a `400` error with code `bad_request`.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  This endpoint pages by page number, not by cursor. Use the `page` and `per_page` query parameters, and the `page`, `total_pages` and `next` values in the `pages` object of the response. The default is `15` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details.{% /admonition %}Requires the `write_users_companies` OAuth scope. A token with only read scopes cannot call this endpoint.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ListRequestBuilderPostQueryParameters 
         {
-            /// <summary>`asc` or `desc`. Return the companies in ascending or descending order. Defaults to desc</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
+            /// <summary>`asc` or `desc`. Return the companies in ascending or descending order. Defaults to desc. Any other value returns a `400` error with code `parameter_invalid`.</summary>
             [QueryParameter("order")]
-            public string? Order { get; set; }
-#nullable restore
-#else
-            [QueryParameter("order")]
-            public string Order { get; set; }
-#endif
+            public global::Soenneker.Intercom.OpenApiClient.Models.ListAllCompaniesOrderParameter? Order { get; set; }
             /// <summary>The page of results to fetch. Defaults to first page</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>How many results to return per page. Defaults to 15</summary>
+            /// <summary>How many results to return per page. Defaults to 15. A value above 60 returns a `400` error with code `parameter_invalid`.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Brands.Item
         {
         }
         /// <summary>
-        /// Fetches a specific brand by its unique identifier
+        /// Fetches a specific brand by its unique identifierRequires the `read_brands` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Brand"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Brands.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Brand>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Brand.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetches a specific brand by its unique identifier
+        /// Fetches a specific brand by its unique identifierRequires the `read_brands` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

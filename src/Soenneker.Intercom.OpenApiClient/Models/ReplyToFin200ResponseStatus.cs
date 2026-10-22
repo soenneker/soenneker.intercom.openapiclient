@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>Fin&apos;s current status in the conversation workflow.</summary>
+    /// <summary>Fin&apos;s status when the request was accepted. Always `thinking`; later statuses arrive as events.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ReplyToFin200ResponseStatus
     {

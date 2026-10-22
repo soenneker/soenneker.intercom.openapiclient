@@ -43,5 +43,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         Fin,
         #pragma warning restore CS1591
+        [EnumMember(Value = "synthetic_test")]
+        #pragma warning disable CS1591
+        SyntheticTest,
+        #pragma warning restore CS1591
     }
 }

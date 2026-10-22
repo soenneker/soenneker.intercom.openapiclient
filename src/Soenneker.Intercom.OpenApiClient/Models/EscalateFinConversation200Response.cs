@@ -14,7 +14,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The external ID of the conversation. Returned when you escalate an existing conversation by `conversation_id` (echoed back). When you escalate a `user`, a new conversation is created and only `intercom_conversation_id` is returned.</summary>
+        /// <summary>The external ID of the conversation. When you escalate an existing conversation by `conversation_id`, this echoes the ID you sent. When you escalate a `user`, Fin creates an agent conversation for the escalation and generates this ID for it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ConversationId { get; set; }
@@ -22,21 +22,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ConversationId { get; set; }
 #endif
-        /// <summary>The internal Intercom conversation ID. Returned when a new conversation was created for the escalation.</summary>
+        /// <summary>The internal Intercom ID of the agent conversation created for the escalation. Returned only when escalating on behalf of a `user`. Fin closes this conversation once the handoff completes; the teammate works in a separate Helpdesk conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? IntercomConversationId { get; set; }
 #nullable restore
 #else
         public string IntercomConversationId { get; set; }
-#endif
-        /// <summary>Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires. Includes a `rewind` window so a subscriber that connects after the escalation is processed can still receive the `escalated` and `complete` events.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? SseSubscriptionUrl { get; set; }
-#nullable restore
-#else
-        public string SseSubscriptionUrl { get; set; }
 #endif
         /// <summary>The resulting status of the conversation.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.EscalatedStatus? Status { get; set; }
@@ -67,7 +59,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "intercom_conversation_id", n => { IntercomConversationId = n.GetStringValue(); } },
-                { "sse_subscription_url", n => { SseSubscriptionUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalatedStatus>(); } },
             };
         }
@@ -80,7 +71,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
-            writer.WriteStringValue("sse_subscription_url", SseSubscriptionUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EscalatedStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }

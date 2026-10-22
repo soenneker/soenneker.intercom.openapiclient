@@ -46,7 +46,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         {
         }
         /// <summary>
-        /// Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
+        /// Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.OAuth tokens must have the `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedDataConnectorObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.
+        /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -100,12 +100,13 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector&apos;s state.
+        /// Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector&apos;s state.OAuth tokens must have the `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail"/></returns>
         /// <param name="body">Update an existing data connector. All fields are optional — only provided fields will be updated. Set `state` to `live` or `draft` to change the connector&apos;s state.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 409 status code</exception>
@@ -123,6 +124,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             var requestInfo = ToPatchRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -131,7 +133,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.
+        /// Delete an existing data connector. The connector must be in `draft` state and must not be in use by any workflows or AI agents.OAuth tokens must have the `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -150,7 +152,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.
+        /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -169,7 +171,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             return requestInfo;
         }
         /// <summary>
-        /// Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector&apos;s state.
+        /// Update an existing data connector. Only provided fields are changed. Set `state` to `live` or `draft` to change the connector&apos;s state.OAuth tokens must have the `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Update an existing data connector. All fields are optional — only provided fields will be updated. Set `state` to `live` or `draft` to change the connector&apos;s state.</param>
@@ -200,7 +202,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
             return new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.DataConnectorItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.
+        /// You can retrieve the full detail of a single data connector by its ID.The response includes configuration, data inputs, response fields, and object mappings.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class DataConnectorItemRequestBuilderGetQueryParameters 

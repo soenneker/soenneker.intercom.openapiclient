@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Full detail view of a data connector, returned by `GET /data_connectors/{id}`.Includes configuration, data inputs, response fields, and object mappings.
+    /// Full detail view of a data connector, returned by `GET /data_connectors/{id}`, `POST /data_connectors`, and `PATCH /data_connectors/{id}`.Includes configuration, data inputs, response fields, and object mappings.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DataConnectorDetail : IAdditionalDataHolder, IParsable
@@ -77,6 +77,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether this connector is used directly by Fin.</summary>
         public bool? DirectFinUsage { get; set; }
+        /// <summary>Whether authentication is enforced for this connector.</summary>
+        public bool? EnforceAuth { get; set; }
         /// <summary>The URL path to fetch execution results for this connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -104,6 +106,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>The internal description of the data connector.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InternalDescription { get; set; }
+#nullable restore
+#else
+        public string InternalDescription { get; set; }
 #endif
         /// <summary>The name of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -139,7 +149,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<string> TokenIds { get; set; }
 #endif
-        /// <summary>The code block used to transform the connector&apos;s response when `data_transformation_type` is`code_block_transformation`. Omitted if the connector has no transform code block configured.</summary>
+        /// <summary>The code block used to transform the connector&apos;s response. Present only when `data_transformation_type` is`code_block_transformation` and a code block exists; otherwise omitted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailTransformCodeBlock? TransformCodeBlock { get; set; }
@@ -207,11 +217,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data_transformation_type", n => { DataTransformationType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailDataTransformationType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
+                { "enforce_auth", n => { EnforceAuth = n.GetBoolValue(); } },
                 { "execution_results_url", n => { ExecutionResultsUrl = n.GetStringValue(); } },
                 { "execution_type", n => { ExecutionType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailExecutionType>(); } },
                 { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailHeadersItem>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailHeadersItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailHttpMethod>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "internal_description", n => { InternalDescription = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "object_mappings", n => { ObjectMappings = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailObjectMappingsItem>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailObjectMappingsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "response_fields", n => { ResponseFields = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -245,11 +257,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailDataTransformationType>("data_transformation_type", DataTransformationType);
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
+            writer.WriteBoolValue("enforce_auth", EnforceAuth);
             writer.WriteStringValue("execution_results_url", ExecutionResultsUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailExecutionType>("execution_type", ExecutionType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailHeadersItem>("headers", Headers);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailHttpMethod>("http_method", HttpMethod);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("internal_description", InternalDescription);
             writer.WriteStringValue("name", Name);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailObjectMappingsItem>("object_mappings", ObjectMappings);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetailResponseFieldsItem>("response_fields", ResponseFields);

@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Brands
         {
         }
         /// <summary>
-        /// Retrieves all brands for the workspace, including the default brand.The default brand id always matches the workspace
+        /// Retrieves all brands for the workspace, including the default brand.The default brand id always matches the workspace id.Requires the `read_brands` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BrandList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Brands
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.BrandList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.BrandList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieves all brands for the workspace, including the default brand.The default brand id always matches the workspace
+        /// Retrieves all brands for the workspace, including the default brand.The default brand id always matches the workspace id.Requires the `read_brands` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

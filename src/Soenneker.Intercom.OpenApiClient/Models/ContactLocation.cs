@@ -23,6 +23,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string City { get; set; }
 #endif
+        /// <summary>The code of the continent that the contact is located in</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ContinentCode { get; set; }
+#nullable restore
+#else
+        public string ContinentCode { get; set; }
+#endif
         /// <summary>The country that the contact is located in</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -30,6 +38,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Country { get; set; }
+#endif
+        /// <summary>The ISO 3166-1 alpha-3 code of the country that the contact is located in</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CountryCode { get; set; }
+#nullable restore
+#else
+        public string CountryCode { get; set; }
 #endif
         /// <summary>The overal region that the contact is located in</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -73,7 +89,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "city", n => { City = n.GetStringValue(); } },
+                { "continent_code", n => { ContinentCode = n.GetStringValue(); } },
                 { "country", n => { Country = n.GetStringValue(); } },
+                { "country_code", n => { CountryCode = n.GetStringValue(); } },
                 { "region", n => { Region = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
@@ -86,7 +104,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("city", City);
+            writer.WriteStringValue("continent_code", ContinentCode);
             writer.WriteStringValue("country", Country);
+            writer.WriteStringValue("country_code", CountryCode);
             writer.WriteStringValue("region", Region);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);

@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The code block used to transform the connector&apos;s response when `data_transformation_type` is`code_block_transformation`. Omitted if the connector has no transform code block configured.
+    /// The code block used to transform the connector&apos;s response. Present only when `data_transformation_type` is`code_block_transformation` and a code block exists; otherwise omitted.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DataConnectorDetailTransformCodeBlock : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The source code of the transform code block. The API response body is available as `inputs[&apos;data&apos;]`, and the code must end with a top-level `return` of the transformed value.</summary>
+        /// <summary>The source code of the transform code block. The API response body is available as `inputs[&apos;data&apos;]`. The code must `return` the transformed value.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Code { get; set; }

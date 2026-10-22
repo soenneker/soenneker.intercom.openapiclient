@@ -27,7 +27,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? CreatedAt { get; set; }
         /// <summary>The type of activity event.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ContactActivityEventType? EventType { get; set; }
-        /// <summary>The external identifier of the contact, if one is set.</summary>
+        /// <summary>The external identifier of the contact. Omitted when not set.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalId { get; set; }
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalId { get; set; }
 #endif
-        /// <summary>For failed events, the reason the activity did not succeed.</summary>
+        /// <summary>For failed events, the reason the activity did not succeed. Omitted on other events.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? FailureReason { get; set; }
@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>For merge events, the identifier of the contact that was merged away.</summary>
+        /// <summary>For merge events, the identifier of the contact that was merged away. Omitted on other events.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MergeSourceId { get; set; }
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string MergeSourceId { get; set; }
 #endif
-        /// <summary>For merge events, the identifier of the contact that was merged into.</summary>
+        /// <summary>For merge events, the identifier of the contact that was merged into. Omitted on other events.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? MergeTargetId { get; set; }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string MergeTargetId { get; set; }
 #endif
-        /// <summary>The role of the contact at the time of the event, either user, lead, or visitor.</summary>
+        /// <summary>The role of the contact at the time of the event, either user, lead, or visitor. Omitted when not recorded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Role { get; set; }

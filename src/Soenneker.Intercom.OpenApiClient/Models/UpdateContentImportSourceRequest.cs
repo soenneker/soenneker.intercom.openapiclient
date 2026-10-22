@@ -29,7 +29,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestStatus? Status { get; set; }
         /// <summary>If you intend to create or update External Pages via the API, this should be set to `api`. You can not change the value to or from api.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateContentImportSourceRequestSyncBehavior? SyncBehavior { get; set; }
-        /// <summary>The URL of the content import source. This may only be different from the existing value if the sync behavior is API.</summary>
+        /// <summary>The URL of the content import source. It must be an http or https URL whose host is a valid public domain name. This may only be different from the existing value if the sync behavior is API.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Url { get; set; }

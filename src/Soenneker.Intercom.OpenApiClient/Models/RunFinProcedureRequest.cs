@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata ConversationMetadata { get; set; }
 #endif
-        /// <summary>The identifier of the environment to start the conversation in, if your Fin for Platforms workspace has environments. Use the same value as `messenger_environment` in your Messenger installation. Defaults to the workspace&apos;s default environment; an identifier that matches no environment is rejected.</summary>
+        /// <summary>The identifier of the environment to start the conversation in. Only Fin for Platforms workspaces use it; other workspaces ignore it. Use the same value as `messenger_environment` in your Messenger installation. Defaults to the workspace&apos;s default environment. On a Fin for Platforms workspace, an identifier that matches no environment returns a 422 error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Environment { get; set; }
@@ -38,13 +38,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Environment { get; set; }
 #endif
-        /// <summary>A message exchanged within a Fin Agent conversation.</summary>
+        /// <summary>Optional message posted to the conversation before the procedure runs. Only `body` is required.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage? Message { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestMessage? Message { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage Message { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestMessage Message { get; set; }
 #endif
         /// <summary>A user object representing the user in a Fin Agent conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "conversation_metadata", n => { ConversationMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata.CreateFromDiscriminatorValue); } },
                 { "environment", n => { Environment = n.GetStringValue(); } },
-                { "message", n => { Message = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage.CreateFromDiscriminatorValue); } },
+                { "message", n => { Message = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestMessage>(global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestMessage.CreateFromDiscriminatorValue); } },
                 { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser.CreateFromDiscriminatorValue); } },
             };
         }
@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata>("conversation_metadata", ConversationMetadata);
             writer.WriteStringValue("environment", Environment);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>("message", Message);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestMessage>("message", Message);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>("user", User);
             writer.WriteAdditionalData(AdditionalData);
         }

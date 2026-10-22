@@ -34,13 +34,14 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories
         {
         }
         /// <summary>
-        /// Retrieve the paginated list of contacts that have been merged into a given contact.Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
+        /// Retrieve the paginated list of contacts that have been merged into a given contact.Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories.Merge_historiesRequestBuilder.Merge_historiesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -55,11 +56,12 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve the paginated list of contacts that have been merged into a given contact.Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
+        /// Retrieve the paginated list of contacts that have been merged into a given contact.Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,7 +89,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories.Merge_historiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Retrieve the paginated list of contacts that have been merged into a given contact.Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.
+        /// Retrieve the paginated list of contacts that have been merged into a given contact.Only available for contacts with a `user` role. Returns a `404` if the contact is not found or has a `lead` role.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Merge_historiesRequestBuilderGetQueryParameters 
@@ -102,10 +104,10 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Merge_histories
             [QueryParameter("cursor")]
             public string Cursor { get; set; }
 #endif
-            /// <summary>The order to return results in. Defaults to descending.</summary>
+            /// <summary>The order to return results in. Defaults to descending. Any other value returns a `422` error.</summary>
             [QueryParameter("order")]
             public global::Soenneker.Intercom.OpenApiClient.Models.ListContactMergeHistoryOrderParameter? Order { get; set; }
-            /// <summary>The number of results to return per page (default 50, max 150).</summary>
+            /// <summary>The number of results to return per page (default 50, max 150). A value outside 1–150 returns a `422` error.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }

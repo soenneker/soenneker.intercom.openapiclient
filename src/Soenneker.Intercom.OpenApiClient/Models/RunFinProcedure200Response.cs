@@ -48,15 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ProcedureId { get; set; }
 #endif
-        /// <summary>Optional. A URL to subscribe to Server-Sent Events (SSE) for this conversation, if SSE is enabled. The access token is a JWT with a 3-minute TTL. The token is revoked when Fin sets the conversation to awaiting_user_reply or complete status. When CSAT is enabled and a survey will follow the resolution, `complete` revocation is deferred until the `csat_requested` event is delivered or the token expires.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? SseSubscriptionUrl { get; set; }
-#nullable restore
-#else
-        public string SseSubscriptionUrl { get; set; }
-#endif
-        /// <summary>Fin&apos;s current status in the conversation workflow.</summary>
+        /// <summary>Fin&apos;s status when the request was accepted. Always `thinking`; later statuses arrive as events.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200ResponseStatus? Status { get; set; }
         /// <summary>The ID of the user.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -96,7 +88,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "errors", n => { Errors = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors.CreateFromDiscriminatorValue); } },
                 { "intercom_conversation_id", n => { IntercomConversationId = n.GetStringValue(); } },
                 { "procedure_id", n => { ProcedureId = n.GetStringValue(); } },
-                { "sse_subscription_url", n => { SseSubscriptionUrl = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200ResponseStatus>(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
@@ -113,7 +104,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>("errors", Errors);
             writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
             writer.WriteStringValue("procedure_id", ProcedureId);
-            writer.WriteStringValue("sse_subscription_url", SseSubscriptionUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedure200ResponseStatus>("status", Status);
             writer.WriteStringValue("user_id", UserId);
             writer.WriteAdditionalData(AdditionalData);

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
         {
         }
         /// <summary>
-        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
+        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply`, `ask`, and `escalate` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -42,6 +42,8 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities422Response">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilitiesRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -57,11 +59,13 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Capabilities
             {
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities422Response.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply` and `ask` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
+        /// Return a machine-readable, per-user list of what Fin can do for a given end user, so anorchestrating agent can decide which endpoint to call.The response is audience-matched to the supplied user: each live, API-triggerableprocedure is checked against that user before being included, alongside the static`reply`, `ask`, and `escalate` actions.{% admonition type=&quot;warning&quot; %}To request access to the Fin Agent API, go to **Settings &gt; Integrations &gt; Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent &gt; Deploy**.{% /admonition %}
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

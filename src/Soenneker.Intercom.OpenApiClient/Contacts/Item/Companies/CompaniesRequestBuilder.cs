@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/companies", pathParameters)
+        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/companies{?order*,page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/companies", rawUrl)
+        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/companies{?order*,page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
@@ -52,27 +52,29 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactAttachedCompanies.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can attach a company to a single contact.
+        /// You can attach a company to a single contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Company"/></returns>
         /// <param name="body">The request body</param>
@@ -107,11 +109,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder.CompaniesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -120,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
             return requestInfo;
         }
         /// <summary>
-        /// You can attach a company to a single contact.
+        /// You can attach a company to a single contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -149,6 +151,22 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.CompaniesRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch a list of companies that are associated to a contact.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class CompaniesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>The order of the companies by when they were last active (`last_request_at`). The value is case-insensitive, and any value other than `asc` is treated as `desc`.</summary>
+            [QueryParameter("order")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.ListCompaniesForAContactOrderParameter? Order { get; set; }
+            /// <summary>The page of results to fetch. Values below 1 are treated as 1.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of companies to return per page. The maximum is 60; a value above 60 returns a `400` error with code `parameter_invalid`.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

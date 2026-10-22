@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AppId { get; set; }
 #endif
-        /// <summary>The company id you have defined for the company.</summary>
+        /// <summary>The company id you have defined for the company. Returned HTML-escaped, for example `&amp;` as `&amp;amp;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CompanyId { get; set; }
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? LastRequestAt { get; set; }
         /// <summary>How much revenue the company generates for your business.</summary>
         public int? MonthlySpend { get; set; }
-        /// <summary>The name of the company.</summary>
+        /// <summary>The name of the company. Returned HTML-escaped, for example `&amp;` as `&amp;amp;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
@@ -87,7 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time the company was created by you.</summary>
         public int? RemoteCreatedAt { get; set; }
-        /// <summary>The list of segments associated with the company</summary>
+        /// <summary>Always returned empty. Fetch a company&apos;s segments with the list attached segments endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.CompanySegments? Segments { get; set; }

@@ -38,6 +38,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage Message { get; set; }
 #endif
+        /// <summary>The format of the `body` in Fin&apos;s replies. Defaults to `html`. Requesting `markdown` on a workspace where it is not enabled returns a 403 error.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.ReplyToFinRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary>A user object representing the user in a Fin Agent conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -74,6 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "message", n => { Message = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage.CreateFromDiscriminatorValue); } },
+                { "response_format", n => { ResponseFormat = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ReplyToFinRequestResponseFormat>(); } },
                 { "user", n => { User = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser.CreateFromDiscriminatorValue); } },
             };
         }
@@ -87,6 +90,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttachment>("attachments", Attachments);
             writer.WriteStringValue("conversation_id", ConversationId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>("message", Message);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ReplyToFinRequestResponseFormat>("response_format", ResponseFormat);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentUser>("user", User);
             writer.WriteAdditionalData(AdditionalData);
         }

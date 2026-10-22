@@ -31,9 +31,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Industry { get; set; }
 #endif
-        /// <summary>How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..</summary>
+        /// <summary>How much revenue the company generates for your business. Floats are truncated to whole integers, so 155.98 is stored as 155. A value above 2147483647 (2**31-1) is stored as 0. 2147483647 itself, or a value of -2147483648 or below, returns a `422` error.</summary>
         public int? MonthlySpend { get; set; }
-        /// <summary>The name of the Company</summary>
+        /// <summary>The name of the Company. Leading and trailing whitespace is removed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }

@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether there are more results to fetch.</summary>
         public bool? HasMore { get; set; }
-        /// <summary>A cursor to pass as the `cursor` query parameter to fetch the next page of results. Absent when there are no more pages.</summary>
+        /// <summary>A cursor to pass as the `cursor` query parameter to fetch the next page of results. `null` when there are no more pages.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? NextCursor { get; set; }

@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The individual attribute changes. Capped at 50 items; total_count reflects the full number of changes.</summary>
+        /// <summary>The individual attribute changes. At most 50 custom attribute changes are included; changes to standard fields are always included, so this array can hold more than 50 items. total_count reflects the full number of changes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChange>? Attributes { get; set; }

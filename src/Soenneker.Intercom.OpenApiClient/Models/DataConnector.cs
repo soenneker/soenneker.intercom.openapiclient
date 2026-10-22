@@ -35,6 +35,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether this data connector is assigned to Fin for direct usage.</summary>
         public bool? DirectFinUsage { get; set; }
+        /// <summary>Whether authentication is enforced for this connector.</summary>
+        public bool? EnforceAuth { get; set; }
         /// <summary>The URL path to fetch execution results for this connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,6 +54,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>The internal description of the data connector.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? InternalDescription { get; set; }
+#nullable restore
+#else
+        public string InternalDescription { get; set; }
 #endif
         /// <summary>The name of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -104,9 +114,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_by_admin_id", n => { CreatedByAdminId = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
+                { "enforce_auth", n => { EnforceAuth = n.GetBoolValue(); } },
                 { "execution_results_url", n => { ExecutionResultsUrl = n.GetStringValue(); } },
                 { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorHttpMethod>(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "internal_description", n => { InternalDescription = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorState>(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>(); } },
@@ -125,9 +137,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("created_by_admin_id", CreatedByAdminId);
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("direct_fin_usage", DirectFinUsage);
+            writer.WriteBoolValue("enforce_auth", EnforceAuth);
             writer.WriteStringValue("execution_results_url", ExecutionResultsUrl);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorHttpMethod>("http_method", HttpMethod);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("internal_description", InternalDescription);
             writer.WriteStringValue("name", Name);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorState>("state", State);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorType>("type", Type);

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions.Item
         {
         }
         /// <summary>
-        /// You can remove a specific subscription from a contact. This will return a subscription type model for the subscription type that was removed from the contact.
+        /// You can remove a specific subscription from a contact. This willreturn a subscription type model for the subscription type that was removedfrom the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Subscriptions.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can remove a specific subscription from a contact. This will return a subscription type model for the subscription type that was removed from the contact.
+        /// You can remove a specific subscription from a contact. This willreturn a subscription type model for the subscription type that was removedfrom the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

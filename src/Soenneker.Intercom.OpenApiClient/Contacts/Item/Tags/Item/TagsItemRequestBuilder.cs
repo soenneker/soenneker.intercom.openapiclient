@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Tags.Item
         {
         }
         /// <summary>
-        /// You can remove tag from a specific contact. This will return a tag object for the tag that was removed from the contact.
+        /// You can remove tag from a specific contact. This will return atag object for the tag that was removed from the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Tags.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Tag>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Tag.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can remove tag from a specific contact. This will return a tag object for the tag that was removed from the contact.
+        /// You can remove tag from a specific contact. This will return atag object for the tag that was removed from the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

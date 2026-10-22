@@ -15,16 +15,28 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The notes property</summary>
+        /// <summary>The notes on the company, newest first.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>? Notes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>? Data { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote> Notes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote> Data { get; set; }
 #endif
+        /// <summary>Always `false`. Every note on the company is returned in `data`.</summary>
+        public bool? HasMore { get; set; }
+        /// <summary>The number of notes in `data`.</summary>
+        public int? TotalCount { get; set; }
         /// <summary>The type of the object</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.NoteListType? Type { get; set; }
+        /// <summary>The relative URL of the company&apos;s notes.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Url { get; set; }
+#nullable restore
+#else
+        public string Url { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyNotes"/> and sets the default values.
         /// </summary>
@@ -50,8 +62,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "notes", n => { Notes = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "has_more", n => { HasMore = n.GetBoolValue(); } },
+                { "total_count", n => { TotalCount = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteListType>(); } },
+                { "url", n => { Url = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -61,8 +76,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>("notes", Notes);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CompanyNote>("data", Data);
+            writer.WriteBoolValue("has_more", HasMore);
+            writer.WriteIntValue("total_count", TotalCount);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteListType>("type", Type);
+            writer.WriteStringValue("url", Url);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

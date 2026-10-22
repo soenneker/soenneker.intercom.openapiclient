@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         {
         }
         /// <summary>
-        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
+        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResultList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
+        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -102,7 +102,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             return new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.
+        /// Retrieve paginated execution logs for a specific data connector.Results from the last hour are returned by default. Use `start_ts` and `end_ts` to customize the time range.Request/response bodies are excluded by default. Use `include_bodies=true` to include them.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Execution_resultsRequestBuilderGetQueryParameters 

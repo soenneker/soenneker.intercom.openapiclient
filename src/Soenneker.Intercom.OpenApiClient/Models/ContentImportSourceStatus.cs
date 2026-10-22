@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The status of the content import source.</summary>
+    /// <summary>The status of the content import source. A source that is being deleted has the status `deletion_in_progress`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ContentImportSourceStatus
     {
@@ -14,6 +14,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "deactivated")]
         #pragma warning disable CS1591
         Deactivated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "deletion_in_progress")]
+        #pragma warning disable CS1591
+        DeletionInProgress,
         #pragma warning restore CS1591
     }
 }

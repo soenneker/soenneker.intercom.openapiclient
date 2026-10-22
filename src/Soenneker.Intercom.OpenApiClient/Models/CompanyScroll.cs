@@ -23,13 +23,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Company> Data { get; set; }
 #endif
-        /// <summary>Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data.A &quot;cursor&quot; or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or &quot;pages&quot; as needed.</summary>
+        /// <summary>Always `null`. Page through a scroll with `scroll_param` instead.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CursorPages? Pages { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollPagesProperty? Pages { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CursorPages Pages { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollPagesProperty Pages { get; set; }
 #endif
         /// <summary>The scroll parameter to use in the next request to fetch the next page of results.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ScrollParam { get; set; }
 #endif
-        /// <summary>The total number of companies</summary>
+        /// <summary>Always `null`. The scroll endpoint does not count the companies it returns.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type of the object.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get; set; }
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
+                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollPagesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollPagesProperty.CreateFromDiscriminatorValue); } },
                 { "scroll_param", n => { ScrollParam = n.GetStringValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>(); } },
@@ -83,7 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>("data", Data);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScrollPagesProperty>("pages", Pages);
             writer.WriteStringValue("scroll_param", ScrollParam);
             writer.WriteIntValue("total_count", TotalCount);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ListType>("type", Type);

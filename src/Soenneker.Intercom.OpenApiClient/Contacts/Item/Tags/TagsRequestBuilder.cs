@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Tags
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TagList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TagList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can tag a specific contact. This will return a tag object for the tag that was added to the contact.
+        /// You can tag a specific contact. This will return a tag object forthe tag that was added to the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag"/></returns>
         /// <param name="body">The request body</param>
@@ -118,7 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Tags
             return requestInfo;
         }
         /// <summary>
-        /// You can tag a specific contact. This will return a tag object for the tag that was added to the contact.
+        /// You can tag a specific contact. This will return a tag object forthe tag that was added to the contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

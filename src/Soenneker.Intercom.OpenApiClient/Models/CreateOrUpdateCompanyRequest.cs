@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// You can create or update a Company
+    /// You can create or update a Company. Send either `company_id` or `id`; a request with neither returns a `400` error.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateOrUpdateCompanyRequest : IAdditionalDataHolder, IParsable
@@ -31,6 +31,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty CustomAttributes { get; set; }
 #endif
+        /// <summary>An alternative name for `company_id`. Supply this or `company_id`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Id { get; set; }
+#nullable restore
+#else
+        public string Id { get; set; }
+#endif
         /// <summary>The industry that this company operates in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -39,9 +47,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Industry { get; set; }
 #endif
-        /// <summary>How much revenue the company generates for your business. Note that this will truncate floats. i.e. it only allow for whole integers, 155.98 will be truncated to 155. Note that this has an upper limit of 2**31-1 or 2147483647..</summary>
+        /// <summary>How much revenue the company generates for your business. Floats are truncated to whole integers, so 155.98 is stored as 155. A value above 2147483647 (2**31-1) is stored as 0. 2147483647 itself, or a value of -2147483648 or below, returns a `422` error.</summary>
         public int? MonthlySpend { get; set; }
-        /// <summary>The name of the Company</summary>
+        /// <summary>The name of the Company. Leading and trailing whitespace is removed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
@@ -98,6 +106,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty.CreateFromDiscriminatorValue); } },
+                { "id", n => { Id = n.GetStringValue(); } },
                 { "industry", n => { Industry = n.GetStringValue(); } },
                 { "monthly_spend", n => { MonthlySpend = n.GetIntValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -117,6 +126,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCompanyRequestCustomAttributesProperty>("custom_attributes", CustomAttributes);
+            writer.WriteStringValue("id", Id);
             writer.WriteStringValue("industry", Industry);
             writer.WriteIntValue("monthly_spend", MonthlySpend);
             writer.WriteStringValue("name", Name);

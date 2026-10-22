@@ -14,7 +14,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A human-readable description of the capability.</summary>
+        /// <summary>A description of the capability. For a procedure, the text is wrapped in `&lt;untrusted-content&gt;` tags, and is null when the procedure has no description.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Description { get; set; }
@@ -30,13 +30,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Endpoint { get; set; }
 #endif
-        /// <summary>The procedure ID. Present only when `type` is `procedure`.</summary>
+        /// <summary>A JSON Schema describing the request body to send to the capability&apos;s endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200ResponseCapabilitiesItemInputSchema? InputSchema { get; set; }
 #nullable restore
 #else
-        public string Id { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200ResponseCapabilitiesItemInputSchema InputSchema { get; set; }
 #endif
         /// <summary>The HTTP method to use.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -46,21 +46,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Method { get; set; }
 #endif
-        /// <summary>The procedure name. Present only when `type` is `procedure`.</summary>
+        /// <summary>The capability name. Procedures are named `run_procedure_&lt;title_slug&gt;_&lt;id&gt;`, with the slug cut to 80 characters, or `run_procedure_&lt;id&gt;` when the title gives no usable slug (for example a blank or non-Latin title); the static actions are named `reply`, `ask`, and `escalate`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
 #nullable restore
 #else
         public string Name { get; set; }
-#endif
-        /// <summary>The kind of capability — `procedure` for a runnable procedure, or a static action such as `reply`, `ask`, or `escalate`.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Type { get; set; }
-#nullable restore
-#else
-        public string Type { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200ResponseCapabilitiesItem"/> and sets the default values.
@@ -89,10 +81,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "endpoint", n => { Endpoint = n.GetStringValue(); } },
-                { "id", n => { Id = n.GetStringValue(); } },
+                { "inputSchema", n => { InputSchema = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200ResponseCapabilitiesItemInputSchema>(global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200ResponseCapabilitiesItemInputSchema.CreateFromDiscriminatorValue); } },
                 { "method", n => { Method = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -104,10 +95,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("endpoint", Endpoint);
-            writer.WriteStringValue("id", Id);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ListFinCapabilities200ResponseCapabilitiesItemInputSchema>("inputSchema", InputSchema);
             writer.WriteStringValue("method", Method);
             writer.WriteStringValue("name", Name);
-            writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

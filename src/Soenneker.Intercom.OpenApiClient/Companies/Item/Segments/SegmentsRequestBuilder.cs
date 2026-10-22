@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Item.Segments
         {
         }
         /// <summary>
-        /// You can fetch a list of all segments that belong to a company.
+        /// You can fetch a list of all segments that belong to a company.Requires the `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CompanyAttachedSegments"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Item.Segments
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompanyAttachedSegments>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompanyAttachedSegments.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all segments that belong to a company.
+        /// You can fetch a list of all segments that belong to a company.Requires the `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

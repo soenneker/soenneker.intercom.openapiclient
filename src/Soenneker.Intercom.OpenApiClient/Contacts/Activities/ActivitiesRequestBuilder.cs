@@ -34,11 +34,12 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Activities
         {
         }
         /// <summary>
-        /// You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.If the activity store can&apos;t be read, this endpoint returns `200` with an empty `data` array and no `pages.next`, the same response as when there are no new events.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactActivityList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,12 +53,13 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Activities
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactActivityList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactActivityList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.If the activity store can&apos;t be read, this endpoint returns `200` with an empty `data` array and no `pages.next`, the same response as when there are no new events.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -85,12 +87,12 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Activities
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Activities.ActivitiesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of contact activity events for your workspace, such as when contacts are created, role updated, merged, or deleted. Events are returned oldest first.If the activity store can&apos;t be read, this endpoint returns `200` with an empty `data` array and no `pages.next`, the same response as when there are no new events.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `50` results per page, with a maximum of `150`.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ActivitiesRequestBuilderGetQueryParameters 
         {
-            /// <summary>The number of results to return per page. Defaults to 50, minimum 1, maximum 150.</summary>
+            /// <summary>The number of results to return per page. Defaults to 50, minimum 1, maximum 150; larger values are treated as `150`. Only the leading digits are read, so `1.5` is treated as `1`. A value that doesn&apos;t start with a positive integer, such as `0` or `abc`, returns a `400` error with code `invalid_per_page`.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
             /// <summary>The cursor value from `pages.next.starting_after` in a previous response. Used to paginate through results.</summary>

@@ -88,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}{?include_merge_history*}", pathParameters)
+        public ContactItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}{?escape_identity*,include_merge_history*}", pathParameters)
         {
         }
         /// <summary>
@@ -96,16 +96,17 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public ContactItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}{?include_merge_history*}", rawUrl)
+        public ContactItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}{?escape_identity*,include_merge_history*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can delete a single contact.
+        /// You can delete a single contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -119,16 +120,18 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single contact.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=&quot;canonical&quot;  ```  **Response body:**  ```json  {    &quot;type&quot;: &quot;error.list&quot;,    &quot;errors&quot;: [{ &quot;code&quot;: &quot;contact_merged&quot;, &quot;message&quot;: &quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}
+        /// You can fetch the details of a single contact.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=&quot;canonical&quot;  ```  **Response body:**  ```json  {    &quot;type&quot;: &quot;error.list&quot;,    &quot;errors&quot;: [{ &quot;code&quot;: &quot;contact_merged&quot;, &quot;message&quot;: &quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 410 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -143,18 +146,22 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "410", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ShowContact200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}
+        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200Response"/></returns>
         /// <param name="body">The request body</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200Response?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateContactRequestRequestBody body, Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder.ContactItemRequestBuilderPutQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -168,12 +175,15 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.UpdateContact200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single contact.
+        /// You can delete a single contact.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -192,7 +202,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single contact.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=&quot;canonical&quot;  ```  **Response body:**  ```json  {    &quot;type&quot;: &quot;error.list&quot;,    &quot;errors&quot;: [{ &quot;code&quot;: &quot;contact_merged&quot;, &quot;message&quot;: &quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}
+        /// You can fetch the details of a single contact.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=&quot;canonical&quot;  ```  **Response body:**  ```json  {    &quot;type&quot;: &quot;error.list&quot;,    &quot;errors&quot;: [{ &quot;code&quot;: &quot;contact_merged&quot;, &quot;message&quot;: &quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -211,7 +221,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}
+        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -242,22 +252,25 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch the details of a single contact.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=&quot;canonical&quot;  ```  **Response body:**  ```json  {    &quot;type&quot;: &quot;error.list&quot;,    &quot;errors&quot;: [{ &quot;code&quot;: &quot;contact_merged&quot;, &quot;message&quot;: &quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}
+        /// You can fetch the details of a single contact.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If a contact has been merged into another contact via the Merge endpoint (`POST /contacts/merge`), requesting it by its original ID will return **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact.  **Response headers:**  ```  Link: &lt;/contacts/{canonical_id}&gt;; rel=&quot;canonical&quot;  ```  **Response body:**  ```json  {    &quot;type&quot;: &quot;error.list&quot;,    &quot;errors&quot;: [{ &quot;code&quot;: &quot;contact_merged&quot;, &quot;message&quot;: &quot;This contact has been merged. See the &apos;Link&apos; header for the canonical contact.&quot; }]  }  ```  The `Link` header contains the path to the final merge target, resolving multi-hop merge chains (up to 3 hops).{% /admonition %}Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ContactItemRequestBuilderGetQueryParameters 
         {
-            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Only returned for contacts with a `user` role.</summary>
+            /// <summary>By default, `name` and `email` values in the response, including nested ones such as social profile names, are HTML-escaped (for example, `&amp;` is returned as `&amp;amp;`). Custom attributes and tags are never escaped. Pass `false` to return them unescaped.</summary>
+            [QueryParameter("escape_identity")]
+            public bool? EscapeIdentity { get; set; }
+            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Returned for contacts of any role, with at most the 10 most recent merges.</summary>
             [QueryParameter("include_merge_history")]
             public bool? IncludeMergeHistory { get; set; }
         }
         /// <summary>
-        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}
+        /// You can update an existing contact (ie. user or lead).{% admonition type=&quot;info&quot; %}  This endpoint handles both **contact updates** and **custom object associations**.  See _`update a contact with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ContactItemRequestBuilderPutQueryParameters 
         {
-            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Only returned for contacts with a `user` role.</summary>
+            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Returned for contacts of any role, with at most the 10 most recent merges.</summary>
             [QueryParameter("include_merge_history")]
             public bool? IncludeMergeHistory { get; set; }
         }

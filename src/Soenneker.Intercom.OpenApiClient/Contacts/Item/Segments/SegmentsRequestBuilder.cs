@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Segments
         {
         }
         /// <summary>
-        /// You can fetch a list of segments that are associated to a contact.
+        /// You can fetch a list of segments that are associated to a contact.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactSegments"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Segments
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContactSegments>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContactSegments.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of segments that are associated to a contact.
+        /// You can fetch a list of segments that are associated to a contact.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

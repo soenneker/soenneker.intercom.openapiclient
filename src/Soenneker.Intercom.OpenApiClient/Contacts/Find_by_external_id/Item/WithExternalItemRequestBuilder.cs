@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithExternalItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{externalId}{?include_merge_history*}", pathParameters)
+        public WithExternalItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{externalId}{?escape_identity*,include_merge_history*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,16 +30,17 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithExternalItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{externalId}{?include_merge_history*}", rawUrl)
+        public WithExternalItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/find_by_external_id/{externalId}{?escape_identity*,include_merge_history*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}
+        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 410 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,12 +55,13 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "410", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}
+        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,12 +89,15 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Find_by_external_id.Item.WithExternalItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}
+        /// You can fetch the details of a single contact by external ID. Note that this endpoint only supports users and not leads.{% admonition type=&quot;info&quot; name=&quot;Merged contacts return 410 Gone&quot; %}  If the contact with this external ID has been merged into another contact, the API returns **HTTP 410 Gone** with a `Link` header pointing to the canonical (merged-into) contact. See `GET /contacts/{id}` for details on the response format.{% /admonition %}Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithExternalItemRequestBuilderGetQueryParameters 
         {
-            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Only returned for contacts with a `user` role.</summary>
+            /// <summary>By default, `name` and `email` values in the response, including nested ones such as social profile names, are HTML-escaped (for example, `&amp;` is returned as `&amp;amp;`). Custom attributes and tags are never escaped. Pass `false` to return them unescaped.</summary>
+            [QueryParameter("escape_identity")]
+            public bool? EscapeIdentity { get; set; }
+            /// <summary>Pass `true` to include the contact&apos;s merge history in the response. Returned for contacts of any role, with at most the 10 most recent merges.</summary>
             [QueryParameter("include_merge_history")]
             public bool? IncludeMergeHistory { get; set; }
         }

@@ -47,11 +47,12 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners
         {
         }
         /// <summary>
-        /// Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.
+        /// Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BannerList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -65,12 +66,13 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.BannerList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.BannerList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.
+        /// Returns the banners a contact currently matches, so you can display them onsurfaces outside the Messenger (native mobile apps, kiosks, embedded tools).Each banner in the response includes a `view_id`. Use it to record a dismissalwith the dismiss endpoint. A returned banner is treated as shown: requestingthis endpoint records an impression for each banner returned, so call it at thepoint you are about to display the banners, not speculatively.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

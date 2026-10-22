@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The list of segments associated with the company
+    /// Always returned empty. Fetch a company&apos;s segments with the list attached segments endpoint.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompanySegments : IAdditionalDataHolder, IParsable

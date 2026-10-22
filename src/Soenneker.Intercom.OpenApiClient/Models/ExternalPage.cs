@@ -59,10 +59,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The time when the external page was last ingested.</summary>
         public int? LastIngestedAt { get; set; }
-        /// <summary>Always en</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.EnLocale? Locale { get; set; }
+        /// <summary>The language code of the external page, for example `en` or `fr`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
         /// <summary>The unique identifier for the source of the external page which was given by Intercom. Every external page must be associated with a Content Import Source which represents the place it comes from and from which it inherits a default audience (configured in the UI). For a new source, make a POST request to the Content Import Source endpoint and an ID for the source will be returned in the response.</summary>
         public int? SourceId { get; set; }
+        /// <summary>The tags applied to the external page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags? Tags { get; set; }
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags Tags { get; set; }
+#endif
         /// <summary>The title of the external page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -118,8 +132,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "html", n => { Html = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "last_ingested_at", n => { LastIngestedAt = n.GetIntValue(); } },
-                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EnLocale>(); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
+                { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags>(global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
@@ -143,8 +158,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("html", Html);
             writer.WriteStringValue("id", Id);
             writer.WriteIntValue("last_ingested_at", LastIngestedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EnLocale>("locale", Locale);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteIntValue("source_id", SourceId);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags>("tags", Tags);
             writer.WriteStringValue("title", Title);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);

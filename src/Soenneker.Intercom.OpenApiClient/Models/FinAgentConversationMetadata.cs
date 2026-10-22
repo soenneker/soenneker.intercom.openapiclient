@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentConversationMetadataAttributesProperty Attributes { get; set; }
 #endif
-        /// <summary>An array of previous messages in the conversation before Fin is initialized.This data provides context to Fin and helps generate a better answer.Limit to the last 10 messages.</summary>
+        /// <summary>An array of previous messages in the conversation before Fin is initialized.This data provides context to Fin and helps generate a better answer.Limit to the last 10 messages.Only `user` and `agent` authors are accepted. If any item is invalid, for example it has no `timestamp` or `timestamp_ms`, or has another author, the whole history is ignored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessage>? History { get; set; }

@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Deleted
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public DeletedRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/deleted{?page*,per_page*}", pathParameters)
+        public DeletedRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/deleted{?escape_identity*,page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Deleted
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public DeletedRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/deleted{?page*,per_page*}", rawUrl)
+        public DeletedRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/deleted{?escape_identity*,page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// Fetch a paginated list of the contacts in your workspace that are no longer active,so you can recover ones whose `id`, `email`, or `external_id` you no longer have andthen permanently delete them. Each entry carries a `status` describing why the contactis inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.`merged_into_id` is present only when `status` is `merged`, and `external_id` and `email`are `null` for `permanently_deleted` contacts.
+        /// Fetch a paginated list of the contacts in your workspace that are no longer active,so you can recover ones whose `id`, `email`, or `external_id` you no longer have andthen permanently delete them. Each entry carries a `status` describing why the contactis inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.`merged_into_id` is present only when `status` is `merged`, and `external_id` and `email`are `null` for `permanently_deleted` contacts.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Deleted
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedContactList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a paginated list of the contacts in your workspace that are no longer active,so you can recover ones whose `id`, `email`, or `external_id` you no longer have andthen permanently delete them. Each entry carries a `status` describing why the contactis inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.`merged_into_id` is present only when `status` is `merged`, and `external_id` and `email`are `null` for `permanently_deleted` contacts.
+        /// Fetch a paginated list of the contacts in your workspace that are no longer active,so you can recover ones whose `id`, `email`, or `external_id` you no longer have andthen permanently delete them. Each entry carries a `status` describing why the contactis inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.`merged_into_id` is present only when `status` is `merged`, and `external_id` and `email`are `null` for `permanently_deleted` contacts.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -87,15 +87,18 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Deleted
             return new global::Soenneker.Intercom.OpenApiClient.Contacts.Deleted.DeletedRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Fetch a paginated list of the contacts in your workspace that are no longer active,so you can recover ones whose `id`, `email`, or `external_id` you no longer have andthen permanently delete them. Each entry carries a `status` describing why the contactis inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.`merged_into_id` is present only when `status` is `merged`, and `external_id` and `email`are `null` for `permanently_deleted` contacts.
+        /// Fetch a paginated list of the contacts in your workspace that are no longer active,so you can recover ones whose `id`, `email`, or `external_id` you no longer have andthen permanently delete them. Each entry carries a `status` describing why the contactis inactive: `archived`, `blocked`, `merged`, `pending_deletion`, or `permanently_deleted`.`merged_into_id` is present only when `status` is `merged`, and `external_id` and `email`are `null` for `permanently_deleted` contacts.Requires the `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class DeletedRequestBuilderGetQueryParameters 
         {
+            /// <summary>By default, `email` values in the response are HTML-escaped (for example, `&amp;` is returned as `&amp;amp;`). Pass `false` to return them unescaped.</summary>
+            [QueryParameter("escape_identity")]
+            public bool? EscapeIdentity { get; set; }
             /// <summary>The page of results to fetch. Defaults to `1`.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>The number of results per page. Defaults to `10`, with a maximum of `150`.</summary>
+            /// <summary>The number of results per page. Defaults to `10`, with a maximum of `150`; larger values are treated as `150`. Only the leading digits are read, so `1.5` is treated as `1`. A value that doesn&apos;t start with a positive integer, such as `0` or `abc`, returns a `400` error with code `invalid_per_page`.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }
