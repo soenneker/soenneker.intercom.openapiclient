@@ -161,7 +161,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics Statistics { get; set; }
 #endif
-        /// <summary>A list of tags objects associated with a conversation</summary>
+        /// <summary>A list of tags objects associated with a conversation, article or internal article</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Tags? Tags { get; set; }

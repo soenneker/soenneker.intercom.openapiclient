@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The ID of the parent folder</summary>
+        /// <summary>The ID of the parent folder. Send `null` to move the folder to the top level. If omitted, the parent folder is unchanged.</summary>
         public int? ParentFolderId { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateFolderRequestFolder"/> and sets the default values.

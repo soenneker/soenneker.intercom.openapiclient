@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
         {
         }
         /// <summary>
-        /// You can delete a single news item.
+        /// You can delete a single news item.Requires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single news item.
+        /// You can fetch the details of a single news item.Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsItem"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -84,34 +84,36 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.NewsItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Update a news item
+        /// You can update a news item.You can also send this request with `PATCH`; it behaves the same as `PUT`.`title`, `body`, `state`, `deliver_silently` and `cover_image_url` keep their current values when you leave them out. `labels` and `newsfeed_assignments` do not: leaving either out clears it, so send the full list on every update. Leaving `reactions` out disables reactions, although the list in the response does not change.Requires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsItem"/></returns>
-        /// <param name="body">A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.</param>
+        /// <param name="body">The body of a request that updates an existing news item. Leaving `labels` or `newsfeed_assignments` out clears them, and leaving `reactions` out disables reactions; every other optional field keeps its current value when left out.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.NewsItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single news item.
+        /// You can delete a single news item.Requires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -130,7 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single news item.
+        /// You can fetch the details of a single news item.Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -149,18 +151,18 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
             return requestInfo;
         }
         /// <summary>
-        /// Update a news item
+        /// You can update a news item.You can also send this request with `PATCH`; it behaves the same as `PUT`.`title`, `body`, `state`, `deliver_silently` and `cover_image_url` keep their current values when you leave them out. `labels` and `newsfeed_assignments` do not: leaving either out clears it, so send the full list on every update. Leaving `reactions` out disables reactions, although the list in the response does not change.Requires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.</param>
+        /// <param name="body">The body of a request that updates an existing news item. Leaving `labels` or `newsfeed_assignments` out clears them, and leaving `reactions` out disables reactions; every other optional field keeps its current value when left out.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToPutRequestInformation(global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));

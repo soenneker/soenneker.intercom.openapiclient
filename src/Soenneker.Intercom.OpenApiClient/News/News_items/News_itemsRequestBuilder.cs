@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public News_itemsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/news/news_items", pathParameters)
+        public News_itemsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/news/news_items{?page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,40 +43,44 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public News_itemsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/news/news_items", rawUrl)
+        public News_itemsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/news/news_items{?page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all news items
+        /// You can fetch a list of all news itemsNews items are returned newest first, by creation date.Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.News.News_items.News_itemsRequestBuilder.News_itemsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.News.News_items.News_itemsRequestBuilder.News_itemsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.PaginatedResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a news item
+        /// You can create a news itemRequires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsItem"/></returns>
         /// <param name="body">A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.NewsItemRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -90,22 +94,24 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.NewsItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all news items
+        /// You can fetch a list of all news itemsNews items are returned newest first, by creation date.Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.News.News_items.News_itemsRequestBuilder.News_itemsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.News.News_items.News_itemsRequestBuilder.News_itemsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -114,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items
             return requestInfo;
         }
         /// <summary>
-        /// You can create a news item
+        /// You can create a news itemRequires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">A News Item is a content type in Intercom enabling you to announce product updates, company news, promotions, events and more with your customers.</param>
@@ -143,6 +149,19 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items
         public global::Soenneker.Intercom.OpenApiClient.News.News_items.News_itemsRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.News.News_items.News_itemsRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch a list of all news itemsNews items are returned newest first, by creation date.Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class News_itemsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>The page of results to fetch.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of news items to return per page. Values above 20 are reduced to 20.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

@@ -41,7 +41,6 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Bulk_actions
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
-        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -57,7 +56,6 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Bulk_actions
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
-                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);

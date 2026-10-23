@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A condition used to filter contacts in an audience.
+    /// A condition used to filter contacts in an audience. An attribute predicate compares one attribute. A logical predicate has a `type` of `and`, `or` or `not` and groups other predicates instead.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Predicate : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The attribute to filter on.</summary>
+        /// <summary>The attribute to filter on. Required on an attribute predicate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Attribute { get; set; }
@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Attribute { get; set; }
 #endif
-        /// <summary>The comparison operator.</summary>
+        /// <summary>The comparison operator. Required on an attribute predicate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Comparison { get; set; }
@@ -31,7 +31,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Comparison { get; set; }
 #endif
-        /// <summary>The type of the attribute.</summary>
+        /// <summary>The predicates grouped by a logical predicate. Only used when `type` is `and`, `or` or `not`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? Predicates { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> Predicates { get; set; }
+#endif
+        /// <summary>The type of the attribute, or `and`, `or` or `not` on a logical predicate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Type { get; set; }
@@ -39,13 +47,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Type { get; set; }
 #endif
-        /// <summary>The value to compare against.</summary>
+        /// <summary>The value to compare against. The accepted value depends on the attribute and the comparison, and can be a string, a number, a boolean, an array or `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Value { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PredicateValue? Value { get; set; }
 #nullable restore
 #else
-        public string Value { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PredicateValue Value { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Predicate"/> and sets the default values.
@@ -74,8 +82,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "attribute", n => { Attribute = n.GetStringValue(); } },
                 { "comparison", n => { Comparison = n.GetStringValue(); } },
+                { "predicates", n => { Predicates = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>(global::Soenneker.Intercom.OpenApiClient.Models.Predicate.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "value", n => { Value = n.GetStringValue(); } },
+                { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PredicateValue>(global::Soenneker.Intercom.OpenApiClient.Models.PredicateValue.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -87,8 +96,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("attribute", Attribute);
             writer.WriteStringValue("comparison", Comparison);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>("predicates", Predicates);
             writer.WriteStringValue("type", Type);
-            writer.WriteStringValue("value", Value);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PredicateValue>("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

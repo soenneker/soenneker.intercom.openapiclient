@@ -34,11 +34,12 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
         {
         }
         /// <summary>
-        /// You can delete a folder (if it contains no content) by making a DELETE request to `https://api.intercom.io/folders/&lt;id&gt;`.
+        /// You can delete a folder (if it contains no content) by making a DELETE request to `https://api.intercom.io/folders/&lt;id&gt;`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
@@ -54,6 +55,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -61,11 +63,12 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedFolderObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single folder by making a GET request to `https://api.intercom.io/folders/&lt;id&gt;`.
+        /// You can fetch the details of a single folder by making a GET request to `https://api.intercom.io/folders/&lt;id&gt;`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Folder"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -80,13 +83,14 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Folder>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Folder.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update a folder by making a PUT request to `https://api.intercom.io/folders/&lt;id&gt;`.
+        /// You can update a folder by making a PUT request to `https://api.intercom.io/folders/&lt;id&gt;`.Fields you leave out keep their current values. Send `parent_folder_id` as `null` to move the folder to the top level. Folder names longer than 191 characters are truncated.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Folder"/></returns>
         /// <param name="body">The request body</param>
@@ -115,7 +119,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Folder>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Folder.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a folder (if it contains no content) by making a DELETE request to `https://api.intercom.io/folders/&lt;id&gt;`.
+        /// You can delete a folder (if it contains no content) by making a DELETE request to `https://api.intercom.io/folders/&lt;id&gt;`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -134,7 +138,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single folder by making a GET request to `https://api.intercom.io/folders/&lt;id&gt;`.
+        /// You can fetch the details of a single folder by making a GET request to `https://api.intercom.io/folders/&lt;id&gt;`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -153,7 +157,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update a folder by making a PUT request to `https://api.intercom.io/folders/&lt;id&gt;`.
+        /// You can update a folder by making a PUT request to `https://api.intercom.io/folders/&lt;id&gt;`.Fields you leave out keep their current values. Send `parent_folder_id` as `null` to move the folder to the top level. Folder names longer than 191 characters are truncated.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A list of tags objects associated with a conversation
+    /// A list of tags objects associated with a conversation, article or internal article
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Tags : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A list of tags objects associated with the conversation.</summary>
+        /// <summary>A list of tags objects associated with the object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Tag>? TagsProp { get; set; }

@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body`.</summary>
+        /// <summary>The content of the article in markdown. An alternative to `body` — you can provide content as markdown instead of HTML. Mutually exclusive with `body` and `json_blocks`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? BodyMarkdown { get; set; }
@@ -47,8 +47,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string BodyMarkdown { get; set; }
 #endif
-        /// <summary>The ID of the folder to place this article in, or null to leave it without a folder.</summary>
+        /// <summary>The ID of the folder to place this article in. Pass `null` to leave it without a folder.</summary>
         public int? FolderId { get; set; }
+        /// <summary>The content of the article as a list of content blocks. Used only when `body` is not provided. Cannot be combined with `body_markdown`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateInternalArticleRequestJsonBlocksItemProperty>? JsonBlocks { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateInternalArticleRequestJsonBlocksItemProperty> JsonBlocks { get; set; }
+#endif
+        /// <summary>The locale of the article. Defaults to `en`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get; set; }
+#nullable restore
+#else
+        public string Locale { get; set; }
+#endif
         /// <summary>The id of the owner of the article.</summary>
         public int? OwnerId { get; set; }
         /// <summary>The title of the article.</summary>
@@ -95,6 +111,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
+                { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateInternalArticleRequestJsonBlocksItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreateInternalArticleRequestJsonBlocksItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
@@ -114,6 +132,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);
             writer.WriteIntValue("folder_id", FolderId);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateInternalArticleRequestJsonBlocksItemProperty>("json_blocks", JsonBlocks);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteIntValue("owner_id", OwnerId);
             writer.WriteStringValue("title", Title);
             writer.WriteAdditionalData(AdditionalData);

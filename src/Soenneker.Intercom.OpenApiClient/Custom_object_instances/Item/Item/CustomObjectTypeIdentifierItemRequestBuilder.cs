@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.Item
         {
         }
         /// <summary>
-        /// Delete a single Custom Object instance using the Intercom defined id.
+        /// Delete a single Custom Object instance using the Intercom defined id.Requires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetch a Custom Object Instance by id.
+        /// Fetch a Custom Object Instance by id.Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.GetCustomObjectInstancesById200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.GetCustomObjectInstancesById200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.GetCustomObjectInstancesById200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delete a single Custom Object instance using the Intercom defined id.
+        /// Delete a single Custom Object instance using the Intercom defined id.Requires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -103,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.Item
             return requestInfo;
         }
         /// <summary>
-        /// Fetch a Custom Object Instance by id.
+        /// Fetch a Custom Object Instance by id.Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

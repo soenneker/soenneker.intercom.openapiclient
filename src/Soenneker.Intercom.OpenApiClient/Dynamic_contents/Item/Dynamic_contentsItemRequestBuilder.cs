@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
         {
         }
         /// <summary>
-        /// You can delete a single dynamic content by its id. Dynamic content that is still used in an article can&apos;t be deleted. Requires the `read_write_dynamic_content` scope.
+        /// You can delete a single dynamic content by its id. Dynamic content that is still used in an article can&apos;t be deleted.Requires the `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a single dynamic content by its id. Requires the `read_dynamic_content` scope.
+        /// You can fetch a single dynamic content by its id.Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -89,12 +89,13 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update existing dynamic content. Only the fields you provide are changed. Requires the `read_write_dynamic_content` scope.
+        /// You can update existing dynamic content. Only the fields you provide are changed.You can also send this request with `PATCH`; it behaves the same as `PUT`.Requires the `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent"/></returns>
         /// <param name="body">The request payload for updating dynamic content. All fields are optional — only provided fields are updated.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
@@ -112,6 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -120,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single dynamic content by its id. Dynamic content that is still used in an article can&apos;t be deleted. Requires the `read_write_dynamic_content` scope.
+        /// You can delete a single dynamic content by its id. Dynamic content that is still used in an article can&apos;t be deleted.Requires the `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -139,7 +141,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch a single dynamic content by its id. Requires the `read_dynamic_content` scope.
+        /// You can fetch a single dynamic content by its id.Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -158,7 +160,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update existing dynamic content. Only the fields you provide are changed. Requires the `read_write_dynamic_content` scope.
+        /// You can update existing dynamic content. Only the fields you provide are changed.You can also send this request with `PATCH`; it behaves the same as `PUT`.Requires the `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request payload for updating dynamic content. All fields are optional — only provided fields are updated.</param>

@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders
         {
         }
         /// <summary>
-        /// You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.
+        /// You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListFolders200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListFolders200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListFolders200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new folder for organizing content by making a POST request to `https://api.intercom.io/folders`.
+        /// You can create a new folder for organizing content by making a POST request to `https://api.intercom.io/folders`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Folder"/></returns>
         /// <param name="body">The request body</param>
@@ -97,7 +97,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Folder>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Folder.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.
+        /// You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -116,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new folder for organizing content by making a POST request to `https://api.intercom.io/folders`.
+        /// You can create a new folder for organizing content by making a POST request to `https://api.intercom.io/folders`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -147,7 +147,7 @@ namespace Soenneker.Intercom.OpenApiClient.Folders
             return new global::Soenneker.Intercom.OpenApiClient.Folders.FoldersRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.
+        /// You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class FoldersRequestBuilderGetQueryParameters 

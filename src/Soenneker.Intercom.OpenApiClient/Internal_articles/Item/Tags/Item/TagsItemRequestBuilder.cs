@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TagsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/{%2Did}/tags/{id}", pathParameters)
+        public TagsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/{%2Did}/tags/{id}{?admin_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TagsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/{%2Did}/tags/{id}", rawUrl)
+        public TagsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/{%2Did}/tags/{id}{?admin_id*}", rawUrl)
         {
         }
         /// <summary>
@@ -44,11 +44,11 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Tag?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Tag?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item.TagsItemRequestBuilder.TagsItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Tag> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Tag> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item.TagsItemRequestBuilder.TagsItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
@@ -67,11 +67,11 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item.TagsItemRequestBuilder.TagsItemRequestBuilderDeleteQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item.TagsItemRequestBuilder.TagsItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
@@ -87,6 +87,23 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item
         public global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item.TagsItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Internal_articles.Item.Tags.Item.TagsItemRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Remove a tag from an internal article. Returns the tag that was removed, withnull `applied_at` and `applied_by`.The authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class TagsItemRequestBuilderDeleteQueryParameters 
+        {
+            /// <summary>Optional id of a teammate. The id is checked, and an unknown teammate returns a 404 `admin_not_found` error, but the removal is not recorded against the teammate.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("admin_id")]
+            public string? AdminId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("admin_id")]
+            public string AdminId { get; set; }
+#endif
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; private set; }
 #endif
-        /// <summary>The name of the audience.</summary>
+        /// <summary>The name of the audience. Returned HTML-escaped, for example `&amp;` as `&amp;amp;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }

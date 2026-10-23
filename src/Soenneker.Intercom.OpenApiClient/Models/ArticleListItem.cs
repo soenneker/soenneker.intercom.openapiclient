@@ -107,7 +107,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? ScheduledUnpublishAt { get; private set; }
         /// <summary>Whether the article is `published` or is a `draft`. For multilingual articles, this will be the state of the default language&apos;s content.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleState? State { get; set; }
-        /// <summary>A list of tags objects associated with a conversation</summary>
+        /// <summary>A list of tags objects associated with a conversation, article or internal article</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Tags? Tags { get; set; }

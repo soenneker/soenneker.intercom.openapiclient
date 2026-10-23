@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>URL of the image used as cover. Must have .jpg or .png extension.</summary>
+        /// <summary>URL of the image used as cover. Must have .jpg or .png extension. Intercom copies the image you send on write, so the URL returned here is a signed Intercom URL that expires; fetch the news item again for a fresh one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? CoverImageUrl { get; set; }
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>Label names displayed to users to categorize the news item.</summary>
+        /// <summary>Label names displayed to users to categorize the news item, sorted with uppercase letters before lowercase.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Labels { get; set; }
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Timestamp for when the news item last went live. Null if the news item has never been live.</summary>
         public int? PublishedAt { get; set; }
-        /// <summary>Ordered list of emoji reactions to the news item. When empty, reactions are disabled.</summary>
+        /// <summary>Ordered list of emoji reactions to the news item. When empty, reactions are disabled. An update that leaves out `reactions` also disables them but leaves this list as it was.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Reactions { get; set; }

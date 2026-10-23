@@ -40,13 +40,14 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item
         {
         }
         /// <summary>
-        /// You can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.
+        /// You can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedInternalArticleObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedInternalArticleObject?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -61,17 +62,19 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedInternalArticleObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedInternalArticleObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single internal article by making a GET request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.
+        /// You can fetch the details of a single internal article by making a GET request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -86,18 +89,21 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update the details of a single internal article by making a PUT request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.
+        /// You can update the details of a single internal article by making a PUT request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.Fields you leave out keep their current values.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle"/></returns>
         /// <param name="body">You can Update an Internal Article</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle?> PutAsync(global::Soenneker.Intercom.OpenApiClient.Models.UpdateInternalArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -111,13 +117,15 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.
+        /// You can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -136,7 +144,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single internal article by making a GET request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.
+        /// You can fetch the details of a single internal article by making a GET request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -155,7 +163,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update the details of a single internal article by making a PUT request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.
+        /// You can update the details of a single internal article by making a PUT request to `https://api.intercom.io/internal_articles/&lt;id&gt;`.Fields you leave out keep their current values.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can Update an Internal Article</param>

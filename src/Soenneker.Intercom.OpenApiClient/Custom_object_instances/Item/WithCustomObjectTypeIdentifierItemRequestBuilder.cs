@@ -19,7 +19,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
     public partial class WithCustomObjectTypeIdentifierItemRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.custom_object_instances.item.item collection</summary>
-        /// <param name="position">The id or external_id of the custom object instance</param>
+        /// <param name="position">The Intercom defined id of the custom object instance. An external id here is not looked up; to find an instance by its external id, call `GET /custom_object_instances/{custom_object_type_identifier}?external_id=`.</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.Item.CustomObjectTypeIdentifierItemRequestBuilder"/></returns>
         public global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.Item.CustomObjectTypeIdentifierItemRequestBuilder this[string position]
         {
@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         {
         }
         /// <summary>
-        /// Delete a single Custom Object instance by external_id.
+        /// Delete a single Custom Object instance by external_id.Requires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -72,37 +72,40 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list).
+        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list). If no instance matches, the response is still `200`, with the same body the single-instance endpoint returns for a miss.Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListCustomObjectInstances200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder.WithCustomObjectTypeIdentifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListCustomObjectInstances200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder.WithCustomObjectTypeIdentifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder.WithCustomObjectTypeIdentifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListCustomObjectInstances200Response> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder.WithCustomObjectTypeIdentifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstancesPaginatedList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListCustomObjectInstances200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListCustomObjectInstances200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Create or update a custom object instance
+        /// Create or update a custom object instanceRequires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance"/></returns>
         /// <param name="body">Payload to create or update a Custom Object instance</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -118,13 +121,14 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Delete a single Custom Object instance by external_id.
+        /// Delete a single Custom Object instance by external_id.Requires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -143,7 +147,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
             return requestInfo;
         }
         /// <summary>
-        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list).
+        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list). If no instance matches, the response is still `200`, with the same body the single-instance endpoint returns for a miss.Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -162,7 +166,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
             return requestInfo;
         }
         /// <summary>
-        /// Create or update a custom object instance
+        /// Create or update a custom object instanceRequires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Payload to create or update a Custom Object instance</param>
@@ -193,7 +197,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
             return new global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustomObjectTypeIdentifierItemRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Delete a single Custom Object instance by external_id.
+        /// Delete a single Custom Object instance by external_id.Requires the `read_write_custom_object_instances` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithCustomObjectTypeIdentifierItemRequestBuilderDeleteQueryParameters 
@@ -213,7 +217,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
 #endif
         }
         /// <summary>
-        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list).
+        /// List instances of a custom object type. Three modes are supported:- **No filter** — returns all instances for the type.- **`references_contact_id`** — returns instances associated with the given contact.- **`references_conversation_id`** — returns instances associated with the given conversation.When **`external_id`** is provided, returns a single matching instance (not a list). If no instance matches, the response is still `200`, with the same body the single-instance endpoint returns for a miss.Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithCustomObjectTypeIdentifierItemRequestBuilderGetQueryParameters 

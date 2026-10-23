@@ -15,9 +15,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The unique identifier for the newsfeed which is given by Intercom. Publish dates cannot be in the future, to schedule news items use the dedicated feature in app (see this article).</summary>
+        /// <summary>The unique identifier for the newsfeed which is given by Intercom.</summary>
         public int? NewsfeedId { get; set; }
-        /// <summary>Publish date of the news item on the newsfeed, use this field if you want to set a publish date in the past (e.g. when importing existing news items). On write, this field will be ignored if the news item state is &quot;draft&quot;.</summary>
+        /// <summary>Publish date of the news item on the newsfeed, use this field if you want to set a publish date in the past (e.g. when importing existing news items). On write, this field will be ignored if the news item state is &quot;draft&quot;, and a date in the future is rejected with a `400`. Null while the news item isn&apos;t live.</summary>
         public int? PublishedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment"/> and sets the default values.

@@ -41,7 +41,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Internal_articlesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles", pathParameters)
+        public Internal_articlesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles{?page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -49,11 +49,11 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Internal_articlesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles", rawUrl)
+        public Internal_articlesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles{?page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.
+        /// You can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,11 +61,11 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder.Internal_articlesRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder.Internal_articlesRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -76,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.
+        /// You can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle"/></returns>
         /// <param name="body">You can create an Internal Article</param>
@@ -85,6 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateInternalArticleRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -101,21 +102,22 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.
+        /// You can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder.Internal_articlesRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder.Internal_articlesRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -124,7 +126,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.
+        /// You can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create an Internal Article</param>
@@ -153,6 +155,19 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles
         public global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Internal_articles.Internal_articlesRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class Internal_articlesRequestBuilderGetQueryParameters 
+        {
+            /// <summary>The page of results to fetch. Defaults to 1.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results to return per page. Defaults to 50.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

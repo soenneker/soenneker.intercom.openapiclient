@@ -23,6 +23,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
+        /// <summary>URL of the image to use as the cover. Must contain `.png` or `.jpg` in lower case, so `.jpeg` and `.PNG` are rejected. Intercom copies the image and serves it from its own signed URL.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CoverImageUrl { get; set; }
+#nullable restore
+#else
+        public string CoverImageUrl { get; set; }
+#endif
         /// <summary>When set to `true`, the news item will appear in the messenger newsfeed without showing a notification badge.</summary>
         public bool? DeliverSilently { get; set; }
         /// <summary>Label names displayed to users to categorize the news item.</summary>
@@ -41,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment> NewsfeedAssignments { get; set; }
 #endif
-        /// <summary>Ordered list of emoji reactions to the news item. When empty, reactions are disabled.</summary>
+        /// <summary>Ordered list of emoji reactions to the news item. Send an empty list to disable reactions. Send at most five, each a single Unicode code point, so an emoji with a skin tone, a joiner sequence or a variation selector (such as ❤️) is rejected. More than five returns a 400, but the news item is still saved as a draft, with no reactions or cover image.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Reactions { get; set; }
@@ -87,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "cover_image_url", n => { CoverImageUrl = n.GetStringValue(); } },
                 { "deliver_silently", n => { DeliverSilently = n.GetBoolValue(); } },
                 { "labels", n => { Labels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "newsfeed_assignments", n => { NewsfeedAssignments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -104,6 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("cover_image_url", CoverImageUrl);
             writer.WriteBoolValue("deliver_silently", DeliverSilently);
             writer.WriteCollectionOfPrimitiveValues<string>("labels", Labels);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>("newsfeed_assignments", NewsfeedAssignments);

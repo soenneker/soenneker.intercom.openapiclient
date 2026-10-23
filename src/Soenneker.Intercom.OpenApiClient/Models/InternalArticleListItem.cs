@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The id of the owner of the article.</summary>
         public int? OwnerId { get; set; }
-        /// <summary>A list of tags objects associated with a conversation</summary>
+        /// <summary>A list of tags objects associated with a conversation, article or internal article</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.Tags? Tags { get; set; }

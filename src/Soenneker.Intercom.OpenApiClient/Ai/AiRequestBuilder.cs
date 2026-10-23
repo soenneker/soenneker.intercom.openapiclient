@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Ai.Api_template_sources;
 using Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources;
 using Soenneker.Intercom.OpenApiClient.Ai.External_pages;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ namespace Soenneker.Intercom.OpenApiClient.Ai
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AiRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The api_template_sources property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Ai.Api_template_sources.Api_template_sourcesRequestBuilder Api_template_sources
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Ai.Api_template_sources.Api_template_sourcesRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>The content_import_sources property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder Content_import_sources
         {

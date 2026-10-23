@@ -784,6 +784,561 @@ paths:
                       message: Access Token Invalid
               schema:
                 "$ref": "#/components/schemas/error"
+  "/ai/api_template_sources":
+    post:
+      summary: Create an API template source
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      tags:
+      - AI Content
+      operationId: createApiTemplateSource
+      description: |
+        You can create an API template source to import a knowledge base through its vendor's REST API. Send a template that describes the vendor's API, values for the template's variables, and a token for the vendor's API.
+
+        Intercom checks the template and the variables, then checks the token by requesting the template's tree from the vendor. If any check fails, the source isn't created and the API returns a `422` error that names each failing field. Otherwise, the source is created and its first sync starts. The imported content is filed in a folder named after the template.
+
+        If the first sync can't start, the source is still created. Its `latest_sync` is then `null` or has the status `failed`, and you can start a sync with `POST /ai/api_template_sources/{id}/sync`.
+
+        The token is stored with the source and is never returned.
+
+        OAuth tokens must have the `read_write_ai_content` scope.
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    type: api_template_source
+                    id: '494'
+                    template:
+                      name: Example Docs
+                      base_url: https://api.example.com/v1
+                      variables:
+                      - space_id
+                      auth:
+                        header: Authorization
+                        value: 'Bearer {token}'
+                      tree:
+                        path: "/spaces/{space_id}/pages"
+                        query: {}
+                        nodes:
+                        - pages
+                        children: pages
+                        folder_if:
+                        - type: group
+                        folder_if_has_children: true
+                        content_if:
+                        - type: document
+                      item:
+                        path: "/spaces/{space_id}/pages/{page_id}"
+                        query: {}
+                        node_values:
+                          page_id:
+                          - id
+                      mapping:
+                        id:
+                        - node
+                        - id
+                        title:
+                        - node
+                        - title
+                        body:
+                        - item
+                        - body
+                        updated_at:
+                        - item
+                        - updatedAt
+                      body_format: html
+                    variables:
+                      space_id: help-center
+                    created_at: 1734537259
+                    latest_sync:
+                      id: '1287'
+                      status: in_progress
+                      created_at: 1734537259
+                      updated_at: 1734537259
+              schema:
+                "$ref": "#/components/schemas/api_template_source"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 187fc629-1bf4-419a-8995-ad0f81010c58
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '403':
+          description: The workspace isn't allowed to fetch external URLs.
+          content:
+            application/json:
+              examples:
+                Forbidden:
+                  value:
+                    type: error.list
+                    request_id: 1aa556d8-7b3b-4386-b8de-bf562107c874
+                    errors:
+                    - code: action_forbidden
+                      message: "This workspace can't fetch external URLs yet. Contact
+                        support to enable it."
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: |
+            The template, the variables or the token failed a check, and the source wasn't created. The response can list several errors.
+
+            Each error's `field` names the request field that failed, such as `template.base_url`, `variables.space_id` or `auth_token`. A missing value has the code `parameter_not_found`, and any other failure has the code `parameter_invalid`.
+
+            When a template check fails, the message names the check: `<field> fails the <check> check`. The checks are listed in the API Template schema. A tree response over 25 MB fails on `template.tree` with the message `<name>'s tree response is too large: over the 25 MB cap`, where `<name>` is the template's name.
+
+            If the vendor answers the token check with `401` or `403`, the error is on `auth_token` with the message `<name> rejected the token`. If it answers with anything other than success, `401` or `403`, such as a `404` on `tree.path`, a redirect, a `429`, a `5xx` or a timeout, the error is on `auth_token` with the message `<name> could not be reached to check the token`. The check isn't retried.
+          content:
+            application/json:
+              examples:
+                Invalid base URL:
+                  value:
+                    type: error.list
+                    request_id: c78bca98-61fb-4dea-853f-d179a2ed7fda
+                    errors:
+                    - code: parameter_invalid
+                      field: template.base_url
+                      message: base_url fails the not_https check
+                Literal credential in a query:
+                  value:
+                    type: error.list
+                    request_id: e1e5735e-9fb5-445c-b607-6dec2df9aedf
+                    errors:
+                    - code: parameter_invalid
+                      field: template.tree.query
+                      message: tree.query fails the literal_credential check
+                Missing template:
+                  value:
+                    type: error.list
+                    request_id: db830aaf-f8c5-4298-9288-6533c3f02713
+                    errors:
+                    - code: parameter_not_found
+                      field: template
+                      message: An API template object is required
+                Missing variable:
+                  value:
+                    type: error.list
+                    request_id: 8ae61f5d-5d4a-4469-8a63-5f945047d176
+                    errors:
+                    - code: parameter_not_found
+                      field: variables.space_id
+                      message: space_id is required
+                Invalid variable value:
+                  value:
+                    type: error.list
+                    request_id: 8e6ae348-d9da-41a7-bf01-693dd7accede
+                    errors:
+                    - code: parameter_invalid
+                      field: variables.space_id
+                      message: "space_id may only use letters, digits, '.', '_' and
+                        '-', and can't be only dots"
+                Missing token:
+                  value:
+                    type: error.list
+                    request_id: 52c3ca26-c94f-4ebb-9e69-b3422a16434d
+                    errors:
+                    - code: parameter_not_found
+                      field: auth_token
+                      message: A token is required
+                Token rejected:
+                  value:
+                    type: error.list
+                    request_id: 8a27c782-f6d6-42bf-b6c5-2b630120dc8b
+                    errors:
+                    - code: parameter_invalid
+                      field: auth_token
+                      message: Example Docs rejected the token
+                Vendor unreachable:
+                  value:
+                    type: error.list
+                    request_id: 2276a961-ad8f-4cf0-81ac-9ff892ed64ea
+                    errors:
+                    - code: parameter_invalid
+                      field: auth_token
+                      message: Example Docs could not be reached to check the token
+                Tree response too large:
+                  value:
+                    type: error.list
+                    request_id: d5ab4057-55a5-4904-8afe-0d015f5fd288
+                    errors:
+                    - code: parameter_invalid
+                      field: template.tree
+                      message: "Example Docs's tree response is too large: over the
+                        25 MB cap"
+                Several errors:
+                  value:
+                    type: error.list
+                    request_id: 2e5f0311-38de-42fc-8625-b664038601b7
+                    errors:
+                    - code: parameter_not_found
+                      field: auth_token
+                      message: A token is required
+                    - code: parameter_invalid
+                      field: template.auth.header
+                      message: auth.header fails the not_credential check
+              schema:
+                "$ref": "#/components/schemas/error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/create_api_template_source_request"
+            examples:
+              successful:
+                summary: successful
+                value:
+                  template:
+                    name: Example Docs
+                    base_url: https://api.example.com/v1
+                    variables:
+                    - space_id
+                    auth:
+                      header: Authorization
+                      value: 'Bearer {token}'
+                    tree:
+                      path: "/spaces/{space_id}/pages"
+                      query: {}
+                      nodes:
+                      - pages
+                      children: pages
+                      folder_if:
+                      - type: group
+                      folder_if_has_children: true
+                      content_if:
+                      - type: document
+                    item:
+                      path: "/spaces/{space_id}/pages/{page_id}"
+                      query: {}
+                      node_values:
+                        page_id:
+                        - id
+                    mapping:
+                      id:
+                      - node
+                      - id
+                      title:
+                      - node
+                      - title
+                      body:
+                      - item
+                      - body
+                      updated_at:
+                      - item
+                      - updatedAt
+                    body_format: html
+                  variables:
+                    space_id: help-center
+                  auth_token: vendor-api-token
+  "/ai/api_template_sources/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: The unique identifier for the API template source, which is given
+        by Intercom.
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve an API template source
+      operationId: getApiTemplateSource
+      description: |
+        You can retrieve an API template source, with its template, its variables and the status of its latest sync. The source's token is never returned.
+
+        OAuth tokens must have the `read_write_ai_content` scope.
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      tags:
+      - AI Content
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    type: api_template_source
+                    id: '494'
+                    template:
+                      name: Example Docs
+                      base_url: https://api.example.com/v1
+                      variables:
+                      - space_id
+                      auth:
+                        header: Authorization
+                        value: 'Bearer {token}'
+                      tree:
+                        path: "/spaces/{space_id}/pages"
+                        query: {}
+                        nodes:
+                        - pages
+                        children: pages
+                        folder_if:
+                        - type: group
+                        folder_if_has_children: true
+                        content_if:
+                        - type: document
+                      item:
+                        path: "/spaces/{space_id}/pages/{page_id}"
+                        query: {}
+                        node_values:
+                          page_id:
+                          - id
+                      mapping:
+                        id:
+                        - node
+                        - id
+                        title:
+                        - node
+                        - title
+                        body:
+                        - item
+                        - body
+                        updated_at:
+                        - item
+                        - updatedAt
+                      body_format: html
+                    variables:
+                      space_id: help-center
+                    created_at: 1734537259
+                    latest_sync:
+                      id: '1287'
+                      status: success
+                      created_at: 1734537259
+                      updated_at: 1734537265
+              schema:
+                "$ref": "#/components/schemas/api_template_source"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 963aaf87-3f2b-4fae-9f83-69eac49ce2c1
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: API template source not found
+          content:
+            application/json:
+              examples:
+                API template source not found:
+                  value:
+                    type: error.list
+                    request_id: bdba03ae-ed4d-43d8-a0df-8b6947c467bc
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/ai/api_template_sources/{id}/sync":
+    parameters:
+    - name: id
+      in: path
+      description: The unique identifier for the API template source, which is given
+        by Intercom.
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Sync an API template source
+      operationId: syncApiTemplateSource
+      description: |
+        You can start a sync of an API template source, which imports its content from the vendor again. The sync runs in the background: the response is the source, with the new sync as its `latest_sync`. Retrieve the source to follow the sync's status.
+
+        A source runs one sync at a time. Intercom also syncs each source automatically, about once a day, unless the vendor has rejected the token, so you only need this endpoint to sync sooner.
+
+        OAuth tokens must have the `read_write_ai_content` scope.
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      tags:
+      - AI Content
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              examples:
+                successful:
+                  value:
+                    type: api_template_source
+                    id: '494'
+                    template:
+                      name: Example Docs
+                      base_url: https://api.example.com/v1
+                      variables:
+                      - space_id
+                      auth:
+                        header: Authorization
+                        value: 'Bearer {token}'
+                      tree:
+                        path: "/spaces/{space_id}/pages"
+                        query: {}
+                        nodes:
+                        - pages
+                        children: pages
+                        folder_if:
+                        - type: group
+                        folder_if_has_children: true
+                        content_if:
+                        - type: document
+                      item:
+                        path: "/spaces/{space_id}/pages/{page_id}"
+                        query: {}
+                        node_values:
+                          page_id:
+                          - id
+                      mapping:
+                        id:
+                        - node
+                        - id
+                        title:
+                        - node
+                        - title
+                        body:
+                        - item
+                        - body
+                        updated_at:
+                        - item
+                        - updatedAt
+                      body_format: html
+                    variables:
+                      space_id: help-center
+                    created_at: 1734537259
+                    latest_sync:
+                      id: '1311'
+                      status: in_progress
+                      created_at: 1734623659
+                      updated_at: 1734623659
+              schema:
+                "$ref": "#/components/schemas/api_template_source"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 3909bb15-20b6-4593-b849-b572f44a317d
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '403':
+          description: The workspace isn't allowed to fetch external URLs.
+          content:
+            application/json:
+              examples:
+                Forbidden:
+                  value:
+                    type: error.list
+                    request_id: 7ff7b139-7b45-4121-b59f-93956207ee8d
+                    errors:
+                    - code: action_forbidden
+                      message: "This workspace can't fetch external URLs yet. Contact
+                        support to enable it."
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: API template source not found
+          content:
+            application/json:
+              examples:
+                API template source not found:
+                  value:
+                    type: error.list
+                    request_id: d2860453-7f71-4c2b-9c15-ce0f59872f73
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '409':
+          description: A sync is already running for the source, or the source is
+            being deleted.
+          content:
+            application/json:
+              examples:
+                Sync already running:
+                  value:
+                    type: error.list
+                    request_id: 39d83fa9-2362-4bdf-8264-83bd175ef3ef
+                    errors:
+                    - code: conflict
+                      message: A sync is already running for this source
+                Deletion started during the request:
+                  value:
+                    type: error.list
+                    request_id: d7d75f78-fb59-43db-841c-1c88b4f08709
+                    errors:
+                    - code: conflict
+                      message: This source is being deleted
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: The vendor no longer accepts the source's token. The source's
+            token can't be replaced, and Intercom stops syncing the source automatically.
+            To import with a new token, create a new source.
+          content:
+            application/json:
+              examples:
+                Token no longer accepted:
+                  value:
+                    type: error.list
+                    request_id: 9b1f4c2e-6a83-4d57-b0e9-2c7a5f8d1e36
+                    errors:
+                    - code: source_unauthorized
+                      message: The vendor no longer accepts this source's token
+              schema:
+                "$ref": "#/components/schemas/error"
   "/ai/content_import_sources":
     get:
       summary: List content import sources
@@ -3452,15 +4007,16 @@ paths:
       - name: page
         in: query
         required: false
-        description: The page of results to fetch. Defaults to first page.
+        description: The page of results to fetch. Defaults to the first page. Values
+          below 1 are treated as 1.
         example: 1
         schema:
           type: integer
       - name: per_page
         in: query
         required: false
-        description: The number of results to return per page. Defaults to 50. Maximum
-          is 50.
+        description: The number of results to return per page. Defaults to 50. Values
+          above 50 are reduced to 50, and values below 1 are treated as 1.
         example: 50
         schema:
           type: integer
@@ -3468,7 +4024,10 @@ paths:
       tags:
       - Audiences
       operationId: listAudiences
-      description: You can fetch a list of all audiences for the workspace.
+      description: |
+        You can fetch a list of all audiences for the workspace.
+
+        Requires the `read_audiences` or `read_write_audiences` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -3490,8 +4049,11 @@ paths:
                       role_predicates:
                       - attribute: role
                         type: role
-                        comparison: eq
-                        value: user
+                        comparison: in
+                        value:
+                        - user_role
+                        - contact_role
+                        - visitor_role
                       created_at: 1717200000
                       updated_at: 1717200000
                     - type: audience
@@ -3505,8 +4067,11 @@ paths:
                       role_predicates:
                       - attribute: role
                         type: role
-                        comparison: eq
-                        value: user
+                        comparison: in
+                        value:
+                        - user_role
+                        - contact_role
+                        - visitor_role
                       created_at: 1717200000
                       updated_at: 1717200000
                     total_count: 2
@@ -3527,6 +4092,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: ca9d1103-eb54-42e8-8da4-45c95f943584
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
     post:
@@ -3539,7 +4111,10 @@ paths:
       tags:
       - Audiences
       operationId: createAudience
-      description: You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.
+      description: |
+        You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.
+
+        Requires the `read_write_audiences` OAuth scope.
       requestBody:
         required: true
         content:
@@ -3559,8 +4134,11 @@ paths:
                   role_predicates:
                   - attribute: role
                     type: role
-                    comparison: eq
-                    value: user
+                    comparison: in
+                    value:
+                    - user_role
+                    - contact_role
+                    - visitor_role
       responses:
         '201':
           description: Audience created
@@ -3580,8 +4158,11 @@ paths:
                     role_predicates:
                     - attribute: role
                       type: role
-                      comparison: eq
-                      value: user
+                      comparison: in
+                      value:
+                      - user_role
+                      - contact_role
+                      - visitor_role
                     created_at: 1717200000
                     updated_at: 1717200000
               schema:
@@ -3594,7 +4175,7 @@ paths:
                 Validation error:
                   value:
                     type: error.list
-                    request_id: a3e6b0c1-4f2d-4e8a-9c7b-1d2e3f4a5b6c
+                    request_id:
                     errors:
                     - code: validation_error
                       message: Name is required
@@ -3612,6 +4193,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 66178beb-eb7f-43da-b4e9-7376cb2f7df9
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/audiences/{id}":
@@ -3632,8 +4220,10 @@ paths:
       tags:
       - Audiences
       operationId: retrieveAudience
-      description: You can fetch the details of a single audience by making a GET request
-        to `https://api.intercom.io/audiences/{id}`.
+      description: |
+        You can fetch the details of a single audience by making a GET request to `https://api.intercom.io/audiences/{id}`.
+
+        Requires the `read_audiences` or `read_write_audiences` OAuth scope.
       responses:
         '200':
           description: Audience found
@@ -3653,8 +4243,11 @@ paths:
                     role_predicates:
                     - attribute: role
                       type: role
-                      comparison: eq
-                      value: user
+                      comparison: in
+                      value:
+                      - user_role
+                      - contact_role
+                      - visitor_role
                     created_at: 1717200000
                     updated_at: 1717200000
               schema:
@@ -3667,10 +4260,10 @@ paths:
                 Audience not found:
                   value:
                     type: error.list
-                    request_id: d5e6f7a8-1b2c-3d4e-5f6a-7b8c9d0e1f2a
+                    request_id:
                     errors:
                     - code: not_found
-                      message: Resource Not Found
+                      message: Audience not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -3685,6 +4278,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: e8cd397d-4b39-428b-b05d-5834060184e3
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
     put:
@@ -3704,8 +4304,12 @@ paths:
       tags:
       - Audiences
       operationId: updateAudience
-      description: You can update the details of a single audience by making a PUT request
-        to `https://api.intercom.io/audiences/{id}`.
+      description: |
+        You can update the details of a single audience by making a PUT request to `https://api.intercom.io/audiences/{id}`.
+
+        You can also send this request with `PATCH`; it behaves the same as `PUT`.
+
+        Requires the `read_write_audiences` OAuth scope.
       requestBody:
         content:
           application/json:
@@ -3740,8 +4344,11 @@ paths:
                     role_predicates:
                     - attribute: role
                       type: role
-                      comparison: eq
-                      value: user
+                      comparison: in
+                      value:
+                      - user_role
+                      - contact_role
+                      - visitor_role
                     created_at: 1717200000
                     updated_at: 1717200100
               schema:
@@ -3754,10 +4361,10 @@ paths:
                 Audience not found:
                   value:
                     type: error.list
-                    request_id: e7f8a9b0-1c2d-3e4f-5a6b-7c8d9e0f1a2b
+                    request_id:
                     errors:
                     - code: not_found
-                      message: Resource Not Found
+                      message: Audience not found
               schema:
                 "$ref": "#/components/schemas/error"
         '422':
@@ -3765,13 +4372,20 @@ paths:
           content:
             application/json:
               examples:
-                Validation error:
+                Name cannot be blank:
                   value:
                     type: error.list
-                    request_id: f0a1b2c3-4d5e-6f7a-8b9c-0d1e2f3a4b5c
+                    request_id:
                     errors:
                     - code: validation_error
-                      message: Name must not be blank
+                      message: Name cannot be blank
+                Audience has no ruleset:
+                  value:
+                    type: error.list
+                    request_id:
+                    errors:
+                    - code: validation_error
+                      message: Audience has no ruleset
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -3786,6 +4400,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a97359e1-abb7-4055-9af3-f7e7554012c9
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
     delete:
@@ -3805,10 +4426,31 @@ paths:
       tags:
       - Audiences
       operationId: deleteAudience
-      description: You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.
+      description: |
+        You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.
+
+        An audience that is still used by other objects, such as a workflow, cannot be deleted.
+
+        Requires the `read_write_audiences` OAuth scope.
       responses:
         '204':
           description: Audience deleted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Audience has dependent objects:
+                  value:
+                    type: error.list
+                    request_id: 5b5800b4-d2ef-4a6c-8b4c-ac586553b4de
+                    errors:
+                    - code: audience_has_dependent_objects
+                      message: Unable to delete audience with dependent objects.
+                      data:
+                        dependent_count: 2
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Audience not found
           content:
@@ -3817,10 +4459,10 @@ paths:
                 Audience not found:
                   value:
                     type: error.list
-                    request_id: a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+                    request_id:
                     errors:
                     - code: not_found
-                      message: Resource Not Found
+                      message: Audience not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -3835,6 +4477,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a700781a-7897-4cdc-93d9-dfb1becab382
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/office_hours_schedules":
@@ -5619,14 +6268,30 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch. Defaults to 1.
+        schema:
+          type: integer
+          example: 1
+      - name: per_page
+        in: query
+        required: false
+        description: The number of results to return per page. Defaults to 50.
+        schema:
+          type: integer
+          example: 50
       tags:
       - Internal Articles
       operationId: listInternalArticles
-      description: "You can fetch a list of all internal articles by making a GET request to
-        `https://api.intercom.io/internal_articles`."
+      description: |
+        You can fetch a list of all internal articles by making a GET request to `https://api.intercom.io/internal_articles`.
+
+        Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
       responses:
         '200':
-          description: successful
+          description: successful. `pages.page` and `pages.per_page` are returned as strings when you send `page` and `per_page` in the request, and as integers otherwise.
           content:
             application/json:
               examples:
@@ -5636,7 +6301,7 @@ paths:
                     pages:
                       type: pages
                       page: 1
-                      per_page: 25
+                      per_page: 50
                       total_pages: 1
                     total_count: 1
                     data:
@@ -5679,7 +6344,10 @@ paths:
       tags:
       - Internal Articles
       operationId: createInternalArticle
-      description: You can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.
+      description: |
+        You can create a new internal article by making a POST request to `https://api.intercom.io/internal_articles`.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: internal article created
@@ -5704,31 +6372,80 @@ paths:
               schema:
                 "$ref": "#/components/schemas/internal_article"
         '400':
-          description: Bad Request
+          description: Bad request. The request body is empty, in which case the response has no body, or `audience_ids` is not an array of integers
           content:
             application/json:
               examples:
-                Bad Request:
+                audience_ids is not an array:
                   value:
                     type: error.list
-                    request_id: e522ca8a-cd15-404e-84b3-7f7536003d4a
+                    request_id: null
                     errors:
-                    - code: parameter_not_found
-                      message: author_id must be in the main body or default locale
-                        translated_content object
+                    - code: data_invalid
+                      message: audience_ids must be an array
+                audience_ids contains a non-integer:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: data_invalid
+                      message: audience_ids must contain only integer values
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
-          description: Unknown audience IDs
+          description: Teammate, folder or audience ID not found
           content:
             application/json:
               examples:
+                Teammate not found:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: Admin with ID 999999 not found
+                Folder not found:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: Folder with ID 123 not found
                 Unknown audience IDs:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: parameter_invalid
                       message: 'audience_ids contains unknown audience IDs: 999'
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Missing required parameters, body_markdown sent with body or json_blocks, or an ai_*_availability value that is not a boolean
+          content:
+            application/json:
+              examples:
+                Missing required parameters:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Missing required parameters: owner_id, author_id'
+                Body and JSON blocks both provided:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: body_markdown is mutually exclusive with body and json_blocks - please provide only one
+                Non-boolean availability flag:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: ai_chatbot_availability must be a boolean (true or false)
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -5762,8 +6479,8 @@ paths:
                   audience_ids:
                   - 1
                   - 2
-              bad_request:
-                summary: Bad Request
+              missing_required_parameters:
+                summary: Missing required parameters
                 value:
                   title: Thanks for everything
                   body: Body of the Internal Article
@@ -5785,8 +6502,10 @@ paths:
       tags:
       - Internal Articles
       operationId: retrieveInternalArticle
-      description: You can fetch the details of a single internal article by making a GET request
-        to `https://api.intercom.io/internal_articles/<id>`.
+      description: |
+        You can fetch the details of a single internal article by making a GET request to `https://api.intercom.io/internal_articles/<id>`.
+
+        Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: Internal article found
@@ -5817,10 +6536,24 @@ paths:
                 Internal article not found:
                   value:
                     type: error.list
-                    request_id: 79abd27a-1bfb-42ec-a404-5728c76ba773
+                    request_id: null
                     errors:
                     - code: not_found
-                      message: Resource Not Found
+                      message: Resource not found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Invalid article ID
+          content:
+            application/json:
+              examples:
+                Invalid article ID:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: id must be an integer
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -5854,8 +6587,12 @@ paths:
       tags:
       - Internal Articles
       operationId: updateInternalArticle
-      description: You can update the details of a single internal article by making a PUT
-        request to `https://api.intercom.io/internal_articles/<id>`.
+      description: |
+        You can update the details of a single internal article by making a PUT request to `https://api.intercom.io/internal_articles/<id>`.
+
+        Fields you leave out keep their current values.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -5865,37 +6602,108 @@ paths:
                 successful:
                   value:
                     id: 48
+                    title: Thanks for everything
                     body: Body of the Article
                     body_markdown: "Body of the Article\n"
                     owner_id: 991266252
                     author_id: 991266252
                     locale: en
+                    folder_id: null
                     audience_ids:
                     - 1
                     - 2
                     ai_chatbot_availability: true
                     ai_copilot_availability: true
                     ai_sales_agent_availability: true
+                    created_at: 1672928359
+                    updated_at: 1672928610
+                    tags:
+                      type: tag.list
+                      tags: []
               schema:
                 "$ref": "#/components/schemas/internal_article"
+        '400':
+          description: Bad request. The request body is empty, in which case the response has no body, or `audience_ids` is not an array of integers
+          content:
+            application/json:
+              examples:
+                audience_ids is not an array:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: data_invalid
+                      message: audience_ids must be an array
+                audience_ids contains a non-integer:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: data_invalid
+                      message: audience_ids must contain only integer values
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
-          description: Internal article or audience ID not found
+          description: Internal article, teammate, folder or audience ID not found
           content:
             application/json:
               examples:
                 Internal article not found:
                   value:
                     type: error.list
-                    request_id: f9adccb2-9fca-4b87-bbb7-65f2af5e1d78
+                    request_id: null
                     errors:
                     - code: not_found
-                      message: Resource Not Found
+                      message: Resource not found
+                Teammate not found:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: Admin with ID 999999 not found
+                Folder not found:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: Folder with ID 123 not found
                 Unknown audience IDs:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: parameter_invalid
                       message: 'audience_ids contains unknown audience IDs: 999'
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: body_markdown sent with body or json_blocks, an ai_*_availability value that is not a boolean, or the article is in a release running a live experiment
+          content:
+            application/json:
+              examples:
+                Body and JSON blocks both provided:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: body_markdown is mutually exclusive with body and json_blocks - please provide only one
+                Non-boolean availability flag:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: ai_chatbot_availability must be a boolean (true or false)
+                Release live experiment conflict:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: release_live_experiment_conflict
+                      message: Can't update this internal article while release "Q3 launch" is running a live experiment on it. Complete or stop the experiment first.
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -5948,7 +6756,10 @@ paths:
       tags:
       - Internal Articles
       operationId: deleteInternalArticle
-      description: You can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/<id>`.
+      description: |
+        You can delete a single internal article by making a DELETE request to `https://api.intercom.io/internal_articles/<id>`.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -5970,10 +6781,31 @@ paths:
                 Internal article not found:
                   value:
                     type: error.list
-                    request_id: afe37506-cc48-4727-8068-ae7ff0e7b0e3
+                    request_id: null
                     errors:
                     - code: not_found
-                      message: Resource Not Found
+                      message: Resource not found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Invalid article ID, or the article is in a release running a live experiment
+          content:
+            application/json:
+              examples:
+                Invalid article ID:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: id must be an integer
+                Release live experiment conflict:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: release_live_experiment_conflict
+                      message: Can't delete this internal article while release "Q3 launch" is running a live experiment on it. Complete or stop the experiment first.
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -6074,7 +6906,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
-          description: Internal article or tag not found
+          description: Internal article, tag or teammate not found
           content:
             application/json:
               examples:
@@ -6092,6 +6924,13 @@ paths:
                     errors:
                     - code: tag_not_found
                       message: Tag not found
+                Teammate not found:
+                  value:
+                    type: error.list
+                    request_id: 5d1f0c6e-7b7a-4c9d-8f3e-2a4b6c8d0e1f
+                    errors:
+                    - code: admin_not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -6120,6 +6959,15 @@ paths:
         required: true
         description: The unique identifier of the tag to remove, as given by Intercom.
         example: '7522907'
+        schema:
+          type: string
+      - name: admin_id
+        in: query
+        required: false
+        description: Optional id of a teammate. The id is checked, and an unknown
+          teammate returns a 404 `admin_not_found` error, but the removal is not
+          recorded against the teammate.
+        example: '1234'
         schema:
           type: string
       operationId: detachTagFromInternalArticle
@@ -6161,7 +7009,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
-          description: Internal article or tag not found
+          description: Internal article, tag or teammate not found
           content:
             application/json:
               examples:
@@ -6179,6 +7027,13 @@ paths:
                     errors:
                     - code: tag_not_found
                       message: Tag not found
+                Teammate not found:
+                  value:
+                    type: error.list
+                    request_id: 5d1f0c6e-7b7a-4c9d-8f3e-2a4b6c8d0e1f
+                    errors:
+                    - code: admin_not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -6194,14 +7049,31 @@ paths:
       - name: folder_id
         in: query
         required: false
-        description: The ID of the folder to search in. Results will include articles from this folder and all its descendant folders.
+        description: The ID of the folder to search in. Results will include articles from this folder and all its descendant folders. If omitted or blank, the response is an empty list.
         example: 123
         schema:
           type: integer
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch. Defaults to 1.
+        schema:
+          type: integer
+          example: 1
+      - name: per_page
+        in: query
+        required: false
+        description: The number of results to return per page. Defaults to 10.
+        schema:
+          type: integer
+          example: 10
       tags:
       - Internal Articles
       operationId: searchInternalArticles
-      description: You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.
+      description: |
+        You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: Search successful
@@ -6214,11 +7086,31 @@ paths:
                     total_count: 1
                     internal_articles:
                     - id: 55
+                      title: Thanks for everything
                       body: Body of the Article
+                      body_markdown: "Body of the Article\n"
                       owner_id: 991266252
                       author_id: 991266252
                       locale: en
                       folder_id: 123
+                      audience_ids:
+                      - 1
+                      - 2
+                      ai_chatbot_availability: true
+                      ai_copilot_availability: true
+                      ai_sales_agent_availability: true
+                      created_at: 1672928359
+                      updated_at: 1672928610
+                      tags:
+                        type: tag.list
+                        tags:
+                        - type: tag
+                          id: '7522907'
+                          name: Independent
+                          applied_at: 1663597223
+                          applied_by:
+                            type: admin
+                            id: '991266252'
                     pages:
                       type: pages
                       page: 1
@@ -6226,6 +7118,20 @@ paths:
                       per_page: 10
               schema:
                 "$ref": "#/components/schemas/internal_article_search_response"
+        '404':
+          description: Folder not found
+          content:
+            application/json:
+              examples:
+                Folder not found:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: Folder with ID 123 not found
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -6270,10 +7176,13 @@ paths:
       tags:
       - Folders
       operationId: listFolders
-      description: "You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`."
+      description: |
+        You can fetch a list of all folders for organizing content by making a GET request to `https://api.intercom.io/folders`.
+
+        Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
       responses:
         '200':
-          description: successful
+          description: successful. `pages.page` and `pages.per_page` are returned as strings when you send `page` and `per_page` in the request, and as integers otherwise.
           content:
             application/json:
               example:
@@ -6283,7 +7192,6 @@ paths:
                   name: Product Documentation
                   description: Internal product docs
                   emoji: "📚"
-                  parent_folder_id: null
                   content_count: 5
                   created_at: 1672928359
                   updated_at: 1672928610
@@ -6303,6 +7211,7 @@ paths:
                     example: list
                   data:
                     type: array
+                    description: The folders on this page. Unlike when you retrieve a single folder, the keys `description`, `emoji` and `parent_folder_id` are omitted when they are `null`.
                     items:
                       "$ref": "#/components/schemas/folder"
                   total_count:
@@ -6327,7 +7236,10 @@ paths:
       tags:
       - Folders
       operationId: createFolder
-      description: "You can create a new folder for organizing content by making a POST request to `https://api.intercom.io/folders`."
+      description: |
+        You can create a new folder for organizing content by making a POST request to `https://api.intercom.io/folders`.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       requestBody:
         content:
           application/json:
@@ -6409,7 +7321,10 @@ paths:
       tags:
       - Folders
       operationId: retrieveFolder
-      description: "You can fetch the details of a single folder by making a GET request to `https://api.intercom.io/folders/<id>`."
+      description: |
+        You can fetch the details of a single folder by making a GET request to `https://api.intercom.io/folders/<id>`.
+
+        Requires the `read_articles_scope` or `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: folder found
@@ -6426,6 +7341,20 @@ paths:
                 updated_at: 1672928610
               schema:
                 "$ref": "#/components/schemas/folder"
+        '400':
+          description: Invalid folder ID
+          content:
+            application/json:
+              examples:
+                Invalid folder ID:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: id must be an integer
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -6455,7 +7384,12 @@ paths:
       tags:
       - Folders
       operationId: updateFolder
-      description: "You can update a folder by making a PUT request to `https://api.intercom.io/folders/<id>`."
+      description: |
+        You can update a folder by making a PUT request to `https://api.intercom.io/folders/<id>`.
+
+        Fields you leave out keep their current values. Send `parent_folder_id` as `null` to move the folder to the top level. Folder names longer than 191 characters are truncated.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       requestBody:
         content:
           application/json:
@@ -6482,7 +7416,7 @@ paths:
                     parent_folder_id:
                       type: integer
                       nullable: true
-                      description: The ID of the parent folder
+                      description: The ID of the parent folder. Send `null` to move the folder to the top level. If omitted, the parent folder is unchanged.
                       example: null
             example:
               folder:
@@ -6517,9 +7451,17 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
         '400':
-          description: Bad request
+          description: Bad request, for example an invalid folder ID
           content:
             application/json:
+              examples:
+                Invalid folder ID:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: id must be an integer
               schema:
                 "$ref": "#/components/schemas/error"
     delete:
@@ -6539,7 +7481,10 @@ paths:
       tags:
       - Folders
       operationId: deleteFolder
-      description: "You can delete a folder (if it contains no content) by making a DELETE request to `https://api.intercom.io/folders/<id>`."
+      description: |
+        You can delete a folder (if it contains no content) by making a DELETE request to `https://api.intercom.io/folders/<id>`.
+
+        Requires the `read_write_articles_scope` OAuth scope.
       responses:
         '200':
           description: folder deleted
@@ -6551,6 +7496,27 @@ paths:
                 deleted: true
               schema:
                 "$ref": "#/components/schemas/deleted_folder_object"
+        '400':
+          description: Invalid folder ID, or the folder is synced from an external source and cannot be deleted
+          content:
+            application/json:
+              examples:
+                Invalid folder ID:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: id must be an integer
+                Synced folder:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: parameter_invalid
+                      message: Cannot delete synced folders
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -13696,23 +14662,24 @@ paths:
               schema:
                 "$ref": "#/components/schemas/content_bulk_action_response"
         '401':
-          description: Unauthorized
+          description: Unauthorized. The token is invalid or is missing the `write_content` OAuth scope
           content:
             application/json:
               examples:
                 Unauthorized:
                   value:
                     type: error.list
-                    request_id: 2e760b85-9020-471b-89dc-f579ec8a0104
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
-              schema:
-                "$ref": "#/components/schemas/error"
-        '403':
-          description: Forbidden — token is missing the `write_content` OAuth scope
-          content:
-            application/json:
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
         '422':
@@ -14042,8 +15009,6 @@ paths:
                       page: 1
                       per_page: 10
                       total_pages: 1
-                      next:
-                      prev:
                     data:
                     - type: content_snippet
                       id: '123'
@@ -14071,10 +15036,54 @@ paths:
                         locale: fr
               schema:
                 "$ref": "#/components/schemas/content_search_response"
+        '400':
+          description: Page number too high. `page` multiplied by `per_page` must not exceed 10,000, and `page` must not exceed 5001
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
-          $ref: "#/components/responses/Unauthorized"
+          description: Unauthorized. The token is invalid or is missing the `read_content` OAuth scope
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '422':
-          $ref: "#/components/responses/ValidationError"
+          description: Invalid filter value
+          content:
+            application/json:
+              examples:
+                Invalid states value:
+                  value:
+                    type: error.list
+                    request_id: f0c3b8a5-1d62-4e97-a4b1-8c7e2d5a9f30
+                    errors:
+                    - code: parameter_invalid
+                      message: 'invalid value for states: "foo"; must be one of published, draft'
+                Incomplete folder filter:
+                  value:
+                    type: error.list
+                    request_id: 1a5e7c9d-3b84-4f20-96d1-e2b8a4c6f503
+                    errors:
+                    - code: parameter_invalid
+                      message: folder_ids and folder_entity_type must be provided together
+              schema:
+                "$ref": "#/components/schemas/error"
   "/content_snippets":
     get:
       summary: List all content snippets
@@ -14100,7 +15109,10 @@ paths:
       tags:
       - Content Snippets
       operationId: listContentSnippets
-      description: You can fetch a list of all content snippets for a workspace.
+      description: |
+        You can fetch a list of all content snippets for a workspace.
+
+        Requires the `read_content_snippets` or `read_write_content_snippets` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -14118,7 +15130,7 @@ paths:
                       json_blocks:
                       - type: paragraph
                         text: Navigate to Settings > Security > Reset password.
-                      body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
+                      body_markdown: "Navigate to Settings \\> Security \\> Reset password.\n"
                       chatbot_availability: 2
                       copilot_availability: 2
                       ai_chatbot_availability: true
@@ -14135,6 +15147,27 @@ paths:
                     total_pages: 1
               schema:
                 "$ref": "#/components/schemas/content_snippet_list"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
     post:
       summary: Create a content snippet
       parameters:
@@ -14145,7 +15178,10 @@ paths:
       tags:
       - Content Snippets
       operationId: createContentSnippet
-      description: You can create a new content snippet.
+      description: |
+        You can create a new content snippet.
+
+        Requires the `read_write_content_snippets` OAuth scope.
       requestBody:
         required: true
         content:
@@ -14178,7 +15214,7 @@ paths:
                     json_blocks:
                     - type: paragraph
                       text: Navigate to Settings > Security > Reset password.
-                    body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
+                    body_markdown: "Navigate to Settings \\> Security \\> Reset password.\n"
                     chatbot_availability: 2
                     copilot_availability: 2
                     ai_chatbot_availability: true
@@ -14191,6 +15227,48 @@ paths:
                     - 2
               schema:
                 "$ref": "#/components/schemas/content_snippet"
+        '400':
+          description: Invalid availability flag or audience_ids
+          content:
+            application/json:
+              examples:
+                Invalid availability flag:
+                  value:
+                    type: error.list
+                    request_id: 7c1d9e2a-3b4f-4a56-8d70-1e2f3a4b5c6d
+                    errors:
+                    - code: parameter_invalid
+                      message: ai_chatbot_availability must be a boolean
+                Malformed audience_ids:
+                  value:
+                    type: error.list
+                    request_id: 9a8b7c6d-5e4f-4321-b0a9-8f7e6d5c4b3a
+                    errors:
+                    - code: data_invalid
+                      message: audience_ids must be an array
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Unknown audience IDs
           content:
@@ -14199,22 +15277,31 @@ paths:
                 Unknown audience IDs:
                   value:
                     type: error.list
+                    request_id: 2b3c4d5e-6f70-4812-93a4-b5c6d7e8f901
                     errors:
                     - code: parameter_invalid
                       message: 'audience_ids contains unknown audience IDs: 999'
               schema:
                 "$ref": "#/components/schemas/error"
         '422':
-          description: Validation error
+          description: Validation error, or body_markdown sent with json_blocks
           content:
             application/json:
               examples:
                 Validation error:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: validation_error
                       message: The language is not currently supported for Fin
+                Body and JSON blocks both provided:
+                  value:
+                    type: error.list
+                    request_id: 4d5e6f70-8192-4a3b-8c4d-5e6f708192a3
+                    errors:
+                    - code: parameter_invalid
+                      message: body_markdown and json_blocks are mutually exclusive - please provide only one
               schema:
                 "$ref": "#/components/schemas/error"
   "/content_snippets/{id}":
@@ -14235,7 +15322,10 @@ paths:
       tags:
       - Content Snippets
       operationId: getContentSnippet
-      description: You can fetch a single content snippet by its id.
+      description: |
+        You can fetch a single content snippet by its id.
+
+        Requires the `read_content_snippets` or `read_write_content_snippets` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -14251,7 +15341,7 @@ paths:
                     json_blocks:
                     - type: paragraph
                       text: Navigate to Settings > Security > Reset password.
-                    body_markdown: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
+                    body_markdown: "Navigate to Settings \\> Security \\> Reset password.\n"
                     chatbot_availability: 2
                     copilot_availability: 2
                     ai_chatbot_availability: true
@@ -14264,6 +15354,27 @@ paths:
                     - 2
               schema:
                 "$ref": "#/components/schemas/content_snippet"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Content snippet not found
           content:
@@ -14272,6 +15383,7 @@ paths:
                 Content snippet not found:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: not_found
                       message: Content snippet not found
@@ -14294,7 +15406,10 @@ paths:
       tags:
       - Content Snippets
       operationId: updateContentSnippet
-      description: You can update an existing content snippet.
+      description: |
+        You can update an existing content snippet.
+
+        Requires the `read_write_content_snippets` OAuth scope.
       requestBody:
         required: true
         content:
@@ -14326,7 +15441,7 @@ paths:
                     json_blocks:
                     - type: paragraph
                       text: Go to Settings > Security > Reset password and follow the steps.
-                    body_markdown: "# How to reset your password (updated)\n\nGo to Settings > Security > Reset password and follow the steps.\n"
+                    body_markdown: "Go to Settings \\> Security \\> Reset password and follow the steps.\n"
                     chatbot_availability: 2
                     copilot_availability: 2
                     ai_chatbot_availability: true
@@ -14339,6 +15454,48 @@ paths:
                     - 2
               schema:
                 "$ref": "#/components/schemas/content_snippet"
+        '400':
+          description: Invalid availability flag or audience_ids
+          content:
+            application/json:
+              examples:
+                Invalid availability flag:
+                  value:
+                    type: error.list
+                    request_id: 6f708192-a3b4-4c5d-9e6f-708192a3b4c5
+                    errors:
+                    - code: parameter_invalid
+                      message: ai_chatbot_availability must be a boolean
+                Malformed audience_ids:
+                  value:
+                    type: error.list
+                    request_id: 8192a3b4-c5d6-4e7f-8091-a2b3c4d5e6f7
+                    errors:
+                    - code: data_invalid
+                      message: audience_ids must be an array
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Content snippet or audience ID not found
           content:
@@ -14347,28 +15504,45 @@ paths:
                 Content snippet not found:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: not_found
                       message: Content snippet not found
                 Unknown audience IDs:
                   value:
                     type: error.list
+                    request_id: a3b4c5d6-e7f8-4091-a2b3-c4d5e6f70819
                     errors:
                     - code: parameter_invalid
                       message: 'audience_ids contains unknown audience IDs: 999'
               schema:
                 "$ref": "#/components/schemas/error"
         '422':
-          description: Validation error
+          description: Validation error, body_markdown sent with json_blocks, or the snippet is in a release running a live experiment
           content:
             application/json:
               examples:
                 Validation error:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: validation_error
-                      message: The language is not currently supported for Fin
+                      message: Title is too long
+                Body and JSON blocks both provided:
+                  value:
+                    type: error.list
+                    request_id: c5d6e7f8-0912-4a3b-b4c5-d6e7f8091a2b
+                    errors:
+                    - code: parameter_invalid
+                      message: body_markdown and json_blocks are mutually exclusive - please provide only one
+                Release live experiment conflict:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: release_live_experiment_conflict
+                      message: Can't update this snippet while release "Q3 launch" is running a live experiment on it. Complete or stop the experiment first.
               schema:
                 "$ref": "#/components/schemas/error"
     delete:
@@ -14388,10 +15562,34 @@ paths:
       tags:
       - Content Snippets
       operationId: deleteContentSnippet
-      description: You can delete a single content snippet by its id.
+      description: |
+        You can delete a single content snippet by its id.
+
+        Requires the `read_write_content_snippets` OAuth scope.
       responses:
         '204':
           description: Content snippet deleted
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 12a938a3-314e-4939-b773-5cd45738bd21
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a3e5b8e2-1234-5678-9abc-def012345678
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Content snippet not found
           content:
@@ -14400,23 +15598,32 @@ paths:
                 Content snippet not found:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: not_found
                       message: Content snippet not found
               schema:
                 "$ref": "#/components/schemas/error"
         '422':
-          description: Content snippet has procedure dependencies
+          description: Content snippet has procedure dependencies, or is in a release running a live experiment
           content:
             application/json:
               examples:
                 Content snippet has procedure dependencies:
                   value:
                     type: error.list
+                    request_id: null
                     errors:
                     - code: content_has_procedure_dependencies
                       message: Content snippet has dependent procedures and cannot
                         be deleted
+                Release live experiment conflict:
+                  value:
+                    type: error.list
+                    request_id: null
+                    errors:
+                    - code: release_live_experiment_conflict
+                      message: Can't delete this snippet while release "Q3 launch" is running a live experiment on it. Complete or stop the experiment first.
               schema:
                 "$ref": "#/components/schemas/error"
   "/content_snippets/{content_snippet_id}/tags":
@@ -14502,7 +15709,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
-          description: Content snippet or tag not found
+          description: Content snippet, tag or teammate not found
           content:
             application/json:
               examples:
@@ -14520,6 +15727,13 @@ paths:
                     errors:
                     - code: tag_not_found
                       message: Tag not found
+                Teammate not found:
+                  value:
+                    type: error.list
+                    request_id: 5d1f0c6e-7b7a-4c9d-8f3e-2a4b6c8d0e1f
+                    errors:
+                    - code: admin_not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -14547,6 +15761,15 @@ paths:
         required: true
         description: The unique identifier of the tag to remove, as given by Intercom.
         example: '7522907'
+        schema:
+          type: string
+      - name: admin_id
+        in: query
+        required: false
+        description: Optional id of a teammate. The id is checked, and an unknown
+          teammate returns a 404 `admin_not_found` error, but the removal is not
+          recorded against the teammate.
+        example: '1234'
         schema:
           type: string
       operationId: detachTagFromContentSnippet
@@ -14588,7 +15811,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
-          description: Content snippet or tag not found
+          description: Content snippet, tag or teammate not found
           content:
             application/json:
               examples:
@@ -14606,6 +15829,13 @@ paths:
                     errors:
                     - code: tag_not_found
                       message: Tag not found
+                Teammate not found:
+                  value:
+                    type: error.list
+                    request_id: 5d1f0c6e-7b7a-4c9d-8f3e-2a4b6c8d0e1f
+                    errors:
+                    - code: admin_not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -14621,22 +15851,27 @@ paths:
       - name: page
         in: query
         required: false
-        description: The page of results to fetch.
+        description: The page of results to fetch. Defaults to the first page. Values
+          below 1 are treated as 1.
         schema:
           type: integer
           example: 1
       - name: per_page
         in: query
         required: false
-        description: The number of results to return per page. Max value of 50.
+        description: The number of results to return per page. Defaults to 50. Values
+          above 50 are reduced to 50, and values below 1 are treated as 1.
         schema:
           type: integer
+          maximum: 50
           example: 20
       tags:
       - Dynamic Content
       operationId: listDynamicContents
-      description: You can fetch a list of all dynamic content for a workspace, most
-        recently updated first. Requires the `read_dynamic_content` scope.
+      description: |
+        You can fetch a list of all dynamic content for a workspace, most recently updated first.
+
+        Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -14697,8 +15932,10 @@ paths:
       tags:
       - Dynamic Content
       operationId: createDynamicContent
-      description: You can create dynamic content. Requires the `read_write_dynamic_content`
-        scope.
+      description: |
+        You can create dynamic content.
+
+        Requires the `read_write_dynamic_content` OAuth scope.
       requestBody:
         required: true
         content:
@@ -14772,6 +16009,20 @@ paths:
                     updated_at: 1663597223
               schema:
                 "$ref": "#/components/schemas/dynamic_content"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Unknown field:
+                  value:
+                    type: error.list
+                    request_id: c9369cf1-9610-4a1a-91b9-bc3dfde9df4f
+                    errors:
+                    - code: parameter_invalid
+                      message: 'found unpermitted parameter: :key'
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           "$ref": "#/components/responses/Unauthorized"
         '403':
@@ -14843,8 +16094,10 @@ paths:
       tags:
       - Dynamic Content
       operationId: getDynamicContent
-      description: You can fetch a single dynamic content by its id. Requires the
-        `read_dynamic_content` scope.
+      description: |
+        You can fetch a single dynamic content by its id.
+
+        Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -14933,8 +16186,12 @@ paths:
       tags:
       - Dynamic Content
       operationId: updateDynamicContent
-      description: You can update existing dynamic content. Only the fields you provide
-        are changed. Requires the `read_write_dynamic_content` scope.
+      description: |
+        You can update existing dynamic content. Only the fields you provide are changed.
+
+        You can also send this request with `PATCH`; it behaves the same as `PUT`.
+
+        Requires the `read_write_dynamic_content` OAuth scope.
       requestBody:
         required: true
         content:
@@ -14986,6 +16243,20 @@ paths:
                     updated_at: 1663597300
               schema:
                 "$ref": "#/components/schemas/dynamic_content"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Unknown field:
+                  value:
+                    type: error.list
+                    request_id: c3bf536d-e972-4310-86c4-f0c3503284ce
+                    errors:
+                    - code: parameter_invalid
+                      message: 'found unpermitted parameter: :type'
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           "$ref": "#/components/responses/Unauthorized"
         '403':
@@ -15069,9 +16340,10 @@ paths:
       tags:
       - Dynamic Content
       operationId: deleteDynamicContent
-      description: You can delete a single dynamic content by its id. Dynamic content
-        that is still used in an article can't be deleted. Requires the `read_write_dynamic_content`
-        scope.
+      description: |
+        You can delete a single dynamic content by its id. Dynamic content that is still used in an article can't be deleted.
+
+        Requires the `read_write_dynamic_content` OAuth scope.
       responses:
         '204':
           description: Dynamic content deleted
@@ -15483,6 +16755,7 @@ paths:
                         reviewed_teammate:
                           type: admin
                           admin_id: '991267715'
+                        review_id: '123'
                         reviewer:
                           type: admin
                           admin_id: '884120017'
@@ -16228,6 +17501,7 @@ paths:
                       reviewed_teammate:
                         type: admin
                         admin_id: '991267715'
+                      review_id: '123'
                       reviewer:
                         type: admin
                         admin_id: '884120017'
@@ -16711,6 +17985,20 @@ paths:
                     deleted: true
               schema:
                 "$ref": "#/components/schemas/conversation_deleted"
+        '400':
+          description: Side conversation
+          content:
+            application/json:
+              examples:
+                Side conversation:
+                  value:
+                    type: error.list
+                    request_id: 44656d97-2081-44b1-b5f7-c14d0bb1b894
+                    errors:
+                    - code: side_conversation
+                      message: action can not be performed on a side conversation
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -16978,6 +18266,7 @@ paths:
                         reviewed_teammate:
                           type: admin
                           admin_id: '991267715'
+                        review_id: '123'
                         reviewer:
                           type: admin
                           admin_id: '884120017'
@@ -18125,6 +19414,20 @@ paths:
                       id: 6762f19b1bb69f9f2193bbd4
               schema:
                 "$ref": "#/components/schemas/conversation_participants_response"
+        '400':
+          description: Side conversation
+          content:
+            application/json:
+              examples:
+                Side conversation:
+                  value:
+                    type: error.list
+                    request_id: af2cd450-2764-402c-a0e0-cae08a72647b
+                    errors:
+                    - code: side_conversation
+                      message: action can not be performed on a side conversation
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Not found
           content:
@@ -18230,6 +19533,20 @@ paths:
                       id: 6762f1b41bb69f9f2193bbe0
               schema:
                 "$ref": "#/components/schemas/conversation_participants_response"
+        '400':
+          description: Side conversation
+          content:
+            application/json:
+              examples:
+                Side conversation:
+                  value:
+                    type: error.list
+                    request_id: 83b5ee5b-1971-4594-a6fd-581ee7c56adb
+                    errors:
+                    - code: side_conversation
+                      message: action can not be performed on a side conversation
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Contact not found
           content:
@@ -19130,6 +20447,13 @@ paths:
                     errors:
                     - code: parameter_invalid
                       message: Ticket type is not a customer ticket type
+                Side conversation:
+                  value:
+                    type: error.list
+                    request_id: 2c105a05-72f9-4b5d-a01b-4b0c84f6e466
+                    errors:
+                    - code: side_conversation
+                      message: action can not be performed on a side conversation
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -20020,7 +21344,10 @@ paths:
       tags:
       - Custom Object Instances
       operationId: createCustomObjectInstances
-      description: Create or update a custom object instance
+      description: |
+        Create or update a custom object instance
+
+        Requires the `read_write_custom_object_instances` OAuth scope.
       responses:
         '200':
           description: successful
@@ -20041,6 +21368,27 @@ paths:
                     updated_at: 1734537745
               schema:
                 "$ref": "#/components/schemas/custom_object_instance"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Reserved external_id:
+                  value:
+                    type: error.list
+                    request_id: 3f1a6d2b-9c47-4e58-8a01-6b7d2e4f9c13
+                    errors:
+                    - code: bad_request
+                      message: Invalid external_id value
+                Value does not match the attribute type:
+                  value:
+                    type: error.list
+                    request_id: 5c8e4b17-2a6d-49f3-b0e5-71c9a3d82f46
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid value 'yesterday' for attribute 'ordered_at'
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           $ref: "#/components/responses/Unauthorized"
         '404':
@@ -20102,13 +21450,15 @@ paths:
       tags:
       - Custom Object Instances
       operationId: listCustomObjectInstances
-      description: |-
+      description: |
         List instances of a custom object type. Three modes are supported:
         - **No filter** — returns all instances for the type.
         - **`references_contact_id`** — returns instances associated with the given contact.
         - **`references_conversation_id`** — returns instances associated with the given conversation.
 
-        When **`external_id`** is provided, returns a single matching instance (not a list).
+        When **`external_id`** is provided, returns a single matching instance (not a list). If no instance matches, the response is still `200`, with the same body the single-instance endpoint returns for a miss.
+
+        Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
       responses:
         '200':
           description: successful
@@ -20146,7 +21496,24 @@ paths:
                       created_at: 1734537100
                       updated_at: 1734537100
               schema:
-                "$ref": "#/components/schemas/custom_object_instances_paginated_list"
+                anyOf:
+                - "$ref": "#/components/schemas/custom_object_instances_paginated_list"
+                - "$ref": "#/components/schemas/custom_object_instance"
+                - "$ref": "#/components/schemas/custom_object_instance_not_found"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Both reference filters given:
+                  value:
+                    type: error.list
+                    request_id: 7d2b9e54-6c13-4a87-95f0-2e8b4c71d9a3
+                    errors:
+                    - code: bad_request
+                      message: Cannot provide both references_contact_id and references_conversation_id
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           $ref: "#/components/responses/Unauthorized"
         '404':
@@ -20174,8 +21541,11 @@ paths:
           "$ref": "#/components/schemas/intercom_version"
       tags:
       - Custom Object Instances
-      operationId: deleteCustomObjectInstancesById
-      description: Delete a single Custom Object instance by external_id.
+      operationId: deleteCustomObjectInstancesByExternalId
+      description: |
+        Delete a single Custom Object instance by external_id.
+
+        Requires the `read_write_custom_object_instances` OAuth scope.
       responses:
         '200':
           description: successful
@@ -20192,7 +21562,26 @@ paths:
         '401':
           $ref: "#/components/responses/Unauthorized"
         '404':
-          $ref: "#/components/responses/ObjectNotFound"
+          description: Custom object type or instance not found
+          content:
+            application/json:
+              examples:
+                Instance not found:
+                  value:
+                    type: error.list
+                    request_id: 9e4c1a86-3d75-42b9-8c60-5f1a7b93e2d4
+                    errors:
+                    - code: not_found
+                      message: Custom object instance not found
+                Type not found:
+                  value:
+                    type: error.list
+                    request_id: 2a7f5c93-8b14-46e0-97d2-3c6e1b85a07f
+                    errors:
+                    - code: not_found
+                      message: Custom object type `undefined` not found
+              schema:
+                "$ref": "#/components/schemas/error"
   "/custom_object_instances/{custom_object_type_identifier}/{id}":
     parameters:
     - name: custom_object_type_identifier
@@ -20208,7 +21597,9 @@ paths:
       parameters:
       - name: id
         in: path
-        description: The id or external_id of the custom object instance
+        description: The Intercom defined id of the custom object instance. An external
+          id here is not looked up; to find an instance by its external id, call
+          `GET /custom_object_instances/{custom_object_type_identifier}?external_id=`.
         required: true
         schema:
           type: string
@@ -20219,7 +21610,10 @@ paths:
       tags:
       - Custom Object Instances
       operationId: getCustomObjectInstancesById
-      description: Fetch a Custom Object Instance by id.
+      description: |
+        Fetch a Custom Object Instance by id.
+
+        Requires the `read_conversations`, `read_users_companies`, `read_write_custom_object_instances` or `read_write_users` OAuth scope.
       responses:
         '200':
           description: "successful. If the custom object type exists but no instance matches, the response is still `200` with `found: false`."
@@ -20273,9 +21667,11 @@ paths:
           "$ref": "#/components/schemas/intercom_version"
       tags:
       - Custom Object Instances
-      operationId: deleteCustomObjectInstancesByExternalId
-      description: Delete a single Custom Object instance using the Intercom defined
-        id.
+      operationId: deleteCustomObjectInstancesById
+      description: |
+        Delete a single Custom Object instance using the Intercom defined id.
+
+        Requires the `read_write_custom_object_instances` OAuth scope.
       responses:
         '200':
           description: successful
@@ -20292,7 +21688,26 @@ paths:
         '401':
           $ref: "#/components/responses/Unauthorized"
         '404':
-          $ref: "#/components/responses/ObjectNotFound"
+          description: Custom object type or instance not found
+          content:
+            application/json:
+              examples:
+                Instance not found:
+                  value:
+                    type: error.list
+                    request_id: 4b6d8e01-7f29-4c53-a1b8-9d3e5c270f84
+                    errors:
+                    - code: not_found
+                      message: Custom object instance not found
+                Type not found:
+                  value:
+                    type: error.list
+                    request_id: 6e9a3c47-1b58-4d02-83f7-c5214a9e6b30
+                    errors:
+                    - code: not_found
+                      message: Custom object type `undefined` not found
+              schema:
+                "$ref": "#/components/schemas/error"
   "/data_attributes":
     get:
       summary: List all data attributes
@@ -24648,9 +26063,11 @@ paths:
               examples:
                 missing ruleset_id:
                   value:
-                    type: error
-                    request_id: "req_123"
-                    message: "ruleset_id is required"
+                    type: error.list
+                    request_id: 71c45f21-af71-4b0a-a3c6-ef5e2b55740c
+                    errors:
+                    - code: parameter_not_found
+                      message: ruleset_id is required
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -24688,9 +26105,11 @@ paths:
               examples:
                 server error:
                   value:
-                    type: error
+                    type: error.list
                     request_id: 591a0c2f-78b3-41bb-bfa7-f1fae15107b2
-                    message: "Request failed due to an internal error. Please reach out to support"
+                    errors:
+                    - code: server_error
+                      message: Request failed due to an internal error. Please reach out to support
               schema:
                 "$ref": "#/components/schemas/error"
   "/messages/whatsapp/status":
@@ -24752,9 +26171,11 @@ paths:
               examples:
                 missing message_id:
                   value:
-                    type: error
-                    request_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-                    message: "message_id is required"
+                    type: error.list
+                    request_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    errors:
+                    - code: parameter_not_found
+                      message: message_id is required
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -24769,6 +26190,20 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+              schema:
+                "$ref": "#/components/schemas/error"
+        '403':
+          description: API plan restricted
+          content:
+            application/json:
+              examples:
+                API plan restricted:
+                  value:
+                    type: error.list
+                    request_id: 76d8344a-bd94-424c-937b-cc19de8215bb
+                    errors:
+                    - code: api_plan_restricted
+                      message: Active subscription needed.
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
@@ -24875,10 +26310,33 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch.
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      - name: per_page
+        in: query
+        required: false
+        description: The number of news items to return per page. Values above 20 are
+          reduced to 20.
+        schema:
+          type: integer
+          default: 10
+          maximum: 20
+          example: 10
       tags:
       - News
       operationId: listNewsItems
-      description: You can fetch a list of all news items
+      description: |
+        You can fetch a list of all news items
+
+        News items are returned newest first, by creation date.
+
+        Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -24903,14 +26361,11 @@ paths:
                       state: draft
                       labels: []
                       cover_image_url:
-                      reactions:
-                      -
-                      -
-                      -
-                      -
+                      reactions: []
                       deliver_silently: false
                       created_at: 1734537793
                       updated_at: 1734537793
+                      published_at:
                       newsfeed_assignments: []
                     - id: '30'
                       type: news-item
@@ -24921,18 +26376,31 @@ paths:
                       state: draft
                       labels: []
                       cover_image_url:
-                      reactions:
-                      -
-                      -
-                      -
-                      -
+                      reactions: []
                       deliver_silently: false
                       created_at: 1734537793
                       updated_at: 1734537793
+                      published_at:
                       newsfeed_assignments: []
                     total_count: 2
               schema:
                 "$ref": "#/components/schemas/paginated_response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Per page too small:
+                  value:
+                    type: error.list
+                    request_id: 1d4b6f2a-5c83-4e71-9a0d-2b6e8c47f310
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too small
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: News is not enabled on the workspace. The response has no body.
         '401':
           description: Unauthorized
           content:
@@ -24945,6 +26413,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 3f7c91e4-6a25-4d8b-b1c3-7e95a2d6048f
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
     post:
@@ -24957,7 +26432,10 @@ paths:
       tags:
       - News
       operationId: createNewsItem
-      description: You can create a news item
+      description: |
+        You can create a news item
+
+        Requires the `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -24984,11 +26462,77 @@ paths:
                     deliver_silently: true
                     created_at: 1734537797
                     updated_at: 1734537797
+                    published_at: 1734537797
                     newsfeed_assignments:
                     - newsfeed_id: 53
                       published_at: 1664638214
               schema:
                 "$ref": "#/components/schemas/news_item"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Title missing:
+                  value:
+                    type: error.list
+                    request_id: 5a2e8d16-9b47-4c30-8f6a-1c84e7b59d22
+                    errors:
+                    - code: parameter_not_found
+                      message: Title is a required parameter
+                Sender missing:
+                  value:
+                    type: error.list
+                    request_id: 7c93f4b8-2d16-4a59-93e7-6b0d85f1c4a3
+                    errors:
+                    - code: parameter_not_found
+                      message: sender_id is a required parameter
+                Invalid cover image URL:
+                  value:
+                    type: error.list
+                    request_id: 9e51a7c2-4f38-4b6d-a27c-85d3f960e1b4
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid cover image URL. Must be a valid url of a PNG
+                        or JPG file
+                Newsfeed does not exist:
+                  value:
+                    type: error.list
+                    request_id: 2b86d053-7e14-49af-8c35-4a71e2d9f806
+                    errors:
+                    - code: parameter_invalid
+                      message: Newsfeed with id 123 does not exist
+                Invalid state:
+                  value:
+                    type: error.list
+                    request_id: 8d40b2f7-3c95-4e18-a6d1-5f27c09e4b83
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid state. State can either be draft or live
+                Published date in the future:
+                  value:
+                    type: error.list
+                    request_id: a3e61c58-7b04-4f92-8d3e-1c69f5b20a47
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid published_at 4102444800. Date cannot be in the future. Scheduling is not supported through API
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Sender not found. If News is not enabled on the workspace the
+            response has no body.
+          content:
+            application/json:
+              examples:
+                Sender Not Found:
+                  value:
+                    type: error.list
+                    request_id: 4d19c6e7-8a52-4f03-b67d-93e5017ac2b8
+                    errors:
+                    - code: not_found
+                      message: Admin not found
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -25001,6 +26545,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 6f02b3a9-1c74-4d85-ae29-50b7c38d6e14
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -25045,7 +26596,10 @@ paths:
       tags:
       - News
       operationId: retrieveNewsItem
-      description: You can fetch the details of a single news item.
+      description: |
+        You can fetch the details of a single news item.
+
+        Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25063,21 +26617,19 @@ paths:
                     state: live
                     labels: []
                     cover_image_url:
-                    reactions:
-                    -
-                    -
-                    -
-                    -
+                    reactions: []
                     deliver_silently: false
                     created_at: 1734537800
                     updated_at: 1734537800
+                    published_at: 1734537800
                     newsfeed_assignments:
                     - newsfeed_id: 55
                       published_at: 1734537800
               schema:
                 "$ref": "#/components/schemas/news_item"
         '404':
-          description: News Item Not Found
+          description: News Item Not Found. If News is not enabled on the workspace
+            the response has no body.
           content:
             application/json:
               examples:
@@ -25102,6 +26654,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 0c63f8b1-5d27-4e94-82a6-7f91b35ce0d8
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
     put:
@@ -25121,6 +26680,14 @@ paths:
       tags:
       - News
       operationId: updateNewsItem
+      description: |
+        You can update a news item.
+
+        You can also send this request with `PATCH`; it behaves the same as `PUT`.
+
+        `title`, `body`, `state`, `deliver_silently` and `cover_image_url` keep their current values when you leave them out. `labels` and `newsfeed_assignments` do not: leaving either out clears it, so send the full list on every update. Leaving `reactions` out disables reactions, although the list in the response does not change.
+
+        Requires the `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25144,11 +26711,50 @@ paths:
                     deliver_silently: false
                     created_at: 1734537803
                     updated_at: 1734537804
+                    published_at: 1734537804
                     newsfeed_assignments: []
               schema:
                 "$ref": "#/components/schemas/news_item"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Invalid cover image URL:
+                  value:
+                    type: error.list
+                    request_id: 1e58a2c9-7f43-4b06-95d1-3c82e67a4f90
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid cover image URL. Must be a valid url of a PNG
+                        or JPG file
+                Invalid state:
+                  value:
+                    type: error.list
+                    request_id: 3a91d7f5-2e68-4c47-b830-6d15f92b8c07
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid state. State can either be draft or live
+                Newsfeed does not exist:
+                  value:
+                    type: error.list
+                    request_id: 5c74e019-4a3b-4d62-8e15-9f07a2c631d4
+                    errors:
+                    - code: parameter_invalid
+                      message: Newsfeed with id 123 does not exist
+                Published date in the future:
+                  value:
+                    type: error.list
+                    request_id: f27c9d14-5a68-4b3e-90c2-7e81a4d6b359
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid published_at 4102444800. Date cannot be in the future. Scheduling is not supported through API
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
-          description: News Item Not Found
+          description: News Item Not Found, or the sender was not found. Omitting `sender_id`
+            also returns this status. If News is not enabled on the workspace the response
+            has no body.
           content:
             application/json:
               examples:
@@ -25159,6 +26765,13 @@ paths:
                     errors:
                     - code: not_found
                       message: Resource Not Found
+                Sender Not Found:
+                  value:
+                    type: error.list
+                    request_id: 7b20f6a4-6c81-4e39-a05b-2d48e71c9035
+                    errors:
+                    - code: not_found
+                      message: Admin not found
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -25173,13 +26786,20 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 9d36c851-8e05-4a7b-b492-1a63f58d720e
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/news_item_request"
+              "$ref": "#/components/schemas/update_news_item_request"
             examples:
               successful:
                 summary: successful
@@ -25216,7 +26836,10 @@ paths:
       tags:
       - News
       operationId: deleteNewsItem
-      description: You can delete a single news item.
+      description: |
+        You can delete a single news item.
+
+        Requires the `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25231,7 +26854,8 @@ paths:
               schema:
                 "$ref": "#/components/schemas/deleted_object"
         '404':
-          description: News Item Not Found
+          description: News Item Not Found. If News is not enabled on the workspace
+            the response has no body.
           content:
             application/json:
               examples:
@@ -25256,6 +26880,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 2f85b4d7-0a19-4c63-8e74-5b92d16fa038
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/news/newsfeeds/{id}/items":
@@ -25274,11 +26905,33 @@ paths:
         example: '123'
         schema:
           type: string
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch.
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      - name: per_page
+        in: query
+        required: false
+        description: The number of news items to return per page. Values above 20 are
+          reduced to 20.
+        schema:
+          type: integer
+          default: 20
+          maximum: 20
+          example: 20
       tags:
       - News
       operationId: listLiveNewsfeedItems
-      description: You can fetch a list of all news items that are live on a given
-        newsfeed
+      description: |
+        You can fetch a list of all news items that are live on a given newsfeed
+
+        News items are returned most recently published first.
+
+        Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25297,6 +26950,35 @@ paths:
                     total_count: 0
               schema:
                 "$ref": "#/components/schemas/paginated_response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Per page too small:
+                  value:
+                    type: error.list
+                    request_id: 4a07e9b3-2c56-4f81-96d0-8e34b15c7d92
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too small
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Newsfeed not found. If News is not enabled on the workspace
+            the response has no body.
+          content:
+            application/json:
+              examples:
+                Newsfeed Not Found:
+                  value:
+                    type: error.list
+                    request_id: 6c58d1f0-4e73-4a25-b8c9-0f26a93e5b14
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -25309,6 +26991,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 8e71a3c6-6b90-4d48-85f2-3a07c14e9d26
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/news/newsfeeds":
@@ -25319,10 +27008,33 @@ paths:
         in: header
         schema:
           "$ref": "#/components/schemas/intercom_version"
+      - name: page
+        in: query
+        required: false
+        description: The page of results to fetch.
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      - name: per_page
+        in: query
+        required: false
+        description: The number of newsfeeds to return per page. Values above 20 are
+          reduced to 20.
+        schema:
+          type: integer
+          default: 10
+          maximum: 20
+          example: 10
       tags:
       - News
       operationId: listNewsfeeds
-      description: You can fetch a list of all newsfeeds
+      description: |
+        You can fetch a list of all newsfeeds
+
+        Newsfeeds are returned newest first, by creation date.
+
+        Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25351,6 +27063,22 @@ paths:
                     total_count: 2
               schema:
                 "$ref": "#/components/schemas/paginated_response"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Per page too small:
+                  value:
+                    type: error.list
+                    request_id: 0b94f5e2-8d17-4b60-a3c7-5e29d60b847f
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too small
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: News is not enabled on the workspace. The response has no body.
         '401':
           description: Unauthorized
           content:
@@ -25363,6 +27091,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 2d16c7a8-0f34-4e82-9b51-7c40e83f6a95
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/news/newsfeeds/{id}":
@@ -25384,7 +27119,10 @@ paths:
       tags:
       - News
       operationId: retrieveNewsfeed
-      description: You can fetch the details of a single newsfeed
+      description: |
+        You can fetch the details of a single newsfeed
+
+        Requires the `read_news_scope` or `read_write_news_scope` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25400,6 +27138,21 @@ paths:
                     updated_at: 1734537815
               schema:
                 "$ref": "#/components/schemas/newsfeed"
+        '404':
+          description: Newsfeed not found. If News is not enabled on the workspace
+            the response has no body.
+          content:
+            application/json:
+              examples:
+                Newsfeed Not Found:
+                  value:
+                    type: error.list
+                    request_id: 4f38e9b0-2a51-4c06-83d7-9e62f05a1b48
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -25412,6 +27165,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 1a7d35c0-6e82-4b49-9f13-48c0d2e671ba
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/notes/{id}":
@@ -26297,7 +28057,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/phone_switch"
         '400':
-          description: bad request - invalid number
+          description: Phone number lookup or SMS send failed
           content:
             application/json:
               examples:
@@ -26314,9 +28074,15 @@ paths:
           content:
             application/json:
               examples:
+                Invalid phone number:
+                  value:
+                    error_key: invalid_phone_number
                 unprocessable entity:
                   value:
-                    error_key: some_error
+                    error_key: landline_phone
+                Twilio account not found:
+                  value:
+                    error_key: twilio_settings
         '401':
           description: Unauthorized
           content:
@@ -26329,6 +28095,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Feature not available:
+                  value:
+                    type: error.list
+                    request_id: 79b635fd-f1f6-4404-aa83-5782675987fb
+                    errors:
+                    - code: unauthorized
+                      message: App does not have access to this feature
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -33840,6 +35613,340 @@ components:
           example:
             email: user@example.com
             company.name: Acme Inc
+    api_template:
+      title: API Template
+      type: object
+      x-tags:
+      - AI Content
+      description: |
+        An API template describes how to read a knowledge base through its vendor's REST API. Intercom requests the `tree`, a list of the knowledge base's nodes, such as folders and pages. For each node that is content, it then requests the `item`, such as the page's body. `mapping` says which fields of the node and the item become the imported content.
+
+        A placeholder such as `{space_id}` in `base_url`, a path or a query value is filled from `variables`. In the item request, it can also be filled from `item.node_values`. Values filled into `base_url` or a path are URL-encoded. `{token}` stands for the source's token. It can only be used in `auth.value` or as an entire query value.
+
+        When a template check fails, creating the source returns a `422` error whose message is `<name> fails the <check> check`, where `<name>` is the failing field below; see the create endpoint for the error shape. Each field below names its checks in brackets. Top-level keys other than the ones below are ignored and not stored.
+
+        Intercom sends one tree request per sync. Paging isn't supported. A sync fails if the tree response is over 25 MB or has more than 50,000 nodes. Nodes nested more than 12 levels deep aren't imported. An item whose response is over 10 MB, or that the vendor returns as not found, is skipped. A redirect isn't followed and fails the sync. During a sync, if the vendor answers `429`, Intercom waits for the time in its `Retry-After` header, or 60 seconds if there's none, and then retries. If the vendor keeps answering `429`, the sync fails.
+      properties:
+        name:
+          type: string
+          description: The name of the knowledge base. The imported content is filed
+            in a folder with this name. It can't be blank (`blank`).
+          example: Example Docs
+        base_url:
+          type: string
+          description: The base URL of the vendor's API. It must be an `https` URL
+            with a host (`not_https`); a URL that can't be parsed, including one
+            with malformed percent-encoding, also fails `not_https`. It must have
+            no query or fragment (`query_or_fragment`) and no user name or password
+            (`userinfo`), and can't be on an Intercom domain (`intercom_host`). It
+            can use placeholders from `variables` (`undeclared_placeholder`).
+          example: https://api.example.com/v1
+        variables:
+          type: array
+          description: The names of the template's variables. Each name may only use
+            letters, digits and underscores (`invalid`), and can't look like a credential,
+            such as `api_key`, `token` or `secret` (`credential_name`). Use an empty
+            list if the template has no variables.
+          items:
+            type: string
+          example:
+          - space_id
+        auth:
+          type: object
+          description: How the token is sent to the vendor. It must be an object (`invalid`).
+          properties:
+            header:
+              type: string
+              description: The name of the request header that carries the token, such
+                as `Authorization` or `X-API-Key`. It may only use letters, digits
+                and hyphens (`invalid`), and must contain `auth`, `key`, `token` or
+                `secret` (`not_credential`). It can't be a header that controls the
+                connection, routing or cookies, such as `Host`, `Cookie`, `Forwarded`
+                or a `Proxy-` header (`reserved`).
+              example: Authorization
+            value:
+              type: string
+              description: The header's value. It must be `{token}`, optionally after
+                a scheme word and a space, such as `Bearer {token}` (`literal_text`).
+                A scheme word starts with a letter and has at most 24 letters and
+                hyphens.
+              example: 'Bearer {token}'
+          required:
+          - header
+          - value
+        tree:
+          type: object
+          description: The request that lists the knowledge base's nodes. It must be
+            an object (`invalid`) with `path`, `nodes` and `content_if` (`missing_keys`).
+            Its path and query values can only use placeholders from `variables`
+            (`undeclared_placeholder`).
+          properties:
+            path:
+              type: string
+              description: The request path, relative to `base_url`. It can't be an
+                absolute URL, contain `//` or have a `:` in its first segment (`not_relative`),
+                can't contain `?` or `#` (`query_or_fragment`), and must be a valid
+                URL path (`invalid`). Use `query` for query parameters.
+              example: "/spaces/{space_id}/pages"
+            query:
+              type: object
+              description: The query parameters to send. Values must be strings (`invalid`).
+                A value of exactly `{token}` is replaced with the source's token. A
+                parameter whose name looks like a credential, such as `api_key` or
+                `access_token`, must have the value `{token}` (`literal_credential`).
+              additionalProperties:
+                type: string
+              example:
+                status: published
+            nodes:
+              type: array
+              description: The keys to follow in the tree response to reach the list
+                of nodes. Use an empty list if the response is the list.
+              items:
+                oneOf:
+                - type: string
+                - type: integer
+              example:
+              - pages
+            children:
+              type: string
+              description: The key on a node that holds its child nodes, for a tree
+                whose nodes are nested.
+              example: pages
+            content_if:
+              type: array
+              description: The conditions for a node to be imported as content. A condition
+                is an object of keys and values, and a node matches it when the node
+                has each of those values at those keys. A node is imported when it
+                matches any condition. It must be a non-empty list of objects (`invalid`).
+              items:
+                type: object
+                additionalProperties: true
+              example:
+              - type: document
+            folder_if:
+              type: array
+              description: The conditions, in the same form as `content_if`, for a node
+                to become a folder. A folder's child nodes are filed in it. A folder
+                is named with `mapping.title` read from the node, and a node without
+                a title doesn't become a folder. It must be a list of objects (`invalid`).
+              items:
+                type: object
+                additionalProperties: true
+              example:
+              - type: group
+            folder_if_has_children:
+              type: boolean
+              description: Whether a node that has child nodes becomes a folder.
+              example: true
+          required:
+          - path
+          - nodes
+          - content_if
+        item:
+          type: object
+          description: The request that fetches a content node's item, made once for
+            each node that matches `tree.content_if`. It must be an object (`invalid`)
+            with a `path` (`missing_keys`). Its path and query values can use placeholders
+            from `variables` and `node_values` (`undeclared_placeholder`).
+          properties:
+            path:
+              type: string
+              description: The request path, relative to `base_url`. It has the same
+                checks as `tree.path`.
+              example: "/spaces/{space_id}/pages/{page_id}"
+            query:
+              type: object
+              description: The query parameters to send. It has the same checks as
+                `tree.query`.
+              additionalProperties:
+                type: string
+              example: {}
+            node_values:
+              type: object
+              description: Placeholders filled from the node, each with the keys to
+                follow in the node to reach its value. It must be an object (`invalid`),
+                and its names can't look like credentials (`credential_name`). A blank
+                value fails the sync. A value filled into the path must use only letters,
+                digits, `.`, `_` and `-`, and can't be only dots, or the sync fails.
+              additionalProperties:
+                type: array
+                items:
+                  oneOf:
+                  - type: string
+                  - type: integer
+              example:
+                page_id:
+                - id
+          required:
+          - path
+        mapping:
+          type: object
+          description: Where each field of the imported content comes from. Each value
+            is a list that starts with `node` or `item`, followed by the keys to follow
+            in it. An integer key indexes into a list. It must be an object (`invalid`)
+            with `id`, `title`, `body` and `updated_at` (`missing_keys`), and each
+            value must have this form (`invalid`).
+          properties:
+            id:
+              type: array
+              description: The node's unique identifier. It must start with `node`.
+                A node whose id is blank isn't imported, though its child nodes are.
+              items:
+                oneOf:
+                - type: string
+                - type: integer
+              example:
+              - node
+              - id
+            title:
+              type: array
+              description: The title. Folders always read it from the node. Content
+                without a title isn't imported.
+              items:
+                oneOf:
+                - type: string
+                - type: integer
+              example:
+              - node
+              - title
+            body:
+              type: array
+              description: The body, in `body_format`.
+              items:
+                oneOf:
+                - type: string
+                - type: integer
+              example:
+              - item
+              - body
+            updated_at:
+              type: array
+              description: When the content was last updated, as a date and time such
+                as `2024-12-18T15:47:39Z`. A value that can't be read as a date is
+                ignored.
+              items:
+                oneOf:
+                - type: string
+                - type: integer
+              example:
+              - item
+              - updatedAt
+            item_id:
+              type: array
+              description: An identifier shared by nodes that are the same item, such
+                as a page listed in two folders. The item is fetched and imported once,
+                in the first node's folder. It must start with `node`.
+              items:
+                oneOf:
+                - type: string
+                - type: integer
+              example:
+              - node
+              - page_id
+          required:
+          - id
+          - title
+          - body
+          - updated_at
+        body_format:
+          type: string
+          description: The format of the body (`unknown`). HTML is sanitized, Markdown
+            is converted to HTML without any front matter, and plain text keeps its
+            line breaks.
+          enum:
+          - html
+          - markdown
+          - plain_text
+          example: html
+      required:
+      - name
+      - base_url
+      - variables
+      - auth
+      - tree
+      - item
+      - mapping
+      - body_format
+    api_template_source:
+      title: API Template Source
+      type: object
+      x-tags:
+      - AI Content
+      description: A content source that imports a knowledge base through its vendor's
+        REST API, as its API template describes. The template is returned as it
+        was stored. The source's token is never returned.
+      nullable: false
+      properties:
+        type:
+          type: string
+          readOnly: true
+          description: Always `api_template_source`.
+          enum:
+          - api_template_source
+          example: api_template_source
+        id:
+          type: string
+          readOnly: true
+          description: The unique identifier for the API template source, which is
+            given by Intercom.
+          example: '494'
+        template:
+          "$ref": "#/components/schemas/api_template"
+        variables:
+          type: object
+          description: The values for the template's variables. Only the variables
+            the template declares are kept, as strings.
+          additionalProperties:
+            type: string
+          example:
+            space_id: help-center
+        created_at:
+          type: integer
+          format: date-time
+          readOnly: true
+          description: The time when the API template source was created.
+          example: 1734537259
+        latest_sync:
+          type: object
+          nullable: true
+          readOnly: true
+          description: The source's most recent sync, or `null` if no sync has started.
+            Intercom also syncs each source automatically, about once a day, unless
+            the vendor has rejected the token, so this can be a sync you didn't start.
+          properties:
+            id:
+              type: string
+              description: The unique identifier for the sync.
+              example: '1287'
+            status:
+              type: string
+              description: The status of the sync. It's `in_progress` while the sync
+                runs, then `success`, `failed`, `cancelled` or `skipped`.
+              enum:
+              - in_progress
+              - success
+              - failed
+              - cancelled
+              - skipped
+              example: success
+            created_at:
+              type: integer
+              format: date-time
+              description: The time when the sync started.
+              example: 1734537259
+            updated_at:
+              type: integer
+              format: date-time
+              description: The time when the sync was last updated.
+              example: 1734537265
+      required:
+      - type
+      - id
+      - template
+      - variables
+      - created_at
+      - latest_sync
     app:
       title: App
       type: object
@@ -33897,7 +36004,8 @@ components:
           readOnly: true
         name:
           type: string
-          description: The name of the audience.
+          description: The name of the audience. Returned HTML-escaped, for example
+            `&` as `&amp;`.
           example: VIP Customers
         predicates:
           type: array
@@ -33918,8 +36026,11 @@ components:
           example:
           - attribute: role
             type: role
-            comparison: eq
-            value: user
+            comparison: in
+            value:
+            - user_role
+            - contact_role
+            - visitor_role
         created_at:
           type: integer
           description: The time the audience was created as a Unix timestamp.
@@ -33965,24 +36076,34 @@ components:
     predicate:
       title: Predicate
       type: object
-      description: A condition used to filter contacts in an audience.
+      description: A condition used to filter contacts in an audience. An attribute
+        predicate compares one attribute. A logical predicate has a `type` of `and`,
+        `or` or `not` and groups other predicates instead.
       properties:
         attribute:
           type: string
-          description: The attribute to filter on.
+          description: The attribute to filter on. Required on an attribute predicate.
           example: company.name
         type:
           type: string
-          description: The type of the attribute.
+          description: The type of the attribute, or `and`, `or` or `not` on a logical
+            predicate.
           example: string
         comparison:
           type: string
-          description: The comparison operator.
+          description: The comparison operator. Required on an attribute predicate.
           example: contains
         value:
-          type: string
-          description: The value to compare against.
+          description: The value to compare against. The accepted value depends on
+            the attribute and the comparison, and can be a string, a number, a boolean,
+            an array or `null`.
           example: Acme
+        predicates:
+          type: array
+          description: The predicates grouped by a logical predicate. Only used when
+            `type` is `and`, `or` or `not`.
+          items:
+            "$ref": "#/components/schemas/predicate"
     article:
       title: Article
       type: object
@@ -34458,11 +36579,11 @@ components:
         owner_id:
           type: integer
           description: The id of the owner of the article.
-          example: '5017691'
+          example: 5017691
         author_id:
           type: integer
           description: The id of the author of the article.
-          example: '5017691'
+          example: 5017691
         created_at:
           type: integer
           format: date-time
@@ -38113,17 +40234,15 @@ components:
             next:
               type: string
               format: uri
-              description: A link to the next page of results, or null when on
-                the last page.
-              nullable: true
-              example: https://api.intercom.io/content/search?query=billing&page=2
+              description: A link to the next page of results. Omitted when on the
+                last page.
+              example: https://api.intercom.io/content/search?query=billing&per_page=10&page=2
             prev:
               type: string
               format: uri
-              description: A link to the previous page of results, or null when
-                on the first page.
-              nullable: true
-              example:
+              description: A link to the previous page of results. Omitted when on
+                the first page.
+              example: https://api.intercom.io/content/search?query=billing&per_page=10&page=1
         data:
           type: array
           description: The list of matched content items. Each item's `type`
@@ -38175,7 +40294,8 @@ components:
           example: en
         json_blocks:
           type: array
-          description: The content blocks that make up the body of the snippet.
+          description: The content blocks that make up the body of the snippet. In
+            responses, the blocks are returned as a JSON-encoded string rather than as an array.
           items:
             type: object
           example:
@@ -38185,7 +40305,7 @@ components:
           type: string
           nullable: true
           description: The body of the content snippet in markdown.
-          example: "# How to reset your password\n\nNavigate to Settings > Security > Reset password.\n"
+          example: "Navigate to Settings \\> Security \\> Reset password.\n"
         chatbot_availability:
           type: integer
           deprecated: true
@@ -38404,7 +40524,8 @@ components:
           example: '123'
         name:
           type: string
-          description: The name of the dynamic content.
+          description: The name of the dynamic content. Returned HTML-escaped, for
+            example `&` as `&amp;`.
           example: Support phone number
         key:
           type: string
@@ -39006,6 +41127,11 @@ components:
           example: 1719493065
         reviewed_teammate:
           "$ref": "#/components/schemas/conversation_scorecard_reviewed_teammate"
+        review_id:
+          type: string
+          nullable: true
+          description: The ID of the QA review linked to this scorecard entry.
+          example: '123'
         reviewer:
           "$ref": "#/components/schemas/conversation_scorecard_reviewer"
         review_status:
@@ -40027,6 +42153,34 @@ components:
       - type
       - user
       - visitor
+    create_api_template_source_request:
+      title: Create API Template Source Payload
+      type: object
+      description: You can create an API template source to import a knowledge base
+        through its vendor's REST API.
+      nullable: false
+      properties:
+        template:
+          "$ref": "#/components/schemas/api_template"
+        variables:
+          type: object
+          description: A value for each variable the template declares. A value may
+            only use letters, digits, `.`, `_` and `-`, and can't be only dots. Keys
+            the template doesn't declare are ignored.
+          additionalProperties:
+            type: string
+          example:
+            space_id: help-center
+        auth_token:
+          type: string
+          description: The token for the vendor's API, sent as `auth.value` describes.
+            It may only use printable ASCII characters. Intercom checks it with the
+            vendor before creating the source. It's stored with the source and is
+            never returned.
+          example: vendor-api-token
+      required:
+      - template
+      - auth_token
     create_audience_request:
       title: Create Audience Request
       type: object
@@ -40051,14 +42205,17 @@ components:
         role_predicates:
           type: array
           description: Role-based predicates that further filter audience membership by
-            contact role.
+            contact role. Defaults to all three contact roles when omitted.
           items:
             "$ref": "#/components/schemas/predicate"
           example:
           - attribute: role
             type: role
-            comparison: eq
-            value: user
+            comparison: in
+            value:
+            - user_role
+            - contact_role
+            - visitor_role
     create_article_request:
       description: You can create an Article
       type: object
@@ -40209,8 +42366,19 @@ components:
         body_markdown:
           type: string
           description: The content of the article in markdown. An alternative to `body` — you
-            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+            can provide content as markdown instead of HTML. Mutually exclusive with `body`
+            and `json_blocks`.
           example: "# Internal Guide\n\nSome instructions.\n"
+        json_blocks:
+          type: array
+          description: The content of the article as a list of content blocks. Used
+            only when `body` is not provided. Cannot be combined with `body_markdown`.
+          items:
+            type: object
+        locale:
+          type: string
+          description: The locale of the article. Defaults to `en`.
+          example: en
         author_id:
           type: integer
           description: The id of the author of the article.
@@ -40222,7 +42390,7 @@ components:
         folder_id:
           type: integer
           nullable: true
-          description: The ID of the folder to place this article in, or null to leave it without a folder.
+          description: The ID of the folder to place this article in. Pass `null` to leave it without a folder.
           example: 6
         audience_ids:
           type: array
@@ -41020,27 +43188,45 @@ components:
         external_id:
           type: string
           description: A unique identifier for the Custom Object instance in the external
-            system it originated from.
+            system it originated from. The value `reference_not_found` is reserved
+            and is rejected with a `400`. Omitting this field creates a new instance
+            on every request instead of updating an existing one.
         external_created_at:
           type: integer
           format: date-time
           nullable: true
           description: The time when the Custom Object instance was created in the
-            external system it originated from.
+            external system it originated from. A value that cannot be read as a time
+            is stored as `null` rather than rejected.
           example: 1571672154
         external_updated_at:
           type: integer
           format: date-time
           nullable: true
           description: The time when the Custom Object instance was last updated in
-            the external system it originated from.
+            the external system it originated from. A value that cannot be read as
+            a time is stored as `null` rather than rejected.
           example: 1571672154
         custom_attributes:
           type: object
           nullable: true
-          description: The custom attributes which are set for the Custom Object instance.
+          description: |-
+            The custom attributes which are set for the Custom Object instance.
+
+            Each value must match the type of the attribute it is set on: a string, integer, number or boolean, a Unix timestamp or date string for a datetime attribute, or `null` to clear the attribute. A list attribute takes the label or id of one of its options; a value that matches no option clears the attribute rather than being rejected. A reference attribute takes the Intercom id of the record it points at, or an array of ids for a reference to several records; an id that matches no record is skipped.
           additionalProperties:
-            type: string
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: array
+              items:
+                type: string
+          example:
+            order_number: ORDER-12345
+            total_amount: 99.99
     create_or_update_tag_request:
       description: You can create or update an existing tag.
       type: object
@@ -46902,10 +49088,10 @@ components:
             "$ref": "#/components/schemas/newsfeed_assignment"
         labels:
           type: array
-          description: Label names displayed to users to categorize the news item.
+          description: Label names displayed to users to categorize the news item,
+            sorted with uppercase letters before lowercase.
           items:
             type: string
-            nullable: true
             description: The label name.
             example: Product Update
         cover_image_url:
@@ -46913,14 +49099,17 @@ components:
           format: uri
           nullable: true
           description: URL of the image used as cover. Must have .jpg or .png extension.
+            Intercom copies the image you send on write, so the URL returned here is
+            a signed Intercom URL that expires; fetch the news item again for a fresh
+            one.
           example: https://example.com/cover.jpg
         reactions:
           type: array
           description: Ordered list of emoji reactions to the news item. When empty,
-            reactions are disabled.
+            reactions are disabled. An update that leaves out `reactions` also disables
+            them but leaves this list as it was.
           items:
             type: string
-            nullable: true
             description: The emoji reaction to the news item.
             example: "\U0001F44D"
         deliver_silently:
@@ -46986,13 +49175,22 @@ components:
           - Product
           - Update
           - New
+        cover_image_url:
+          type: string
+          format: uri
+          description: URL of the image to use as the cover. Must contain `.png` or
+            `.jpg` in lower case, so `.jpeg` and `.PNG` are rejected. Intercom copies
+            the image and serves it from its own signed URL.
+          example: https://example.com/cover.jpg
         reactions:
           type: array
-          description: Ordered list of emoji reactions to the news item. When empty,
-            reactions are disabled.
+          description: Ordered list of emoji reactions to the news item. Send an empty
+            list to disable reactions. Send at most five, each a single Unicode code
+            point, so an emoji with a skin tone, a joiner sequence or a variation selector
+            (such as ❤️) is rejected. More than five returns a 400, but the news item
+            is still saved as a draft, with no reactions or cover image.
           items:
             type: string
-            nullable: true
           example:
           - "\U0001F606"
           - "\U0001F605"
@@ -47003,6 +49201,76 @@ components:
             "$ref": "#/components/schemas/newsfeed_assignment"
       required:
       - title
+      - sender_id
+    update_news_item_request:
+      description: The body of a request that updates an existing news item. Leaving
+        `labels` or `newsfeed_assignments` out clears them, and leaving `reactions`
+        out disables reactions; every other optional field keeps its current value
+        when left out.
+      type: object
+      title: Update News Item Request
+      properties:
+        title:
+          type: string
+          description: The title of the news item.
+          example: Halloween is here!
+        body:
+          type: string
+          description: The news item body, which may contain HTML.
+          example: "<p>New costumes in store for this spooky season</p>"
+        sender_id:
+          type: integer
+          description: The id of the sender of the news item. Must be a teammate on
+            the workspace.
+          example: 123
+        state:
+          type: string
+          description: News items will not be visible to your users in the assigned
+            newsfeeds until they are set live.
+          enum:
+          - draft
+          - live
+          example: live
+        deliver_silently:
+          type: boolean
+          description: When set to `true`, the news item will appear in the messenger
+            newsfeed without showing a notification badge.
+          example: true
+        labels:
+          type: array
+          description: Label names displayed to users to categorize the news item.
+            Send the full list; the labels you leave out are removed.
+          items:
+            type: string
+          example:
+          - Product
+          - Update
+          - New
+        cover_image_url:
+          type: string
+          format: uri
+          description: URL of the image to use as the cover. Must contain `.png` or
+            `.jpg` in lower case, so `.jpeg` and `.PNG` are rejected. Intercom copies
+            the image and serves it from its own signed URL.
+          example: https://example.com/cover.jpg
+        reactions:
+          type: array
+          description: Ordered list of emoji reactions to the news item. Send an empty
+            list to disable reactions. Send at most five, each a single Unicode code
+            point, so an emoji with a skin tone, a joiner sequence or a variation selector
+            (such as ❤️) is rejected.
+          items:
+            type: string
+          example:
+          - "\U0001F606"
+          - "\U0001F605"
+        newsfeed_assignments:
+          type: array
+          description: A list of newsfeed_assignments to assign to the specified newsfeed.
+            Send the full list; the assignments you leave out are removed.
+          items:
+            "$ref": "#/components/schemas/newsfeed_assignment"
+      required:
       - sender_id
     newsfeed:
       title: Newsfeed
@@ -47027,7 +49295,8 @@ components:
         name:
           type: string
           description: The name of the newsfeed. This name will never be visible to
-            your users.
+            your users. Returned HTML-escaped, for example `&` as `&amp;`. The News
+            Center newsfeed always returns the name `News center newsfeed`.
           example: My Newsfeed
         created_at:
           type: integer
@@ -47049,16 +49318,16 @@ components:
         newsfeed_id:
           type: integer
           description: The unique identifier for the newsfeed which is given by Intercom.
-            Publish dates cannot be in the future, to schedule news items use the
-            dedicated feature in app (see this article).
           example: 198313
         published_at:
           type: integer
           format: timestamp
+          nullable: true
           description: Publish date of the news item on the newsfeed, use this field
             if you want to set a publish date in the past (e.g. when importing existing
             news items). On write, this field will be ignored if the news item state
-            is "draft".
+            is "draft", and a date in the future is rejected with a `400`. Null while
+            the news item isn't live.
           example: 1674917488
     note:
       title: Note
@@ -47364,10 +49633,9 @@ components:
           description: The type of object
           enum:
           - list
-          - conversation.list
           example: list
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
           description: A count of the total number of objects.
@@ -48012,8 +50280,9 @@ components:
       type: object
       x-tags:
       - Tags
-      description: A tag allows you to label your contacts, companies, and conversations
-        and list them using that tag.
+      description: A tag allows you to label your contacts, companies, conversations,
+        tickets, articles, internal articles and content snippets, and list them using
+        that tag.
       properties:
         type:
           type: string
@@ -48031,12 +50300,12 @@ components:
           type: integer
           format: date-time
           nullable: true
-          description: The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, or when it is returned as part of an external page.
+          description: The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. `null` when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.
           example: 1663597223
         applied_by:
           type: object
           nullable: true
-          description: The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, or when it is returned as part of an external page.
+          description: The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. `null` when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value. When no admin is recorded, `type` is `nobody_admin` and `id` is `null`.
           allOf:
             - "$ref": "#/components/schemas/reference"
     tag_basic:
@@ -48164,7 +50433,7 @@ components:
     tags:
       title: Tags
       type: object
-      description: A list of tags objects associated with a conversation
+      description: A list of tags objects associated with a conversation, article or internal article
       properties:
         type:
           type: string
@@ -48174,7 +50443,7 @@ components:
           example: tag.list
         tags:
           type: array
-          description: A list of tags objects associated with the conversation.
+          description: A list of tags objects associated with the object.
           items:
             "$ref": "#/components/schemas/tag"
     team:
@@ -49230,8 +51499,11 @@ components:
           example:
           - attribute: role
             type: role
-            comparison: eq
-            value: user
+            comparison: in
+            value:
+            - user_role
+            - contact_role
+            - visitor_role
     publish_article_draft_request:
       description: |
         Optional body for publishing a staged article draft. On a single-language
@@ -49440,8 +51712,21 @@ components:
         body_markdown:
           type: string
           description: The content of the article in markdown. An alternative to `body` — you
-            can provide content as markdown instead of HTML. Mutually exclusive with `body`.
+            can provide content as markdown instead of HTML. Mutually exclusive with `body`
+            and `json_blocks`.
           example: "## Updated\n\nNew content.\n"
+        json_blocks:
+          type: array
+          description: The content of the article as a list of content blocks. Used
+            only when `body` is not provided. Cannot be combined with `body_markdown`.
+            If none of `body`, `body_markdown` and `json_blocks` is provided, the
+            existing content is kept.
+          items:
+            type: object
+        locale:
+          type: string
+          description: The locale of the article. If omitted, the existing locale is kept.
+          example: en
         author_id:
           type: integer
           description: The id of the author of the article.
@@ -49453,7 +51738,7 @@ components:
         folder_id:
           type: integer
           nullable: true
-          description: The ID of the folder to place this article in, or null to remove it from its folder.
+          description: The ID of the folder to place this article in. Pass `null` to remove it from its folder. If omitted, the folder is unchanged.
           example: 6
         audience_ids:
           type: array
@@ -49499,7 +51784,9 @@ components:
           example: English description
         icon:
           type: string
-          description: The icon of the collection, for example `book-bookmark`.
+          description: The icon of the collection, for example `book-bookmark`. If
+            you leave out `icon`, or send it empty, the collection's icon is reset
+            to `folder`.
           example: book-bookmark
         translated_content:
           nullable: true

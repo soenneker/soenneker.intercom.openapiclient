@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents
         {
         }
         /// <summary>
-        /// You can fetch a list of all dynamic content for a workspace, most recently updated first. Requires the `read_dynamic_content` scope.
+        /// You can fetch a list of all dynamic content for a workspace, most recently updated first.Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -72,12 +72,13 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create dynamic content. Requires the `read_write_dynamic_content` scope.
+        /// You can create dynamic content.Requires the `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent"/></returns>
         /// <param name="body">The request payload for creating dynamic content.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
@@ -94,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -101,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DynamicContent.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all dynamic content for a workspace, most recently updated first. Requires the `read_dynamic_content` scope.
+        /// You can fetch a list of all dynamic content for a workspace, most recently updated first.Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -120,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents
             return requestInfo;
         }
         /// <summary>
-        /// You can create dynamic content. Requires the `read_write_dynamic_content` scope.
+        /// You can create dynamic content.Requires the `read_write_dynamic_content` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request payload for creating dynamic content.</param>
@@ -151,15 +153,15 @@ namespace Soenneker.Intercom.OpenApiClient.Dynamic_contents
             return new global::Soenneker.Intercom.OpenApiClient.Dynamic_contents.Dynamic_contentsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all dynamic content for a workspace, most recently updated first. Requires the `read_dynamic_content` scope.
+        /// You can fetch a list of all dynamic content for a workspace, most recently updated first.Requires the `read_dynamic_content` or `read_write_dynamic_content` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Dynamic_contentsRequestBuilderGetQueryParameters 
         {
-            /// <summary>The page of results to fetch.</summary>
+            /// <summary>The page of results to fetch. Defaults to the first page. Values below 1 are treated as 1.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>The number of results to return per page. Max value of 50.</summary>
+            /// <summary>The number of results to return per page. Defaults to 50. Values above 50 are reduced to 50, and values below 1 are treated as 1.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }

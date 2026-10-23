@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The name of the newsfeed. This name will never be visible to your users.</summary>
+        /// <summary>The name of the newsfeed. This name will never be visible to your users. Returned HTML-escaped, for example `&amp;` as `&amp;amp;`. The News Center newsfeed always returns the name `News center newsfeed`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }

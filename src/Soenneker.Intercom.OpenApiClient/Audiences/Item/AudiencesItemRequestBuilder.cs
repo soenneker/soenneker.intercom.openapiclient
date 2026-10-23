@@ -34,10 +34,11 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences.Item
         {
         }
         /// <summary>
-        /// You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.
+        /// You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.An audience that is still used by other objects, such as a workflow, cannot be deleted.Requires the `read_write_audiences` OAuth scope.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -52,13 +53,14 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences.Item
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single audience by making a GET request to `https://api.intercom.io/audiences/{id}`.
+        /// You can fetch the details of a single audience by making a GET request to `https://api.intercom.io/audiences/{id}`.Requires the `read_audiences` or `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Audience"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -83,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Audience>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Audience.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update the details of a single audience by making a PUT request to `https://api.intercom.io/audiences/{id}`.
+        /// You can update the details of a single audience by making a PUT request to `https://api.intercom.io/audiences/{id}`.You can also send this request with `PATCH`; it behaves the same as `PUT`.Requires the `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Audience"/></returns>
         /// <param name="body">The request payload for updating an audience. All fields are optional — only provided fields will be updated.</param>
@@ -112,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Audience>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Audience.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.
+        /// You can delete a single audience by making a DELETE request to `https://api.intercom.io/audiences/{id}`.An audience that is still used by other objects, such as a workflow, cannot be deleted.Requires the `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -131,7 +133,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single audience by making a GET request to `https://api.intercom.io/audiences/{id}`.
+        /// You can fetch the details of a single audience by making a GET request to `https://api.intercom.io/audiences/{id}`.Requires the `read_audiences` or `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -150,7 +152,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update the details of a single audience by making a PUT request to `https://api.intercom.io/audiences/{id}`.
+        /// You can update the details of a single audience by making a PUT request to `https://api.intercom.io/audiences/{id}`.You can also send this request with `PATCH`; it behaves the same as `PUT`.Requires the `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request payload for updating an audience. All fields are optional — only provided fields will be updated.</param>

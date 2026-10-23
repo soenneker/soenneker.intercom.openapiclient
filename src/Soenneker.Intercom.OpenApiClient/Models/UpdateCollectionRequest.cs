@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Checked against the collection&apos;s Help Center but not applied, so it can&apos;t move the collection to another Help Center.</summary>
         public int? HelpCenterId { get; set; }
-        /// <summary>The icon of the collection, for example `book-bookmark`.</summary>
+        /// <summary>The icon of the collection, for example `book-bookmark`. If you leave out `icon`, or send it empty, the collection&apos;s icon is reset to `folder`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Icon { get; set; }

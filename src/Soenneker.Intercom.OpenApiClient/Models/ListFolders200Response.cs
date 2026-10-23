@@ -14,7 +14,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The data property</summary>
+        /// <summary>The folders on this page. Unlike when you retrieve a single folder, the keys `description`, `emoji` and `parent_folder_id` are omitted when they are `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Folder>? Data { get; set; }

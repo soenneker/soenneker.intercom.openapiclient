@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The custom attributes which are set for the Custom Object instance.</summary>
+        /// <summary>The custom attributes which are set for the Custom Object instance.Each value must match the type of the attribute it is set on: a string, integer, number or boolean, a Unix timestamp or date string for a datetime attribute, or `null` to clear the attribute. A list attribute takes the label or id of one of its options; a value that matches no option clears the attribute rather than being rejected. A reference attribute takes the Intercom id of the record it points at, or an array of ids for a reference to several records; an id that matches no record is skipped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty? CustomAttributes { get; set; }
@@ -23,9 +23,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty CustomAttributes { get; set; }
 #endif
-        /// <summary>The time when the Custom Object instance was created in the external system it originated from.</summary>
+        /// <summary>The time when the Custom Object instance was created in the external system it originated from. A value that cannot be read as a time is stored as `null` rather than rejected.</summary>
         public int? ExternalCreatedAt { get; set; }
-        /// <summary>A unique identifier for the Custom Object instance in the external system it originated from.</summary>
+        /// <summary>A unique identifier for the Custom Object instance in the external system it originated from. The value `reference_not_found` is reserved and is rejected with a `400`. Omitting this field creates a new instance on every request instead of updating an existing one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ExternalId { get; set; }
@@ -33,7 +33,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalId { get; set; }
 #endif
-        /// <summary>The time when the Custom Object instance was last updated in the external system it originated from.</summary>
+        /// <summary>The time when the Custom Object instance was last updated in the external system it originated from. A value that cannot be read as a time is stored as `null` rather than rejected.</summary>
         public int? ExternalUpdatedAt { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest"/> and sets the default values.

@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Search
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/search{?folder_id*}", pathParameters)
+        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/search{?folder_id*,page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,16 +30,17 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Search
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/search{?folder_id*}", rawUrl)
+        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/internal_articles/search{?folder_id*,page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.
+        /// You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponse?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Internal_articles.Search.SearchRequestBuilder.SearchRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -53,11 +54,12 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Search
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.InternalArticleSearchResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.
+        /// You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -85,14 +87,20 @@ namespace Soenneker.Intercom.OpenApiClient.Internal_articles.Search
             return new global::Soenneker.Intercom.OpenApiClient.Internal_articles.Search.SearchRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.
+        /// You can search for internal articles by making a GET request to `https://api.intercom.io/internal_articles/search`.Requires the `read_write_articles_scope` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SearchRequestBuilderGetQueryParameters 
         {
-            /// <summary>The ID of the folder to search in. Results will include articles from this folder and all its descendant folders.</summary>
+            /// <summary>The ID of the folder to search in. Results will include articles from this folder and all its descendant folders. If omitted or blank, the response is an empty list.</summary>
             [QueryParameter("folder_id")]
             public int? FolderId { get; set; }
+            /// <summary>The page of results to fetch. Defaults to 1.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results to return per page. Defaults to 10.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The content blocks that make up the body of the snippet.</summary>
+        /// <summary>The content blocks that make up the body of the snippet. In responses, the blocks are returned as a JSON-encoded string rather than as an array.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetJsonBlocksItemProperty>? JsonBlocks { get; set; }

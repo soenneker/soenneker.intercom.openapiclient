@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> Predicates { get; set; }
 #endif
-        /// <summary>Role-based predicates that further filter audience membership by contact role.</summary>
+        /// <summary>Role-based predicates that further filter audience membership by contact role. Defaults to all three contact roles when omitted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? RolePredicates { get; set; }

@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A link to the next page of results, or null when on the last page.</summary>
+        /// <summary>A link to the next page of results. Omitted when on the last page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Next { get; set; }
@@ -27,7 +27,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? Page { get; set; }
         /// <summary>Number of results per page.</summary>
         public int? PerPage { get; set; }
-        /// <summary>A link to the previous page of results, or null when on the first page.</summary>
+        /// <summary>A link to the previous page of results. Omitted when on the first page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Prev { get; set; }

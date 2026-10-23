@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences
         {
         }
         /// <summary>
-        /// You can fetch a list of all audiences for the workspace.
+        /// You can fetch a list of all audiences for the workspace.Requires the `read_audiences` or `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AudienceList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AudienceList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AudienceList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.
+        /// You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.Requires the `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Audience"/></returns>
         /// <param name="body">The request payload for creating an audience.</param>
@@ -97,7 +97,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Audience>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Audience.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all audiences for the workspace.
+        /// You can fetch a list of all audiences for the workspace.Requires the `read_audiences` or `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -116,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.
+        /// You can create a new audience by making a POST request to `https://api.intercom.io/audiences`.Requires the `read_write_audiences` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request payload for creating an audience.</param>
@@ -147,15 +147,15 @@ namespace Soenneker.Intercom.OpenApiClient.Audiences
             return new global::Soenneker.Intercom.OpenApiClient.Audiences.AudiencesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all audiences for the workspace.
+        /// You can fetch a list of all audiences for the workspace.Requires the `read_audiences` or `read_write_audiences` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class AudiencesRequestBuilderGetQueryParameters 
         {
-            /// <summary>The page of results to fetch. Defaults to first page.</summary>
+            /// <summary>The page of results to fetch. Defaults to the first page. Values below 1 are treated as 1.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>The number of results to return per page. Defaults to 50. Maximum is 50.</summary>
+            /// <summary>The number of results to return per page. Defaults to 50. Values above 50 are reduced to 50, and values below 1 are treated as 1.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }

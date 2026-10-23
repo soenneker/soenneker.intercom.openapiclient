@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Key { get; set; }
 #endif
-        /// <summary>The name of the dynamic content.</summary>
+        /// <summary>The name of the dynamic content. Returned HTML-escaped, for example `&amp;` as `&amp;amp;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
