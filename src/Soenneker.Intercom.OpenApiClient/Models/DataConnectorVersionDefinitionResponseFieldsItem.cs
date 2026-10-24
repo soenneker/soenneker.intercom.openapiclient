@@ -17,10 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The example_value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItemExampleValue? ExampleValue { get; set; }
+        public UntypedNode? ExampleValue { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItemExampleValue ExampleValue { get; set; }
+        public UntypedNode ExampleValue { get; set; }
 #endif
         /// <summary>The path property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "example_value", n => { ExampleValue = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItemExampleValue>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItemExampleValue.CreateFromDiscriminatorValue); } },
+                { "example_value", n => { ExampleValue = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "path", n => { Path = n.GetStringValue(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -78,7 +78,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItemExampleValue>("example_value", ExampleValue);
+            writer.WriteObjectValue<UntypedNode>("example_value", ExampleValue);
             writer.WriteStringValue("path", Path);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteStringValue("type", Type);

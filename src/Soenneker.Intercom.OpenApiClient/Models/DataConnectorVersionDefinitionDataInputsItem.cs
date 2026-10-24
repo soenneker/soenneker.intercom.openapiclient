@@ -17,10 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The default_value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItemDefaultValue? DefaultValue { get; set; }
+        public UntypedNode? DefaultValue { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItemDefaultValue DefaultValue { get; set; }
+        public UntypedNode DefaultValue { get; set; }
 #endif
         /// <summary>The description property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "default_value", n => { DefaultValue = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItemDefaultValue>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItemDefaultValue.CreateFromDiscriminatorValue); } },
+                { "default_value", n => { DefaultValue = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "required", n => { Required = n.GetBoolValue(); } },
@@ -87,7 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItemDefaultValue>("default_value", DefaultValue);
+            writer.WriteObjectValue<UntypedNode>("default_value", DefaultValue);
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("name", Name);
             writer.WriteBoolValue("required", Required);

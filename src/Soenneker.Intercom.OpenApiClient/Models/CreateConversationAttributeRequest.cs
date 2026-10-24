@@ -91,31 +91,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.CreateConversationAttributeBooleanRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeBooleanRequest();
             }
-            else if("CreateConversationAttributeDatetimeRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("datetime".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeDatetimeRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeDatetimeRequest();
             }
-            else if("CreateConversationAttributeDecimalRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("decimal".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeDecimalRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeDecimalRequest();
             }
-            else if("CreateConversationAttributeFilesRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("files".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeFilesRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeFilesRequest();
             }
-            else if("CreateConversationAttributeIntegerRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("integer".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeIntegerRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeIntegerRequest();
             }
-            else if("CreateConversationAttributeListRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeListRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeListRequest();
             }
-            else if("CreateConversationAttributeRelationshipRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("relationship".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeRelationshipRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest();
             }
-            else if("CreateConversationAttributeStringRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("string".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CreateConversationAttributeStringRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeStringRequest();
             }

@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.office_hours_schedules.item collection</summary>
         /// <param name="position">The unique identifier for the office hours schedule.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_hours_schedulesItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_hours_schedulesItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("id", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_hours_schedulesItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Team_handling_segments
 {
     /// <summary>
-    /// Builds and executes requests for operations under \conversations\{conversation-id}\team_handling_segments
+    /// Builds and executes requests for operations under \conversations\{conversationId}\team_handling_segments
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Team_handling_segmentsRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Team_handling_segm
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Team_handling_segmentsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/team_handling_segments", pathParameters)
+        public Team_handling_segmentsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversationId}/team_handling_segments", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Team_handling_segm
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Team_handling_segmentsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversation%2Did}/team_handling_segments", rawUrl)
+        public Team_handling_segmentsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversationId}/team_handling_segments", rawUrl)
         {
         }
         /// <summary>

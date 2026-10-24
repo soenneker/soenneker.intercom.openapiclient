@@ -13,7 +13,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results
 {
     /// <summary>
-    /// Builds and executes requests for operations under \data_connectors\{dataConnector-id}\execution_results
+    /// Builds and executes requests for operations under \data_connectors\{id}\execution_results
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Execution_resultsRequestBuilder : BaseRequestBuilder
@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
+                urlTplParams.Add("id2", position);
                 return new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Item.Execution_resultsItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Execution_resultsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{dataConnector%2Did}/execution_results{?end_ts*,error_type*,include_bodies*,per_page*,start_ts*,starting_after*,success*}", pathParameters)
+        public Execution_resultsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{id}/execution_results{?end_ts*,error_type*,include_bodies*,per_page*,start_ts*,starting_after*,success*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Execution_resultsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{dataConnector%2Did}/execution_results{?end_ts*,error_type*,include_bodies*,per_page*,start_ts*,starting_after*,success*}", rawUrl)
+        public Execution_resultsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/data_connectors/{id}/execution_results{?end_ts*,error_type*,include_bodies*,per_page*,start_ts*,starting_after*,success*}", rawUrl)
         {
         }
         /// <summary>

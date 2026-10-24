@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \articles\{article-id}\versions\{id}
+    /// Builds and executes requests for operations under \articles\{id}\versions\{id2}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class VersionsItemRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public VersionsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/{article%2Did}/versions/{id}{?locale*}", pathParameters)
+        public VersionsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/{id}/versions/{id2}{?locale*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Versions.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public VersionsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/{article%2Did}/versions/{id}{?locale*}", rawUrl)
+        public VersionsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/{id}/versions/{id2}{?locale*}", rawUrl)
         {
         }
         /// <summary>

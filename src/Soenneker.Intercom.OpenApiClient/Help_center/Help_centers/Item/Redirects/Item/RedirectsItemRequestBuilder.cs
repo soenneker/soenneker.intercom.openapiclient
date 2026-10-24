@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirects.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \help_center\help_centers\{helpCenter-id}\redirects\{id}
+    /// Builds and executes requests for operations under \help_center\help_centers\{helpCenterId}\redirects\{id}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class RedirectsItemRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RedirectsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenter%2Did}/redirects/{id}", pathParameters)
+        public RedirectsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenterId}/redirects/{id}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RedirectsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenter%2Did}/redirects/{id}", rawUrl)
+        public RedirectsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenterId}/redirects/{id}", rawUrl)
         {
         }
         /// <summary>

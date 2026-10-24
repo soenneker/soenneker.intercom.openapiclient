@@ -25,10 +25,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The value for this attribute. Must be type-compatible with the attribute&apos;s data_type from the webhook (e.g., boolean for boolean attributes, option ID string for list attributes).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItemValue? Value { get; set; }
+        public UntypedNode? Value { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItemValue Value { get; set; }
+        public UntypedNode Value { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem"/> and sets the default values.
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "identifier", n => { Identifier = n.GetStringValue(); } },
-                { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItemValue>(global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItemValue.CreateFromDiscriminatorValue); } },
+                { "value", n => { Value = n.GetObjectValue<UntypedNode>(UntypedNode.CreateFromDiscriminatorValue); } },
             };
         }
         /// <summary>
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("identifier", Identifier);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItemValue>("value", Value);
+            writer.WriteObjectValue<UntypedNode>("value", Value);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

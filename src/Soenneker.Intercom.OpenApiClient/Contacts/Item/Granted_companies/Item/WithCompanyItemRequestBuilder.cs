@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \contacts\{contact-id}\granted_companies\{companyId}
+    /// Builds and executes requests for operations under \contacts\{id}\granted_companies\{companyId}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithCompanyItemRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithCompanyItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/granted_companies/{companyId}", pathParameters)
+        public WithCompanyItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/granted_companies/{companyId}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Granted_companies.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithCompanyItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/granted_companies/{companyId}", rawUrl)
+        public WithCompanyItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/granted_companies/{companyId}", rawUrl)
         {
         }
         /// <summary>

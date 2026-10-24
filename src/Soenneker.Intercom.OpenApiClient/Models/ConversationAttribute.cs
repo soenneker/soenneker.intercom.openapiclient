@@ -91,31 +91,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.ConversationAttributeBooleanType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType();
             }
-            else if("ConversationAttributeDatetimeType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("datetime".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeDatetimeType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType();
             }
-            else if("ConversationAttributeDecimalType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("decimal".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeDecimalType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType();
             }
-            else if("ConversationAttributeFilesType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("files".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeFilesType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType();
             }
-            else if("ConversationAttributeIntegerType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("integer".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeIntegerType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType();
             }
-            else if("ConversationAttributeListType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeListType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType();
             }
-            else if("ConversationAttributeRelationshipType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("relationship".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeRelationshipType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType();
             }
-            else if("ConversationAttributeStringType".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("string".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ConversationAttributeStringType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType();
             }

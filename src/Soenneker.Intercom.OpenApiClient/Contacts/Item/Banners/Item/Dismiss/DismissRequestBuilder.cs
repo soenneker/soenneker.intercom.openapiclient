@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item.Dismiss
 {
     /// <summary>
-    /// Builds and executes requests for operations under \contacts\{contact-id}\banners\{viewId}\dismiss
+    /// Builds and executes requests for operations under \contacts\{id}\banners\{viewId}\dismiss
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DismissRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item.Dismiss
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public DismissRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/banners/{viewId}/dismiss", pathParameters)
+        public DismissRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/banners/{viewId}/dismiss", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item.Dismiss
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public DismissRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/banners/{viewId}/dismiss", rawUrl)
+        public DismissRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/banners/{viewId}/dismiss", rawUrl)
         {
         }
         /// <summary>

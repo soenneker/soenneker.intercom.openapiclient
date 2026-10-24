@@ -53,21 +53,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ManageConversationRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("message_type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.ManageConversationRequest();
-            if("AssignConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("assignment".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.AssignConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest();
             }
-            else if("CloseConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("close".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CloseConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CloseConversationRequest();
             }
-            else if("OpenConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("open".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.OpenConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest();
             }
-            else if("SnoozeConversationRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("snoozed".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.SnoozeConversationRequest = new global::Soenneker.Intercom.OpenApiClient.Models.SnoozeConversationRequest();
             }

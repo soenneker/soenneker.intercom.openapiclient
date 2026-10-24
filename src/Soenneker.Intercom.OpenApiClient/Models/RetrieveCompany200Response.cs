@@ -45,17 +45,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompany200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.RetrieveCompany200Response();
-            if("Company".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("company".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.Company = new global::Soenneker.Intercom.OpenApiClient.Models.Company();
             }
-            else if("CompanyList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CompanyList = new global::Soenneker.Intercom.OpenApiClient.Models.CompanyList();
             }
-            else if("CompanyUserList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("user.list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CompanyUserList = new global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList();
             }

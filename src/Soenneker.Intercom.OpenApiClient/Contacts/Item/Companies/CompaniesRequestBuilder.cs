@@ -13,7 +13,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
 {
     /// <summary>
-    /// Builds and executes requests for operations under \contacts\{contact-id}\companies
+    /// Builds and executes requests for operations under \contacts\{id}\companies
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CompaniesRequestBuilder : BaseRequestBuilder
@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
+                urlTplParams.Add("id2", position);
                 return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies.Item.CompaniesItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/companies{?order*,page*,per_page*}", pathParameters)
+        public CompaniesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/companies{?order*,page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Companies
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/companies{?order*,page*,per_page*}", rawUrl)
+        public CompaniesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/companies{?order*,page*,per_page*}", rawUrl)
         {
         }
         /// <summary>

@@ -13,7 +13,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations
 {
     /// <summary>
-    /// Builds and executes requests for operations under \tickets\{-id}\linked_conversations
+    /// Builds and executes requests for operations under \tickets\{id}\linked_conversations
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Linked_conversationsRequestBuilder : BaseRequestBuilder
@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
+                urlTplParams.Add("id2", position);
                 return new global::Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations.Item.Linked_conversationsItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Linked_conversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{%2Did}/linked_conversations", pathParameters)
+        public Linked_conversationsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{id}/linked_conversations", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Linked_conversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{%2Did}/linked_conversations", rawUrl)
+        public Linked_conversationsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{id}/linked_conversations", rawUrl)
         {
         }
         /// <summary>

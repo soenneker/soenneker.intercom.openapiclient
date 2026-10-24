@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \tickets\{-id}\linked_conversations\{id}
+    /// Builds and executes requests for operations under \tickets\{id}\linked_conversations\{id2}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Linked_conversationsItemRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations.Ite
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Linked_conversationsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{%2Did}/linked_conversations/{id}", pathParameters)
+        public Linked_conversationsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{id}/linked_conversations/{id2}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item.Linked_conversations.Ite
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Linked_conversationsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{%2Did}/linked_conversations/{id}", rawUrl)
+        public Linked_conversationsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tickets/{id}/linked_conversations/{id2}", rawUrl)
         {
         }
         /// <summary>

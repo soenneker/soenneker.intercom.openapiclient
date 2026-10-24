@@ -13,7 +13,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     #pragma warning restore CS1591
     {
         /// <summary>If the user has enabled push messaging.</summary>
-        public bool? EnabledPushMessaging { get; set; }
+        public new bool? EnabledPushMessaging { get => base.EnabledPushMessaging; set => base.EnabledPushMessaging = value; }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
@@ -32,7 +32,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>(base.GetFieldDeserializers())
             {
-                { "enabled_push_messaging", n => { EnabledPushMessaging = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -43,7 +42,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
-            writer.WriteBoolValue("enabled_push_messaging", EnabledPushMessaging);
         }
     }
 }

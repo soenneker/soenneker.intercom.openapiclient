@@ -37,13 +37,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.LisDataEvents200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.LisDataEvents200Response();
-            if("DataEventList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("event.list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.DataEventList = new global::Soenneker.Intercom.OpenApiClient.Models.DataEventList();
             }
-            else if("DataEventSummary".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("event.summary".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.DataEventSummary = new global::Soenneker.Intercom.OpenApiClient.Models.DataEventSummary();
             }

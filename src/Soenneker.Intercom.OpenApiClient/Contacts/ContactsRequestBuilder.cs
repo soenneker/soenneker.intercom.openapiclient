@@ -56,14 +56,14 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.contacts.item collection</summary>
         /// <param name="position">id</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactsItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactsItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("contact%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("id", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Contacts.Item.ContactsItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>
@@ -111,7 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         /// You can create a new contact (ie. user or lead).Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateContact200Response"/></returns>
-        /// <param name="body">The request body</param>
+        /// <param name="body">Payload to create a contact</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -161,7 +161,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts
         /// You can create a new contact (ie. user or lead).Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request body</param>
+        /// <param name="body">Payload to create a contact</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

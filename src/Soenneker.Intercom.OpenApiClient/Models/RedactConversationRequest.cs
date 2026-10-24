@@ -37,13 +37,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequest();
-            if("RedactConversationRequestRedactConversationPartRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("conversation_part".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.RedactConversationRequestRedactConversationPartRequest = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequest();
             }
-            else if("RedactConversationRequestRedactConversationSourceRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("source".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.RedactConversationRequestRedactConversationSourceRequest = new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequest();
             }

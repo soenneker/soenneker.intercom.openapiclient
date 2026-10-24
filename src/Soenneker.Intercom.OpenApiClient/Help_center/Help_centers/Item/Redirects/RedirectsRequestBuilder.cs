@@ -13,7 +13,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirects
 {
     /// <summary>
-    /// Builds and executes requests for operations under \help_center\help_centers\{helpCenter-id}\redirects
+    /// Builds and executes requests for operations under \help_center\help_centers\{helpCenterId}\redirects
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class RedirectsRequestBuilder : BaseRequestBuilder
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RedirectsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenter%2Did}/redirects{?page*,per_page*}", pathParameters)
+        public RedirectsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenterId}/redirects{?page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Help_centers.Item.Redirec
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RedirectsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenter%2Did}/redirects{?page*,per_page*}", rawUrl)
+        public RedirectsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/help_center/help_centers/{helpCenterId}/redirects{?page*,per_page*}", rawUrl)
         {
         }
         /// <summary>

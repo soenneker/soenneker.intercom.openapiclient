@@ -12,7 +12,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Tags.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \content_snippets\{contentSnippet-id}\tags\{id}
+    /// Builds and executes requests for operations under \content_snippets\{id}\tags\{id2}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class TagsItemRequestBuilder : BaseRequestBuilder
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Tags.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TagsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content_snippets/{contentSnippet%2Did}/tags/{id}{?admin_id*}", pathParameters)
+        public TagsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content_snippets/{id}/tags/{id2}{?admin_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets.Item.Tags.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TagsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content_snippets/{contentSnippet%2Did}/tags/{id}{?admin_id*}", rawUrl)
+        public TagsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/content_snippets/{id}/tags/{id2}{?admin_id*}", rawUrl)
         {
         }
         /// <summary>

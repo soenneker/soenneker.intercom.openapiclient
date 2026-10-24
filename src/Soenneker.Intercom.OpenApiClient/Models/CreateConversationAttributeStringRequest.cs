@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType? DataType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeStringRequestDataType? DataType { get; set; }
         /// <summary>Readable description of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType>(); } },
+                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeStringRequestDataType>(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "multiline", n => { Multiline = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRequestBaseDataType>("data_type", DataType);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeStringRequestDataType>("data_type", DataType);
             writer.WriteStringValue("description", Description);
             writer.WriteBoolValue("multiline", Multiline);
             writer.WriteStringValue("name", Name);

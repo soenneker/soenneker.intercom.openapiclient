@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.ticket_types.item collection</summary>
         /// <param name="position">The unique identifier for the ticket type which is given by Intercom.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Ticket_types.Item.ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Ticket_types.Item.ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Ticket_types.Item.WithTicketTypeItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Ticket_types.Item.WithTicketTypeItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Ticket_types.Item.ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("ticketTypeId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Ticket_types.Item.WithTicketTypeItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

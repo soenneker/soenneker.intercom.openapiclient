@@ -13,7 +13,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_hours_exceptions
 {
     /// <summary>
-    /// Builds and executes requests for operations under \office_hours_schedules\{-id}\office_hours_exceptions
+    /// Builds and executes requests for operations under \office_hours_schedules\{id}\office_hours_exceptions
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Office_hours_exceptionsRequestBuilder : BaseRequestBuilder
@@ -26,7 +26,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
+                urlTplParams.Add("id2", position);
                 return new global::Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_hours_exceptions.Item.Office_hours_exceptionsItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Office_hours_exceptionsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/office_hours_schedules/{%2Did}/office_hours_exceptions", pathParameters)
+        public Office_hours_exceptionsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/office_hours_schedules/{id}/office_hours_exceptions", pathParameters)
         {
         }
         /// <summary>
@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Office_hours_exceptionsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/office_hours_schedules/{%2Did}/office_hours_exceptions", rawUrl)
+        public Office_hours_exceptionsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/office_hours_schedules/{id}/office_hours_exceptions", rawUrl)
         {
         }
         /// <summary>

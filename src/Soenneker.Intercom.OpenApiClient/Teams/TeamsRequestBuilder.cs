@@ -20,14 +20,14 @@ namespace Soenneker.Intercom.OpenApiClient.Teams
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.teams.item collection</summary>
         /// <param name="position">The unique identifier of a given team.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.WithTeamItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Teams.Item.WithTeamItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Teams.Item.ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("teamId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Teams.Item.WithTeamItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

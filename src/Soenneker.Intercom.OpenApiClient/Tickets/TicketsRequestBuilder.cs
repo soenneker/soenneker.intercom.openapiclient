@@ -32,14 +32,14 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.tickets.item collection</summary>
         /// <param name="position">The unique identifier for the ticket which is given by Intercom.{% admonition type=&quot;info&quot; name=&quot;Not the Inbox ticket ID&quot; %}This is the internal `id` field from the API response, not the `ticket_id` displayed in the Intercom Inbox (e.g., #12345). Use the `id` value from the ticket object returned by the API.{% /admonition %}</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Tickets.Item.ItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Tickets.Item.ItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Tickets.Item.TicketsItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Tickets.Item.TicketsItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Tickets.Item.ItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("id", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Tickets.Item.TicketsItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

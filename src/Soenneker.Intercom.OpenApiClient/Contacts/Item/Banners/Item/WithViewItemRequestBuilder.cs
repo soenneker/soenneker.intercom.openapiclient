@@ -10,7 +10,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item
 {
     /// <summary>
-    /// Builds and executes requests for operations under \contacts\{contact-id}\banners\{viewId}
+    /// Builds and executes requests for operations under \contacts\{id}\banners\{viewId}
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class WithViewItemRequestBuilder : BaseRequestBuilder
@@ -25,7 +25,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithViewItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/banners/{viewId}", pathParameters)
+        public WithViewItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/banners/{viewId}", pathParameters)
         {
         }
         /// <summary>
@@ -33,7 +33,7 @@ namespace Soenneker.Intercom.OpenApiClient.Contacts.Item.Banners.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithViewItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{contact%2Did}/banners/{viewId}", rawUrl)
+        public WithViewItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/contacts/{id}/banners/{viewId}", rawUrl)
         {
         }
     }

@@ -37,13 +37,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.RetrieveACompanyById200Response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.RetrieveACompanyById200Response();
-            if("Company".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("company".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.Company = new global::Soenneker.Intercom.OpenApiClient.Models.Company();
             }
-            else if("CompanyUserList".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("user.list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.CompanyUserList = new global::Soenneker.Intercom.OpenApiClient.Models.CompanyUserList();
             }

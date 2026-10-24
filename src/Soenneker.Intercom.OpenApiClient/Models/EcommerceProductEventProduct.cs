@@ -42,10 +42,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog&apos;s structure and answer questions like &quot;what&apos;s in the sale collection?&quot;. Each element may be a plain string or an object with a `title` field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCollectionsItem>? Collections { get; set; }
+        public List<string>? Collections { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCollectionsItem> Collections { get; set; }
+        public List<string> Collections { get; set; }
 #endif
         /// <summary>When the product was created in your store, as an ISO 8601 timestamp.</summary>
         public DateTimeOffset? CreatedAt { get; set; }
@@ -165,7 +165,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "additional_data", n => { AdditionalDataProperty = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData.CreateFromDiscriminatorValue); } },
                 { "available_options", n => { AvailableOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "category_path", n => { CategoryPath = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath.CreateFromDiscriminatorValue); } },
-                { "collections", n => { Collections = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCollectionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCollectionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "collections", n => { Collections = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
@@ -193,7 +193,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData>("additional_data", AdditionalDataProperty);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>("available_options", AvailableOptions);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath>("category_path", CategoryPath);
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCollectionsItem>("collections", Collections);
+            writer.WriteCollectionOfPrimitiveValues<string>("collections", Collections);
             writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
             writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("description", Description);

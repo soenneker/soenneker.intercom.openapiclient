@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.ContentSearchArticleItem = new global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchArticleItem();
             }
-            else if("ContentSearchDefaultItem".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("content_snippet".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 result.ContentSearchDefaultItem = new global::Soenneker.Intercom.OpenApiClient.Models.ContentSearchDefaultItem();
             }

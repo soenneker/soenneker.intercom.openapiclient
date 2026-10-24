@@ -44,14 +44,14 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.conversations.item collection</summary>
         /// <param name="position">The id of the conversation to target</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Item.ConversationItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.ConversationItemRequestBuilder this[int position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Conversations.Item.WithConversationItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.WithConversationItemRequestBuilder this[int position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("conversation%2Did", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.ConversationItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("conversationId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.WithConversationItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

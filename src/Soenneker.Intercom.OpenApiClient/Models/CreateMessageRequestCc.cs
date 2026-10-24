@@ -8,26 +8,26 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCcBranch2"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/>, List&lt;global::Soenneker.Intercom.OpenApiClient.Models.Recipient&gt;
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateMessageRequestCc : IComposedTypeWrapper, IParsable
     {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCcBranch2"/></summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCcBranch2? CreateMessageRequestCcBranch2 { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCcBranch2 CreateMessageRequestCcBranch2 { get; set; }
-#endif
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Recipient"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Recipient? Recipient { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Recipient? CreateMessageRequestCcRecipient { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Recipient Recipient { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Recipient CreateMessageRequestCcRecipient { get; set; }
+#endif
+        /// <summary>Composed type representation for type List&lt;global::Soenneker.Intercom.OpenApiClient.Models.Recipient&gt;</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>? Recipient { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Recipient> Recipient { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -39,13 +39,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc();
-            if("CreateMessageRequestCcBranch2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("Recipient".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateMessageRequestCcBranch2 = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCcBranch2();
+                result.CreateMessageRequestCcRecipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
             }
-            else if("Recipient".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(global::Soenneker.Intercom.OpenApiClient.Models.Recipient.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.Recipient> recipientValue)
             {
-                result.Recipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
+                result.Recipient = recipientValue;
             }
             return result;
         }
@@ -55,13 +55,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(CreateMessageRequestCcBranch2 != null)
+            if(CreateMessageRequestCcRecipient != null)
             {
-                return CreateMessageRequestCcBranch2.GetFieldDeserializers();
-            }
-            else if(Recipient != null)
-            {
-                return Recipient.GetFieldDeserializers();
+                return CreateMessageRequestCcRecipient.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -72,13 +68,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(CreateMessageRequestCcBranch2 != null)
+            if(CreateMessageRequestCcRecipient != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCcBranch2>(null, CreateMessageRequestCcBranch2);
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, CreateMessageRequestCcRecipient);
             }
             else if(Recipient != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, Recipient);
+                writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, Recipient);
             }
         }
     }
