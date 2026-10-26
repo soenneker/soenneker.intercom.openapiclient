@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? DirectFinUsage { get; set; }
         /// <summary>Whether authentication is enforced. On workspaces where this is supported, it takes precedence over `customer_authentication` and `bypass_authentication` when sent together, and setting it to false disables OTP.</summary>
         public bool? EnforceAuth { get; set; }
-        /// <summary>HTTP headers to include in the request.</summary>
+        /// <summary>HTTP headers to include in the request. Don&apos;t put credentials such as API keys here: header values are recorded unmasked in the connector&apos;s execution logs, except `Authorization`, which is always masked. Attach a stored credential with `token_ids` instead (see [Create an auth token](/docs/references/preview/rest-api/api.intercom.io/auth-tokens/createauthtoken)). Its value is stored encrypted, masked in execution logs, and never returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataConnectorRequestHeadersItem>? Headers { get; set; }

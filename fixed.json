@@ -58249,7 +58249,7 @@
             "items": {
               "$ref": "#/components/schemas/CreateDataConnectorRequestHeadersItem"
             },
-            "description": "HTTP headers to include in the request."
+            "description": "HTTP headers to include in the request. Don\u0027t put credentials such as API keys here: header values are recorded unmasked in the connector\u0027s execution logs, except \u0060Authorization\u0060, which is always masked. Attach a stored credential with \u0060token_ids\u0060 instead (see [Create an auth token](/docs/references/preview/rest-api/api.intercom.io/auth-tokens/createauthtoken)). Its value is stored encrypted, masked in execution logs, and never returned.\n"
           },
           "data_inputs": {
             "type": "array",
@@ -58354,7 +58354,7 @@
             "items": {
               "$ref": "#/components/schemas/UpdateDataConnectorRequestHeadersItem"
             },
-            "description": "HTTP headers to include in the request."
+            "description": "HTTP headers to include in the request. Don\u0027t put credentials such as API keys here: header values are recorded unmasked in the connector\u0027s execution logs, except \u0060Authorization\u0060, which is always masked. Attach a stored credential with \u0060token_ids\u0060 instead (see [Create an auth token](/docs/references/preview/rest-api/api.intercom.io/auth-tokens/createauthtoken)). Its value is stored encrypted, masked in execution logs, and never returned.\n"
           },
           "data_inputs": {
             "type": "array",
