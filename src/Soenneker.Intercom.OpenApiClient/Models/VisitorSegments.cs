@@ -17,10 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The segments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Segments { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsSegmentsItem>? Segments { get; set; }
 #nullable restore
 #else
-        public List<string> Segments { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsSegmentsItem> Segments { get; set; }
 #endif
         /// <summary>The type of the object</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.SegmentListType? Type { get; set; }
@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "segments", n => { Segments = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "segments", n => { Segments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsSegmentsItem>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsSegmentsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentListType>(); } },
             };
         }
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfPrimitiveValues<string>("segments", Segments);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorSegmentsSegmentsItem>("segments", Segments);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

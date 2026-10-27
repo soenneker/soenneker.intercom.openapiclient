@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The unique identifiers to convert a single Visitor.
+    /// The unique identifiers to convert a single Visitor. One of `id` or `user_id` is required; an `email` on its own does not identify a visitor.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConvertVisitorRequestVisitor : IAdditionalDataHolder, IParsable

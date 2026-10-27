@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The data type of the attribute.</summary>
+    /// <summary>The data type of the attribute. A list attribute created with the `options` data type is returned as `string`, with its choices in `options`. `relationship` is a reference to a custom object.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum DataAttributeDataType
     {
@@ -30,6 +30,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "datetime")]
         #pragma warning disable CS1591
         Datetime,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "relationship")]
+        #pragma warning disable CS1591
+        Relationship,
         #pragma warning restore CS1591
     }
 }

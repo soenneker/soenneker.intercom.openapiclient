@@ -7198,7 +7198,7 @@
           "Reporting Data Export"
         ],
         "summary": "Enqueue a new reporting data export job",
-        "description": "For the **conversation** dataset, from the Preview version this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.",
+        "description": "For the **conversation** dataset, from API version 2.16 this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.\n\nRequires the \u0060export_reporting_data\u0060 OAuth scope.\n",
         "operationId": "PostExportReportingDataEnqueue",
         "parameters": [
           {
@@ -7293,7 +7293,7 @@
                       "errors": [
                         {
                           "code": "bad_request",
-                          "message": "\u0027attribute_ids\u0027 not an array must be of type Array"
+                          "message": "\u0027attribute_ids: not an array\u0027 must be of type Array"
                         }
                       ]
                     }
@@ -7306,6 +7306,66 @@
                         {
                           "code": "bad_request",
                           "message": "attribute_ids invalid for conversation dataset: non_existent"
+                        }
+                      ]
+                    }
+                  },
+                  "Unqualified attribute_ids": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "attribute_ids must use qualified_id format (e.g., \u0027people.Brand\u0027 instead of \u0027Brand\u0027). Use the qualified_id from the get_datasets response. Unqualified ids: conversation_id"
+                        }
+                      ]
+                    }
+                  },
+                  "start_time too far in the past": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "\u0027start_time\u0027 parameter too far in past (more than 2 years)"
+                        }
+                      ]
+                    }
+                  },
+                  "end_time before start_time": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "end_time is less than start_time"
+                        }
+                      ]
+                    }
+                  },
+                  "Unknown parameter": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "bad \u0027unknown_field\u0027 parameter"
+                        }
+                      ]
+                    }
+                  },
+                  "Not available in this API version": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version"
                         }
                       ]
                     }
@@ -7371,6 +7431,7 @@
           "Reporting Data Export"
         ],
         "summary": "Get export job status",
+        "description": "Requires the \u0060export_reporting_data\u0060 OAuth scope.",
         "operationId": "GetExportReportingDataByJobIdentifier",
         "parameters": [
           {
@@ -7381,34 +7442,9 @@
             }
           },
           {
-            "name": "app_id",
-            "in": "query",
-            "description": "The Intercom defined code of the workspace the company is associated to.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "client_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "job_identifier",
-            "in": "query",
-            "description": "Unique identifier of the job.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "jobIdentifier",
             "in": "path",
+            "description": "Unique identifier of the job.",
             "required": true,
             "schema": {
               "type": "string"
@@ -7424,12 +7460,20 @@
                   "$ref": "#/components/schemas/GetExportReportingDataByJobIdentifier200Response"
                 },
                 "examples": {
+                  "With pending status": {
+                    "value": {
+                      "job_identifier": "job1",
+                      "status": "pending",
+                      "download_url": "",
+                      "download_expires_at": ""
+                    }
+                  },
                   "With complete status": {
                     "value": {
                       "job_identifier": "job1",
                       "status": "complete",
-                      "download_url": "",
-                      "download_expires_at": ""
+                      "download_url": "https://api.intercom.io/download/reporting_data/job1",
+                      "download_expires_at": 1788480000
                     }
                   },
                   "With failed status": {
@@ -7444,8 +7488,35 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Not available in this API version": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
           "404": {
-            "description": "When job not found",
+            "description": "When the job is not found or was created by a different teammate",
             "content": {
               "application/json": {
                 "schema": {
@@ -7477,6 +7548,7 @@
           "Reporting Data Export"
         ],
         "summary": "List available datasets and attributes",
+        "description": "Requires the \u0060export_reporting_data\u0060 or \u0060read_reporting_datasets\u0060 OAuth scope.",
         "operationId": "GetExportReportingDataGetDatasets",
         "parameters": [
           {
@@ -7497,6 +7569,33 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Not available in this API version": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -7507,7 +7606,7 @@
           "Reporting Data Export"
         ],
         "summary": "Download completed export job data",
-        "description": "Download the data from a completed reporting data export job.\n\n\u003E Octet header required\n\u003E\n\u003E You will have to specify the header Accept: \u0060application/octet-stream\u0060 when hitting this endpoint.\n",
+        "description": "Download the data from a completed reporting data export job.\n\n\u003E Octet header required\n\u003E\n\u003E You will have to specify the header Accept: \u0060application/octet-stream\u0060 when hitting this endpoint.\n\nRequires the \u0060export_reporting_data\u0060 OAuth scope.\n",
         "operationId": "GetDownloadReportingDataByJobIdentifier",
         "parameters": [
           {
@@ -7527,24 +7626,9 @@
             }
           },
           {
-            "name": "app_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "job_identifier",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "jobIdentifier",
             "in": "path",
+            "description": "Unique identifier of the job.",
             "required": true,
             "schema": {
               "type": "string"
@@ -7553,10 +7637,53 @@
         ],
         "responses": {
           "200": {
-            "description": "Export file downloaded"
+            "description": "Export file downloaded. The CSV data is gzip-compressed and the response has a \u0060Content-Encoding: gzip\u0060 header, so most HTTP clients decompress it automatically.",
+            "headers": {
+              "Content-Encoding": {
+                "description": "The encoding applied to the response body.",
+                "schema": {
+                  "type": "string",
+                  "example": "gzip"
+                }
+              }
+            },
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDownloadReportingDataByJobIdentifier200OctetStreamResponseSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Not available in this API version": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "When job not found",
+            "description": "When the job is not found, was created by a different teammate, or is not complete, or the export file is no longer available",
             "content": {
               "application/json": {
                 "schema": {
@@ -7571,6 +7698,18 @@
                         {
                           "code": "not_found",
                           "message": "Export job not found for identifier: job1"
+                        }
+                      ]
+                    }
+                  },
+                  "Export file not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Object not found"
                         }
                       ]
                     }
@@ -12315,7 +12454,7 @@
           "Companies"
         ],
         "summary": "List all company notes",
-        "description": "You can fetch a list of notes that are associated to a company.",
+        "description": "You can fetch a list of notes that are associated to a company.\n\nRequires the \u0060read_users_companies\u0060 OAuth scope.\n",
         "operationId": "ListCompanyNotes",
         "parameters": [
           {
@@ -12327,6 +12466,33 @@
               "type": "string"
             },
             "example": "5f4d3c1c-7b1b-4d7d-a97e-6095715c6632"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of results to return. Defaults to \u00601\u0060.",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of notes to return per page. Defaults to \u006050\u0060, maximum \u006060\u0060.",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 50
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "The order the notes are returned in, by id. Defaults to \u0060desc\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/ListCompanyNotesOrderParameter"
+            },
+            "example": "desc"
           },
           {
             "name": "Intercom-Version",
@@ -12426,6 +12592,66 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Page size too big": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4a1f7c90-2b63-4f18-9d7a-0c5e8b41d9f2",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Per Page is too big"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7d2e5b14-8a06-4c39-bf5d-91e07c3a6b48",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0f6c3a92-57d1-4e80-b23f-6a9d5c8e14b7",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
             "description": "Company not found",
             "content": {
@@ -12458,7 +12684,7 @@
           "Companies"
         ],
         "summary": "Create a company note",
-        "description": "You can add a note to a single company.",
+        "description": "You can add a note to a single company.\n\nRequires the \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "CreateCompanyNote",
         "parameters": [
           {
@@ -12543,12 +12769,62 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Body missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2b84c6e0-91fd-4a37-8c52-6e7d093af415",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Body can\u0027t be nil"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5e9a2d71-6c04-4bf8-93ae-1d0f74b25c69",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8c1b70d3-4f25-49ea-a6d8-3b5f92e07a14",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -15020,7 +15296,7 @@
           "Contacts"
         ],
         "summary": "List all contact notes",
-        "description": "You can fetch a list of notes that are associated to a contact.",
+        "description": "You can fetch a list of notes that are associated to a contact.\n\nRequires the \u0060read_users_companies\u0060 or \u0060read_write_users\u0060 OAuth scope.\n",
         "operationId": "ListNotes",
         "parameters": [
           {
@@ -15031,6 +15307,33 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of results to return. Defaults to \u00601\u0060.",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of notes to return per page. Defaults to \u006050\u0060, maximum \u006060\u0060.",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 50
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "The order the notes are returned in, by id. Defaults to \u0060desc\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/ListNotesOrderParameter"
+            },
+            "example": "desc"
           },
           {
             "name": "Intercom-Version",
@@ -15122,6 +15425,66 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Page size too big": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3b2d41-7ce9-4a05-91d8-2b74e0c6a93f",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Per Page is too big"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3a7d90c5-14e6-4b28-bf03-85c1d6e742ab",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9b5e41a7-0d38-4c6f-a920-7e3f85b14c6d",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
             "description": "Contact not found",
             "content": {
@@ -15154,7 +15517,7 @@
           "Contacts"
         ],
         "summary": "Create a note",
-        "description": "You can add a note to a single contact.",
+        "description": "You can add a note to a single contact.\n\nRequires the \u0060read_write_users\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "CreateNote",
         "parameters": [
           {
@@ -15170,9 +15533,9 @@
             "description": "The unique identifier of a given contact.",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": "123"
+            "example": "6762f0ad1bb69f9f2193bb62"
           }
         ],
         "requestBody": {
@@ -15185,24 +15548,21 @@
                 "successful_response": {
                   "summary": "Successful response",
                   "value": {
-                    "contact_id": "6762f0ad1bb69f9f2193bb62",
-                    "admin_id": 991267583,
+                    "admin_id": "991267583",
                     "body": "Hello"
                   }
                 },
                 "admin_not_found": {
                   "summary": "Admin not found",
                   "value": {
-                    "contact_id": "6762f0af1bb69f9f2193bb63",
-                    "admin_id": 123,
+                    "admin_id": "123",
                     "body": "Hello"
                   }
                 },
                 "contact_not_found": {
                   "summary": "Contact not found",
                   "value": {
-                    "contact_id": 123,
-                    "admin_id": 991267585,
+                    "admin_id": "991267585",
                     "body": "Hello"
                   }
                 }
@@ -15237,6 +15597,66 @@
                         "away_mode_reassign": false
                       },
                       "body": "\u003Cp\u003EHello\u003C/p\u003E"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Body missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c40d9e58-1b76-4f23-85a0-7d6c2e914bf3",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Body can\u0027t be nil"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1e68b70f-9c3d-4a51-b48e-20d9f7c536a1",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "74c0a9e3-5d81-4b62-9f07-e3a5861d2c4b",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
                     }
                   }
                 }
@@ -23686,7 +24106,7 @@
           "Conversations"
         ],
         "summary": "Creates a conversation",
-        "description": "You can create a conversation that has been initiated by a contact (ie. user or lead).\nThe conversation can be an in-app message only.\n\n{% admonition type=\u0022info\u0022 name=\u0022Sending for visitors\u0022 %}\nYou can also send a message from a visitor by specifying their \u0060user_id\u0060 or \u0060id\u0060 value in the \u0060from\u0060 field, along with a \u0060type\u0060 field value of \u0060contact\u0060.\nThis visitor will be automatically converted to a contact with a lead role once the conversation is created.\n{% /admonition %}\n\nThis will return the Message model that has been created.\n\n",
+        "description": "You can create a conversation that has been initiated by a contact (ie. user or lead).\nThe conversation can be an in-app message only.\n\n{% admonition type=\u0022info\u0022 name=\u0022Sending for visitors\u0022 %}\nYou can also send a message from a visitor by specifying their \u0060id\u0060 value in the \u0060from\u0060 field, along with a \u0060type\u0060 field value of \u0060lead\u0060.\nThis visitor will be automatically converted to a contact with a lead role once the conversation is created.\n{% /admonition %}\n\nThis will return the Message model that has been created.\n\n",
         "operationId": "CreateConversation",
         "parameters": [
           {
@@ -30305,7 +30725,7 @@
           "Data Attributes"
         ],
         "summary": "List all data attributes",
-        "description": "You can fetch a list of all data attributes belonging to a workspace for contacts or companies.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Conversation attributes removed\u0022 %}\nConversation attributes are no longer returned by this endpoint. Calling without a \u0060model\u0060 parameter no longer includes them in the response, and \u0060model=conversation\u0060 returns a \u0060422\u0060 error. Use [GET /conversations/attributes](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) instead.\n{% /admonition %}\n",
+        "description": "You can fetch a list of all data attributes belonging to a workspace for contacts or companies.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Conversation attributes removed\u0022 %}\nConversation attributes are no longer returned by this endpoint. Calling without a \u0060model\u0060 parameter no longer includes them in the response, and \u0060model=conversation\u0060 returns a \u0060422\u0060 error. Use [GET /conversations/attributes](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) instead.\n{% /admonition %}\n\nRequires the \u0060read_users_companies\u0060 or \u0060read_write_users\u0060 OAuth scope.\n",
         "operationId": "LisDataAttributes",
         "parameters": [
           {
@@ -30615,6 +31035,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2f0c1e7a-5a3d-43a1-9f61-6b2d1c4e8a90",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -30651,7 +31083,7 @@
           "Data Attributes"
         ],
         "summary": "Create a data attribute",
-        "description": "You can create a data attributes for a \u0060contact\u0060 or a \u0060company\u0060.",
+        "description": "You can create a data attributes for a \u0060contact\u0060 or a \u0060company\u0060.\n\nRequires the \u0060write_attributes\u0060 OAuth scope.\n",
         "operationId": "CreateDataAttribute",
         "parameters": [
           {
@@ -30758,7 +31190,7 @@
             }
           },
           "400": {
-            "description": "Too few options for list",
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
@@ -30848,6 +31280,42 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8d0a4f23-0b7e-4c2e-9a68-1d5f3c7b2e41",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Relationship data type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3a6b9c14-7e52-4d08-b1f3-c8a0e5d27b36",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Data Type isn\u0027t an option"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -30862,7 +31330,7 @@
           "Data Attributes"
         ],
         "summary": "Update a data attribute",
-        "description": "\nYou can update a data attribute.\n\n\u003E \uD83D\uDEA7 Updating the data type is not possible\n\u003E\n\u003E It is currently a dangerous action to execute changing a data attribute\u0027s type via the API. You will need to update the type via the UI instead.\n",
+        "description": "\nYou can update a data attribute.\n\n\u003E \uD83D\uDEA7 Updating the data type is not possible\n\u003E\n\u003E It is currently a dangerous action to execute changing a data attribute\u0027s type via the API. You will need to update the type via the UI instead.\n\nYou can also send this request with \u0060PATCH\u0060; it behaves the same as \u0060PUT\u0060.\n\nRequires the \u0060write_attributes\u0060 OAuth scope.\n",
         "operationId": "UpdateDataAttribute",
         "parameters": [
           {
@@ -31066,6 +31534,18 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5c71e2d8-9a04-4b36-8e57-f2b6c3a91d4e",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
                         }
                       ]
                     }
@@ -34520,7 +35000,7 @@
           "Data Events"
         ],
         "summary": "Submit a data event",
-        "description": "\nYou will need an Access Token that has write permissions to send Events. Once you have a key you can submit events via POST to the Events resource, which is located at https://api.intercom.io/events, or you can send events using one of the client libraries. When working with the HTTP API directly a client should send the event with a \u0060Content-Type\u0060 of \u0060application/json\u0060.\n\nWhen using the JavaScript API, [adding the code to your app](http://docs.intercom.io/configuring-Intercom/tracking-user-events-in-your-app) makes the Events API available. Once added, you can submit an event using the \u0060trackEvent\u0060 method. This will associate the event with the Lead or currently logged-in user or logged-out visitor/lead and send it to Intercom. The final parameter is a map that can be used to send optional metadata about the event.\n\nWith the Ruby client you pass a hash describing the event to \u0060Intercom::Event.create\u0060, or call the \u0060track_user\u0060 method directly on the current user object (e.g. \u0060user.track_event\u0060).\n\n**NB: For the JSON object types, please note that we do not currently support nested JSON structure.**\n\n| Type            | Description                                                                                                                                                                                                     | Example                                                                           |\n| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |\n| String          | The value is a JSON String                                                                                                                                                                                      | \u0060\u0022source\u0022:\u0022desktop\u0022\u0060                                                              |\n| Number          | The value is a JSON Number                                                                                                                                                                                      | \u0060\u0022load\u0022: 3.67\u0060                                                                    |\n| Date            | The key ends with the String \u0060_date\u0060 and the value is a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time), assumed to be in the [UTC](http://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone. | \u0060\u0022contact_date\u0022: 1392036272\u0060                                                      |\n| Link            | The value is a HTTP or HTTPS URI.                                                                                                                                                                               | \u0060\u0022article\u0022: \u0022https://example.org/ab1de.html\u0022\u0060                                     |\n| Rich Link       | The value is a JSON object that contains \u0060url\u0060 and \u0060value\u0060 keys.                                                                                                                                                | \u0060\u0022article\u0022: {\u0022url\u0022: \u0022https://example.org/ab1de.html\u0022, \u0022value\u0022:\u0022the dude abides\u0022}\u0060 |\n| Monetary Amount | The value is a JSON object that contains \u0060amount\u0060 and \u0060currency\u0060 keys. The \u0060amount\u0060 key is a positive integer representing the amount in cents. The price in the example to the right denotes \u20AC349.99.          | \u0060\u0022price\u0022: {\u0022amount\u0022: 34999, \u0022currency\u0022: \u0022eur\u0022}\u0060                                   |\n\n**Lead Events**\n\nWhen submitting events for Leads, you will need to specify the Lead\u0027s \u0060id\u0060.\n\n**Metadata behaviour**\n\n- We currently limit the number of tracked metadata keys to 10 per event. Once the quota is reached, we ignore any further keys we receive. The first 10 metadata keys are determined by the order in which they are sent in with the event.\n- It is not possible to change the metadata keys once the event has been sent. A new event will need to be created with the new keys and you can archive the old one.\n- There might be up to 24 hrs delay when you send a new metadata for an existing event.\n\n**Event de-duplication**\n\nThe API may detect and ignore duplicate events. Each event is uniquely identified as a combination of the following data - the Workspace identifier, the Contact external identifier, the Data Event name and the Data Event created time. As a result, it is **strongly recommended** to send a second granularity Unix timestamp in the \u0060created_at\u0060 field.\n\nDuplicated events are responded to using the normal \u0060202 Accepted\u0060 code - an error is not thrown, however repeat requests will be counted against any rate limit that is in place.\n\n### HTTP API Responses\n\n- Successful responses to submitted events return \u0060202 Accepted\u0060 with an empty body.\n- Unauthorised access will be rejected with a \u0060401 Unauthorized\u0060 or \u0060403 Forbidden\u0060 response code.\n- Events sent about users that cannot be found will return a \u0060404 Not Found\u0060.\n- Event lists containing duplicate events will have those duplicates ignored.\n- Server errors will return a \u0060500\u0060 response code and may contain an error message in the body.\n\n",
+        "description": "\nYou will need an Access Token that has write permissions to send Events. Once you have a key you can submit events via POST to the Events resource, which is located at https://api.intercom.io/events, or you can send events using one of the client libraries. When working with the HTTP API directly a client should send the event with a \u0060Content-Type\u0060 of \u0060application/json\u0060.\n\nWhen using the JavaScript API, [adding the code to your app](http://docs.intercom.io/configuring-Intercom/tracking-user-events-in-your-app) makes the Events API available. Once added, you can submit an event using the \u0060trackEvent\u0060 method. This will associate the event with the Lead or currently logged-in user or logged-out visitor/lead and send it to Intercom. The final parameter is a map that can be used to send optional metadata about the event.\n\nWith the Ruby client you pass a hash describing the event to \u0060Intercom::Event.create\u0060, or call the \u0060track_user\u0060 method directly on the current user object (e.g. \u0060user.track_event\u0060).\n\n**NB: For the JSON object types, please note that we do not currently support nested JSON structure.**\n\n| Type            | Description                                                                                                                                                                                                     | Example                                                                           |\n| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |\n| String          | The value is a JSON String                                                                                                                                                                                      | \u0060\u0022source\u0022:\u0022desktop\u0022\u0060                                                              |\n| Number          | The value is a JSON Number                                                                                                                                                                                      | \u0060\u0022load\u0022: 3.67\u0060                                                                    |\n| Date            | The key ends with the String \u0060_date\u0060 and the value is a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time), assumed to be in the [UTC](http://en.wikipedia.org/wiki/Coordinated_Universal_Time) timezone. | \u0060\u0022contact_date\u0022: 1392036272\u0060                                                      |\n| Link            | The value is a HTTP or HTTPS URI.                                                                                                                                                                               | \u0060\u0022article\u0022: \u0022https://example.org/ab1de.html\u0022\u0060                                     |\n| Rich Link       | The value is a JSON object that contains \u0060url\u0060 and \u0060value\u0060 keys.                                                                                                                                                | \u0060\u0022article\u0022: {\u0022url\u0022: \u0022https://example.org/ab1de.html\u0022, \u0022value\u0022:\u0022the dude abides\u0022}\u0060 |\n| Monetary Amount | The value is a JSON object that contains \u0060amount\u0060 and \u0060currency\u0060 keys. The \u0060amount\u0060 key is a positive integer representing the amount in cents. The price in the example to the right denotes \u20AC349.99.          | \u0060\u0022price\u0022: {\u0022amount\u0022: 34999, \u0022currency\u0022: \u0022eur\u0022}\u0060                                   |\n\n**Lead Events**\n\nWhen submitting events for Leads, you will need to specify the Lead\u0027s \u0060id\u0060.\n\n**Metadata behaviour**\n\n- We currently limit the number of tracked metadata keys to 20 per event name. The limit counts every key ever recorded for that event name, not the keys in a single request, so it is reached cumulatively as you send more events with the same name. Once the quota is reached, we ignore any further keys we receive. The keys that count towards the quota are determined by the order in which they are sent in with the event.\n- It is not possible to change the metadata keys once the event has been sent. A new event will need to be created with the new keys and you can archive the old one.\n- There might be up to 24 hrs delay when you send a new metadata for an existing event.\n\n**Event de-duplication**\n\nThe API may detect and ignore duplicate events. Each event is uniquely identified as a combination of the following data - the Workspace identifier, the Contact external identifier, the Data Event name and the Data Event created time. As a result, it is **strongly recommended** to send a second granularity Unix timestamp in the \u0060created_at\u0060 field.\n\nDuplicated events are responded to using the normal \u0060202 Accepted\u0060 code - an error is not thrown, however repeat requests will be counted against any rate limit that is in place.\n\n### HTTP API Responses\n\n- Successful responses to submitted events return \u0060202 Accepted\u0060 with an empty body.\n- Unauthorised access will be rejected with a \u0060401 Unauthorized\u0060 or \u0060403 Forbidden\u0060 response code.\n- Events sent about users that cannot be found will return a \u0060404 Not Found\u0060.\n- Event lists containing duplicate events will have those duplicates ignored.\n- Server errors will return a \u0060500\u0060 response code and may contain an error message in the body.\n\nRequires the \u0060write_events\u0060 OAuth scope.\n\n",
         "operationId": "CreateDataEvent",
         "parameters": [
           {
@@ -34544,6 +35024,66 @@
           "202": {
             "description": "successful"
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing a required field": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5d0c8e27-3a91-4f6b-b2d4-7e18c9a06f53",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "missing data parameter"
+                        }
+                      ]
+                    }
+                  },
+                  "Null event name": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9b1f3c40-5d2a-4e7b-8c16-a3d9e0f51b24",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "missing event_name parameter"
+                        }
+                      ]
+                    }
+                  },
+                  "Metadata is not an object": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c4e07a19-62b8-4d35-91fa-70e2b6c38d5f",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "event metadata must be an object"
+                        }
+                      ]
+                    }
+                  },
+                  "Bad type parameter": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "71d3b8e5-0c46-4a92-bf27-5e8a1d60c93b",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "bad type parameter"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -34563,6 +35103,102 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0e5a9c62-3b71-4f84-ad19-6c7e2b05f4a8",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contact not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2b8f6d13-47ca-4e09-9d52-f1a63c0e78b5",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "User Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Lead not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6a2c91e7-8d40-4b15-a3f6-9e0b72d5c814",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Lead Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Event name too long": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4f1e7b03-9c25-4d6a-82be-13a0c5d9e672",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "invalid event name length; use up to 100 characters"
+                        }
+                      ]
+                    }
+                  },
+                  "Metadata too long": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8c40a5f2-1e69-4730-b8d4-27f5e1c06a93",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "invalid event metadata length; use up to 65535 characters"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid timestamp": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "d57b2e91-6043-4c8f-a12d-3b9e07f45c68",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "invalid timestamp format; please use seconds since epoch"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -34575,7 +35211,7 @@
           "Data Events"
         ],
         "summary": "List all data events",
-        "description": "\n\u003E \uD83D\uDEA7\n\u003E\n\u003E Please note that you can only \u0027list\u0027 events that are less than 90 days old. Event counts and summaries will still include your events older than 90 days but you cannot \u0027list\u0027 these events individually if they are older than 90 days\n\nThe events belonging to a customer can be listed by sending a GET request to \u0060https://api.intercom.io/events\u0060 with a user or lead identifier along with a \u0060type\u0060 parameter. The identifier parameter can be one of \u0060user_id\u0060, \u0060email\u0060 or \u0060intercom_user_id\u0060. The \u0060type\u0060 parameter value must be \u0060user\u0060.\n\n- \u0060https://api.intercom.io/events?type=user\u0026user_id={user_id}\u0060\n- \u0060https://api.intercom.io/events?type=user\u0026email={email}\u0060\n- \u0060https://api.intercom.io/events?type=user\u0026intercom_user_id={id}\u0060 (this call can be used to list leads)\n\nThe \u0060email\u0060 parameter value should be [url encoded](http://en.wikipedia.org/wiki/Percent-encoding) when sending.\n\nYou can optionally define the result page size as well with the \u0060per_page\u0060 parameter.\n",
+        "description": "\n\u003E \uD83D\uDEA7\n\u003E\n\u003E Please note that you can only \u0027list\u0027 events that are less than 90 days old. Event counts and summaries will still include your events older than 90 days but you cannot \u0027list\u0027 these events individually if they are older than 90 days\n\nThe events belonging to a customer can be listed by sending a GET request to \u0060https://api.intercom.io/events\u0060 with a user or lead identifier along with a \u0060type\u0060 parameter. The identifier parameter can be one of \u0060user_id\u0060, \u0060email\u0060, \u0060intercom_user_id\u0060 or \u0060anonymous_id\u0060. The \u0060type\u0060 parameter value must be \u0060user\u0060 or \u0060lead\u0060.\n\n- \u0060https://api.intercom.io/events?type=user\u0026user_id={user_id}\u0060\n- \u0060https://api.intercom.io/events?type=user\u0026email={email}\u0060\n- \u0060https://api.intercom.io/events?type=user\u0026intercom_user_id={id}\u0060 (this call can be used to list leads)\n\nWhen \u0060type\u0060 is \u0060lead\u0060, a \u0060user_id\u0060 you send is matched against the lead\u0027s anonymous id instead.\n\nThe \u0060email\u0060 parameter value should be [url encoded](http://en.wikipedia.org/wiki/Percent-encoding) when sending.\n\nYou can optionally define the result page size as well with the \u0060per_page\u0060 parameter.\n\nRequires the \u0060read_events\u0060 or \u0060write_events\u0060 OAuth scope.\n",
         "operationId": "LisDataEvents",
         "parameters": [
           {
@@ -34629,6 +35265,19 @@
                     }
                   },
                   "additionalProperties": false
+                },
+                {
+                  "title": "anonymous_id query parameter",
+                  "required": [
+                    "anonymous_id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "anonymous_id": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
                 }
               ]
             }
@@ -34636,10 +35285,36 @@
           {
             "name": "type",
             "in": "query",
-            "description": "The value must be user",
+            "description": "The value must be \u0060user\u0060 or \u0060lead\u0060.",
             "required": true,
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/LisDataEventsTypeParameter"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of events to return per page.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "since",
+            "in": "query",
+            "description": "Only return events created after this time, as a Unix timestamp in milliseconds. Take the value from the \u0060since\u0060 link in the \u0060pages\u0060 object of a previous response.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "Only return events created before this time, as a Unix timestamp in milliseconds. Take the value from the \u0060next\u0060 link in the \u0060pages\u0060 object of a previous response.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           },
           {
@@ -34713,6 +35388,78 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b3a71f58-2c09-4e6d-91b7-4f8c5e2a0d63",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contact not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5e9c0b24-71f3-4a86-bd50-2c7a1e638f49",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "User Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Lead not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "93f6d205-4b18-47ea-8c31-6d0b5a7e2f14",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Lead Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unsupported type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1d4e8a07-5f62-4390-b7c8-0a2e9b16d35f",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "unsupported type [company]"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -34727,7 +35474,7 @@
           "Data Events"
         ],
         "summary": "Create event summaries",
-        "description": "Create event summaries for a user. Event summaries are used to track the number of times an event has occurred, the first time it occurred and the last time it occurred.\n\n",
+        "description": "Create event summaries for a user. Event summaries are used to track the number of times an event has occurred, the first time it occurred and the last time it occurred.\n\nIdentify the user with one of \u0060id\u0060, \u0060user_id\u0060 or \u0060email\u0060. If more than one is sent, \u0060id\u0060 is used first, then \u0060user_id\u0060, then \u0060email\u0060.\n\nRequires the \u0060write_events\u0060 OAuth scope.\n",
         "operationId": "DataEventSummaries",
         "parameters": [
           {
@@ -34751,6 +35498,54 @@
           "200": {
             "description": "successful"
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "No user identifier": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7c1b93a6-0d52-4e87-96f4-2a8e5c0b7d31",
+                      "errors": [
+                        {
+                          "code": "missing_parameter",
+                          "message": "No user identifier found"
+                        }
+                      ]
+                    }
+                  },
+                  "No summaries": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a04f6e82-3c97-4b15-8d26-f1b7093c5e48",
+                      "errors": [
+                        {
+                          "code": "missing_parameter",
+                          "message": "No summaries found"
+                        }
+                      ]
+                    }
+                  },
+                  "Summary field has the wrong type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e82d47b1-6a09-4c35-b7f1-305c9e2a6d70",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Value: many not of type Integer"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -34770,6 +35565,42 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "36b0e95c-7d41-4a28-83ef-9c5a1b204e76",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Contact not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "58c7a230-9e16-4b74-a0d3-7f2e6c1b9d45",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "User Not Found"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -34784,7 +35615,7 @@
           "Data Export"
         ],
         "summary": "Create content data export",
-        "description": "To create your export job, you need to send a \u0060POST\u0060 request to the export endpoint \u0060https://api.intercom.io/export/content/data\u0060.\n\nThis endpoint exports **message delivery and engagement data** for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not export raw message or conversation content.\n\nThe only parameters you need to provide are the range of dates that you want exported.\n\n\u003E\uD83D\uDEA7 Limit of one active job\n\u003E\n\u003E You can only have one active job per workspace. You will receive a HTTP status code of 429 with the message Exceeded rate limit of 1 pending message data export jobs if you attempt to create a second concurrent job.\n\n\u003E\u2757\uFE0F Updated_at not included\n\u003E\n\u003E It should be noted that the timeframe only includes messages sent during the time period and not messages that were only updated during this period. For example, if a message was updated yesterday but sent two days ago, you would need to set the created_at_after date before the message was sent to include that in your retrieval job.\n\n\u003E\uD83D\uDCD8 Date ranges are inclusive\n\u003E\n\u003E Requesting data for 2018-06-01 until 2018-06-30 will get all data for those days including those specified - e.g. 2018-06-01 00:00:00 until 2018-06-30 23:59:99.\n",
+        "description": "To create your export job, you need to send a \u0060POST\u0060 request to the export endpoint \u0060https://api.intercom.io/export/content/data\u0060.\n\nThis endpoint exports **message delivery and engagement data** for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not export raw message or conversation content.\n\nThe only parameters you need to provide are the range of dates that you want exported. The range cannot be longer than 90 days.\n\n\u003E\uD83D\uDEA7 Limit of two active jobs\n\u003E\n\u003E You can only have two active jobs per workspace. You will receive a HTTP status code of 429 with the message Exceeded rate limit of 2 pending content data export jobs if you attempt to create a third concurrent job.\n\n\u003E\u2757\uFE0F Updated_at not included\n\u003E\n\u003E It should be noted that the timeframe only includes messages sent during the time period and not messages that were only updated during this period. For example, if a message was updated yesterday but sent two days ago, you would need to set the created_at_after date before the message was sent to include that in your retrieval job.\n\n\u003E\uD83D\uDCD8 Date ranges are inclusive\n\u003E\n\u003E Requesting data for 2018-06-01 until 2018-06-30 will get all data for those days including those specified - e.g. 2018-06-01 00:00:00 until 2018-06-30 23:59:99.\n\nRequires the \u0060export_content_data\u0060 OAuth scope.\n",
         "operationId": "CreateDataExport",
         "parameters": [
           {
@@ -34833,6 +35664,174 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing date": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1a7c0e36-b249-4d85-96f1-5c03e7a2b48d",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "\u0027created_at_after\u0027 is a required parameter"
+                        }
+                      ]
+                    }
+                  },
+                  "Date is not an integer": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "62e9b0a4-38c7-4f51-bd96-07a1c4e5f283",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "\u0027created_at_before: yesterday\u0027 must be of type Integer"
+                        }
+                      ]
+                    }
+                  },
+                  "Dates out of order": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "f3081b57-4c2a-49e6-85d0-2b7a6e91c340",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "created_at_after is greater than created_at_before"
+                        }
+                      ]
+                    }
+                  },
+                  "Unknown parameter": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9d2f4c81-706b-4e39-a5c7-13e08b6d2f95",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "bad \u0027created_at\u0027 parameter"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4b6e1d09-85f2-4a37-9c60-d1a37e204b58",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0c93a7e5-1f48-4b62-83da-6e5c702f194b",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Range too long": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7e50c938-2a61-4df7-b084-c9f2e63a51d7",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "The export period is longer than 90 days"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many concurrent jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Concurrent job limit reached": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "83b4f027-5d19-4ce6-a27f-b05e19c63d4a",
+                      "errors": [
+                        {
+                          "code": "rate_limit_exceeded",
+                          "message": "Exceeded rate limit of 2 pending content data export jobs"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Content data export disabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Export disabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a5c6e239-0b74-41f8-9d13-7e2b840c5f61",
+                      "errors": [
+                        {
+                          "code": "server_error",
+                          "message": "Content data export is currently disabled"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -34843,7 +35842,7 @@
           "Data Export"
         ],
         "summary": "Show content data export",
-        "description": "You can view the status of your job by sending a \u0060GET\u0060 request to the URL\n\u0060https://api.intercom.io/export/content/data/{job_identifier}\u0060 - the \u0060{job_identifier}\u0060 is the value returned in the response when you first created the export job. More on it can be seen in the Export Job Model.\n\n\u003E \uD83D\uDEA7 Jobs expire after two days\n\u003E All jobs that have completed processing (and are thus available to download from the provided URL) will have an expiry limit of two days from when the export ob completed. After this, the data will no longer be available.\n",
+        "description": "You can view the status of your job by sending a \u0060GET\u0060 request to the URL\n\u0060https://api.intercom.io/export/content/data/{job_identifier}\u0060 - the \u0060{job_identifier}\u0060 is the value returned in the response when you first created the export job. More on it can be seen in the Export Job Model.\n\n\u003E \uD83D\uDEA7 Jobs expire after one week\n\u003E All jobs that have completed processing (and are thus available to download from the provided URL) will have an expiry limit of one week from when the export job was created. After this, the data will no longer be available.\n\nA job that failed is returned with a \u0060504\u0060 status code and a \u0060status\u0060 of \u0060failed\u0060. A job left in progress for more than a day is marked failed when you poll it.\n\nRequires the \u0060export_content_data\u0060 OAuth scope.\n",
         "operationId": "GetDataExport",
         "parameters": [
           {
@@ -34883,6 +35882,86 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6ea2c705-84b3-4f19-bd68-013c7e5a2f84",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1f73b08e-5a26-4c93-87d1-902e4b6c35fa",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Export job not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Job not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "50a9e14c-6d82-4b37-9f05-c83e712a6d49",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Export job not found for identifier: braxwk3j039t6txy"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The job failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataExport"
+                },
+                "examples": {
+                  "Failed job": {
+                    "value": {
+                      "job_identifier": "braxwk3j039t6txy",
+                      "status": "failed",
+                      "download_url": "",
+                      "download_expires_at": ""
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -34893,7 +35972,7 @@
           "Data Export"
         ],
         "summary": "Cancel content data export",
-        "description": "You can cancel your job",
+        "description": "You can cancel your job. A job that has already reached a terminal state is returned unchanged.\n\nRequires the \u0060export_content_data\u0060 OAuth scope.\n",
         "operationId": "CancelDataExport",
         "parameters": [
           {
@@ -34928,6 +36007,90 @@
                       "status": "canceled",
                       "download_url": "",
                       "download_expires_at": ""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7d41c093-2eb6-4a58-8f27-c590b31e6472",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3e8b5f27-91c4-40da-b163-8f0c27a4e95d",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Export job not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Job not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b24f7e51-0a93-4c86-95d7-1e6038b2c74f",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Export job not found for identifier: v134nyc2bku9hj91"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Content data export disabled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Export disabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c6017af3-4958-42be-a0d1-72f3e8b5c096",
+                      "errors": [
+                        {
+                          "code": "server_error",
+                          "message": "Content data export is currently disabled"
+                        }
+                      ]
                     }
                   }
                 }
@@ -35085,7 +36248,7 @@
           "Data Export"
         ],
         "summary": "Download content data export",
-        "description": "When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.\n\nYour exported message data will be streamed continuously back down to you in a gzipped CSV format.\n\n\u003E \uD83D\uDCD8 Octet header required\n\u003E\n\u003E You will have to specify the header Accept: \u0060application/octet-stream\u0060 when hitting this endpoint.\n",
+        "description": "When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.\n\nYour exported message data is returned as a ZIP archive containing one CSV file per data group. The response is sent with the header \u0060Content-Encoding: zip\u0060.\n\n\u003E \uD83D\uDCD8 Octet header required\n\u003E\n\u003E You will have to specify the header Accept: \u0060application/octet-stream\u0060 when hitting this endpoint.\n\nRequires the \u0060export_content_data\u0060 OAuth scope.\n",
         "operationId": "DownloadDataExport",
         "parameters": [
           {
@@ -35108,6 +36271,102 @@
         "responses": {
           "200": {
             "description": "successful"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9a3c6d08-f714-4b25-8e60-37bc1f9a2e58",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4812fa6b-7d05-49c3-96e1-5a0b3c7d84f2",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Export job not found or not complete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Job not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "d709e38a-1c64-4257-bf90-6e23a85c107b",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Export job not found for identifier: xyz1234"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Download failed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5b96c021-83e7-4d4a-a715-0f26e3b8d94c",
+                      "errors": [
+                        {
+                          "code": "server_error",
+                          "message": "Request failed due to an internal error. Please reach out to support with the job_identifier of this job"
+                        }
+                      ]
+                    }
+                  },
+                  "Export disabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e13a7c59-204b-468f-82d6-71c5b09e3a47",
+                      "errors": [
+                        {
+                          "code": "server_error",
+                          "message": "Content data export is currently disabled"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -35118,7 +36377,7 @@
           "Jobs"
         ],
         "summary": "Retrieve job status",
-        "description": "Retrieve the status of job execution.",
+        "description": "Retrieve the status of job execution.\n\n\u0060resource_id\u0060 and \u0060resource_url\u0060 are returned only once \u0060status\u0060 is \u0060success\u0060. While the job is \u0060pending\u0060 or \u0060failed\u0060 both keys are left out of the response rather than returned as \u0060null\u0060.\n\nRequires the \u0060read_jobs\u0060 OAuth scope.\n",
         "operationId": "JobsStatus",
         "parameters": [
           {
@@ -35151,10 +36410,20 @@
                     "value": {
                       "type": "job",
                       "id": "2",
+                      "url": "https://api.intercom.io/jobs/status/2",
                       "status": "success",
                       "resource_type": "ticket",
                       "resource_id": "20",
                       "resource_url": "https://api.intercom.io/tickets/20"
+                    }
+                  },
+                  "job still pending": {
+                    "value": {
+                      "type": "job",
+                      "id": "2",
+                      "url": "https://api.intercom.io/jobs/status/2",
+                      "status": "pending",
+                      "resource_type": "ticket"
                     }
                   }
                 }
@@ -35201,6 +36470,18 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "ad9c4f05-6e31-4b7a-82d6-15c0e934b7f8",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
                         }
                       ]
                     }
@@ -37933,9 +39214,9 @@
             "description": "The unique identifier of a given note",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": 1
+            "example": "34"
           }
         ],
         "responses": {
@@ -38026,7 +39307,7 @@
           "Notes"
         ],
         "summary": "Delete a note",
-        "description": "You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.",
+        "description": "You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.\n\nRequires the \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "DeleteNote",
         "parameters": [
           {
@@ -38042,9 +39323,9 @@
             "description": "The unique identifier of a given note",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "string"
             },
-            "example": 1
+            "example": "34"
           }
         ],
         "responses": {
@@ -38110,6 +39391,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b24e8f37-0a91-4d5c-9e76-38c1b0da5f62",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -38130,7 +39423,7 @@
                       "errors": [
                         {
                           "code": "intercom_version_invalid",
-                          "message": "Requested resource is not available in current API version."
+                          "message": "Requested resource is not available in current API version"
                         }
                       ]
                     }
@@ -38624,7 +39917,7 @@
           "Segments"
         ],
         "summary": "List all segments",
-        "description": "You can fetch a list of all segments.",
+        "description": "You can fetch a list of all segments.\n\nSegment names are returned HTML-escaped, for example \u0060\u0026\u0060 as \u0060\u0026amp;\u0060.\n\nRequires the \u0060read_users_companies\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "ListSegments",
         "parameters": [
           {
@@ -38637,11 +39930,20 @@
           {
             "name": "include_count",
             "in": "query",
-            "description": "It includes the count of contacts that belong to each segment.",
+            "description": "Includes the count of contacts that belong to each segment. The counts are added whenever this parameter has a value in the query string, even \u0060false\u0060 or an empty one, so omit it entirely to leave them out. A bare \u0060include_count\u0060 with no \u0060=\u0060 adds no counts. With \u0060type=company\u0060, a company segment gets no count unless a contact segment has the same name, and then it shows that contact segment\u0027s count.",
             "schema": {
               "type": "boolean"
             },
             "example": true
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Pass \u0060company\u0060 to list company segments. Any other value, or no value, lists contact segments.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "company"
           }
         ],
         "responses": {
@@ -38699,6 +40001,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5fa31c82-7d64-4e09-b1a7-9c48d0e35b61",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -38713,7 +40027,7 @@
           "Segments"
         ],
         "summary": "Retrieve a segment",
-        "description": "You can fetch the details of a single segment.",
+        "description": "You can fetch the details of a single segment.\n\nThe segment name is returned HTML-escaped, for example \u0060\u0026\u0060 as \u0060\u0026amp;\u0060.\n\nRequires the \u0060read_users_companies\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "RetrieveSegment",
         "parameters": [
           {
@@ -38732,6 +40046,15 @@
               "type": "string"
             },
             "example": "123"
+          },
+          {
+            "name": "include_count",
+            "in": "query",
+            "description": "Includes the count of contacts that belong to the segment. The count is added whenever this parameter has a value in the query string, even \u0060false\u0060 or an empty one, so omit it entirely to leave it out. A bare \u0060include_count\u0060 with no \u0060=\u0060 adds no count.",
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
           }
         ],
         "responses": {
@@ -38797,6 +40120,18 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "36b0d794-82ce-4a15-9f63-71d4ea80c592",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
                         }
                       ]
                     }
@@ -39028,7 +40363,7 @@
           "Subscription Types"
         ],
         "summary": "List subscription types",
-        "description": "You can list all subscription types. A list of subscription type objects will be returned.",
+        "description": "You can list all subscription types. A list of subscription type objects will be returned.\n\nRequires the \u0060read_users_companies\u0060 OAuth scope.\n",
         "operationId": "ListSubscriptionTypes",
         "parameters": [
           {
@@ -39099,6 +40434,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e8471b06-3d25-4c9f-b0a8-57fe2d619c3a",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -39113,7 +40460,7 @@
           "Subscription Types"
         ],
         "summary": "Retrieve a subscription type",
-        "description": "You can fetch the details of a single subscription type by making a GET request to \u0060https://api.intercom.io/subscription_types/\u003Cid\u003E\u0060.",
+        "description": "You can fetch the details of a single subscription type by making a GET request to \u0060https://api.intercom.io/subscription_types/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_users_companies\u0060 OAuth scope.\n",
         "operationId": "GetSubscriptionType",
         "parameters": [
           {
@@ -39205,11 +40552,23 @@
                   "Unauthorized": {
                     "value": {
                       "type": "error.list",
-                      "request_id": "06d15b1f-19b0-42cc-aff9-a9d9db39402b",
+                      "request_id": "9d3f28a5-6e07-4b14-8c92-45a0f7d6b318",
                       "errors": [
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "41c7e95b-08a3-4d62-97f1-6b2d5c8a034e",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
                         }
                       ]
                     }
@@ -39924,9 +41283,72 @@
           "Tags"
         ],
         "summary": "List all tags",
-        "description": "You can fetch a list of all tags for a given workspace.\n\n",
+        "description": "You can fetch a list of all tags for a given workspace.\n\nPassing \u0060id\u0060 returns that one tag object instead of a list. Passing \u0060taggable_type\u0060 returns a list of the tags applied to a single contact or company.\n\nRequires the \u0060read_tags\u0060 or \u0060read_users_companies\u0060 OAuth scope.\n",
         "operationId": "ListTags",
         "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The unique identifier of a tag. When set, a single tag object is returned instead of a list.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "123"
+          },
+          {
+            "name": "taggable_type",
+            "in": "query",
+            "description": "Set to \u0060user\u0060 or \u0060company\u0060 to list the tags applied to one contact or company instead of the whole workspace. Identify it with \u0060taggable_id\u0060, \u0060user_id\u0060, \u0060email\u0060, \u0060company_id\u0060 or \u0060name\u0060.",
+            "schema": {
+              "$ref": "#/components/schemas/ListTagsTaggableTypeParameter"
+            },
+            "example": "user"
+          },
+          {
+            "name": "taggable_id",
+            "in": "query",
+            "description": "The Intercom id of the contact or company whose tags you want, used with \u0060taggable_type\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "536e564f316c83104c000020"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "The external id of the contact whose tags you want, used with \u0060taggable_type=user\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "25"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The email address of the contact whose tags you want, used with \u0060taggable_type=user\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "jane@example.com"
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "The external id of the company whose tags you want, used with \u0060taggable_type=company\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The name of the company whose tags you want, used with \u0060taggable_type=company\u0060.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Intercom"
+          },
           {
             "name": "Intercom-Version",
             "in": "header",
@@ -39941,7 +41363,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TagList"
+                  "$ref": "#/components/schemas/ListTags200Response"
                 },
                 "examples": {
                   "successful": {
@@ -39954,6 +41376,13 @@
                           "name": "Manual tag 1"
                         }
                       ]
+                    }
+                  },
+                  "single tag": {
+                    "value": {
+                      "type": "tag",
+                      "id": "102",
+                      "name": "Manual tag 1"
                     }
                   }
                 }
@@ -39979,6 +41408,66 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7a4e0c61-9b35-4d28-8f70-c2a916e5473d",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tag, contact or company not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Tag not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0c93d5a8-62f1-4e37-b54a-8d7016c9f2be",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Contact not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "93e157b4-d0a2-4c86-bf39-5e702a1c4d86",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "User Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Company not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2d6f81e0-4a37-49b5-91c8-607de4a2b3f5",
+                      "errors": [
+                        {
+                          "code": "company_not_found",
+                          "message": "Company Not Found"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -39991,7 +41480,7 @@
           "Tags"
         ],
         "summary": "Create or update a tag, Tag or untag companies, Tag contacts",
-        "description": "You can use this endpoint to perform the following operations:\n\n  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in \u0022Create or Update Tag Request Payload\u0022 described below.\n\n  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in \u0022Create or Update Tag Request Payload\u0022 described below.\n\n  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in \u0022Tag Company Request Payload\u0022 described below. Also, if the tag doesn\u0027t exist then a new one will be created automatically.\n\n  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in \u0022Untag Company Request Payload\u0022 described below.\n\n  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in \u0022Tag Users Request Payload\u0022 described below.\n\nEach operation will return a tag object.\n",
+        "description": "You can use this endpoint to perform the following operations:\n\n  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in \u0022Create or Update Tag Request Payload\u0022 described below.\n\n  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in \u0022Create or Update Tag Request Payload\u0022 described below.\n\n  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in \u0022Tag Company Request Payload\u0022 described below. Also, if the tag doesn\u0027t exist then a new one will be created automatically.\n\n  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in \u0022Untag Company Request Payload\u0022 described below.\n\n  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in \u0022Tag Users Request Payload\u0022 described below.\n\nEach operation will return a tag object.\n\nContacts and companies listed in \u0060users\u0060 or \u0060companies\u0060 that do not exist are skipped: they are left out of the \u0060users\u0060 and \u0060companies\u0060 arrays in the response and the request still succeeds. With \u0060ids_to_add\u0060 it depends on \u0060taggable_type\u0060: a contact id that does not exist returns a 404, while a company id that does not exist is skipped. With \u0060ids_to_add\u0060, the \u0060users\u0060 and \u0060companies\u0060 arrays in the response are always empty, and a 404 still leaves the tag created or renamed.\n\nRequires the \u0060write_tags\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "CreateTag",
         "parameters": [
           {
@@ -40015,10 +41504,53 @@
                     "name": "test"
                   }
                 },
+                "companies_tagged": {
+                  "summary": "Companies tagged",
+                  "value": {
+                    "name": "test",
+                    "companies": [
+                      {
+                        "company_id": "6"
+                      }
+                    ]
+                  }
+                },
                 "invalid_parameters": {
                   "summary": "Invalid parameters",
                   "value": {
                     "test": "invalid"
+                  }
+                },
+                "unknown_company_skipped": {
+                  "summary": "Unknown company skipped",
+                  "value": {
+                    "name": "test",
+                    "companies": [
+                      {
+                        "company_id": "123"
+                      }
+                    ]
+                  }
+                },
+                "unknown_user_skipped": {
+                  "summary": "Unknown user skipped",
+                  "value": {
+                    "name": "test",
+                    "users": [
+                      {
+                        "id": "123"
+                      }
+                    ]
+                  }
+                },
+                "contact_in_ids_to_add_not_found": {
+                  "summary": "Contact in ids_to_add not found",
+                  "value": {
+                    "name": "test",
+                    "taggable_type": "user",
+                    "ids_to_add": [
+                      "123"
+                    ]
                   }
                 }
               }
@@ -40040,9 +41572,18 @@
                       "id": "105",
                       "name": "test",
                       "users": [],
+                      "companies": []
+                    }
+                  },
+                  "Companies tagged": {
+                    "value": {
+                      "type": "tag",
+                      "id": "105",
+                      "name": "test",
+                      "users": [],
                       "companies": [
                         {
-                          "id": "valid-123",
+                          "id": "6329e838deab40166d1a5400",
                           "tagged": true
                         }
                       ]
@@ -40095,6 +41636,54 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6e02b8d5-91c7-4a30-bf68-74d1e953c0a2",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tag or contact not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Tag not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8f51c0a4-2d79-4e36-9b1a-50c7d2e86f43",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Contact in ids_to_add not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "d7b4169e-35fa-4c80-91d2-6e0853a7bc15",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "User Not Found"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -40109,7 +41698,7 @@
           "Tags"
         ],
         "summary": "Find a specific tag",
-        "description": "You can fetch the details of tags that are on the workspace by their id.\nThis will return a tag object.\n",
+        "description": "You can fetch the details of tags that are on the workspace by their id.\nThis will return a tag object.\n\nRequires the \u0060read_tags\u0060 or \u0060read_users_companies\u0060 OAuth scope.\n",
         "operationId": "FindTag",
         "parameters": [
           {
@@ -40193,6 +41782,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a05f7362-c194-4d8b-9e27-f63b85c1d409",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -40205,7 +41806,7 @@
           "Tags"
         ],
         "summary": "Delete tag",
-        "description": "You can delete the details of tags that are on the workspace by passing in the id.",
+        "description": "You can delete the details of tags that are on the workspace by passing in the id.\n\nRequires the \u0060write_tags\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "DeleteTag",
         "parameters": [
           {
@@ -40294,6 +41895,18 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1b8e4790-ad35-42f6-8c01-9e5d73a2bf64",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
                         }
                       ]
                     }
@@ -44495,7 +46108,7 @@
           "Visitors"
         ],
         "summary": "Update a visitor",
-        "description": "Sending a PUT request to \u0060/visitors\u0060 will result in an update of an existing Visitor.\n\n**Option 1.** You can update a visitor by passing in the \u0060user_id\u0060 of the visitor in the Request body.\n\n**Option 2.** You can update a visitor by passing in the \u0060id\u0060 of the visitor in the Request body.\n",
+        "description": "Sending a PUT request to \u0060/visitors\u0060 will result in an update of an existing Visitor.\n\n**Option 1.** You can update a visitor by passing in the \u0060user_id\u0060 of the visitor in the Request body.\n\n**Option 2.** You can update a visitor by passing in the \u0060id\u0060 of the visitor in the Request body.\n\nSending an \u0060email\u0060 promotes the visitor to a lead. When that happens the response is a contact object with a \u0060role\u0060 of \u0060lead\u0060, not a visitor object.\n\nRequires the \u0060read_write_users\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "UpdateVisitor",
         "parameters": [
           {
@@ -44596,6 +46209,30 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "No identifier supplied": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2a71c4e6-85d0-4b93-9f18-6c0e3b7a52d4",
+                      "errors": [
+                        {
+                          "code": "400",
+                          "message": "Visitor id or user_id must be supplied"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "404": {
             "description": "visitor Not Found",
             "content": {
@@ -44639,6 +46276,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8f25b071-3ca9-4d68-b4e0-5719c2a6f30e",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -44651,7 +46300,7 @@
           "Visitors"
         ],
         "summary": "Retrieve a visitor with User ID",
-        "description": "You can fetch the details of a single visitor.",
+        "description": "You can fetch the details of a single visitor.\n\nRequires the \u0060read_single_user\u0060, \u0060read_users_companies\u0060 or \u0060read_write_users\u0060 OAuth scope.\n",
         "operationId": "RetrieveVisitorWithUserId",
         "parameters": [
           {
@@ -44779,6 +46428,18 @@
                         }
                       ]
                     }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7b09e4d2-61c8-4530-9a7f-284c60b5e1d3",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -44793,7 +46454,7 @@
           "Visitors"
         ],
         "summary": "Convert a visitor",
-        "description": "You can merge a Visitor to a Contact of role type \u0060lead\u0060 or \u0060user\u0060.\n\n\u003E \uD83D\uDCD8 What happens upon a visitor being converted?\n\u003E\n\u003E If the User exists, then the Visitor will be merged into it, the Visitor deleted and the User returned. If the User does not exist, the Visitor will be converted to a User, with the User identifiers replacing it\u0027s Visitor identifiers.\n",
+        "description": "You can merge a Visitor to a Contact of role type \u0060lead\u0060 or \u0060user\u0060.\n\n\u003E \uD83D\uDCD8 What happens upon a visitor being converted?\n\u003E\n\u003E If the User exists, then the Visitor will be merged into it, the Visitor deleted and the User returned. If the User does not exist, the Visitor will be converted to a User, with the User identifiers replacing it\u0027s Visitor identifiers.\n\nIdentify the visitor with \u0060visitor.id\u0060 or \u0060visitor.user_id\u0060. The \u0060user\u0060 object is required when \u0060type\u0060 is \u0060user\u0060, and is not read when \u0060type\u0060 is \u0060lead\u0060.\n\nRequires the \u0060read_write_users\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "ConvertVisitor",
         "parameters": [
           {
@@ -44943,6 +46604,42 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "No visitor identifier supplied": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9e4b2c07-61da-4f85-93b0-c7a1e568d234",
+                      "errors": [
+                        {
+                          "code": "400",
+                          "message": "Visitor id or user_id must be supplied"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing or unknown type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "41c70e93-8b26-4d5a-a9f7-02e6b1c38045",
+                      "errors": [
+                        {
+                          "code": "type_mismatch",
+                          "message": "The type attribute provided should be either \u0027user\u0027 or \u0027lead\u0027"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -44959,6 +46656,42 @@
                         {
                           "code": "unauthorized",
                           "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6b58d204-3f91-4e7c-85a0-d2f71e634b09",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Visitor not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Visitor not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0a7e53c1-9268-4bd4-83f6-1c5027e9a4b8",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Visitor Not Found"
                         }
                       ]
                     }
@@ -48419,11 +50152,7 @@
             ]
           },
           "avatar": {
-            "type": "string",
-            "description": "Image for the associated team or teammate",
-            "format": "uri",
-            "nullable": true,
-            "example": "https://picsum.photos/200/300"
+            "$ref": "#/components/schemas/AdminAvatar"
           },
           "team_priority_level": {
             "$ref": "#/components/schemas/TeamPriorityLevel"
@@ -55209,7 +56938,6 @@
         "title": "Convert Visitor Request Payload",
         "required": [
           "type",
-          "user",
           "visitor"
         ],
         "type": "object",
@@ -55807,6 +57535,26 @@
           "event_summaries"
         ],
         "type": "object",
+        "anyOf": [
+          {
+            "title": "id required",
+            "required": [
+              "id"
+            ]
+          },
+          {
+            "title": "user_id required",
+            "required": [
+              "user_id"
+            ]
+          },
+          {
+            "title": "email required",
+            "required": [
+              "email"
+            ]
+          }
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -56181,17 +57929,31 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 191,
             "type": "string",
-            "description": "The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive.",
+            "description": "The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive and can be at most 191 characters long. Creating a tag with a longer name returns a 400. When updating by \u0060id\u0060, a longer name or one that another tag already has returns 200 with the new name, but the tag keeps its old name.",
             "example": "Independent"
           },
           "id": {
             "type": "string",
             "description": "The id of tag to updates.",
             "example": "656452352"
+          },
+          "ids_to_add": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The Intercom ids of the contacts or companies to apply the tag to. A contact id that does not exist returns a 404; a company id that does not exist is skipped. A 404 still leaves the tag created or renamed. The \u0060users\u0060 and \u0060companies\u0060 arrays in the response are always empty when this field is used.",
+            "example": [
+              "536e564f316c83104c000020"
+            ]
+          },
+          "taggable_type": {
+            "$ref": "#/components/schemas/CreateOrUpdateTagRequestTaggableType"
           }
         },
-        "description": "You can create or update an existing tag."
+        "description": "You can create or update an existing tag, and optionally apply it to a list of contact or company ids."
       },
       "CreatePhoneSwitchRequest": {
         "title": "Create Phone Switch Request Payload",
@@ -59032,7 +60794,7 @@
         "title": "Data Export",
         "type": "object",
         "properties": {
-          "job_identfier": {
+          "job_identifier": {
             "type": "string",
             "description": "The identifier for your job.",
             "example": "orzzsbd7hk67xyu"
@@ -59042,13 +60804,13 @@
           },
           "download_expires_at": {
             "type": "string",
-            "description": "The time after which you will not be able to access the data.",
+            "description": "The time after which you will not be able to access the data, as a Unix timestamp. It is one week from the time the job was created. Empty until the job completes.",
             "example": "1674917488"
           },
           "download_url": {
             "type": "string",
-            "description": "The location where you can download your data.",
-            "example": "https://api.intercom.test/download/messages/data/example"
+            "description": "The location where you can download your data. Empty until the job completes.",
+            "example": "https://api.intercom.io/download/content/data/orzzsbd7hk67xyu"
           }
         },
         "description": "The data export API is used to export message delivery and engagement statistics for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more) sent in a given timeframe. The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces).",
@@ -61111,7 +62873,7 @@
           "id": {
             "type": "string",
             "description": "The id of the job that\u0027s currently being processed or has completed.",
-            "example": 20
+            "example": "20"
           },
           "url": {
             "type": "string",
@@ -61128,15 +62890,15 @@
           },
           "resource_id": {
             "type": "string",
-            "description": "The id of the resource created during job execution (e.g. ticket id)",
+            "description": "The id of the resource created during job execution (e.g. ticket id). Only set once the job has succeeded.",
             "nullable": true,
-            "example": 123
+            "example": "123"
           },
           "resource_url": {
             "type": "string",
-            "description": "The url of the resource created during job exeuction. Use this url to fetch the resource.",
+            "description": "The url of the resource created during job execution. Use this url to fetch the resource. Only set once the job has succeeded.",
             "nullable": true,
-            "example": "http://api.intercom.io/tickets/123"
+            "example": "https://api.intercom.io/tickets/123"
           }
         },
         "description": "Jobs are tasks that are processed asynchronously by the Intercom system after being enqueued via the API. This allows for efficient handling of operations that may take time to complete, such as data imports or exports. You can check the status of your jobs to monitor their progress and ensure they are completed successfully.",
@@ -62277,7 +64039,7 @@
             "$ref": "#/components/schemas/NoteCompany"
           },
           "author": {
-            "$ref": "#/components/schemas/Admin"
+            "$ref": "#/components/schemas/NoteAuthor"
           },
           "body": {
             "type": "string",
@@ -62425,10 +64187,10 @@
             "example": 1
           },
           "pages": {
-            "$ref": "#/components/schemas/CursorPages"
+            "$ref": "#/components/schemas/PagesLink"
           }
         },
-        "description": "A paginated list of notes associated with a contact or a company."
+        "description": "A paginated list of notes associated with a contact or a company. On the last page, \u0060pages.next\u0060 is \u0060null\u0060. These lists never send \u0060pages.prev\u0060."
       },
       "CompanyNote": {
         "title": "Company Note",
@@ -62827,7 +64589,7 @@
           },
           "count": {
             "type": "integer",
-            "description": "The number of items in the user segment. It\u0027s returned when \u0060include_count=true\u0060 is included in the request.",
+            "description": "The number of items in the user segment. It\u0027s returned when the request has \u0060include_count\u0060 with a value. A company segment only gets a count when a contact segment has the same name, and it shows that segment\u0027s count.",
             "nullable": true,
             "example": 3
           }
@@ -62850,12 +64612,9 @@
               "$ref": "#/components/schemas/Segment"
             },
             "description": "A list of Segment objects"
-          },
-          "pages": {
-            "$ref": "#/components/schemas/SegmentListPagesProperty"
           }
         },
-        "description": "This will return a list of Segment Objects. The result may also have a pages object if the response is paginated."
+        "description": "This will return a list of Segment Objects. The list is not paginated."
       },
       "SingleFilterSearchRequest": {
         "title": "Single Filter Search Request",
@@ -63159,7 +64918,7 @@
           "applied_at": {
             "type": "integer",
             "description": "The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. \u0060null\u0060 when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.",
-            "format": "date-time",
+            "format": "timestamp",
             "nullable": true,
             "example": 1663597223
           },
@@ -63246,8 +65005,9 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 191,
             "type": "string",
-            "description": "The name of the tag, which will be created if not found.",
+            "description": "The name of the tag, which will be created if not found. Names can be at most 191 characters long.",
             "example": "Independent"
           },
           "companies": {
@@ -63255,7 +65015,7 @@
             "items": {
               "$ref": "#/components/schemas/TagCompanyRequestCompaniesItem"
             },
-            "description": "The id or company_id of the company can be passed as input parameters."
+            "description": "The id, company_id or name of the company can be passed as input parameters. Companies that cannot be found are skipped."
           }
         },
         "description": "You can tag a single company or a list of companies."
@@ -63286,18 +65046,20 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 191,
             "type": "string",
-            "description": "The name of the tag, which will be created if not found.",
+            "description": "The name of the tag, which will be created if not found. Names can be at most 191 characters long.",
             "example": "Independent"
           },
           "users": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagMultipleUsersRequestUsersItem"
-            }
+            },
+            "description": "The id, user_id or email of the user can be passed as input parameters. Users that cannot be found are skipped."
           }
         },
-        "description": "You can tag a list of users."
+        "description": "You can tag or untag a list of users."
       },
       "Tags": {
         "title": "Tags",
@@ -64213,8 +65975,9 @@
         "type": "object",
         "properties": {
           "name": {
+            "maxLength": 191,
             "type": "string",
-            "description": "The name of the tag which will be untagged from the company",
+            "description": "The name of the tag which will be untagged from the company. Names can be at most 191 characters long.",
             "example": "Independent"
           },
           "companies": {
@@ -64222,7 +65985,7 @@
             "items": {
               "$ref": "#/components/schemas/UntagCompanyRequestCompaniesItem"
             },
-            "description": "The id or company_id of the company can be passed as input parameters."
+            "description": "The id, company_id or name of the company can be passed as input parameters. Companies that cannot be found are skipped."
           }
         },
         "description": "You can tag a single company or a list of companies."
@@ -64984,18 +66747,95 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "A unique identified for the visitor which is given by Intercom.",
+            "description": "A unique identified for the visitor which is given by Intercom. Used to look the visitor up; it is not changed by this request.",
             "example": "8a88a590-e"
           },
           "user_id": {
             "type": "string",
-            "description": "A unique identified for the visitor which is given by you.",
+            "description": "A unique identified for the visitor which is given by you. Used to look the visitor up; it is not changed by this request.",
             "example": "123"
           },
           "name": {
             "type": "string",
             "description": "The visitor\u0027s name.",
             "example": "Christian Bale"
+          },
+          "email": {
+            "type": "string",
+            "description": "The visitor\u0027s email address. Sending this promotes the visitor to a lead and the response becomes a contact object.",
+            "example": "winstonsmith@truth.org"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The visitor\u0027s phone number.",
+            "example": "\u002B353871234567"
+          },
+          "owner_id": {
+            "type": "integer",
+            "description": "The id of the teammate who owns the visitor.",
+            "example": 991267734
+          },
+          "last_request_at": {
+            "type": "integer",
+            "description": "The time the visitor was last seen, as a Unix timestamp.",
+            "example": 1663597223
+          },
+          "last_seen_ip": {
+            "type": "string",
+            "description": "The IP address the visitor was last seen from.",
+            "example": "1.2.3.4"
+          },
+          "last_seen_user_agent": {
+            "type": "string",
+            "description": "The user agent the visitor was last seen with.",
+            "example": "Mozilla/5.0"
+          },
+          "unsubscribed_from_emails": {
+            "type": "boolean",
+            "description": "Whether the visitor is unsubscribed from emails.",
+            "example": false
+          },
+          "language_override": {
+            "type": "string",
+            "description": "The language to send the visitor messages in, overriding the language we detect.",
+            "example": "fr"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "An image URL for the visitor\u0027s avatar.",
+            "example": "https://example.org/128Wu8Q.jpg"
+          },
+          "companies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateVisitorRequestCompaniesItemProperty"
+            },
+            "description": "The companies to associate the visitor with. Only applied when the same request sends \u0060email\u0060, which promotes the visitor to a lead."
+          },
+          "utm_campaign": {
+            "type": "string",
+            "description": "The campaign the visitor arrived from.",
+            "example": "intercom-link"
+          },
+          "utm_content": {
+            "type": "string",
+            "description": "The content the visitor arrived from.",
+            "example": "banner"
+          },
+          "utm_medium": {
+            "type": "string",
+            "description": "The medium the visitor arrived from.",
+            "example": "email"
+          },
+          "utm_source": {
+            "type": "string",
+            "description": "The source the visitor arrived from.",
+            "example": "Intercom"
+          },
+          "utm_term": {
+            "type": "string",
+            "description": "The search term the visitor arrived from.",
+            "example": "messenger"
           },
           "custom_attributes": {
             "$ref": "#/components/schemas/UpdateVisitorRequestCustomAttributesProperty"
@@ -65482,6 +67322,11 @@
             "required": [
               "user_id"
             ]
+          },
+          {
+            "required": [
+              "email"
+            ]
           }
         ],
         "properties": {
@@ -65501,7 +67346,7 @@
             "example": "winstonsmith@truth.org"
           }
         },
-        "description": "The unique identifiers retained after converting or merging."
+        "description": "The unique identifiers retained after converting or merging. Required when \u0060type\u0060 is \u0060user\u0060; not read when \u0060type\u0060 is \u0060lead\u0060."
       },
       "ConvertVisitorRequestVisitor": {
         "type": "object",
@@ -65514,11 +67359,6 @@
           {
             "required": [
               "user_id"
-            ]
-          },
-          {
-            "required": [
-              "email"
             ]
           }
         ],
@@ -65539,7 +67379,7 @@
             "example": "winstonsmith@truth.org"
           }
         },
-        "description": "The unique identifiers to convert a single Visitor."
+        "description": "The unique identifiers to convert a single Visitor. One of \u0060id\u0060 or \u0060user_id\u0060 is required; an \u0060email\u0060 on its own does not identify a visitor."
       },
       "CreateContentImportSourceRequestAudienceIds": {
         "oneOf": [
@@ -65592,7 +67432,7 @@
         }
       },
       "CreateMessageRequestTo": {
-        "oneOf": [
+        "anyOf": [
           {
             "$ref": "#/components/schemas/Recipient"
           },
@@ -65616,7 +67456,7 @@
         ]
       },
       "CreateMessageRequestCc": {
-        "oneOf": [
+        "anyOf": [
           {
             "$ref": "#/components/schemas/Recipient"
           },
@@ -65636,7 +67476,7 @@
         ]
       },
       "CreateMessageRequestBcc": {
-        "oneOf": [
+        "anyOf": [
           {
             "$ref": "#/components/schemas/Recipient"
           },
@@ -65766,6 +67606,26 @@
           },
           {
             "$ref": "#/components/schemas/CustomObjectInstanceList"
+          }
+        ]
+      },
+      "CustomObjectInstanceCustomAttributesAdditionalProperties": {
+        "anyOf": [
+          {
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "object"
           }
         ]
       },
@@ -66099,6 +67959,82 @@
           }
         ]
       },
+      "NoteAuthor": {
+        "title": "Admin",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "String representing the object\u0027s type. Always has the value \u0060admin\u0060.",
+            "example": "admin"
+          },
+          "id": {
+            "type": "string",
+            "description": "The id representing the admin.",
+            "example": "1295"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the admin.",
+            "example": "Joe Example"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the admin.",
+            "example": "jdoe@example.com"
+          },
+          "job_title": {
+            "type": "string",
+            "description": "The job title of the admin.",
+            "example": "Associate"
+          },
+          "away_mode_enabled": {
+            "type": "boolean",
+            "description": "Identifies if this admin is currently set in away mode.",
+            "example": false
+          },
+          "away_mode_reassign": {
+            "type": "boolean",
+            "description": "Identifies if this admin is set to automatically reassign new conversations to the apps default inbox.",
+            "example": false
+          },
+          "away_status_reason_id": {
+            "type": "integer",
+            "description": "The unique identifier of the away status reason",
+            "nullable": true,
+            "example": 12345
+          },
+          "has_inbox_seat": {
+            "type": "boolean",
+            "description": "Identifies if this admin has a paid inbox seat to restrict/allow features that require them.",
+            "example": true
+          },
+          "team_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "This object represents the avatar associated with the admin.",
+            "example": [
+              814865
+            ]
+          },
+          "avatar": {
+            "$ref": "#/components/schemas/AdminAvatar"
+          },
+          "team_priority_level": {
+            "$ref": "#/components/schemas/TeamPriorityLevel"
+          },
+          "role": {
+            "$ref": "#/components/schemas/AdminRole"
+          }
+        },
+        "description": "Represents the Admin that created the note. When the note has no recorded admin, this is \u0060null\u0060 on a single note and left out of each note in a list.",
+        "nullable": true,
+        "x-tags": [
+          "Admins"
+        ]
+      },
       "PaginatedResponseDataItem": {
         "anyOf": [
           {
@@ -66367,6 +68303,40 @@
           }
         }
       },
+      "UpdateVisitorRequestCustomAttributesAdditionalProperties": {
+        "anyOf": [
+          {
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "VisitorCustomAttributesAdditionalProperties": {
+        "anyOf": [
+          {
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
       "AttachContactToConversationRequestCustomerIntercomUserId": {
         "title": "Intercom User ID",
         "required": [
@@ -66505,6 +68475,25 @@
             "after": 30
           }
         }
+      },
+      "AdminAvatar": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Value is \u0060avatar\u0060. Returned by List all admins only.",
+            "example": "avatar"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "The URL of the avatar image.",
+            "format": "uri",
+            "nullable": true,
+            "example": "https://picsum.photos/200/300"
+          }
+        },
+        "description": "The teammate\u0027s avatar image. On List all admins it is only included when \u0060display_avatar\u0060 is \u0060true\u0060. Elsewhere it is left out when the teammate has neither an uploaded avatar nor a gravatar.",
+        "nullable": true
       },
       "AdminRole": {
         "type": "object",
@@ -67796,8 +69785,7 @@
       },
       "CreateConversationRequestFrom": {
         "required": [
-          "type",
-          "id"
+          "type"
         ],
         "type": "object",
         "properties": {
@@ -67808,15 +69796,27 @@
             "maxLength": 24,
             "minLength": 24,
             "type": "string",
-            "description": "The identifier for the contact which is given by Intercom.",
-            "format": "uuid",
+            "description": "The identifier for the contact which is given by Intercom. Provide one of \u0060id\u0060, \u0060user_id\u0060 or \u0060email\u0060. If you send more than one, \u0060id\u0060 is used first, then \u0060user_id\u0060.",
             "example": "536e564f316c83104c000020"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The external identifier you gave the user. Matches users only; for a lead, use \u0060id\u0060 or \u0060email\u0060.",
+            "example": "25"
+          },
+          "email": {
+            "type": "string",
+            "description": "The contact\u0027s email. Matches a user or a lead, depending on \u0060type\u0060. Used only when \u0060user_id\u0060 isn\u0027t sent. If several leads share the email and it\u0027s the only identifier sent, the request fails with \u0060multiple_users\u0060; use \u0060id\u0060 instead.",
+            "example": "joe@example.com"
           }
         }
       },
       "CreateDataEventRequestMetadata": {
         "type": "object",
-        "description": "Optional metadata about the event.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/CreateDataEventRequestMetadataAdditionalProperties"
+        },
+        "description": "Optional metadata about the event. Values can be a string, a number, a boolean, or an object holding a rich link (\u0060url\u0060 and \u0060value\u0060) or a monetary amount (\u0060amount\u0060 and \u0060currency\u0060).",
         "example": {
           "invite_code": "ADDAFRIEND"
         }
@@ -67983,9 +69983,13 @@
       "CustomObjectInstanceCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/CustomObjectInstanceCustomAttributesAdditionalProperties"
         },
-        "description": "The custom attributes you have set on the custom object instance."
+        "description": "The custom attributes you have set on the custom object instance.\n\nEach value is returned with the type of the attribute it is set on: a string, integer, number or boolean, or \u0060null\u0060 when the attribute is unset. A list attribute returns the label of the selected option. A reference attribute returns an object holding the referenced records, under \u0060contacts\u0060 for a contact reference, \u0060conversations\u0060 for a conversation reference, or \u0060instances\u0060 for a reference to another custom object type.",
+        "example": {
+          "order_number": "ORDER-12345",
+          "total_amount": 99.99
+        }
       },
       "CustomObjectInstanceNotFoundCustomAttributes": {
         "type": "object",
@@ -68483,7 +70487,10 @@
       },
       "DataEventMetadata": {
         "type": "object",
-        "description": "Optional metadata about the event.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/DataEventMetadataAdditionalProperties"
+        },
+        "description": "Optional metadata about the event. Values keep the type they were sent with.",
         "example": {
           "invite_code": "ADDAFRIEND"
         }
@@ -68849,8 +70856,15 @@
         "type": "object",
         "properties": {
           "code": {
-            "type": "string",
-            "description": "A string indicating the kind of error, used to further qualify the HTTP response code",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "A string indicating the kind of error, used to further qualify the HTTP response code. A few request validation errors send an HTTP status code as an integer here instead, for example \u0060422\u0060.",
             "example": "unauthorized"
           },
           "message": {
@@ -69418,10 +71432,6 @@
         },
         "description": "An optional object to sort the results by."
       },
-      "SegmentListPages": {
-        "type": "object",
-        "description": "A pagination object, which may be empty, indicating no further pages to fetch."
-      },
       "TagCompanyRequestCompaniesItem": {
         "type": "object",
         "properties": {
@@ -69434,6 +71444,11 @@
             "type": "string",
             "description": "The company id you have defined for the company.",
             "example": "6"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the company, used to look it up when neither \u0060id\u0060 nor \u0060company_id\u0060 is given.",
+            "example": "Intercom"
           }
         }
       },
@@ -69444,6 +71459,21 @@
             "type": "string",
             "description": "The Intercom defined id representing the user.",
             "example": "5f7f0d217289f8d2f4262080"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The user id you have defined for the user, used to look it up when \u0060id\u0060 is not given.",
+            "example": "25"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user, used to look it up when neither \u0060id\u0060 nor \u0060user_id\u0060 is given.",
+            "example": "jane@example.com"
+          },
+          "untag": {
+            "type": "boolean",
+            "description": "Set to true to remove the tag from this user instead of applying it.",
+            "example": true
           }
         }
       },
@@ -69571,6 +71601,9 @@
         "example": "multiline: true"
       },
       "UntagCompanyRequestCompaniesItem": {
+        "required": [
+          "untag"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -69583,10 +71616,15 @@
             "description": "The company id you have defined for the company.",
             "example": "6"
           },
+          "name": {
+            "type": "string",
+            "description": "The name of the company, used to look it up when neither \u0060id\u0060 nor \u0060company_id\u0060 is given.",
+            "example": "Intercom"
+          },
           "untag": {
             "type": "boolean",
             "description": "Always set to true",
-            "example": "true"
+            "example": true
           }
         }
       },
@@ -69606,10 +71644,13 @@
           "_default_description_": "having a problem"
         }
       },
+      "UpdateVisitorRequestCompaniesItem": {
+        "type": "object"
+      },
       "UpdateVisitorRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/UpdateVisitorRequestCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set for the visitor.",
         "example": {
@@ -69645,8 +71686,9 @@
           "companies": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Company"
-            }
+              "$ref": "#/components/schemas/VisitorCompaniesCompaniesItem"
+            },
+            "description": "Companies are returned in a reduced form here, with only these four keys."
           }
         }
       },
@@ -69733,7 +71775,7 @@
           "segments": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/VisitorSegmentsSegmentsItem"
             }
           }
         }
@@ -69741,7 +71783,7 @@
       "VisitorCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/VisitorCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes you have set on the Visitor."
       },
@@ -70104,6 +72146,25 @@
         },
         "description": "Cursor for the next page of results. Omitted on the last page."
       },
+      "CreateDataEventRequestMetadataAdditionalProperties": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      },
       "DataConnectorDetailObjectMappingsItemAttributeMappingsItem": {
         "type": "object",
         "properties": {
@@ -70234,6 +72295,25 @@
             }
           }
         }
+      },
+      "DataEventMetadataAdditionalProperties": {
+        "anyOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
       },
       "ConversationSlaTargetMissedSlaStatesAdditionalProperties": {
         "type": "object",
@@ -70453,6 +72533,30 @@
         },
         "description": "The new value of the attribute."
       },
+      "VisitorCompaniesCompaniesItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CompanyType"
+          },
+          "company_id": {
+            "type": "string",
+            "description": "The company id you have defined for the company.",
+            "nullable": true,
+            "example": "625"
+          },
+          "id": {
+            "type": "string",
+            "description": "The Intercom defined id representing the company.",
+            "example": "531ee472cce572a6ec000006"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the company.",
+            "example": "Blue Sun"
+          }
+        }
+      },
       "VisitorTagsTagsItem": {
         "type": "object",
         "properties": {
@@ -70468,6 +72572,19 @@
             "type": "string",
             "description": "The name of the tag.",
             "example": "tag_name"
+          }
+        }
+      },
+      "VisitorSegmentsSegmentsItem": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SegmentType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The Intercom defined id representing the segment.",
+            "example": "56203d455f71e8285f000020"
           }
         }
       },
@@ -70743,19 +72860,21 @@
             },
             "description": "List of attribute identifiers to include in the export. Requires qualified_id format (e.g., \u0022people.Brand\u0022, \u0022standard.conversation_id\u0022). Use the qualified_id returned from the get_datasets response.",
             "example": [
-              "conversation_id",
-              "conversation_started_at"
+              "standard.conversation_id",
+              "timestamp.conversation_started_at"
             ]
           },
           "start_time": {
             "type": "integer",
+            "description": "Start of the export period, as a Unix timestamp in seconds. Must be within your workspace\u0027s reporting data retention period, which is 2 years by default (3 years for workspaces with extended retention).",
             "format": "int64",
-            "example": 1717490000
+            "example": 1788220800
           },
           "end_time": {
             "type": "integer",
+            "description": "End of the export period, as a Unix timestamp in seconds. Must not be earlier than start_time and must also be within the retention period.",
             "format": "int64",
-            "example": 1717510000
+            "example": 1788307200
           }
         }
       },
@@ -70768,13 +72887,16 @@
           },
           "status": {
             "type": "string",
+            "description": "The status of the job. A newly enqueued job is \u0060pending\u0060.",
             "example": "pending"
           },
           "download_url": {
-            "type": "string"
+            "type": "string",
+            "description": "Empty until the job is complete."
           },
           "download_expires_at": {
-            "type": "string"
+            "type": "string",
+            "description": "Empty until the job is complete."
           }
         }
       },
@@ -70782,16 +72904,18 @@
         "type": "object",
         "properties": {
           "job_identifier": {
-            "type": "string"
+            "type": "string",
+            "description": "Unique identifier of the job."
           },
           "status": {
-            "type": "string"
+            "$ref": "#/components/schemas/GetExportReportingDataByJobIdentifier200ResponseStatus"
           },
           "download_url": {
-            "type": "string"
+            "type": "string",
+            "description": "The URL to download the export from. Empty until the job is complete."
           },
           "download_expires_at": {
-            "type": "string"
+            "$ref": "#/components/schemas/GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt"
           }
         }
       },
@@ -70809,6 +72933,10 @@
             }
           }
         }
+      },
+      "GetDownloadReportingDataByJobIdentifier200OctetStreamResponse": {
+        "type": "string",
+        "format": "binary"
       },
       "AttachTagToInternalArticleRequest": {
         "required": [
@@ -70953,11 +73081,6 @@
             "type": "string",
             "description": "The text of the note.",
             "example": "New note"
-          },
-          "contact_id": {
-            "type": "string",
-            "description": "The unique identifier of a given contact.",
-            "example": "123"
           },
           "admin_id": {
             "type": "string",
@@ -73140,8 +75263,18 @@
           }
         }
       },
+      "ListTags200Response": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TagList"
+          },
+          {
+            "$ref": "#/components/schemas/TagBasic"
+          }
+        ]
+      },
       "CreateTagRequest": {
-        "oneOf": [
+        "anyOf": [
           {
             "$ref": "#/components/schemas/CreateOrUpdateTagRequest"
           },
@@ -73730,6 +75863,10 @@
         "type": "object",
         "description": "Placeholder schema for path example refs"
       },
+      "GetDownloadReportingDataByJobIdentifier200OctetStreamResponseSchema": {
+        "type": "string",
+        "format": "binary"
+      },
       "ShowCallTranscript200ResponseSchema": {
         "type": "array",
         "items": {
@@ -74186,6 +76323,19 @@
           ]
         }
       },
+      "GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "maxLength": 0,
+            "type": "string"
+          }
+        ],
+        "description": "The time after which the export can no longer be downloaded, as a Unix timestamp in seconds. Empty string until the job is complete."
+      },
       "ActivityLogMetadataChangesProperty": {
         "type": "object",
         "additionalProperties": {
@@ -74303,7 +76453,10 @@
       },
       "CreateDataEventRequestMetadataProperty": {
         "type": "object",
-        "description": "Optional metadata about the event.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/CreateDataEventRequestMetadataAdditionalProperties"
+        },
+        "description": "Optional metadata about the event. Values can be a string, a number, a boolean, or an object holding a rich link (\u0060url\u0060 and \u0060value\u0060) or a monetary amount (\u0060amount\u0060 and \u0060currency\u0060).",
         "example": {
           "invite_code": "ADDAFRIEND"
         }
@@ -74374,9 +76527,13 @@
       "CustomObjectInstanceCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/CustomObjectInstanceCustomAttributesAdditionalProperties"
         },
-        "description": "The custom attributes you have set on the custom object instance."
+        "description": "The custom attributes you have set on the custom object instance.\n\nEach value is returned with the type of the attribute it is set on: a string, integer, number or boolean, or \u0060null\u0060 when the attribute is unset. A list attribute returns the label of the selected option. A reference attribute returns an object holding the referenced records, under \u0060contacts\u0060 for a contact reference, \u0060conversations\u0060 for a conversation reference, or \u0060instances\u0060 for a reference to another custom object type.",
+        "example": {
+          "order_number": "ORDER-12345",
+          "total_amount": 99.99
+        }
       },
       "CustomObjectInstanceNotFoundCustomAttributesProperty": {
         "type": "object",
@@ -74404,7 +76561,10 @@
       },
       "DataEventMetadataProperty": {
         "type": "object",
-        "description": "Optional metadata about the event.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/DataEventMetadataAdditionalProperties"
+        },
+        "description": "Optional metadata about the event. Values keep the type they were sent with.",
         "example": {
           "invite_code": "ADDAFRIEND"
         }
@@ -74481,10 +76641,6 @@
       "BannerClientTargetingItemProperty": {
         "type": "object"
       },
-      "SegmentListPagesProperty": {
-        "type": "object",
-        "description": "A pagination object, which may be empty, indicating no further pages to fetch."
-      },
       "TicketTicketAttributes": {
         "title": "Ticket Attributes",
         "type": "object",
@@ -74533,10 +76689,13 @@
           "_default_description_": "having a problem"
         }
       },
+      "UpdateVisitorRequestCompaniesItemProperty": {
+        "type": "object"
+      },
       "UpdateVisitorRequestCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/UpdateVisitorRequestCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set for the visitor.",
         "example": {
@@ -74548,7 +76707,7 @@
       "VisitorCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "type": "string"
+          "$ref": "#/components/schemas/VisitorCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes you have set on the Visitor."
       },
@@ -74718,7 +76877,7 @@
           },
           "default_time_attribute_id": {
             "type": "string",
-            "example": "conversation_started_at"
+            "example": "conversation.conversation_created_at"
           },
           "attributes": {
             "type": "array",
@@ -75168,7 +77327,7 @@
           "qualified_id": {
             "type": "string",
             "description": "A namespaced identifier that uniquely identifies the attribute across all types. Format is \u0022prefix.name\u0022 (e.g., \u0022people.Brand\u0022, \u0022conversation.Brand\u0022). Required when calling the enqueue endpoint.",
-            "example": "conversation.conversation_id"
+            "example": "standard.conversation_id"
           },
           "name": {
             "type": "string",
@@ -77622,6 +79781,29 @@
           ]
         }
       },
+      "CreateOrUpdateTagRequestTaggableType": {
+        "enum": [
+          "user",
+          "company"
+        ],
+        "type": "string",
+        "description": "Whether the ids in \u0060ids_to_add\u0060 are contacts or companies. Defaults to \u0060user\u0060.",
+        "example": "user",
+        "x-ms-enum": {
+          "name": "CreateOrUpdateTagRequestTaggableType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "company",
+              "name": "Company"
+            }
+          ]
+        }
+      },
       "EmailChannel": {
         "enum": [
           "email"
@@ -77774,10 +79956,11 @@
           "float",
           "boolean",
           "date",
-          "datetime"
+          "datetime",
+          "relationship"
         ],
         "type": "string",
-        "description": "The data type of the attribute.",
+        "description": "The data type of the attribute. A list attribute created with the \u0060options\u0060 data type is returned as \u0060string\u0060, with its choices in \u0060options\u0060. \u0060relationship\u0060 is a reference to a custom object.",
         "example": "boolean",
         "x-ms-enum": {
           "name": "DataAttributeDataType",
@@ -77806,6 +79989,10 @@
             {
               "value": "datetime",
               "name": "Datetime"
+            },
+            {
+              "value": "relationship",
+              "name": "Relationship"
             }
           ]
         }
@@ -80794,7 +82981,6 @@
           "integer",
           "float",
           "boolean",
-          "datetime",
           "date"
         ],
         "type": "string",
@@ -80817,10 +83003,6 @@
             {
               "value": "boolean",
               "name": "Boolean"
-            },
-            {
-              "value": "datetime",
-              "name": "Datetime"
             },
             {
               "value": "date",
@@ -81238,8 +83420,7 @@
       "CreateConversationRequestFromType": {
         "enum": [
           "lead",
-          "user",
-          "contact"
+          "user"
         ],
         "type": "string",
         "description": "The role associated to the contact - user or lead.",
@@ -81255,10 +83436,6 @@
             {
               "value": "user",
               "name": "User"
-            },
-            {
-              "value": "contact",
-              "name": "Contact"
             }
           ]
         }
@@ -82063,6 +84240,33 @@
           ]
         }
       },
+      "GetExportReportingDataByJobIdentifier200ResponseStatus": {
+        "enum": [
+          "pending",
+          "complete",
+          "failed"
+        ],
+        "type": "string",
+        "description": "The status of the job.",
+        "x-ms-enum": {
+          "name": "GetExportReportingDataByJobIdentifier200ResponseStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "complete",
+              "name": "Complete"
+            },
+            {
+              "value": "failed",
+              "name": "Failed"
+            }
+          ]
+        }
+      },
       "UploadEcommerceCatalogFormDataRequestFinalize": {
         "enum": [
           "true",
@@ -82542,6 +84746,27 @@
           ]
         }
       },
+      "ListCompanyNotesOrderParameter": {
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ListCompanyNotesOrderParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "asc",
+              "name": "Asc"
+            },
+            {
+              "value": "desc",
+              "name": "Desc"
+            }
+          ]
+        }
+      },
       "ListAllCompaniesOrderParameter": {
         "enum": [
           "asc",
@@ -82593,6 +84818,27 @@
         "type": "string",
         "x-ms-enum": {
           "name": "ListGrantedCompaniesForAContactOrderParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "asc",
+              "name": "Asc"
+            },
+            {
+              "value": "desc",
+              "name": "Desc"
+            }
+          ]
+        }
+      },
+      "ListNotesOrderParameter": {
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ListNotesOrderParameter",
           "modelAsString": false,
           "values": [
             {
@@ -82940,6 +85186,48 @@
             {
               "value": "false",
               "name": "FalseValue"
+            }
+          ]
+        }
+      },
+      "LisDataEventsTypeParameter": {
+        "enum": [
+          "user",
+          "lead"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "LisDataEventsTypeParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "lead",
+              "name": "Lead"
+            }
+          ]
+        }
+      },
+      "ListTagsTaggableTypeParameter": {
+        "enum": [
+          "user",
+          "company"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ListTagsTaggableTypeParameter",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "company",
+              "name": "Company"
             }
           ]
         }

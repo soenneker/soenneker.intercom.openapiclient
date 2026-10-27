@@ -55,7 +55,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.String = stringValue;
             }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1> singleFilterSearchRequestValueMember1Value)
+            else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequestValueMember1> singleFilterSearchRequestValueMember1Value)
             {
                 result.SingleFilterSearchRequestValueMember1 = singleFilterSearchRequestValueMember1Value;
             }

@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? CreatedAt { get; set; }
         /// <summary>Set to true if this is a CDA</summary>
         public bool? Custom { get; set; }
-        /// <summary>The data type of the attribute.</summary>
+        /// <summary>The data type of the attribute. A list attribute created with the `options` data type is returned as `string`, with its choices in `options`. `relationship` is a reference to a custom object.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeDataType? DataType { get; set; }
         /// <summary>Readable description of the attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

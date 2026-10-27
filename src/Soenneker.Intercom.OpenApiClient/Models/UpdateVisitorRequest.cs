@@ -15,6 +15,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>An image URL for the visitor&apos;s avatar.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Avatar { get; set; }
+#nullable restore
+#else
+        public string Avatar { get; set; }
+#endif
+        /// <summary>The companies to associate the visitor with. Only applied when the same request sends `email`, which promotes the visitor to a lead.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty>? Companies { get; set; }
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty> Companies { get; set; }
+#endif
         /// <summary>The custom attributes which are set for the visitor.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -23,13 +39,47 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCustomAttributesProperty CustomAttributes { get; set; }
 #endif
-        /// <summary>A unique identified for the visitor which is given by Intercom.</summary>
+        /// <summary>The visitor&apos;s email address. Sending this promotes the visitor to a lead and the response becomes a contact object.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Email { get; set; }
+#nullable restore
+#else
+        public string Email { get; set; }
+#endif
+        /// <summary>A unique identified for the visitor which is given by Intercom. Used to look the visitor up; it is not changed by this request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }
 #nullable restore
 #else
         public string Id { get; set; }
+#endif
+        /// <summary>The language to send the visitor messages in, overriding the language we detect.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LanguageOverride { get; set; }
+#nullable restore
+#else
+        public string LanguageOverride { get; set; }
+#endif
+        /// <summary>The time the visitor was last seen, as a Unix timestamp.</summary>
+        public int? LastRequestAt { get; set; }
+        /// <summary>The IP address the visitor was last seen from.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LastSeenIp { get; set; }
+#nullable restore
+#else
+        public string LastSeenIp { get; set; }
+#endif
+        /// <summary>The user agent the visitor was last seen with.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LastSeenUserAgent { get; set; }
+#nullable restore
+#else
+        public string LastSeenUserAgent { get; set; }
 #endif
         /// <summary>The visitor&apos;s name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -39,13 +89,65 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>A unique identified for the visitor which is given by you.</summary>
+        /// <summary>The id of the teammate who owns the visitor.</summary>
+        public int? OwnerId { get; set; }
+        /// <summary>The visitor&apos;s phone number.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Phone { get; set; }
+#nullable restore
+#else
+        public string Phone { get; set; }
+#endif
+        /// <summary>Whether the visitor is unsubscribed from emails.</summary>
+        public bool? UnsubscribedFromEmails { get; set; }
+        /// <summary>A unique identified for the visitor which is given by you. Used to look the visitor up; it is not changed by this request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? UserId { get; set; }
 #nullable restore
 #else
         public string UserId { get; set; }
+#endif
+        /// <summary>The campaign the visitor arrived from.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmCampaign { get; set; }
+#nullable restore
+#else
+        public string UtmCampaign { get; set; }
+#endif
+        /// <summary>The content the visitor arrived from.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmContent { get; set; }
+#nullable restore
+#else
+        public string UtmContent { get; set; }
+#endif
+        /// <summary>The medium the visitor arrived from.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmMedium { get; set; }
+#nullable restore
+#else
+        public string UtmMedium { get; set; }
+#endif
+        /// <summary>The source the visitor arrived from.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmSource { get; set; }
+#nullable restore
+#else
+        public string UtmSource { get; set; }
+#endif
+        /// <summary>The search term the visitor arrived from.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UtmTerm { get; set; }
+#nullable restore
+#else
+        public string UtmTerm { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequest"/> and sets the default values.
@@ -72,10 +174,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "avatar", n => { Avatar = n.GetStringValue(); } },
+                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCustomAttributesProperty.CreateFromDiscriminatorValue); } },
+                { "email", n => { Email = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
+                { "last_request_at", n => { LastRequestAt = n.GetIntValue(); } },
+                { "last_seen_ip", n => { LastSeenIp = n.GetStringValue(); } },
+                { "last_seen_user_agent", n => { LastSeenUserAgent = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "owner_id", n => { OwnerId = n.GetIntValue(); } },
+                { "phone", n => { Phone = n.GetStringValue(); } },
+                { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
+                { "utm_campaign", n => { UtmCampaign = n.GetStringValue(); } },
+                { "utm_content", n => { UtmContent = n.GetStringValue(); } },
+                { "utm_medium", n => { UtmMedium = n.GetStringValue(); } },
+                { "utm_source", n => { UtmSource = n.GetStringValue(); } },
+                { "utm_term", n => { UtmTerm = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -85,10 +202,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("avatar", Avatar);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty>("companies", Companies);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCustomAttributesProperty>("custom_attributes", CustomAttributes);
+            writer.WriteStringValue("email", Email);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("language_override", LanguageOverride);
+            writer.WriteIntValue("last_request_at", LastRequestAt);
+            writer.WriteStringValue("last_seen_ip", LastSeenIp);
+            writer.WriteStringValue("last_seen_user_agent", LastSeenUserAgent);
             writer.WriteStringValue("name", Name);
+            writer.WriteIntValue("owner_id", OwnerId);
+            writer.WriteStringValue("phone", Phone);
+            writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteStringValue("user_id", UserId);
+            writer.WriteStringValue("utm_campaign", UtmCampaign);
+            writer.WriteStringValue("utm_content", UtmContent);
+            writer.WriteStringValue("utm_medium", UtmMedium);
+            writer.WriteStringValue("utm_source", UtmSource);
+            writer.WriteStringValue("utm_term", UtmTerm);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

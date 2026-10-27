@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The id or company_id of the company can be passed as input parameters.</summary>
+        /// <summary>The id, company_id or name of the company can be passed as input parameters. Companies that cannot be found are skipped.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem>? Companies { get; set; }
@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequestCompaniesItem> Companies { get; set; }
 #endif
-        /// <summary>The name of the tag, which will be created if not found.</summary>
+        /// <summary>The name of the tag, which will be created if not found. Names can be at most 191 characters long.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }

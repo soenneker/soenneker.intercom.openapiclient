@@ -2,6 +2,7 @@
 #pragma warning disable CS0618
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
+using Microsoft.Kiota.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -11,11 +12,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// The data export API is used to export message delivery and engagement statistics for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more) sent in a given timeframe. The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-    public partial class DataExport : IAdditionalDataHolder, IParsable
+    public partial class DataExport : ApiException, IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The time after which you will not be able to access the data.</summary>
+        /// <summary>The time after which you will not be able to access the data, as a Unix timestamp. It is one week from the time the job was created. Empty until the job completes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DownloadExpiresAt { get; set; }
@@ -23,7 +24,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string DownloadExpiresAt { get; set; }
 #endif
-        /// <summary>The location where you can download your data.</summary>
+        /// <summary>The location where you can download your data. Empty until the job completes.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DownloadUrl { get; set; }
@@ -34,11 +35,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The identifier for your job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? JobIdentfier { get; set; }
+        public string? JobIdentifier { get; set; }
 #nullable restore
 #else
-        public string JobIdentfier { get; set; }
+        public string JobIdentifier { get; set; }
 #endif
+        /// <summary>The primary error message.</summary>
+        public override string Message { get => base.Message; }
         /// <summary>The current state of your job.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.DataExportStatus? Status { get; set; }
         /// <summary>
@@ -68,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "download_expires_at", n => { DownloadExpiresAt = n.GetStringValue(); } },
                 { "download_url", n => { DownloadUrl = n.GetStringValue(); } },
-                { "job_identfier", n => { JobIdentfier = n.GetStringValue(); } },
+                { "job_identifier", n => { JobIdentifier = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataExportStatus>(); } },
             };
         }
@@ -81,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("download_expires_at", DownloadExpiresAt);
             writer.WriteStringValue("download_url", DownloadUrl);
-            writer.WriteStringValue("job_identfier", JobIdentfier);
+            writer.WriteStringValue("job_identifier", JobIdentifier);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataExportStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }

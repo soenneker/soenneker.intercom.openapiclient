@@ -15,13 +15,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Image for the associated team or teammate</summary>
+        /// <summary>The teammate&apos;s avatar image. On List all admins it is only included when `display_avatar` is `true`. Elsewhere it is left out when the teammate has neither an uploaded avatar nor a gravatar.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Avatar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar? Avatar { get; set; }
 #nullable restore
 #else
-        public string Avatar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar Avatar { get; set; }
 #endif
         /// <summary>Identifies if this admin is currently set in away mode.</summary>
         public bool? AwayModeEnabled { get; set; }
@@ -120,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "avatar", n => { Avatar = n.GetStringValue(); } },
+                { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar.CreateFromDiscriminatorValue); } },
                 { "away_mode_enabled", n => { AwayModeEnabled = n.GetBoolValue(); } },
                 { "away_mode_reassign", n => { AwayModeReassign = n.GetBoolValue(); } },
                 { "away_status_reason_id", n => { AwayStatusReasonId = n.GetIntValue(); } },
@@ -142,7 +142,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("avatar", Avatar);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar>("avatar", Avatar);
             writer.WriteBoolValue("away_mode_enabled", AwayModeEnabled);
             writer.WriteBoolValue("away_mode_reassign", AwayModeReassign);
             writer.WriteIntValue("away_status_reason_id", AwayStatusReasonId);

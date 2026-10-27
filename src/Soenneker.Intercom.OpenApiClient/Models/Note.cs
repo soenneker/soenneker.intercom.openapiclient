@@ -15,13 +15,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Admins are teammate accounts that have access to a workspace.</summary>
+        /// <summary>Represents the Admin that created the note. When the note has no recorded admin, this is `null` on a single note and left out of each note in a list.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin? Author { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.NoteAuthor? Author { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Admin Author { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.NoteAuthor Author { get; set; }
 #endif
         /// <summary>The body text of the note.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -90,7 +90,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>(global::Soenneker.Intercom.OpenApiClient.Models.Admin.CreateFromDiscriminatorValue); } },
+                { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.NoteAuthor.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteCompany>(global::Soenneker.Intercom.OpenApiClient.Models.NoteCompany.CreateFromDiscriminatorValue); } },
                 { "contact", n => { Contact = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteContact>(global::Soenneker.Intercom.OpenApiClient.Models.NoteContact.CreateFromDiscriminatorValue); } },
@@ -106,7 +106,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin>("author", Author);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteAuthor>("author", Author);
             writer.WriteStringValue("body", Body);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteCompany>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.NoteContact>("contact", Contact);

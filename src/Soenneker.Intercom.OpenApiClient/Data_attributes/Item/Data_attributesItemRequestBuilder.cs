@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes.Item
         {
         }
         /// <summary>
-        /// You can update a data attribute.&gt; 🚧 Updating the data type is not possible&gt;&gt; It is currently a dangerous action to execute changing a data attribute&apos;s type via the API. You will need to update the type via the UI instead.
+        /// You can update a data attribute.&gt; 🚧 Updating the data type is not possible&gt;&gt; It is currently a dangerous action to execute changing a data attribute&apos;s type via the API. You will need to update the type via the UI instead.You can also send this request with `PATCH`; it behaves the same as `PUT`.Requires the `write_attributes` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute"/></returns>
         /// <param name="body">The request body</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_attributes.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update a data attribute.&gt; 🚧 Updating the data type is not possible&gt;&gt; It is currently a dangerous action to execute changing a data attribute&apos;s type via the API. You will need to update the type via the UI instead.
+        /// You can update a data attribute.&gt; 🚧 Updating the data type is not possible&gt;&gt; It is currently a dangerous action to execute changing a data attribute&apos;s type via the API. You will need to update the type via the UI instead.You can also send this request with `PATCH`; it behaves the same as `PUT`.Requires the `write_attributes` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
         {
         }
         /// <summary>
-        /// You can fetch the details of a single visitor.
+        /// You can fetch the details of a single visitor.Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Visitor"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,12 +65,13 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Visitor>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Visitor.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Sending a PUT request to `/visitors` will result in an update of an existing Visitor.**Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body.**Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.
+        /// Sending a PUT request to `/visitors` will result in an update of an existing Visitor.**Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body.**Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.Sending an `email` promotes the visitor to a lead. When that happens the response is a contact object with a `role` of `lead`, not a visitor object.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Visitor"/></returns>
         /// <param name="body">Update an existing visitor.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -86,13 +87,14 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Visitor>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Visitor.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single visitor.
+        /// You can fetch the details of a single visitor.Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -111,7 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
             return requestInfo;
         }
         /// <summary>
-        /// Sending a PUT request to `/visitors` will result in an update of an existing Visitor.**Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body.**Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.
+        /// Sending a PUT request to `/visitors` will result in an update of an existing Visitor.**Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body.**Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.Sending an `email` promotes the visitor to a lead. When that happens the response is a contact object with a `role` of `lead`, not a visitor object.Requires the `read_write_users` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Update an existing visitor.</param>
@@ -142,7 +144,7 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
             return new global::Soenneker.Intercom.OpenApiClient.Visitors.VisitorsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch the details of a single visitor.
+        /// You can fetch the details of a single visitor.Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class VisitorsRequestBuilderGetQueryParameters 

@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The id of the resource created during job execution (e.g. ticket id)</summary>
+        /// <summary>The id of the resource created during job execution (e.g. ticket id). Only set once the job has succeeded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ResourceId { get; set; }
@@ -39,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ResourceType { get; set; }
 #endif
-        /// <summary>The url of the resource created during job exeuction. Use this url to fetch the resource.</summary>
+        /// <summary>The url of the resource created during job execution. Use this url to fetch the resource. Only set once the job has succeeded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ResourceUrl { get; set; }

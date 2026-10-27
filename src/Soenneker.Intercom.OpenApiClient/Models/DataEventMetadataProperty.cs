@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Optional metadata about the event.
+    /// Optional metadata about the event. Values keep the type they were sent with.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class DataEventMetadataProperty : IAdditionalDataHolder, IParsable

@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a conversation that has been initiated by a contact (ie. user or lead).The conversation can be an in-app message only.{% admonition type=&quot;info&quot; name=&quot;Sending for visitors&quot; %}You can also send a message from a visitor by specifying their `user_id` or `id` value in the `from` field, along with a `type` field value of `contact`.This visitor will be automatically converted to a contact with a lead role once the conversation is created.{% /admonition %}This will return the Message model that has been created.
+        /// You can create a conversation that has been initiated by a contact (ie. user or lead).The conversation can be an in-app message only.{% admonition type=&quot;info&quot; name=&quot;Sending for visitors&quot; %}You can also send a message from a visitor by specifying their `id` value in the `from` field, along with a `type` field value of `lead`.This visitor will be automatically converted to a contact with a lead role once the conversation is created.{% /admonition %}This will return the Message model that has been created.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation200Response"/></returns>
         /// <param name="body">Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.</param>
@@ -144,7 +144,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
             return requestInfo;
         }
         /// <summary>
-        /// You can create a conversation that has been initiated by a contact (ie. user or lead).The conversation can be an in-app message only.{% admonition type=&quot;info&quot; name=&quot;Sending for visitors&quot; %}You can also send a message from a visitor by specifying their `user_id` or `id` value in the `from` field, along with a `type` field value of `contact`.This visitor will be automatically converted to a contact with a lead role once the conversation is created.{% /admonition %}This will return the Message model that has been created.
+        /// You can create a conversation that has been initiated by a contact (ie. user or lead).The conversation can be an in-app message only.{% admonition type=&quot;info&quot; name=&quot;Sending for visitors&quot; %}You can also send a message from a visitor by specifying their `id` value in the `from` field, along with a `type` field value of `lead`.This visitor will be automatically converted to a contact with a lead role once the conversation is created.{% /admonition %}This will return the Message model that has been created.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.</param>

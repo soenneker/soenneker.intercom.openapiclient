@@ -39,11 +39,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue();
-            if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest>(global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest> multipleFilterSearchRequestValue)
+            if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest>(global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequest> multipleFilterSearchRequestValue)
             {
                 result.MultipleFilterSearchRequest = multipleFilterSearchRequestValue;
             }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest> singleFilterSearchRequestValue)
+            else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest>(global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.SingleFilterSearchRequest> singleFilterSearchRequestValue)
             {
                 result.SingleFilterSearchRequest = singleFilterSearchRequestValue;
             }

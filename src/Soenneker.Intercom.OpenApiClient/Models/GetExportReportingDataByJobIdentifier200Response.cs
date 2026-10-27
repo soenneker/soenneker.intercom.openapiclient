@@ -14,15 +14,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The download_expires_at property</summary>
+        /// <summary>The time after which the export can no longer be downloaded, as a Unix timestamp in seconds. Empty string until the job is complete.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DownloadExpiresAt { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt? DownloadExpiresAt { get; set; }
 #nullable restore
 #else
-        public string DownloadExpiresAt { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt DownloadExpiresAt { get; set; }
 #endif
-        /// <summary>The download_url property</summary>
+        /// <summary>The URL to download the export from. Empty until the job is complete.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DownloadUrl { get; set; }
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string DownloadUrl { get; set; }
 #endif
-        /// <summary>The job_identifier property</summary>
+        /// <summary>Unique identifier of the job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? JobIdentifier { get; set; }
@@ -38,14 +38,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string JobIdentifier { get; set; }
 #endif
-        /// <summary>The status property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Status { get; set; }
-#nullable restore
-#else
-        public string Status { get; set; }
-#endif
+        /// <summary>The status of the job.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseStatus? Status { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response"/> and sets the default values.
         /// </summary>
@@ -71,10 +65,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "download_expires_at", n => { DownloadExpiresAt = n.GetStringValue(); } },
+                { "download_expires_at", n => { DownloadExpiresAt = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt>(global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt.CreateFromDiscriminatorValue); } },
                 { "download_url", n => { DownloadUrl = n.GetStringValue(); } },
                 { "job_identifier", n => { JobIdentifier = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetStringValue(); } },
+                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseStatus>(); } },
             };
         }
         /// <summary>
@@ -84,10 +78,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("download_expires_at", DownloadExpiresAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseDownloadExpiresAt>("download_expires_at", DownloadExpiresAt);
             writer.WriteStringValue("download_url", DownloadUrl);
             writer.WriteStringValue("job_identifier", JobIdentifier);
-            writer.WriteStringValue("status", Status);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200ResponseStatus>("status", Status);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data
     public partial class Reporting_dataRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.download.reporting_data.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Unique identifier of the job.</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder"/></returns>
         public global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder this[string position]
         {

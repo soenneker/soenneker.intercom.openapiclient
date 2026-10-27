@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// You can create or update an existing tag.
+    /// You can create or update an existing tag, and optionally apply it to a list of contact or company ids.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateOrUpdateTagRequest : IAdditionalDataHolder, IParsable
@@ -23,7 +23,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive.</summary>
+        /// <summary>The Intercom ids of the contacts or companies to apply the tag to. A contact id that does not exist returns a 404; a company id that does not exist is skipped. A 404 still leaves the tag created or renamed. The `users` and `companies` arrays in the response are always empty when this field is used.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? IdsToAdd { get; set; }
+#nullable restore
+#else
+        public List<string> IdsToAdd { get; set; }
+#endif
+        /// <summary>The name of the tag, which will be created if not found, or the new name for the tag if this is an update request. Names are case insensitive and can be at most 191 characters long. Creating a tag with a longer name returns a 400. When updating by `id`, a longer name or one that another tag already has returns 200 with the new name, but the tag keeps its old name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
@@ -31,6 +39,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
+        /// <summary>Whether the ids in `ids_to_add` are contacts or companies. Defaults to `user`.</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequestTaggableType? TaggableType { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest"/> and sets the default values.
         /// </summary>
@@ -57,7 +67,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "ids_to_add", n => { IdsToAdd = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
+                { "taggable_type", n => { TaggableType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequestTaggableType>(); } },
             };
         }
         /// <summary>
@@ -68,7 +80,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("id", Id);
+            writer.WriteCollectionOfPrimitiveValues<string>("ids_to_add", IdsToAdd);
             writer.WriteStringValue("name", Name);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequestTaggableType>("taggable_type", TaggableType);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -14,7 +14,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The download_expires_at property</summary>
+        /// <summary>Empty until the job is complete.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DownloadExpiresAt { get; set; }
@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string DownloadExpiresAt { get; set; }
 #endif
-        /// <summary>The download_url property</summary>
+        /// <summary>Empty until the job is complete.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? DownloadUrl { get; set; }
@@ -38,7 +38,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string JobIdentifier { get; set; }
 #endif
-        /// <summary>The status property</summary>
+        /// <summary>The status of the job. A newly enqueued job is `pending`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Status { get; set; }

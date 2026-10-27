@@ -53,24 +53,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.CreateTagRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTagRequest();
-            if("CreateOrUpdateTagRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.CreateOrUpdateTagRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest();
-            }
-            else if("TagCompanyRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.TagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest();
-            }
-            else if("TagMultipleUsersRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.TagMultipleUsersRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest();
-            }
-            else if("UntagCompanyRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.UntagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest();
-            }
+            result.CreateOrUpdateTagRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest();
+            result.TagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest();
+            result.TagMultipleUsersRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest();
+            result.UntagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest();
             return result;
         }
         /// <summary>
@@ -79,21 +66,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(CreateOrUpdateTagRequest != null)
+            if(CreateOrUpdateTagRequest != null || TagCompanyRequest != null || TagMultipleUsersRequest != null || UntagCompanyRequest != null)
             {
-                return CreateOrUpdateTagRequest.GetFieldDeserializers();
-            }
-            else if(TagCompanyRequest != null)
-            {
-                return TagCompanyRequest.GetFieldDeserializers();
-            }
-            else if(TagMultipleUsersRequest != null)
-            {
-                return TagMultipleUsersRequest.GetFieldDeserializers();
-            }
-            else if(UntagCompanyRequest != null)
-            {
-                return UntagCompanyRequest.GetFieldDeserializers();
+                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(CreateOrUpdateTagRequest, TagCompanyRequest, TagMultipleUsersRequest, UntagCompanyRequest);
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -104,22 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(CreateOrUpdateTagRequest != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest>(null, CreateOrUpdateTagRequest);
-            }
-            else if(TagCompanyRequest != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest>(null, TagCompanyRequest);
-            }
-            else if(TagMultipleUsersRequest != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest>(null, TagMultipleUsersRequest);
-            }
-            else if(UntagCompanyRequest != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest>(null, UntagCompanyRequest);
-            }
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest>(null, CreateOrUpdateTagRequest, TagCompanyRequest, TagMultipleUsersRequest, UntagCompanyRequest);
         }
     }
 }

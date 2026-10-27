@@ -30,9 +30,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string DatasetId { get; set; }
 #endif
-        /// <summary>The end_time property</summary>
+        /// <summary>End of the export period, as a Unix timestamp in seconds. Must not be earlier than start_time and must also be within the retention period.</summary>
         public long? EndTime { get; set; }
-        /// <summary>The start_time property</summary>
+        /// <summary>Start of the export period, as a Unix timestamp in seconds. Must be within your workspace&apos;s reporting data retention period, which is 2 years by default (3 years for workspaces with extended retention).</summary>
         public long? StartTime { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PostExportReportingDataEnqueueRequest"/> and sets the default values.

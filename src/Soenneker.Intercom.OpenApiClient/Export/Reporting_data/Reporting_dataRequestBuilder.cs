@@ -28,7 +28,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data
             get => new global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Get_datasets.Get_datasetsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.export.reporting_data.item collection</summary>
-        /// <param name="position">Unique identifier of the item</param>
+        /// <param name="position">Unique identifier of the job.</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder"/></returns>
         public global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder this[string position]
         {

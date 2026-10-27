@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TagsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tags", pathParameters)
+        public TagsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tags{?company_id*,email*,id*,name*,taggable_id*,taggable_type*,user_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,34 +43,36 @@ namespace Soenneker.Intercom.OpenApiClient.Tags
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public TagsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tags", rawUrl)
+        public TagsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/tags{?company_id*,email*,id*,name*,taggable_id*,taggable_type*,user_id*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all tags for a given workspace.
+        /// You can fetch a list of all tags for a given workspace.Passing `id` returns that one tag object instead of a list. Passing `taggable_type` returns a list of the tags applied to a single contact or company.Requires the `read_tags` or `read_users_companies` OAuth scope.
         /// </summary>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagList"/></returns>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListTags200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TagList?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListTags200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Tags.TagsRequestBuilder.TagsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TagList> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.ListTags200Response> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Tags.TagsRequestBuilder.TagsRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TagList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TagList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListTags200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListTags200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can use this endpoint to perform the following operations:  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in &quot;Tag Company Request Payload&quot; described below. Also, if the tag doesn&apos;t exist then a new one will be created automatically.  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in &quot;Untag Company Request Payload&quot; described below.  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in &quot;Tag Users Request Payload&quot; described below.Each operation will return a tag object.
+        /// You can use this endpoint to perform the following operations:  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in &quot;Tag Company Request Payload&quot; described below. Also, if the tag doesn&apos;t exist then a new one will be created automatically.  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in &quot;Untag Company Request Payload&quot; described below.  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in &quot;Tag Users Request Payload&quot; described below.Each operation will return a tag object.Contacts and companies listed in `users` or `companies` that do not exist are skipped: they are left out of the `users` and `companies` arrays in the response and the request still succeeds. With `ids_to_add` it depends on `taggable_type`: a contact id that does not exist returns a 404, while a company id that does not exist is skipped. With `ids_to_add`, the `users` and `companies` arrays in the response are always empty, and a 404 still leaves the tag created or renamed.Requires the `write_tags` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -78,6 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateTagRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -93,21 +96,22 @@ namespace Soenneker.Intercom.OpenApiClient.Tags
             {
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all tags for a given workspace.
+        /// You can fetch a list of all tags for a given workspace.Passing `id` returns that one tag object instead of a list. Passing `taggable_type` returns a list of the tags applied to a single contact or company.Requires the `read_tags` or `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Tags.TagsRequestBuilder.TagsRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Tags.TagsRequestBuilder.TagsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -116,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags
             return requestInfo;
         }
         /// <summary>
-        /// You can use this endpoint to perform the following operations:  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in &quot;Tag Company Request Payload&quot; described below. Also, if the tag doesn&apos;t exist then a new one will be created automatically.  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in &quot;Untag Company Request Payload&quot; described below.  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in &quot;Tag Users Request Payload&quot; described below.Each operation will return a tag object.
+        /// You can use this endpoint to perform the following operations:  **1. Create a new tag:** You can create a new tag by passing in the tag name as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **2. Update an existing tag:** You can update an existing tag by passing the id of the tag as specified in &quot;Create or Update Tag Request Payload&quot; described below.  **3. Tag Companies:** You can tag single company or a list of companies. You can tag a company by passing in the tag name and the company details as specified in &quot;Tag Company Request Payload&quot; described below. Also, if the tag doesn&apos;t exist then a new one will be created automatically.  **4. Untag Companies:** You can untag a single company or a list of companies. You can untag a company by passing in the tag id and the company details as specified in &quot;Untag Company Request Payload&quot; described below.  **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in &quot;Tag Users Request Payload&quot; described below.Each operation will return a tag object.Contacts and companies listed in `users` or `companies` that do not exist are skipped: they are left out of the `users` and `companies` arrays in the response and the request still succeeds. With `ids_to_add` it depends on `taggable_type`: a contact id that does not exist returns a 404, while a company id that does not exist is skipped. With `ids_to_add`, the `users` and `companies` arrays in the response are always empty, and a 404 still leaves the tag created or renamed.Requires the `write_tags` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
@@ -145,6 +149,76 @@ namespace Soenneker.Intercom.OpenApiClient.Tags
         public global::Soenneker.Intercom.OpenApiClient.Tags.TagsRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Tags.TagsRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch a list of all tags for a given workspace.Passing `id` returns that one tag object instead of a list. Passing `taggable_type` returns a list of the tags applied to a single contact or company.Requires the `read_tags` or `read_users_companies` OAuth scope.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class TagsRequestBuilderGetQueryParameters 
+        {
+            /// <summary>The external id of the company whose tags you want, used with `taggable_type=company`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("company_id")]
+            public string? CompanyId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("company_id")]
+            public string CompanyId { get; set; }
+#endif
+            /// <summary>The email address of the contact whose tags you want, used with `taggable_type=user`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("email")]
+            public string? Email { get; set; }
+#nullable restore
+#else
+            [QueryParameter("email")]
+            public string Email { get; set; }
+#endif
+            /// <summary>The unique identifier of a tag. When set, a single tag object is returned instead of a list.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("id")]
+            public string? Id { get; set; }
+#nullable restore
+#else
+            [QueryParameter("id")]
+            public string Id { get; set; }
+#endif
+            /// <summary>The name of the company whose tags you want, used with `taggable_type=company`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("name")]
+            public string? Name { get; set; }
+#nullable restore
+#else
+            [QueryParameter("name")]
+            public string Name { get; set; }
+#endif
+            /// <summary>The Intercom id of the contact or company whose tags you want, used with `taggable_type`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("taggable_id")]
+            public string? TaggableId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("taggable_id")]
+            public string TaggableId { get; set; }
+#endif
+            /// <summary>Set to `user` or `company` to list the tags applied to one contact or company instead of the whole workspace. Identify it with `taggable_id`, `user_id`, `email`, `company_id` or `name`.</summary>
+            [QueryParameter("taggable_type")]
+            public global::Soenneker.Intercom.OpenApiClient.Models.ListTagsTaggableTypeParameter? TaggableType { get; set; }
+            /// <summary>The external id of the contact whose tags you want, used with `taggable_type=user`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("user_id")]
+            public string? UserId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("user_id")]
+            public string UserId { get; set; }
+#endif
         }
     }
 }

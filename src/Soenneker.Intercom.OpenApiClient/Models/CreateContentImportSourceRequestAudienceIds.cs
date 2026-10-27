@@ -37,7 +37,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 result.CreateContentImportSourceRequestAudienceIdsInteger = createContentImportSourceRequestAudienceIdsIntegerValue;
             }
-            else if(parseNode.GetCollectionOfPrimitiveValues<int?>()?.AsList() is List<int?> integerValue)
+            else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfPrimitiveValues<int?>()?.AsList() is List<int?> integerValue)
             {
                 result.Integer = integerValue;
             }

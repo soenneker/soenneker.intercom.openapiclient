@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithJobIdentifierItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/download/reporting_data/{jobIdentifier}?app_id={app_id}&job_identifier={job_identifier}", pathParameters)
+        public WithJobIdentifierItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/download/reporting_data/{jobIdentifier}", pathParameters)
         {
         }
         /// <summary>
@@ -30,49 +30,53 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithJobIdentifierItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/download/reporting_data/{jobIdentifier}?app_id={app_id}&job_identifier={job_identifier}", rawUrl)
+        public WithJobIdentifierItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/download/reporting_data/{jobIdentifier}", rawUrl)
         {
         }
         /// <summary>
-        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
+        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.Requires the `export_reporting_data` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<Stream> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
+        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.Requires the `export_reporting_data` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "application/json");
+            requestInfo.Headers.TryAdd("Accept", "application/octet-stream, application/json");
             return requestInfo;
         }
         /// <summary>
@@ -83,39 +87,6 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item
         public global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Download.Reporting_data.Item.WithJobIdentifierItemRequestBuilder(rawUrl, RequestAdapter);
-        }
-        /// <summary>
-        /// Download the data from a completed reporting data export job.&gt; Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class WithJobIdentifierItemRequestBuilderGetQueryParameters 
-        {
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            #pragma warning disable CS1591
-            [QueryParameter("app_id")]
-            public string? AppId { get; set; }
-            #pragma warning restore CS1591
-#nullable restore
-#else
-            #pragma warning disable CS1591
-            [QueryParameter("app_id")]
-            public string AppId { get; set; }
-            #pragma warning restore CS1591
-#endif
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            #pragma warning disable CS1591
-            [QueryParameter("job_identifier")]
-            public string? JobIdentifier { get; set; }
-            #pragma warning restore CS1591
-#nullable restore
-#else
-            #pragma warning disable CS1591
-            [QueryParameter("job_identifier")]
-            public string JobIdentifier { get; set; }
-            #pragma warning restore CS1591
-#endif
         }
     }
 }

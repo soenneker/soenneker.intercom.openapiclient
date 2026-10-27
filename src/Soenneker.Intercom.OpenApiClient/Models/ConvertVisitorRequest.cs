@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Type { get; set; }
 #endif
-        /// <summary>The unique identifiers retained after converting or merging.</summary>
+        /// <summary>The unique identifiers retained after converting or merging. Required when `type` is `user`; not read when `type` is `lead`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ConvertVisitorRequestUser? User { get; set; }
@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ConvertVisitorRequestUser User { get; set; }
 #endif
-        /// <summary>The unique identifiers to convert a single Visitor.</summary>
+        /// <summary>The unique identifiers to convert a single Visitor. One of `id` or `user_id` is required; an `email` on its own does not identify a visitor.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ConvertVisitorRequestVisitor? Visitor { get; set; }

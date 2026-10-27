@@ -14,13 +14,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The companies property</summary>
+        /// <summary>Companies are returned in a reduced form here, with only these four keys.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Company>? Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompaniesCompaniesItem>? Companies { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Company> Companies { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompaniesCompaniesItem> Companies { get; set; }
 #endif
         /// <summary>The type of the object</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CompanyListType? Type { get; set; }
@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompaniesCompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompaniesCompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyListType>(); } },
             };
         }
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>("companies", Companies);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.VisitorCompaniesCompaniesItem>("companies", Companies);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CompanyListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

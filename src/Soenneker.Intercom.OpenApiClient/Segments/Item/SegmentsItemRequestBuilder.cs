@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Segments.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SegmentsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments/{id}", pathParameters)
+        public SegmentsItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments/{id}{?include_count*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Segments.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SegmentsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments/{id}", rawUrl)
+        public SegmentsItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments/{id}{?include_count*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch the details of a single segment.
+        /// You can fetch the details of a single segment.The segment name is returned HTML-escaped, for example `&amp;` as `&amp;amp;`.Requires the `read_users_companies` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Segment"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Segments.Item
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Segment?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Segment?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Segments.Item.SegmentsItemRequestBuilder.SegmentsItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Segment> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.Segment> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Segments.Item.SegmentsItemRequestBuilder.SegmentsItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
@@ -59,17 +59,17 @@ namespace Soenneker.Intercom.OpenApiClient.Segments.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Segment>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Segment.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single segment.
+        /// You can fetch the details of a single segment.The segment name is returned HTML-escaped, for example `&amp;` as `&amp;amp;`.Requires the `read_users_companies` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Segments.Item.SegmentsItemRequestBuilder.SegmentsItemRequestBuilderGetQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Segments.Item.SegmentsItemRequestBuilder.SegmentsItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -85,6 +85,16 @@ namespace Soenneker.Intercom.OpenApiClient.Segments.Item
         public global::Soenneker.Intercom.OpenApiClient.Segments.Item.SegmentsItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Segments.Item.SegmentsItemRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// You can fetch the details of a single segment.The segment name is returned HTML-escaped, for example `&amp;` as `&amp;amp;`.Requires the `read_users_companies` or `write_users_companies` OAuth scope.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class SegmentsItemRequestBuilderGetQueryParameters 
+        {
+            /// <summary>Includes the count of contacts that belong to the segment. The count is added whenever this parameter has a value in the query string, even `false` or an empty one, so omit it entirely to leave it out. A bare `include_count` with no `=` adds no count.</summary>
+            [QueryParameter("include_count")]
+            public bool? IncludeCount { get; set; }
         }
     }
 }

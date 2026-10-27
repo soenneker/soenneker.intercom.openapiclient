@@ -49,7 +49,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string IntercomUserId { get; set; }
 #endif
-        /// <summary>Optional metadata about the event.</summary>
+        /// <summary>Optional metadata about the event. Values keep the type they were sent with.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.DataEventMetadataProperty? Metadata { get; set; }

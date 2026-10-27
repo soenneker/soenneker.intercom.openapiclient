@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Segments
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SegmentsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments{?include_count*}", pathParameters)
+        public SegmentsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments{?include_count*,type*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Segments
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SegmentsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments{?include_count*}", rawUrl)
+        public SegmentsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/segments{?include_count*,type*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can fetch a list of all segments.
+        /// You can fetch a list of all segments.Segment names are returned HTML-escaped, for example `&amp;` as `&amp;amp;`.Requires the `read_users_companies` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SegmentList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Segments
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SegmentList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SegmentList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all segments.
+        /// You can fetch a list of all segments.Segment names are returned HTML-escaped, for example `&amp;` as `&amp;amp;`.Requires the `read_users_companies` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -98,14 +98,24 @@ namespace Soenneker.Intercom.OpenApiClient.Segments
             return new global::Soenneker.Intercom.OpenApiClient.Segments.SegmentsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all segments.
+        /// You can fetch a list of all segments.Segment names are returned HTML-escaped, for example `&amp;` as `&amp;amp;`.Requires the `read_users_companies` or `write_users_companies` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class SegmentsRequestBuilderGetQueryParameters 
         {
-            /// <summary>It includes the count of contacts that belong to each segment.</summary>
+            /// <summary>Includes the count of contacts that belong to each segment. The counts are added whenever this parameter has a value in the query string, even `false` or an empty one, so omit it entirely to leave them out. A bare `include_count` with no `=` adds no counts. With `type=company`, a company segment gets no count unless a contact segment has the same name, and then it shows that contact segment&apos;s count.</summary>
             [QueryParameter("include_count")]
             public bool? IncludeCount { get; set; }
+            /// <summary>Pass `company` to list company segments. Any other value, or no value, lists contact segments.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("type")]
+            public string? Type { get; set; }
+#nullable restore
+#else
+            [QueryParameter("type")]
+            public string Type { get; set; }
+#endif
         }
     }
 }

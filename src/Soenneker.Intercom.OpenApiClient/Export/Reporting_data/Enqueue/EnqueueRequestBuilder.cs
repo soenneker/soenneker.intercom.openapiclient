@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Enqueue
         {
         }
         /// <summary>
-        /// For the **conversation** dataset, from the Preview version this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.
+        /// For the **conversation** dataset, from API version 2.16 this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.Requires the `export_reporting_data` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PostExportReportingDataEnqueue200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Enqueue
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.PostExportReportingDataEnqueue200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.PostExportReportingDataEnqueue200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// For the **conversation** dataset, from the Preview version this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.
+        /// For the **conversation** dataset, from API version 2.16 this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.Requires the `export_reporting_data` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

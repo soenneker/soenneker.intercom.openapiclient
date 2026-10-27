@@ -37,15 +37,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestTo();
-            if("Recipient".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
-            {
-                result.CreateMessageRequestToRecipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
-            }
-            else if(parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(global::Soenneker.Intercom.OpenApiClient.Models.Recipient.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.Recipient> recipientValue)
+            if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray && parseNode.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(global::Soenneker.Intercom.OpenApiClient.Models.Recipient.CreateFromDiscriminatorValue)?.AsList() is List<global::Soenneker.Intercom.OpenApiClient.Models.Recipient> recipientValue)
             {
                 result.Recipient = recipientValue;
+            }
+            else {
+                result.CreateMessageRequestToRecipient = new global::Soenneker.Intercom.OpenApiClient.Models.Recipient();
             }
             return result;
         }
@@ -57,7 +55,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(CreateMessageRequestToRecipient != null)
             {
-                return CreateMessageRequestToRecipient.GetFieldDeserializers();
+                return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(CreateMessageRequestToRecipient);
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -68,13 +66,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(CreateMessageRequestToRecipient != null)
-            {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, CreateMessageRequestToRecipient);
-            }
-            else if(Recipient != null)
+            if(Recipient != null)
             {
                 writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, Recipient);
+            }
+            else {
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Recipient>(null, CreateMessageRequestToRecipient);
             }
         }
     }

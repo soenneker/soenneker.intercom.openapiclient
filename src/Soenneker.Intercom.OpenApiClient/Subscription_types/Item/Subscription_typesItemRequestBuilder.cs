@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Subscription_types.Item
         {
         }
         /// <summary>
-        /// You can fetch the details of a single subscription type by making a GET request to `https://api.intercom.io/subscription_types/&lt;id&gt;`.
+        /// You can fetch the details of a single subscription type by making a GET request to `https://api.intercom.io/subscription_types/&lt;id&gt;`.Requires the `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Subscription_types.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionType.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single subscription type by making a GET request to `https://api.intercom.io/subscription_types/&lt;id&gt;`.
+        /// You can fetch the details of a single subscription type by making a GET request to `https://api.intercom.io/subscription_types/&lt;id&gt;`.Requires the `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

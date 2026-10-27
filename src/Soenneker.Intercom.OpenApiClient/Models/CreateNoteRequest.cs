@@ -30,14 +30,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Body { get; set; }
 #endif
-        /// <summary>The unique identifier of a given contact.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ContactId { get; set; }
-#nullable restore
-#else
-        public string ContactId { get; set; }
-#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateNoteRequest"/> and sets the default values.
         /// </summary>
@@ -65,7 +57,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "contact_id", n => { ContactId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -77,7 +68,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
             writer.WriteStringValue("body", Body);
-            writer.WriteStringValue("contact_id", ContactId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -15,9 +15,5 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         User,
         #pragma warning restore CS1591
-        [EnumMember(Value = "contact")]
-        #pragma warning disable CS1591
-        Contact,
-        #pragma warning restore CS1591
     }
 }

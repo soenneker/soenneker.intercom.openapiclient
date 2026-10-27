@@ -8,21 +8,13 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// This will return a list of Segment Objects. The result may also have a pages object if the response is paginated.
+    /// This will return a list of Segment Objects. The list is not paginated.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SegmentList : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A pagination object, which may be empty, indicating no further pages to fetch.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.SegmentListPagesProperty? Pages { get; set; }
-#nullable restore
-#else
-        public global::Soenneker.Intercom.OpenApiClient.Models.SegmentListPagesProperty Pages { get; set; }
-#endif
         /// <summary>A list of Segment objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -58,7 +50,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentListPagesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.SegmentListPagesProperty.CreateFromDiscriminatorValue); } },
                 { "segments", n => { Segments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Segment>(global::Soenneker.Intercom.OpenApiClient.Models.Segment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentListType>(); } },
             };
@@ -70,7 +61,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentListPagesProperty>("pages", Pages);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Segment>("segments", Segments);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SegmentListType>("type", Type);
             writer.WriteAdditionalData(AdditionalData);

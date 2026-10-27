@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Subscription_types
         {
         }
         /// <summary>
-        /// You can list all subscription types. A list of subscription type objects will be returned.
+        /// You can list all subscription types. A list of subscription type objects will be returned.Requires the `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -70,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Subscription_types
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can list all subscription types. A list of subscription type objects will be returned.
+        /// You can list all subscription types. A list of subscription type objects will be returned.Requires the `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

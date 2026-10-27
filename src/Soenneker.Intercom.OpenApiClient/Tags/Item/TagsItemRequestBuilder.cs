@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags.Item
         {
         }
         /// <summary>
-        /// You can delete the details of tags that are on the workspace by passing in the id.
+        /// You can delete the details of tags that are on the workspace by passing in the id.Requires the `write_tags` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags.Item
             return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of tags that are on the workspace by their id.This will return a tag object.
+        /// You can fetch the details of tags that are on the workspace by their id.This will return a tag object.Requires the `read_tags` or `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TagBasic"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -86,7 +86,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TagBasic.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete the details of tags that are on the workspace by passing in the id.
+        /// You can delete the details of tags that are on the workspace by passing in the id.Requires the `write_tags` or `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -105,7 +105,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tags.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of tags that are on the workspace by their id.This will return a tag object.
+        /// You can fetch the details of tags that are on the workspace by their id.This will return a tag object.Requires the `read_tags` or `read_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

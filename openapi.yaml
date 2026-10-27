@@ -5012,7 +5012,10 @@ paths:
   "/export/reporting_data/enqueue":
     post:
       summary: Enqueue a new reporting data export job
-      description: For the **conversation** dataset, from the Preview version this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.
+      description: |
+        For the **conversation** dataset, from API version 2.16 this export returns all conversations, including those that never received a user reply. Earlier versions return only conversations that received at least one user reply. Other datasets are unaffected.
+
+        Requires the `export_reporting_data` OAuth scope.
       tags: [Reporting Data Export]
       parameters:
       - name: Intercom-Version
@@ -5035,15 +5038,17 @@ paths:
                   description: List of attribute identifiers to include in the export. Requires qualified_id format (e.g., "people.Brand", "standard.conversation_id"). Use the qualified_id returned from the get_datasets response.
                   items:
                     type: string
-                  example: [conversation_id, conversation_started_at]
+                  example: [standard.conversation_id, timestamp.conversation_started_at]
                 start_time:
                   type: integer
                   format: int64
-                  example: 1717490000
+                  description: Start of the export period, as a Unix timestamp in seconds. Must be within your workspace's reporting data retention period, which is 2 years by default (3 years for workspaces with extended retention).
+                  example: 1788220800
                 end_time:
                   type: integer
                   format: int64
-                  example: 1717510000
+                  description: End of the export period, as a Unix timestamp in seconds. Must not be earlier than start_time and must also be within the retention period.
+                  example: 1788307200
       responses:
         '200':
           description: Job enqueued successfully
@@ -5057,11 +5062,14 @@ paths:
                     example: job1
                   status:
                     type: string
+                    description: The status of the job. A newly enqueued job is `pending`.
                     example: pending
                   download_url:
                     type: string
+                    description: Empty until the job is complete.
                   download_expires_at:
                     type: string
+                    description: Empty until the job is complete.
         '400':
           description: Bad request (e.g. validation errors)
           content:
@@ -5101,7 +5109,7 @@ paths:
                     request_id: b68959ea-6328-4f70-83cb-e7913dba1542
                     errors:
                     - code: bad_request
-                      message: "'attribute_ids' not an array must be of type Array"
+                      message: "'attribute_ids: not an array' must be of type Array"
                 Invalid attribute_ids:
                   value:
                     type: error.list
@@ -5109,6 +5117,41 @@ paths:
                     errors:
                     - code: bad_request
                       message: "attribute_ids invalid for conversation dataset: non_existent"
+                Unqualified attribute_ids:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: bad_request
+                      message: "attribute_ids must use qualified_id format (e.g., 'people.Brand' instead of 'Brand'). Use the qualified_id from the get_datasets response. Unqualified ids: conversation_id"
+                start_time too far in the past:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: bad_request
+                      message: "'start_time' parameter too far in past (more than 2 years)"
+                end_time before start_time:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: bad_request
+                      message: end_time is less than start_time
+                Unknown parameter:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: bad_request
+                      message: "bad 'unknown_field' parameter"
+                Not available in this API version:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: intercom_version_invalid
+                      message: Requested resource is not available in current API version
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -5142,27 +5185,16 @@ paths:
   "/export/reporting_data/{job_identifier}":
     get:
       summary: Get export job status
+      description: Requires the `export_reporting_data` OAuth scope.
       tags: [Reporting Data Export]
       parameters:
         - name: Intercom-Version
           in: header
           schema:
             "$ref": "#/components/schemas/intercom_version"
-        - name: app_id
-          in: query
-          description: The Intercom defined code of the workspace the company is associated
-            to.
-          required: true
-          schema:
-            type: string
-        - name: client_id
-          in: query
-          required: true
-          schema:
-            type: string
         - name: job_identifier
           description: Unique identifier of the job.
-          in: query
+          in: path
           required: true
           schema:
             type: string
@@ -5172,12 +5204,18 @@ paths:
           content:
             application/json:
               examples:
+                With pending status:
+                  value:
+                    job_identifier: job1
+                    status: pending
+                    download_url: ''
+                    download_expires_at: ''
                 With complete status:
                   value:
                     job_identifier: job1
                     status: complete
-                    download_url: ''
-                    download_expires_at: ''
+                    download_url: https://api.intercom.io/download/reporting_data/job1
+                    download_expires_at: 1788480000
                 With failed status:
                   value:
                     job_identifier: job1
@@ -5189,14 +5227,42 @@ paths:
                 properties:
                   job_identifier:
                     type: string
+                    description: Unique identifier of the job.
                   status:
                     type: string
+                    description: The status of the job.
+                    enum:
+                    - pending
+                    - complete
+                    - failed
                   download_url:
                     type: string
+                    description: The URL to download the export from. Empty until the job is complete.
                   download_expires_at:
-                    type: string
+                    description: The time after which the export can no longer be downloaded, as a Unix timestamp in seconds. Empty string until the job is complete.
+                    oneOf:
+                    - type: integer
+                      format: int64
+                    - type: string
+                      maxLength: 0
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Not available in this API version:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: intercom_version_invalid
+                      message: Requested resource is not available in current API version
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
         '404':
-          description: When job not found
+          description: When the job is not found or was created by a different teammate
           content:
             application/json:
               examples:
@@ -5212,6 +5278,7 @@ paths:
   "/export/reporting_data/get_datasets":
     get:
       summary: List available datasets and attributes
+      description: Requires the `export_reporting_data` or `read_reporting_datasets` OAuth scope.
       parameters:
       - name: Intercom-Version
         in: header
@@ -5245,7 +5312,7 @@ paths:
                           example: "Conversation-level details: status, channel, assignee."
                         default_time_attribute_id:
                           type: string
-                          example: conversation_started_at
+                          example: conversation.conversation_created_at
                         attributes:
                           type: array
                           items:
@@ -5258,10 +5325,26 @@ paths:
                               qualified_id:
                                 type: string
                                 description: A namespaced identifier that uniquely identifies the attribute across all types. Format is "prefix.name" (e.g., "people.Brand", "conversation.Brand"). Required when calling the enqueue endpoint.
-                                example: conversation.conversation_id
+                                example: standard.conversation_id
                               name:
                                 type: string
                                 example: Conversation ID
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Not available in this API version:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: intercom_version_invalid
+                      message: Requested resource is not available in current API version
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
   "/download/reporting_data/{job_identifier}":
     get:
       summary: Download completed export job data
@@ -5271,6 +5354,8 @@ paths:
         > Octet header required
         >
         > You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
+
+        Requires the `export_reporting_data` OAuth scope.
       tags: [Reporting Data Export]
       parameters:
         - name: Intercom-Version
@@ -5286,21 +5371,44 @@ paths:
             enum:
               - application/octet-stream
           description: "Required header for downloading the export file"
-        - name: app_id
-          in: query
-          required: true
-          schema:
-            type: string
         - name: job_identifier
-          in: query
+          description: Unique identifier of the job.
+          in: path
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Export file downloaded
+          description: "Export file downloaded. The CSV data is gzip-compressed and the response has a `Content-Encoding: gzip` header, so most HTTP clients decompress it automatically."
+          headers:
+            Content-Encoding:
+              description: The encoding applied to the response body.
+              schema:
+                type: string
+                example: gzip
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Not available in this API version:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: intercom_version_invalid
+                      message: Requested resource is not available in current API version
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
         '404':
-          description: When job not found
+          description: When the job is not found, was created by a different teammate, or is not complete, or the export file is no longer available
           content:
             application/json:
               examples:
@@ -5311,6 +5419,13 @@ paths:
                     errors:
                     - code: not_found
                       message: "Export job not found for identifier: job1"
+                Export file not found:
+                  value:
+                    type: error.list
+                    request_id: b68959ea-6328-4f70-83cb-e7913dba1542
+                    errors:
+                    - code: not_found
+                      message: Object not found
               schema:
                 "$ref": "#/components/schemas/error"
   "/help_center/help_centers/{help_center_id}/redirects":
@@ -8600,6 +8715,31 @@ paths:
         example: 5f4d3c1c-7b1b-4d7d-a97e-6095715c6632
         schema:
           type: string
+      - name: page
+        in: query
+        required: false
+        description: The page of results to return. Defaults to `1`.
+        example: 1
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of notes to return per page. Defaults to `50`, maximum
+          `60`.
+        example: 50
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: The order the notes are returned in, by id. Defaults to `desc`.
+        example: desc
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
       - name: Intercom-Version
         in: header
         schema:
@@ -8608,7 +8748,10 @@ paths:
       - Notes
       - Companies
       operationId: listCompanyNotes
-      description: You can fetch a list of notes that are associated to a company.
+      description: |
+        You can fetch a list of notes that are associated to a company.
+
+        Requires the `read_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -8678,6 +8821,41 @@ paths:
                       total_pages: 1
               schema:
                 "$ref": "#/components/schemas/note_list"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Page size too big:
+                  value:
+                    type: error.list
+                    request_id: 4a1f7c90-2b63-4f18-9d7a-0c5e8b41d9f2
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too big
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 7d2e5b14-8a06-4c39-bf5d-91e07c3a6b48
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 0f6c3a92-57d1-4e80-b23f-6a9d5c8e14b7
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Company not found
           content:
@@ -8710,7 +8888,10 @@ paths:
       - Notes
       - Companies
       operationId: createCompanyNote
-      description: You can add a note to a single company.
+      description: |
+        You can add a note to a single company.
+
+        Requires the `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -8735,10 +8916,39 @@ paths:
                     body: "<p>Hello</p>"
               schema:
                 "$ref": "#/components/schemas/note"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Body missing:
+                  value:
+                    type: error.list
+                    request_id: 2b84c6e0-91fd-4a37-8c52-6e7d093af415
+                    errors:
+                    - code: parameter_invalid
+                      message: Body can't be nil
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
             application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 5e9a2d71-6c04-4bf8-93ae-1d0f74b25c69
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 8c1b70d3-4f25-49ea-a6d8-3b5f92e07a14
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
         '404':
@@ -10538,6 +10748,31 @@ paths:
         description: The unique identifier of a contact.
         schema:
           type: integer
+      - name: page
+        in: query
+        required: false
+        description: The page of results to return. Defaults to `1`.
+        example: 1
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        required: false
+        description: The number of notes to return per page. Defaults to `50`, maximum
+          `60`.
+        example: 50
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: The order the notes are returned in, by id. Defaults to `desc`.
+        example: desc
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
       - name: Intercom-Version
         in: header
         schema:
@@ -10546,7 +10781,10 @@ paths:
       - Notes
       - Contacts
       operationId: listNotes
-      description: You can fetch a list of notes that are associated to a contact.
+      description: |
+        You can fetch a list of notes that are associated to a contact.
+
+        Requires the `read_users_companies` or `read_write_users` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -10608,6 +10846,41 @@ paths:
                       total_pages: 1
               schema:
                 "$ref": "#/components/schemas/note_list"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Page size too big:
+                  value:
+                    type: error.list
+                    request_id: 6f3b2d41-7ce9-4a05-91d8-2b74e0c6a93f
+                    errors:
+                    - code: parameter_invalid
+                      message: Per Page is too big
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 3a7d90c5-14e6-4b28-bf03-85c1d6e742ab
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 9b5e41a7-0d38-4c6f-a920-7e3f85b14c6d
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Contact not found
           content:
@@ -10633,14 +10906,17 @@ paths:
         in: path
         required: true
         description: The unique identifier of a given contact.
-        example: '123'
+        example: 6762f0ad1bb69f9f2193bb62
         schema:
-          type: integer
+          type: string
       tags:
       - Notes
       - Contacts
       operationId: createNote
-      description: You can add a note to a single contact.
+      description: |
+        You can add a note to a single contact.
+
+        Requires the `read_write_users` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -10665,6 +10941,41 @@ paths:
                     body: "<p>Hello</p>"
               schema:
                 "$ref": "#/components/schemas/note"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Body missing:
+                  value:
+                    type: error.list
+                    request_id: c40d9e58-1b76-4f23-85a0-7d6c2e914bf3
+                    errors:
+                    - code: parameter_invalid
+                      message: Body can't be nil
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 1e68b70f-9c3d-4a51-b48e-20d9f7c536a1
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 74c0a9e3-5d81-4b62-9f07-e3a5861d2c4b
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: Contact not found
           content:
@@ -10698,10 +11009,6 @@ paths:
                   type: string
                   description: The text of the note.
                   example: New note
-                contact_id:
-                  type: string
-                  description: The unique identifier of a given contact.
-                  example: '123'
                 admin_id:
                   type: string
                   description: The unique identifier of a given admin.
@@ -10710,20 +11017,17 @@ paths:
               successful_response:
                 summary: Successful response
                 value:
-                  contact_id: 6762f0ad1bb69f9f2193bb62
-                  admin_id: 991267583
+                  admin_id: '991267583'
                   body: Hello
               admin_not_found:
                 summary: Admin not found
                 value:
-                  contact_id: 6762f0af1bb69f9f2193bb63
-                  admin_id: 123
+                  admin_id: '123'
                   body: Hello
               contact_not_found:
                 summary: Contact not found
                 value:
-                  contact_id: 123
-                  admin_id: 991267585
+                  admin_id: '991267585'
                   body: Hello
   "/contacts/{contact_id}/segments":
     get:
@@ -16828,7 +17132,7 @@ paths:
         The conversation can be an in-app message only.
 
         {% admonition type="info" name="Sending for visitors" %}
-        You can also send a message from a visitor by specifying their `user_id` or `id` value in the `from` field, along with a `type` field value of `contact`.
+        You can also send a message from a visitor by specifying their `id` value in the `from` field, along with a `type` field value of `lead`.
         This visitor will be automatically converted to a contact with a lead role once the conversation is created.
         {% /admonition %}
 
@@ -21743,6 +22047,8 @@ paths:
         {% admonition type="warning" name="Conversation attributes removed" %}
         Conversation attributes are no longer returned by this endpoint. Calling without a `model` parameter no longer includes them in the response, and `model=conversation` returns a `422` error. Use [GET /conversations/attributes](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) instead.
         {% /admonition %}
+
+        Requires the `read_users_companies` or `read_write_users` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -21982,6 +22288,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 2f0c1e7a-5a3d-43a1-9f61-6b2d1c4e8a90
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
         '422':
@@ -22008,7 +22321,10 @@ paths:
       tags:
       - Data Attributes
       operationId: createDataAttribute
-      description: You can create a data attributes for a `contact` or a `company`.
+      description: |
+        You can create a data attributes for a `contact` or a `company`.
+
+        Requires the `write_attributes` OAuth scope.
       responses:
         '200':
           description: Successful
@@ -22035,7 +22351,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/data_attribute"
         '400':
-          description: Too few options for list
+          description: Bad Request
           content:
             application/json:
               examples:
@@ -22092,6 +22408,27 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 8d0a4f23-0b7e-4c2e-9a68-1d5f3c7b2e41
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              examples:
+                Relationship data type:
+                  value:
+                    type: error.list
+                    request_id: 3a6b9c14-7e52-4d08-b1f3-c8a0e5d27b36
+                    errors:
+                    - code: parameter_invalid
+                      message: Data Type isn't an option
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -22155,10 +22492,17 @@ paths:
       tags:
       - Data Attributes
       operationId: updateDataAttribute
-      description: "\nYou can update a data attribute.\n\n> \U0001F6A7 Updating the
-        data type is not possible\n>\n> It is currently a dangerous action to execute
-        changing a data attribute's type via the API. You will need to update the
-        type via the UI instead.\n"
+      description: |
+
+        You can update a data attribute.
+
+        > 🚧 Updating the data type is not possible
+        >
+        > It is currently a dangerous action to execute changing a data attribute's type via the API. You will need to update the type via the UI instead.
+
+        You can also send this request with `PATCH`; it behaves the same as `PUT`.
+
+        Requires the `write_attributes` OAuth scope.
       responses:
         '200':
           description: Successful
@@ -22243,6 +22587,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 5c71e2d8-9a04-4b36-8e57-f2b6c3a91d4e
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -24768,7 +25119,7 @@ paths:
 
         **Metadata behaviour**
 
-        - We currently limit the number of tracked metadata keys to 10 per event. Once the quota is reached, we ignore any further keys we receive. The first 10 metadata keys are determined by the order in which they are sent in with the event.
+        - We currently limit the number of tracked metadata keys to 20 per event name. The limit counts every key ever recorded for that event name, not the keys in a single request, so it is reached cumulatively as you send more events with the same name. Once the quota is reached, we ignore any further keys we receive. The keys that count towards the quota are determined by the order in which they are sent in with the event.
         - It is not possible to change the metadata keys once the event has been sent. A new event will need to be created with the new keys and you can archive the old one.
         - There might be up to 24 hrs delay when you send a new metadata for an existing event.
 
@@ -24786,9 +25137,46 @@ paths:
         - Event lists containing duplicate events will have those duplicates ignored.
         - Server errors will return a `500` response code and may contain an error message in the body.
 
+        Requires the `write_events` OAuth scope.
+
       responses:
         '202':
           description: successful
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Missing a required field:
+                  value:
+                    type: error.list
+                    request_id: 5d0c8e27-3a91-4f6b-b2d4-7e18c9a06f53
+                    errors:
+                    - code: parameter_not_found
+                      message: missing data parameter
+                Null event name:
+                  value:
+                    type: error.list
+                    request_id: 9b1f3c40-5d2a-4e7b-8c16-a3d9e0f51b24
+                    errors:
+                    - code: parameter_not_found
+                      message: missing event_name parameter
+                Metadata is not an object:
+                  value:
+                    type: error.list
+                    request_id: c4e07a19-62b8-4d35-91fa-70e2b6c38d5f
+                    errors:
+                    - code: type_mismatch
+                      message: event metadata must be an object
+                Bad type parameter:
+                  value:
+                    type: error.list
+                    request_id: 71d3b8e5-0c46-4a92-bf27-5e8a1d60c93b
+                    errors:
+                    - code: parameter_invalid
+                      message: bad type parameter
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -24801,6 +25189,62 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 0e5a9c62-3b71-4f84-ad19-6c7e2b05f4a8
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              examples:
+                User not found:
+                  value:
+                    type: error.list
+                    request_id: 2b8f6d13-47ca-4e09-9d52-f1a63c0e78b5
+                    errors:
+                    - code: not_found
+                      message: User Not Found
+                Lead not found:
+                  value:
+                    type: error.list
+                    request_id: 6a2c91e7-8d40-4b15-a3f6-9e0b72d5c814
+                    errors:
+                    - code: not_found
+                      message: Lead Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              examples:
+                Event name too long:
+                  value:
+                    type: error.list
+                    request_id: 4f1e7b03-9c25-4d6a-82be-13a0c5d9e672
+                    errors:
+                    - code: parameter_invalid
+                      message: invalid event name length; use up to 100 characters
+                Metadata too long:
+                  value:
+                    type: error.list
+                    request_id: 8c40a5f2-1e69-4730-b8d4-27f5e1c06a93
+                    errors:
+                    - code: parameter_invalid
+                      message: invalid event metadata length; use up to 65535 characters
+                Invalid timestamp:
+                  value:
+                    type: error.list
+                    request_id: d57b2e91-6043-4c8f-a12d-3b9e07f45c68
+                    errors:
+                    - code: parameter_invalid
+                      message: invalid timestamp format; please use seconds since epoch
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -24844,12 +25288,46 @@ paths:
             required:
             - email
             additionalProperties: false
+          - title: anonymous_id query parameter
+            properties:
+              anonymous_id:
+                type: string
+            required:
+            - anonymous_id
+            additionalProperties: false
       - name: type
         in: query
         required: true
-        description: The value must be user
+        description: The value must be `user` or `lead`.
         schema:
           type: string
+          enum:
+          - user
+          - lead
+      - name: per_page
+        in: query
+        required: false
+        description: The number of events to return per page.
+        schema:
+          type: integer
+      - name: since
+        in: query
+        required: false
+        description: Only return events created after this time, as a Unix timestamp
+          in milliseconds. Take the value from the `since` link in the `pages` object
+          of a previous response.
+        schema:
+          type: integer
+          format: int64
+      - name: before
+        in: query
+        required: false
+        description: Only return events created before this time, as a Unix timestamp
+          in milliseconds. Take the value from the `next` link in the `pages` object
+          of a previous response.
+        schema:
+          type: integer
+          format: int64
       - name: summary
         in: query
         required: false
@@ -24859,18 +25337,25 @@ paths:
       tags:
       - Data Events
       operationId: lisDataEvents
-      description: "\n> \U0001F6A7\n>\n> Please note that you can only 'list' events
-        that are less than 90 days old. Event counts and summaries will still include
-        your events older than 90 days but you cannot 'list' these events individually
-        if they are older than 90 days\n\nThe events belonging to a customer can be
-        listed by sending a GET request to `https://api.intercom.io/events` with a
-        user or lead identifier along with a `type` parameter. The identifier parameter
-        can be one of `user_id`, `email` or `intercom_user_id`. The `type` parameter
-        value must be `user`.\n\n- `https://api.intercom.io/events?type=user&user_id={user_id}`\n-
-        `https://api.intercom.io/events?type=user&email={email}`\n- `https://api.intercom.io/events?type=user&intercom_user_id={id}`
-        (this call can be used to list leads)\n\nThe `email` parameter value should
-        be [url encoded](http://en.wikipedia.org/wiki/Percent-encoding) when sending.\n\nYou
-        can optionally define the result page size as well with the `per_page` parameter.\n"
+      description: |
+
+        > 🚧
+        >
+        > Please note that you can only 'list' events that are less than 90 days old. Event counts and summaries will still include your events older than 90 days but you cannot 'list' these events individually if they are older than 90 days
+
+        The events belonging to a customer can be listed by sending a GET request to `https://api.intercom.io/events` with a user or lead identifier along with a `type` parameter. The identifier parameter can be one of `user_id`, `email`, `intercom_user_id` or `anonymous_id`. The `type` parameter value must be `user` or `lead`.
+
+        - `https://api.intercom.io/events?type=user&user_id={user_id}`
+        - `https://api.intercom.io/events?type=user&email={email}`
+        - `https://api.intercom.io/events?type=user&intercom_user_id={id}` (this call can be used to list leads)
+
+        When `type` is `lead`, a `user_id` you send is matched against the lead's anonymous id instead.
+
+        The `email` parameter value should be [url encoded](http://en.wikipedia.org/wiki/Percent-encoding) when sending.
+
+        You can optionally define the result page size as well with the `per_page` parameter.
+
+        Requires the `read_events` or `write_events` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -24915,6 +25400,48 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: b3a71f58-2c09-4e6d-91b7-4f8c5e2a0d63
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              examples:
+                User not found:
+                  value:
+                    type: error.list
+                    request_id: 5e9c0b24-71f3-4a86-bd50-2c7a1e638f49
+                    errors:
+                    - code: not_found
+                      message: User Not Found
+                Lead not found:
+                  value:
+                    type: error.list
+                    request_id: 93f6d205-4b18-47ea-8c31-6d0b5a7e2f14
+                    errors:
+                    - code: not_found
+                      message: Lead Not Found
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              examples:
+                Unsupported type:
+                  value:
+                    type: error.list
+                    request_id: 1d4e8a07-5f62-4390-b7c8-0a2e9b16d35f
+                    errors:
+                    - code: parameter_invalid
+                      message: unsupported type [company]
               schema:
                 "$ref": "#/components/schemas/error"
   "/events/summaries":
@@ -24928,12 +25455,43 @@ paths:
       tags:
       - Data Events
       operationId: dataEventSummaries
-      description: "Create event summaries for a user. Event summaries are used to
-        track the number of times an event has occurred, the first time it occurred
-        and the last time it occurred.\n\n"
+      description: |
+        Create event summaries for a user. Event summaries are used to track the number of times an event has occurred, the first time it occurred and the last time it occurred.
+
+        Identify the user with one of `id`, `user_id` or `email`. If more than one is sent, `id` is used first, then `user_id`, then `email`.
+
+        Requires the `write_events` OAuth scope.
       responses:
         '200':
           description: successful
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                No user identifier:
+                  value:
+                    type: error.list
+                    request_id: 7c1b93a6-0d52-4e87-96f4-2a8e5c0b7d31
+                    errors:
+                    - code: missing_parameter
+                      message: No user identifier found
+                No summaries:
+                  value:
+                    type: error.list
+                    request_id: a04f6e82-3c97-4b15-8d26-f1b7093c5e48
+                    errors:
+                    - code: missing_parameter
+                      message: No summaries found
+                Summary field has the wrong type:
+                  value:
+                    type: error.list
+                    request_id: e82d47b1-6a09-4c35-b7f1-305c9e2a6d70
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Value: many not of type Integer'
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -24946,6 +25504,27 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 36b0e95c-7d41-4a28-83ef-9c5a1b204e76
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              examples:
+                User not found:
+                  value:
+                    type: error.list
+                    request_id: 58c7a230-9e16-4b74-a0d3-7f2e6c1b9d45
+                    errors:
+                    - code: not_found
+                      message: User Not Found
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -24964,25 +25543,26 @@ paths:
       tags:
       - Data Export
       operationId: createDataExport
-      description: "To create your export job, you need to send a `POST` request to
-        the export endpoint `https://api.intercom.io/export/content/data`.\n\nThis
-        endpoint exports **message delivery and engagement data** for outbound content
-        (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported
-        data includes who received each message, when they received it, and how they
-        engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes,
-        and bounces). It does not export raw message or conversation content.\n\nThe
-        only parameters you need to provide are the range of dates that you want exported.\n\n>\U0001F6A7
-        Limit of one active job\n>\n> You can only have one active job per workspace.
-        You will receive a HTTP status code of 429 with the message Exceeded rate
-        limit of 1 pending message data export jobs if you attempt to create a second
-        concurrent job.\n\n>❗️ Updated_at not included\n>\n> It should be noted that
-        the timeframe only includes messages sent during the time period and not messages
-        that were only updated during this period. For example, if a message was updated
-        yesterday but sent two days ago, you would need to set the created_at_after
-        date before the message was sent to include that in your retrieval job.\n\n>\U0001F4D8
-        Date ranges are inclusive\n>\n> Requesting data for 2018-06-01 until 2018-06-30
-        will get all data for those days including those specified - e.g. 2018-06-01
-        00:00:00 until 2018-06-30 23:59:99.\n"
+      description: |
+        To create your export job, you need to send a `POST` request to the export endpoint `https://api.intercom.io/export/content/data`.
+
+        This endpoint exports **message delivery and engagement data** for outbound content (Emails, Posts, Custom Bots, Surveys, Tours, Series, and more). The exported data includes who received each message, when they received it, and how they engaged with it (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces). It does not export raw message or conversation content.
+
+        The only parameters you need to provide are the range of dates that you want exported. The range cannot be longer than 90 days.
+
+        >🚧 Limit of two active jobs
+        >
+        > You can only have two active jobs per workspace. You will receive a HTTP status code of 429 with the message Exceeded rate limit of 2 pending content data export jobs if you attempt to create a third concurrent job.
+
+        >❗️ Updated_at not included
+        >
+        > It should be noted that the timeframe only includes messages sent during the time period and not messages that were only updated during this period. For example, if a message was updated yesterday but sent two days ago, you would need to set the created_at_after date before the message was sent to include that in your retrieval job.
+
+        >📘 Date ranges are inclusive
+        >
+        > Requesting data for 2018-06-01 until 2018-06-30 will get all data for those days including those specified - e.g. 2018-06-01 00:00:00 until 2018-06-30 23:59:99.
+
+        Requires the `export_content_data` OAuth scope.
       responses:
         '200':
           description: successful
@@ -24997,6 +25577,105 @@ paths:
                     download_expires_at: ''
               schema:
                 "$ref": "#/components/schemas/data_export"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                Missing date:
+                  value:
+                    type: error.list
+                    request_id: 1a7c0e36-b249-4d85-96f1-5c03e7a2b48d
+                    errors:
+                    - code: bad_request
+                      message: "'created_at_after' is a required parameter"
+                Date is not an integer:
+                  value:
+                    type: error.list
+                    request_id: 62e9b0a4-38c7-4f51-bd96-07a1c4e5f283
+                    errors:
+                    - code: bad_request
+                      message: "'created_at_before: yesterday' must be of type Integer"
+                Dates out of order:
+                  value:
+                    type: error.list
+                    request_id: f3081b57-4c2a-49e6-85d0-2b7a6e91c340
+                    errors:
+                    - code: bad_request
+                      message: created_at_after is greater than created_at_before
+                Unknown parameter:
+                  value:
+                    type: error.list
+                    request_id: 9d2f4c81-706b-4e39-a5c7-13e08b6d2f95
+                    errors:
+                    - code: bad_request
+                      message: "bad 'created_at' parameter"
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 4b6e1d09-85f2-4a37-9c60-d1a37e204b58
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 0c93a7e5-1f48-4b62-83da-6e5c702f194b
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              examples:
+                Range too long:
+                  value:
+                    type: error.list
+                    request_id: 7e50c938-2a61-4df7-b084-c9f2e63a51d7
+                    errors:
+                    - code: parameter_invalid
+                      message: The export period is longer than 90 days
+              schema:
+                "$ref": "#/components/schemas/error"
+        '429':
+          description: Too many concurrent jobs
+          content:
+            application/json:
+              examples:
+                Concurrent job limit reached:
+                  value:
+                    type: error.list
+                    request_id: 83b4f027-5d19-4ce6-a27f-b05e19c63d4a
+                    errors:
+                    - code: rate_limit_exceeded
+                      message: Exceeded rate limit of 2 pending content data export
+                        jobs
+              schema:
+                "$ref": "#/components/schemas/error"
+        '500':
+          description: Content data export disabled
+          content:
+            application/json:
+              examples:
+                Export disabled:
+                  value:
+                    type: error.list
+                    request_id: a5c6e239-0b74-41f8-9d13-7e2b840c5f61
+                    errors:
+                    - code: server_error
+                      message: Content data export is currently disabled
+              schema:
+                "$ref": "#/components/schemas/error"
       requestBody:
         content:
           application/json:
@@ -25025,14 +25704,16 @@ paths:
       tags:
       - Data Export
       operationId: getDataExport
-      description: "You can view the status of your job by sending a `GET` request
-        to the URL\n`https://api.intercom.io/export/content/data/{job_identifier}`
-        - the `{job_identifier}` is the value returned in the response when you first
-        created the export job. More on it can be seen in the Export Job Model.\n\n>
-        \U0001F6A7 Jobs expire after two days\n> All jobs that have completed processing
-        (and are thus available to download from the provided URL) will have an expiry
-        limit of two days from when the export ob completed. After this, the data
-        will no longer be available.\n"
+      description: |
+        You can view the status of your job by sending a `GET` request to the URL
+        `https://api.intercom.io/export/content/data/{job_identifier}` - the `{job_identifier}` is the value returned in the response when you first created the export job. More on it can be seen in the Export Job Model.
+
+        > 🚧 Jobs expire after one week
+        > All jobs that have completed processing (and are thus available to download from the provided URL) will have an expiry limit of one week from when the export job was created. After this, the data will no longer be available.
+
+        A job that failed is returned with a `504` status code and a `status` of `failed`. A job left in progress for more than a day is marked failed when you poll it.
+
+        Requires the `export_content_data` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25043,6 +25724,54 @@ paths:
                   value:
                     job_identifier: braxwk3j039t6txy
                     status: pending
+                    download_url: ''
+                    download_expires_at: ''
+              schema:
+                "$ref": "#/components/schemas/data_export"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 6ea2c705-84b3-4f19-bd68-013c7e5a2f84
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 1f73b08e-5a26-4c93-87d1-902e4b6c35fa
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Export job not found
+          content:
+            application/json:
+              examples:
+                Job not found:
+                  value:
+                    type: error.list
+                    request_id: 50a9e14c-6d82-4b37-9f05-c83e712a6d49
+                    errors:
+                    - code: not_found
+                      message: 'Export job not found for identifier: braxwk3j039t6txy'
+              schema:
+                "$ref": "#/components/schemas/error"
+        '504':
+          description: The job failed
+          content:
+            application/json:
+              examples:
+                Failed job:
+                  value:
+                    job_identifier: braxwk3j039t6txy
+                    status: failed
                     download_url: ''
                     download_expires_at: ''
               schema:
@@ -25064,7 +25793,10 @@ paths:
       tags:
       - Data Export
       operationId: cancelDataExport
-      description: You can cancel your job
+      description: |
+        You can cancel your job. A job that has already reached a terminal state is returned unchanged.
+
+        Requires the `export_content_data` OAuth scope.
       responses:
         '200':
           description: successful
@@ -25079,6 +25811,55 @@ paths:
                     download_expires_at: ''
               schema:
                 "$ref": "#/components/schemas/data_export"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 7d41c093-2eb6-4a58-8f27-c590b31e6472
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 3e8b5f27-91c4-40da-b163-8f0c27a4e95d
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Export job not found
+          content:
+            application/json:
+              examples:
+                Job not found:
+                  value:
+                    type: error.list
+                    request_id: b24f7e51-0a93-4c86-95d7-1e6038b2c74f
+                    errors:
+                    - code: not_found
+                      message: 'Export job not found for identifier: v134nyc2bku9hj91'
+              schema:
+                "$ref": "#/components/schemas/error"
+        '500':
+          description: Content data export disabled
+          content:
+            application/json:
+              examples:
+                Export disabled:
+                  value:
+                    type: error.list
+                    request_id: c6017af3-4958-42be-a0d1-72f3e8b5c096
+                    errors:
+                    - code: server_error
+                      message: Content data export is currently disabled
+              schema:
+                "$ref": "#/components/schemas/error"
   "/export/workflows/{id}":
     get:
       summary: Export a workflow
@@ -25191,15 +25972,76 @@ paths:
       tags:
       - Data Export
       operationId: downloadDataExport
-      description: "When a job has a status of complete, and thus a filled download_url,
-        you can download your data by hitting that provided URL, formatted like so:
-        https://api.intercom.io/download/content/data/xyz1234.\n\nYour exported message
-        data will be streamed continuously back down to you in a gzipped CSV format.\n\n>
-        \U0001F4D8 Octet header required\n>\n> You will have to specify the header
-        Accept: `application/octet-stream` when hitting this endpoint.\n"
+      description: |
+        When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.
+
+        Your exported message data is returned as a ZIP archive containing one CSV file per data group. The response is sent with the header `Content-Encoding: zip`.
+
+        > 📘 Octet header required
+        >
+        > You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.
+
+        Requires the `export_content_data` OAuth scope.
       responses:
         '200':
           description: successful
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                Unauthorized:
+                  value:
+                    type: error.list
+                    request_id: 9a3c6d08-f714-4b25-8e60-37bc1f9a2e58
+                    errors:
+                    - code: unauthorized
+                      message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 4812fa6b-7d05-49c3-96e1-5a0b3c7d84f2
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Export job not found or not complete
+          content:
+            application/json:
+              examples:
+                Job not found:
+                  value:
+                    type: error.list
+                    request_id: d709e38a-1c64-4257-bf90-6e23a85c107b
+                    errors:
+                    - code: not_found
+                      message: 'Export job not found for identifier: xyz1234'
+              schema:
+                "$ref": "#/components/schemas/error"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              examples:
+                Download failed:
+                  value:
+                    type: error.list
+                    request_id: 5b96c021-83e7-4d4a-a715-0f26e3b8d94c
+                    errors:
+                    - code: server_error
+                      message: Request failed due to an internal error. Please reach
+                        out to support with the job_identifier of this job
+                Export disabled:
+                  value:
+                    type: error.list
+                    request_id: e13a7c59-204b-468f-82d6-71c5b09e3a47
+                    errors:
+                    - code: server_error
+                      message: Content data export is currently disabled
+              schema:
+                "$ref": "#/components/schemas/error"
   "/jobs/status/{id}":
     get:
       summary: Retrieve job status
@@ -25217,7 +26059,12 @@ paths:
       tags:
       - Jobs
       operationId: jobsStatus
-      description: Retrieve the status of job execution.
+      description: |
+        Retrieve the status of job execution.
+
+        `resource_id` and `resource_url` are returned only once `status` is `success`. While the job is `pending` or `failed` both keys are left out of the response rather than returned as `null`.
+
+        Requires the `read_jobs` OAuth scope.
       responses:
         '200':
           description: Job execution status
@@ -25228,10 +26075,18 @@ paths:
                   value:
                     type: job
                     id: '2'
+                    url: 'https://api.intercom.io/jobs/status/2'
                     status: success
                     resource_type: ticket
                     resource_id: '20'
                     resource_url: 'https://api.intercom.io/tickets/20'
+                job still pending:
+                  value:
+                    type: job
+                    id: '2'
+                    url: 'https://api.intercom.io/jobs/status/2'
+                    status: pending
+                    resource_type: ticket
               schema:
                 "$ref": "#/components/schemas/jobs"
         '404':
@@ -25260,6 +26115,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: ad9c4f05-6e31-4b7a-82d6-15c0e934b7f8
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/macros":
@@ -27186,9 +28048,9 @@ paths:
         in: path
         required: true
         description: The unique identifier of a given note
-        example: 1
+        example: '34'
         schema:
-          type: integer
+          type: string
       tags:
       - Notes
       operationId: retrieveNote
@@ -27256,14 +28118,16 @@ paths:
         in: path
         required: true
         description: The unique identifier of a given note
-        example: 1
+        example: '34'
         schema:
-          type: integer
+          type: string
       tags:
       - Notes
       operationId: deleteNote
-      description: You can delete a single contact or company note. Notes of other
-        kinds cannot be deleted through the API.
+      description: |
+        You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.
+
+        Requires the `write_users_companies` OAuth scope.
       responses:
         '200':
           description: successful
@@ -27303,6 +28167,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: b24e8f37-0a91-4d5c-9e76-38c1b0da5f62
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
         '400':
@@ -27316,7 +28187,7 @@ paths:
                     request_id: 9a2d6e4b-7c1f-4a83-b6d0-2f8e5c1a9b37
                     errors:
                     - code: intercom_version_invalid
-                      message: Requested resource is not available in current API version.
+                      message: Requested resource is not available in current API version
               schema:
                 "$ref": "#/components/schemas/error"
   "/roles":
@@ -27642,14 +28513,32 @@ paths:
       - name: include_count
         in: query
         required: false
-        description: It includes the count of contacts that belong to each segment.
+        description: Includes the count of contacts that belong to each segment. The
+          counts are added whenever this parameter has a value in the query string,
+          even `false` or an empty one, so omit it entirely to leave them out. A
+          bare `include_count` with no `=` adds no counts. With `type=company`, a
+          company segment gets no count unless a contact segment has the same name,
+          and then it shows that contact segment's count.
         example: true
         schema:
           type: boolean
+      - name: type
+        in: query
+        required: false
+        description: Pass `company` to list company segments. Any other value, or
+          no value, lists contact segments.
+        example: company
+        schema:
+          type: string
       tags:
       - Segments
       operationId: listSegments
-      description: You can fetch a list of all segments.
+      description: |
+        You can fetch a list of all segments.
+
+        Segment names are returned HTML-escaped, for example `&` as `&amp;`.
+
+        Requires the `read_users_companies` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -27686,6 +28575,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 5fa31c82-7d64-4e09-b1a7-9c48d0e35b61
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/segments/{id}":
@@ -27703,10 +28599,25 @@ paths:
         example: '123'
         schema:
           type: string
+      - name: include_count
+        in: query
+        required: false
+        description: Includes the count of contacts that belong to the segment. The
+          count is added whenever this parameter has a value in the query string, even
+          `false` or an empty one, so omit it entirely to leave it out. A bare
+          `include_count` with no `=` adds no count.
+        example: true
+        schema:
+          type: boolean
       tags:
       - Segments
       operationId: retrieveSegment
-      description: You can fetch the details of a single segment.
+      description: |
+        You can fetch the details of a single segment.
+
+        The segment name is returned HTML-escaped, for example `&` as `&amp;`.
+
+        Requires the `read_users_companies` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful response
@@ -27749,6 +28660,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 36b0d794-82ce-4a15-9f63-71d4ea80c592
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/sla_rules":
@@ -27914,8 +28832,10 @@ paths:
       tags:
       - Subscription Types
       operationId: listSubscriptionTypes
-      description: You can list all subscription types. A list of subscription type
-        objects will be returned.
+      description: |
+        You can list all subscription types. A list of subscription type objects will be returned.
+
+        Requires the `read_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful
@@ -27954,6 +28874,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: e8471b06-3d25-4c9f-b0a8-57fe2d619c3a
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/subscription_types/{id}":
@@ -27974,8 +28901,10 @@ paths:
       tags:
       - Subscription Types
       operationId: getSubscriptionType
-      description: You can fetch the details of a single subscription type by making
-        a GET request to `https://api.intercom.io/subscription_types/<id>`.
+      description: |
+        You can fetch the details of a single subscription type by making a GET request to `https://api.intercom.io/subscription_types/<id>`.
+
+        Requires the `read_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful
@@ -28022,10 +28951,17 @@ paths:
                 Unauthorized:
                   value:
                     type: error.list
-                    request_id: 06d15b1f-19b0-42cc-aff9-a9d9db39402b
+                    request_id: 9d3f28a5-6e07-4b14-8c92-45a0f7d6b318
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 41c7e95b-08a3-4d62-97f1-6b2d5c8a034e
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/phone_call_redirects":
@@ -28510,6 +29446,65 @@ paths:
     get:
       summary: List all tags
       parameters:
+      - name: id
+        in: query
+        required: false
+        description: The unique identifier of a tag. When set, a single tag object
+          is returned instead of a list.
+        example: '123'
+        schema:
+          type: string
+      - name: taggable_type
+        in: query
+        required: false
+        description: Set to `user` or `company` to list the tags applied to one contact
+          or company instead of the whole workspace. Identify it with `taggable_id`,
+          `user_id`, `email`, `company_id` or `name`.
+        example: user
+        schema:
+          type: string
+          enum:
+          - user
+          - company
+      - name: taggable_id
+        in: query
+        required: false
+        description: The Intercom id of the contact or company whose tags you want,
+          used with `taggable_type`.
+        example: 536e564f316c83104c000020
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        required: false
+        description: The external id of the contact whose tags you want, used with
+          `taggable_type=user`.
+        example: '25'
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        description: The email address of the contact whose tags you want, used with
+          `taggable_type=user`.
+        example: jane@example.com
+        schema:
+          type: string
+      - name: company_id
+        in: query
+        required: false
+        description: The external id of the company whose tags you want, used with
+          `taggable_type=company`.
+        example: '6'
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        description: The name of the company whose tags you want, used with `taggable_type=company`.
+        example: Intercom
+        schema:
+          type: string
       - name: Intercom-Version
         in: header
         schema:
@@ -28517,7 +29512,12 @@ paths:
       tags:
       - Tags
       operationId: listTags
-      description: "You can fetch a list of all tags for a given workspace.\n\n"
+      description: |
+        You can fetch a list of all tags for a given workspace.
+
+        Passing `id` returns that one tag object instead of a list. Passing `taggable_type` returns a list of the tags applied to a single contact or company.
+
+        Requires the `read_tags` or `read_users_companies` OAuth scope.
       responses:
         '200':
           description: successful
@@ -28531,8 +29531,15 @@ paths:
                     - type: tag
                       id: '102'
                       name: Manual tag 1
+                single tag:
+                  value:
+                    type: tag
+                    id: '102'
+                    name: Manual tag 1
               schema:
-                "$ref": "#/components/schemas/tag_list"
+                anyOf:
+                - "$ref": "#/components/schemas/tag_list"
+                - "$ref": "#/components/schemas/tag_basic"
         '401':
           description: Unauthorized
           content:
@@ -28545,6 +29552,41 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 7a4e0c61-9b35-4d28-8f70-c2a916e5473d
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Tag, contact or company not found
+          content:
+            application/json:
+              examples:
+                Tag not found:
+                  value:
+                    type: error.list
+                    request_id: 0c93d5a8-62f1-4e37-b54a-8d7016c9f2be
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+                Contact not found:
+                  value:
+                    type: error.list
+                    request_id: 93e157b4-d0a2-4c86-bf39-5e702a1c4d86
+                    errors:
+                    - code: not_found
+                      message: User Not Found
+                Company not found:
+                  value:
+                    type: error.list
+                    request_id: 2d6f81e0-4a37-49b5-91c8-607de4a2b3f5
+                    errors:
+                    - code: company_not_found
+                      message: Company Not Found
               schema:
                 "$ref": "#/components/schemas/error"
     post:
@@ -28571,6 +29613,10 @@ paths:
           **5. Tag Multiple Users:** You can tag a list of users. You can tag the users by passing in the tag name and the user details as specified in "Tag Users Request Payload" described below.
 
         Each operation will return a tag object.
+
+        Contacts and companies listed in `users` or `companies` that do not exist are skipped: they are left out of the `users` and `companies` arrays in the response and the request still succeeds. With `ids_to_add` it depends on `taggable_type`: a contact id that does not exist returns a 404, while a company id that does not exist is skipped. With `ids_to_add`, the `users` and `companies` arrays in the response are always empty, and a 404 still leaves the tag created or renamed.
+
+        Requires the `write_tags` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Action successful
@@ -28583,7 +29629,16 @@ paths:
                     id: '105'
                     name: test
                     users: []
-                    companies: [{ "id": "valid-123", "tagged": true }]
+                    companies: []
+                Companies tagged:
+                  value:
+                    type: tag
+                    id: '105'
+                    name: test
+                    users: []
+                    companies:
+                    - id: '6329e838deab40166d1a5400'
+                      tagged: true
               schema:
                 "$ref": "#/components/schemas/tag_create_response"
         '400':
@@ -28612,13 +29667,41 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 6e02b8d5-91c7-4a30-bf68-74d1e953c0a2
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Tag or contact not found
+          content:
+            application/json:
+              examples:
+                Tag not found:
+                  value:
+                    type: error.list
+                    request_id: 8f51c0a4-2d79-4e36-9b1a-50c7d2e86f43
+                    errors:
+                    - code: not_found
+                      message: Resource Not Found
+                Contact in ids_to_add not found:
+                  value:
+                    type: error.list
+                    request_id: d7b4169e-35fa-4c80-91d2-6e0853a7bc15
+                    errors:
+                    - code: not_found
+                      message: User Not Found
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
         content:
           application/json:
             schema:
-              oneOf:
+              anyOf:
               - "$ref": "#/components/schemas/create_or_update_tag_request"
               - "$ref": "#/components/schemas/tag_company_request"
               - "$ref": "#/components/schemas/untag_company_request"
@@ -28628,10 +29711,35 @@ paths:
                 summary: Action successful
                 value:
                   name: test
+              companies_tagged:
+                summary: Companies tagged
+                value:
+                  name: test
+                  companies:
+                  - company_id: '6'
               invalid_parameters:
                 summary: Invalid parameters
                 value:
                   test: invalid
+              unknown_company_skipped:
+                summary: Unknown company skipped
+                value:
+                  name: test
+                  companies:
+                  - company_id: '123'
+              unknown_user_skipped:
+                summary: Unknown user skipped
+                value:
+                  name: test
+                  users:
+                  - id: '123'
+              contact_in_ids_to_add_not_found:
+                summary: Contact in ids_to_add not found
+                value:
+                  name: test
+                  taggable_type: user
+                  ids_to_add:
+                  - '123'
   "/tags/{id}":
     get:
       summary: Find a specific tag
@@ -28653,6 +29761,8 @@ paths:
       description: |
         You can fetch the details of tags that are on the workspace by their id.
         This will return a tag object.
+
+        Requires the `read_tags` or `read_users_companies` OAuth scope.
       responses:
         '200':
           description: Tag found
@@ -28692,6 +29802,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: a05f7362-c194-4d8b-9e27-f63b85c1d409
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
     delete:
@@ -28711,8 +29828,10 @@ paths:
       tags:
       - Tags
       operationId: deleteTag
-      description: You can delete the details of tags that are on the workspace by
-        passing in the id.
+      description: |
+        You can delete the details of tags that are on the workspace by passing in the id.
+
+        Requires the `write_tags` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful
@@ -28757,6 +29876,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 1b8e4790-ad35-42f6-8c01-9e5d73a2bf64
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/teams":
@@ -31850,6 +32976,10 @@ paths:
         **Option 1.** You can update a visitor by passing in the `user_id` of the visitor in the Request body.
 
         **Option 2.** You can update a visitor by passing in the `id` of the visitor in the Request body.
+
+        Sending an `email` promotes the visitor to a lead. When that happens the response is a contact object with a `role` of `lead`, not a visitor object.
+
+        Requires the `read_write_users` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: successful
@@ -31903,6 +33033,20 @@ paths:
                     do_not_track:
               schema:
                 "$ref": "#/components/schemas/visitor"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                No identifier supplied:
+                  value:
+                    type: error.list
+                    request_id: 2a71c4e6-85d0-4b93-9f18-6c0e3b7a52d4
+                    errors:
+                    - code: '400'
+                      message: Visitor id or user_id must be supplied
+              schema:
+                "$ref": "#/components/schemas/error"
         '404':
           description: visitor Not Found
           content:
@@ -31929,6 +33073,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 8f25b071-3ca9-4d68-b4e0-5719c2a6f30e
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -31963,7 +33114,10 @@ paths:
       tags:
       - Visitors
       operationId: retrieveVisitorWithUserId
-      description: You can fetch the details of a single visitor.
+      description: |
+        You can fetch the details of a single visitor.
+
+        Requires the `read_single_user`, `read_users_companies` or `read_write_users` OAuth scope.
       responses:
         '200':
           description: successful
@@ -32043,6 +33197,13 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 7b09e4d2-61c8-4530-9a7f-284c60b5e1d3
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
   "/visitors/convert":
@@ -32056,11 +33217,16 @@ paths:
       tags:
       - Visitors
       operationId: convertVisitor
-      description: "You can merge a Visitor to a Contact of role type `lead` or `user`.\n\n>
-        \U0001F4D8 What happens upon a visitor being converted?\n>\n> If the User
-        exists, then the Visitor will be merged into it, the Visitor deleted and the
-        User returned. If the User does not exist, the Visitor will be converted to
-        a User, with the User identifiers replacing it's Visitor identifiers.\n"
+      description: |
+        You can merge a Visitor to a Contact of role type `lead` or `user`.
+
+        > 📘 What happens upon a visitor being converted?
+        >
+        > If the User exists, then the Visitor will be merged into it, the Visitor deleted and the User returned. If the User does not exist, the Visitor will be converted to a User, with the User identifiers replacing it's Visitor identifiers.
+
+        Identify the visitor with `visitor.id` or `visitor.user_id`. The `user` object is required when `type` is `user`, and is not read when `type` is `lead`.
+
+        Requires the `read_write_users` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: successful
@@ -32163,6 +33329,28 @@ paths:
                     enabled_push_messaging:
               schema:
                 "$ref": "#/components/schemas/contact"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                No visitor identifier supplied:
+                  value:
+                    type: error.list
+                    request_id: 9e4b2c07-61da-4f85-93b0-c7a1e568d234
+                    errors:
+                    - code: '400'
+                      message: Visitor id or user_id must be supplied
+                Missing or unknown type:
+                  value:
+                    type: error.list
+                    request_id: 41c70e93-8b26-4d5a-a9f7-02e6b1c38045
+                    errors:
+                    - code: type_mismatch
+                      message: The type attribute provided should be either 'user'
+                        or 'lead'
+              schema:
+                "$ref": "#/components/schemas/error"
         '401':
           description: Unauthorized
           content:
@@ -32175,6 +33363,27 @@ paths:
                     errors:
                     - code: unauthorized
                       message: Access Token Invalid
+                Token lacks required scope:
+                  value:
+                    type: error.list
+                    request_id: 6b58d204-3f91-4e7c-85a0-d2f71e634b09
+                    errors:
+                    - code: token_unauthorized
+                      message: Not authorized to access resource
+              schema:
+                "$ref": "#/components/schemas/error"
+        '404':
+          description: Visitor not found
+          content:
+            application/json:
+              examples:
+                Visitor not found:
+                  value:
+                    type: error.list
+                    request_id: 0a7e53c1-9268-4bd4-83f6-1c5027e9a4b8
+                    errors:
+                    - code: not_found
+                      message: Visitor Not Found
               schema:
                 "$ref": "#/components/schemas/error"
       requestBody:
@@ -35180,11 +36389,22 @@ components:
           items:
             type: integer
         avatar:
-          type: string
-          format: uri
+          type: object
           nullable: true
-          description: Image for the associated team or teammate
-          example: https://picsum.photos/200/300
+          description: The teammate's avatar image. On List all admins it is only
+            included when `display_avatar` is `true`. Elsewhere it is left out when
+            the teammate has neither an uploaded avatar nor a gravatar.
+          properties:
+            type:
+              type: string
+              description: Value is `avatar`. Returned by List all admins only.
+              example: avatar
+            image_url:
+              type: string
+              format: uri
+              nullable: true
+              description: The URL of the avatar image.
+              example: https://picsum.photos/200/300
         team_priority_level:
           "$ref": "#/components/schemas/team_priority_level"
         role:
@@ -42105,6 +43325,7 @@ components:
         user:
           type: object
           description: The unique identifiers retained after converting or merging.
+            Required when `type` is `user`; not read when `type` is `lead`.
           properties:
             id:
               type: string
@@ -42125,9 +43346,13 @@ components:
             - id
           - required:
             - user_id
+          - required:
+            - email
         visitor:
           type: object
-          description: The unique identifiers to convert a single Visitor.
+          description: The unique identifiers to convert a single Visitor. One of
+            `id` or `user_id` is required; an `email` on its own does not identify
+            a visitor.
           properties:
             id:
               type: string
@@ -42147,11 +43372,8 @@ components:
             - id
           - required:
             - user_id
-          - required:
-            - email
       required:
       - type
-      - user
       - visitor
     create_api_template_source_request:
       title: Create API Template Source Payload
@@ -42614,19 +43836,30 @@ components:
               enum:
               - lead
               - user
-              - contact
               description: The role associated to the contact - user or lead.
               example: user
             id:
               type: string
               description: The identifier for the contact which is given by Intercom.
-              format: uuid
+                Provide one of `id`, `user_id` or `email`. If you send more than one,
+                `id` is used first, then `user_id`.
               minLength: 24
               maxLength: 24
               example: 536e564f316c83104c000020
+            user_id:
+              type: string
+              description: The external identifier you gave the user. Matches users only;
+                for a lead, use `id` or `email`.
+              example: '25'
+            email:
+              type: string
+              description: The contact's email. Matches a user or a lead, depending on
+                `type`. Used only when `user_id` isn't sent. If several leads share the
+                email and it's the only identifier sent, the request fails with
+                `multiple_users`; use `id` instead.
+              example: joe@example.com
           required:
           - type
-          - id
         body:
           type: string
           description: The content of the message. HTML is not supported.
@@ -42710,7 +43943,6 @@ components:
                 - integer
                 - float
                 - boolean
-                - datetime
                 - date
           title: 'other type'
     create_data_event_request:
@@ -42746,8 +43978,16 @@ components:
           example: frodo.baggins@example.com
         metadata:
           type: object
-          description: Optional metadata about the event.
-          additionalProperties: true
+          description: Optional metadata about the event. Values can be a string,
+            a number, a boolean, or an object holding a rich link (`url` and `value`)
+            or a monetary amount (`amount` and `currency`).
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: object
           example:
             invite_code: ADDAFRIEND
       anyOf:
@@ -42773,6 +44013,16 @@ components:
         combination, to improve readability, for example `updated-plan`.
       type: object
       title: Create Data Event Summaries Request
+      anyOf:
+      - title: id required
+        required:
+        - id
+      - title: user_id required
+        required:
+        - user_id
+      - title: email required
+        required:
+        - email
       properties:
         user_id:
           type: string
@@ -43228,20 +44478,44 @@ components:
             order_number: ORDER-12345
             total_amount: 99.99
     create_or_update_tag_request:
-      description: You can create or update an existing tag.
+      description: You can create or update an existing tag, and optionally apply
+        it to a list of contact or company ids.
       type: object
       title: Create or Update Tag Request Payload
       properties:
         name:
           type: string
+          maxLength: 191
           description: The name of the tag, which will be created if not found, or
             the new name for the tag if this is an update request. Names are case
-            insensitive.
+            insensitive and can be at most 191 characters long. Creating a tag with
+            a longer name returns a 400. When updating by `id`, a longer name or one
+            that another tag already has returns 200 with the new name, but the tag
+            keeps its old name.
           example: Independent
         id:
           type: string
           description: The id of tag to updates.
           example: '656452352'
+        ids_to_add:
+          type: array
+          description: The Intercom ids of the contacts or companies to apply the
+            tag to. A contact id that does not exist returns a 404; a company id
+            that does not exist is skipped. A 404 still leaves the tag created or
+            renamed. The `users` and `companies` arrays in the response are always
+            empty when this field is used.
+          items:
+            type: string
+          example:
+          - 536e564f316c83104c000020
+        taggable_type:
+          type: string
+          description: Whether the ids in `ids_to_add` are contacts or companies.
+            Defaults to `user`.
+          enum:
+          - user
+          - company
+          example: user
       required:
       - name
     create_phone_switch_request:
@@ -43878,9 +45152,21 @@ components:
           example: Order
         custom_attributes:
           type: object
-          description: The custom attributes you have set on the custom object instance.
+          description: |-
+            The custom attributes you have set on the custom object instance.
+
+            Each value is returned with the type of the attribute it is set on: a string, integer, number or boolean, or `null` when the attribute is unset. A list attribute returns the label of the selected option. A reference attribute returns an object holding the referenced records, under `contacts` for a contact reference, `conversations` for a conversation reference, or `instances` for a reference to another custom object type.
           additionalProperties:
-            type: string
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: object
+          example:
+            order_number: ORDER-12345
+            total_amount: 99.99
     custom_object_instance_deleted:
       title: Custom Object Instance Deleted
       type: object
@@ -44056,7 +45342,9 @@ components:
           example: Whether the user is a paid subscriber.
         data_type:
           type: string
-          description: The data type of the attribute.
+          description: The data type of the attribute. A list attribute created with
+            the `options` data type is returned as `string`, with its choices in
+            `options`. `relationship` is a reference to a custom object.
           enum:
           - string
           - integer
@@ -44064,6 +45352,7 @@ components:
           - boolean
           - date
           - datetime
+          - relationship
           example: boolean
         options:
           type: array
@@ -45801,8 +47090,15 @@ components:
           example: frodo.baggins@example.com
         metadata:
           type: object
-          description: Optional metadata about the event.
-          additionalProperties: true
+          description: Optional metadata about the event. Values keep the type they
+            were sent with.
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: object
           example:
             invite_code: ADDAFRIEND
       required:
@@ -45899,7 +47195,7 @@ components:
         received each message, when they received it, and how they engaged with it
         (opens, clicks, replies, completions, dismissals, unsubscribes, and bounces).
       properties:
-        job_identfier:
+        job_identifier:
           type: string
           description: The identifier for your job.
           example: orzzsbd7hk67xyu
@@ -45916,12 +47212,15 @@ components:
           example: pending
         download_expires_at:
           type: string
-          description: The time after which you will not be able to access the data.
+          description: The time after which you will not be able to access the data,
+            as a Unix timestamp. It is one week from the time the job was created.
+            Empty until the job completes.
           example: '1674917488'
         download_url:
           type: string
-          description: The location where you can download your data.
-          example: https://api.intercom.test/download/messages/data/example
+          description: The location where you can download your data. Empty until
+            the job completes.
+          example: https://api.intercom.io/download/content/data/orzzsbd7hk67xyu
     data_export_csv:
       title: Data Export CSV
       type: object
@@ -47058,9 +48357,13 @@ components:
           items:
             properties:
               code:
-                type: string
+                anyOf:
+                - type: string
+                - type: integer
                 description: A string indicating the kind of error, used to further
-                  qualify the HTTP response code
+                  qualify the HTTP response code. A few request validation errors
+                  send an HTTP status code as an integer here instead, for example
+                  `422`.
                 example: unauthorized
               message:
                 type: string
@@ -48252,7 +49555,7 @@ components:
         id:
           type: string
           description: The id of the job that's currently being processed or has completed.
-          example: 20
+          example: '20'
         url:
           type: string
           description: API endpoint URL to check the job status.
@@ -48270,13 +49573,13 @@ components:
           example: ticket
         resource_id:
           type: string
-          description: The id of the resource created during job execution (e.g. ticket id)
-          example: 123
+          description: The id of the resource created during job execution (e.g. ticket id). Only set once the job has succeeded.
+          example: '123'
           nullable: true
         resource_url:
           type: string
-          description: The url of the resource created during job exeuction. Use this url to fetch the resource.
-          example: http://api.intercom.io/tickets/123
+          description: The url of the resource created during job execution. Use this url to fetch the resource. Only set once the job has succeeded.
+          example: https://api.intercom.io/tickets/123
           nullable: true
       required:
       - id
@@ -49380,8 +50683,13 @@ components:
               description: The id of the company.
               example: 5f4d3c1c-7b1b-4d7d-a97e-6095715c6632
         author:
-          "$ref": "#/components/schemas/admin"
-          description: Optional. Represents the Admin that created the note.
+          type: object
+          nullable: true
+          description: Represents the Admin that created the note. When the note has
+            no recorded admin, this is `null` on a single note and left out of each
+            note in a list.
+          allOf:
+          - "$ref": "#/components/schemas/admin"
         body:
           type: string
           description: The body text of the note.
@@ -49531,6 +50839,7 @@ components:
       title: Paginated Response
       type: object
       description: A paginated list of notes associated with a contact or a company.
+        On the last page, `pages.next` is `null`. These lists never send `pages.prev`.
       properties:
         type:
           type: string
@@ -49547,7 +50856,7 @@ components:
           description: A count of the total number of notes.
           example: 1
         pages:
-          "$ref": "#/components/schemas/cursor_pages"
+          "$ref": "#/components/schemas/pages_link"
     company_note:
       title: Company Note
       type: object
@@ -49952,14 +51261,15 @@ components:
         count:
           type: integer
           description: The number of items in the user segment. It's returned when
-            `include_count=true` is included in the request.
+            the request has `include_count` with a value. A company segment only gets
+            a count when a contact segment has the same name, and it shows that
+            segment's count.
           example: 3
           nullable: true
     segment_list:
       title: Segment List
       type: object
-      description: This will return a list of Segment Objects. The result may also
-        have a pages object if the response is paginated.
+      description: This will return a list of Segment Objects. The list is not paginated.
       properties:
         type:
           type: string
@@ -49972,10 +51282,6 @@ components:
           description: A list of Segment objects
           items:
             "$ref": "#/components/schemas/segment"
-        pages:
-          type: object
-          description: A pagination object, which may be empty, indicating no further
-            pages to fetch.
     single_filter_search_request:
       title: Single Filter Search Request
       description: Search using Intercoms Search APIs with a single filter.
@@ -50300,7 +51606,7 @@ components:
           example: Test tag
         applied_at:
           type: integer
-          format: date-time
+          format: timestamp
           nullable: true
           description: The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. `null` when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.
           example: 1663597223
@@ -50377,7 +51683,9 @@ components:
       properties:
         name:
           type: string
-          description: The name of the tag, which will be created if not found.
+          maxLength: 191
+          description: The name of the tag, which will be created if not found. Names
+            can be at most 191 characters long.
           example: Independent
         companies:
           type: array
@@ -50391,8 +51699,13 @@ components:
                 type: string
                 description: The company id you have defined for the company.
                 example: '6'
-          description: The id or company_id of the company can be passed as input
-            parameters.
+              name:
+                type: string
+                description: The name of the company, used to look it up when neither
+                  `id` nor `company_id` is given.
+                example: Intercom
+          description: The id, company_id or name of the company can be passed as
+            input parameters. Companies that cannot be found are skipped.
       required:
       - name
       - companies
@@ -50413,22 +51726,41 @@ components:
           items:
             "$ref": "#/components/schemas/tag"
     tag_multiple_users_request:
-      description: You can tag a list of users.
+      description: You can tag or untag a list of users.
       type: object
       title: Tag Users Request Payload
       properties:
         name:
           type: string
-          description: The name of the tag, which will be created if not found.
+          maxLength: 191
+          description: The name of the tag, which will be created if not found. Names
+            can be at most 191 characters long.
           example: Independent
         users:
           type: array
+          description: The id, user_id or email of the user can be passed as input
+            parameters. Users that cannot be found are skipped.
           items:
             properties:
               id:
                 type: string
                 description: The Intercom defined id representing the user.
                 example: 5f7f0d217289f8d2f4262080
+              user_id:
+                type: string
+                description: The user id you have defined for the user, used to look
+                  it up when `id` is not given.
+                example: '25'
+              email:
+                type: string
+                description: The email address of the user, used to look it up when
+                  neither `id` nor `user_id` is given.
+                example: jane@example.com
+              untag:
+                type: boolean
+                description: Set to true to remove the tag from this user instead
+                  of applying it.
+                example: true
       required:
       - name
       - users
@@ -51449,7 +52781,9 @@ components:
       properties:
         name:
           type: string
-          description: The name of the tag which will be untagged from the company
+          maxLength: 191
+          description: The name of the tag which will be untagged from the company.
+            Names can be at most 191 characters long.
           example: Independent
         companies:
           type: array
@@ -51463,12 +52797,19 @@ components:
                 type: string
                 description: The company id you have defined for the company.
                 example: '6'
+              name:
+                type: string
+                description: The name of the company, used to look it up when neither
+                  `id` nor `company_id` is given.
+                example: Intercom
               untag:
                 type: boolean
                 description: Always set to true
-                example: 'true'
-          description: The id or company_id of the company can be passed as input
-            parameters.
+                example: true
+            required:
+            - untag
+          description: The id, company_id or name of the company can be passed as
+            input parameters. Companies that cannot be found are skipped.
       required:
       - name
       - companies
@@ -52299,20 +53640,91 @@ components:
         id:
           type: string
           description: A unique identified for the visitor which is given by Intercom.
+            Used to look the visitor up; it is not changed by this request.
           example: 8a88a590-e
         user_id:
           type: string
           description: A unique identified for the visitor which is given by you.
+            Used to look the visitor up; it is not changed by this request.
           example: '123'
         name:
           type: string
           description: The visitor's name.
           example: Christian Bale
+        email:
+          type: string
+          description: The visitor's email address. Sending this promotes the visitor
+            to a lead and the response becomes a contact object.
+          example: winstonsmith@truth.org
+        phone:
+          type: string
+          description: The visitor's phone number.
+          example: "+353871234567"
+        owner_id:
+          type: integer
+          description: The id of the teammate who owns the visitor.
+          example: 991267734
+        last_request_at:
+          type: integer
+          description: The time the visitor was last seen, as a Unix timestamp.
+          example: 1663597223
+        last_seen_ip:
+          type: string
+          description: The IP address the visitor was last seen from.
+          example: 1.2.3.4
+        last_seen_user_agent:
+          type: string
+          description: The user agent the visitor was last seen with.
+          example: Mozilla/5.0
+        unsubscribed_from_emails:
+          type: boolean
+          description: Whether the visitor is unsubscribed from emails.
+          example: false
+        language_override:
+          type: string
+          description: The language to send the visitor messages in, overriding the
+            language we detect.
+          example: fr
+        avatar:
+          type: string
+          description: An image URL for the visitor's avatar.
+          example: https://example.org/128Wu8Q.jpg
+        companies:
+          type: array
+          description: The companies to associate the visitor with. Only applied
+            when the same request sends `email`, which promotes the visitor to a lead.
+          items:
+            type: object
+        utm_campaign:
+          type: string
+          description: The campaign the visitor arrived from.
+          example: intercom-link
+        utm_content:
+          type: string
+          description: The content the visitor arrived from.
+          example: banner
+        utm_medium:
+          type: string
+          description: The medium the visitor arrived from.
+          example: email
+        utm_source:
+          type: string
+          description: The source the visitor arrived from.
+          example: Intercom
+        utm_term:
+          type: string
+          description: The search term the visitor arrived from.
+          example: messenger
         custom_attributes:
           type: object
           description: The custom attributes which are set for the visitor.
           additionalProperties:
-            type: string
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
           example:
             paid_subscriber: true
             monthly_spend: 155.5
@@ -52397,8 +53809,30 @@ components:
               example: company.list
             companies:
               type: array
+              description: Companies are returned in a reduced form here, with only
+                these four keys.
               items:
-                "$ref": "#/components/schemas/company"
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the object
+                    enum:
+                    - company
+                    example: company
+                  company_id:
+                    type: string
+                    nullable: true
+                    description: The company id you have defined for the company.
+                    example: '625'
+                  id:
+                    type: string
+                    description: The Intercom defined id representing the company.
+                    example: 531ee472cce572a6ec000006
+                  name:
+                    type: string
+                    description: The name of the company.
+                    example: Blue Sun
         location_data:
           type: object
           properties:
@@ -52528,12 +53962,28 @@ components:
             segments:
               type: array
               items:
-                type: string
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the object
+                    enum:
+                    - segment
+                    example: segment
+                  id:
+                    type: string
+                    description: The Intercom defined id representing the segment.
+                    example: 56203d455f71e8285f000020
         custom_attributes:
           type: object
           description: The custom attributes you have set on the Visitor.
           additionalProperties:
-            type: string
+            anyOf:
+            - type: string
+              nullable: true
+            - type: integer
+            - type: number
+            - type: boolean
         referrer:
           type: string
           nullable: true

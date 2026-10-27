@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The unique identifiers retained after converting or merging.
+    /// The unique identifiers retained after converting or merging. Required when `type` is `user`; not read when `type` is `lead`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConvertVisitorRequestUser : IAdditionalDataHolder, IParsable

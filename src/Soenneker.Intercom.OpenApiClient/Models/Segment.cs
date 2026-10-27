@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The number of items in the user segment. It&apos;s returned when `include_count=true` is included in the request.</summary>
+        /// <summary>The number of items in the user segment. It&apos;s returned when the request has `include_count` with a value. A company segment only gets a count when a contact segment has the same name, and it shows that segment&apos;s count.</summary>
         public int? Count { get; set; }
         /// <summary>The time the segment was created.</summary>
         public int? CreatedAt { get; set; }

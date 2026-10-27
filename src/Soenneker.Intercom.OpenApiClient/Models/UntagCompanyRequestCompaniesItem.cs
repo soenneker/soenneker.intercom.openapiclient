@@ -30,6 +30,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>The name of the company, used to look it up when neither `id` nor `company_id` is given.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Name { get; set; }
+#nullable restore
+#else
+        public string Name { get; set; }
+#endif
         /// <summary>Always set to true</summary>
         public bool? Untag { get; set; }
         /// <summary>
@@ -59,6 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "name", n => { Name = n.GetStringValue(); } },
                 { "untag", n => { Untag = n.GetBoolValue(); } },
             };
         }
@@ -71,6 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteStringValue("id", Id);
+            writer.WriteStringValue("name", Name);
             writer.WriteBoolValue("untag", Untag);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -18,7 +18,7 @@ namespace Soenneker.Intercom.OpenApiClient.Notes
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.notes.item collection</summary>
         /// <param name="position">The unique identifier of a given note</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder this[int position]
+        public global::Soenneker.Intercom.OpenApiClient.Notes.Item.NotesItemRequestBuilder this[string position]
         {
             get
             {

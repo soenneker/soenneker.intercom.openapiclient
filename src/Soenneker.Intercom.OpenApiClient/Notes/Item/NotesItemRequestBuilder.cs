@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Notes.Item
         {
         }
         /// <summary>
-        /// You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.
+        /// You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.Requires the `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedNoteObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -86,7 +86,7 @@ namespace Soenneker.Intercom.OpenApiClient.Notes.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Note>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Note.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.
+        /// You can delete a single contact or company note. Notes of other kinds cannot be deleted through the API.Requires the `write_users_companies` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

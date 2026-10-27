@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Optional metadata about the event.
+    /// Optional metadata about the event. Values can be a string, a number, a boolean, or an object holding a rich link (`url` and `value`) or a monetary amount (`amount` and `currency`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateDataEventRequestMetadataProperty : IAdditionalDataHolder, IParsable

@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithJobIdentifierItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/export/reporting_data/{jobIdentifier}?app_id={app_id}&client_id={client_id}&job_identifier={job_identifier}", pathParameters)
+        public WithJobIdentifierItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/export/reporting_data/{jobIdentifier}", pathParameters)
         {
         }
         /// <summary>
@@ -30,44 +30,48 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithJobIdentifierItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/export/reporting_data/{jobIdentifier}?app_id={app_id}&client_id={client_id}&job_identifier={job_identifier}", rawUrl)
+        public WithJobIdentifierItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/export/reporting_data/{jobIdentifier}", rawUrl)
         {
         }
         /// <summary>
-        /// Get export job status
+        /// Requires the `export_reporting_data` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response?> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response> GetAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataByJobIdentifier200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Get export job status
+        /// Requires the `export_reporting_data` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder.WithJobIdentifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
@@ -83,46 +87,6 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item
         public global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Export.Reporting_data.Item.WithJobIdentifierItemRequestBuilder(rawUrl, RequestAdapter);
-        }
-        /// <summary>
-        /// Get export job status
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
-        public partial class WithJobIdentifierItemRequestBuilderGetQueryParameters 
-        {
-            /// <summary>The Intercom defined code of the workspace the company is associated to.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("app_id")]
-            public string? AppId { get; set; }
-#nullable restore
-#else
-            [QueryParameter("app_id")]
-            public string AppId { get; set; }
-#endif
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            #pragma warning disable CS1591
-            [QueryParameter("client_id")]
-            public string? ClientId { get; set; }
-            #pragma warning restore CS1591
-#nullable restore
-#else
-            #pragma warning disable CS1591
-            [QueryParameter("client_id")]
-            public string ClientId { get; set; }
-            #pragma warning restore CS1591
-#endif
-            /// <summary>Unique identifier of the job.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-            [QueryParameter("job_identifier")]
-            public string? JobIdentifier { get; set; }
-#nullable restore
-#else
-            [QueryParameter("job_identifier")]
-            public string JobIdentifier { get; set; }
-#endif
         }
     }
 }

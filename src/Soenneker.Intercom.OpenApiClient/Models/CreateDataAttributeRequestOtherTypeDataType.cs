@@ -24,10 +24,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         Boolean,
         #pragma warning restore CS1591
-        [EnumMember(Value = "datetime")]
-        #pragma warning disable CS1591
-        Datetime,
-        #pragma warning restore CS1591
         [EnumMember(Value = "date")]
         #pragma warning disable CS1591
         Date,

@@ -17,7 +17,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the attribute was created as a UTC Unix timestamp</summary>
         public int? CreatedAt { get; set; }
-        /// <summary>The custom attributes you have set on the custom object instance.</summary>
+        /// <summary>The custom attributes you have set on the custom object instance.Each value is returned with the type of the attribute it is set on: a string, integer, number or boolean, or `null` when the attribute is unset. A list attribute returns the label of the selected option. A reference attribute returns an object holding the referenced records, under `contacts` for a contact reference, `conversations` for a conversation reference, or `instances` for a reference to another custom object type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceCustomAttributesProperty? CustomAttributes { get; set; }
