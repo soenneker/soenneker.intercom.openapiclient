@@ -15,7 +15,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>An array of contacts to delete, each identified by `id`. Maximum 100 contacts per request.</summary>
+        /// <summary>An array of contacts to delete, each identified by `id`. Maximum 1,000 contacts per request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkDeleteContactsRequestContactsItem>? Contacts { get; set; }

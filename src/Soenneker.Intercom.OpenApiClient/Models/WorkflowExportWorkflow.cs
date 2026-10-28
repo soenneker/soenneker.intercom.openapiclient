@@ -41,7 +41,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty> EmbeddedRules { get; set; }
 #endif
-        /// <summary>The unique identifier for the workflow.</summary>
+        /// <summary>The unique identifier for the workflow. This is not the ruleset ID that the export endpoint&apos;s `id` path parameter expects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Id { get; set; }

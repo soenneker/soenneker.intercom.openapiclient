@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The request payload for creating a content snippet. You must provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive.
+    /// The request payload for creating a content snippet. You can provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive. When `json_blocks` is omitted or `null` and `body_markdown` is omitted or blank, the snippet is created with a single empty paragraph.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContentSnippetCreateRequest : IAdditionalDataHolder, IParsable
@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Locale { get; set; }
 #endif
-        /// <summary>The title of the content snippet.</summary>
+        /// <summary>The title of the content snippet. The API accepts a missing, `null` or empty title.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Title { get; set; }

@@ -1370,6 +1370,8 @@ paths:
       description: |
         You can retrieve a list of all content import sources for a workspace.
 
+        `total_count` and `pages.total_pages` are worked out from every content import source in the workspace, including deleted ones that the list leaves out, so both can be higher than the number of sources you get back across all pages. The last pages can be short or empty.
+
         OAuth tokens must have the `read_write_ai_content` scope.
       responses:
         '200':
@@ -3116,7 +3118,9 @@ paths:
         rendered with its draft content, leaving the live article untouched.
 
         A draft exists only when a published article has unpublished changes staged
-        on top of it. Returns `404` when the article has no staged draft.
+        on top of it. Returns `404` with an empty response body when the article
+        has no staged draft. An article ID that doesn't exist returns a `404` with
+        the standard error body.
 
         Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
@@ -3197,7 +3201,9 @@ paths:
         unchanged until the draft is published.
 
         The article must already be published; staging a draft on an article that
-        has never been published returns `422`.
+        has never been published returns `422`. That `422` has the short body
+        `{ "errors": [{ "message": "...", "status": 422 }] }`, with no `type`,
+        `request_id` or `code`. Other `422` errors use the standard error format.
 
         Only text content is staged: `title`, `description`, `body` or
         `body_markdown`, and `author_id`, including per-locale values in
@@ -3266,11 +3272,16 @@ paths:
               examples:
                 Article not published:
                   value:
+                    errors:
+                    - message: Article must be published before a draft can be staged
+                      status: 422
+                Locale not published:
+                  value:
                     type: error.list
                     request_id: 6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f
                     errors:
                     - code: parameter_invalid
-                      message: Article must be published before a draft can be staged
+                      message: 'Cannot stage a draft for locale(s) that are not published on the article: fr'
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -3313,6 +3324,10 @@ paths:
         workspace you must list which locales to publish via the `locales` array;
         omitting it returns `422`. Returns `422` when there is no staged draft to
         publish, or when a requested locale has no pending changes.
+
+        The `422` for no staged draft has the short body
+        `{ "errors": [{ "message": "...", "status": 422 }] }`, with no `type`,
+        `request_id` or `code`. The other `422` errors use the standard error format.
 
         Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
@@ -3375,11 +3390,9 @@ paths:
               examples:
                 No draft to publish:
                   value:
-                    type: error.list
-                    request_id: 8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
                     errors:
-                    - code: parameter_invalid
-                      message: Article has no draft to publish
+                    - message: Article has no draft to publish
+                      status: 422
                 Locales required on a multilingual workspace:
                   value:
                     type: error.list
@@ -3459,6 +3472,9 @@ paths:
         returned newest-first as a paginated list of metadata. Use
         `GET /articles/{article_id}/versions/{id}` to retrieve a single version
         with its full content.
+
+        A `404` has an empty response body, whether the article or its content
+        isn't found.
 
         Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
@@ -3557,6 +3573,9 @@ paths:
         by making a GET request to
         `https://api.intercom.io/articles/<article_id>/versions/<id>`. Returns
         the version's full content; the live article remains untouched.
+
+        A `404` has an empty response body, whether the article, its content or
+        the version isn't found.
 
         Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
@@ -6107,6 +6126,8 @@ paths:
       description: |
         You can update the details of a single collection by making a PUT request to `https://api.intercom.io/help_center/collections/<id>`.
 
+        `help_center_id` is checked but never applied. It must match the help center of the collection's articles and sub-collections, or the request returns a `400`. A collection with no content rejects any `help_center_id`, so leave it out. Moving a collection to another help center isn't supported.
+
         Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
@@ -7717,6 +7738,8 @@ paths:
         Both `enabled` and `ip_allowlist` are optional. A field you omit is left unchanged, and a request with neither returns the current settings without changing anything. Sending `null` for a field is the same as omitting it.
 
         Every non-blank `ip_allowlist` entry must be an IPv4 address or an IPv4 range in CIDR notation. Blank entries are ignored and surrounding whitespace is trimmed. Any other entry, including an IPv6 address, returns a 422 `parameter_invalid` error.
+
+        When the update leaves the allowlist enabled with at least one entry, the request must come from an IPv4 address that is on the list. A request from an IPv6 address can never match an IPv4 allowlist, so it returns the lockout 422 below.
 
         Requires the `manage_ip_allowlist` OAuth scope.
 
@@ -10550,7 +10573,7 @@ paths:
         The endpoint creates an async job that processes the deletes in the background. Use the returned job ID with `GET /companies/bulk/{id}` to check the job status.
 
         {% admonition type="info" name="Limits" %}
-          - Maximum of 100 companies per request.
+          - Maximum of 1,000 companies per request.
           - You can append tasks to an existing job by including `job.id` in the request body.
         {% /admonition %}
       requestBody:
@@ -10663,7 +10686,7 @@ paths:
                     request_id: 2859da57-c83f-405c-8166-240a312442a3
                     errors:
                     - code: parameter_invalid
-                      message: maximum number of companies per request is 100
+                      message: maximum number of companies per request is 1000
                 companies_not_an_array:
                   value:
                     type: error.list
@@ -14701,7 +14724,7 @@ paths:
         {% /admonition %}
 
         {% admonition type="info" name="Limits" %}
-          - Maximum of 100 contacts per request.
+          - Maximum of 1,000 contacts per request.
           - You can append tasks to an existing job by including `job.id` in the request body.
         {% /admonition %}
 
@@ -14823,7 +14846,7 @@ paths:
                     request_id: 2859da57-c83f-405c-8166-240a312442a3
                     errors:
                     - code: parameter_invalid
-                      message: maximum number of contacts per request is 100
+                      message: maximum number of contacts per request is 1000
                 contacts_not_an_array:
                   value:
                     type: error.list
@@ -15073,6 +15096,8 @@ paths:
         required: false
         description: A free-text search term matched against the title and body of
           each content item. When omitted, returns the most recent content items.
+          Keep it to 500 characters or fewer. The API doesn't currently reject
+          longer values.
         example: billing
         schema:
           type: string
@@ -15082,6 +15107,7 @@ paths:
         required: false
         description: The page number to fetch. Defaults to 1. Values below 1 are
           clamped to 1.
+          Values above 5001 return a `400` `parameter_invalid` error.
         example: 1
         schema:
           type: integer
@@ -15341,7 +15367,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/content_search_response"
         '400':
-          description: Page number too high. `page` multiplied by `per_page` must not exceed 10,000, and `page` must not exceed 5001
+          description: Page number too high. `page` multiplied by `per_page` must not exceed 10,000, and `page` must not exceed 5001. Going over the 10,000 window returns `bad_request`.
           content:
             application/json:
               schema:
@@ -15484,6 +15510,8 @@ paths:
       operationId: createContentSnippet
       description: |
         You can create a new content snippet.
+
+        `title` is listed as required, but a missing, `null` or empty `title` is accepted and the snippet is created with a blank title. When `json_blocks` is omitted or `null` and `body_markdown` is omitted or blank, the snippet is created with a single empty paragraph.
 
         Requires the `read_write_content_snippets` OAuth scope.
       requestBody:
@@ -25870,7 +25898,10 @@ paths:
           "$ref": "#/components/schemas/intercom_version"
       - name: id
         in: path
-        description: The unique identifier for the workflow
+        description: 'The ruleset ID of the workflow. This is the number at the end
+          of the workflow''s URL in Intercom, `https://app.intercom.com/a/apps/<app_id>/automation/workflows/<id>`.
+          It is not the `workflow.id` returned in the response, so don''t pass that
+          value back here.'
         required: true
         schema:
           type: string
@@ -25880,6 +25911,8 @@ paths:
       operationId: exportWorkflow
       description: |
         Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.
+
+        The `id` in the path is the workflow's ruleset ID, the number at the end of the workflow's URL in Intercom (`https://app.intercom.com/a/apps/<app_id>/automation/workflows/<id>`). The `workflow.id` in the response is a different ID, so don't pass it back as `id`.
 
         This endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.
 
@@ -28404,13 +28437,6 @@ paths:
                     errors:
                     - code: parameter_invalid
                       message: environment_id must reference an environment in this workspace
-                Environments not available:
-                  value:
-                    type: error.list
-                    request_id: 0e4b7d92-3c1a-4a85-b6f0-9d2e5c7a8b14
-                    errors:
-                    - code: parameter_invalid
-                      message: environment_id is not supported for this workspace
               schema:
                 "$ref": "#/components/schemas/error"
         '401':
@@ -33978,7 +34004,7 @@ paths:
                         endpoint: /fin/reply
                         method: POST
                       - name: ask
-                        description: Ask Fin a single question and get one informational answer. Fin never escalates, disambiguates, or asks follow-up questions. Use for one-shot informational lookups.
+                        description: Ask Fin a single question and get one informational answer. Fin does not decide to hand over to a human, disambiguate, or ask follow-up questions, although escalation rules can still apply. Use for one-shot informational lookups.
                         inputSchema:
                           type: object
                           properties:
@@ -34227,10 +34253,11 @@ paths:
         Ask Fin a single, self-contained question and receive one informational answer.
 
         Unlike a conversation, `/fin/ask` is non-conversational: Fin will not ask follow-up
-        questions, will not run procedures, and will not escalate to a human on its own. You can
-        still escalate one yourself with `POST /fin/escalate`; the ask conversation is already
-        closed after its one-shot answer, and escalation leaves it closed while routing the
-        handoff separately.
+        questions, will not run procedures, and will not decide to hand over to a human itself.
+        Escalation rules can still match, and the conversation can still be routed to a team or
+        finish without resolution. You can also escalate one yourself with `POST /fin/escalate`;
+        the ask conversation is already closed after its one-shot answer, and escalation leaves
+        it closed while routing the handoff separately.
 
         Fin's answer is delivered asynchronously via the `fin_replied` event. The conversation
         ends with a `complete` status — there is no `awaiting_user_reply` cycle.
@@ -37494,7 +37521,8 @@ components:
           example: 6
         name:
           type: string
-          description: The name of the folder
+          description: The name of the folder. Returned HTML-escaped, for example `&`
+            as `&amp;`.
           example: Product Documentation
         description:
           type: string
@@ -39144,8 +39172,8 @@ components:
         companies:
           type: array
           description: An array of companies to delete, each identified by its Intercom
-            company `id`. Maximum 100 companies per request.
-          maxItems: 100
+            company `id`. Maximum 1,000 companies per request.
+          maxItems: 1000
           items:
             type: object
             required:
@@ -39358,8 +39386,8 @@ components:
         contacts:
           type: array
           description: An array of contacts to delete, each identified by `id`.
-            Maximum 100 contacts per request.
-          maxItems: 100
+            Maximum 1,000 contacts per request.
+          maxItems: 1000
           items:
             type: object
             required:
@@ -41282,7 +41310,8 @@ components:
           "$ref": "#/components/schemas/pages_link"
         total_count:
           type: integer
-          description: A count of the total number of content import sources.
+          description: A count of the total number of content import sources, including
+            deleted ones that the list leaves out.
           example: 1
         data:
           type: array
@@ -41602,16 +41631,18 @@ components:
     content_snippet_create_request:
       title: Create Content Snippet Request
       type: object
-      description: The request payload for creating a content snippet. You must provide
+      description: The request payload for creating a content snippet. You can provide
         either `json_blocks` or `body_markdown` for the snippet content — they are
-        mutually exclusive.
+        mutually exclusive. When `json_blocks` is omitted or `null` and `body_markdown` is
+        omitted or blank, the snippet is created with a single empty paragraph.
       nullable: false
       required:
       - title
       properties:
         title:
           type: string
-          description: The title of the content snippet.
+          description: The title of the content snippet. The API accepts a missing, `null`
+            or empty title.
           maxLength: 255
           example: How to reset your password
         json_blocks:
@@ -47823,8 +47854,6 @@ components:
           type: string
           description: The HTML content of any quoted or forwarded email history from the initial inbound message
           example: '<div><span>On Jan 28, wrote:</span><blockquote>Previous thread</blockquote></div>'
-    metadata:
-          "$ref": "#/components/schemas/conversation_part_metadata"
     conversation_attribute_updated_by_workflow:
       title: Part type - conversation_attribute_updated_by_workflow
       type: object
@@ -48720,12 +48749,14 @@ components:
         status:
           type: string
           enum:
+          - thinking
           - awaiting_user_reply
           - escalated
           - resolved
           - complete
           description: |
             Fin's current status.
+            - thinking: Fin has started running a procedure. Not sent on every turn
             - awaiting_user_reply: Fin has finished replying and is waiting for the user to respond
             - escalated: The conversation has been escalated to a human
             - resolved: The user's query has been resolved
@@ -48736,13 +48767,28 @@ components:
           description: |
             Optional. A human-readable explanation of why the conversation was escalated.
             Only present when status is 'escalated'.
-            Possible values include:
+
+            When you escalate deterministically with `/fin/escalate`, the reason is always
+            "Escalation requested via API".
+
+            The following reasons apply to Fin-decided escalations when Fin owns the
+            conversation (`/fin/start`, `/fin/procedures/{procedure_id}/run`, and
+            `/fin/reply` on a conversation that was started that way). `/fin/ask` can
+            report any of them, because escalation rules still apply and the conversation
+            can still be routed to a team or finish without resolution. On an Ask,
+            "Escalation requested by user" normally only follows an escalation rule match.
             - "Escalation requested by user"
             - "Escalation rule: {rule_name}"
             - "Escalation rule matched"
             - "Routed to team"
             - "Conversation finished without resolution"
-          example: Escalation requested by user
+
+            "Escalation requested by user" is sent whenever Fin decides to hand over, not
+            only when the user asks for a human, for example on a procedure handoff or a
+            custom answer handover. It also follows an escalation rule match, as a second
+            `escalated` event after the rule's reason. While a procedure is running, every
+            escalation Fin decides on reports it.
+          example: Escalation requested via API
         created_at_ms:
           type: string
           format: date-time
@@ -48848,10 +48894,12 @@ components:
           enum:
           - replying
           - awaiting_user_reply
+          - complete
           description: |
             Fin's current status.
             - replying: Intermediate reply part; more parts may follow
             - awaiting_user_reply: Legacy status; instead use the fin_status_updated event with 'awaiting_user_reply', which fires once Fin's reply is done
+            - complete: Fin's reply is final and no user reply is expected. Sent for one-shot Ask replies only
           example: replying
         created_at_ms:
           type: string
@@ -54062,7 +54110,8 @@ components:
           properties:
             id:
               type: string
-              description: The unique identifier for the workflow.
+              description: The unique identifier for the workflow. This is not the
+                ruleset ID that the export endpoint's `id` path parameter expects.
               example: "67890"
             title:
               type: string
@@ -54443,7 +54492,7 @@ tags:
   description: |
     Manage IP allowlist settings for your workspace.
 
-    The IP Allowlist API allows you to configure which IP addresses are allowed to access the Intercom API and web application for your workspace. This is useful for restricting access to your Intercom workspace to specific corporate networks or VPNs.
+    The IP Allowlist API allows you to configure which IP addresses teammates can use your workspace from, in the web app and mobile apps. This is useful for restricting teammate access to specific corporate networks or VPNs. It doesn't apply to REST API requests, which use a separate REST API allowlist that this API doesn't manage.
 
     {% admonition type="info" name="Authentication" %}
       This endpoint requires the `manage_ip_allowlist` OAuth scope.

@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
         {
         }
         /// <summary>
-        /// You can retrieve a list of all content import sources for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// You can retrieve a list of all content import sources for a workspace.`total_count` and `pages.total_pages` are worked out from every content import source in the workspace, including deleted ones that the list leaves out, so both can be higher than the number of sources you get back across all pages. The last pages can be short or empty.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourcesList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -99,7 +99,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSource.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can retrieve a list of all content import sources for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// You can retrieve a list of all content import sources for a workspace.`total_count` and `pages.total_pages` are worked out from every content import source in the workspace, including deleted ones that the list leaves out, so both can be higher than the number of sources you get back across all pages. The last pages can be short or empty.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -149,7 +149,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources
             return new global::Soenneker.Intercom.OpenApiClient.Ai.Content_import_sources.Content_import_sourcesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can retrieve a list of all content import sources for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// You can retrieve a list of all content import sources for a workspace.`total_count` and `pages.total_pages` are worked out from every content import source in the workspace, including deleted ones that the list leaves out, so both can be higher than the number of sources you get back across all pages. The last pages can be short or empty.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Content_import_sourcesRequestBuilderGetQueryParameters 

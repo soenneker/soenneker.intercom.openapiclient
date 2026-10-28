@@ -70,10 +70,10 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippetList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new content snippet.Requires the `read_write_content_snippets` OAuth scope.
+        /// You can create a new content snippet.`title` is listed as required, but a missing, `null` or empty `title` is accepted and the snippet is created with a blank title. When `json_blocks` is omitted or `null` and `body_markdown` is omitted or blank, the snippet is created with a single empty paragraph.Requires the `read_write_content_snippets` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentSnippet"/></returns>
-        /// <param name="body">The request payload for creating a content snippet. You must provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive.</param>
+        /// <param name="body">The request payload for creating a content snippet. You can provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive. When `json_blocks` is omitted or `null` and `body_markdown` is omitted or blank, the snippet is created with a single empty paragraph.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -120,10 +120,10 @@ namespace Soenneker.Intercom.OpenApiClient.Content_snippets
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new content snippet.Requires the `read_write_content_snippets` OAuth scope.
+        /// You can create a new content snippet.`title` is listed as required, but a missing, `null` or empty `title` is accepted and the snippet is created with a blank title. When `json_blocks` is omitted or `null` and `body_markdown` is omitted or blank, the snippet is created with a single empty paragraph.Requires the `read_write_content_snippets` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request payload for creating a content snippet. You must provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive.</param>
+        /// <param name="body">The request payload for creating a content snippet. You can provide either `json_blocks` or `body_markdown` for the snippet content — they are mutually exclusive. When `json_blocks` is omitted or `null` and `body_markdown` is omitted or blank, the snippet is created with a single empty paragraph.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

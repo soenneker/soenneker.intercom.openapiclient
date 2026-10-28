@@ -1869,7 +1869,7 @@
           "AI Content"
         ],
         "summary": "List content import sources",
-        "description": "You can retrieve a list of all content import sources for a workspace.\n\nOAuth tokens must have the \u0060read_write_ai_content\u0060 scope.\n",
+        "description": "You can retrieve a list of all content import sources for a workspace.\n\n\u0060total_count\u0060 and \u0060pages.total_pages\u0060 are worked out from every content import source in the workspace, including deleted ones that the list leaves out, so both can be higher than the number of sources you get back across all pages. The last pages can be short or empty.\n\nOAuth tokens must have the \u0060read_write_ai_content\u0060 scope.\n",
         "operationId": "ListContentImportSources",
         "parameters": [
           {
@@ -4491,7 +4491,7 @@
           "Articles"
         ],
         "summary": "Retrieve an article draft",
-        "description": "Fetch the staged draft of a published article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The response is the article\nrendered with its draft content, leaving the live article untouched.\n\nA draft exists only when a published article has unpublished changes staged\non top of it. Returns \u0060404\u0060 when the article has no staged draft.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Fetch the staged draft of a published article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The response is the article\nrendered with its draft content, leaving the live article untouched.\n\nA draft exists only when a published article has unpublished changes staged\non top of it. Returns \u0060404\u0060 with an empty response body when the article\nhas no staged draft. An article ID that doesn\u0027t exist returns a \u0060404\u0060 with\nthe standard error body.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveArticleDraft",
         "parameters": [
           {
@@ -4585,7 +4585,7 @@
           "Articles"
         ],
         "summary": "Stage an article draft",
-        "description": "Stage changes to a published article as a draft by making a PUT request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The live article remains\nunchanged until the draft is published.\n\nThe article must already be published; staging a draft on an article that\nhas never been published returns \u0060422\u0060.\n\nOnly text content is staged: \u0060title\u0060, \u0060description\u0060, \u0060body\u0060 or\n\u0060body_markdown\u0060, and \u0060author_id\u0060, including per-locale values in\n\u0060translated_content\u0060. Any other field in the request body, such as \u0060state\u0060,\n\u0060parent_id\u0060, \u0060folder_id\u0060, \u0060audience_ids\u0060, the AI availability fields or the\nscheduling fields, is still validated but not applied, so the live article is left untouched.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Stage changes to a published article as a draft by making a PUT request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The live article remains\nunchanged until the draft is published.\n\nThe article must already be published; staging a draft on an article that\nhas never been published returns \u0060422\u0060. That \u0060422\u0060 has the short body\n\u0060{ \u0022errors\u0022: [{ \u0022message\u0022: \u0022...\u0022, \u0022status\u0022: 422 }] }\u0060, with no \u0060type\u0060,\n\u0060request_id\u0060 or \u0060code\u0060. Other \u0060422\u0060 errors use the standard error format.\n\nOnly text content is staged: \u0060title\u0060, \u0060description\u0060, \u0060body\u0060 or\n\u0060body_markdown\u0060, and \u0060author_id\u0060, including per-locale values in\n\u0060translated_content\u0060. Any other field in the request body, such as \u0060state\u0060,\n\u0060parent_id\u0060, \u0060folder_id\u0060, \u0060audience_ids\u0060, the AI availability fields or the\nscheduling fields, is still validated but not applied, so the live article is left untouched.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "StageArticleDraft",
         "parameters": [
           {
@@ -4697,12 +4697,22 @@
                 "examples": {
                   "Article not published": {
                     "value": {
+                      "errors": [
+                        {
+                          "message": "Article must be published before a draft can be staged",
+                          "status": 422
+                        }
+                      ]
+                    }
+                  },
+                  "Locale not published": {
+                    "value": {
                       "type": "error.list",
                       "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
                       "errors": [
                         {
                           "code": "parameter_invalid",
-                          "message": "Article must be published before a draft can be staged"
+                          "message": "Cannot stage a draft for locale(s) that are not published on the article: fr"
                         }
                       ]
                     }
@@ -4723,7 +4733,7 @@
           "Articles"
         ],
         "summary": "Publish an article draft",
-        "description": "Publish a staged draft by making a POST request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft/publish\u0060, promoting the draft\ncontent to live.\n\nOn a single-language workspace no body is required. On a multilingual\nworkspace you must list which locales to publish via the \u0060locales\u0060 array;\nomitting it returns \u0060422\u0060. Returns \u0060422\u0060 when there is no staged draft to\npublish, or when a requested locale has no pending changes.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Publish a staged draft by making a POST request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft/publish\u0060, promoting the draft\ncontent to live.\n\nOn a single-language workspace no body is required. On a multilingual\nworkspace you must list which locales to publish via the \u0060locales\u0060 array;\nomitting it returns \u0060422\u0060. Returns \u0060422\u0060 when there is no staged draft to\npublish, or when a requested locale has no pending changes.\n\nThe \u0060422\u0060 for no staged draft has the short body\n\u0060{ \u0022errors\u0022: [{ \u0022message\u0022: \u0022...\u0022, \u0022status\u0022: 422 }] }\u0060, with no \u0060type\u0060,\n\u0060request_id\u0060 or \u0060code\u0060. The other \u0060422\u0060 errors use the standard error format.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "PublishArticleDraft",
         "parameters": [
           {
@@ -4837,12 +4847,10 @@
                 "examples": {
                   "No draft to publish": {
                     "value": {
-                      "type": "error.list",
-                      "request_id": "8a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
                       "errors": [
                         {
-                          "code": "parameter_invalid",
-                          "message": "Article has no draft to publish"
+                          "message": "Article has no draft to publish",
+                          "status": 422
                         }
                       ]
                     }
@@ -4887,7 +4895,7 @@
           "Articles"
         ],
         "summary": "List article versions",
-        "description": "Fetch the version history of an article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions\u0060. Versions are\nreturned newest-first as a paginated list of metadata. Use\n\u0060GET /articles/{article_id}/versions/{id}\u0060 to retrieve a single version\nwith its full content.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Fetch the version history of an article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions\u0060. Versions are\nreturned newest-first as a paginated list of metadata. Use\n\u0060GET /articles/{article_id}/versions/{id}\u0060 to retrieve a single version\nwith its full content.\n\nA \u0060404\u0060 has an empty response body, whether the article or its content\nisn\u0027t found.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListArticleVersions",
         "parameters": [
           {
@@ -5027,7 +5035,7 @@
           "Articles"
         ],
         "summary": "Retrieve an article version",
-        "description": "Fetch a single prior version of an article, including its body content,\nby making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions/\u003Cid\u003E\u0060. Returns\nthe version\u0027s full content; the live article remains untouched.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Fetch a single prior version of an article, including its body content,\nby making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions/\u003Cid\u003E\u0060. Returns\nthe version\u0027s full content; the live article remains untouched.\n\nA \u0060404\u0060 has an empty response body, whether the article, its content or\nthe version isn\u0027t found.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveArticleVersion",
         "parameters": [
           {
@@ -8717,7 +8725,7 @@
           "Help Center"
         ],
         "summary": "Update a collection",
-        "description": "You can update the details of a single collection by making a PUT request to \u0060https://api.intercom.io/help_center/collections/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can update the details of a single collection by making a PUT request to \u0060https://api.intercom.io/help_center/collections/\u003Cid\u003E\u0060.\n\n\u0060help_center_id\u0060 is checked but never applied. It must match the help center of the collection\u0027s articles and sub-collections, or the request returns a \u0060400\u0060. A collection with no content rejects any \u0060help_center_id\u0060, so leave it out. Moving a collection to another help center isn\u0027t supported.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "UpdateCollection",
         "parameters": [
           {
@@ -11036,7 +11044,7 @@
           "IP Allowlist"
         ],
         "summary": "Update IP allowlist settings",
-        "description": "Update the IP allowlist configuration for the workspace.\n\nBoth \u0060enabled\u0060 and \u0060ip_allowlist\u0060 are optional. A field you omit is left unchanged, and a request with neither returns the current settings without changing anything. Sending \u0060null\u0060 for a field is the same as omitting it.\n\nEvery non-blank \u0060ip_allowlist\u0060 entry must be an IPv4 address or an IPv4 range in CIDR notation. Blank entries are ignored and surrounding whitespace is trimmed. Any other entry, including an IPv6 address, returns a 422 \u0060parameter_invalid\u0060 error.\n\nRequires the \u0060manage_ip_allowlist\u0060 OAuth scope.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Lockout Protection\u0022 %}\n  The API will reject updates that would lock out the caller\u0027s IP address. Ensure your current IP is included in the allowlist when enabling the feature.\n{% /admonition %}\n",
+        "description": "Update the IP allowlist configuration for the workspace.\n\nBoth \u0060enabled\u0060 and \u0060ip_allowlist\u0060 are optional. A field you omit is left unchanged, and a request with neither returns the current settings without changing anything. Sending \u0060null\u0060 for a field is the same as omitting it.\n\nEvery non-blank \u0060ip_allowlist\u0060 entry must be an IPv4 address or an IPv4 range in CIDR notation. Blank entries are ignored and surrounding whitespace is trimmed. Any other entry, including an IPv6 address, returns a 422 \u0060parameter_invalid\u0060 error.\n\nWhen the update leaves the allowlist enabled with at least one entry, the request must come from an IPv4 address that is on the list. A request from an IPv6 address can never match an IPv4 allowlist, so it returns the lockout 422 below.\n\nRequires the \u0060manage_ip_allowlist\u0060 OAuth scope.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Lockout Protection\u0022 %}\n  The API will reject updates that would lock out the caller\u0027s IP address. Ensure your current IP is included in the allowlist when enabling the feature.\n{% /admonition %}\n",
         "operationId": "UpdateIpAllowlist",
         "parameters": [
           {
@@ -14972,7 +14980,7 @@
           "Companies"
         ],
         "summary": "Bulk delete companies",
-        "description": "You can bulk delete companies by submitting an array of companies, each identified by its Intercom company \u0060id\u0060. Deleting a company detaches all of its associated contacts but keeps the company record itself \u2014 the same archival behaviour as the single [Delete a company](/docs/references/preview/rest-api/api.intercom.io/companies/deletecompany) endpoint.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 100 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
+        "description": "You can bulk delete companies by submitting an array of companies, each identified by its Intercom company \u0060id\u0060. Deleting a company detaches all of its associated contacts but keeps the company record itself \u2014 the same archival behaviour as the single [Delete a company](/docs/references/preview/rest-api/api.intercom.io/companies/deletecompany) endpoint.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 1,000 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
         "operationId": "BulkDeleteCompanies",
         "parameters": [
           {
@@ -15165,7 +15173,7 @@
                       "errors": [
                         {
                           "code": "parameter_invalid",
-                          "message": "maximum number of companies per request is 100"
+                          "message": "maximum number of companies per request is 1000"
                         }
                       ]
                     }
@@ -20592,7 +20600,7 @@
           "Contacts"
         ],
         "summary": "Bulk delete contacts",
-        "description": "You can delete contacts in bulk by submitting an array of contact \u0060id\u0060s.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /contacts/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Permanent deletion\u0022 %}\n  A contact that doesn\u0027t exist, or can\u0027t be deleted, fails that item and the job\u0027s \u0060state\u0060 ends as \u0060completed_with_errors\u0060 (visible via \u0060GET /contacts/bulk/{id}\u0060) without failing the rest of the batch.\n{% /admonition %}\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 100 contacts per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n\nRequires the \u0060read_write_users\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
+        "description": "You can delete contacts in bulk by submitting an array of contact \u0060id\u0060s.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /contacts/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Permanent deletion\u0022 %}\n  A contact that doesn\u0027t exist, or can\u0027t be deleted, fails that item and the job\u0027s \u0060state\u0060 ends as \u0060completed_with_errors\u0060 (visible via \u0060GET /contacts/bulk/{id}\u0060) without failing the rest of the batch.\n{% /admonition %}\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 1,000 contacts per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n\nRequires the \u0060read_write_users\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "BulkDeleteContacts",
         "parameters": [
           {
@@ -20797,7 +20805,7 @@
                       "errors": [
                         {
                           "code": "parameter_invalid",
-                          "message": "maximum number of contacts per request is 100"
+                          "message": "maximum number of contacts per request is 1000"
                         }
                       ]
                     }
@@ -21178,7 +21186,7 @@
           {
             "name": "query",
             "in": "query",
-            "description": "A free-text search term matched against the title and body of each content item. When omitted, returns the most recent content items.",
+            "description": "A free-text search term matched against the title and body of each content item. When omitted, returns the most recent content items. Keep it to 500 characters or fewer. The API doesn\u0027t currently reject longer values.",
             "schema": {
               "maxLength": 500,
               "type": "string"
@@ -21188,7 +21196,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "The page number to fetch. Defaults to 1. Values below 1 are clamped to 1.",
+            "description": "The page number to fetch. Defaults to 1. Values below 1 are clamped to 1. Values above 5001 return a \u0060400\u0060 \u0060parameter_invalid\u0060 error.",
             "schema": {
               "minimum": 1,
               "type": "integer",
@@ -21461,7 +21469,7 @@
             }
           },
           "400": {
-            "description": "Page number too high. \u0060page\u0060 multiplied by \u0060per_page\u0060 must not exceed 10,000, and \u0060page\u0060 must not exceed 5001",
+            "description": "Page number too high. \u0060page\u0060 multiplied by \u0060per_page\u0060 must not exceed 10,000, and \u0060page\u0060 must not exceed 5001. Going over the 10,000 window returns \u0060bad_request\u0060.",
             "content": {
               "application/json": {
                 "schema": {
@@ -21671,7 +21679,7 @@
           "Content Snippets"
         ],
         "summary": "Create a content snippet",
-        "description": "You can create a new content snippet.\n\nRequires the \u0060read_write_content_snippets\u0060 OAuth scope.\n",
+        "description": "You can create a new content snippet.\n\n\u0060title\u0060 is listed as required, but a missing, \u0060null\u0060 or empty \u0060title\u0060 is accepted and the snippet is created with a blank title. When \u0060json_blocks\u0060 is omitted or \u0060null\u0060 and \u0060body_markdown\u0060 is omitted or blank, the snippet is created with a single empty paragraph.\n\nRequires the \u0060read_write_content_snippets\u0060 OAuth scope.\n",
         "operationId": "CreateContentSnippet",
         "parameters": [
           {
@@ -36106,7 +36114,7 @@
           "Workflows"
         ],
         "summary": "Export a workflow",
-        "description": "Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.\n\nThis endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.\n\n{% admonition type=\u0022info\u0022 name=\u0022Preview API\u0022 %}\n  This endpoint is available in the Preview API version. We may make iterative improvements, including adding new fields or refining existing ones.\n{% /admonition %}\n",
+        "description": "Export a workflow configuration by its ID. This endpoint returns the complete workflow definition including its steps, targeting rules, and attributes.\n\nThe \u0060id\u0060 in the path is the workflow\u0027s ruleset ID, the number at the end of the workflow\u0027s URL in Intercom (\u0060https://app.intercom.com/a/apps/\u003Capp_id\u003E/automation/workflows/\u003Cid\u003E\u0060). The \u0060workflow.id\u0060 in the response is a different ID, so don\u0027t pass it back as \u0060id\u0060.\n\nThis endpoint is designed for EU Data Act compliance, allowing customers to export their workflow configurations.\n\n{% admonition type=\u0022info\u0022 name=\u0022Preview API\u0022 %}\n  This endpoint is available in the Preview API version. We may make iterative improvements, including adding new fields or refining existing ones.\n{% /admonition %}\n",
         "operationId": "ExportWorkflow",
         "parameters": [
           {
@@ -36119,7 +36127,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The unique identifier for the workflow",
+            "description": "The ruleset ID of the workflow. This is the number at the end of the workflow\u0027s URL in Intercom, \u0060https://app.intercom.com/a/apps/\u003Capp_id\u003E/automation/workflows/\u003Cid\u003E\u0060. It is not the \u0060workflow.id\u0060 returned in the response, so don\u0027t pass that value back here.",
             "required": true,
             "schema": {
               "type": "string",
@@ -39782,18 +39790,6 @@
                         {
                           "code": "parameter_invalid",
                           "message": "environment_id must reference an environment in this workspace"
-                        }
-                      ]
-                    }
-                  },
-                  "Environments not available": {
-                    "value": {
-                      "type": "error.list",
-                      "request_id": "0e4b7d92-3c1a-4a85-b6f0-9d2e5c7a8b14",
-                      "errors": [
-                        {
-                          "code": "parameter_invalid",
-                          "message": "environment_id is not supported for this workspace"
                         }
                       ]
                     }
@@ -47562,7 +47558,7 @@
                         },
                         {
                           "name": "ask",
-                          "description": "Ask Fin a single question and get one informational answer. Fin never escalates, disambiguates, or asks follow-up questions. Use for one-shot informational lookups.",
+                          "description": "Ask Fin a single question and get one informational answer. Fin does not decide to hand over to a human, disambiguate, or ask follow-up questions, although escalation rules can still apply. Use for one-shot informational lookups.",
                           "inputSchema": {
                             "type": "object",
                             "properties": {
@@ -47848,7 +47844,7 @@
           "Fin Agent"
         ],
         "summary": "Ask Fin",
-        "description": "Ask Fin a single, self-contained question and receive one informational answer.\n\nUnlike a conversation, \u0060/fin/ask\u0060 is non-conversational: Fin will not ask follow-up\nquestions, will not run procedures, and will not escalate to a human on its own. You can\nstill escalate one yourself with \u0060POST /fin/escalate\u0060; the ask conversation is already\nclosed after its one-shot answer, and escalation leaves it closed while routing the\nhandoff separately.\n\nFin\u0027s answer is delivered asynchronously via the \u0060fin_replied\u0060 event. The conversation\nends with a \u0060complete\u0060 status \u2014 there is no \u0060awaiting_user_reply\u0060 cycle.\n\n{% admonition type=\u0022warning\u0022 %}\nTo request access to the Fin Agent API, go to **Settings \u003E Integrations \u003E Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent \u003E Deploy**.\n{% /admonition %}\n",
+        "description": "Ask Fin a single, self-contained question and receive one informational answer.\n\nUnlike a conversation, \u0060/fin/ask\u0060 is non-conversational: Fin will not ask follow-up\nquestions, will not run procedures, and will not decide to hand over to a human itself.\nEscalation rules can still match, and the conversation can still be routed to a team or\nfinish without resolution. You can also escalate one yourself with \u0060POST /fin/escalate\u0060;\nthe ask conversation is already closed after its one-shot answer, and escalation leaves\nit closed while routing the handoff separately.\n\nFin\u0027s answer is delivered asynchronously via the \u0060fin_replied\u0060 event. The conversation\nends with a \u0060complete\u0060 status \u2014 there is no \u0060awaiting_user_reply\u0060 cycle.\n\n{% admonition type=\u0022warning\u0022 %}\nTo request access to the Fin Agent API, go to **Settings \u003E Integrations \u003E Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent \u003E Deploy**.\n{% /admonition %}\n",
         "operationId": "AskFin",
         "parameters": [
           {
@@ -51215,7 +51211,7 @@
           },
           "name": {
             "type": "string",
-            "description": "The name of the folder",
+            "description": "The name of the folder. Returned HTML-escaped, for example \u0060\u0026\u0060 as \u0060\u0026amp;\u0060.",
             "example": "Product Documentation"
           },
           "description": {
@@ -52795,12 +52791,12 @@
         "type": "object",
         "properties": {
           "companies": {
-            "maxItems": 100,
+            "maxItems": 1000,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BulkDeleteCompaniesRequestCompaniesItem"
             },
-            "description": "An array of companies to delete, each identified by its Intercom company \u0060id\u0060. Maximum 100 companies per request."
+            "description": "An array of companies to delete, each identified by its Intercom company \u0060id\u0060. Maximum 1,000 companies per request."
           },
           "job": {
             "$ref": "#/components/schemas/BulkDeleteCompaniesRequestJob"
@@ -52858,12 +52854,12 @@
         "type": "object",
         "properties": {
           "contacts": {
-            "maxItems": 100,
+            "maxItems": 1000,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BulkDeleteContactsRequestContactsItem"
             },
-            "description": "An array of contacts to delete, each identified by \u0060id\u0060. Maximum 100 contacts per request."
+            "description": "An array of contacts to delete, each identified by \u0060id\u0060. Maximum 1,000 contacts per request."
           },
           "job": {
             "$ref": "#/components/schemas/BulkDeleteContactsRequestJob"
@@ -54788,7 +54784,7 @@
           },
           "total_count": {
             "type": "integer",
-            "description": "A count of the total number of content import sources.",
+            "description": "A count of the total number of content import sources, including deleted ones that the list leaves out.",
             "example": 1
           },
           "data": {
@@ -55128,7 +55124,7 @@
           "title": {
             "maxLength": 255,
             "type": "string",
-            "description": "The title of the content snippet.",
+            "description": "The title of the content snippet. The API accepts a missing, \u0060null\u0060 or empty title.",
             "example": "How to reset your password"
           },
           "json_blocks": {
@@ -55182,7 +55178,7 @@
             "example": true
           }
         },
-        "description": "The request payload for creating a content snippet. You must provide either \u0060json_blocks\u0060 or \u0060body_markdown\u0060 for the snippet content \u2014 they are mutually exclusive."
+        "description": "The request payload for creating a content snippet. You can provide either \u0060json_blocks\u0060 or \u0060body_markdown\u0060 for the snippet content \u2014 they are mutually exclusive. When \u0060json_blocks\u0060 is omitted or \u0060null\u0060 and \u0060body_markdown\u0060 is omitted or blank, the snippet is created with a single empty paragraph."
       },
       "ContentSnippetUpdateRequest": {
         "title": "Update Content Snippet Request",
@@ -61539,9 +61535,6 @@
         },
         "description": "Contains metadata if the message was sent as an email"
       },
-      "Metadata": {
-        "$ref": "#/components/schemas/ConversationPartMetadata"
-      },
       "ConversationAttributeUpdatedByWorkflow": {
         "title": "Part type - conversation_attribute_updated_by_workflow",
         "type": "object",
@@ -62285,8 +62278,8 @@
           },
           "reason": {
             "type": "string",
-            "description": "Optional. A human-readable explanation of why the conversation was escalated.\nOnly present when status is \u0027escalated\u0027.\nPossible values include:\n- \u0022Escalation requested by user\u0022\n- \u0022Escalation rule: {rule_name}\u0022\n- \u0022Escalation rule matched\u0022\n- \u0022Routed to team\u0022\n- \u0022Conversation finished without resolution\u0022\n",
-            "example": "Escalation requested by user"
+            "description": "Optional. A human-readable explanation of why the conversation was escalated.\nOnly present when status is \u0027escalated\u0027.\n\nWhen you escalate deterministically with \u0060/fin/escalate\u0060, the reason is always\n\u0022Escalation requested via API\u0022.\n\nThe following reasons apply to Fin-decided escalations when Fin owns the\nconversation (\u0060/fin/start\u0060, \u0060/fin/procedures/{procedure_id}/run\u0060, and\n\u0060/fin/reply\u0060 on a conversation that was started that way). \u0060/fin/ask\u0060 can\nreport any of them, because escalation rules still apply and the conversation\ncan still be routed to a team or finish without resolution. On an Ask,\n\u0022Escalation requested by user\u0022 normally only follows an escalation rule match.\n- \u0022Escalation requested by user\u0022\n- \u0022Escalation rule: {rule_name}\u0022\n- \u0022Escalation rule matched\u0022\n- \u0022Routed to team\u0022\n- \u0022Conversation finished without resolution\u0022\n\n\u0022Escalation requested by user\u0022 is sent whenever Fin decides to hand over, not\nonly when the user asks for a human, for example on a procedure handoff or a\ncustom answer handover. It also follows an escalation rule match, as a second\n\u0060escalated\u0060 event after the rule\u0027s reason. While a procedure is running, every\nescalation Fin decides on reports it.\n",
+            "example": "Escalation requested via API"
           },
           "created_at_ms": {
             "type": "string",
@@ -71792,7 +71785,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique identifier for the workflow.",
+            "description": "The unique identifier for the workflow. This is not the ruleset ID that the export endpoint\u0027s \u0060id\u0060 path parameter expects.",
             "example": "67890"
           },
           "title": {
@@ -81389,18 +81382,23 @@
       },
       "FinAgentStatusUpdatedEventStatus": {
         "enum": [
+          "thinking",
           "awaiting_user_reply",
           "escalated",
           "resolved",
           "complete"
         ],
         "type": "string",
-        "description": "Fin\u0027s current status.\n- awaiting_user_reply: Fin has finished replying and is waiting for the user to respond\n- escalated: The conversation has been escalated to a human\n- resolved: The user\u0027s query has been resolved\n- complete: Fin has completed its workflow. When CSAT is enabled a csat_requested event may follow\n",
+        "description": "Fin\u0027s current status.\n- thinking: Fin has started running a procedure. Not sent on every turn\n- awaiting_user_reply: Fin has finished replying and is waiting for the user to respond\n- escalated: The conversation has been escalated to a human\n- resolved: The user\u0027s query has been resolved\n- complete: Fin has completed its workflow. When CSAT is enabled a csat_requested event may follow\n",
         "example": "escalated",
         "x-ms-enum": {
           "name": "FinAgentStatusUpdatedEventStatus",
           "modelAsString": false,
           "values": [
+            {
+              "value": "thinking",
+              "name": "Thinking"
+            },
             {
               "value": "awaiting_user_reply",
               "name": "AwaitingUserReply"
@@ -81441,10 +81439,11 @@
       "FinAgentRepliedEventStatus": {
         "enum": [
           "replying",
-          "awaiting_user_reply"
+          "awaiting_user_reply",
+          "complete"
         ],
         "type": "string",
-        "description": "Fin\u0027s current status.\n- replying: Intermediate reply part; more parts may follow\n- awaiting_user_reply: Legacy status; instead use the fin_status_updated event with \u0027awaiting_user_reply\u0027, which fires once Fin\u0027s reply is done\n",
+        "description": "Fin\u0027s current status.\n- replying: Intermediate reply part; more parts may follow\n- awaiting_user_reply: Legacy status; instead use the fin_status_updated event with \u0027awaiting_user_reply\u0027, which fires once Fin\u0027s reply is done\n- complete: Fin\u0027s reply is final and no user reply is expected. Sent for one-shot Ask replies only\n",
         "example": "replying",
         "x-ms-enum": {
           "name": "FinAgentRepliedEventStatus",
@@ -81457,6 +81456,10 @@
             {
               "value": "awaiting_user_reply",
               "name": "AwaitingUserReply"
+            },
+            {
+              "value": "complete",
+              "name": "Complete"
             }
           ]
         }
@@ -85514,7 +85517,7 @@
     },
     {
       "name": "IP Allowlist",
-      "description": "Manage IP allowlist settings for your workspace.\n\nThe IP Allowlist API allows you to configure which IP addresses are allowed to access the Intercom API and web application for your workspace. This is useful for restricting access to your Intercom workspace to specific corporate networks or VPNs.\n\n{% admonition type=\u0022info\u0022 name=\u0022Authentication\u0022 %}\n  This endpoint requires the \u0060manage_ip_allowlist\u0060 OAuth scope.\n{% /admonition %}\n"
+      "description": "Manage IP allowlist settings for your workspace.\n\nThe IP Allowlist API allows you to configure which IP addresses teammates can use your workspace from, in the web app and mobile apps. This is useful for restricting teammate access to specific corporate networks or VPNs. It doesn\u0027t apply to REST API requests, which use a separate REST API allowlist that this API doesn\u0027t manage.\n\n{% admonition type=\u0022info\u0022 name=\u0022Authentication\u0022 %}\n  This endpoint requires the \u0060manage_ip_allowlist\u0060 OAuth scope.\n{% /admonition %}\n"
     },
     {
       "name": "Jobs",

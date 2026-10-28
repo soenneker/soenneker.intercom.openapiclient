@@ -16,7 +16,7 @@ namespace Soenneker.Intercom.OpenApiClient.Export.Workflows
     public partial class WorkflowsRequestBuilder : BaseRequestBuilder
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.export.workflows.item collection</summary>
-        /// <param name="position">The unique identifier for the workflow</param>
+        /// <param name="position">The ruleset ID of the workflow. This is the number at the end of the workflow&apos;s URL in Intercom, `https://app.intercom.com/a/apps/&lt;app_id&gt;/automation/workflows/&lt;id&gt;`. It is not the `workflow.id` returned in the response, so don&apos;t pass that value back here.</param>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Export.Workflows.Item.WorkflowsItemRequestBuilder"/></returns>
         public global::Soenneker.Intercom.OpenApiClient.Export.Workflows.Item.WorkflowsItemRequestBuilder this[string position]
         {

@@ -31,7 +31,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.PagesLink Pages { get; set; }
 #endif
-        /// <summary>A count of the total number of content import sources.</summary>
+        /// <summary>A count of the total number of content import sources, including deleted ones that the list leaves out.</summary>
         public int? TotalCount { get; set; }
         /// <summary>The type of the object.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get; set; }

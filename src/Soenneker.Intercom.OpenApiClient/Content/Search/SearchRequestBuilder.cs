@@ -172,13 +172,13 @@ namespace Soenneker.Intercom.OpenApiClient.Content.Search
             [QueryParameter("locales")]
             public string[] Locales { get; set; }
 #endif
-            /// <summary>The page number to fetch. Defaults to 1. Values below 1 are clamped to 1.</summary>
+            /// <summary>The page number to fetch. Defaults to 1. Values below 1 are clamped to 1. Values above 5001 return a `400` `parameter_invalid` error.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
             /// <summary>Number of results per page. Defaults to 10. Maximum 50.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
-            /// <summary>A free-text search term matched against the title and body of each content item. When omitted, returns the most recent content items.</summary>
+            /// <summary>A free-text search term matched against the title and body of each content item. When omitted, returns the most recent content items. Keep it to 500 characters or fewer. The API doesn&apos;t currently reject longer values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("query")]

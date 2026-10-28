@@ -37,7 +37,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>The unique identifier for the folder</summary>
         public int? Id { get; set; }
-        /// <summary>The name of the folder</summary>
+        /// <summary>The name of the folder. Returned HTML-escaped, for example `&amp;` as `&amp;amp;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
