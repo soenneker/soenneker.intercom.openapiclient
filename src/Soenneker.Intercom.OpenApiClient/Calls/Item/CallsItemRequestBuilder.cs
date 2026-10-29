@@ -46,7 +46,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item
         {
         }
         /// <summary>
-        /// Retrieve a single call by id.
+        /// Retrieve a single call by id.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Call"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Call>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Call.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve a single call by id.
+        /// Retrieve a single call by id.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

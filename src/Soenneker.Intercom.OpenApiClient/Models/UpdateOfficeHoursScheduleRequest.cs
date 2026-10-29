@@ -8,14 +8,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The request payload for updating an office hours schedule. Only the provided fields are updated.
+    /// The request payload for updating an office hours schedule. Only the provided fields are updated. Any other field, apart from `id`, is rejected with a 400 error.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateOfficeHoursScheduleRequest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The name of the office hours schedule.</summary>
+        /// <summary>The name of the office hours schedule. It must be unique among the workspace&apos;s schedules; a duplicate name returns a 422 error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Name { get; set; }
@@ -23,7 +23,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>The open intervals for the schedule. `start_minute` and `end_minute` must be on a 15-minute boundary.</summary>
+        /// <summary>The open intervals for the schedule. `start_minute` and `end_minute` must be on a 15-minute boundary, except for the whole-week interval `0` to `10079`. Don&apos;t send `day_of_week`; it is read-only and a request that includes it is rejected with a 400 error. When provided, the intervals replace all of the schedule&apos;s existing intervals.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? TimeIntervals { get; set; }

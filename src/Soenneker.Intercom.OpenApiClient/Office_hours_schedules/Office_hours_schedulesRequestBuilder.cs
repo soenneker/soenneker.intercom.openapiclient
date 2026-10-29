@@ -73,9 +73,10 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules
         /// You can create a new office hours schedule for the workspace.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursSchedule"/></returns>
-        /// <param name="body">The request payload for creating an office hours schedule.</param>
+        /// <param name="body">The request payload for creating an office hours schedule. Any other field, apart from `id`, is rejected with a 400 error.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -91,6 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
@@ -119,7 +121,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules
         /// You can create a new office hours schedule for the workspace.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request payload for creating an office hours schedule.</param>
+        /// <param name="body">The request payload for creating an office hours schedule. Any other field, apart from `id`, is rejected with a 400 error.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

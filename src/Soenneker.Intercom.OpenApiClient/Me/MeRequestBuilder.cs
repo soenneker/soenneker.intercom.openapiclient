@@ -34,11 +34,13 @@ namespace Soenneker.Intercom.OpenApiClient.Me
         {
         }
         /// <summary>
-        /// You can view the currently authorised admin along with the embedded app object (a &quot;workspace&quot; in legacy terminology).&gt; 🚧 Single Sign On&gt;&gt; If you are building a custom &quot;Log in with Intercom&quot; flow for your site, and you call the `/me` endpoint to identify the logged-in user, you should not accept any sign-ins from users with unverified email addresses as it poses a potential impersonation security risk.
+        /// You can view the currently authorised admin along with the embedded app object (a &quot;workspace&quot; in legacy terminology).&gt; 🚧 Single Sign On&gt;&gt; If you are building a custom &quot;Log in with Intercom&quot; flow for your site, and you call the `/me` endpoint to identify the logged-in user, you should not accept any sign-ins from users with unverified email addresses as it poses a potential impersonation security risk.Requires the `read_single_admin` or `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminWithApp"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.AdminWithApp?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -49,10 +51,15 @@ namespace Soenneker.Intercom.OpenApiClient.Me
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AdminWithApp>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AdminWithApp.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AdminWithApp>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AdminWithApp.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can view the currently authorised admin along with the embedded app object (a &quot;workspace&quot; in legacy terminology).&gt; 🚧 Single Sign On&gt;&gt; If you are building a custom &quot;Log in with Intercom&quot; flow for your site, and you call the `/me` endpoint to identify the logged-in user, you should not accept any sign-ins from users with unverified email addresses as it poses a potential impersonation security risk.
+        /// You can view the currently authorised admin along with the embedded app object (a &quot;workspace&quot; in legacy terminology).&gt; 🚧 Single Sign On&gt;&gt; If you are building a custom &quot;Log in with Intercom&quot; flow for your site, and you call the `/me` endpoint to identify the logged-in user, you should not accept any sign-ins from users with unverified email addresses as it poses a potential impersonation security risk.Requires the `read_single_admin` or `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

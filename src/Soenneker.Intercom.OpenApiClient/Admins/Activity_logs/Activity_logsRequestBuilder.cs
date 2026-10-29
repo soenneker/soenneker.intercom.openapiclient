@@ -28,7 +28,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Activity_logsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs?created_at_after={created_at_after}{&created_at_before*}", pathParameters)
+        public Activity_logsRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs{?created_at_after*,created_at_before*,page*,per_page*}", pathParameters)
         {
         }
         /// <summary>
@@ -36,15 +36,16 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public Activity_logsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs?created_at_after={created_at_after}{&created_at_before*}", rawUrl)
+        public Activity_logsRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/admins/activity_logs{?created_at_after*,created_at_before*,page*,per_page*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can get a log of activities by all admins in an app.
+        /// You can get a log of activities by all admins in an app.Requires the `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -58,12 +59,13 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can get a log of activities by all admins in an app.
+        /// You can get a log of activities by all admins in an app.Requires the `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -91,12 +93,12 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
             return new global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can get a log of activities by all admins in an app.
+        /// You can get a log of activities by all admins in an app.Requires the `read_admins` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class Activity_logsRequestBuilderGetQueryParameters 
         {
-            /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp.</summary>
+            /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to 30 days before the request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("created_at_after")]
@@ -106,7 +108,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
             [QueryParameter("created_at_after")]
             public string CreatedAtAfter { get; set; }
 #endif
-            /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp.</summary>
+            /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to the time of the request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("created_at_before")]
@@ -116,6 +118,12 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_logs
             [QueryParameter("created_at_before")]
             public string CreatedAtBefore { get; set; }
 #endif
+            /// <summary>The page number of results to return. Defaults to the first page.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
+            /// <summary>The number of results per page. Must be between 1 and 250.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
         {
         }
         /// <summary>
-        /// You can fetch a list of all exceptions for an office hours schedule.
+        /// You can fetch a list of all exceptions for an office hours schedule, ordered by date with the earliest first.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursExceptionList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -75,9 +75,10 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
         /// You can create an exception for an office hours schedule. Use `closed` to mark the day closed (omit `time_intervals`) or `custom_hours` to supply replacement intervals.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursException"/></returns>
-        /// <param name="body">The request payload for creating an office hours exception. Omit `time_intervals` when `exception_type` is `closed`.</param>
+        /// <param name="body">The request payload for creating an office hours exception. Omit `time_intervals` when `exception_type` is `closed`. Any other field, apart from `id` and `office_hours_schedule_id`, is rejected with a 400 error.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
@@ -94,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -101,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursException>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursException.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all exceptions for an office hours schedule.
+        /// You can fetch a list of all exceptions for an office hours schedule, ordered by date with the earliest first.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -123,7 +125,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item.Office_ho
         /// You can create an exception for an office hours schedule. Use `closed` to mark the day closed (omit `time_intervals`) or `custom_hours` to supply replacement intervals.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request payload for creating an office hours exception. Omit `time_intervals` when `exception_type` is `closed`.</param>
+        /// <param name="body">The request payload for creating an office hours exception. Omit `time_intervals` when `exception_type` is `closed`. Any other field, apart from `id` and `office_hours_schedule_id`, is rejected with a 400 error.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

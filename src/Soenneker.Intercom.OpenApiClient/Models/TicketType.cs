@@ -45,6 +45,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
+        /// <summary>`true` if tickets of this type are internal only and can never be shared with customers; `false` if they are, or can be, shared.</summary>
+        public bool? IsInternal { get; set; }
         /// <summary>The name of the ticket type</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -118,6 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "icon", n => { Icon = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
+                { "is_internal", n => { IsInternal = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "ticket_states", n => { TicketStates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeTicketStates>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeTicketStates.CreateFromDiscriminatorValue); } },
                 { "ticket_type_attributes", n => { TicketTypeAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeList>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeList.CreateFromDiscriminatorValue); } },
@@ -139,6 +142,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("description", Description);
             writer.WriteStringValue("icon", Icon);
             writer.WriteStringValue("id", Id);
+            writer.WriteBoolValue("is_internal", IsInternal);
             writer.WriteStringValue("name", Name);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeTicketStates>("ticket_states", TicketStates);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeList>("ticket_type_attributes", TicketTypeAttributes);

@@ -27,7 +27,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? AwayModeEnabled { get; set; }
         /// <summary>Identifies if this admin is set to automatically reassign new conversations to the apps default inbox.</summary>
         public bool? AwayModeReassign { get; set; }
-        /// <summary>The unique identifier of the away status reason</summary>
+        /// <summary>The unique identifier of the away status reason. Not returned by List all admins.</summary>
         public int? AwayStatusReasonId { get; set; }
         /// <summary>The email of the admin.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.AdminRole Role { get; set; }
 #endif
-        /// <summary>This object represents the avatar associated with the admin.</summary>
+        /// <summary>The ids of the teams the admin belongs to. When the workspace has a default team, its id is the last item.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<int?>? TeamIds { get; set; }

@@ -43,6 +43,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Region { get; set; }
 #endif
+        /// <summary>Whether or not the app uses identity verification. Same value as `identity_verification`.</summary>
+        public bool? Secure { get; set; }
         /// <summary>The timezone of the region where the app is located.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -90,6 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "identity_verification", n => { IdentityVerification = n.GetBoolValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "region", n => { Region = n.GetStringValue(); } },
+                { "secure", n => { Secure = n.GetBoolValue(); } },
                 { "timezone", n => { Timezone = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
@@ -106,6 +109,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("identity_verification", IdentityVerification);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("region", Region);
+            writer.WriteBoolValue("secure", Secure);
             writer.WriteStringValue("timezone", Timezone);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);

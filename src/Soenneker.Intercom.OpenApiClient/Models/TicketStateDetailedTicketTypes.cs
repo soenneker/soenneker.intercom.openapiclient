@@ -8,20 +8,20 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A list of ticket types associated with a given ticket state.
+    /// A list of the ticket types that use this ticket state.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class TicketStateDetailedTicketTypes : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>A list of ticket type attributes associated with a given ticket type.</summary>
+        /// <summary>A summary of each ticket type that uses this ticket state. It doesn&apos;t include the ticket type&apos;s attributes or ticket states; retrieve the ticket type for those.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>? Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypesDataItem>? Data { get; set; }
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketType> Data { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypesDataItem> Data { get; set; }
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `list`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>(global::Soenneker.Intercom.OpenApiClient.Models.TicketType.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypesDataItem>(global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypesDataItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>("data", Data);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypesDataItem>("data", Data);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

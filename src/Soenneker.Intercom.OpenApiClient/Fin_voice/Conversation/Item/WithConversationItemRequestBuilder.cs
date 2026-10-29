@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item
         {
         }
         /// <summary>
-        /// Retrieve information about Fin Voice calls associated with a conversation.Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.
+        /// Retrieve information about Fin Voice calls associated with a conversation.Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A List&lt;global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse&gt;</returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -60,7 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Conversation.Item
             return collectionResult?.AsList();
         }
         /// <summary>
-        /// Retrieve information about Fin Voice calls associated with a conversation.Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.
+        /// Retrieve information about Fin Voice calls associated with a conversation.Returns all matched calls for the given conversation ID. A conversation may have multiple associated calls.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Register
         {
         }
         /// <summary>
-        /// Register a Fin Voice call with Intercom. This endpoint creates an external referencethat links an external call identifier to an Intercom call and conversation.The call can be from different sources:- AWS Connect (default)- Five9- Zoom Phone
+        /// Register a Fin Voice call with Intercom. This endpoint creates an external referencethat links an external call identifier to an Intercom call and conversation.The call can be from different sources:- AWS Connect (default)- Five9- Zoom Phone- NICE CXone- Dialpad- GenericRequires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse"/></returns>
         /// <param name="body">Register a Fin Voice call with Intercom</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Register
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Register a Fin Voice call with Intercom. This endpoint creates an external referencethat links an external call identifier to an Intercom call and conversation.The call can be from different sources:- AWS Connect (default)- Five9- Zoom Phone
+        /// Register a Fin Voice call with Intercom. This endpoint creates an external referencethat links an external call identifier to an Intercom call and conversation.The call can be from different sources:- AWS Connect (default)- Five9- Zoom Phone- NICE CXone- Dialpad- GenericRequires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Register a Fin Voice call with Intercom</param>

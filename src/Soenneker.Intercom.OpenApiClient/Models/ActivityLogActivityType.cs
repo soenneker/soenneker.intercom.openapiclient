@@ -8,14 +8,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public enum ActivityLogActivityType
     #pragma warning restore CS1591
     {
-        [EnumMember(Value = "admin_conversation_assignment_limit_change")]
-        #pragma warning disable CS1591
-        AdminConversationAssignmentLimitChange,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "admin_ticket_assignment_limit_change")]
-        #pragma warning disable CS1591
-        AdminTicketAssignmentLimitChange,
-        #pragma warning restore CS1591
         [EnumMember(Value = "admin_avatar_change")]
         #pragma warning disable CS1591
         AdminAvatarChange,
@@ -24,6 +16,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AdminAwayModeChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "admin_occupancy_state_change")]
+        #pragma warning disable CS1591
+        AdminOccupancyStateChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_channel_change")]
+        #pragma warning disable CS1591
+        AdminChannelChange,
+        #pragma warning restore CS1591
         [EnumMember(Value = "admin_deletion")]
         #pragma warning disable CS1591
         AdminDeletion,
@@ -31,6 +31,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "admin_deprovisioned")]
         #pragma warning disable CS1591
         AdminDeprovisioned,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "intercom_teammate_removal")]
+        #pragma warning disable CS1591
+        IntercomTeammateRemoval,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_impersonation_consent_approved")]
+        #pragma warning disable CS1591
+        AdminImpersonationConsentApproved,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_impersonation_consent_revoked")]
+        #pragma warning disable CS1591
+        AdminImpersonationConsentRevoked,
         #pragma warning restore CS1591
         [EnumMember(Value = "admin_impersonation_end")]
         #pragma warning disable CS1591
@@ -44,6 +56,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AdminInviteChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "admin_bulk_invite_creation")]
+        #pragma warning disable CS1591
+        AdminBulkInviteCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_bulk_notification_settings_change")]
+        #pragma warning disable CS1591
+        AdminBulkNotificationSettingsChange,
+        #pragma warning restore CS1591
         [EnumMember(Value = "admin_invite_creation")]
         #pragma warning disable CS1591
         AdminInviteCreation,
@@ -51,6 +71,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "admin_invite_deletion")]
         #pragma warning disable CS1591
         AdminInviteDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_unauthorized_sign_in_method")]
+        #pragma warning disable CS1591
+        AdminUnauthorizedSignInMethod,
         #pragma warning restore CS1591
         [EnumMember(Value = "admin_login_failure")]
         #pragma warning disable CS1591
@@ -64,13 +88,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AdminLogout,
         #pragma warning restore CS1591
-        [EnumMember(Value = "admin_occupancy_setting_change")]
+        [EnumMember(Value = "admin_login_attempts_reset")]
         #pragma warning disable CS1591
-        AdminOccupancySettingChange,
+        AdminLoginAttemptsReset,
         #pragma warning restore CS1591
-        [EnumMember(Value = "admin_occupancy_state_change")]
+        [EnumMember(Value = "admin_mobile_login_failure")]
         #pragma warning disable CS1591
-        AdminOccupancyStateChange,
+        AdminMobileLoginFailure,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_mobile_login_success")]
+        #pragma warning disable CS1591
+        AdminMobileLoginSuccess,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_sign_in_method_expired")]
+        #pragma warning disable CS1591
+        AdminSignInMethodExpired,
         #pragma warning restore CS1591
         [EnumMember(Value = "admin_password_reset_request")]
         #pragma warning disable CS1591
@@ -88,13 +120,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AdminProvisioned,
         #pragma warning restore CS1591
-        [EnumMember(Value = "admin_two_factor_auth_change")]
+        [EnumMember(Value = "admin_name_change")]
         #pragma warning disable CS1591
-        AdminTwoFactorAuthChange,
+        AdminNameChange,
         #pragma warning restore CS1591
-        [EnumMember(Value = "admin_unauthorized_sign_in_method")]
+        [EnumMember(Value = "admin_email_change")]
         #pragma warning disable CS1591
-        AdminUnauthorizedSignInMethod,
+        AdminEmailChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_password_change")]
+        #pragma warning disable CS1591
+        AdminPasswordChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_locale_change")]
+        #pragma warning disable CS1591
+        AdminLocaleChange,
         #pragma warning restore CS1591
         [EnumMember(Value = "app_admin_join")]
         #pragma warning disable CS1591
@@ -112,6 +152,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         AppDataExport,
         #pragma warning restore CS1591
+        [EnumMember(Value = "request_log_export_requested")]
+        #pragma warning disable CS1591
+        RequestLogExportRequested,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workspace_deletion_request")]
+        #pragma warning disable CS1591
+        WorkspaceDeletionRequest,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workspace_owner_designation_change")]
+        #pragma warning disable CS1591
+        WorkspaceOwnerDesignationChange,
+        #pragma warning restore CS1591
         [EnumMember(Value = "app_google_sso_domain_change")]
         #pragma warning disable CS1591
         AppGoogleSsoDomainChange,
@@ -119,6 +171,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "app_identity_verification_change")]
         #pragma warning disable CS1591
         AppIdentityVerificationChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "app_identity_verification_reminder_disabled")]
+        #pragma warning disable CS1591
+        AppIdentityVerificationReminderDisabled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "identity_verification_unmarked")]
+        #pragma warning disable CS1591
+        IdentityVerificationUnmarked,
         #pragma warning restore CS1591
         [EnumMember(Value = "app_name_change")]
         #pragma warning disable CS1591
@@ -139,6 +199,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "app_package_uninstallation")]
         #pragma warning disable CS1591
         AppPackageUninstallation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "developer_hub_secret_revealed")]
+        #pragma warning disable CS1591
+        DeveloperHubSecretRevealed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "developer_hub_secret_copied")]
+        #pragma warning disable CS1591
+        DeveloperHubSecretCopied,
         #pragma warning restore CS1591
         [EnumMember(Value = "app_team_creation")]
         #pragma warning disable CS1591
@@ -168,6 +236,46 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         ArticlesInMessengerEnabledChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "automatic_domain_authentication_started")]
+        #pragma warning disable CS1591
+        AutomaticDomainAuthenticationStarted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "automatic_domain_authentication_complete")]
+        #pragma warning disable CS1591
+        AutomaticDomainAuthenticationComplete,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_api_secret_creation")]
+        #pragma warning disable CS1591
+        MessengerApiSecretCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_api_secret_deletion")]
+        #pragma warning disable CS1591
+        MessengerApiSecretDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_search_required_change")]
+        #pragma warning disable CS1591
+        MessengerSearchRequiredChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_spaces_change")]
+        #pragma warning disable CS1591
+        MessengerSpacesChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "bulk_data_export_creation")]
+        #pragma warning disable CS1591
+        BulkDataExportCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "bulk_data_export_delete")]
+        #pragma warning disable CS1591
+        BulkDataExportDelete,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "bulk_data_export_run")]
+        #pragma warning disable CS1591
+        BulkDataExportRun,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "bulk_data_export_settings_change")]
+        #pragma warning disable CS1591
+        BulkDataExportSettingsChange,
+        #pragma warning restore CS1591
         [EnumMember(Value = "bulk_delete")]
         #pragma warning disable CS1591
         BulkDelete,
@@ -175,6 +283,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "bulk_export")]
         #pragma warning disable CS1591
         BulkExport,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "call_settings_change")]
+        #pragma warning disable CS1591
+        CallSettingsChange,
         #pragma warning restore CS1591
         [EnumMember(Value = "campaign_deletion")]
         #pragma warning disable CS1591
@@ -184,13 +296,69 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         CampaignStateChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "content_sync_pair_creation")]
+        #pragma warning disable CS1591
+        ContentSyncPairCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_sync_pair_deletion")]
+        #pragma warning disable CS1591
+        ContentSyncPairDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_sync_pair_run")]
+        #pragma warning disable CS1591
+        ContentSyncPairRun,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_sync_pair_update")]
+        #pragma warning disable CS1591
+        ContentSyncPairUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_attribute_archive")]
+        #pragma warning disable CS1591
+        ConversationAttributeArchive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_deletion")]
+        #pragma warning disable CS1591
+        ConversationDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_deletion_schedule_creation")]
+        #pragma warning disable CS1591
+        ConversationDeletionScheduleCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_deletion_schedule_state_change")]
+        #pragma warning disable CS1591
+        ConversationDeletionScheduleStateChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_deletion_schedule_update")]
+        #pragma warning disable CS1591
+        ConversationDeletionScheduleUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_hard_deletion_enqueued")]
+        #pragma warning disable CS1591
+        ConversationHardDeletionEnqueued,
+        #pragma warning restore CS1591
         [EnumMember(Value = "conversation_part_deletion")]
         #pragma warning disable CS1591
         ConversationPartDeletion,
         #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_part_edited")]
+        #pragma warning disable CS1591
+        ConversationPartEdited,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_part_redaction")]
+        #pragma warning disable CS1591
+        ConversationPartRedaction,
+        #pragma warning restore CS1591
         [EnumMember(Value = "conversation_pdf_export")]
         #pragma warning disable CS1591
         ConversationPdfExport,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_redaction_enqueued")]
+        #pragma warning disable CS1591
+        ConversationRedactionEnqueued,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "conversation_sla_change")]
+        #pragma warning disable CS1591
+        ConversationSlaChange,
         #pragma warning restore CS1591
         [EnumMember(Value = "conversation_topic_change")]
         #pragma warning disable CS1591
@@ -204,9 +372,37 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         ConversationTopicDeletion,
         #pragma warning restore CS1591
-        [EnumMember(Value = "customer_facing_name_change")]
+        [EnumMember(Value = "csv_import_completion")]
         #pragma warning disable CS1591
-        CustomerFacingNameChange,
+        CsvImportCompletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "csv_import_creation")]
+        #pragma warning disable CS1591
+        CsvImportCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "taxonomy_upload_creation")]
+        #pragma warning disable CS1591
+        TaxonomyUploadCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "automation_roadmap_form_submission_creation")]
+        #pragma warning disable CS1591
+        AutomationRoadmapFormSubmissionCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "data_connector_log_retention_setting_creation")]
+        #pragma warning disable CS1591
+        DataConnectorLogRetentionSettingCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "data_connector_log_retention_setting_update")]
+        #pragma warning disable CS1591
+        DataConnectorLogRetentionSettingUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "email_settings_change")]
+        #pragma warning disable CS1591
+        EmailSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "strip_inbound_email_links_change")]
+        #pragma warning disable CS1591
+        StripInboundEmailLinksChange,
         #pragma warning restore CS1591
         [EnumMember(Value = "help_center_settings_change")]
         #pragma warning disable CS1591
@@ -224,9 +420,81 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         InboxBulkAction,
         #pragma warning restore CS1591
+        [EnumMember(Value = "internal_agent_proposal_applied")]
+        #pragma warning disable CS1591
+        InternalAgentProposalApplied,
+        #pragma warning restore CS1591
         [EnumMember(Value = "message_deletion")]
         #pragma warning disable CS1591
         MessageDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ruleset_activation")]
+        #pragma warning disable CS1591
+        RulesetActivation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ruleset_deletion")]
+        #pragma warning disable CS1591
+        RulesetDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ruleset_creation")]
+        #pragma warning disable CS1591
+        RulesetCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workflow_creation")]
+        #pragma warning disable CS1591
+        WorkflowCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workflow_deletion")]
+        #pragma warning disable CS1591
+        WorkflowDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workflow_update")]
+        #pragma warning disable CS1591
+        WorkflowUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workflow_status_change")]
+        #pragma warning disable CS1591
+        WorkflowStatusChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "workflow_participant_action_configured")]
+        #pragma warning disable CS1591
+        WorkflowParticipantActionConfigured,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "oauth_token_revocation")]
+        #pragma warning disable CS1591
+        OAuthTokenRevocation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_creation")]
+        #pragma warning disable CS1591
+        ArticleCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_deletion")]
+        #pragma warning disable CS1591
+        ArticleDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_content_creation")]
+        #pragma warning disable CS1591
+        ArticleContentCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_content_update")]
+        #pragma warning disable CS1591
+        ArticleContentUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_content_deletion")]
+        #pragma warning disable CS1591
+        ArticleContentDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_content_published")]
+        #pragma warning disable CS1591
+        ArticleContentPublished,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_content_unpublished")]
+        #pragma warning disable CS1591
+        ArticleContentUnpublished,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "article_content_audience_updated")]
+        #pragma warning disable CS1591
+        ArticleContentAudienceUpdated,
         #pragma warning restore CS1591
         [EnumMember(Value = "message_state_change")]
         #pragma warning disable CS1591
@@ -236,17 +504,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         MessengerLookAndFeelChange,
         #pragma warning restore CS1591
-        [EnumMember(Value = "messenger_search_required_change")]
-        #pragma warning disable CS1591
-        MessengerSearchRequiredChange,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "messenger_spaces_change")]
-        #pragma warning disable CS1591
-        MessengerSpacesChange,
-        #pragma warning restore CS1591
         [EnumMember(Value = "office_hours_change")]
         #pragma warning disable CS1591
         OfficeHoursChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "office_hours_exception_change")]
+        #pragma warning disable CS1591
+        OfficeHoursExceptionChange,
         #pragma warning restore CS1591
         [EnumMember(Value = "role_change")]
         #pragma warning disable CS1591
@@ -260,26 +524,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         RoleDeletion,
         #pragma warning restore CS1591
-        [EnumMember(Value = "ruleset_activation_title_preview")]
-        #pragma warning disable CS1591
-        RulesetActivationTitlePreview,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "ruleset_creation")]
-        #pragma warning disable CS1591
-        RulesetCreation,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "ruleset_deletion")]
-        #pragma warning disable CS1591
-        RulesetDeletion,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "search_browse_enabled_change")]
-        #pragma warning disable CS1591
-        SearchBrowseEnabledChange,
-        #pragma warning restore CS1591
-        [EnumMember(Value = "search_browse_required_change")]
-        #pragma warning disable CS1591
-        SearchBrowseRequiredChange,
-        #pragma warning restore CS1591
         [EnumMember(Value = "seat_change")]
         #pragma warning disable CS1591
         SeatChange,
@@ -288,25 +532,1029 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         SeatRevoke,
         #pragma warning restore CS1591
+        [EnumMember(Value = "pre_migration_seat_expiration_date_change")]
+        #pragma warning disable CS1591
+        PreMigrationSeatExpirationDateChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "post_migration_seat_deletion")]
+        #pragma warning disable CS1591
+        PostMigrationSeatDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "post_migration_seat_update")]
+        #pragma warning disable CS1591
+        PostMigrationSeatUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "post_migration_seat_creation")]
+        #pragma warning disable CS1591
+        PostMigrationSeatCreation,
+        #pragma warning restore CS1591
         [EnumMember(Value = "security_settings_change")]
         #pragma warning disable CS1591
         SecuritySettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "temporary_expectation_auto_expired")]
+        #pragma warning disable CS1591
+        TemporaryExpectationAutoExpired,
         #pragma warning restore CS1591
         [EnumMember(Value = "temporary_expectation_change")]
         #pragma warning disable CS1591
         TemporaryExpectationChange,
         #pragma warning restore CS1591
-        [EnumMember(Value = "upfront_email_collection_change")]
+        [EnumMember(Value = "temporary_expectation_messages_change")]
         #pragma warning disable CS1591
-        UpfrontEmailCollectionChange,
+        TemporaryExpectationMessagesChange,
         #pragma warning restore CS1591
         [EnumMember(Value = "welcome_message_change")]
         #pragma warning disable CS1591
         WelcomeMessageChange,
         #pragma warning restore CS1591
+        [EnumMember(Value = "start_conversation_button_text_change")]
+        #pragma warning disable CS1591
+        StartConversationButtonTextChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "upfront_email_collection_change")]
+        #pragma warning disable CS1591
+        UpfrontEmailCollectionChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_assignment_limit_change")]
+        #pragma warning disable CS1591
+        AdminAssignmentLimitChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_channel_limit_change")]
+        #pragma warning disable CS1591
+        AdminChannelLimitChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_conversation_assignment_limit_change")]
+        #pragma warning disable CS1591
+        AdminConversationAssignmentLimitChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_ticket_assignment_limit_change")]
+        #pragma warning disable CS1591
+        AdminTicketAssignmentLimitChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_unassign_unsnoozed_at_capacity_change")]
+        #pragma warning disable CS1591
+        AdminUnassignUnsnoozedAtCapacityChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "team_assignment_limit_change")]
+        #pragma warning disable CS1591
+        TeamAssignmentLimitChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "teammate_skills_synced")]
+        #pragma warning disable CS1591
+        TeammateSkillsSynced,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "skill_category_created")]
+        #pragma warning disable CS1591
+        SkillCategoryCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "skill_category_updated")]
+        #pragma warning disable CS1591
+        SkillCategoryUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "snooze_presets_change")]
+        #pragma warning disable CS1591
+        SnoozePresetsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "team_skill_categories_updated")]
+        #pragma warning disable CS1591
+        TeamSkillCategoriesUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_two_factor_auth_change")]
+        #pragma warning disable CS1591
+        AdminTwoFactorAuthChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_two_factor_login_failure")]
+        #pragma warning disable CS1591
+        AdminTwoFactorLoginFailure,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "email_signature_change")]
+        #pragma warning disable CS1591
+        EmailSignatureChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "recovery_code_sent")]
+        #pragma warning disable CS1591
+        RecoveryCodeSent,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "billing_addressees_change")]
+        #pragma warning disable CS1591
+        BillingAddresseesChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "billing_addressees_bounced_and_removed")]
+        #pragma warning disable CS1591
+        BillingAddresseesBouncedAndRemoved,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "billing_details_change")]
+        #pragma warning disable CS1591
+        BillingDetailsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "broadcast_deletion")]
+        #pragma warning disable CS1591
+        BroadcastDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_opt_in")]
+        #pragma warning disable CS1591
+        FinOptIn,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_free_usage_window_create")]
+        #pragma warning disable CS1591
+        FinFreeUsageWindowCreate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_free_usage_window_extension")]
+        #pragma warning disable CS1591
+        FinFreeUsageWindowExtension,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_ingestion_consent")]
+        #pragma warning disable CS1591
+        FinIngestionConsent,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ip_allowlist_setting_change")]
+        #pragma warning disable CS1591
+        IpAllowlistSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "rest_api_ip_allowlist_setting_change")]
+        #pragma warning disable CS1591
+        RestApiIpAllowlistSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_platform_availability_change")]
+        #pragma warning disable CS1591
+        MessengerPlatformAvailabilityChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_platform_inactivity_disable_event")]
+        #pragma warning disable CS1591
+        MessengerPlatformInactivityDisableEvent,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_report_update")]
+        #pragma warning disable CS1591
+        CustomReportUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_report_delete")]
+        #pragma warning disable CS1591
+        CustomReportDelete,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_report_create")]
+        #pragma warning disable CS1591
+        CustomReportCreate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_folder_create")]
+        #pragma warning disable CS1591
+        ReportingFolderCreate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_folder_delete")]
+        #pragma warning disable CS1591
+        ReportingFolderDelete,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "teammate_office_hours_schedule_assign")]
+        #pragma warning disable CS1591
+        TeammateOfficeHoursScheduleAssign,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "teammate_office_hours_schedule_unassign")]
+        #pragma warning disable CS1591
+        TeammateOfficeHoursScheduleUnassign,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_snapshot_create")]
+        #pragma warning disable CS1591
+        ReportSnapshotCreate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_scheduled_share_create")]
+        #pragma warning disable CS1591
+        ReportScheduledShareCreate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_scheduled_share_update")]
+        #pragma warning disable CS1591
+        ReportScheduledShareUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_scheduled_share_delete")]
+        #pragma warning disable CS1591
+        ReportScheduledShareDelete,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_folder_name_change")]
+        #pragma warning disable CS1591
+        ReportingFolderNameChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_folder_position_change")]
+        #pragma warning disable CS1591
+        ReportingFolderPositionChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_folder_reports_change")]
+        #pragma warning disable CS1591
+        ReportingFolderReportsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_folder_pin_change")]
+        #pragma warning disable CS1591
+        ReportingFolderPinChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "reporting_csv_export")]
+        #pragma warning disable CS1591
+        ReportingCsvExport,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "pii_data_revealed")]
+        #pragma warning disable CS1591
+        PiiDataRevealed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "privacy_policy_notice_change")]
+        #pragma warning disable CS1591
+        PrivacyPolicyNoticeChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "privacy_policy_notice_contents_change")]
+        #pragma warning disable CS1591
+        PrivacyPolicyNoticeContentsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_access_create")]
+        #pragma warning disable CS1591
+        ReportAccessCreate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_access_delete")]
+        #pragma warning disable CS1591
+        ReportAccessDelete,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "report_access_update")]
+        #pragma warning disable CS1591
+        ReportAccessUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_persisted_data_context_attribute_change")]
+        #pragma warning disable CS1591
+        FinPersistedDataContextAttributeChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_sdr_connector_generated")]
+        #pragma warning disable CS1591
+        FinSdrConnectorGenerated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_sdr_connector_activated")]
+        #pragma warning disable CS1591
+        FinSdrConnectorActivated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_sdr_marketo_connected")]
+        #pragma warning disable CS1591
+        FinSdrMarketoConnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_sdr_marketo_partition_selected")]
+        #pragma warning disable CS1591
+        FinSdrMarketoPartitionSelected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_sdr_marketo_disconnected")]
+        #pragma warning disable CS1591
+        FinSdrMarketoDisconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_sdr_playbook_updated")]
+        #pragma warning disable CS1591
+        FinSdrPlaybookUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "generic_ecommerce_connector_creation")]
+        #pragma warning disable CS1591
+        GenericEcommerceConnectorCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_customization_settings_change")]
+        #pragma warning disable CS1591
+        AiAgentCustomizationSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_identity_settings_change")]
+        #pragma warning disable CS1591
+        AiAgentIdentitySettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_multilingual_settings_change")]
+        #pragma warning disable CS1591
+        AiAgentMultilingualSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_safety_guard_settings_change")]
+        #pragma warning disable CS1591
+        AiAgentSafetyGuardSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_language_change")]
+        #pragma warning disable CS1591
+        MessengerLanguageChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_guidance_change")]
+        #pragma warning disable CS1591
+        AiAgentGuidanceChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_category_change")]
+        #pragma warning disable CS1591
+        AiCategoryChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "escalation_rule_change")]
+        #pragma warning disable CS1591
+        EscalationRuleChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "hitl_rule_change")]
+        #pragma warning disable CS1591
+        HitlRuleChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "safety_response_category_config_change")]
+        #pragma warning disable CS1591
+        SafetyResponseCategoryConfigChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "hitl_inbox_action")]
+        #pragma warning disable CS1591
+        HitlInboxAction,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "brand_creation")]
+        #pragma warning disable CS1591
+        BrandCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "brand_update")]
+        #pragma warning disable CS1591
+        BrandUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "brand_deletion")]
+        #pragma warning disable CS1591
+        BrandDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "brand_settings_change")]
+        #pragma warning disable CS1591
+        BrandSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "action_created")]
+        #pragma warning disable CS1591
+        ActionCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "action_risk_accepted_change")]
+        #pragma warning disable CS1591
+        ActionRiskAcceptedChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "data_connector_security_warning_acknowledged")]
+        #pragma warning disable CS1591
+        DataConnectorSecurityWarningAcknowledged,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "action_published")]
+        #pragma warning disable CS1591
+        ActionPublished,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "action_status_change")]
+        #pragma warning disable CS1591
+        ActionStatusChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "action_update")]
+        #pragma warning disable CS1591
+        ActionUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "allowed_attachment_filetypes_setting_change")]
+        #pragma warning disable CS1591
+        AllowedAttachmentFiletypesSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_fin_playground_change")]
+        #pragma warning disable CS1591
+        AiAgentFinPlaygroundChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_agent_preview_token_generated")]
+        #pragma warning disable CS1591
+        AiAgentPreviewTokenGenerated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "selection_set_creation")]
+        #pragma warning disable CS1591
+        SelectionSetCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "selection_set_archive")]
+        #pragma warning disable CS1591
+        SelectionSetArchive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "series_creation")]
+        #pragma warning disable CS1591
+        SeriesCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "series_deletion")]
+        #pragma warning disable CS1591
+        SeriesDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "series_settings_update")]
+        #pragma warning disable CS1591
+        SeriesSettingsUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "series_status_change")]
+        #pragma warning disable CS1591
+        SeriesStatusChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "series_update")]
+        #pragma warning disable CS1591
+        SeriesUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_launch_to_conversation_change")]
+        #pragma warning disable CS1591
+        MessengerLaunchToConversationChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_launcher_display_condition_change")]
+        #pragma warning disable CS1591
+        MessengerLauncherDisplayConditionChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "alias_mode_change")]
+        #pragma warning disable CS1591
+        AliasModeChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "alias_name_change")]
+        #pragma warning disable CS1591
+        AliasNameChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "hippa_compliance_settings_change")]
+        #pragma warning disable CS1591
+        HippaComplianceSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ai_inbox_translation_setting_change")]
+        #pragma warning disable CS1591
+        AiInboxTranslationSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_integration_auto_promoted")]
+        #pragma warning disable CS1591
+        SlackIntegrationAutoPromoted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_oauth_fresh_install")]
+        #pragma warning disable CS1591
+        SlackOAuthFreshInstall,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_oauth_reinstall")]
+        #pragma warning disable CS1591
+        SlackOAuthReinstall,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_oauth_reauthentication")]
+        #pragma warning disable CS1591
+        SlackOAuthReauthentication,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_integration_uninstalled")]
+        #pragma warning disable CS1591
+        SlackIntegrationUninstalled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "telegram_identity_reset")]
+        #pragma warning disable CS1591
+        TelegramIdentityReset,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "telegram_integration_installed")]
+        #pragma warning disable CS1591
+        TelegramIntegrationInstalled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "telegram_integration_uninstalled")]
+        #pragma warning disable CS1591
+        TelegramIntegrationUninstalled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_user_association_setting_change")]
+        #pragma warning disable CS1591
+        SlackUserAssociationSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ms_teams_user_association_setting_change")]
+        #pragma warning disable CS1591
+        MsTeamsUserAssociationSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_integration_type_change")]
+        #pragma warning disable CS1591
+        SlackIntegrationTypeChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_multi_conversational_changed")]
+        #pragma warning disable CS1591
+        SlackMultiConversationalChanged,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "whatsapp_direct_send_changed")]
+        #pragma warning disable CS1591
+        WhatsappDirectSendChanged,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "slack_user_token_creation")]
+        #pragma warning disable CS1591
+        SlackUserTokenCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "standalone_channel_change")]
+        #pragma warning disable CS1591
+        StandaloneChannelChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "standalone_connection_config_change")]
+        #pragma warning disable CS1591
+        StandaloneConnectionConfigChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "standalone_schedule_sync_deletion")]
+        #pragma warning disable CS1591
+        StandaloneScheduleSyncDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "skill_category_deleted")]
+        #pragma warning disable CS1591
+        SkillCategoryDeleted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "skill_based_routing_toggled")]
+        #pragma warning disable CS1591
+        SkillBasedRoutingToggled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "consent_banner_settings_change")]
+        #pragma warning disable CS1591
+        ConsentBannerSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_redaction_rule_creation")]
+        #pragma warning disable CS1591
+        ContentRedactionRuleCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_redaction_rule_deletion")]
+        #pragma warning disable CS1591
+        ContentRedactionRuleDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_redaction_rule_update")]
+        #pragma warning disable CS1591
+        ContentRedactionRuleUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "content_suggestions_change")]
+        #pragma warning disable CS1591
+        ContentSuggestionsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "suggestions_limiters_reset")]
+        #pragma warning disable CS1591
+        SuggestionsLimitersReset,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_authentication_token_creation")]
+        #pragma warning disable CS1591
+        CustomAuthenticationTokenCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_authentication_token_update")]
+        #pragma warning disable CS1591
+        CustomAuthenticationTokenUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_authentication_token_deletion")]
+        #pragma warning disable CS1591
+        CustomAuthenticationTokenDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "device_token_deletion")]
+        #pragma warning disable CS1591
+        DeviceTokenDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "predictive_answers_settings_change")]
+        #pragma warning disable CS1591
+        PredictiveAnswersSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "custom_emoji_deletion")]
+        #pragma warning disable CS1591
+        CustomEmojiDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "customer_facing_name_change")]
+        #pragma warning disable CS1591
+        CustomerFacingNameChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "attach_uploads_inline_setting_change")]
+        #pragma warning disable CS1591
+        AttachUploadsInlineSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_camera_attachments_setting_change")]
+        #pragma warning disable CS1591
+        UserCameraAttachmentsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_media_attachments_setting_change")]
+        #pragma warning disable CS1591
+        UserMediaAttachmentsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_file_attachments_setting_change")]
+        #pragma warning disable CS1591
+        UserFileAttachmentsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "file_upload_audience_predicates_setting_change")]
+        #pragma warning disable CS1591
+        FileUploadAudiencePredicatesSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_gifs_setting_change")]
+        #pragma warning disable CS1591
+        UserGifsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_emojis_setting_change")]
+        #pragma warning disable CS1591
+        UserEmojisSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_voice_notes_setting_change")]
+        #pragma warning disable CS1591
+        UserVoiceNotesSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_conversation_attachments_setting_change")]
+        #pragma warning disable CS1591
+        UserConversationAttachmentsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "teammate_gifs_setting_change")]
+        #pragma warning disable CS1591
+        TeammateGifsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_group_creation")]
+        #pragma warning disable CS1591
+        ScimGroupCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_group_update")]
+        #pragma warning disable CS1591
+        ScimGroupUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_groups_bulk_update")]
+        #pragma warning disable CS1591
+        ScimGroupsBulkUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_group_deletion")]
+        #pragma warning disable CS1591
+        ScimGroupDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_group_membership_change")]
+        #pragma warning disable CS1591
+        ScimGroupMembershipChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_admin_role_change")]
+        #pragma warning disable CS1591
+        ScimAdminRoleChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_admin_bulk_role_assignment")]
+        #pragma warning disable CS1591
+        ScimAdminBulkRoleAssignment,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_admin_profile_update")]
+        #pragma warning disable CS1591
+        ScimAdminProfileUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_admin_password_update")]
+        #pragma warning disable CS1591
+        ScimAdminPasswordUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_system_enabled")]
+        #pragma warning disable CS1591
+        ScimSystemEnabled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_system_disabled")]
+        #pragma warning disable CS1591
+        ScimSystemDisabled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "scim_settings_change")]
+        #pragma warning disable CS1591
+        ScimSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "macro_content_export_run")]
+        #pragma warning disable CS1591
+        MacroContentExportRun,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "personal_macro_admin_read")]
+        #pragma warning disable CS1591
+        PersonalMacroAdminRead,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "personal_macro_admin_convert")]
+        #pragma warning disable CS1591
+        PersonalMacroAdminConvert,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "personal_macro_admin_destroy")]
+        #pragma warning disable CS1591
+        PersonalMacroAdminDestroy,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "macro_creation")]
+        #pragma warning disable CS1591
+        MacroCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "macro_deletion")]
+        #pragma warning disable CS1591
+        MacroDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "macro_update")]
+        #pragma warning disable CS1591
+        MacroUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "macro_usage_export")]
+        #pragma warning disable CS1591
+        MacroUsageExport,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_created")]
+        #pragma warning disable CS1591
+        McpServerCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_updated")]
+        #pragma warning disable CS1591
+        McpServerUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_deleted")]
+        #pragma warning disable CS1591
+        McpServerDeleted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_enabled")]
+        #pragma warning disable CS1591
+        McpServerEnabled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_disabled")]
+        #pragma warning disable CS1591
+        McpServerDisabled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_oauth_connected")]
+        #pragma warning disable CS1591
+        McpServerOAuthConnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_oauth_disconnected")]
+        #pragma warning disable CS1591
+        McpServerOAuthDisconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_server_reconnected")]
+        #pragma warning disable CS1591
+        McpServerReconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_action_added")]
+        #pragma warning disable CS1591
+        McpActionAdded,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_actions_batch_added")]
+        #pragma warning disable CS1591
+        McpActionsBatchAdded,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_action_updated")]
+        #pragma warning disable CS1591
+        McpActionUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "mcp_action_removed")]
+        #pragma warning disable CS1591
+        McpActionRemoved,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_agent_api_settings_change")]
+        #pragma warning disable CS1591
+        FinAgentApiSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_procedures_hitl_settings_change")]
+        #pragma warning disable CS1591
+        FinProceduresHitlSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_procedures_hitl_access_token_rotated")]
+        #pragma warning disable CS1591
+        FinProceduresHitlAccessTokenRotated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_agent_api_secret_revealed")]
+        #pragma warning disable CS1591
+        FinAgentApiSecretRevealed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_agent_api_secret_copied")]
+        #pragma warning disable CS1591
+        FinAgentApiSecretCopied,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "a2a_agent_registered")]
+        #pragma warning disable CS1591
+        A2AAgentRegistered,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "a2a_agent_oauth_connected")]
+        #pragma warning disable CS1591
+        A2AAgentOAuthConnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "automatic_away_mode_setting_change")]
+        #pragma warning disable CS1591
+        AutomaticAwayModeSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "admin_occupancy_setting_change")]
+        #pragma warning disable CS1591
+        AdminOccupancySettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "unassign_unsnoozed_at_capacity_setting_change")]
+        #pragma warning disable CS1591
+        UnassignUnsnoozedAtCapacitySettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "unassign_unsnoozed_when_away_setting_change")]
+        #pragma warning disable CS1591
+        UnassignUnsnoozedWhenAwaySettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "unassign_triggers_setting_change")]
+        #pragma warning disable CS1591
+        UnassignTriggersSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "malicious_domains_setting_change")]
+        #pragma warning disable CS1591
+        MaliciousDomainsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "trusted_domains_setting_change")]
+        #pragma warning disable CS1591
+        TrustedDomainsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "messenger_allowed_domains_change")]
+        #pragma warning disable CS1591
+        MessengerAllowedDomainsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_monitor_creation")]
+        #pragma warning disable CS1591
+        QaMonitorCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_monitor_update")]
+        #pragma warning disable CS1591
+        QaMonitorUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_monitor_archive")]
+        #pragma warning disable CS1591
+        QaMonitorArchive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_monitor_restore")]
+        #pragma warning disable CS1591
+        QaMonitorRestore,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_scorecard_creation")]
+        #pragma warning disable CS1591
+        QaScorecardCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_scorecard_update")]
+        #pragma warning disable CS1591
+        QaScorecardUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_scorecard_archive")]
+        #pragma warning disable CS1591
+        QaScorecardArchive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_review_plan_creation")]
+        #pragma warning disable CS1591
+        QaReviewPlanCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "qa_review_plan_archive")]
+        #pragma warning disable CS1591
+        QaReviewPlanArchive,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "lead_to_user_merge")]
+        #pragma warning disable CS1591
+        LeadToUserMerge,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "user_to_user_merge")]
+        #pragma warning disable CS1591
+        UserToUserMerge,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "sales_messenger_configuration_change")]
+        #pragma warning disable CS1591
+        SalesMessengerConfigurationChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_refund_order")]
+        #pragma warning disable CS1591
+        ShopifyRefundOrder,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_replacement_order")]
+        #pragma warning disable CS1591
+        ShopifyReplacementOrder,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_gift_card_compensation")]
+        #pragma warning disable CS1591
+        ShopifyGiftCardCompensation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_add_replacement_item")]
+        #pragma warning disable CS1591
+        ShopifyAddReplacementItem,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_disable_discount_code")]
+        #pragma warning disable CS1591
+        ShopifyDisableDiscountCode,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_disable_gift_card")]
+        #pragma warning disable CS1591
+        ShopifyDisableGiftCard,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_create_discount_code")]
+        #pragma warning disable CS1591
+        ShopifyCreateDiscountCode,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "shopify_update_shipping_address")]
+        #pragma warning disable CS1591
+        ShopifyUpdateShippingAddress,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "channel_identity_rule_change")]
+        #pragma warning disable CS1591
+        ChannelIdentityRuleChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "topic_curation_set_live")]
+        #pragma warning disable CS1591
+        TopicCurationSetLive,
+        #pragma warning restore CS1591
         [EnumMember(Value = "hide_csat_from_agents_setting_change")]
         #pragma warning disable CS1591
         HideCsatFromAgentsSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "phone_purchase_diagnostic")]
+        #pragma warning disable CS1591
+        PhonePurchaseDiagnostic,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "phone_number_purchase")]
+        #pragma warning disable CS1591
+        PhoneNumberPurchase,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "sip_domain_provisioned")]
+        #pragma warning disable CS1591
+        SipDomainProvisioned,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "sip_domain_deleted")]
+        #pragma warning disable CS1591
+        SipDomainDeleted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "sip_integration_stage_confirmed")]
+        #pragma warning disable CS1591
+        SipIntegrationStageConfirmed,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "sip_header_mappings_updated")]
+        #pragma warning disable CS1591
+        SipHeaderMappingsUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "phone_queue_call_pinned")]
+        #pragma warning disable CS1591
+        PhoneQueueCallPinned,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "phone_queue_call_unpinned")]
+        #pragma warning disable CS1591
+        PhoneQueueCallUnpinned,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "phone_queue_call_pin_cleared")]
+        #pragma warning disable CS1591
+        PhoneQueueCallPinCleared,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_creation")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_change")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_deletion")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_state_change")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignStateChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_csv_upload")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignCsvUpload,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_import")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignImport,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "outbound_phone_campaign_session_start")]
+        #pragma warning disable CS1591
+        OutboundPhoneCampaignSessionStart,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "channel_wrap_up_settings_change")]
+        #pragma warning disable CS1591
+        ChannelWrapUpSettingsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ticket_state_customer_notifications_change")]
+        #pragma warning disable CS1591
+        TicketStateCustomerNotificationsChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "schedule_template_update")]
+        #pragma warning disable CS1591
+        ScheduleTemplateUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "schedule_template_creation")]
+        #pragma warning disable CS1591
+        ScheduleTemplateCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "schedule_template_deletion")]
+        #pragma warning disable CS1591
+        ScheduleTemplateDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "schedule_template_apply")]
+        #pragma warning disable CS1591
+        ScheduleTemplateApply,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "wfm_google_calendar_connected")]
+        #pragma warning disable CS1591
+        WfmGoogleCalendarConnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "wfm_google_calendar_disconnected")]
+        #pragma warning disable CS1591
+        WfmGoogleCalendarDisconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "wfm_google_calendar_sync_setting_change")]
+        #pragma warning disable CS1591
+        WfmGoogleCalendarSyncSettingChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "github_sync_disconnected")]
+        #pragma warning disable CS1591
+        GithubSyncDisconnected,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "github_sync_cleanup_deleted_folder")]
+        #pragma warning disable CS1591
+        GithubSyncCleanupDeletedFolder,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "github_sync_installed")]
+        #pragma warning disable CS1591
+        GithubSyncInstalled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "github_sync_connector_cloned")]
+        #pragma warning disable CS1591
+        GithubSyncConnectorCloned,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "github_sync_pulled")]
+        #pragma warning disable CS1591
+        GithubSyncPulled,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fallback_admin_alias_change")]
+        #pragma warning disable CS1591
+        FallbackAdminAliasChange,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "spam_email_deletion")]
+        #pragma warning disable CS1591
+        SpamEmailDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "snowflake_share_activated")]
+        #pragma warning disable CS1591
+        SnowflakeShareActivated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "snowflake_share_torn_down")]
+        #pragma warning disable CS1591
+        SnowflakeShareTornDown,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "calendar_mapping_rule_creation")]
+        #pragma warning disable CS1591
+        CalendarMappingRuleCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "calendar_mapping_rule_deletion")]
+        #pragma warning disable CS1591
+        CalendarMappingRuleDeletion,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "calendar_mapping_rule_update")]
+        #pragma warning disable CS1591
+        CalendarMappingRuleUpdate,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "activity_type_creation")]
+        #pragma warning disable CS1591
+        ActivityTypeCreation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "masked_admin_avatar_change")]
+        #pragma warning disable CS1591
+        MaskedAdminAvatarChange,
         #pragma warning restore CS1591
     }
 }

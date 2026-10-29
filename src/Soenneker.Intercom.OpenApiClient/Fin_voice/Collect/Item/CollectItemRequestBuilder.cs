@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.Item
         {
         }
         /// <summary>
-        /// Retrieve information about a Fin Voice call using the external reference ID.
+        /// Retrieve information about a Fin Voice call using the external reference ID.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin_voice.Collect.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve information about a Fin Voice call using the external reference ID.
+        /// Retrieve information about a Fin Voice call using the external reference ID.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

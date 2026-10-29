@@ -45,7 +45,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Id { get; set; }
 #endif
-        /// <summary>Input options for the attribute</summary>
+        /// <summary>Input options for the attribute. For a string attribute this holds `multiline` when it was set; for a list attribute it holds the list&apos;s options. When the attribute has no input options, this is `null`, or left out of the create and update ticket type attribute responses.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeAttributeInputOptionsProperty? InputOptions { get; set; }

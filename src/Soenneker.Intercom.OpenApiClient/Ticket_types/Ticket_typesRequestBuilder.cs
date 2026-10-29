@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
         {
         }
         /// <summary>
-        /// You can get a list of all ticket types for a workspace.
+        /// You can get a list of all ticket types for a workspace. The list includes archived ticket types and ticket types that Intercom creates itself.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -76,6 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
         /// <param name="body">The request payload for creating a ticket type.  You can copy the `icon` property for your ticket type from [Twemoji Cheatsheet](https://twemoji-cheatsheet.vercel.app/)</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -90,12 +91,13 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_types
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TicketType.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can get a list of all ticket types for a workspace.
+        /// You can get a list of all ticket types for a workspace. The list includes archived ticket types and ticket types that Intercom creates itself.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

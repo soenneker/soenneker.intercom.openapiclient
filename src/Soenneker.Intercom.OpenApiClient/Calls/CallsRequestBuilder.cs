@@ -53,11 +53,12 @@ namespace Soenneker.Intercom.OpenApiClient.Calls
         {
         }
         /// <summary>
-        /// Retrieve a paginated list of calls.
+        /// Retrieve a paginated list of calls.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CallList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -71,12 +72,13 @@ namespace Soenneker.Intercom.OpenApiClient.Calls
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CallList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CallList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve a paginated list of calls.
+        /// Retrieve a paginated list of calls.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -104,7 +106,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls
             return new global::Soenneker.Intercom.OpenApiClient.Calls.CallsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// Retrieve a paginated list of calls.
+        /// Retrieve a paginated list of calls.Requires the `read_conversations` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class CallsRequestBuilderGetQueryParameters 
@@ -112,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls
             /// <summary>The page of results to fetch. Defaults to first page</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
-            /// <summary>How many results to display per page. Defaults to 25. Max 25.</summary>
+            /// <summary>How many results to display per page. Defaults to 25. Must be between 1 and 25. A value outside that range returns a 400 error.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
         }

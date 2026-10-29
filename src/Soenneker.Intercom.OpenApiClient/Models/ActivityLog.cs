@@ -13,7 +13,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ActivityLog : IAdditionalDataHolder, IParsable
     {
-        /// <summary>A sentence or two describing the activity.</summary>
+        /// <summary>A sentence or two describing the activity. `null` when the admin who performed the activity isn&apos;t available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? ActivityDescription { get; set; }
@@ -43,13 +43,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata Metadata { get; set; }
 #endif
-        /// <summary>Details about the Admin involved in the activity.</summary>
+        /// <summary>Details about the Admin involved in the activity. `null` when the admin who performed the activity isn&apos;t available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy? PerformedBy { get; set; }
 #nullable restore
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy PerformedBy { get; set; }
+#endif
+        /// <summary>String representing the object&apos;s type. Always has the value `admin_activity_log_event`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Type { get; set; }
+#nullable restore
+#else
+        public string Type { get; set; }
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog"/> and sets the default values.
@@ -82,6 +90,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata.CreateFromDiscriminatorValue); } },
                 { "performed_by", n => { PerformedBy = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy.CreateFromDiscriminatorValue); } },
+                { "type", n => { Type = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -97,6 +106,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata>("metadata", Metadata);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy>("performed_by", PerformedBy);
+            writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

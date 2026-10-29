@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_states
         {
         }
         /// <summary>
-        /// You can get a list of all ticket states for a workspace.
+        /// You can get a list of all ticket states for a workspace. The list includes archived ticket states; check `archived` on each one.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketStateList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ticket_states
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.TicketStateList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can get a list of all ticket states for a workspace.
+        /// You can get a list of all ticket states for a workspace. The list includes archived ticket states; check `archived` on each one.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

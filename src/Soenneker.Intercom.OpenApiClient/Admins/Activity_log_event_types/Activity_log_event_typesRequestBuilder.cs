@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_log_event_types
         {
         }
         /// <summary>
-        /// You can get a list of all activity log event types. This is useful for discovering valid values to use with the `event_types` filter on the List all activity logs endpoint.
+        /// You can get a list of all activity log event types. This is useful for discovering valid values to use with the `event_types` filter on the Search activity logs endpoint.Requires the `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogEventTypeList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -57,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Activity_log_event_types
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogEventTypeList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogEventTypeList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can get a list of all activity log event types. This is useful for discovering valid values to use with the `event_types` filter on the List all activity logs endpoint.
+        /// You can get a list of all activity log event types. This is useful for discovering valid values to use with the `event_types` filter on the Search activity logs endpoint.Requires the `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

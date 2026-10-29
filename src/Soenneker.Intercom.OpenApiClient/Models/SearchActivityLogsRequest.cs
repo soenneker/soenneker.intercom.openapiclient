@@ -14,9 +14,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp.</summary>
+        /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to 30 days before the request.</summary>
         public int? CreatedAtAfter { get; set; }
-        /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp.</summary>
+        /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to the time of the request.</summary>
         public int? CreatedAtBefore { get; set; }
         /// <summary>An optional list of event types to filter activity logs by. Use the list all activity log event types endpoint to retrieve available values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

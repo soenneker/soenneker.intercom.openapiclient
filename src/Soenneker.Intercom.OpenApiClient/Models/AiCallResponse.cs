@@ -49,6 +49,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string ExternalCallId { get; set; }
 #endif
+        /// <summary>How long the most recent AI Agent (Fin) part of the call lasted, in seconds, returned as a string. Null until the call is matched and that part has ended, or when the call has no AI Agent part.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FinCallDuration { get; set; }
+#nullable restore
+#else
+        public string FinCallDuration { get; set; }
+#endif
         /// <summary>The unique identifier for the external reference</summary>
         public int? Id { get; set; }
         /// <summary>Array of intent classifications for the call</summary>
@@ -99,6 +107,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string UserPhoneNumber { get; set; }
 #endif
+        /// <summary>Vendor-supplied identifier provided at registration time, for linking the Fin Voice session to records in the vendor&apos;s own systems. Null when the vendor did not supply one.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? VendorInternalId { get; set; }
+#nullable restore
+#else
+        public string VendorInternalId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponse"/> and sets the default values.
         /// </summary>
@@ -129,6 +145,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "call_transcript", n => { CallTranscript = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty.CreateFromDiscriminatorValue); } },
                 { "external_call_id", n => { ExternalCallId = n.GetStringValue(); } },
+                { "fin_call_duration", n => { FinCallDuration = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "intent", n => { Intent = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "intercom_call_id", n => { IntercomCallId = n.GetStringValue(); } },
@@ -136,6 +153,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "language", n => { Language = n.GetStringValue(); } },
                 { "status", n => { Status = n.GetStringValue(); } },
                 { "user_phone_number", n => { UserPhoneNumber = n.GetStringValue(); } },
+                { "vendor_internal_id", n => { VendorInternalId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -150,6 +168,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseCallTranscriptItemProperty>("call_transcript", CallTranscript);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseDataProperty>("data", Data);
             writer.WriteStringValue("external_call_id", ExternalCallId);
+            writer.WriteStringValue("fin_call_duration", FinCallDuration);
             writer.WriteIntValue("id", Id);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AiCallResponseIntentItemProperty>("intent", Intent);
             writer.WriteStringValue("intercom_call_id", IntercomCallId);
@@ -157,6 +176,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("language", Language);
             writer.WriteStringValue("status", Status);
             writer.WriteStringValue("user_phone_number", UserPhoneNumber);
+            writer.WriteStringValue("vendor_internal_id", VendorInternalId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

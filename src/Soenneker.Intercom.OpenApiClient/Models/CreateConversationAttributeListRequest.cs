@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Name { get; set; }
 #endif
-        /// <summary>Initial options for this list attribute. Each option must have a `label`.</summary>
+        /// <summary>Initial options for this list attribute. Each option must have a `label`. A list attribute needs at least 2 options.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeOptionRequest>? Options { get; set; }

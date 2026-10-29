@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Details about the Admin involved in the activity.
+    /// Details about the Admin involved in the activity. `null` when the admin who performed the activity isn&apos;t available.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ActivityLogPerformedBy : IAdditionalDataHolder, IParsable

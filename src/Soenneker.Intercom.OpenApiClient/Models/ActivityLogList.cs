@@ -23,13 +23,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Cursor-based pagination is a technique used in the Intercom API to navigate through large amounts of data.A &quot;cursor&quot; or pointer is used to keep track of the current position in the result set, allowing the API to return the data in small chunks or &quot;pages&quot; as needed.</summary>
+        /// <summary>The majority of list resources in the API are paginated to allow clients to traverse data over multiple requests.Their responses are likely to contain a pages object that hosts pagination links which a client can use to paginate through the data without having to construct a query. The link relations for the pages field are as follows.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CursorPages? Pages { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesLink? Pages { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CursorPages Pages { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.PagesLink Pages { get; set; }
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `activity_log.list`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "activity_logs", n => { ActivityLogs = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>(global::Soenneker.Intercom.OpenApiClient.Models.CursorPages.CreateFromDiscriminatorValue); } },
+                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesLink>(global::Soenneker.Intercom.OpenApiClient.Models.PagesLink.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }
@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLog>("activity_logs", ActivityLogs);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CursorPages>("pages", Pages);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.PagesLink>("pages", Pages);
             writer.WriteStringValue("type", Type);
             writer.WriteAdditionalData(AdditionalData);
         }

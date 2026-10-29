@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Emails.Item
         {
         }
         /// <summary>
-        /// Fetches a specific email setting by its unique identifier
+        /// Fetches a specific email setting by its unique identifierRequires the `read_emails` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EmailSetting"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -59,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Emails.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.EmailSetting>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.EmailSetting.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Fetches a specific email setting by its unique identifier
+        /// Fetches a specific email setting by its unique identifierRequires the `read_emails` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

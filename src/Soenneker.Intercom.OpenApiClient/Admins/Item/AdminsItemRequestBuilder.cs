@@ -40,7 +40,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item
         {
         }
         /// <summary>
-        /// You can retrieve the details of a single admin.
+        /// You can retrieve the details of a single admin.Requires the `read_single_admin` or `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Admin"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Admin>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Admin.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can retrieve the details of a single admin.
+        /// You can retrieve the details of a single admin.Requires the `read_single_admin` or `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

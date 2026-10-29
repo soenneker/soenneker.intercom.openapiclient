@@ -14,11 +14,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>Set to &quot;true&quot; to change the status of the admin to away.</summary>
+        /// <summary>Set to `true` to change the status of the admin to away, or `false` to set them back to active.</summary>
         public bool? AwayModeEnabled { get; set; }
         /// <summary>Set to &quot;true&quot; to assign any new conversation replies to your default inbox.</summary>
         public bool? AwayModeReassign { get; set; }
-        /// <summary>The unique identifier of the away status reason</summary>
+        /// <summary>The unique identifier of the away status reason. Only allowed when `away_mode_enabled` is `true`, and the reason can&apos;t be archived, unless it is already the admin&apos;s current reason. Required if your workspace makes away status reasons mandatory.</summary>
         public int? AwayStatusReasonId { get; set; }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SetAwayAdminRequest"/> and sets the default values.
@@ -26,7 +26,6 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public SetAwayAdminRequest()
         {
             AdditionalData = new Dictionary<string, object>();
-            AwayModeEnabled = true;
             AwayModeReassign = false;
         }
         /// <summary>

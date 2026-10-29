@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
         {
         }
         /// <summary>
-        /// Redirects to a signed URL for the call&apos;s recording if it exists.
+        /// Redirects to a signed URL for the call&apos;s recording if it exists.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Redirects to a signed URL for the call&apos;s recording if it exists.
+        /// Redirects to a signed URL for the call&apos;s recording if it exists.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

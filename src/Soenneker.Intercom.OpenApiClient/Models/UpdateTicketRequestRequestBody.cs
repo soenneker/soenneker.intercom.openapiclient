@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string CompanyId { get; set; }
 #endif
-        /// <summary>Specify whether the ticket is visible to users.</summary>
+        /// <summary>Set to `true` to share a ticket with the customer. Only a ticket that isn&apos;t shared yet can be shared: a Back-office ticket, of a ticket type that isn&apos;t internal, that is linked to a conversation with no other shared linked ticket. Sending `false`, or `true` for a ticket that is already shared (Customer tickets are shared by default) or can&apos;t be shared (Tracker tickets), returns a `400`.</summary>
         public bool? IsShared { get; set; }
         /// <summary>Specify if a ticket is open. Set to false to close a ticket. Closing a ticket will also unsnooze it.</summary>
         public bool? Open { get; set; }

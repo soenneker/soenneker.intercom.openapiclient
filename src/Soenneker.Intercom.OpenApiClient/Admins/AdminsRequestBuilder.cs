@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins
         {
         }
         /// <summary>
-        /// You can fetch a list of admins for a given workspace.
+        /// You can fetch a list of admins for a given workspace.Requires the `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -88,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.AdminList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.AdminList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of admins for a given workspace.
+        /// You can fetch a list of admins for a given workspace.Requires the `read_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -116,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins
             return new global::Soenneker.Intercom.OpenApiClient.Admins.AdminsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of admins for a given workspace.
+        /// You can fetch a list of admins for a given workspace.Requires the `read_admins` OAuth scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class AdminsRequestBuilderGetQueryParameters 

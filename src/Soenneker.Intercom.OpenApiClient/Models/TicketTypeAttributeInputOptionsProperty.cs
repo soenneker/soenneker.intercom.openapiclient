@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Input options for the attribute
+    /// Input options for the attribute. For a string attribute this holds `multiline` when it was set; for a list attribute it holds the list&apos;s options. When the attribute has no input options, this is `null`, or left out of the create and update ticket type attribute responses.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class TicketTypeAttributeInputOptionsProperty : IAdditionalDataHolder, IParsable

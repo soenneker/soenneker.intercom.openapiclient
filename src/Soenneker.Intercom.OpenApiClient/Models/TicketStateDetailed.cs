@@ -43,7 +43,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string InternalLabel { get; set; }
 #endif
-        /// <summary>A list of ticket types associated with a given ticket state.</summary>
+        /// <summary>A list of the ticket types that use this ticket state.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes? TicketTypes { get; set; }

@@ -71,7 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Direction { get; set; }
 #endif
-        /// <summary>Total call duration in seconds from the caller&apos;s perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended.</summary>
+        /// <summary>Total call duration in seconds from the caller&apos;s perspective. For inbound calls, measured from initiated to ended. For outbound calls, measured from answered to ended. Null until the call ends, and for outbound calls that were never answered.</summary>
         public int? Duration { get; set; }
         /// <summary>The ended_at property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER

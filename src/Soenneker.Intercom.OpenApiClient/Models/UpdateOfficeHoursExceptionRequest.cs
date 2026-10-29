@@ -9,14 +9,14 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The request payload for updating an office hours exception. Only the provided fields are updated.
+    /// The request payload for updating an office hours exception. Only the provided fields are updated. Any other field, apart from `id` and `office_hours_schedule_id`, is rejected with a 400 error.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateOfficeHoursExceptionRequest : IAdditionalDataHolder, IParsable
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The date the exception applies to, in `YYYY-MM-DD` format.</summary>
+        /// <summary>The date the exception applies to, in `YYYY-MM-DD` format. A schedule can have only one exception for each date.</summary>
         public Date? ExceptionDate { get; set; }
         /// <summary>The type of exception.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? ExceptionType { get; set; }
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #endif
         /// <summary>Whether the exception repeats every year on the same date.</summary>
         public bool? RecurringAnnually { get; set; }
-        /// <summary>The open intervals for the exception date. Required for `custom_hours`; omit for `closed`.</summary>
+        /// <summary>The open intervals for the exception date. Required for `custom_hours`; omit for `closed`, which returns a 422 error if intervals are sent. `start_minute` and `end_minute` must be on a 15-minute boundary. Don&apos;t send `day_of_week`; it is read-only and a request that includes it is rejected with a 400 error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? TimeIntervals { get; set; }

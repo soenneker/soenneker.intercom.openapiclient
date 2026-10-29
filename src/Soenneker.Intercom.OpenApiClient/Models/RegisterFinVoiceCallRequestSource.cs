@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>Source of the call. Can be &quot;five9&quot;, &quot;zoom_phone&quot;, or defaults to &quot;aws_connect&quot;</summary>
+    /// <summary>Source of the call. Can be &quot;five9&quot;, &quot;zoom_phone&quot;, &quot;nice_cxone&quot;, &quot;dialpad&quot;, &quot;generic&quot;, or &quot;aws_connect&quot;. Defaults to &quot;aws_connect&quot;, and any other value is treated as &quot;aws_connect&quot;.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum RegisterFinVoiceCallRequestSource
     {
@@ -14,6 +14,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "zoom_phone")]
         #pragma warning disable CS1591
         ZoomPhone,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "nice_cxone")]
+        #pragma warning disable CS1591
+        NiceCxone,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "dialpad")]
+        #pragma warning disable CS1591
+        Dialpad,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "generic")]
+        #pragma warning disable CS1591
+        Generic,
         #pragma warning restore CS1591
         [EnumMember(Value = "aws_connect")]
         #pragma warning disable CS1591

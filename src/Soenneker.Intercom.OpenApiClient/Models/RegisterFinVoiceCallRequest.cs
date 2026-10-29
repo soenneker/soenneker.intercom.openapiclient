@@ -39,8 +39,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string PhoneNumber { get; set; }
 #endif
-        /// <summary>Source of the call. Can be &quot;five9&quot;, &quot;zoom_phone&quot;, or defaults to &quot;aws_connect&quot;</summary>
+        /// <summary>Source of the call. Can be &quot;five9&quot;, &quot;zoom_phone&quot;, &quot;nice_cxone&quot;, &quot;dialpad&quot;, &quot;generic&quot;, or &quot;aws_connect&quot;. Defaults to &quot;aws_connect&quot;, and any other value is treated as &quot;aws_connect&quot;.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource? Source { get; set; }
+        /// <summary>Optional vendor-supplied identifier for linking the Fin Voice session to records in the vendor&apos;s own systems. Stored as-is and returned on every lookup.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? VendorInternalId { get; set; }
+#nullable restore
+#else
+        public string VendorInternalId { get; set; }
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequest"/> and sets the default values.
         /// </summary>
@@ -70,6 +78,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty.CreateFromDiscriminatorValue); } },
                 { "phone_number", n => { PhoneNumber = n.GetStringValue(); } },
                 { "source", n => { Source = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource>(); } },
+                { "vendor_internal_id", n => { VendorInternalId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -83,6 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestDataProperty>("data", Data);
             writer.WriteStringValue("phone_number", PhoneNumber);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource>("source", Source);
+            writer.WriteStringValue("vendor_internal_id", VendorInternalId);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

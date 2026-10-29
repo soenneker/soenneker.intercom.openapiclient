@@ -32,7 +32,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string CompanyId { get; set; }
 #endif
-        /// <summary>The list of contacts (users or leads) affected by this ticket. Currently only one is allowed</summary>
+        /// <summary>The list of contacts (users or leads) affected by this ticket. Currently only one is allowed. Required for Customer and Back-office ticket types, and optional for Tracker ticket types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItem>? Contacts { get; set; }

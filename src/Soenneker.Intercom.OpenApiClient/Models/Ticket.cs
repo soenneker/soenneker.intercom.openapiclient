@@ -27,6 +27,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string Channel { get; set; }
 #endif
+        /// <summary>The ID of the company the ticket is associated with. Omitted when the ticket has no company.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? CompanyId { get; set; }
+#nullable restore
+#else
+        public string CompanyId { get; set; }
+#endif
         /// <summary>The list of contacts affected by a ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -141,6 +149,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketCategory>(); } },
                 { "channel", n => { Channel = n.GetStringValue(); } },
+                { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -169,6 +178,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketCategory>("category", Category);
             writer.WriteStringValue("channel", Channel);
+            writer.WriteStringValue("company_id", CompanyId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>("contacts", Contacts);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);

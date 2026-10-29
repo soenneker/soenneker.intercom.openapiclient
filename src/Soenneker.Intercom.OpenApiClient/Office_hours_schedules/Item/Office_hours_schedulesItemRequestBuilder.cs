@@ -40,13 +40,14 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item
         {
         }
         /// <summary>
-        /// You can delete a single office hours schedule.
+        /// You can delete a single office hours schedule. The workspace&apos;s default schedule can&apos;t be deleted.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeleteOfficeHoursSchedule200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeleteOfficeHoursSchedule200Response?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -61,6 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeleteOfficeHoursSchedule200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeleteOfficeHoursSchedule200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -93,9 +95,10 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item
         /// You can update an existing office hours schedule.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursSchedule"/></returns>
-        /// <param name="body">The request payload for updating an office hours schedule. Only the provided fields are updated.</param>
+        /// <param name="body">The request payload for updating an office hours schedule. Only the provided fields are updated. Any other field, apart from `id`, is rejected with a 400 error.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
@@ -112,6 +115,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item
             var requestInfo = ToPutRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
@@ -119,7 +123,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursSchedule>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursSchedule.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can delete a single office hours schedule.
+        /// You can delete a single office hours schedule. The workspace&apos;s default schedule can&apos;t be deleted.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -160,7 +164,7 @@ namespace Soenneker.Intercom.OpenApiClient.Office_hours_schedules.Item
         /// You can update an existing office hours schedule.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The request payload for updating an office hours schedule. Only the provided fields are updated.</param>
+        /// <param name="body">The request payload for updating an office hours schedule. Only the provided fields are updated. Any other field, apart from `id`, is rejected with a 400 error.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

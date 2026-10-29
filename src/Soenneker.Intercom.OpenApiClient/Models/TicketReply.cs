@@ -15,6 +15,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     {
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The app package code if this part was created via API. Note this field won&apos;t show if the part was not created via API.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AppPackageCode { get; set; }
+#nullable restore
+#else
+        public string AppPackageCode { get; set; }
+#endif
         /// <summary>A list of attachments for the part.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -90,6 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "app_package_code", n => { AppPackageCode = n.GetStringValue(); } },
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPartAuthor.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
@@ -109,6 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("app_package_code", AppPackageCode);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>("attachments", Attachments);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartAuthor>("author", Author);
             writer.WriteStringValue("body", Body);

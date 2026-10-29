@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Search
         {
         }
         /// <summary>
-        /// Retrieve calls by a list of conversation ids and include transcripts when available.A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.
+        /// Retrieve calls by a list of conversation ids and include transcripts when available.A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200Response"/></returns>
         /// <param name="body">The request body</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Search
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve calls by a list of conversation ids and include transcripts when available.A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.
+        /// Retrieve calls by a list of conversation ids and include transcripts when available.A maximum of 20 `conversation_ids` can be provided. If none are provided or more than 20 are provided, a 400 error is returned.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>
