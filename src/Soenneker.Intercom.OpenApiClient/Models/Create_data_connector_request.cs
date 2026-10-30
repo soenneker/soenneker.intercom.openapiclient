@@ -12,91 +12,135 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Create_data_connector_request : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("audiences") is { } nullNodeAudiences && nullNodeAudiences.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Audiences = null;
+            if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("bypass_authentication") is { } nullNodeBypassAuthentication && nullNodeBypassAuthentication.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BypassAuthentication = null;
+            if (parseNode.GetChildNode("customer_authentication") is { } nullNodeCustomerAuthentication && nullNodeCustomerAuthentication.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomerAuthentication = null;
+            if (parseNode.GetChildNode("data_inputs") is { } nullNodeDataInputs && nullNodeDataInputs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataInputs = null;
+            if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
+            if (parseNode.GetChildNode("direct_fin_usage") is { } nullNodeDirectFinUsage && nullNodeDirectFinUsage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DirectFinUsage = null;
+            if (parseNode.GetChildNode("headers") is { } nullNodeHeaders && nullNodeHeaders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Headers = null;
+            if (parseNode.GetChildNode("http_method") is { } nullNodeHttpMethod && nullNodeHttpMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HttpMethod = null;
+            if (parseNode.GetChildNode("mock_response") is { } nullNodeMockResponse && nullNodeMockResponse.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MockResponse = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("token_ids") is { } nullNodeTokenIds && nullNodeTokenIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenIds = null;
+            if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("validate_missing_attributes") is { } nullNodeValidateMissingAttributes && nullNodeValidateMissingAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ValidateMissingAttributes = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The user types this connector is available for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_audiences?>? Audiences { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_audiences?>? Audiences { get => _explicitNullValueAudiences; set { _explicitNullValueAudiences = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audiences"); else _explicitNullProperties?.Remove("audiences"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_audiences?>? _explicitNullValueAudiences = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_audiences?> Audiences { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_audiences?> Audiences { get => _explicitNullValueAudiences; set { _explicitNullValueAudiences = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audiences"); else _explicitNullProperties?.Remove("audiences"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_audiences?> _explicitNullValueAudiences = default!;
 #endif
         /// <summary>The request body template. Supports template variables.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get; set; }
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public string Body { get; set; }
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        private string _explicitNullValueBody = default!;
 #endif
         /// <summary>Whether authentication is bypassed entirely (public endpoint). Defaults to false.</summary>
-        public bool? BypassAuthentication { get; set; }
+        public bool? BypassAuthentication { get => _explicitNullValueBypassAuthentication; set { _explicitNullValueBypassAuthentication = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bypass_authentication"); else _explicitNullProperties?.Remove("bypass_authentication"); } }
+        private bool? _explicitNullValueBypassAuthentication = default!;
         /// <summary>Whether the connector requires customer authentication before executing. Defaults to false.</summary>
-        public bool? CustomerAuthentication { get; set; }
+        public bool? CustomerAuthentication { get => _explicitNullValueCustomerAuthentication; set { _explicitNullValueCustomerAuthentication = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_authentication"); else _explicitNullProperties?.Remove("customer_authentication"); } }
+        private bool? _explicitNullValueCustomerAuthentication = default!;
         /// <summary>Input parameters accepted by the connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_data_inputs>? DataInputs { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_data_inputs>? DataInputs { get => _explicitNullValueDataInputs; set { _explicitNullValueDataInputs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_inputs"); else _explicitNullProperties?.Remove("data_inputs"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_data_inputs>? _explicitNullValueDataInputs = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_data_inputs> DataInputs { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_data_inputs> DataInputs { get => _explicitNullValueDataInputs; set { _explicitNullValueDataInputs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_inputs"); else _explicitNullProperties?.Remove("data_inputs"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_data_inputs> _explicitNullValueDataInputs = default!;
 #endif
         /// <summary>A description of what this data connector does.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        private string? _explicitNullValueDescription = default!;
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>Whether the connector is used directly by Fin (true) or only in workflows (false). Defaults to false.</summary>
-        public bool? DirectFinUsage { get; set; }
+        public bool? DirectFinUsage { get => _explicitNullValueDirectFinUsage; set { _explicitNullValueDirectFinUsage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("direct_fin_usage"); else _explicitNullProperties?.Remove("direct_fin_usage"); } }
+        private bool? _explicitNullValueDirectFinUsage = default!;
         /// <summary>HTTP headers to include in the request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers>? Headers { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers>? Headers { get => _explicitNullValueHeaders; set { _explicitNullValueHeaders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headers"); else _explicitNullProperties?.Remove("headers"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers>? _explicitNullValueHeaders = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers> Headers { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers> Headers { get => _explicitNullValueHeaders; set { _explicitNullValueHeaders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headers"); else _explicitNullProperties?.Remove("headers"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers> _explicitNullValueHeaders = default!;
 #endif
         /// <summary>The HTTP method used when calling the external API.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method? HttpMethod { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method? HttpMethod { get => _explicitNullValueHttpMethod; set { _explicitNullValueHttpMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("http_method"); else _explicitNullProperties?.Remove("http_method"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method? _explicitNullValueHttpMethod = default!;
         /// <summary>A sample JSON response from the external API. Auto-generates `response_fields` and sets `configuration_response_type` to `mock_response_type`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response? MockResponse { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response? MockResponse { get => _explicitNullValueMockResponse; set { _explicitNullValueMockResponse = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mock_response"); else _explicitNullProperties?.Remove("mock_response"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response? _explicitNullValueMockResponse = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response MockResponse { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response MockResponse { get => _explicitNullValueMockResponse; set { _explicitNullValueMockResponse = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mock_response"); else _explicitNullProperties?.Remove("mock_response"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response _explicitNullValueMockResponse = default!;
 #endif
         /// <summary>The name of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>IDs of authentication tokens to attach to this data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? TokenIds { get; set; }
+        public List<string>? TokenIds { get => _explicitNullValueTokenIds; set { _explicitNullValueTokenIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_ids"); else _explicitNullProperties?.Remove("token_ids"); } }
+        private List<string>? _explicitNullValueTokenIds = default!;
 #nullable restore
 #else
-        public List<string> TokenIds { get; set; }
+        public List<string> TokenIds { get => _explicitNullValueTokenIds; set { _explicitNullValueTokenIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_ids"); else _explicitNullProperties?.Remove("token_ids"); } }
+        private List<string> _explicitNullValueTokenIds = default!;
 #endif
         /// <summary>The URL of the external API endpoint. Supports template variables like `{{order_id}}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        private string? _explicitNullValueUrl = default!;
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        private string _explicitNullValueUrl = default!;
 #endif
         /// <summary>Whether to validate that all required data inputs have values before executing.</summary>
-        public bool? ValidateMissingAttributes { get; set; }
+        public bool? ValidateMissingAttributes { get => _explicitNullValueValidateMissingAttributes; set { _explicitNullValueValidateMissingAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("validate_missing_attributes"); else _explicitNullProperties?.Remove("validate_missing_attributes"); } }
+        private bool? _explicitNullValueValidateMissingAttributes = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request"/> and sets the default values.
         /// </summary>
@@ -112,7 +156,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -159,6 +203,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<string>("token_ids", TokenIds);
             writer.WriteStringValue("url", Url);
             writer.WriteBoolValue("validate_missing_attributes", ValidateMissingAttributes);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

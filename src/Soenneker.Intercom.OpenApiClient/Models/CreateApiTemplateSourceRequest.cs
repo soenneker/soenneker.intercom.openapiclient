@@ -12,32 +12,48 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateApiTemplateSourceRequest : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("auth_token") is { } nullNodeAuthToken && nullNodeAuthToken.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AuthToken = null;
+            if (parseNode.GetChildNode("template") is { } nullNodeTemplate && nullNodeTemplate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Template = null;
+            if (parseNode.GetChildNode("variables") is { } nullNodeVariables && nullNodeVariables.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variables = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The token for the vendor&apos;s API, sent as `auth.value` describes. It may only use printable ASCII characters. Intercom checks it with the vendor before creating the source. It&apos;s stored with the source and is never returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AuthToken { get; set; }
+        public string? AuthToken { get => _explicitNullValueAuthToken; set { _explicitNullValueAuthToken = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auth_token"); else _explicitNullProperties?.Remove("auth_token"); } }
+        private string? _explicitNullValueAuthToken = default!;
 #nullable restore
 #else
-        public string AuthToken { get; set; }
+        public string AuthToken { get => _explicitNullValueAuthToken; set { _explicitNullValueAuthToken = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auth_token"); else _explicitNullProperties?.Remove("auth_token"); } }
+        private string _explicitNullValueAuthToken = default!;
 #endif
         /// <summary>An API template describes how to read a knowledge base through its vendor&apos;s REST API. Intercom requests the `tree`, a list of the knowledge base&apos;s nodes, such as folders and pages. For each node that is content, it then requests the `item`, such as the page&apos;s body. `mapping` says which fields of the node and the item become the imported content.A placeholder such as `{space_id}` in `base_url`, a path or a query value is filled from `variables`. In the item request, it can also be filled from `item.node_values`. Values filled into `base_url` or a path are URL-encoded. `{token}` stands for the source&apos;s token. It can only be used in `auth.value` or as an entire query value.When a template check fails, creating the source returns a `422` error whose message is `&lt;name&gt; fails the &lt;check&gt; check`, where `&lt;name&gt;` is the failing field below; see the create endpoint for the error shape. Each field below names its checks in brackets. Top-level keys other than the ones below are ignored and not stored.Intercom sends one tree request per sync. Paging isn&apos;t supported. A sync fails if the tree response is over 25 MB or has more than 50,000 nodes. Nodes nested more than 12 levels deep aren&apos;t imported. An item whose response is over 10 MB, or that the vendor returns as not found, is skipped. A redirect isn&apos;t followed and fails the sync. During a sync, if the vendor answers `429`, Intercom waits for the time in its `Retry-After` header, or 60 seconds if there&apos;s none, and then retries. If the vendor keeps answering `429`, the sync fails.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate? Template { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate? Template { get => _explicitNullValueTemplate; set { _explicitNullValueTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("template"); else _explicitNullProperties?.Remove("template"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate? _explicitNullValueTemplate = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate Template { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate Template { get => _explicitNullValueTemplate; set { _explicitNullValueTemplate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("template"); else _explicitNullProperties?.Remove("template"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate _explicitNullValueTemplate = default!;
 #endif
         /// <summary>A value for each variable the template declares. A value may only use letters, digits, `.`, `_` and `-`, and can&apos;t be only dots. Keys the template doesn&apos;t declare are ignored.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty? Variables { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty? Variables { get => _explicitNullValueVariables; set { _explicitNullValueVariables = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variables"); else _explicitNullProperties?.Remove("variables"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty? _explicitNullValueVariables = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty Variables { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty Variables { get => _explicitNullValueVariables; set { _explicitNullValueVariables = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variables"); else _explicitNullProperties?.Remove("variables"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty _explicitNullValueVariables = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequest"/> and sets the default values.
@@ -54,7 +70,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -79,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("auth_token", AuthToken);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate>("template", Template);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateApiTemplateSourceRequestVariablesProperty>("variables", Variables);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -12,130 +12,189 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class EcommerceProductEventProduct : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("additional_data") is { } nullNodeAdditionalDataProperty && nullNodeAdditionalDataProperty.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdditionalDataProperty = null;
+            if (parseNode.GetChildNode("available_options") is { } nullNodeAvailableOptions && nullNodeAvailableOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AvailableOptions = null;
+            if (parseNode.GetChildNode("category_path") is { } nullNodeCategoryPath && nullNodeCategoryPath.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CategoryPath = null;
+            if (parseNode.GetChildNode("collections") is { } nullNodeCollections && nullNodeCollections.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Collections = null;
+            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("currency") is { } nullNodeCurrency && nullNodeCurrency.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Currency = null;
+            if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
+            if (parseNode.GetChildNode("description_html") is { } nullNodeDescriptionHtml && nullNodeDescriptionHtml.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DescriptionHtml = null;
+            if (parseNode.GetChildNode("featured_image_url") is { } nullNodeFeaturedImageUrl && nullNodeFeaturedImageUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FeaturedImageUrl = null;
+            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("image_urls") is { } nullNodeImageUrls && nullNodeImageUrls.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImageUrls = null;
+            if (parseNode.GetChildNode("in_stock") is { } nullNodeInStock && nullNodeInStock.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InStock = null;
+            if (parseNode.GetChildNode("price_max") is { } nullNodePriceMax && nullNodePriceMax.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PriceMax = null;
+            if (parseNode.GetChildNode("price_min") is { } nullNodePriceMin && nullNodePriceMin.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PriceMin = null;
+            if (parseNode.GetChildNode("tags") is { } nullNodeTags && nullNodeTags.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tags = null;
+            if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+            if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("variants") is { } nullNodeVariants && nullNodeVariants.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variants = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Custom attributes for your business. Fin uses these to show each customer only the products relevant to them (e.g. regional availability or warehouse codes). All keys must be consistent across all products in your catalog — the attribute schema is read from the first product in the file.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData? AdditionalDataProperty { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData? AdditionalDataProperty { get => _explicitNullValueAdditionalDataProperty; set { _explicitNullValueAdditionalDataProperty = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("additional_data"); else _explicitNullProperties?.Remove("additional_data"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData? _explicitNullValueAdditionalDataProperty = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData AdditionalDataProperty { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData AdditionalDataProperty { get => _explicitNullValueAdditionalDataProperty; set { _explicitNullValueAdditionalDataProperty = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("additional_data"); else _explicitNullProperties?.Remove("additional_data"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData _explicitNullValueAdditionalDataProperty = default!;
 #endif
         /// <summary>Option types available for this product and their possible values(e.g. `{&quot;name&quot;: &quot;Size&quot;, &quot;values&quot;: [&quot;S&quot;, &quot;M&quot;, &quot;L&quot;]}`). Fin uses these to understand whatchoices a shopper can make and to correctly filter variants when a shopper asks for aspecific size, colour, or other attribute.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>? AvailableOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>? AvailableOptions { get => _explicitNullValueAvailableOptions; set { _explicitNullValueAvailableOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("available_options"); else _explicitNullProperties?.Remove("available_options"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>? _explicitNullValueAvailableOptions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem> AvailableOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem> AvailableOptions { get => _explicitNullValueAvailableOptions; set { _explicitNullValueAvailableOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("available_options"); else _explicitNullProperties?.Remove("available_options"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem> _explicitNullValueAvailableOptions = default!;
 #endif
         /// <summary>Hierarchical category breadcrumb for the product. Fin understands the hierarchy — ashopper asking about &quot;Clothing&quot; will see products from all subcategories underneath it.The most specific category is shown in search results. Strongly recommended. Provide asa pre-formatted string (e.g. `&quot;Clothing &gt; T-Shirts&quot;`) or as an array of path segments(e.g. `[&quot;Clothing&quot;, &quot;T-Shirts&quot;]`). Array segments are joined with ` &gt; `.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath? CategoryPath { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath? CategoryPath { get => _explicitNullValueCategoryPath; set { _explicitNullValueCategoryPath = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("category_path"); else _explicitNullProperties?.Remove("category_path"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath? _explicitNullValueCategoryPath = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath CategoryPath { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath CategoryPath { get => _explicitNullValueCategoryPath; set { _explicitNullValueCategoryPath = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("category_path"); else _explicitNullProperties?.Remove("category_path"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath _explicitNullValueCategoryPath = default!;
 #endif
         /// <summary>Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog&apos;s structure and answer questions like &quot;what&apos;s in the sale collection?&quot;. Each element may be a plain string or an object with a `title` field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Collections { get; set; }
+        public List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>? Collections { get => _explicitNullValueCollections; set { _explicitNullValueCollections = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("collections"); else _explicitNullProperties?.Remove("collections"); } }
+        private List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>? _explicitNullValueCollections = default!;
 #nullable restore
 #else
-        public List<string> Collections { get; set; }
+        public List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode> Collections { get => _explicitNullValueCollections; set { _explicitNullValueCollections = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("collections"); else _explicitNullProperties?.Remove("collections"); } }
+        private List<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode> _explicitNullValueCollections = default!;
 #endif
         /// <summary>When the product was created in your store, as an ISO 8601 timestamp.</summary>
-        public DateTimeOffset? CreatedAt { get; set; }
+        public DateTimeOffset? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private DateTimeOffset? _explicitNullValueCreatedAt = default!;
         /// <summary>ISO 4217 currency code for all prices on this product (e.g. &quot;USD&quot;, &quot;EUR&quot;, &quot;GBP&quot;). Defaults to USD if omitted. Used to format prices with the correct symbol in Fin&apos;s responses and product cards.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Currency { get; set; }
+        public string? Currency { get => _explicitNullValueCurrency; set { _explicitNullValueCurrency = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("currency"); else _explicitNullProperties?.Remove("currency"); } }
+        private string? _explicitNullValueCurrency = default!;
 #nullable restore
 #else
-        public string Currency { get; set; }
+        public string Currency { get => _explicitNullValueCurrency; set { _explicitNullValueCurrency = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("currency"); else _explicitNullProperties?.Remove("currency"); } }
+        private string _explicitNullValueCurrency = default!;
 #endif
         /// <summary>Product description that Fin reads to understand what the product is. HTML formatting is supported and safely sanitized (`description_html` takes precedence if both are provided). This is the primary field Fin uses to match products to shopper questions — a richer description leads to better recommendations.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        private string? _explicitNullValueDescription = default!;
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>HTML product description. Takes precedence over `description` when both are provided. HTML is safely sanitized before indexing.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DescriptionHtml { get; set; }
+        public string? DescriptionHtml { get => _explicitNullValueDescriptionHtml; set { _explicitNullValueDescriptionHtml = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description_html"); else _explicitNullProperties?.Remove("description_html"); } }
+        private string? _explicitNullValueDescriptionHtml = default!;
 #nullable restore
 #else
-        public string DescriptionHtml { get; set; }
+        public string DescriptionHtml { get => _explicitNullValueDescriptionHtml; set { _explicitNullValueDescriptionHtml = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description_html"); else _explicitNullProperties?.Remove("description_html"); } }
+        private string _explicitNullValueDescriptionHtml = default!;
 #endif
         /// <summary>Primary product image shown in Fin&apos;s recommendation cards. Falls back to the first entry of `image_urls` if not provided. If no valid image can be resolved for a variant, that variant&apos;s recommendation card is not shown to the shopper.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FeaturedImageUrl { get; set; }
+        public string? FeaturedImageUrl { get => _explicitNullValueFeaturedImageUrl; set { _explicitNullValueFeaturedImageUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("featured_image_url"); else _explicitNullProperties?.Remove("featured_image_url"); } }
+        private string? _explicitNullValueFeaturedImageUrl = default!;
 #nullable restore
 #else
-        public string FeaturedImageUrl { get; set; }
+        public string FeaturedImageUrl { get => _explicitNullValueFeaturedImageUrl; set { _explicitNullValueFeaturedImageUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("featured_image_url"); else _explicitNullProperties?.Remove("featured_image_url"); } }
+        private string _explicitNullValueFeaturedImageUrl = default!;
 #endif
         /// <summary>Your unique product identifier. Used to match products on re-upload so only changed products are re-indexed. Also the delete key — any product ID absent from a new upload is removed from Fin&apos;s knowledge. Must be stable across uploads.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private string _explicitNullValueId = default!;
 #endif
         /// <summary>Additional product images. Used as a fallback image source when `featured_image_url` is absent or when a variant has no specific image.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ImageUrls { get; set; }
+        public List<string>? ImageUrls { get => _explicitNullValueImageUrls; set { _explicitNullValueImageUrls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("image_urls"); else _explicitNullProperties?.Remove("image_urls"); } }
+        private List<string>? _explicitNullValueImageUrls = default!;
 #nullable restore
 #else
-        public List<string> ImageUrls { get; set; }
+        public List<string> ImageUrls { get => _explicitNullValueImageUrls; set { _explicitNullValueImageUrls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("image_urls"); else _explicitNullProperties?.Remove("image_urls"); } }
+        private List<string> _explicitNullValueImageUrls = default!;
 #endif
         /// <summary>Whether the product is available to purchase. If omitted, derived from variant stock — theproduct is in stock if at least one variant has `in_stock: true`. Products with no in-stockvariants are hidden from Fin entirely and will not be recommended to shoppers.</summary>
-        public bool? InStock { get; set; }
+        public bool? InStock { get => _explicitNullValueInStock; set { _explicitNullValueInStock = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("in_stock"); else _explicitNullProperties?.Remove("in_stock"); } }
+        private bool? _explicitNullValueInStock = default!;
         /// <summary>Highest price across all variants. If omitted, derived from variant prices. Used alongside `price_min` for budget filtering and price display.</summary>
-        public double? PriceMax { get; set; }
+        public double? PriceMax { get => _explicitNullValuePriceMax; set { _explicitNullValuePriceMax = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("price_max"); else _explicitNullProperties?.Remove("price_max"); } }
+        private double? _explicitNullValuePriceMax = default!;
         /// <summary>Lowest price across all variants. If omitted, derived automatically from variant prices. Fin uses this to filter products when a shopper mentions a budget (e.g. &quot;under $100&quot;). Displayed as a range alongside `price_max`, or as a single value if both are equal.</summary>
-        public double? PriceMin { get; set; }
+        public double? PriceMin { get => _explicitNullValuePriceMin; set { _explicitNullValuePriceMin = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("price_min"); else _explicitNullProperties?.Remove("price_min"); } }
+        private double? _explicitNullValuePriceMin = default!;
         /// <summary>Free-form keywords matching how shoppers phrase needs in chat (e.g. &quot;waterproof&quot;, &quot;gift&quot;, &quot;plus-size&quot;). Used by Fin to match fuzzy queries; complements `category_path` and `collections`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Tags { get; set; }
+        public List<string>? Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private List<string>? _explicitNullValueTags = default!;
 #nullable restore
 #else
-        public List<string> Tags { get; set; }
+        public List<string> Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private List<string> _explicitNullValueTags = default!;
 #endif
         /// <summary>Product name. Used by Fin when searching for and recommending products.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        private string? _explicitNullValueTitle = default!;
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>When the product was last changed in your store, as an ISO 8601 timestamp.</summary>
-        public DateTimeOffset? UpdatedAt { get; set; }
+        public DateTimeOffset? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private DateTimeOffset? _explicitNullValueUpdatedAt = default!;
         /// <summary>Canonical product page URL shown in Fin&apos;s product recommendations. Must be a valid https:// URL.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get; set; }
+        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        private string? _explicitNullValueUrl = default!;
 #nullable restore
 #else
-        public string Url { get; set; }
+        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        private string _explicitNullValueUrl = default!;
 #endif
         /// <summary>Individual purchasable variants of the product. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See `ecommerce_catalog_variant` for the variant object schema.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant>? Variants { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant>? Variants { get => _explicitNullValueVariants; set { _explicitNullValueVariants = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variants"); else _explicitNullProperties?.Remove("variants"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant>? _explicitNullValueVariants = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant> Variants { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant> Variants { get => _explicitNullValueVariants; set { _explicitNullValueVariants = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variants"); else _explicitNullProperties?.Remove("variants"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant> _explicitNullValueVariants = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct"/> and sets the default values.
@@ -152,7 +211,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -165,7 +224,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "additional_data", n => { AdditionalDataProperty = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData.CreateFromDiscriminatorValue); } },
                 { "available_options", n => { AvailableOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "category_path", n => { CategoryPath = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath.CreateFromDiscriminatorValue); } },
-                { "collections", n => { Collections = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
+                { "collections", n => { Collections = n.GetCollectionOfObjectValues<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "created_at", n => { CreatedAt = n.GetDateTimeOffsetValue(); } },
                 { "currency", n => { Currency = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
@@ -193,7 +252,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData>("additional_data", AdditionalDataProperty);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>("available_options", AvailableOptions);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductCategoryPath>("category_path", CategoryPath);
-            writer.WriteCollectionOfPrimitiveValues<string>("collections", Collections);
+            writer.WriteCollectionOfObjectValues<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>("collections", Collections);
             writer.WriteDateTimeOffsetValue("created_at", CreatedAt);
             writer.WriteStringValue("currency", Currency);
             writer.WriteStringValue("description", Description);
@@ -209,6 +268,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogVariant>("variants", Variants);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

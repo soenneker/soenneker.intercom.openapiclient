@@ -12,306 +12,426 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ArticleTranslatedContent : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("ar") is { } nullNodeAr && nullNodeAr.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ar = null;
+            if (parseNode.GetChildNode("bg") is { } nullNodeBg && nullNodeBg.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Bg = null;
+            if (parseNode.GetChildNode("bs") is { } nullNodeBs && nullNodeBs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Bs = null;
+            if (parseNode.GetChildNode("ca") is { } nullNodeCa && nullNodeCa.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ca = null;
+            if (parseNode.GetChildNode("cs") is { } nullNodeCs && nullNodeCs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Cs = null;
+            if (parseNode.GetChildNode("da") is { } nullNodeDa && nullNodeDa.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Da = null;
+            if (parseNode.GetChildNode("de") is { } nullNodeDe && nullNodeDe.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) De = null;
+            if (parseNode.GetChildNode("el") is { } nullNodeEl && nullNodeEl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) El = null;
+            if (parseNode.GetChildNode("en") is { } nullNodeEn && nullNodeEn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) En = null;
+            if (parseNode.GetChildNode("es") is { } nullNodeEs && nullNodeEs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Es = null;
+            if (parseNode.GetChildNode("et") is { } nullNodeEt && nullNodeEt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Et = null;
+            if (parseNode.GetChildNode("fi") is { } nullNodeFi && nullNodeFi.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Fi = null;
+            if (parseNode.GetChildNode("fr") is { } nullNodeFr && nullNodeFr.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Fr = null;
+            if (parseNode.GetChildNode("he") is { } nullNodeHe && nullNodeHe.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) He = null;
+            if (parseNode.GetChildNode("hr") is { } nullNodeHr && nullNodeHr.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Hr = null;
+            if (parseNode.GetChildNode("hu") is { } nullNodeHu && nullNodeHu.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Hu = null;
+            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("it") is { } nullNodeIt && nullNodeIt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) It = null;
+            if (parseNode.GetChildNode("ja") is { } nullNodeJa && nullNodeJa.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ja = null;
+            if (parseNode.GetChildNode("ko") is { } nullNodeKo && nullNodeKo.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ko = null;
+            if (parseNode.GetChildNode("lt") is { } nullNodeLt && nullNodeLt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Lt = null;
+            if (parseNode.GetChildNode("lv") is { } nullNodeLv && nullNodeLv.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Lv = null;
+            if (parseNode.GetChildNode("mn") is { } nullNodeMn && nullNodeMn.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mn = null;
+            if (parseNode.GetChildNode("nb") is { } nullNodeNb && nullNodeNb.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Nb = null;
+            if (parseNode.GetChildNode("nl") is { } nullNodeNl && nullNodeNl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Nl = null;
+            if (parseNode.GetChildNode("pl") is { } nullNodePl && nullNodePl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Pl = null;
+            if (parseNode.GetChildNode("pt") is { } nullNodePt && nullNodePt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Pt = null;
+            if (parseNode.GetChildNode("pt-BR") is { } nullNodePtBR && nullNodePtBR.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PtBR = null;
+            if (parseNode.GetChildNode("ro") is { } nullNodeRo && nullNodeRo.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ro = null;
+            if (parseNode.GetChildNode("ru") is { } nullNodeRu && nullNodeRu.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Ru = null;
+            if (parseNode.GetChildNode("sl") is { } nullNodeSl && nullNodeSl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sl = null;
+            if (parseNode.GetChildNode("sr") is { } nullNodeSr && nullNodeSr.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sr = null;
+            if (parseNode.GetChildNode("sv") is { } nullNodeSv && nullNodeSv.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Sv = null;
+            if (parseNode.GetChildNode("tr") is { } nullNodeTr && nullNodeTr.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tr = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("vi") is { } nullNodeVi && nullNodeVi.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Vi = null;
+            if (parseNode.GetChildNode("zh-CN") is { } nullNodeZhCN && nullNodeZhCN.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ZhCN = null;
+            if (parseNode.GetChildNode("zh-TW") is { } nullNodeZhTW && nullNodeZhTW.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ZhTW = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ar { get => _explicitNullValueAr; set { _explicitNullValueAr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ar"); else _explicitNullProperties?.Remove("ar"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueAr = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ar { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ar { get => _explicitNullValueAr; set { _explicitNullValueAr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ar"); else _explicitNullProperties?.Remove("ar"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueAr = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Bg { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Bg { get => _explicitNullValueBg; set { _explicitNullValueBg = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bg"); else _explicitNullProperties?.Remove("bg"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueBg = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Bg { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Bg { get => _explicitNullValueBg; set { _explicitNullValueBg = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bg"); else _explicitNullProperties?.Remove("bg"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueBg = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Bs { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Bs { get => _explicitNullValueBs; set { _explicitNullValueBs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bs"); else _explicitNullProperties?.Remove("bs"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueBs = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Bs { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Bs { get => _explicitNullValueBs; set { _explicitNullValueBs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bs"); else _explicitNullProperties?.Remove("bs"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueBs = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ca { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ca { get => _explicitNullValueCa; set { _explicitNullValueCa = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ca"); else _explicitNullProperties?.Remove("ca"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueCa = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ca { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ca { get => _explicitNullValueCa; set { _explicitNullValueCa = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ca"); else _explicitNullProperties?.Remove("ca"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueCa = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Cs { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Cs { get => _explicitNullValueCs; set { _explicitNullValueCs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cs"); else _explicitNullProperties?.Remove("cs"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueCs = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Cs { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Cs { get => _explicitNullValueCs; set { _explicitNullValueCs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cs"); else _explicitNullProperties?.Remove("cs"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueCs = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Da { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Da { get => _explicitNullValueDa; set { _explicitNullValueDa = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("da"); else _explicitNullProperties?.Remove("da"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueDa = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Da { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Da { get => _explicitNullValueDa; set { _explicitNullValueDa = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("da"); else _explicitNullProperties?.Remove("da"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueDa = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? De { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? De { get => _explicitNullValueDe; set { _explicitNullValueDe = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("de"); else _explicitNullProperties?.Remove("de"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueDe = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent De { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent De { get => _explicitNullValueDe; set { _explicitNullValueDe = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("de"); else _explicitNullProperties?.Remove("de"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueDe = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? El { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? El { get => _explicitNullValueEl; set { _explicitNullValueEl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("el"); else _explicitNullProperties?.Remove("el"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueEl = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent El { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent El { get => _explicitNullValueEl; set { _explicitNullValueEl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("el"); else _explicitNullProperties?.Remove("el"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueEl = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? En { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? En { get => _explicitNullValueEn; set { _explicitNullValueEn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("en"); else _explicitNullProperties?.Remove("en"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueEn = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent En { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent En { get => _explicitNullValueEn; set { _explicitNullValueEn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("en"); else _explicitNullProperties?.Remove("en"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueEn = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Es { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Es { get => _explicitNullValueEs; set { _explicitNullValueEs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("es"); else _explicitNullProperties?.Remove("es"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueEs = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Es { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Es { get => _explicitNullValueEs; set { _explicitNullValueEs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("es"); else _explicitNullProperties?.Remove("es"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueEs = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Et { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Et { get => _explicitNullValueEt; set { _explicitNullValueEt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("et"); else _explicitNullProperties?.Remove("et"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueEt = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Et { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Et { get => _explicitNullValueEt; set { _explicitNullValueEt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("et"); else _explicitNullProperties?.Remove("et"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueEt = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Fi { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Fi { get => _explicitNullValueFi; set { _explicitNullValueFi = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fi"); else _explicitNullProperties?.Remove("fi"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueFi = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Fi { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Fi { get => _explicitNullValueFi; set { _explicitNullValueFi = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fi"); else _explicitNullProperties?.Remove("fi"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueFi = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Fr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Fr { get => _explicitNullValueFr; set { _explicitNullValueFr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fr"); else _explicitNullProperties?.Remove("fr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueFr = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Fr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Fr { get => _explicitNullValueFr; set { _explicitNullValueFr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("fr"); else _explicitNullProperties?.Remove("fr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueFr = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? He { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? He { get => _explicitNullValueHe; set { _explicitNullValueHe = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("he"); else _explicitNullProperties?.Remove("he"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueHe = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent He { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent He { get => _explicitNullValueHe; set { _explicitNullValueHe = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("he"); else _explicitNullProperties?.Remove("he"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueHe = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Hr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Hr { get => _explicitNullValueHr; set { _explicitNullValueHr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hr"); else _explicitNullProperties?.Remove("hr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueHr = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Hr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Hr { get => _explicitNullValueHr; set { _explicitNullValueHr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hr"); else _explicitNullProperties?.Remove("hr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueHr = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Hu { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Hu { get => _explicitNullValueHu; set { _explicitNullValueHu = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hu"); else _explicitNullProperties?.Remove("hu"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueHu = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Hu { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Hu { get => _explicitNullValueHu; set { _explicitNullValueHu = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hu"); else _explicitNullProperties?.Remove("hu"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueHu = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Id { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Id { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueId = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? It { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? It { get => _explicitNullValueIt; set { _explicitNullValueIt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("it"); else _explicitNullProperties?.Remove("it"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueIt = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent It { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent It { get => _explicitNullValueIt; set { _explicitNullValueIt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("it"); else _explicitNullProperties?.Remove("it"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueIt = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ja { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ja { get => _explicitNullValueJa; set { _explicitNullValueJa = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ja"); else _explicitNullProperties?.Remove("ja"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueJa = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ja { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ja { get => _explicitNullValueJa; set { _explicitNullValueJa = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ja"); else _explicitNullProperties?.Remove("ja"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueJa = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ko { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ko { get => _explicitNullValueKo; set { _explicitNullValueKo = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ko"); else _explicitNullProperties?.Remove("ko"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueKo = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ko { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ko { get => _explicitNullValueKo; set { _explicitNullValueKo = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ko"); else _explicitNullProperties?.Remove("ko"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueKo = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Lt { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Lt { get => _explicitNullValueLt; set { _explicitNullValueLt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lt"); else _explicitNullProperties?.Remove("lt"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueLt = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Lt { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Lt { get => _explicitNullValueLt; set { _explicitNullValueLt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lt"); else _explicitNullProperties?.Remove("lt"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueLt = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Lv { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Lv { get => _explicitNullValueLv; set { _explicitNullValueLv = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lv"); else _explicitNullProperties?.Remove("lv"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueLv = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Lv { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Lv { get => _explicitNullValueLv; set { _explicitNullValueLv = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("lv"); else _explicitNullProperties?.Remove("lv"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueLv = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Mn { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Mn { get => _explicitNullValueMn; set { _explicitNullValueMn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mn"); else _explicitNullProperties?.Remove("mn"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueMn = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Mn { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Mn { get => _explicitNullValueMn; set { _explicitNullValueMn = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mn"); else _explicitNullProperties?.Remove("mn"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueMn = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Nb { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Nb { get => _explicitNullValueNb; set { _explicitNullValueNb = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nb"); else _explicitNullProperties?.Remove("nb"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueNb = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Nb { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Nb { get => _explicitNullValueNb; set { _explicitNullValueNb = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nb"); else _explicitNullProperties?.Remove("nb"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueNb = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Nl { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Nl { get => _explicitNullValueNl; set { _explicitNullValueNl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nl"); else _explicitNullProperties?.Remove("nl"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueNl = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Nl { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Nl { get => _explicitNullValueNl; set { _explicitNullValueNl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nl"); else _explicitNullProperties?.Remove("nl"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueNl = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Pl { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Pl { get => _explicitNullValuePl; set { _explicitNullValuePl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pl"); else _explicitNullProperties?.Remove("pl"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValuePl = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Pl { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Pl { get => _explicitNullValuePl; set { _explicitNullValuePl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pl"); else _explicitNullProperties?.Remove("pl"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValuePl = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Pt { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Pt { get => _explicitNullValuePt; set { _explicitNullValuePt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pt"); else _explicitNullProperties?.Remove("pt"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValuePt = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Pt { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Pt { get => _explicitNullValuePt; set { _explicitNullValuePt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pt"); else _explicitNullProperties?.Remove("pt"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValuePt = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? PtBR { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? PtBR { get => _explicitNullValuePtBR; set { _explicitNullValuePtBR = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pt-BR"); else _explicitNullProperties?.Remove("pt-BR"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValuePtBR = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent PtBR { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent PtBR { get => _explicitNullValuePtBR; set { _explicitNullValuePtBR = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pt-BR"); else _explicitNullProperties?.Remove("pt-BR"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValuePtBR = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ro { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ro { get => _explicitNullValueRo; set { _explicitNullValueRo = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ro"); else _explicitNullProperties?.Remove("ro"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueRo = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ro { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ro { get => _explicitNullValueRo; set { _explicitNullValueRo = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ro"); else _explicitNullProperties?.Remove("ro"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueRo = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ru { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Ru { get => _explicitNullValueRu; set { _explicitNullValueRu = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ru"); else _explicitNullProperties?.Remove("ru"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueRu = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ru { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Ru { get => _explicitNullValueRu; set { _explicitNullValueRu = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ru"); else _explicitNullProperties?.Remove("ru"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueRu = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Sl { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Sl { get => _explicitNullValueSl; set { _explicitNullValueSl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sl"); else _explicitNullProperties?.Remove("sl"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueSl = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Sl { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Sl { get => _explicitNullValueSl; set { _explicitNullValueSl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sl"); else _explicitNullProperties?.Remove("sl"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueSl = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Sr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Sr { get => _explicitNullValueSr; set { _explicitNullValueSr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sr"); else _explicitNullProperties?.Remove("sr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueSr = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Sr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Sr { get => _explicitNullValueSr; set { _explicitNullValueSr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sr"); else _explicitNullProperties?.Remove("sr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueSr = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Sv { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Sv { get => _explicitNullValueSv; set { _explicitNullValueSv = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sv"); else _explicitNullProperties?.Remove("sv"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueSv = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Sv { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Sv { get => _explicitNullValueSv; set { _explicitNullValueSv = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sv"); else _explicitNullProperties?.Remove("sv"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueSv = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Tr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Tr { get => _explicitNullValueTr; set { _explicitNullValueTr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tr"); else _explicitNullProperties?.Remove("tr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueTr = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Tr { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Tr { get => _explicitNullValueTr; set { _explicitNullValueTr = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tr"); else _explicitNullProperties?.Remove("tr"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueTr = default!;
 #endif
         /// <summary>The type of object - article_translated_content.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType? _explicitNullValueType = default!;
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Vi { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? Vi { get => _explicitNullValueVi; set { _explicitNullValueVi = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("vi"); else _explicitNullProperties?.Remove("vi"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueVi = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Vi { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent Vi { get => _explicitNullValueVi; set { _explicitNullValueVi = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("vi"); else _explicitNullProperties?.Remove("vi"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueVi = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? ZhCN { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? ZhCN { get => _explicitNullValueZhCN; set { _explicitNullValueZhCN = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("zh-CN"); else _explicitNullProperties?.Remove("zh-CN"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueZhCN = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent ZhCN { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent ZhCN { get => _explicitNullValueZhCN; set { _explicitNullValueZhCN = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("zh-CN"); else _explicitNullProperties?.Remove("zh-CN"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueZhCN = default!;
 #endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? ZhTW { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? ZhTW { get => _explicitNullValueZhTW; set { _explicitNullValueZhTW = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("zh-TW"); else _explicitNullProperties?.Remove("zh-TW"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent? _explicitNullValueZhTW = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent ZhTW { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent ZhTW { get => _explicitNullValueZhTW; set { _explicitNullValueZhTW = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("zh-TW"); else _explicitNullProperties?.Remove("zh-TW"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueZhTW = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent"/> and sets the default values.
@@ -328,7 +448,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent();
+            // Preserve a nullable root response.
+            if (parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) return null!;
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContent(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -423,6 +545,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("vi", Vi);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("zh-CN", ZhCN);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("zh-TW", ZhTW);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

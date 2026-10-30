@@ -12,6 +12,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public partial class CreateContact_200 : global::Soenneker.Intercom.OpenApiClient.Models.Contact, IParsable
     #pragma warning restore CS1591
     {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public override void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            base.CaptureExplicitNulls(parseNode);
+        }
+
         /// <summary>If the user has enabled push messaging.</summary>
         public new bool? EnabledPushMessaging { get => base.EnabledPushMessaging; set => base.EnabledPushMessaging = value; }
         /// <summary>
@@ -22,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static new global::Soenneker.Intercom.OpenApiClient.Models.CreateContact_200 CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.CreateContact_200();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateContact_200(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -41,7 +49,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public override void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            base.Serialize(writer);
+            base.Serialize(writer);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            
         }
     }
 }

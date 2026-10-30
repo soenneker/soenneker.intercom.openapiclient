@@ -12,88 +12,125 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CallTranscriptTurn : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("article_sources") is { } nullNodeArticleSources && nullNodeArticleSources.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ArticleSources = null;
+            if (parseNode.GetChildNode("content") is { } nullNodeContent && nullNodeContent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Content = null;
+            if (parseNode.GetChildNode("end_time") is { } nullNodeEndTime && nullNodeEndTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndTime = null;
+            if (parseNode.GetChildNode("speaker") is { } nullNodeSpeaker && nullNodeSpeaker.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Speaker = null;
+            if (parseNode.GetChildNode("speaker_id") is { } nullNodeSpeakerId && nullNodeSpeakerId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SpeakerId = null;
+            if (parseNode.GetChildNode("speaker_label") is { } nullNodeSpeakerLabel && nullNodeSpeakerLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SpeakerLabel = null;
+            if (parseNode.GetChildNode("speaker_name") is { } nullNodeSpeakerName && nullNodeSpeakerName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SpeakerName = null;
+            if (parseNode.GetChildNode("speaker_type") is { } nullNodeSpeakerType && nullNodeSpeakerType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SpeakerType = null;
+            if (parseNode.GetChildNode("start_time") is { } nullNodeStartTime && nullNodeStartTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartTime = null;
+            if (parseNode.GetChildNode("triggered_guidance") is { } nullNodeTriggeredGuidance && nullNodeTriggeredGuidance.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TriggeredGuidance = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Sources Fin cited during this turn. Only present on Fin Voice call transcripts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem>? ArticleSources { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem>? ArticleSources { get => _explicitNullValueArticleSources; set { _explicitNullValueArticleSources = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("article_sources"); else _explicitNullProperties?.Remove("article_sources"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem>? _explicitNullValueArticleSources = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem> ArticleSources { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem> ArticleSources { get => _explicitNullValueArticleSources; set { _explicitNullValueArticleSources = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("article_sources"); else _explicitNullProperties?.Remove("article_sources"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem> _explicitNullValueArticleSources = default!;
 #endif
         /// <summary>The transcribed text spoken during this turn.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Content { get; set; }
+        public string? Content { get => _explicitNullValueContent; set { _explicitNullValueContent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content"); else _explicitNullProperties?.Remove("content"); } }
+        private string? _explicitNullValueContent = default!;
 #nullable restore
 #else
-        public string Content { get; set; }
+        public string Content { get => _explicitNullValueContent; set { _explicitNullValueContent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content"); else _explicitNullProperties?.Remove("content"); } }
+        private string _explicitNullValueContent = default!;
 #endif
         /// <summary>The end time of the turn, as a seconds offset from the start of the call. A string on calls transcribed by Amazon Transcribe, a number on Fin Voice calls.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time? EndTime { get; set; }
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode? EndTime { get => _explicitNullValueEndTime; set { _explicitNullValueEndTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_time"); else _explicitNullProperties?.Remove("end_time"); } }
+        private global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode? _explicitNullValueEndTime = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time EndTime { get; set; }
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode EndTime { get => _explicitNullValueEndTime; set { _explicitNullValueEndTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_time"); else _explicitNullProperties?.Remove("end_time"); } }
+        private global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode _explicitNullValueEndTime = default!;
 #endif
         /// <summary>The diarization label for the speaker. Same value as `speaker_label`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Speaker { get; set; }
+        public string? Speaker { get => _explicitNullValueSpeaker; set { _explicitNullValueSpeaker = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker"); else _explicitNullProperties?.Remove("speaker"); } }
+        private string? _explicitNullValueSpeaker = default!;
 #nullable restore
 #else
-        public string Speaker { get; set; }
+        public string Speaker { get => _explicitNullValueSpeaker; set { _explicitNullValueSpeaker = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker"); else _explicitNullProperties?.Remove("speaker"); } }
+        private string _explicitNullValueSpeaker = default!;
 #endif
         /// <summary>The id of the teammate or contact who is the speaker. `-1` when the teammate who spoke has since been deleted, in which case `speaker_name` is `Deleted teammate`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SpeakerId { get; set; }
+        public string? SpeakerId { get => _explicitNullValueSpeakerId; set { _explicitNullValueSpeakerId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_id"); else _explicitNullProperties?.Remove("speaker_id"); } }
+        private string? _explicitNullValueSpeakerId = default!;
 #nullable restore
 #else
-        public string SpeakerId { get; set; }
+        public string SpeakerId { get => _explicitNullValueSpeakerId; set { _explicitNullValueSpeakerId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_id"); else _explicitNullProperties?.Remove("speaker_id"); } }
+        private string _explicitNullValueSpeakerId = default!;
 #endif
         /// <summary>The diarization label for the speaker.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SpeakerLabel { get; set; }
+        public string? SpeakerLabel { get => _explicitNullValueSpeakerLabel; set { _explicitNullValueSpeakerLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_label"); else _explicitNullProperties?.Remove("speaker_label"); } }
+        private string? _explicitNullValueSpeakerLabel = default!;
 #nullable restore
 #else
-        public string SpeakerLabel { get; set; }
+        public string SpeakerLabel { get => _explicitNullValueSpeakerLabel; set { _explicitNullValueSpeakerLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_label"); else _explicitNullProperties?.Remove("speaker_label"); } }
+        private string _explicitNullValueSpeakerLabel = default!;
 #endif
         /// <summary>The resolved display name of the speaker. A contact who has been merged into another resolves to the name on the surviving record. Omitted when the speaker cannot be resolved or has no name, for example a contact whose record was scrambled by a GDPR deletion request. Clients should fall back to `speaker_label` when this is absent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SpeakerName { get; set; }
+        public string? SpeakerName { get => _explicitNullValueSpeakerName; set { _explicitNullValueSpeakerName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_name"); else _explicitNullProperties?.Remove("speaker_name"); } }
+        private string? _explicitNullValueSpeakerName = default!;
 #nullable restore
 #else
-        public string SpeakerName { get; set; }
+        public string SpeakerName { get => _explicitNullValueSpeakerName; set { _explicitNullValueSpeakerName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_name"); else _explicitNullProperties?.Remove("speaker_name"); } }
+        private string _explicitNullValueSpeakerName = default!;
 #endif
         /// <summary>The type of the speaker - either `admin` for a teammate or `user` for a contact. Absent on Fin Voice call transcripts and on calls transcribed before speaker attribution shipped, where only `speaker_label` identifies the speaker.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SpeakerType { get; set; }
+        public string? SpeakerType { get => _explicitNullValueSpeakerType; set { _explicitNullValueSpeakerType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_type"); else _explicitNullProperties?.Remove("speaker_type"); } }
+        private string? _explicitNullValueSpeakerType = default!;
 #nullable restore
 #else
-        public string SpeakerType { get; set; }
+        public string SpeakerType { get => _explicitNullValueSpeakerType; set { _explicitNullValueSpeakerType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speaker_type"); else _explicitNullProperties?.Remove("speaker_type"); } }
+        private string _explicitNullValueSpeakerType = default!;
 #endif
         /// <summary>The start time of the turn, as a seconds offset from the start of the call. A string on calls transcribed by Amazon Transcribe, a number on Fin Voice calls.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time? StartTime { get; set; }
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode? StartTime { get => _explicitNullValueStartTime; set { _explicitNullValueStartTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_time"); else _explicitNullProperties?.Remove("start_time"); } }
+        private global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode? _explicitNullValueStartTime = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time StartTime { get; set; }
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode StartTime { get => _explicitNullValueStartTime; set { _explicitNullValueStartTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_time"); else _explicitNullProperties?.Remove("start_time"); } }
+        private global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode _explicitNullValueStartTime = default!;
 #endif
         /// <summary>Guidance rules that Fin matched during this turn. Only present on Fin Voice call transcripts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem>? TriggeredGuidance { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem>? TriggeredGuidance { get => _explicitNullValueTriggeredGuidance; set { _explicitNullValueTriggeredGuidance = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("triggered_guidance"); else _explicitNullProperties?.Remove("triggered_guidance"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem>? _explicitNullValueTriggeredGuidance = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem> TriggeredGuidance { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem> TriggeredGuidance { get => _explicitNullValueTriggeredGuidance; set { _explicitNullValueTriggeredGuidance = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("triggered_guidance"); else _explicitNullProperties?.Remove("triggered_guidance"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem> _explicitNullValueTriggeredGuidance = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn"/> and sets the default values.
@@ -110,7 +147,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -122,13 +159,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "article_sources", n => { ArticleSources = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem>(global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "content", n => { Content = n.GetStringValue(); } },
-                { "end_time", n => { EndTime = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time>(global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time.CreateFromDiscriminatorValue); } },
+                { "end_time", n => { EndTime = n.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue); } },
                 { "speaker", n => { Speaker = n.GetStringValue(); } },
                 { "speaker_id", n => { SpeakerId = n.GetStringValue(); } },
                 { "speaker_label", n => { SpeakerLabel = n.GetStringValue(); } },
                 { "speaker_name", n => { SpeakerName = n.GetStringValue(); } },
                 { "speaker_type", n => { SpeakerType = n.GetStringValue(); } },
-                { "start_time", n => { StartTime = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time>(global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time.CreateFromDiscriminatorValue); } },
+                { "start_time", n => { StartTime = n.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue); } },
                 { "triggered_guidance", n => { TriggeredGuidance = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem>(global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }
@@ -141,14 +178,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnArticleSourcesItem>("article_sources", ArticleSources);
             writer.WriteStringValue("content", Content);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time>("end_time", EndTime);
+            writer.WriteObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>("end_time", EndTime);
             writer.WriteStringValue("speaker", Speaker);
             writer.WriteStringValue("speaker_id", SpeakerId);
             writer.WriteStringValue("speaker_label", SpeakerLabel);
             writer.WriteStringValue("speaker_name", SpeakerName);
             writer.WriteStringValue("speaker_type", SpeakerType);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time>("start_time", StartTime);
+            writer.WriteObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>("start_time", StartTime);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurnTriggeredGuidanceItem>("triggered_guidance", TriggeredGuidance);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
         /// <summary>
@@ -174,14 +212,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
             public static global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time CreateFromDiscriminatorValue(IParseNode parseNode)
             {
+            // A null union input must not initialize an object branch.
+            if (global::System.Object.ReferenceEquals(parseNode, null)) throw new global::System.ArgumentNullException(nameof(parseNode));
+            if (parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) return new global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time();
+
                 if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
                 var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
                 var result = new global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_end_time();
-                if(parseNode.GetDoubleValue() is double doubleValue)
+                if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is (global::Microsoft.Kiota.Abstractions.Serialization.UntypedInteger or global::Microsoft.Kiota.Abstractions.Serialization.UntypedLong or global::Microsoft.Kiota.Abstractions.Serialization.UntypedFloat or global::Microsoft.Kiota.Abstractions.Serialization.UntypedDouble or global::Microsoft.Kiota.Abstractions.Serialization.UntypedDecimal) && parseNode.GetDoubleValue() is double doubleValue)
                 {
                     result.Double = doubleValue;
                 }
-                else if(parseNode.GetStringValue() is string stringValue)
+                else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString && parseNode.GetStringValue() is string stringValue)
                 {
                     result.String = stringValue;
                 }
@@ -201,6 +243,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             /// <param name="writer">Serialization writer to use to serialize this model</param>
             public virtual void Serialize(ISerializationWriter writer)
             {
+            // Empty composed wrappers serialize as JSON null.
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (Double == null && String == null) { writer.WriteNullValue(null); return; }
+
                 if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
                 if(Double != null)
                 {
@@ -235,14 +281,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
             public static global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time CreateFromDiscriminatorValue(IParseNode parseNode)
             {
+            // A null union input must not initialize an object branch.
+            if (global::System.Object.ReferenceEquals(parseNode, null)) throw new global::System.ArgumentNullException(nameof(parseNode));
+            if (parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) return new global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time();
+
                 if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
                 var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
                 var result = new global::Soenneker.Intercom.OpenApiClient.Models.CallTranscriptTurn.CallTranscriptTurn_start_time();
-                if(parseNode.GetDoubleValue() is double doubleValue)
+                if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is (global::Microsoft.Kiota.Abstractions.Serialization.UntypedInteger or global::Microsoft.Kiota.Abstractions.Serialization.UntypedLong or global::Microsoft.Kiota.Abstractions.Serialization.UntypedFloat or global::Microsoft.Kiota.Abstractions.Serialization.UntypedDouble or global::Microsoft.Kiota.Abstractions.Serialization.UntypedDecimal) && parseNode.GetDoubleValue() is double doubleValue)
                 {
                     result.Double = doubleValue;
                 }
-                else if(parseNode.GetStringValue() is string stringValue)
+                else if(parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString && parseNode.GetStringValue() is string stringValue)
                 {
                     result.String = stringValue;
                 }
@@ -262,6 +312,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             /// <param name="writer">Serialization writer to use to serialize this model</param>
             public virtual void Serialize(ISerializationWriter writer)
             {
+            // Empty composed wrappers serialize as JSON null.
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (Double == null && String == null) { writer.WriteNullValue(null); return; }
+
                 if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
                 if(Double != null)
                 {

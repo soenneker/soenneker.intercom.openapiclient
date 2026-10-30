@@ -12,58 +12,85 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateTicketRequest : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("assignment") is { } nullNodeAssignment && nullNodeAssignment.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Assignment = null;
+            if (parseNode.GetChildNode("company_id") is { } nullNodeCompanyId && nullNodeCompanyId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyId = null;
+            if (parseNode.GetChildNode("contacts") is { } nullNodeContacts && nullNodeContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Contacts = null;
+            if (parseNode.GetChildNode("conversation_to_link_id") is { } nullNodeConversationToLinkId && nullNodeConversationToLinkId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationToLinkId = null;
+            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("ticket_attributes") is { } nullNodeTicketAttributes && nullNodeTicketAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketAttributes = null;
+            if (parseNode.GetChildNode("ticket_type_id") is { } nullNodeTicketTypeId && nullNodeTicketTypeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketTypeId = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The assignment property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment? Assignment { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment? Assignment { get => _explicitNullValueAssignment; set { _explicitNullValueAssignment = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignment"); else _explicitNullProperties?.Remove("assignment"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment? _explicitNullValueAssignment = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment Assignment { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment Assignment { get => _explicitNullValueAssignment; set { _explicitNullValueAssignment = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignment"); else _explicitNullProperties?.Remove("assignment"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment _explicitNullValueAssignment = default!;
 #endif
         /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompanyId { get; set; }
+        public string? CompanyId { get => _explicitNullValueCompanyId; set { _explicitNullValueCompanyId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_id"); else _explicitNullProperties?.Remove("company_id"); } }
+        private string? _explicitNullValueCompanyId = default!;
 #nullable restore
 #else
-        public string CompanyId { get; set; }
+        public string CompanyId { get => _explicitNullValueCompanyId; set { _explicitNullValueCompanyId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_id"); else _explicitNullProperties?.Remove("company_id"); } }
+        private string _explicitNullValueCompanyId = default!;
 #endif
         /// <summary>The list of contacts (users or leads) affected by this ticket. Currently only one is allowed</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts>? Contacts { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts>? Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts>? _explicitNullValueContacts = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts> Contacts { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts> Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts> _explicitNullValueContacts = default!;
 #endif
         /// <summary>The ID of the conversation you want to link to the ticket. Here are the valid ways of linking two tickets: - conversation | back-office ticket - customer tickets | non-shared back-office ticket - conversation | tracker ticket - customer ticket | tracker ticket</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationToLinkId { get; set; }
+        public string? ConversationToLinkId { get => _explicitNullValueConversationToLinkId; set { _explicitNullValueConversationToLinkId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_to_link_id"); else _explicitNullProperties?.Remove("conversation_to_link_id"); } }
+        private string? _explicitNullValueConversationToLinkId = default!;
 #nullable restore
 #else
-        public string ConversationToLinkId { get; set; }
+        public string ConversationToLinkId { get => _explicitNullValueConversationToLinkId; set { _explicitNullValueConversationToLinkId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_to_link_id"); else _explicitNullProperties?.Remove("conversation_to_link_id"); } }
+        private string _explicitNullValueConversationToLinkId = default!;
 #endif
         /// <summary>The time the ticket was created. If not provided, the current time will be used.</summary>
-        public int? CreatedAt { get; set; }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private int? _explicitNullValueCreatedAt = default!;
         /// <summary>The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of type `list`, the key should be `priority` and the value of the attribute should be the guid of the list item (e.g. `de1825a0-0164-4070-8ca6-13e22462fa7e`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes? TicketAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes? TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes? _explicitNullValueTicketAttributes = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes TicketAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes _explicitNullValueTicketAttributes = default!;
 #endif
         /// <summary>The ID of the type of ticket you want to create</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TicketTypeId { get; set; }
+        public string? TicketTypeId { get => _explicitNullValueTicketTypeId; set { _explicitNullValueTicketTypeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_type_id"); else _explicitNullProperties?.Remove("ticket_type_id"); } }
+        private string? _explicitNullValueTicketTypeId = default!;
 #nullable restore
 #else
-        public string TicketTypeId { get; set; }
+        public string TicketTypeId { get => _explicitNullValueTicketTypeId; set { _explicitNullValueTicketTypeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_type_id"); else _explicitNullProperties?.Remove("ticket_type_id"); } }
+        private string _explicitNullValueTicketTypeId = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest"/> and sets the default values.
@@ -80,7 +107,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -113,6 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_type_id", TicketTypeId);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
         /// <summary>
@@ -152,6 +180,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
             public static global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts CreateFromDiscriminatorValue(IParseNode parseNode)
             {
+            // A null union input must not initialize an object branch.
+            if (global::System.Object.ReferenceEquals(parseNode, null)) throw new global::System.ArgumentNullException(nameof(parseNode));
+            if (parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) return new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts();
+
                 if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
                 var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
                 var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts();
@@ -195,6 +227,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             /// <param name="writer">Serialization writer to use to serialize this model</param>
             public virtual void Serialize(ISerializationWriter writer)
             {
+            // Empty composed wrappers serialize as JSON null.
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (CreateTicketRequestContactsMember1 == null && CreateTicketRequestContactsMember2 == null && CreateTicketRequestContactsMember3 == null) { writer.WriteNullValue(null); return; }
+
                 if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
                 if(CreateTicketRequestContactsMember1 != null)
                 {

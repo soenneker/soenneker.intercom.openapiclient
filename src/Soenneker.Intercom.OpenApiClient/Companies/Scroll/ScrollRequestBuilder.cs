@@ -59,6 +59,8 @@ namespace Soenneker.Intercom.OpenApiClient.Companies.Scroll
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "503", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CompanyScroll.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

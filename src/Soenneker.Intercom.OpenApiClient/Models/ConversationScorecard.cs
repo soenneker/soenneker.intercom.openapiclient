@@ -12,98 +12,145 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationScorecard : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("ai_score") is { } nullNodeAiScore && nullNodeAiScore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiScore = null;
+            if (parseNode.GetChildNode("evaluated_at") is { } nullNodeEvaluatedAt && nullNodeEvaluatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EvaluatedAt = null;
+            if (parseNode.GetChildNode("evaluators") is { } nullNodeEvaluators && nullNodeEvaluators.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Evaluators = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("notes") is { } nullNodeNotes && nullNodeNotes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Notes = null;
+            if (parseNode.GetChildNode("passed") is { } nullNodePassed && nullNodePassed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Passed = null;
+            if (parseNode.GetChildNode("reviewed_teammate") is { } nullNodeReviewedTeammate && nullNodeReviewedTeammate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReviewedTeammate = null;
+            if (parseNode.GetChildNode("reviewer") is { } nullNodeReviewer && nullNodeReviewer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reviewer = null;
+            if (parseNode.GetChildNode("review_id") is { } nullNodeReviewId && nullNodeReviewId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReviewId = null;
+            if (parseNode.GetChildNode("review_status") is { } nullNodeReviewStatus && nullNodeReviewStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReviewStatus = null;
+            if (parseNode.GetChildNode("revised_by") is { } nullNodeRevisedBy && nullNodeRevisedBy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RevisedBy = null;
+            if (parseNode.GetChildNode("score") is { } nullNodeScore && nullNodeScore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Score = null;
+            if (parseNode.GetChildNode("scorecard_id") is { } nullNodeScorecardId && nullNodeScorecardId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScorecardId = null;
+            if (parseNode.GetChildNode("scorecard_type") is { } nullNodeScorecardType && nullNodeScorecardType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ScorecardType = null;
+            if (parseNode.GetChildNode("submitted_by") is { } nullNodeSubmittedBy && nullNodeSubmittedBy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SubmittedBy = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The numeric score produced by AI evaluation, if applicable. Null when not AI-scored.</summary>
-        public double? AiScore { get; set; }
+        public double? AiScore { get => _explicitNullValueAiScore; set { _explicitNullValueAiScore = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_score"); else _explicitNullProperties?.Remove("ai_score"); } }
+        private double? _explicitNullValueAiScore = default!;
         /// <summary>The time the scorecard was last evaluated. Null in the rare case the underlying record&apos;s timestamp is not yet set.</summary>
-        public int? EvaluatedAt { get; set; }
+        public int? EvaluatedAt { get => _explicitNullValueEvaluatedAt; set { _explicitNullValueEvaluatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluated_at"); else _explicitNullProperties?.Remove("evaluated_at"); } }
+        private int? _explicitNullValueEvaluatedAt = default!;
         /// <summary>Per-evaluator results within this scorecard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator>? Evaluators { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator>? Evaluators { get => _explicitNullValueEvaluators; set { _explicitNullValueEvaluators = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluators"); else _explicitNullProperties?.Remove("evaluators"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator>? _explicitNullValueEvaluators = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator> Evaluators { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator> Evaluators { get => _explicitNullValueEvaluators; set { _explicitNullValueEvaluators = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluators"); else _explicitNullProperties?.Remove("evaluators"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardEvaluator> _explicitNullValueEvaluators = default!;
 #endif
         /// <summary>The name of the scorecard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>The notes teammates left on the QA review linked to this scorecard entry. Empty when the scorecard has no linked review.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNote>? Notes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNote>? Notes { get => _explicitNullValueNotes; set { _explicitNullValueNotes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notes"); else _explicitNullProperties?.Remove("notes"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNote>? _explicitNullValueNotes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNote> Notes { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNote> Notes { get => _explicitNullValueNotes; set { _explicitNullValueNotes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notes"); else _explicitNullProperties?.Remove("notes"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardNote> _explicitNullValueNotes = default!;
 #endif
         /// <summary>Whether the conversation passed the scorecard. Null when the scorecard has not been scored.</summary>
-        public bool? Passed { get; set; }
+        public bool? Passed { get => _explicitNullValuePassed; set { _explicitNullValuePassed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("passed"); else _explicitNullProperties?.Remove("passed"); } }
+        private bool? _explicitNullValuePassed = default!;
         /// <summary>The teammate (or AI agent) whose handling of the conversation was reviewed by this scorecard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate? ReviewedTeammate { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate? ReviewedTeammate { get => _explicitNullValueReviewedTeammate; set { _explicitNullValueReviewedTeammate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewed_teammate"); else _explicitNullProperties?.Remove("reviewed_teammate"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate? _explicitNullValueReviewedTeammate = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate ReviewedTeammate { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate ReviewedTeammate { get => _explicitNullValueReviewedTeammate; set { _explicitNullValueReviewedTeammate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewed_teammate"); else _explicitNullProperties?.Remove("reviewed_teammate"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewedTeammate _explicitNullValueReviewedTeammate = default!;
 #endif
         /// <summary>Who the review of this scorecard is assigned to. `ai` when it is assigned to Fin; `admin` when it is assigned to a teammate. Null when no review exists for this scorecard or the review is unassigned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer? Reviewer { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer? Reviewer { get => _explicitNullValueReviewer; set { _explicitNullValueReviewer = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewer"); else _explicitNullProperties?.Remove("reviewer"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer? _explicitNullValueReviewer = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer Reviewer { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer Reviewer { get => _explicitNullValueReviewer; set { _explicitNullValueReviewer = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewer"); else _explicitNullProperties?.Remove("reviewer"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewer _explicitNullValueReviewer = default!;
 #endif
         /// <summary>The ID of the QA review linked to this scorecard entry.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReviewId { get; set; }
+        public string? ReviewId { get => _explicitNullValueReviewId; set { _explicitNullValueReviewId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("review_id"); else _explicitNullProperties?.Remove("review_id"); } }
+        private string? _explicitNullValueReviewId = default!;
 #nullable restore
 #else
-        public string ReviewId { get; set; }
+        public string ReviewId { get => _explicitNullValueReviewId; set { _explicitNullValueReviewId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("review_id"); else _explicitNullProperties?.Remove("review_id"); } }
+        private string _explicitNullValueReviewId = default!;
 #endif
         /// <summary>The status of the review of this scorecard, as shown in the QA reviews list in Intercom. `unreviewed` while the review is waiting for a reviewer&apos;s verdict; `submitted` once the review has been submitted; `passed_review`, `needs_fix`, `wont_fix` or `fix_complete` when a teammate set a specific outcome. Null when no review exists for this scorecard.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewStatus? ReviewStatus { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewStatus? ReviewStatus { get => _explicitNullValueReviewStatus; set { _explicitNullValueReviewStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("review_status"); else _explicitNullProperties?.Remove("review_status"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardReviewStatus? _explicitNullValueReviewStatus = default!;
         /// <summary>Who last changed the review of this scorecard after it was submitted. `ai` when Fin made the change; `admin` when a teammate did. Null while the review is unreviewed, when it has not been changed since it was submitted, or when no review exists for this scorecard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy? RevisedBy { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy? RevisedBy { get => _explicitNullValueRevisedBy; set { _explicitNullValueRevisedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("revised_by"); else _explicitNullProperties?.Remove("revised_by"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy? _explicitNullValueRevisedBy = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy RevisedBy { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy RevisedBy { get => _explicitNullValueRevisedBy; set { _explicitNullValueRevisedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("revised_by"); else _explicitNullProperties?.Remove("revised_by"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardRevisedBy _explicitNullValueRevisedBy = default!;
 #endif
         /// <summary>The numeric score for the scorecard. Null when the scorecard has not been scored.</summary>
-        public double? Score { get; set; }
+        public double? Score { get => _explicitNullValueScore; set { _explicitNullValueScore = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("score"); else _explicitNullProperties?.Remove("score"); } }
+        private double? _explicitNullValueScore = default!;
         /// <summary>The unique identifier of the scorecard definition.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ScorecardId { get; set; }
+        public string? ScorecardId { get => _explicitNullValueScorecardId; set { _explicitNullValueScorecardId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scorecard_id"); else _explicitNullProperties?.Remove("scorecard_id"); } }
+        private string? _explicitNullValueScorecardId = default!;
 #nullable restore
 #else
-        public string ScorecardId { get; set; }
+        public string ScorecardId { get => _explicitNullValueScorecardId; set { _explicitNullValueScorecardId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scorecard_id"); else _explicitNullProperties?.Remove("scorecard_id"); } }
+        private string _explicitNullValueScorecardId = default!;
 #endif
         /// <summary>The type of scorecard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ScorecardType { get; set; }
+        public string? ScorecardType { get => _explicitNullValueScorecardType; set { _explicitNullValueScorecardType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scorecard_type"); else _explicitNullProperties?.Remove("scorecard_type"); } }
+        private string? _explicitNullValueScorecardType = default!;
 #nullable restore
 #else
-        public string ScorecardType { get; set; }
+        public string ScorecardType { get => _explicitNullValueScorecardType; set { _explicitNullValueScorecardType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("scorecard_type"); else _explicitNullProperties?.Remove("scorecard_type"); } }
+        private string _explicitNullValueScorecardType = default!;
 #endif
         /// <summary>Who last submitted the review of this scorecard, which can differ from the `reviewer` it is assigned to. `ai` when Fin submitted it; `admin` when a teammate did. Null while the review is unreviewed or when no review exists for this scorecard.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy? SubmittedBy { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy? SubmittedBy { get => _explicitNullValueSubmittedBy; set { _explicitNullValueSubmittedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("submitted_by"); else _explicitNullProperties?.Remove("submitted_by"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy? _explicitNullValueSubmittedBy = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy SubmittedBy { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy SubmittedBy { get => _explicitNullValueSubmittedBy; set { _explicitNullValueSubmittedBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("submitted_by"); else _explicitNullProperties?.Remove("submitted_by"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy _explicitNullValueSubmittedBy = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard"/> and sets the default values.
@@ -120,7 +167,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -169,6 +216,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("scorecard_id", ScorecardId);
             writer.WriteStringValue("scorecard_type", ScorecardType);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecardSubmittedBy>("submitted_by", SubmittedBy);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

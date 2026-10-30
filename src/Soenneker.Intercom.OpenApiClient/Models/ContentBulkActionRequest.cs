@@ -11,42 +11,63 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class ContentBulkActionRequest : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("action") is { } nullNodeAction && nullNodeAction.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Action = null;
+            if (parseNode.GetChildNode("audience") is { } nullNodeAudience && nullNodeAudience.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Audience = null;
+            if (parseNode.GetChildNode("availability") is { } nullNodeAvailability && nullNodeAvailability.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Availability = null;
+            if (parseNode.GetChildNode("content_ids") is { } nullNodeContentIds && nullNodeContentIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentIds = null;
+            if (parseNode.GetChildNode("tags") is { } nullNodeTags && nullNodeTags.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tags = null;
+        }
+
         /// <summary>The bulk action to perform. Allowed `content_ids[].type` values vary per action:  * `publish`, `unpublish`: `article_content`  * `delete`: `article_content`, `content_snippet`, `file_source_content`, `internal_article`  * `set_availability`, `set_audience`: `article_content`, `content_snippet`, `external_content`, `file_source_content`, `internal_article`  * `update_tags`: `article` (the parent Article id, not `article_content`), `content_snippet`, `external_content`, `file_source_content`, `internal_article`</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction? Action { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction? Action { get => _explicitNullValueAction; set { _explicitNullValueAction = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("action"); else _explicitNullProperties?.Remove("action"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAction? _explicitNullValueAction = default!;
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Required when `action` is `set_audience`. Manages segment membership.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience? Audience { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience? Audience { get => _explicitNullValueAudience; set { _explicitNullValueAudience = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audience"); else _explicitNullProperties?.Remove("audience"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience? _explicitNullValueAudience = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience Audience { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience Audience { get => _explicitNullValueAudience; set { _explicitNullValueAudience = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audience"); else _explicitNullProperties?.Remove("audience"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience _explicitNullValueAudience = default!;
 #endif
         /// <summary>Required when `action` is `set_availability`. Each field is optional — only theproperties present in the request are toggled.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability? Availability { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability? Availability { get => _explicitNullValueAvailability; set { _explicitNullValueAvailability = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("availability"); else _explicitNullProperties?.Remove("availability"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability? _explicitNullValueAvailability = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability Availability { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability Availability { get => _explicitNullValueAvailability; set { _explicitNullValueAvailability = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("availability"); else _explicitNullProperties?.Remove("availability"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability _explicitNullValueAvailability = default!;
 #endif
         /// <summary>Up to 1,000 content items to apply the action to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>? ContentIds { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>? ContentIds { get => _explicitNullValueContentIds; set { _explicitNullValueContentIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_ids"); else _explicitNullProperties?.Remove("content_ids"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>? _explicitNullValueContentIds = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem> ContentIds { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem> ContentIds { get => _explicitNullValueContentIds; set { _explicitNullValueContentIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_ids"); else _explicitNullProperties?.Remove("content_ids"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem> _explicitNullValueContentIds = default!;
 #endif
         /// <summary>Required when `action` is `update_tags`. Applies and/or removes existing tags.Supply at least one of `add_tag_ids` / `remove_tag_ids`. At most 100 distinct tag IDsmay be supplied across `add_tag_ids` and `remove_tag_ids` combined. Tag IDs mustreference existing, non-archived tags; exceeding the limit or referencing unknown orarchived IDs is rejected with `parameter_invalid` (HTTP 422).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags? Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags? Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags? _explicitNullValueTags = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags _explicitNullValueTags = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest"/> and sets the default values.
@@ -63,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -92,6 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability>("availability", Availability);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestContentIdsItem>("content_ids", ContentIds);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestTags>("tags", Tags);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -12,76 +12,111 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Ai_call_response : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("app_id") is { } nullNodeAppId && nullNodeAppId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AppId = null;
+            if (parseNode.GetChildNode("call_summary") is { } nullNodeCallSummary && nullNodeCallSummary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallSummary = null;
+            if (parseNode.GetChildNode("call_transcript") is { } nullNodeCallTranscript && nullNodeCallTranscript.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallTranscript = null;
+            if (parseNode.GetChildNode("external_call_id") is { } nullNodeExternalCallId && nullNodeExternalCallId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExternalCallId = null;
+            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("intent") is { } nullNodeIntent && nullNodeIntent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Intent = null;
+            if (parseNode.GetChildNode("intercom_call_id") is { } nullNodeIntercomCallId && nullNodeIntercomCallId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomCallId = null;
+            if (parseNode.GetChildNode("intercom_conversation_id") is { } nullNodeIntercomConversationId && nullNodeIntercomConversationId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomConversationId = null;
+            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("user_phone_number") is { } nullNodeUserPhoneNumber && nullNodeUserPhoneNumber.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserPhoneNumber = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The workspace identifier</summary>
-        public int? AppId { get; set; }
+        public int? AppId { get => _explicitNullValueAppId; set { _explicitNullValueAppId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("app_id"); else _explicitNullProperties?.Remove("app_id"); } }
+        private int? _explicitNullValueAppId = default!;
         /// <summary>Summary of the call conversation, truncated to 256 characters. Empty string if no summary available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CallSummary { get; set; }
+        public string? CallSummary { get => _explicitNullValueCallSummary; set { _explicitNullValueCallSummary = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("call_summary"); else _explicitNullProperties?.Remove("call_summary"); } }
+        private string? _explicitNullValueCallSummary = default!;
 #nullable restore
 #else
-        public string CallSummary { get; set; }
+        public string CallSummary { get => _explicitNullValueCallSummary; set { _explicitNullValueCallSummary = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("call_summary"); else _explicitNullProperties?.Remove("call_summary"); } }
+        private string _explicitNullValueCallSummary = default!;
 #endif
         /// <summary>Array of transcript entries for the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_call_transcript>? CallTranscript { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_call_transcript>? CallTranscript { get => _explicitNullValueCallTranscript; set { _explicitNullValueCallTranscript = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("call_transcript"); else _explicitNullProperties?.Remove("call_transcript"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_call_transcript>? _explicitNullValueCallTranscript = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_call_transcript> CallTranscript { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_call_transcript> CallTranscript { get => _explicitNullValueCallTranscript; set { _explicitNullValueCallTranscript = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("call_transcript"); else _explicitNullProperties?.Remove("call_transcript"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_call_transcript> _explicitNullValueCallTranscript = default!;
 #endif
         /// <summary>The external call identifier from the call provider</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalCallId { get; set; }
+        public string? ExternalCallId { get => _explicitNullValueExternalCallId; set { _explicitNullValueExternalCallId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_call_id"); else _explicitNullProperties?.Remove("external_call_id"); } }
+        private string? _explicitNullValueExternalCallId = default!;
 #nullable restore
 #else
-        public string ExternalCallId { get; set; }
+        public string ExternalCallId { get => _explicitNullValueExternalCallId; set { _explicitNullValueExternalCallId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_call_id"); else _explicitNullProperties?.Remove("external_call_id"); } }
+        private string _explicitNullValueExternalCallId = default!;
 #endif
         /// <summary>The unique identifier for the external reference</summary>
-        public int? Id { get; set; }
+        public int? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private int? _explicitNullValueId = default!;
         /// <summary>Array of intent classifications for the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_intent>? Intent { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_intent>? Intent { get => _explicitNullValueIntent; set { _explicitNullValueIntent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intent"); else _explicitNullProperties?.Remove("intent"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_intent>? _explicitNullValueIntent = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_intent> Intent { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_intent> Intent { get => _explicitNullValueIntent; set { _explicitNullValueIntent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intent"); else _explicitNullProperties?.Remove("intent"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response_intent> _explicitNullValueIntent = default!;
 #endif
         /// <summary>The Intercom call identifier, if the call has been matched</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IntercomCallId { get; set; }
+        public string? IntercomCallId { get => _explicitNullValueIntercomCallId; set { _explicitNullValueIntercomCallId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_call_id"); else _explicitNullProperties?.Remove("intercom_call_id"); } }
+        private string? _explicitNullValueIntercomCallId = default!;
 #nullable restore
 #else
-        public string IntercomCallId { get; set; }
+        public string IntercomCallId { get => _explicitNullValueIntercomCallId; set { _explicitNullValueIntercomCallId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_call_id"); else _explicitNullProperties?.Remove("intercom_call_id"); } }
+        private string _explicitNullValueIntercomCallId = default!;
 #endif
         /// <summary>The Intercom conversation identifier, if a conversation has been created</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IntercomConversationId { get; set; }
+        public string? IntercomConversationId { get => _explicitNullValueIntercomConversationId; set { _explicitNullValueIntercomConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_conversation_id"); else _explicitNullProperties?.Remove("intercom_conversation_id"); } }
+        private string? _explicitNullValueIntercomConversationId = default!;
 #nullable restore
 #else
-        public string IntercomConversationId { get; set; }
+        public string IntercomConversationId { get => _explicitNullValueIntercomConversationId; set { _explicitNullValueIntercomConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_conversation_id"); else _explicitNullProperties?.Remove("intercom_conversation_id"); } }
+        private string _explicitNullValueIntercomConversationId = default!;
 #endif
         /// <summary>Status of the call. Can be &quot;registered&quot;, &quot;in-progress&quot;, or a resolution state</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get; set; }
+        public string? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        private string? _explicitNullValueStatus = default!;
 #nullable restore
 #else
-        public string Status { get; set; }
+        public string Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        private string _explicitNullValueStatus = default!;
 #endif
         /// <summary>Phone number in E.164 format for the call</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UserPhoneNumber { get; set; }
+        public string? UserPhoneNumber { get => _explicitNullValueUserPhoneNumber; set { _explicitNullValueUserPhoneNumber = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_phone_number"); else _explicitNullProperties?.Remove("user_phone_number"); } }
+        private string? _explicitNullValueUserPhoneNumber = default!;
 #nullable restore
 #else
-        public string UserPhoneNumber { get; set; }
+        public string UserPhoneNumber { get => _explicitNullValueUserPhoneNumber; set { _explicitNullValueUserPhoneNumber = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_phone_number"); else _explicitNullProperties?.Remove("user_phone_number"); } }
+        private string _explicitNullValueUserPhoneNumber = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response"/> and sets the default values.
@@ -98,7 +133,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Ai_call_response(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -137,6 +172,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("intercom_conversation_id", IntercomConversationId);
             writer.WriteStringValue("status", Status);
             writer.WriteStringValue("user_phone_number", UserPhoneNumber);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

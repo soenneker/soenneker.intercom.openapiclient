@@ -12,63 +12,104 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class SlaRule : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("archived") is { } nullNodeArchived && nullNodeArchived.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Archived = null;
+            if (parseNode.GetChildNode("archived_at") is { } nullNodeArchivedAt && nullNodeArchivedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ArchivedAt = null;
+            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("first_reply_time_in_seconds") is { } nullNodeFirstReplyTimeInSeconds && nullNodeFirstReplyTimeInSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstReplyTimeInSeconds = null;
+            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("next_reply_time_in_seconds") is { } nullNodeNextReplyTimeInSeconds && nullNodeNextReplyTimeInSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NextReplyTimeInSeconds = null;
+            if (parseNode.GetChildNode("office_hours_schedule_id") is { } nullNodeOfficeHoursScheduleId && nullNodeOfficeHoursScheduleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OfficeHoursScheduleId = null;
+            if (parseNode.GetChildNode("pause_on_snooze") is { } nullNodePauseOnSnooze && nullNodePauseOnSnooze.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PauseOnSnooze = null;
+            if (parseNode.GetChildNode("pause_on_waiting_on_customer") is { } nullNodePauseOnWaitingOnCustomer && nullNodePauseOnWaitingOnCustomer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PauseOnWaitingOnCustomer = null;
+            if (parseNode.GetChildNode("resolution_time_in_seconds") is { } nullNodeResolutionTimeInSeconds && nullNodeResolutionTimeInSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ResolutionTimeInSeconds = null;
+            if (parseNode.GetChildNode("speed_of_answer_in_seconds") is { } nullNodeSpeedOfAnswerInSeconds && nullNodeSpeedOfAnswerInSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SpeedOfAnswerInSeconds = null;
+            if (parseNode.GetChildNode("time_to_close_in_seconds") is { } nullNodeTimeToCloseInSeconds && nullNodeTimeToCloseInSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeToCloseInSeconds = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the SLA rule is archived.</summary>
-        public bool? Archived { get; set; }
+        public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
+        private bool? _explicitNullValueArchived = default!;
         /// <summary>The time the SLA rule was archived as a Unix timestamp, or `null` if it is not archived.</summary>
-        public int? ArchivedAt { get; set; }
+        public int? ArchivedAt { get => _explicitNullValueArchivedAt; set { _explicitNullValueArchivedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived_at"); else _explicitNullProperties?.Remove("archived_at"); } }
+        private int? _explicitNullValueArchivedAt = default!;
         /// <summary>The time the SLA rule was created as a Unix timestamp.</summary>
-        public int? CreatedAt { get; set; }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private int? _explicitNullValueCreatedAt = default!;
         /// <summary>The target time in seconds for the first reply, or `null` if no target is set.</summary>
-        public int? FirstReplyTimeInSeconds { get; set; }
+        public int? FirstReplyTimeInSeconds { get => _explicitNullValueFirstReplyTimeInSeconds; set { _explicitNullValueFirstReplyTimeInSeconds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_reply_time_in_seconds"); else _explicitNullProperties?.Remove("first_reply_time_in_seconds"); } }
+        private int? _explicitNullValueFirstReplyTimeInSeconds = default!;
         /// <summary>The unique identifier for the SLA rule.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private string _explicitNullValueId = default!;
 #endif
         /// <summary>The name of the SLA rule. It is unique within the workspace.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>The target time in seconds for a teammate to reply to each subsequent customer message, or `null` if no target is set.</summary>
-        public int? NextReplyTimeInSeconds { get; set; }
+        public int? NextReplyTimeInSeconds { get => _explicitNullValueNextReplyTimeInSeconds; set { _explicitNullValueNextReplyTimeInSeconds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("next_reply_time_in_seconds"); else _explicitNullProperties?.Remove("next_reply_time_in_seconds"); } }
+        private int? _explicitNullValueNextReplyTimeInSeconds = default!;
         /// <summary>The unique identifier for the [office hours schedule](/docs/references/preview/rest-api/api.intercom.io/office-hours/getofficehoursschedule) the SLA rule&apos;s timers count against. This is the SLA rule&apos;s own schedule if it has one, otherwise the workspace&apos;s default schedule. It is `null` if neither exists.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? OfficeHoursScheduleId { get; set; }
+        public string? OfficeHoursScheduleId { get => _explicitNullValueOfficeHoursScheduleId; set { _explicitNullValueOfficeHoursScheduleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("office_hours_schedule_id"); else _explicitNullProperties?.Remove("office_hours_schedule_id"); } }
+        private string? _explicitNullValueOfficeHoursScheduleId = default!;
 #nullable restore
 #else
-        public string OfficeHoursScheduleId { get; set; }
+        public string OfficeHoursScheduleId { get => _explicitNullValueOfficeHoursScheduleId; set { _explicitNullValueOfficeHoursScheduleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("office_hours_schedule_id"); else _explicitNullProperties?.Remove("office_hours_schedule_id"); } }
+        private string _explicitNullValueOfficeHoursScheduleId = default!;
 #endif
         /// <summary>Whether the SLA rule&apos;s timers pause while the conversation is snoozed.</summary>
-        public bool? PauseOnSnooze { get; set; }
+        public bool? PauseOnSnooze { get => _explicitNullValuePauseOnSnooze; set { _explicitNullValuePauseOnSnooze = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pause_on_snooze"); else _explicitNullProperties?.Remove("pause_on_snooze"); } }
+        private bool? _explicitNullValuePauseOnSnooze = default!;
         /// <summary>Whether the SLA rule&apos;s timers pause while the conversation is waiting on the customer.</summary>
-        public bool? PauseOnWaitingOnCustomer { get; set; }
+        public bool? PauseOnWaitingOnCustomer { get => _explicitNullValuePauseOnWaitingOnCustomer; set { _explicitNullValuePauseOnWaitingOnCustomer = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pause_on_waiting_on_customer"); else _explicitNullProperties?.Remove("pause_on_waiting_on_customer"); } }
+        private bool? _explicitNullValuePauseOnWaitingOnCustomer = default!;
         /// <summary>The target time in seconds for a ticket to be resolved, or `null` if no target is set.</summary>
-        public int? ResolutionTimeInSeconds { get; set; }
+        public int? ResolutionTimeInSeconds { get => _explicitNullValueResolutionTimeInSeconds; set { _explicitNullValueResolutionTimeInSeconds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("resolution_time_in_seconds"); else _explicitNullProperties?.Remove("resolution_time_in_seconds"); } }
+        private int? _explicitNullValueResolutionTimeInSeconds = default!;
         /// <summary>The target time in seconds to answer an inbound phone call, or `null` if no target is set. This timer does not pause.</summary>
-        public int? SpeedOfAnswerInSeconds { get; set; }
+        public int? SpeedOfAnswerInSeconds { get => _explicitNullValueSpeedOfAnswerInSeconds; set { _explicitNullValueSpeedOfAnswerInSeconds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("speed_of_answer_in_seconds"); else _explicitNullProperties?.Remove("speed_of_answer_in_seconds"); } }
+        private int? _explicitNullValueSpeedOfAnswerInSeconds = default!;
         /// <summary>The target time in seconds for closing the conversation, or `null` if no target is set.</summary>
-        public int? TimeToCloseInSeconds { get; set; }
+        public int? TimeToCloseInSeconds { get => _explicitNullValueTimeToCloseInSeconds; set { _explicitNullValueTimeToCloseInSeconds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_to_close_in_seconds"); else _explicitNullProperties?.Remove("time_to_close_in_seconds"); } }
+        private int? _explicitNullValueTimeToCloseInSeconds = default!;
         /// <summary>The type of the object - always `sla_rule`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private string _explicitNullValueType = default!;
 #endif
         /// <summary>The time the SLA rule was last updated as a Unix timestamp.</summary>
-        public int? UpdatedAt { get; set; }
+        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private int? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SlaRule"/> and sets the default values.
         /// </summary>
@@ -84,7 +125,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.SlaRule CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.SlaRule();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.SlaRule(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -133,6 +174,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("time_to_close_in_seconds", TimeToCloseInSeconds);
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

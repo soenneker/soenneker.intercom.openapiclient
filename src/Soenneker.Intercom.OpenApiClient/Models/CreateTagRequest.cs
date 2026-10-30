@@ -12,7 +12,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateTagRequest : IComposedTypeWrapper, IParsable
-    {
+    , global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder {
+        // Preserve ambiguous union payloads without inventing a discriminator.
+        /// <summary>The complete payload when no unique typed union branch can be selected.</summary>
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode UnrecognizedValue { get; set; } = null!;
+        public global::System.Collections.Generic.IDictionary<string, object> AdditionalData { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
+
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,11 +59,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTagRequest();
-            result.CreateOrUpdateTagRequest = new global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest();
-            result.TagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest();
-            result.TagMultipleUsersRequest = new global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest();
-            result.UntagCompanyRequest = new global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest();
-            return result;
+            
+            
+            
+            
+            
+            var unionPayload = parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue);
+            bool matchesUnionBranch0 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("name") != null && (parseNode.GetChildNode("taggable_type") == null || (parseNode.GetChildNode("taggable_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag1 && ("user".Equals(optionalTag1.GetValue(), global::System.StringComparison.Ordinal) || "company".Equals(optionalTag1.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("name") != null && parseNode.GetChildNode("companies") != null))();
+            bool matchesUnionBranch2 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("name") != null && parseNode.GetChildNode("companies") != null))();
+            bool matchesUnionBranch3 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("name") != null && parseNode.GetChildNode("users") != null))();
+            if (result.CreateOrUpdateTagRequest == null && result.TagCompanyRequest == null && result.TagMultipleUsersRequest == null && result.UntagCompanyRequest == null && matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch3) result.CreateOrUpdateTagRequest = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest(), parseNode);
+            if (result.CreateOrUpdateTagRequest == null && result.TagCompanyRequest == null && result.TagMultipleUsersRequest == null && result.UntagCompanyRequest == null && matchesUnionBranch1 && !matchesUnionBranch0 && !matchesUnionBranch2 && !matchesUnionBranch3) result.TagCompanyRequest = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.TagCompanyRequest(), parseNode);
+            if (result.CreateOrUpdateTagRequest == null && result.TagCompanyRequest == null && result.TagMultipleUsersRequest == null && result.UntagCompanyRequest == null && matchesUnionBranch2 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch3) result.UntagCompanyRequest = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.UntagCompanyRequest(), parseNode);
+            if (result.CreateOrUpdateTagRequest == null && result.TagCompanyRequest == null && result.TagMultipleUsersRequest == null && result.UntagCompanyRequest == null && matchesUnionBranch3 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2) result.TagMultipleUsersRequest = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.TagMultipleUsersRequest(), parseNode);
+            if (result.CreateOrUpdateTagRequest == null && result.TagCompanyRequest == null && result.TagMultipleUsersRequest == null && result.UntagCompanyRequest == null) result.UnrecognizedValue = unionPayload;
+return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -78,6 +94,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <param name="writer">Serialization writer to use to serialize this model</param>
         public virtual void Serialize(ISerializationWriter writer)
         {
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (CreateOrUpdateTagRequest == null && TagCompanyRequest == null && TagMultipleUsersRequest == null && UntagCompanyRequest == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
+            if (CreateOrUpdateTagRequest != null && TagCompanyRequest == null && TagMultipleUsersRequest == null && UntagCompanyRequest == null) { if (CreateOrUpdateTagRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CreateOrUpdateTagRequest); return; }
+            if (TagCompanyRequest != null && CreateOrUpdateTagRequest == null && TagMultipleUsersRequest == null && UntagCompanyRequest == null) { if (TagCompanyRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, TagCompanyRequest); return; }
+            if (TagMultipleUsersRequest != null && CreateOrUpdateTagRequest == null && TagCompanyRequest == null && UntagCompanyRequest == null) { if (TagMultipleUsersRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, TagMultipleUsersRequest); return; }
+            if (UntagCompanyRequest != null && CreateOrUpdateTagRequest == null && TagCompanyRequest == null && TagMultipleUsersRequest == null) { if (UntagCompanyRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, UntagCompanyRequest); return; }
+
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateTagRequest>(null, CreateOrUpdateTagRequest, TagCompanyRequest, TagMultipleUsersRequest, UntagCompanyRequest);
         }

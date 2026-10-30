@@ -12,57 +12,87 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class AdminReplyTicketRequest : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("attachment_files") is { } nullNodeAttachmentFiles && nullNodeAttachmentFiles.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentFiles = null;
+            if (parseNode.GetChildNode("attachment_urls") is { } nullNodeAttachmentUrls && nullNodeAttachmentUrls.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentUrls = null;
+            if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("cross_post") is { } nullNodeCrossPost && nullNodeCrossPost.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CrossPost = null;
+            if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
+            if (parseNode.GetChildNode("reply_options") is { } nullNodeReplyOptions && nullNodeReplyOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReplyOptions = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The id of the admin who is authoring the comment.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminId { get; set; }
+        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        private string? _explicitNullValueAdminId = default!;
 #nullable restore
 #else
-        public string AdminId { get; set; }
+        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        private string _explicitNullValueAdminId = default!;
 #endif
         /// <summary>A list of files that will be added as attachments. You can include up to 10 files. If both attachment_files and attachment_urls are provided, attachment_files takes precedence.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? AttachmentFiles { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? AttachmentFiles { get => _explicitNullValueAttachmentFiles; set { _explicitNullValueAttachmentFiles = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_files"); else _explicitNullProperties?.Remove("attachment_files"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? _explicitNullValueAttachmentFiles = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> AttachmentFiles { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> AttachmentFiles { get => _explicitNullValueAttachmentFiles; set { _explicitNullValueAttachmentFiles = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_files"); else _explicitNullProperties?.Remove("attachment_files"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> _explicitNullValueAttachmentFiles = default!;
 #endif
         /// <summary>A list of image URLs that will be added as attachments. You can include up to 10 URLs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? AttachmentUrls { get; set; }
+        public List<string>? AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
+        private List<string>? _explicitNullValueAttachmentUrls = default!;
 #nullable restore
 #else
-        public List<string> AttachmentUrls { get; set; }
+        public List<string> AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
+        private List<string> _explicitNullValueAttachmentUrls = default!;
 #endif
         /// <summary>The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get; set; }
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public string Body { get; set; }
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        private string _explicitNullValueBody = default!;
 #endif
         /// <summary>The time the reply was created. If not provided, the current time will be used.</summary>
-        public int? CreatedAt { get; set; }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private int? _explicitNullValueCreatedAt = default!;
         /// <summary>If set to true, the note will be cross-posted to all linked conversations. Only applicable to note message types on back-office tickets.</summary>
-        public bool? CrossPost { get; set; }
+        public bool? CrossPost { get => _explicitNullValueCrossPost; set { _explicitNullValueCrossPost = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cross_post"); else _explicitNullProperties?.Remove("cross_post"); } }
+        private bool? _explicitNullValueCrossPost = default!;
         /// <summary>The type of reply. Tracker tickets and back-office tickets that are not shared with the customer do not support `comment`; use `note` instead.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType? MessageType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType? _explicitNullValueMessageType = default!;
         /// <summary>The quick reply options to display. Must be present for quick_reply message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>? ReplyOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>? ReplyOptions { get => _explicitNullValueReplyOptions; set { _explicitNullValueReplyOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reply_options"); else _explicitNullProperties?.Remove("reply_options"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>? _explicitNullValueReplyOptions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem> ReplyOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem> ReplyOptions { get => _explicitNullValueReplyOptions; set { _explicitNullValueReplyOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reply_options"); else _explicitNullProperties?.Remove("reply_options"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem> _explicitNullValueReplyOptions = default!;
 #endif
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.AdminType? _explicitNullValueType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/> and sets the default values.
         /// </summary>
@@ -78,7 +108,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -115,6 +145,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequestReplyOptionsItem>("reply_options", ReplyOptions);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>("type", Type);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

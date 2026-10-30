@@ -12,157 +12,232 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Conversation_list_item : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("admin_assignee_id") is { } nullNodeAdminAssigneeId && nullNodeAdminAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminAssigneeId = null;
+            if (parseNode.GetChildNode("ai_agent") is { } nullNodeAiAgent && nullNodeAiAgent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiAgent = null;
+            if (parseNode.GetChildNode("ai_agent_participated") is { } nullNodeAiAgentParticipated && nullNodeAiAgentParticipated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiAgentParticipated = null;
+            if (parseNode.GetChildNode("company") is { } nullNodeCompany && nullNodeCompany.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Company = null;
+            if (parseNode.GetChildNode("contacts") is { } nullNodeContacts && nullNodeContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Contacts = null;
+            if (parseNode.GetChildNode("conversation_rating") is { } nullNodeConversationRating && nullNodeConversationRating.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationRating = null;
+            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("custom_attributes") is { } nullNodeCustomAttributes && nullNodeCustomAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomAttributes = null;
+            if (parseNode.GetChildNode("first_contact_reply") is { } nullNodeFirstContactReply && nullNodeFirstContactReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstContactReply = null;
+            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("linked_objects") is { } nullNodeLinkedObjects && nullNodeLinkedObjects.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LinkedObjects = null;
+            if (parseNode.GetChildNode("open") is { } nullNodeOpen && nullNodeOpen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Open = null;
+            if (parseNode.GetChildNode("priority") is { } nullNodePriority && nullNodePriority.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Priority = null;
+            if (parseNode.GetChildNode("read") is { } nullNodeRead && nullNodeRead.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Read = null;
+            if (parseNode.GetChildNode("sla_applied") is { } nullNodeSlaApplied && nullNodeSlaApplied.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaApplied = null;
+            if (parseNode.GetChildNode("snoozed_until") is { } nullNodeSnoozedUntil && nullNodeSnoozedUntil.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SnoozedUntil = null;
+            if (parseNode.GetChildNode("source") is { } nullNodeSource && nullNodeSource.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Source = null;
+            if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
+            if (parseNode.GetChildNode("statistics") is { } nullNodeStatistics && nullNodeStatistics.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Statistics = null;
+            if (parseNode.GetChildNode("tags") is { } nullNodeTags && nullNodeTags.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tags = null;
+            if (parseNode.GetChildNode("team_assignee_id") is { } nullNodeTeamAssigneeId && nullNodeTeamAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamAssigneeId = null;
+            if (parseNode.GetChildNode("teammates") is { } nullNodeTeammates && nullNodeTeammates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Teammates = null;
+            if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+            if (parseNode.GetChildNode("waiting_since") is { } nullNodeWaitingSince && nullNodeWaitingSince.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WaitingSince = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The id of the admin assigned to the conversation. If it&apos;s not assigned to an admin it will return null.</summary>
-        public int? AdminAssigneeId { get; set; }
+        public int? AdminAssigneeId { get => _explicitNullValueAdminAssigneeId; set { _explicitNullValueAdminAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_assignee_id"); else _explicitNullProperties?.Remove("admin_assignee_id"); } }
+        private int? _explicitNullValueAdminAssigneeId = default!;
         /// <summary>Data related to AI Agent involvement in the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent? AiAgent { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent? AiAgent { get => _explicitNullValueAiAgent; set { _explicitNullValueAiAgent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_agent"); else _explicitNullProperties?.Remove("ai_agent"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent? _explicitNullValueAiAgent = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent AiAgent { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent AiAgent { get => _explicitNullValueAiAgent; set { _explicitNullValueAiAgent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_agent"); else _explicitNullProperties?.Remove("ai_agent"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent _explicitNullValueAiAgent = default!;
 #endif
         /// <summary>Indicates whether the AI Agent participated in the conversation.</summary>
-        public bool? AiAgentParticipated { get; set; }
+        public bool? AiAgentParticipated { get => _explicitNullValueAiAgentParticipated; set { _explicitNullValueAiAgentParticipated = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_agent_participated"); else _explicitNullProperties?.Remove("ai_agent_participated"); } }
+        private bool? _explicitNullValueAiAgentParticipated = default!;
         /// <summary>Companies allow you to represent organizations using your product. Each company will have its own description and be associated with contacts. You can fetch, create, update and list companies.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company? Company { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Company? Company { get => _explicitNullValueCompany; set { _explicitNullValueCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company"); else _explicitNullProperties?.Remove("company"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Company? _explicitNullValueCompany = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Company Company { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Company Company { get => _explicitNullValueCompany; set { _explicitNullValueCompany = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company"); else _explicitNullProperties?.Remove("company"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Company _explicitNullValueCompany = default!;
 #endif
         /// <summary>The list of contacts (users or leads) involved in this conversation. This will only contain one customer unless more were added via the group conversation feature.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts? Contacts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts? Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts? _explicitNullValueContacts = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts Contacts { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_contacts _explicitNullValueContacts = default!;
 #endif
         /// <summary>The Conversation Rating object which contains information on the rating and/or remark added by a Contact and the Admin assigned to the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating? ConversationRating { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating? ConversationRating { get => _explicitNullValueConversationRating; set { _explicitNullValueConversationRating = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_rating"); else _explicitNullProperties?.Remove("conversation_rating"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating? _explicitNullValueConversationRating = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating ConversationRating { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating ConversationRating { get => _explicitNullValueConversationRating; set { _explicitNullValueConversationRating = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_rating"); else _explicitNullProperties?.Remove("conversation_rating"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_rating _explicitNullValueConversationRating = default!;
 #endif
         /// <summary>The time the conversation was created.</summary>
-        public int? CreatedAt { get; set; }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private int? _explicitNullValueCreatedAt = default!;
         /// <summary>An object containing the different custom attributes associated to the conversation as key-value pairs. For relationship attributes the value will be a list of custom object instance models.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_custom_attributes? CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_custom_attributes? CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_custom_attributes? _explicitNullValueCustomAttributes = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_custom_attributes CustomAttributes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_custom_attributes CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_custom_attributes _explicitNullValueCustomAttributes = default!;
 #endif
         /// <summary>An object containing information on the first users message. For a contact initiated message this will represent the users original message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply? FirstContactReply { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply? FirstContactReply { get => _explicitNullValueFirstContactReply; set { _explicitNullValueFirstContactReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_contact_reply"); else _explicitNullProperties?.Remove("first_contact_reply"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply? _explicitNullValueFirstContactReply = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply FirstContactReply { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply FirstContactReply { get => _explicitNullValueFirstContactReply; set { _explicitNullValueFirstContactReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_contact_reply"); else _explicitNullProperties?.Remove("first_contact_reply"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_first_contact_reply _explicitNullValueFirstContactReply = default!;
 #endif
         /// <summary>The id representing the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get; set; }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get; set; }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        private string _explicitNullValueId = default!;
 #endif
         /// <summary>An object containing metadata about linked conversations and linked tickets. Up to 1000 can be returned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list? LinkedObjects { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list? LinkedObjects { get => _explicitNullValueLinkedObjects; set { _explicitNullValueLinkedObjects = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linked_objects"); else _explicitNullProperties?.Remove("linked_objects"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list? _explicitNullValueLinkedObjects = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list LinkedObjects { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list LinkedObjects { get => _explicitNullValueLinkedObjects; set { _explicitNullValueLinkedObjects = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linked_objects"); else _explicitNullProperties?.Remove("linked_objects"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list _explicitNullValueLinkedObjects = default!;
 #endif
         /// <summary>Indicates whether a conversation is open (true) or closed (false).</summary>
-        public bool? Open { get; set; }
+        public bool? Open { get => _explicitNullValueOpen; set { _explicitNullValueOpen = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("open"); else _explicitNullProperties?.Remove("open"); } }
+        private bool? _explicitNullValueOpen = default!;
         /// <summary>If marked as priority, it will return priority or else not_priority.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_priority? Priority { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_priority? Priority { get => _explicitNullValuePriority; set { _explicitNullValuePriority = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("priority"); else _explicitNullProperties?.Remove("priority"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_priority? _explicitNullValuePriority = default!;
         /// <summary>Indicates whether a conversation has been read.</summary>
-        public bool? Read { get; set; }
+        public bool? Read { get => _explicitNullValueRead; set { _explicitNullValueRead = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("read"); else _explicitNullProperties?.Remove("read"); } }
+        private bool? _explicitNullValueRead = default!;
         /// <summary>&quot;The SLA Applied object contains the details for which SLA has been applied to this conversation.Important: if there are any canceled sla_events for the conversation - meaning an SLA has been manually removed from a conversation, the sla_status will always be returned as null.&quot;</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied? SlaApplied { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied? SlaApplied { get => _explicitNullValueSlaApplied; set { _explicitNullValueSlaApplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_applied"); else _explicitNullProperties?.Remove("sla_applied"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied? _explicitNullValueSlaApplied = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied SlaApplied { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied SlaApplied { get => _explicitNullValueSlaApplied; set { _explicitNullValueSlaApplied = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_applied"); else _explicitNullProperties?.Remove("sla_applied"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied _explicitNullValueSlaApplied = default!;
 #endif
         /// <summary>If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.</summary>
-        public int? SnoozedUntil { get; set; }
+        public int? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
+        private int? _explicitNullValueSnoozedUntil = default!;
         /// <summary>The type of the conversation part that started this conversation. Can be Contact, Admin, Campaign, Automated or Operator initiated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source? Source { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source? Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source? _explicitNullValueSource = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source Source { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_source _explicitNullValueSource = default!;
 #endif
         /// <summary>Can be set to &quot;open&quot;, &quot;closed&quot; or &quot;snoozed&quot;.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_state? State { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_state? State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item_state? _explicitNullValueState = default!;
         /// <summary>A Statistics object containing all information required for reporting, with timestamps and calculated metrics.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics? Statistics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics? Statistics { get => _explicitNullValueStatistics; set { _explicitNullValueStatistics = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("statistics"); else _explicitNullProperties?.Remove("statistics"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics? _explicitNullValueStatistics = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics Statistics { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics Statistics { get => _explicitNullValueStatistics; set { _explicitNullValueStatistics = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("statistics"); else _explicitNullProperties?.Remove("statistics"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics _explicitNullValueStatistics = default!;
 #endif
         /// <summary>A list of tags objects associated with a conversation</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Tags? Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Tags? Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Tags? _explicitNullValueTags = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Tags Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Tags Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Tags _explicitNullValueTags = default!;
 #endif
         /// <summary>The id of the team assigned to the conversation. If it&apos;s not assigned to a team it will return null.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TeamAssigneeId { get; set; }
+        public string? TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
+        private string? _explicitNullValueTeamAssigneeId = default!;
 #nullable restore
 #else
-        public string TeamAssigneeId { get; set; }
+        public string TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
+        private string _explicitNullValueTeamAssigneeId = default!;
 #endif
         /// <summary>The list of teammates who participated in the conversation (wrote at least one conversation part).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates? Teammates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates? Teammates { get => _explicitNullValueTeammates; set { _explicitNullValueTeammates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teammates"); else _explicitNullProperties?.Remove("teammates"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates? _explicitNullValueTeammates = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates Teammates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates Teammates { get => _explicitNullValueTeammates; set { _explicitNullValueTeammates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teammates"); else _explicitNullProperties?.Remove("teammates"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_teammates _explicitNullValueTeammates = default!;
 #endif
         /// <summary>The title given to the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get; set; }
+        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        private string? _explicitNullValueTitle = default!;
 #nullable restore
 #else
-        public string Title { get; set; }
+        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>Always conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private string _explicitNullValueType = default!;
 #endif
         /// <summary>The last time the conversation was updated.</summary>
-        public int? UpdatedAt { get; set; }
+        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private int? _explicitNullValueUpdatedAt = default!;
         /// <summary>The last time a Contact responded to an Admin. In other words, the time a customer started waiting for a response. Set to null if last reply is from an Admin.</summary>
-        public int? WaitingSince { get; set; }
+        public int? WaitingSince { get => _explicitNullValueWaitingSince; set { _explicitNullValueWaitingSince = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("waiting_since"); else _explicitNullProperties?.Remove("waiting_since"); } }
+        private int? _explicitNullValueWaitingSince = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item"/> and sets the default values.
         /// </summary>
@@ -178,7 +253,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_list_item(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -249,6 +324,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("type", Type);
             writer.WriteIntValue("updated_at", UpdatedAt);
             writer.WriteIntValue("waiting_since", WaitingSince);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

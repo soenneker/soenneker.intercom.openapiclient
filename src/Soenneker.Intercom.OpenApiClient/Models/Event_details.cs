@@ -140,6 +140,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
         public static global::Soenneker.Intercom.OpenApiClient.Models.Event_details CreateFromDiscriminatorValue(IParseNode parseNode)
         {
+            // A null union input must not initialize an object branch.
+            if (global::System.Object.ReferenceEquals(parseNode, null)) throw new global::System.ArgumentNullException(nameof(parseNode));
+            if (parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) return new global::Soenneker.Intercom.OpenApiClient.Models.Event_details();
+
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.Event_details();
             result.ConversationAttributeUpdatedByAdmin = new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_attribute_updated_by_admin();
@@ -177,6 +181,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <param name="writer">Serialization writer to use to serialize this model</param>
         public virtual void Serialize(ISerializationWriter writer)
         {
+            // Empty composed wrappers serialize as JSON null.
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (ConversationAttributeUpdatedByAdmin == null && ConversationAttributeUpdatedByUser == null && ConversationAttributeUpdatedByWorkflow == null && ConversationSlaAppliedByRule == null && ConversationSlaAppliedByWorkflow == null && ConversationSlaPaused == null && ConversationSlaRemoved == null && ConversationSlaTargetMissed == null && ConversationSlaUnpaused == null && ConversationTagsUpdated == null && CustomActionFinished == null && CustomActionStarted == null && OperatorWorkflowEvent == null && PriorityChanged == null && Snoozed == null) { writer.WriteNullValue(null); return; }
+
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_attribute_updated_by_admin>(null, ConversationAttributeUpdatedByAdmin, ConversationAttributeUpdatedByUser, ConversationAttributeUpdatedByWorkflow, ConversationSlaAppliedByRule, ConversationSlaAppliedByWorkflow, ConversationSlaPaused, ConversationSlaRemoved, ConversationSlaTargetMissed, ConversationSlaUnpaused, ConversationTagsUpdated, CustomActionFinished, CustomActionStarted, OperatorWorkflowEvent, PriorityChanged, Snoozed);
         }

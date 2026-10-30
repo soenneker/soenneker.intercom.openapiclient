@@ -12,26 +12,41 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationSlaPaused : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("current_sla_status") is { } nullNodeCurrentSlaStatus && nullNodeCurrentSlaStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CurrentSlaStatus = null;
+            if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
+            if (parseNode.GetChildNode("sla_states") is { } nullNodeSlaStates && nullNodeSlaStates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaStates = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Overall SLA status at pause time</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedCurrentSlaStatus? CurrentSlaStatus { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedCurrentSlaStatus? CurrentSlaStatus { get => _explicitNullValueCurrentSlaStatus; set { _explicitNullValueCurrentSlaStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("current_sla_status"); else _explicitNullProperties?.Remove("current_sla_status"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedCurrentSlaStatus? _explicitNullValueCurrentSlaStatus = default!;
         /// <summary>Name of the SLA being paused</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SlaName { get; set; }
+        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        private string? _explicitNullValueSlaName = default!;
 #nullable restore
 #else
-        public string SlaName { get; set; }
+        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        private string _explicitNullValueSlaName = default!;
 #endif
         /// <summary>Status of all SLA targets at pause time</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty? SlaStates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty? SlaStates { get => _explicitNullValueSlaStates; set { _explicitNullValueSlaStates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_states"); else _explicitNullProperties?.Remove("sla_states"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty? _explicitNullValueSlaStates = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty SlaStates { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty SlaStates { get => _explicitNullValueSlaStates; set { _explicitNullValueSlaStates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_states"); else _explicitNullProperties?.Remove("sla_states"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty _explicitNullValueSlaStates = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPaused"/> and sets the default values.
@@ -48,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPaused CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPaused();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPaused(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -73,6 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedCurrentSlaStatus>("current_sla_status", CurrentSlaStatus);
             writer.WriteStringValue("sla_name", SlaName);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaPausedSlaStatesProperty>("sla_states", SlaStates);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

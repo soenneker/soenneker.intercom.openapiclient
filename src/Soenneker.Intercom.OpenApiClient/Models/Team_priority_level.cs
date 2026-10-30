@@ -12,24 +12,37 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Team_priority_level : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("primary_team_ids") is { } nullNodePrimaryTeamIds && nullNodePrimaryTeamIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryTeamIds = null;
+            if (parseNode.GetChildNode("secondary_team_ids") is { } nullNodeSecondaryTeamIds && nullNodeSecondaryTeamIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryTeamIds = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The primary team ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? PrimaryTeamIds { get; set; }
+        public List<int?>? PrimaryTeamIds { get => _explicitNullValuePrimaryTeamIds; set { _explicitNullValuePrimaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_team_ids"); else _explicitNullProperties?.Remove("primary_team_ids"); } }
+        private List<int?>? _explicitNullValuePrimaryTeamIds = default!;
 #nullable restore
 #else
-        public List<int?> PrimaryTeamIds { get; set; }
+        public List<int?> PrimaryTeamIds { get => _explicitNullValuePrimaryTeamIds; set { _explicitNullValuePrimaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_team_ids"); else _explicitNullProperties?.Remove("primary_team_ids"); } }
+        private List<int?> _explicitNullValuePrimaryTeamIds = default!;
 #endif
         /// <summary>The secondary team ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? SecondaryTeamIds { get; set; }
+        public List<int?>? SecondaryTeamIds { get => _explicitNullValueSecondaryTeamIds; set { _explicitNullValueSecondaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_team_ids"); else _explicitNullProperties?.Remove("secondary_team_ids"); } }
+        private List<int?>? _explicitNullValueSecondaryTeamIds = default!;
 #nullable restore
 #else
-        public List<int?> SecondaryTeamIds { get; set; }
+        public List<int?> SecondaryTeamIds { get => _explicitNullValueSecondaryTeamIds; set { _explicitNullValueSecondaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_team_ids"); else _explicitNullProperties?.Remove("secondary_team_ids"); } }
+        private List<int?> _explicitNullValueSecondaryTeamIds = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level"/> and sets the default values.
@@ -46,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Team_priority_level(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -69,6 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<int?>("primary_team_ids", PrimaryTeamIds);
             writer.WriteCollectionOfPrimitiveValues<int?>("secondary_team_ids", SecondaryTeamIds);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

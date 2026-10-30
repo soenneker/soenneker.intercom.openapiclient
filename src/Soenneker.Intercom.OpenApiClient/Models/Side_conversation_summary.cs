@@ -12,27 +12,42 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Side_conversation_summary : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("conversation_parts") is { } nullNodeConversationParts && nullNodeConversationParts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationParts = null;
+            if (parseNode.GetChildNode("side_conversation_id") is { } nullNodeSideConversationId && nullNodeSideConversationId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SideConversationId = null;
+            if (parseNode.GetChildNode("total_count") is { } nullNodeTotalCount && nullNodeTotalCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TotalCount = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The conversation parts (messages) in this side conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>? ConversationParts { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>? ConversationParts { get => _explicitNullValueConversationParts; set { _explicitNullValueConversationParts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_parts"); else _explicitNullProperties?.Remove("conversation_parts"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>? _explicitNullValueConversationParts = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part> ConversationParts { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part> ConversationParts { get => _explicitNullValueConversationParts; set { _explicitNullValueConversationParts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_parts"); else _explicitNullProperties?.Remove("conversation_parts"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part> _explicitNullValueConversationParts = default!;
 #endif
         /// <summary>The unique identifier for the side conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SideConversationId { get; set; }
+        public string? SideConversationId { get => _explicitNullValueSideConversationId; set { _explicitNullValueSideConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("side_conversation_id"); else _explicitNullProperties?.Remove("side_conversation_id"); } }
+        private string? _explicitNullValueSideConversationId = default!;
 #nullable restore
 #else
-        public string SideConversationId { get; set; }
+        public string SideConversationId { get => _explicitNullValueSideConversationId; set { _explicitNullValueSideConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("side_conversation_id"); else _explicitNullProperties?.Remove("side_conversation_id"); } }
+        private string _explicitNullValueSideConversationId = default!;
 #endif
         /// <summary>The total number of conversation parts in this side conversation.</summary>
-        public int? TotalCount { get; set; }
+        public int? TotalCount { get => _explicitNullValueTotalCount; set { _explicitNullValueTotalCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total_count"); else _explicitNullProperties?.Remove("total_count"); } }
+        private int? _explicitNullValueTotalCount = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary"/> and sets the default values.
         /// </summary>
@@ -48,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Side_conversation_summary(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -73,6 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part>("conversation_parts", ConversationParts);
             writer.WriteStringValue("side_conversation_id", SideConversationId);
             writer.WriteIntValue("total_count", TotalCount);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

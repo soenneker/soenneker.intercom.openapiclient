@@ -11,15 +11,28 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class SetAwayAdmin : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("away_mode_enabled") is { } nullNodeAwayModeEnabled && nullNodeAwayModeEnabled.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AwayModeEnabled = null;
+            if (parseNode.GetChildNode("away_mode_reassign") is { } nullNodeAwayModeReassign && nullNodeAwayModeReassign.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AwayModeReassign = null;
+            if (parseNode.GetChildNode("away_status_reason_id") is { } nullNodeAwayStatusReasonId && nullNodeAwayStatusReasonId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AwayStatusReasonId = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Set to &quot;true&quot; to change the status of the admin to away.</summary>
-        public bool? AwayModeEnabled { get; set; }
+        public bool? AwayModeEnabled { get => _explicitNullValueAwayModeEnabled; set { _explicitNullValueAwayModeEnabled = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("away_mode_enabled"); else _explicitNullProperties?.Remove("away_mode_enabled"); } }
+        private bool? _explicitNullValueAwayModeEnabled = default!;
         /// <summary>Set to &quot;true&quot; to assign any new conversation replies to your default inbox.</summary>
-        public bool? AwayModeReassign { get; set; }
+        public bool? AwayModeReassign { get => _explicitNullValueAwayModeReassign; set { _explicitNullValueAwayModeReassign = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("away_mode_reassign"); else _explicitNullProperties?.Remove("away_mode_reassign"); } }
+        private bool? _explicitNullValueAwayModeReassign = default!;
         /// <summary>The unique identifier of the away status reason</summary>
-        public int? AwayStatusReasonId { get; set; }
+        public int? AwayStatusReasonId { get => _explicitNullValueAwayStatusReasonId; set { _explicitNullValueAwayStatusReasonId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("away_status_reason_id"); else _explicitNullProperties?.Remove("away_status_reason_id"); } }
+        private int? _explicitNullValueAwayStatusReasonId = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SetAwayAdmin"/> and sets the default values.
         /// </summary>
@@ -35,7 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.SetAwayAdmin CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.SetAwayAdmin();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.SetAwayAdmin(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -60,6 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("away_mode_enabled", AwayModeEnabled);
             writer.WriteBoolValue("away_mode_reassign", AwayModeReassign);
             writer.WriteIntValue("away_status_reason_id", AwayStatusReasonId);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

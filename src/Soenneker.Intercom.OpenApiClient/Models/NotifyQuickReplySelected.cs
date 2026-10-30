@@ -12,13 +12,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public partial class NotifyQuickReplySelected : global::Soenneker.Intercom.OpenApiClient.Models.CustomChannelBaseEvent, IParsable
     #pragma warning restore CS1591
     {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public override void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            base.CaptureExplicitNulls(parseNode);
+            if (parseNode.GetChildNode("quick_reply_option_id") is { } nullNodeQuickReplyOptionId && nullNodeQuickReplyOptionId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) QuickReplyOptionId = null;
+        }
+
         /// <summary>Id of the selected quick reply option.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? QuickReplyOptionId { get; set; }
+        public string? QuickReplyOptionId { get => _explicitNullValueQuickReplyOptionId; set { _explicitNullValueQuickReplyOptionId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("quick_reply_option_id"); else _explicitNullProperties?.Remove("quick_reply_option_id"); } }
+        private string? _explicitNullValueQuickReplyOptionId = default!;
 #nullable restore
 #else
-        public string QuickReplyOptionId { get; set; }
+        public string QuickReplyOptionId { get => _explicitNullValueQuickReplyOptionId; set { _explicitNullValueQuickReplyOptionId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("quick_reply_option_id"); else _explicitNullProperties?.Remove("quick_reply_option_id"); } }
+        private string _explicitNullValueQuickReplyOptionId = default!;
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -28,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static new global::Soenneker.Intercom.OpenApiClient.Models.NotifyQuickReplySelected CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.NotifyQuickReplySelected();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.NotifyQuickReplySelected(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -49,7 +60,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
-            writer.WriteStringValue("quick_reply_option_id", QuickReplyOptionId);
+            writer.WriteStringValue("quick_reply_option_id", QuickReplyOptionId);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            
         }
     }
 }

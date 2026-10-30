@@ -48,7 +48,7 @@ namespace Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse.CreateFromDiscriminatorValue, default, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Download.Content.Data.Item.WithJob_identifierGetResponse.CreateFromDiscriminatorValue, new global::System.Collections.Generic.Dictionary<string, global::Microsoft.Kiota.Abstractions.Serialization.ParsableFactory<global::Microsoft.Kiota.Abstractions.Serialization.IParsable>> { { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue }, { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue } }, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// &quot;When a job has a status of complete, and thus a filled download_url, you can download your data by hitting that provided URL, formatted like so: https://api.intercom.io/download/content/data/xyz1234.Your exported message data will be streamed continuously back down to you in a gzipped CSV format.&gt; 📘 Octet header required&gt;&gt; You will have to specify the header Accept: `application/octet-stream` when hitting this endpoint.&quot;

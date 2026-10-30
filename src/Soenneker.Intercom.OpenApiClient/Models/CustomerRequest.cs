@@ -12,7 +12,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CustomerRequest : IComposedTypeWrapper, IParsable
-    {
+    , global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder {
+        // Preserve ambiguous union payloads without inventing a discriminator.
+        /// <summary>The complete payload when no unique typed union branch can be selected.</summary>
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode UnrecognizedValue { get; set; } = null!;
+        public global::System.Collections.Generic.IDictionary<string, object> AdditionalData { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
+
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -49,17 +54,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequest();
             if("CustomerRequestEmail".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CustomerRequestEmail = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail();
+                
             }
             else if("CustomerRequestIntercomUserId".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CustomerRequestIntercomUserId = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId();
+                
             }
             else if("CustomerRequestUserId".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CustomerRequestUserId = new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId();
+                
             }
-            return result;
+            
+            var unionPayload = parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue);
+            bool matchesUnionBranch0 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("intercom_user_id") != null))();
+            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("user_id") != null))();
+            bool matchesUnionBranch2 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("email") != null))();
+            if (result.CustomerRequestEmail == null && result.CustomerRequestIntercomUserId == null && result.CustomerRequestUserId == null && matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2) result.CustomerRequestIntercomUserId = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId(), parseNode);
+            if (result.CustomerRequestEmail == null && result.CustomerRequestIntercomUserId == null && result.CustomerRequestUserId == null && matchesUnionBranch1 && !matchesUnionBranch0 && !matchesUnionBranch2) result.CustomerRequestUserId = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId(), parseNode);
+            if (result.CustomerRequestEmail == null && result.CustomerRequestIntercomUserId == null && result.CustomerRequestUserId == null && matchesUnionBranch2 && !matchesUnionBranch0 && !matchesUnionBranch1) result.CustomerRequestEmail = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail(), parseNode);
+            if (result.CustomerRequestEmail == null && result.CustomerRequestIntercomUserId == null && result.CustomerRequestUserId == null) result.UnrecognizedValue = unionPayload;
+return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -87,17 +101,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <param name="writer">Serialization writer to use to serialize this model</param>
         public virtual void Serialize(ISerializationWriter writer)
         {
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (CustomerRequestEmail == null && CustomerRequestIntercomUserId == null && CustomerRequestUserId == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
+            if (CustomerRequestEmail != null && CustomerRequestIntercomUserId == null && CustomerRequestUserId == null) { if (CustomerRequestEmail is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CustomerRequestEmail); return; }
+            if (CustomerRequestIntercomUserId != null && CustomerRequestEmail == null && CustomerRequestUserId == null) { if (CustomerRequestIntercomUserId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CustomerRequestIntercomUserId); return; }
+            if (CustomerRequestUserId != null && CustomerRequestEmail == null && CustomerRequestIntercomUserId == null) { if (CustomerRequestUserId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CustomerRequestUserId); return; }
+
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             if(CustomerRequestEmail != null)
             {
+                if (CustomerRequestEmail is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestEmail>(null, CustomerRequestEmail);
             }
             else if(CustomerRequestIntercomUserId != null)
             {
+                if (CustomerRequestIntercomUserId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestIntercomUserId>(null, CustomerRequestIntercomUserId);
             }
             else if(CustomerRequestUserId != null)
             {
+                if (CustomerRequestUserId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomerRequestUserId>(null, CustomerRequestUserId);
             }
         }

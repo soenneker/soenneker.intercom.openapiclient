@@ -12,47 +12,77 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Update_ticket_type_attribute_request : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("allow_multiple_values") is { } nullNodeAllowMultipleValues && nullNodeAllowMultipleValues.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AllowMultipleValues = null;
+            if (parseNode.GetChildNode("archived") is { } nullNodeArchived && nullNodeArchived.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Archived = null;
+            if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
+            if (parseNode.GetChildNode("list_items") is { } nullNodeListItems && nullNodeListItems.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ListItems = null;
+            if (parseNode.GetChildNode("multiline") is { } nullNodeMultiline && nullNodeMultiline.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Multiline = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("required_to_create") is { } nullNodeRequiredToCreate && nullNodeRequiredToCreate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequiredToCreate = null;
+            if (parseNode.GetChildNode("required_to_create_for_contacts") is { } nullNodeRequiredToCreateForContacts && nullNodeRequiredToCreateForContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequiredToCreateForContacts = null;
+            if (parseNode.GetChildNode("visible_on_create") is { } nullNodeVisibleOnCreate && nullNodeVisibleOnCreate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) VisibleOnCreate = null;
+            if (parseNode.GetChildNode("visible_to_contacts") is { } nullNodeVisibleToContacts && nullNodeVisibleToContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) VisibleToContacts = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the attribute allows multiple files to be attached to it (only applicable to file attributes)</summary>
-        public bool? AllowMultipleValues { get; set; }
+        public bool? AllowMultipleValues { get => _explicitNullValueAllowMultipleValues; set { _explicitNullValueAllowMultipleValues = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("allow_multiple_values"); else _explicitNullProperties?.Remove("allow_multiple_values"); } }
+        private bool? _explicitNullValueAllowMultipleValues = default!;
         /// <summary>Whether the attribute should be archived and not shown during creation of the ticket (it will still be present on previously created tickets)</summary>
-        public bool? Archived { get; set; }
+        public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
+        private bool? _explicitNullValueArchived = default!;
         /// <summary>The description of the attribute presented to the teammate or contact</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get; set; }
+        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        private string? _explicitNullValueDescription = default!;
 #nullable restore
 #else
-        public string Description { get; set; }
+        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>A comma delimited list of items for the attribute value (only applicable to list attributes)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ListItems { get; set; }
+        public string? ListItems { get => _explicitNullValueListItems; set { _explicitNullValueListItems = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("list_items"); else _explicitNullProperties?.Remove("list_items"); } }
+        private string? _explicitNullValueListItems = default!;
 #nullable restore
 #else
-        public string ListItems { get; set; }
+        public string ListItems { get => _explicitNullValueListItems; set { _explicitNullValueListItems = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("list_items"); else _explicitNullProperties?.Remove("list_items"); } }
+        private string _explicitNullValueListItems = default!;
 #endif
         /// <summary>Whether the attribute allows multiple lines of text (only applicable to string attributes)</summary>
-        public bool? Multiline { get; set; }
+        public bool? Multiline { get => _explicitNullValueMultiline; set { _explicitNullValueMultiline = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("multiline"); else _explicitNullProperties?.Remove("multiline"); } }
+        private bool? _explicitNullValueMultiline = default!;
         /// <summary>The name of the ticket type attribute</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>Whether the attribute is required to be filled in when teammates are creating the ticket in Inbox.</summary>
-        public bool? RequiredToCreate { get; set; }
+        public bool? RequiredToCreate { get => _explicitNullValueRequiredToCreate; set { _explicitNullValueRequiredToCreate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("required_to_create"); else _explicitNullProperties?.Remove("required_to_create"); } }
+        private bool? _explicitNullValueRequiredToCreate = default!;
         /// <summary>Whether the attribute is required to be filled in when contacts are creating the ticket in Messenger.</summary>
-        public bool? RequiredToCreateForContacts { get; set; }
+        public bool? RequiredToCreateForContacts { get => _explicitNullValueRequiredToCreateForContacts; set { _explicitNullValueRequiredToCreateForContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("required_to_create_for_contacts"); else _explicitNullProperties?.Remove("required_to_create_for_contacts"); } }
+        private bool? _explicitNullValueRequiredToCreateForContacts = default!;
         /// <summary>Whether the attribute is visible to teammates when creating a ticket in Inbox.</summary>
-        public bool? VisibleOnCreate { get; set; }
+        public bool? VisibleOnCreate { get => _explicitNullValueVisibleOnCreate; set { _explicitNullValueVisibleOnCreate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("visible_on_create"); else _explicitNullProperties?.Remove("visible_on_create"); } }
+        private bool? _explicitNullValueVisibleOnCreate = default!;
         /// <summary>Whether the attribute is visible to contacts when creating a ticket in Messenger.</summary>
-        public bool? VisibleToContacts { get; set; }
+        public bool? VisibleToContacts { get => _explicitNullValueVisibleToContacts; set { _explicitNullValueVisibleToContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("visible_to_contacts"); else _explicitNullProperties?.Remove("visible_to_contacts"); } }
+        private bool? _explicitNullValueVisibleToContacts = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Update_ticket_type_attribute_request"/> and sets the default values.
         /// </summary>
@@ -68,7 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Update_ticket_type_attribute_request CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Update_ticket_type_attribute_request();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Update_ticket_type_attribute_request(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -107,6 +137,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("required_to_create_for_contacts", RequiredToCreateForContacts);
             writer.WriteBoolValue("visible_on_create", VisibleOnCreate);
             writer.WriteBoolValue("visible_to_contacts", VisibleToContacts);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

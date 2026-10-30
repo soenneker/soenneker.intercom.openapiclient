@@ -12,48 +12,70 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class MergePreviewReassignments : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("conversations") is { } nullNodeConversations && nullNodeConversations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Conversations = null;
+            if (parseNode.GetChildNode("notes") is { } nullNodeNotes && nullNodeNotes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Notes = null;
+            if (parseNode.GetChildNode("phone_calls") is { } nullNodePhoneCalls && nullNodePhoneCalls.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PhoneCalls = null;
+            if (parseNode.GetChildNode("tags") is { } nullNodeTags && nullNodeTags.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tags = null;
+            if (parseNode.GetChildNode("tickets") is { } nullNodeTickets && nullNodeTickets.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tickets = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Distinct non-ticket conversations, counting both conversations the contact owns and conversations it participates in. Tickets are excluded here and reported separately under `tickets`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations? Conversations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations? Conversations { get => _explicitNullValueConversations; set { _explicitNullValueConversations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversations"); else _explicitNullProperties?.Remove("conversations"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations? _explicitNullValueConversations = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations Conversations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations Conversations { get => _explicitNullValueConversations; set { _explicitNullValueConversations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversations"); else _explicitNullProperties?.Remove("conversations"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations _explicitNullValueConversations = default!;
 #endif
         /// <summary>Notes attached to the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes? Notes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes? Notes { get => _explicitNullValueNotes; set { _explicitNullValueNotes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notes"); else _explicitNullProperties?.Remove("notes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes? _explicitNullValueNotes = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes Notes { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes Notes { get => _explicitNullValueNotes; set { _explicitNullValueNotes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notes"); else _explicitNullProperties?.Remove("notes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes _explicitNullValueNotes = default!;
 #endif
         /// <summary>Phone calls. Present only for phone-lead merges.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls? PhoneCalls { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls? PhoneCalls { get => _explicitNullValuePhoneCalls; set { _explicitNullValuePhoneCalls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phone_calls"); else _explicitNullProperties?.Remove("phone_calls"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls? _explicitNullValuePhoneCalls = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls PhoneCalls { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls PhoneCalls { get => _explicitNullValuePhoneCalls; set { _explicitNullValuePhoneCalls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phone_calls"); else _explicitNullProperties?.Remove("phone_calls"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls _explicitNullValuePhoneCalls = default!;
 #endif
         /// <summary>Tags. `from` counts only tags the surviving contact does not already have.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags? Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags? Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags? _explicitNullValueTags = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags Tags { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags Tags { get => _explicitNullValueTags; set { _explicitNullValueTags = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tags"); else _explicitNullProperties?.Remove("tags"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags _explicitNullValueTags = default!;
 #endif
         /// <summary>Tickets, meaning conversations of any ticket type. Counted separately from `conversations` so a single conversation is never counted twice.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets? Tickets { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets? Tickets { get => _explicitNullValueTickets; set { _explicitNullValueTickets = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tickets"); else _explicitNullProperties?.Remove("tickets"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets? _explicitNullValueTickets = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets Tickets { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets Tickets { get => _explicitNullValueTickets; set { _explicitNullValueTickets = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tickets"); else _explicitNullProperties?.Remove("tickets"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets _explicitNullValueTickets = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments"/> and sets the default values.
@@ -70,7 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -99,6 +121,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsPhoneCalls>("phone_calls", PhoneCalls);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTags>("tags", Tags);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsTickets>("tickets", Tickets);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

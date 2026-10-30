@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,page*,per_page*,phrase*,state*}", pathParameters)
+        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,locale*,page*,per_page*,phrase*,state*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,7 +30,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,page*,per_page*,phrase*,state*}", rawUrl)
+        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/articles/search{?help_center_id*,highlight*,locale*,page*,per_page*,phrase*,state*}", rawUrl)
         {
         }
         /// <summary>
@@ -55,6 +55,8 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
             {
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -98,6 +100,16 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Search
             /// <summary>Return a highlighted version of the matching content within your articles. Refer to the response schema for more details.</summary>
             [QueryParameter("highlight")]
             public bool? Highlight { get; set; }
+            /// <summary>Return only articles with content in this locale, and only this locale in `translated_content`. Use a locale selected for the Help Center (for example `en`, `fr`).</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("locale")]
+            public string? Locale { get; set; }
+#nullable restore
+#else
+            [QueryParameter("locale")]
+            public string Locale { get; set; }
+#endif
             /// <summary>The page of results to fetch. Defaults to the first page.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }

@@ -13,30 +13,49 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateOfficeHoursExceptionRequest : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("exception_date") is { } nullNodeExceptionDate && nullNodeExceptionDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExceptionDate = null;
+            if (parseNode.GetChildNode("exception_type") is { } nullNodeExceptionType && nullNodeExceptionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExceptionType = null;
+            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("recurring_annually") is { } nullNodeRecurringAnnually && nullNodeRecurringAnnually.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecurringAnnually = null;
+            if (parseNode.GetChildNode("time_intervals") is { } nullNodeTimeIntervals && nullNodeTimeIntervals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeIntervals = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The date the exception applies to, in `YYYY-MM-DD` format. A schedule can have only one exception for each date.</summary>
-        public Date? ExceptionDate { get; set; }
+        public Date? ExceptionDate { get => _explicitNullValueExceptionDate; set { _explicitNullValueExceptionDate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("exception_date"); else _explicitNullProperties?.Remove("exception_date"); } }
+        private Date? _explicitNullValueExceptionDate = default!;
         /// <summary>The type of exception.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? ExceptionType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? ExceptionType { get => _explicitNullValueExceptionType; set { _explicitNullValueExceptionType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("exception_type"); else _explicitNullProperties?.Remove("exception_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? _explicitNullValueExceptionType = default!;
         /// <summary>An optional name for the exception.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get; set; }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get; set; }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        private string _explicitNullValueName = default!;
 #endif
         /// <summary>Whether the exception repeats every year on the same date.</summary>
-        public bool? RecurringAnnually { get; set; }
+        public bool? RecurringAnnually { get => _explicitNullValueRecurringAnnually; set { _explicitNullValueRecurringAnnually = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recurring_annually"); else _explicitNullProperties?.Remove("recurring_annually"); } }
+        private bool? _explicitNullValueRecurringAnnually = default!;
         /// <summary>The open intervals for the exception date. Required for `custom_hours`; omit for `closed`, which returns a 422 error if intervals are sent. `start_minute` and `end_minute` must be on a 15-minute boundary. Don&apos;t send `day_of_week`; it is read-only and a request that includes it is rejected with a 400 error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? TimeIntervals { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? TimeIntervals { get => _explicitNullValueTimeIntervals; set { _explicitNullValueTimeIntervals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_intervals"); else _explicitNullProperties?.Remove("time_intervals"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? _explicitNullValueTimeIntervals = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval> TimeIntervals { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval> TimeIntervals { get => _explicitNullValueTimeIntervals; set { _explicitNullValueTimeIntervals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_intervals"); else _explicitNullProperties?.Remove("time_intervals"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval> _explicitNullValueTimeIntervals = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequest"/> and sets the default values.
@@ -53,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequest CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequest();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequest(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -82,6 +101,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("name", Name);
             writer.WriteBoolValue("recurring_annually", RecurringAnnually);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>("time_intervals", TimeIntervals);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -12,7 +12,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateTicketRequestContactsItem : IComposedTypeWrapper, IParsable
-    {
+    , global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder {
+        // Preserve ambiguous union payloads without inventing a discriminator.
+        /// <summary>The complete payload when no unique typed union branch can be selected.</summary>
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode UnrecognizedValue { get; set; } = null!;
+        public global::System.Collections.Generic.IDictionary<string, object> AdditionalData { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
+
         /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemEmail"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -49,17 +54,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItem();
             if("CreateTicketRequestContactsItemEmail".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateTicketRequestContactsItemEmail = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemEmail();
+                
             }
             else if("CreateTicketRequestContactsItemExternalId".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateTicketRequestContactsItemExternalId = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemExternalId();
+                
             }
             else if("CreateTicketRequestContactsItemId".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.CreateTicketRequestContactsItemId = new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemId();
+                
             }
-            return result;
+            
+            var unionPayload = parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue);
+            bool matchesUnionBranch0 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("id") != null))();
+            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("external_id") != null))();
+            bool matchesUnionBranch2 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("email") != null))();
+            if (result.CreateTicketRequestContactsItemEmail == null && result.CreateTicketRequestContactsItemExternalId == null && result.CreateTicketRequestContactsItemId == null && matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2) result.CreateTicketRequestContactsItemId = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemId(), parseNode);
+            if (result.CreateTicketRequestContactsItemEmail == null && result.CreateTicketRequestContactsItemExternalId == null && result.CreateTicketRequestContactsItemId == null && matchesUnionBranch1 && !matchesUnionBranch0 && !matchesUnionBranch2) result.CreateTicketRequestContactsItemExternalId = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemExternalId(), parseNode);
+            if (result.CreateTicketRequestContactsItemEmail == null && result.CreateTicketRequestContactsItemExternalId == null && result.CreateTicketRequestContactsItemId == null && matchesUnionBranch2 && !matchesUnionBranch0 && !matchesUnionBranch1) result.CreateTicketRequestContactsItemEmail = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemEmail(), parseNode);
+            if (result.CreateTicketRequestContactsItemEmail == null && result.CreateTicketRequestContactsItemExternalId == null && result.CreateTicketRequestContactsItemId == null) result.UnrecognizedValue = unionPayload;
+return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -87,17 +101,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <param name="writer">Serialization writer to use to serialize this model</param>
         public virtual void Serialize(ISerializationWriter writer)
         {
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (CreateTicketRequestContactsItemEmail == null && CreateTicketRequestContactsItemExternalId == null && CreateTicketRequestContactsItemId == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
+            if (CreateTicketRequestContactsItemEmail != null && CreateTicketRequestContactsItemExternalId == null && CreateTicketRequestContactsItemId == null) { if (CreateTicketRequestContactsItemEmail is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CreateTicketRequestContactsItemEmail); return; }
+            if (CreateTicketRequestContactsItemExternalId != null && CreateTicketRequestContactsItemEmail == null && CreateTicketRequestContactsItemId == null) { if (CreateTicketRequestContactsItemExternalId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CreateTicketRequestContactsItemExternalId); return; }
+            if (CreateTicketRequestContactsItemId != null && CreateTicketRequestContactsItemEmail == null && CreateTicketRequestContactsItemExternalId == null) { if (CreateTicketRequestContactsItemId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, CreateTicketRequestContactsItemId); return; }
+
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             if(CreateTicketRequestContactsItemEmail != null)
             {
+                if (CreateTicketRequestContactsItemEmail is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemEmail>(null, CreateTicketRequestContactsItemEmail);
             }
             else if(CreateTicketRequestContactsItemExternalId != null)
             {
+                if (CreateTicketRequestContactsItemExternalId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemExternalId>(null, CreateTicketRequestContactsItemExternalId);
             }
             else if(CreateTicketRequestContactsItemId != null)
             {
+                if (CreateTicketRequestContactsItemId is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
                 writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestContactsItemId>(null, CreateTicketRequestContactsItemId);
             }
         }

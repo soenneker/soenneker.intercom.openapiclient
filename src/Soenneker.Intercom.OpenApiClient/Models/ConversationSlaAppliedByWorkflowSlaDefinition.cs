@@ -12,17 +12,32 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationSlaAppliedByWorkflowSlaDefinition : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("first_reply_time") is { } nullNodeFirstReplyTime && nullNodeFirstReplyTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstReplyTime = null;
+            if (parseNode.GetChildNode("next_reply_time") is { } nullNodeNextReplyTime && nullNodeNextReplyTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NextReplyTime = null;
+            if (parseNode.GetChildNode("resolution_time") is { } nullNodeResolutionTime && nullNodeResolutionTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ResolutionTime = null;
+            if (parseNode.GetChildNode("time_to_close") is { } nullNodeTimeToClose && nullNodeTimeToClose.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeToClose = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>First response time target in seconds</summary>
-        public int? FirstReplyTime { get; set; }
+        public int? FirstReplyTime { get => _explicitNullValueFirstReplyTime; set { _explicitNullValueFirstReplyTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_reply_time"); else _explicitNullProperties?.Remove("first_reply_time"); } }
+        private int? _explicitNullValueFirstReplyTime = default!;
         /// <summary>Next reply time target in seconds</summary>
-        public int? NextReplyTime { get; set; }
+        public int? NextReplyTime { get => _explicitNullValueNextReplyTime; set { _explicitNullValueNextReplyTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("next_reply_time"); else _explicitNullProperties?.Remove("next_reply_time"); } }
+        private int? _explicitNullValueNextReplyTime = default!;
         /// <summary>Resolution time target in seconds</summary>
-        public int? ResolutionTime { get; set; }
+        public int? ResolutionTime { get => _explicitNullValueResolutionTime; set { _explicitNullValueResolutionTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("resolution_time"); else _explicitNullProperties?.Remove("resolution_time"); } }
+        private int? _explicitNullValueResolutionTime = default!;
         /// <summary>Time to close target in seconds</summary>
-        public int? TimeToClose { get; set; }
+        public int? TimeToClose { get => _explicitNullValueTimeToClose; set { _explicitNullValueTimeToClose = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_to_close"); else _explicitNullProperties?.Remove("time_to_close"); } }
+        private int? _explicitNullValueTimeToClose = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition"/> and sets the default values.
         /// </summary>
@@ -38,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -65,6 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("next_reply_time", NextReplyTime);
             writer.WriteIntValue("resolution_time", ResolutionTime);
             writer.WriteIntValue("time_to_close", TimeToClose);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

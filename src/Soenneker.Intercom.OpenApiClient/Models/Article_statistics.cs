@@ -12,23 +12,44 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Article_statistics : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("conversions") is { } nullNodeConversions && nullNodeConversions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Conversions = null;
+            if (parseNode.GetChildNode("happy_reaction_percentage") is { } nullNodeHappyReactionPercentage && nullNodeHappyReactionPercentage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HappyReactionPercentage = null;
+            if (parseNode.GetChildNode("neutral_reaction_percentage") is { } nullNodeNeutralReactionPercentage && nullNodeNeutralReactionPercentage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NeutralReactionPercentage = null;
+            if (parseNode.GetChildNode("reactions") is { } nullNodeReactions && nullNodeReactions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reactions = null;
+            if (parseNode.GetChildNode("sad_reaction_percentage") is { } nullNodeSadReactionPercentage && nullNodeSadReactionPercentage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SadReactionPercentage = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("views") is { } nullNodeViews && nullNodeViews.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Views = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The number of conversations started from the article.</summary>
-        public int? Conversions { get; set; }
+        public int? Conversions { get => _explicitNullValueConversions; set { _explicitNullValueConversions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversions"); else _explicitNullProperties?.Remove("conversions"); } }
+        private int? _explicitNullValueConversions = default!;
         /// <summary>The percentage of happy reactions the article has received against other types of reaction.</summary>
-        public float? HappyReactionPercentage { get; set; }
+        public float? HappyReactionPercentage { get => _explicitNullValueHappyReactionPercentage; set { _explicitNullValueHappyReactionPercentage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("happy_reaction_percentage"); else _explicitNullProperties?.Remove("happy_reaction_percentage"); } }
+        private float? _explicitNullValueHappyReactionPercentage = default!;
         /// <summary>The percentage of neutral reactions the article has received against other types of reaction.</summary>
-        public float? NeutralReactionPercentage { get; set; }
+        public float? NeutralReactionPercentage { get => _explicitNullValueNeutralReactionPercentage; set { _explicitNullValueNeutralReactionPercentage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("neutral_reaction_percentage"); else _explicitNullProperties?.Remove("neutral_reaction_percentage"); } }
+        private float? _explicitNullValueNeutralReactionPercentage = default!;
         /// <summary>The number of total reactions the article has received.</summary>
-        public int? Reactions { get; set; }
+        public int? Reactions { get => _explicitNullValueReactions; set { _explicitNullValueReactions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reactions"); else _explicitNullProperties?.Remove("reactions"); } }
+        private int? _explicitNullValueReactions = default!;
         /// <summary>The percentage of sad reactions the article has received against other types of reaction.</summary>
-        public float? SadReactionPercentage { get; set; }
+        public float? SadReactionPercentage { get => _explicitNullValueSadReactionPercentage; set { _explicitNullValueSadReactionPercentage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sad_reaction_percentage"); else _explicitNullProperties?.Remove("sad_reaction_percentage"); } }
+        private float? _explicitNullValueSadReactionPercentage = default!;
         /// <summary>The type of object - `article_statistics`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics_type? Type { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics_type? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics_type? _explicitNullValueType = default!;
         /// <summary>The number of total views the article has received.</summary>
-        public int? Views { get; set; }
+        public int? Views { get => _explicitNullValueViews; set { _explicitNullValueViews = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("views"); else _explicitNullProperties?.Remove("views"); } }
+        private int? _explicitNullValueViews = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics"/> and sets the default values.
         /// </summary>
@@ -44,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -77,6 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteFloatValue("sad_reaction_percentage", SadReactionPercentage);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics_type>("type", Type);
             writer.WriteIntValue("views", Views);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

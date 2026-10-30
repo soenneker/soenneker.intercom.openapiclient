@@ -6062,6 +6062,15 @@
             "example": false
           },
           {
+            "name": "locale",
+            "in": "query",
+            "description": "Return only articles with content in this locale, and only this locale in \u0060translated_content\u0060. Use a locale selected for the Help Center (for example \u0060en\u0060, \u0060fr\u0060).",
+            "schema": {
+              "type": "string"
+            },
+            "example": "fr"
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "The page of results to fetch. Defaults to the first page.",
@@ -6208,6 +6217,18 @@
                         {
                           "code": "data_invalid",
                           "message": "Pagination data must be a number greater than 0"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid locale": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7c2e5d4a-3b1f-4e8a-9d6c-0f5a2b8e1c37",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Locale \u0027de\u0027 is not available in this Help Center"
                         }
                       ]
                     }
@@ -15166,7 +15187,7 @@
           "Contacts",
           "Companies"
         ],
-        "summary": "List granted companies for a contact (Preview)",
+        "summary": "List granted companies for a contact",
         "description": "List the companies a contact has been granted access to.\n\nA granted company lets the contact read that company\u0027s tickets in the customer portal. It is separate from company membership \u2014 granting a company does not attach the contact to it, and [\u0060GET /contacts/{id}/companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listcompaniesforacontact) does not include grants.\n\n\u0060company_ids\u0060 holds the \u0060company_id\u0060 values you set on your companies, so the list round-trips with the \u0060company_ids\u0060 you send to \u0060PUT /contacts/{contact_id}/granted_companies\u0060. The list is sorted by company id and paginated.\n\nReturns an empty list when granted companies are not enabled for the workspace.\n\nRequires the \u0060read_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListGrantedCompaniesForAContact",
         "parameters": [
@@ -15297,7 +15318,7 @@
           "Contacts",
           "Companies"
         ],
-        "summary": "Replace granted companies for a contact (Preview)",
+        "summary": "Replace granted companies for a contact",
         "description": "Replace the full set of companies a contact has been granted access to.\n\nThis is a replacement, not an append. The \u0060company_ids\u0060 you send become the contact\u0027s entire granted set \u2014 any company id you leave out is dropped. To add a company, send the existing ids plus the new one; to remove one, send the existing ids minus that one; to drop every grant, send an empty array.\n\nIdentify companies by the \u0060company_id\u0060 you set on them, the same values [\u0060GET /contacts/{contact_id}/granted_companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listgrantedcompaniesforacontact) returns. Duplicates in the request are collapsed. A contact can be granted at most 100 companies.\n\nThe response echoes the stored set, so a \u0060200\u0060 is confirmation of exactly what the contact can now read.\n\n{% admonition type=\u0022info\u0022 name=\u0022Requires granted companies to be enabled\u0022 %}\n  This endpoint returns \u0060404\u0060 with the code \u0060granted_companies_not_enabled\u0060 unless granted companies are enabled for the workspace. Contact Intercom Support to enable it.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ReplaceGrantedCompaniesForAContact",
         "parameters": [
@@ -15522,7 +15543,7 @@
           "Contacts",
           "Companies"
         ],
-        "summary": "Remove a granted company from a contact (Preview)",
+        "summary": "Remove a granted company from a contact",
         "description": "Remove a single company from a contact\u0027s granted set, leaving the contact\u0027s other grants in place.\n\nIdentify the company by the \u0060company_id\u0060 you set on it, the same value [\u0060GET /contacts/{contact_id}/granted_companies\u0060](/docs/references/preview/rest-api/api.intercom.io/contacts/listgrantedcompaniesforacontact) returns. A \u0060company_id\u0060 containing a dot or a slash is supported \u2014 URL-encode a slash as \u0060%2F\u0060.\n\nThis endpoint is not idempotent. Removing a company the contact is not currently granted returns \u0060404\u0060 with the code \u0060company_not_found\u0060, so repeating a successful call returns \u0060404\u0060 rather than \u0060204\u0060. Treat the first \u0060204\u0060 as the confirmation.\n\n{% admonition type=\u0022info\u0022 name=\u0022Requires granted companies to be enabled\u0022 %}\n  This endpoint returns \u0060404\u0060 with the code \u0060granted_companies_not_enabled\u0060 unless granted companies are enabled for the workspace. Contact Intercom Support to enable it.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RemoveGrantedCompanyFromAContact",
         "parameters": [
@@ -35691,7 +35712,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EcommerceCatalogUploadPartResponse"
+                  "$ref": "#/components/schemas/UploadEcommerceCatalogSuccessResponse"
                 },
                 "examples": {
                   "Part uploaded": {
@@ -35700,6 +35721,9 @@
                       "next_part_number": 2
                     }
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/EcommerceCatalogUploadPartResponse"
                 }
               }
             }
@@ -35709,7 +35733,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EcommerceCatalogUploadResponse"
+                  "$ref": "#/components/schemas/UploadEcommerceCatalogSuccessResponse"
                 },
                 "examples": {
                   "Sync started": {
@@ -35719,6 +35743,9 @@
                       "message": "Catalog received. Sync has started."
                     }
                   }
+                },
+                "x-client-original-success-schema": {
+                  "$ref": "#/components/schemas/EcommerceCatalogUploadResponse"
                 }
               }
             }
@@ -36491,56 +36518,16 @@
             "schema": {
               "oneOf": [
                 {
-                  "title": "user_id query parameter",
-                  "required": [
-                    "user_id"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "user_id": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                  "$ref": "#/components/schemas/FilterOneOf1"
                 },
                 {
-                  "title": "intercom_user_id query parameter",
-                  "required": [
-                    "intercom_user_id"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "intercom_user_id": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                  "$ref": "#/components/schemas/FilterOneOf2"
                 },
                 {
-                  "title": "email query parameter",
-                  "required": [
-                    "email"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "email": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                  "$ref": "#/components/schemas/FilterOneOf3"
                 },
                 {
-                  "title": "anonymous_id query parameter",
-                  "required": [
-                    "anonymous_id"
-                  ],
-                  "type": "object",
-                  "properties": {
-                    "anonymous_id": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false
+                  "$ref": "#/components/schemas/FilterOneOf4"
                 }
               ]
             }
@@ -56958,9 +56945,6 @@
       },
       "ContentSearchResult": {
         "title": "Content Search Result",
-        "required": [
-          "type"
-        ],
         "oneOf": [
           {
             "$ref": "#/components/schemas/ContentSearchDefaultItem"
@@ -56969,13 +56953,8 @@
             "$ref": "#/components/schemas/ContentSearchArticleItem"
           }
         ],
-        "properties": {
-          "type": {
-            "type": "string"
-          }
-        },
         "description": "A single search result. The \u0060type\u0060 field discriminates between the flat shape used for snippets, external pages, files, and internal articles, and the nested shape used for help center articles.",
-        "discriminator": {
+        "x-client-original-discriminator": {
           "propertyName": "type",
           "mapping": {
             "content_snippet": "#/components/schemas/ContentSearchDefaultItem",
@@ -61415,42 +61394,37 @@
       },
       "ConversationAttribute": {
         "title": "Conversation Attribute",
-        "required": [
-          "data_type"
-        ],
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ConversationAttributeStringType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf1"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeIntegerType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf2"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeListType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf3"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeDecimalType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf4"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeBooleanType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf5"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeDatetimeType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf6"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeRelationshipType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf7"
           },
           {
-            "$ref": "#/components/schemas/ConversationAttributeFilesType"
+            "$ref": "#/components/schemas/ConversationAttributeOneOf8"
           }
         ],
-        "properties": {
-          "data_type": {
-            "type": "string"
-          }
-        },
         "description": "Conversation Attributes represent custom metadata fields for conversations. They support type-specific properties: strings (multiline), lists (options), and relationships (reference).",
-        "discriminator": {
+        "x-tags": [
+          "Conversations Attributes"
+        ],
+        "x-client-original-discriminator": {
           "propertyName": "data_type",
           "mapping": {
             "string": "#/components/schemas/ConversationAttributeStringType",
@@ -61462,10 +61436,7 @@
             "relationship": "#/components/schemas/ConversationAttributeRelationshipType",
             "files": "#/components/schemas/ConversationAttributeFilesType"
           }
-        },
-        "x-tags": [
-          "Conversations Attributes"
-        ]
+        }
       },
       "ConversationAttributeList": {
         "title": "Conversation Attribute List",
@@ -61880,9 +61851,6 @@
       },
       "CreateConversationAttributeRequest": {
         "title": "Create Conversation Attribute Request",
-        "required": [
-          "data_type"
-        ],
         "oneOf": [
           {
             "$ref": "#/components/schemas/CreateConversationAttributeStringRequest"
@@ -61909,13 +61877,8 @@
             "$ref": "#/components/schemas/CreateConversationAttributeFilesRequest"
           }
         ],
-        "properties": {
-          "data_type": {
-            "type": "string"
-          }
-        },
         "description": "Payload for creating a new conversation attribute.",
-        "discriminator": {
+        "x-client-original-discriminator": {
           "propertyName": "data_type",
           "mapping": {
             "string": "#/components/schemas/CreateConversationAttributeStringRequest",
@@ -88900,6 +88863,723 @@
             }
           ]
         }
+      },
+      "ConversationAttributeOneOf1": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "string"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "string",
+                  "name": "StringValue"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          },
+          "multiline": {
+            "type": "boolean",
+            "description": "Whether this string attribute is multiline.",
+            "example": false
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf2": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "integer"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "integer",
+                  "name": "Integer"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf3": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "list"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "list",
+                  "name": "List"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationAttributeOption"
+            },
+            "description": "Predefined options for this attribute. Each option has a unique UUID used to identify it in the options management endpoints."
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf4": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "decimal"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "decimal",
+                  "name": "DecimalValue"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf5": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "boolean"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "boolean",
+                  "name": "Boolean"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf6": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "datetime"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "datetime",
+                  "name": "Datetime"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf7": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "relationship"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "relationship",
+                  "name": "Relationship"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          },
+          "reference": {
+            "$ref": "#/components/schemas/ConversationAttributeRelationshipTypeAllOf2Reference"
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "ConversationAttributeOneOf8": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationAttributeType"
+          },
+          "id": {
+            "type": "integer",
+            "description": "The unique identifier for the conversation attribute.",
+            "example": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the attribute.",
+            "example": "api_test_attr"
+          },
+          "description": {
+            "type": "string",
+            "description": "Readable description of the attribute.",
+            "example": "Created via API test"
+          },
+          "data_type": {
+            "enum": [
+              "files"
+            ],
+            "type": "string",
+            "description": "The data type of the attribute. Allowed types: string, integer, list, decimal, boolean, datetime, relationship, files.",
+            "example": "string",
+            "x-ms-enum": {
+              "name": "DataType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "files",
+                  "name": "Files"
+                }
+              ]
+            }
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this attribute is required.",
+            "example": false
+          },
+          "visible_to_team_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs that can see this attribute. Empty array means all teams.",
+            "example": []
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this attribute is archived.",
+            "example": false
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the attribute was created as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the attribute was last updated as a UTC Unix timestamp.",
+            "format": "date-time",
+            "example": 1778239701
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "ID of the admin who created the attribute, or \u0060null\u0060 if there isn\u0027t one.",
+            "nullable": true,
+            "example": "16"
+          }
+        },
+        "required": [
+          "data_type"
+        ]
+      },
+      "FilterOneOf1": {
+        "title": "user_id query parameter",
+        "required": [
+          "user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterOneOf2": {
+        "title": "intercom_user_id query parameter",
+        "required": [
+          "intercom_user_id"
+        ],
+        "type": "object",
+        "properties": {
+          "intercom_user_id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterOneOf3": {
+        "title": "email query parameter",
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterOneOf4": {
+        "title": "anonymous_id query parameter",
+        "required": [
+          "anonymous_id"
+        ],
+        "type": "object",
+        "properties": {
+          "anonymous_id": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UploadEcommerceCatalogSuccessResponse": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/EcommerceCatalogUploadPartResponse"
+          },
+          {
+            "$ref": "#/components/schemas/EcommerceCatalogUploadResponse"
+          }
+        ]
       }
     },
     "responses": {

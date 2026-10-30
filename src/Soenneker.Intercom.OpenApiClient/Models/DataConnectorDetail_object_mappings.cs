@@ -11,34 +11,52 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class DataConnectorDetail_object_mappings : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("attribute_mappings") is { } nullNodeAttributeMappings && nullNodeAttributeMappings.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttributeMappings = null;
+            if (parseNode.GetChildNode("intercom_object_type") is { } nullNodeIntercomObjectType && nullNodeIntercomObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomObjectType = null;
+            if (parseNode.GetChildNode("reference_mappings") is { } nullNodeReferenceMappings && nullNodeReferenceMappings.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReferenceMappings = null;
+            if (parseNode.GetChildNode("response_object_path") is { } nullNodeResponseObjectPath && nullNodeResponseObjectPath.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ResponseObjectPath = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The attribute_mappings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings>? AttributeMappings { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings>? AttributeMappings { get => _explicitNullValueAttributeMappings; set { _explicitNullValueAttributeMappings = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_mappings"); else _explicitNullProperties?.Remove("attribute_mappings"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings>? _explicitNullValueAttributeMappings = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings> AttributeMappings { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings> AttributeMappings { get => _explicitNullValueAttributeMappings; set { _explicitNullValueAttributeMappings = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_mappings"); else _explicitNullProperties?.Remove("attribute_mappings"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings> _explicitNullValueAttributeMappings = default!;
 #endif
         /// <summary>The intercom_object_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_intercom_object_type? IntercomObjectType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_intercom_object_type? IntercomObjectType { get => _explicitNullValueIntercomObjectType; set { _explicitNullValueIntercomObjectType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_object_type"); else _explicitNullProperties?.Remove("intercom_object_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_intercom_object_type? _explicitNullValueIntercomObjectType = default!;
         /// <summary>The reference_mappings property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings>? ReferenceMappings { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings>? ReferenceMappings { get => _explicitNullValueReferenceMappings; set { _explicitNullValueReferenceMappings = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reference_mappings"); else _explicitNullProperties?.Remove("reference_mappings"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings>? _explicitNullValueReferenceMappings = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings> ReferenceMappings { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings> ReferenceMappings { get => _explicitNullValueReferenceMappings; set { _explicitNullValueReferenceMappings = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reference_mappings"); else _explicitNullProperties?.Remove("reference_mappings"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings> _explicitNullValueReferenceMappings = default!;
 #endif
         /// <summary>The response_object_path property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ResponseObjectPath { get; set; }
+        public string? ResponseObjectPath { get => _explicitNullValueResponseObjectPath; set { _explicitNullValueResponseObjectPath = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("response_object_path"); else _explicitNullProperties?.Remove("response_object_path"); } }
+        private string? _explicitNullValueResponseObjectPath = default!;
 #nullable restore
 #else
-        public string ResponseObjectPath { get; set; }
+        public string ResponseObjectPath { get => _explicitNullValueResponseObjectPath; set { _explicitNullValueResponseObjectPath = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("response_object_path"); else _explicitNullProperties?.Remove("response_object_path"); } }
+        private string _explicitNullValueResponseObjectPath = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings"/> and sets the default values.
@@ -55,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -82,6 +100,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_intercom_object_type>("intercom_object_type", IntercomObjectType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings>("reference_mappings", ReferenceMappings);
             writer.WriteStringValue("response_object_path", ResponseObjectPath);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

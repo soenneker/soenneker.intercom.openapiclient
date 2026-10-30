@@ -12,21 +12,35 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public partial class ListCallsWithTranscripts_200_data : global::Soenneker.Intercom.OpenApiClient.Models.Call, IParsable
     #pragma warning restore CS1591
     {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public override void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            base.CaptureExplicitNulls(parseNode);
+            if (parseNode.GetChildNode("transcript") is { } nullNodeTranscript && nullNodeTranscript.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Transcript = null;
+            if (parseNode.GetChildNode("transcript_status") is { } nullNodeTranscriptStatus && nullNodeTranscriptStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TranscriptStatus = null;
+        }
+
         /// <summary>The call transcript if available, otherwise an empty array.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript>? Transcript { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript>? Transcript { get => _explicitNullValueTranscript; set { _explicitNullValueTranscript = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("transcript"); else _explicitNullProperties?.Remove("transcript"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript>? _explicitNullValueTranscript = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript> Transcript { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript> Transcript { get => _explicitNullValueTranscript; set { _explicitNullValueTranscript = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("transcript"); else _explicitNullProperties?.Remove("transcript"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript> _explicitNullValueTranscript = default!;
 #endif
         /// <summary>The status of the transcript if available.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TranscriptStatus { get; set; }
+        public string? TranscriptStatus { get => _explicitNullValueTranscriptStatus; set { _explicitNullValueTranscriptStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("transcript_status"); else _explicitNullProperties?.Remove("transcript_status"); } }
+        private string? _explicitNullValueTranscriptStatus = default!;
 #nullable restore
 #else
-        public string TranscriptStatus { get; set; }
+        public string TranscriptStatus { get => _explicitNullValueTranscriptStatus; set { _explicitNullValueTranscriptStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("transcript_status"); else _explicitNullProperties?.Remove("transcript_status"); } }
+        private string _explicitNullValueTranscriptStatus = default!;
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -36,7 +50,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static new global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -59,7 +73,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ListCallsWithTranscripts_200_data_transcript>("transcript", Transcript);
-            writer.WriteStringValue("transcript_status", TranscriptStatus);
+            writer.WriteStringValue("transcript_status", TranscriptStatus);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            
         }
     }
 }

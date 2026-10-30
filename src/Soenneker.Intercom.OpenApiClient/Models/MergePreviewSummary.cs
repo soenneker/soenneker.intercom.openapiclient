@@ -12,24 +12,37 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class MergePreviewSummary : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("attribute_changes") is { } nullNodeAttributeChanges && nullNodeAttributeChanges.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttributeChanges = null;
+            if (parseNode.GetChildNode("reassignments") is { } nullNodeReassignments && nullNodeReassignments.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reassignments = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The attribute changes the merge would make to the surviving contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges? AttributeChanges { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges? AttributeChanges { get => _explicitNullValueAttributeChanges; set { _explicitNullValueAttributeChanges = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_changes"); else _explicitNullProperties?.Remove("attribute_changes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges? _explicitNullValueAttributeChanges = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges AttributeChanges { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges AttributeChanges { get => _explicitNullValueAttributeChanges; set { _explicitNullValueAttributeChanges = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_changes"); else _explicitNullProperties?.Remove("attribute_changes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges _explicitNullValueAttributeChanges = default!;
 #endif
         /// <summary>Two counts per object type — `from`, how many are on the lead and would move to the surviving contact, and `into`, how many the surviving contact already has. Only types with reassignments are included, and both counts are always present on a type that is included.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments? Reassignments { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments? Reassignments { get => _explicitNullValueReassignments; set { _explicitNullValueReassignments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reassignments"); else _explicitNullProperties?.Remove("reassignments"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments? _explicitNullValueReassignments = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments Reassignments { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments Reassignments { get => _explicitNullValueReassignments; set { _explicitNullValueReassignments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reassignments"); else _explicitNullProperties?.Remove("reassignments"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments _explicitNullValueReassignments = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewSummary"/> and sets the default values.
@@ -46,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewSummary CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewSummary();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewSummary(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -69,6 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChanges>("attribute_changes", AttributeChanges);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignments>("reassignments", Reassignments);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

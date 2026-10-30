@@ -8,74 +8,79 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationAttribute : IComposedTypeWrapper, IParsable
-    {
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType"/></summary>
+    , global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder {
+        // Preserve ambiguous union payloads without inventing a discriminator.
+        /// <summary>The complete payload when no unique typed union branch can be selected.</summary>
+        public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode UnrecognizedValue { get; set; } = null!;
+        public global::System.Collections.Generic.IDictionary<string, object> AdditionalData { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
+
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType? ConversationAttributeBooleanType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1? ConversationAttributeOneOf1 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType ConversationAttributeBooleanType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1 ConversationAttributeOneOf1 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType? ConversationAttributeDatetimeType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2? ConversationAttributeOneOf2 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType ConversationAttributeDatetimeType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2 ConversationAttributeOneOf2 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType? ConversationAttributeDecimalType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3? ConversationAttributeOneOf3 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType ConversationAttributeDecimalType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3 ConversationAttributeOneOf3 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType? ConversationAttributeFilesType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4? ConversationAttributeOneOf4 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType ConversationAttributeFilesType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4 ConversationAttributeOneOf4 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType? ConversationAttributeIntegerType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5? ConversationAttributeOneOf5 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType ConversationAttributeIntegerType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5 ConversationAttributeOneOf5 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType? ConversationAttributeListType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6? ConversationAttributeOneOf6 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType ConversationAttributeListType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6 ConversationAttributeOneOf6 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType? ConversationAttributeRelationshipType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7? ConversationAttributeOneOf7 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType ConversationAttributeRelationshipType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7 ConversationAttributeOneOf7 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType? ConversationAttributeStringType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8? ConversationAttributeOneOf8 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType ConversationAttributeStringType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8 ConversationAttributeOneOf8 { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -85,41 +90,60 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttribute CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            var mappingValue = parseNode.GetChildNode("data_type")?.GetStringValue();
+            var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttribute();
-            if("boolean".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("ConversationAttributeOneOf1".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeBooleanType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType();
+                
             }
-            else if("datetime".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeDatetimeType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType();
+                
             }
-            else if("decimal".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf3".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeDecimalType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType();
+                
             }
-            else if("files".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf4".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeFilesType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType();
+                
             }
-            else if("integer".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf5".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeIntegerType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType();
+                
             }
-            else if("list".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf6".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeListType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType();
+                
             }
-            else if("relationship".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf7".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeRelationshipType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType();
+                
             }
-            else if("string".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            else if("ConversationAttributeOneOf8".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
-                result.ConversationAttributeStringType = new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType();
+                
             }
-            return result;
+            
+            var unionPayload = parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue);
+            bool matchesUnionBranch0 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("string".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("integer".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch2 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("list".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch3 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("decimal".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch4 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("boolean".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch5 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("datetime".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch6 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("relationship".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            bool matchesUnionBranch7 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => parseNode.GetChildNode("data_type") != null && (parseNode.GetChildNode("data_type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString tag1 && ("files".Equals(tag1.GetValue(), global::System.StringComparison.Ordinal))) && (parseNode.GetChildNode("type") == null || (parseNode.GetChildNode("type")?.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString optionalTag2 && ("conversation_attribute".Equals(optionalTag2.GetValue(), global::System.StringComparison.Ordinal))))))();
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch3 && !matchesUnionBranch4 && !matchesUnionBranch5 && !matchesUnionBranch6 && !matchesUnionBranch7) result.ConversationAttributeOneOf1 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch1 && !matchesUnionBranch0 && !matchesUnionBranch2 && !matchesUnionBranch3 && !matchesUnionBranch4 && !matchesUnionBranch5 && !matchesUnionBranch6 && !matchesUnionBranch7) result.ConversationAttributeOneOf2 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch2 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch3 && !matchesUnionBranch4 && !matchesUnionBranch5 && !matchesUnionBranch6 && !matchesUnionBranch7) result.ConversationAttributeOneOf3 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch3 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch4 && !matchesUnionBranch5 && !matchesUnionBranch6 && !matchesUnionBranch7) result.ConversationAttributeOneOf4 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch4 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch3 && !matchesUnionBranch5 && !matchesUnionBranch6 && !matchesUnionBranch7) result.ConversationAttributeOneOf5 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch5 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch3 && !matchesUnionBranch4 && !matchesUnionBranch6 && !matchesUnionBranch7) result.ConversationAttributeOneOf6 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch6 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch3 && !matchesUnionBranch4 && !matchesUnionBranch5 && !matchesUnionBranch7) result.ConversationAttributeOneOf7 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null && matchesUnionBranch7 && !matchesUnionBranch0 && !matchesUnionBranch1 && !matchesUnionBranch2 && !matchesUnionBranch3 && !matchesUnionBranch4 && !matchesUnionBranch5 && !matchesUnionBranch6) result.ConversationAttributeOneOf8 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8(), parseNode);
+            if (result.ConversationAttributeOneOf1 == null && result.ConversationAttributeOneOf2 == null && result.ConversationAttributeOneOf3 == null && result.ConversationAttributeOneOf4 == null && result.ConversationAttributeOneOf5 == null && result.ConversationAttributeOneOf6 == null && result.ConversationAttributeOneOf7 == null && result.ConversationAttributeOneOf8 == null) result.UnrecognizedValue = unionPayload;
+return result;
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -127,37 +151,37 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            if(ConversationAttributeBooleanType != null)
+            if(ConversationAttributeOneOf1 != null)
             {
-                return ConversationAttributeBooleanType.GetFieldDeserializers();
+                return ConversationAttributeOneOf1.GetFieldDeserializers();
             }
-            else if(ConversationAttributeDatetimeType != null)
+            else if(ConversationAttributeOneOf2 != null)
             {
-                return ConversationAttributeDatetimeType.GetFieldDeserializers();
+                return ConversationAttributeOneOf2.GetFieldDeserializers();
             }
-            else if(ConversationAttributeDecimalType != null)
+            else if(ConversationAttributeOneOf3 != null)
             {
-                return ConversationAttributeDecimalType.GetFieldDeserializers();
+                return ConversationAttributeOneOf3.GetFieldDeserializers();
             }
-            else if(ConversationAttributeFilesType != null)
+            else if(ConversationAttributeOneOf4 != null)
             {
-                return ConversationAttributeFilesType.GetFieldDeserializers();
+                return ConversationAttributeOneOf4.GetFieldDeserializers();
             }
-            else if(ConversationAttributeIntegerType != null)
+            else if(ConversationAttributeOneOf5 != null)
             {
-                return ConversationAttributeIntegerType.GetFieldDeserializers();
+                return ConversationAttributeOneOf5.GetFieldDeserializers();
             }
-            else if(ConversationAttributeListType != null)
+            else if(ConversationAttributeOneOf6 != null)
             {
-                return ConversationAttributeListType.GetFieldDeserializers();
+                return ConversationAttributeOneOf6.GetFieldDeserializers();
             }
-            else if(ConversationAttributeRelationshipType != null)
+            else if(ConversationAttributeOneOf7 != null)
             {
-                return ConversationAttributeRelationshipType.GetFieldDeserializers();
+                return ConversationAttributeOneOf7.GetFieldDeserializers();
             }
-            else if(ConversationAttributeStringType != null)
+            else if(ConversationAttributeOneOf8 != null)
             {
-                return ConversationAttributeStringType.GetFieldDeserializers();
+                return ConversationAttributeOneOf8.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -167,38 +191,57 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <param name="writer">Serialization writer to use to serialize this model</param>
         public virtual void Serialize(ISerializationWriter writer)
         {
+            if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
+            if (ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
+            if (ConversationAttributeOneOf1 != null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf1 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf1); return; }
+            if (ConversationAttributeOneOf2 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf2 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf2); return; }
+            if (ConversationAttributeOneOf3 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf3 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf3); return; }
+            if (ConversationAttributeOneOf4 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf4 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf4); return; }
+            if (ConversationAttributeOneOf5 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf5 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf5); return; }
+            if (ConversationAttributeOneOf6 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf7 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf6 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf6); return; }
+            if (ConversationAttributeOneOf7 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf8 == null) { if (ConversationAttributeOneOf7 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf7); return; }
+            if (ConversationAttributeOneOf8 != null && ConversationAttributeOneOf1 == null && ConversationAttributeOneOf2 == null && ConversationAttributeOneOf3 == null && ConversationAttributeOneOf4 == null && ConversationAttributeOneOf5 == null && ConversationAttributeOneOf6 == null && ConversationAttributeOneOf7 == null) { if (ConversationAttributeOneOf8 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ConversationAttributeOneOf8); return; }
+
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(ConversationAttributeBooleanType != null)
+            if(ConversationAttributeOneOf1 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeBooleanType>(null, ConversationAttributeBooleanType);
+                if (ConversationAttributeOneOf1 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1>(null, ConversationAttributeOneOf1);
             }
-            else if(ConversationAttributeDatetimeType != null)
+            else if(ConversationAttributeOneOf2 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDatetimeType>(null, ConversationAttributeDatetimeType);
+                if (ConversationAttributeOneOf2 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2>(null, ConversationAttributeOneOf2);
             }
-            else if(ConversationAttributeDecimalType != null)
+            else if(ConversationAttributeOneOf3 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeDecimalType>(null, ConversationAttributeDecimalType);
+                if (ConversationAttributeOneOf3 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3>(null, ConversationAttributeOneOf3);
             }
-            else if(ConversationAttributeFilesType != null)
+            else if(ConversationAttributeOneOf4 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeFilesType>(null, ConversationAttributeFilesType);
+                if (ConversationAttributeOneOf4 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4>(null, ConversationAttributeOneOf4);
             }
-            else if(ConversationAttributeIntegerType != null)
+            else if(ConversationAttributeOneOf5 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeIntegerType>(null, ConversationAttributeIntegerType);
+                if (ConversationAttributeOneOf5 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5>(null, ConversationAttributeOneOf5);
             }
-            else if(ConversationAttributeListType != null)
+            else if(ConversationAttributeOneOf6 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeListType>(null, ConversationAttributeListType);
+                if (ConversationAttributeOneOf6 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6>(null, ConversationAttributeOneOf6);
             }
-            else if(ConversationAttributeRelationshipType != null)
+            else if(ConversationAttributeOneOf7 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipType>(null, ConversationAttributeRelationshipType);
+                if (ConversationAttributeOneOf7 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7>(null, ConversationAttributeOneOf7);
             }
-            else if(ConversationAttributeStringType != null)
+            else if(ConversationAttributeOneOf8 != null)
             {
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeStringType>(null, ConversationAttributeStringType);
+                if (ConversationAttributeOneOf8 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8>(null, ConversationAttributeOneOf8);
             }
         }
     }

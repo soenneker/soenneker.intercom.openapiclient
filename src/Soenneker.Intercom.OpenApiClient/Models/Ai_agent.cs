@@ -12,45 +12,73 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Ai_agent : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("content_sources") is { } nullNodeContentSources && nullNodeContentSources.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentSources = null;
+            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("last_answer_type") is { } nullNodeLastAnswerType && nullNodeLastAnswerType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastAnswerType = null;
+            if (parseNode.GetChildNode("rating") is { } nullNodeRating && nullNodeRating.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Rating = null;
+            if (parseNode.GetChildNode("rating_remark") is { } nullNodeRatingRemark && nullNodeRatingRemark.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RatingRemark = null;
+            if (parseNode.GetChildNode("resolution_state") is { } nullNodeResolutionState && nullNodeResolutionState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ResolutionState = null;
+            if (parseNode.GetChildNode("source_title") is { } nullNodeSourceTitle && nullNodeSourceTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SourceTitle = null;
+            if (parseNode.GetChildNode("source_type") is { } nullNodeSourceType && nullNodeSourceType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SourceType = null;
+            if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The content_sources property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list? ContentSources { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list? ContentSources { get => _explicitNullValueContentSources; set { _explicitNullValueContentSources = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_sources"); else _explicitNullProperties?.Remove("content_sources"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list? _explicitNullValueContentSources = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list ContentSources { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list ContentSources { get => _explicitNullValueContentSources; set { _explicitNullValueContentSources = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_sources"); else _explicitNullProperties?.Remove("content_sources"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list _explicitNullValueContentSources = default!;
 #endif
         /// <summary>The time when the AI agent rating was created.</summary>
-        public int? CreatedAt { get; set; }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private int? _explicitNullValueCreatedAt = default!;
         /// <summary>The type of the last answer delivered by AI Agent. If no answer was delivered then this will return `null`</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_last_answer_type? LastAnswerType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_last_answer_type? LastAnswerType { get => _explicitNullValueLastAnswerType; set { _explicitNullValueLastAnswerType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_answer_type"); else _explicitNullProperties?.Remove("last_answer_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_last_answer_type? _explicitNullValueLastAnswerType = default!;
         /// <summary>The customer satisfaction rating given to AI Agent, from 1-5.</summary>
-        public int? Rating { get; set; }
+        public int? Rating { get => _explicitNullValueRating; set { _explicitNullValueRating = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rating"); else _explicitNullProperties?.Remove("rating"); } }
+        private int? _explicitNullValueRating = default!;
         /// <summary>The customer satisfaction rating remark given to AI Agent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RatingRemark { get; set; }
+        public string? RatingRemark { get => _explicitNullValueRatingRemark; set { _explicitNullValueRatingRemark = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rating_remark"); else _explicitNullProperties?.Remove("rating_remark"); } }
+        private string? _explicitNullValueRatingRemark = default!;
 #nullable restore
 #else
-        public string RatingRemark { get; set; }
+        public string RatingRemark { get => _explicitNullValueRatingRemark; set { _explicitNullValueRatingRemark = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rating_remark"); else _explicitNullProperties?.Remove("rating_remark"); } }
+        private string _explicitNullValueRatingRemark = default!;
 #endif
         /// <summary>The resolution state of AI Agent. If no AI or custom answer has been delivered then this will return `null`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_resolution_state? ResolutionState { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_resolution_state? ResolutionState { get => _explicitNullValueResolutionState; set { _explicitNullValueResolutionState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("resolution_state"); else _explicitNullProperties?.Remove("resolution_state"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_resolution_state? _explicitNullValueResolutionState = default!;
         /// <summary>The title of the source that triggered AI Agent involvement in the conversation. If this is `essentials_plan_setup` then it will return `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SourceTitle { get; set; }
+        public string? SourceTitle { get => _explicitNullValueSourceTitle; set { _explicitNullValueSourceTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_title"); else _explicitNullProperties?.Remove("source_title"); } }
+        private string? _explicitNullValueSourceTitle = default!;
 #nullable restore
 #else
-        public string SourceTitle { get; set; }
+        public string SourceTitle { get => _explicitNullValueSourceTitle; set { _explicitNullValueSourceTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_title"); else _explicitNullProperties?.Remove("source_title"); } }
+        private string _explicitNullValueSourceTitle = default!;
 #endif
         /// <summary>The type of the source that triggered AI Agent involvement in the conversation.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_source_type? SourceType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_source_type? SourceType { get => _explicitNullValueSourceType; set { _explicitNullValueSourceType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_type"); else _explicitNullProperties?.Remove("source_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_source_type? _explicitNullValueSourceType = default!;
         /// <summary>The time when the AI agent rating was last updated.</summary>
-        public int? UpdatedAt { get; set; }
+        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private int? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent"/> and sets the default values.
         /// </summary>
@@ -66,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -103,6 +131,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("source_title", SourceTitle);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_source_type>("source_type", SourceType);
             writer.WriteIntValue("updated_at", UpdatedAt);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

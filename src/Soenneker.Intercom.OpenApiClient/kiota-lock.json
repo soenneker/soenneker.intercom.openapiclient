@@ -1,8 +1,8 @@
 {
-  "descriptionHash": "342701AF9999A9A6ABC6EC4D456A15D6E1AC84518B267A229D9879FDBF14137D64A75F94E3462862E5E4A8016DB2E77201953F5D8E49C2851DE5A4BE6F44F22D",
+  "descriptionHash": "D9B684316CD7AA2B9BC6924CBEEA5D8521C05C782017AB5410095197D509DB8699EB26A0489E9214C98C4E0617A1DF7E3EB42FBC469543863E53E77E8C44AC53",
   "descriptionLocation": "../../fixed.json",
   "lockFileVersion": "1.0.0",
-  "kiotaVersion": "1.36.1",
+  "kiotaVersion": "1.37.0",
   "clientClassName": "IntercomOpenApiClient",
   "typeAccessModifier": "Public",
   "clientNamespaceName": "Soenneker.Intercom.OpenApiClient",

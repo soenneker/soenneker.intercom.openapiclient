@@ -12,19 +12,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Conversation_part_metadata : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("quick_reply_options") is { } nullNodeQuickReplyOptions && nullNodeQuickReplyOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) QuickReplyOptions = null;
+            if (parseNode.GetChildNode("quick_reply_uuid") is { } nullNodeQuickReplyUuid && nullNodeQuickReplyUuid.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) QuickReplyUuid = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The quick reply options sent by the Admin or bot, presented in this conversation part.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options>? QuickReplyOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options>? QuickReplyOptions { get => _explicitNullValueQuickReplyOptions; set { _explicitNullValueQuickReplyOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("quick_reply_options"); else _explicitNullProperties?.Remove("quick_reply_options"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options>? _explicitNullValueQuickReplyOptions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options> QuickReplyOptions { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options> QuickReplyOptions { get => _explicitNullValueQuickReplyOptions; set { _explicitNullValueQuickReplyOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("quick_reply_options"); else _explicitNullProperties?.Remove("quick_reply_options"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options> _explicitNullValueQuickReplyOptions = default!;
 #endif
         /// <summary>The unique identifier for the quick reply option that was clicked by the end user.</summary>
-        public Guid? QuickReplyUuid { get; set; }
+        public Guid? QuickReplyUuid { get => _explicitNullValueQuickReplyUuid; set { _explicitNullValueQuickReplyUuid = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("quick_reply_uuid"); else _explicitNullProperties?.Remove("quick_reply_uuid"); } }
+        private Guid? _explicitNullValueQuickReplyUuid = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata"/> and sets the default values.
         /// </summary>
@@ -40,7 +52,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -63,6 +75,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options>("quick_reply_options", QuickReplyOptions);
             writer.WriteGuidValue("quick_reply_uuid", QuickReplyUuid);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

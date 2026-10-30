@@ -12,78 +12,135 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Conversation_statistics : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("adjusted_handling_time") is { } nullNodeAdjustedHandlingTime && nullNodeAdjustedHandlingTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdjustedHandlingTime = null;
+            if (parseNode.GetChildNode("assigned_team_first_response_time") is { } nullNodeAssignedTeamFirstResponseTime && nullNodeAssignedTeamFirstResponseTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignedTeamFirstResponseTime = null;
+            if (parseNode.GetChildNode("assigned_team_first_response_time_in_office_hours") is { } nullNodeAssignedTeamFirstResponseTimeInOfficeHours && nullNodeAssignedTeamFirstResponseTimeInOfficeHours.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssignedTeamFirstResponseTimeInOfficeHours = null;
+            if (parseNode.GetChildNode("count_assignments") is { } nullNodeCountAssignments && nullNodeCountAssignments.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CountAssignments = null;
+            if (parseNode.GetChildNode("count_conversation_parts") is { } nullNodeCountConversationParts && nullNodeCountConversationParts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CountConversationParts = null;
+            if (parseNode.GetChildNode("count_reopens") is { } nullNodeCountReopens && nullNodeCountReopens.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CountReopens = null;
+            if (parseNode.GetChildNode("first_admin_reply_at") is { } nullNodeFirstAdminReplyAt && nullNodeFirstAdminReplyAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstAdminReplyAt = null;
+            if (parseNode.GetChildNode("first_assignment_at") is { } nullNodeFirstAssignmentAt && nullNodeFirstAssignmentAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstAssignmentAt = null;
+            if (parseNode.GetChildNode("first_close_at") is { } nullNodeFirstCloseAt && nullNodeFirstCloseAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstCloseAt = null;
+            if (parseNode.GetChildNode("first_contact_reply_at") is { } nullNodeFirstContactReplyAt && nullNodeFirstContactReplyAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FirstContactReplyAt = null;
+            if (parseNode.GetChildNode("handling_time") is { } nullNodeHandlingTime && nullNodeHandlingTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HandlingTime = null;
+            if (parseNode.GetChildNode("last_admin_reply_at") is { } nullNodeLastAdminReplyAt && nullNodeLastAdminReplyAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastAdminReplyAt = null;
+            if (parseNode.GetChildNode("last_assignment_admin_reply_at") is { } nullNodeLastAssignmentAdminReplyAt && nullNodeLastAssignmentAdminReplyAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastAssignmentAdminReplyAt = null;
+            if (parseNode.GetChildNode("last_assignment_at") is { } nullNodeLastAssignmentAt && nullNodeLastAssignmentAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastAssignmentAt = null;
+            if (parseNode.GetChildNode("last_close_at") is { } nullNodeLastCloseAt && nullNodeLastCloseAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastCloseAt = null;
+            if (parseNode.GetChildNode("last_closed_by_id") is { } nullNodeLastClosedById && nullNodeLastClosedById.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastClosedById = null;
+            if (parseNode.GetChildNode("last_contact_reply_at") is { } nullNodeLastContactReplyAt && nullNodeLastContactReplyAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastContactReplyAt = null;
+            if (parseNode.GetChildNode("median_time_to_reply") is { } nullNodeMedianTimeToReply && nullNodeMedianTimeToReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MedianTimeToReply = null;
+            if (parseNode.GetChildNode("time_to_admin_reply") is { } nullNodeTimeToAdminReply && nullNodeTimeToAdminReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeToAdminReply = null;
+            if (parseNode.GetChildNode("time_to_assignment") is { } nullNodeTimeToAssignment && nullNodeTimeToAssignment.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeToAssignment = null;
+            if (parseNode.GetChildNode("time_to_first_close") is { } nullNodeTimeToFirstClose && nullNodeTimeToFirstClose.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeToFirstClose = null;
+            if (parseNode.GetChildNode("time_to_last_close") is { } nullNodeTimeToLastClose && nullNodeTimeToLastClose.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeToLastClose = null;
+            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Adjusted handling time for conversation in seconds. This is the active handling time excluding idle periods when teammates are not actively working on the conversation.</summary>
-        public int? AdjustedHandlingTime { get; set; }
+        public int? AdjustedHandlingTime { get => _explicitNullValueAdjustedHandlingTime; set { _explicitNullValueAdjustedHandlingTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("adjusted_handling_time"); else _explicitNullProperties?.Remove("adjusted_handling_time"); } }
+        private int? _explicitNullValueAdjustedHandlingTime = default!;
         /// <summary>An array of conversation response time objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? AssignedTeamFirstResponseTime { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? AssignedTeamFirstResponseTime { get => _explicitNullValueAssignedTeamFirstResponseTime; set { _explicitNullValueAssignedTeamFirstResponseTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assigned_team_first_response_time"); else _explicitNullProperties?.Remove("assigned_team_first_response_time"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? _explicitNullValueAssignedTeamFirstResponseTime = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> AssignedTeamFirstResponseTime { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> AssignedTeamFirstResponseTime { get => _explicitNullValueAssignedTeamFirstResponseTime; set { _explicitNullValueAssignedTeamFirstResponseTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assigned_team_first_response_time"); else _explicitNullProperties?.Remove("assigned_team_first_response_time"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> _explicitNullValueAssignedTeamFirstResponseTime = default!;
 #endif
         /// <summary>An array of conversation response time objects within office hours</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? AssignedTeamFirstResponseTimeInOfficeHours { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? AssignedTeamFirstResponseTimeInOfficeHours { get => _explicitNullValueAssignedTeamFirstResponseTimeInOfficeHours; set { _explicitNullValueAssignedTeamFirstResponseTimeInOfficeHours = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assigned_team_first_response_time_in_office_hours"); else _explicitNullProperties?.Remove("assigned_team_first_response_time_in_office_hours"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time>? _explicitNullValueAssignedTeamFirstResponseTimeInOfficeHours = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> AssignedTeamFirstResponseTimeInOfficeHours { get; set; }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> AssignedTeamFirstResponseTimeInOfficeHours { get => _explicitNullValueAssignedTeamFirstResponseTimeInOfficeHours; set { _explicitNullValueAssignedTeamFirstResponseTimeInOfficeHours = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assigned_team_first_response_time_in_office_hours"); else _explicitNullProperties?.Remove("assigned_team_first_response_time_in_office_hours"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_response_time> _explicitNullValueAssignedTeamFirstResponseTimeInOfficeHours = default!;
 #endif
         /// <summary>Number of assignments after first_contact_reply_at.</summary>
-        public int? CountAssignments { get; set; }
+        public int? CountAssignments { get => _explicitNullValueCountAssignments; set { _explicitNullValueCountAssignments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_assignments"); else _explicitNullProperties?.Remove("count_assignments"); } }
+        private int? _explicitNullValueCountAssignments = default!;
         /// <summary>Total number of conversation parts.</summary>
-        public int? CountConversationParts { get; set; }
+        public int? CountConversationParts { get => _explicitNullValueCountConversationParts; set { _explicitNullValueCountConversationParts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_conversation_parts"); else _explicitNullProperties?.Remove("count_conversation_parts"); } }
+        private int? _explicitNullValueCountConversationParts = default!;
         /// <summary>Number of reopens after first_contact_reply_at.</summary>
-        public int? CountReopens { get; set; }
+        public int? CountReopens { get => _explicitNullValueCountReopens; set { _explicitNullValueCountReopens = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_reopens"); else _explicitNullProperties?.Remove("count_reopens"); } }
+        private int? _explicitNullValueCountReopens = default!;
         /// <summary>Time of first admin reply after first_contact_reply_at.</summary>
-        public int? FirstAdminReplyAt { get; set; }
+        public int? FirstAdminReplyAt { get => _explicitNullValueFirstAdminReplyAt; set { _explicitNullValueFirstAdminReplyAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_admin_reply_at"); else _explicitNullProperties?.Remove("first_admin_reply_at"); } }
+        private int? _explicitNullValueFirstAdminReplyAt = default!;
         /// <summary>Time of first assignment after first_contact_reply_at.</summary>
-        public int? FirstAssignmentAt { get; set; }
+        public int? FirstAssignmentAt { get => _explicitNullValueFirstAssignmentAt; set { _explicitNullValueFirstAssignmentAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_assignment_at"); else _explicitNullProperties?.Remove("first_assignment_at"); } }
+        private int? _explicitNullValueFirstAssignmentAt = default!;
         /// <summary>Time of first close after first_contact_reply_at.</summary>
-        public int? FirstCloseAt { get; set; }
+        public int? FirstCloseAt { get => _explicitNullValueFirstCloseAt; set { _explicitNullValueFirstCloseAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_close_at"); else _explicitNullProperties?.Remove("first_close_at"); } }
+        private int? _explicitNullValueFirstCloseAt = default!;
         /// <summary>Time of first text conversation part from a contact.</summary>
-        public int? FirstContactReplyAt { get; set; }
+        public int? FirstContactReplyAt { get => _explicitNullValueFirstContactReplyAt; set { _explicitNullValueFirstContactReplyAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_contact_reply_at"); else _explicitNullProperties?.Remove("first_contact_reply_at"); } }
+        private int? _explicitNullValueFirstContactReplyAt = default!;
         /// <summary>Time from conversation assignment to conversation close in seconds.</summary>
-        public int? HandlingTime { get; set; }
+        public int? HandlingTime { get => _explicitNullValueHandlingTime; set { _explicitNullValueHandlingTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handling_time"); else _explicitNullProperties?.Remove("handling_time"); } }
+        private int? _explicitNullValueHandlingTime = default!;
         /// <summary>Time of the last conversation part from an admin.</summary>
-        public int? LastAdminReplyAt { get; set; }
+        public int? LastAdminReplyAt { get => _explicitNullValueLastAdminReplyAt; set { _explicitNullValueLastAdminReplyAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_admin_reply_at"); else _explicitNullProperties?.Remove("last_admin_reply_at"); } }
+        private int? _explicitNullValueLastAdminReplyAt = default!;
         /// <summary>Time of first admin reply since most recent assignment.</summary>
-        public int? LastAssignmentAdminReplyAt { get; set; }
+        public int? LastAssignmentAdminReplyAt { get => _explicitNullValueLastAssignmentAdminReplyAt; set { _explicitNullValueLastAssignmentAdminReplyAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_assignment_admin_reply_at"); else _explicitNullProperties?.Remove("last_assignment_admin_reply_at"); } }
+        private int? _explicitNullValueLastAssignmentAdminReplyAt = default!;
         /// <summary>Time of last assignment after first_contact_reply_at.</summary>
-        public int? LastAssignmentAt { get; set; }
+        public int? LastAssignmentAt { get => _explicitNullValueLastAssignmentAt; set { _explicitNullValueLastAssignmentAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_assignment_at"); else _explicitNullProperties?.Remove("last_assignment_at"); } }
+        private int? _explicitNullValueLastAssignmentAt = default!;
         /// <summary>Time of the last conversation close.</summary>
-        public int? LastCloseAt { get; set; }
+        public int? LastCloseAt { get => _explicitNullValueLastCloseAt; set { _explicitNullValueLastCloseAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_close_at"); else _explicitNullProperties?.Remove("last_close_at"); } }
+        private int? _explicitNullValueLastCloseAt = default!;
         /// <summary>The last admin who closed the conversation. Returns a reference to an Admin object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? LastClosedById { get; set; }
+        public string? LastClosedById { get => _explicitNullValueLastClosedById; set { _explicitNullValueLastClosedById = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_closed_by_id"); else _explicitNullProperties?.Remove("last_closed_by_id"); } }
+        private string? _explicitNullValueLastClosedById = default!;
 #nullable restore
 #else
-        public string LastClosedById { get; set; }
+        public string LastClosedById { get => _explicitNullValueLastClosedById; set { _explicitNullValueLastClosedById = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_closed_by_id"); else _explicitNullProperties?.Remove("last_closed_by_id"); } }
+        private string _explicitNullValueLastClosedById = default!;
 #endif
         /// <summary>Time of the last conversation part from a contact.</summary>
-        public int? LastContactReplyAt { get; set; }
+        public int? LastContactReplyAt { get => _explicitNullValueLastContactReplyAt; set { _explicitNullValueLastContactReplyAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_contact_reply_at"); else _explicitNullProperties?.Remove("last_contact_reply_at"); } }
+        private int? _explicitNullValueLastContactReplyAt = default!;
         /// <summary>Median based on all admin replies after a contact reply. Subtracts out of business hours. In seconds.</summary>
-        public int? MedianTimeToReply { get; set; }
+        public int? MedianTimeToReply { get => _explicitNullValueMedianTimeToReply; set { _explicitNullValueMedianTimeToReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("median_time_to_reply"); else _explicitNullProperties?.Remove("median_time_to_reply"); } }
+        private int? _explicitNullValueMedianTimeToReply = default!;
         /// <summary>Duration until first admin reply. Subtracts out of business hours. In seconds.</summary>
-        public int? TimeToAdminReply { get; set; }
+        public int? TimeToAdminReply { get => _explicitNullValueTimeToAdminReply; set { _explicitNullValueTimeToAdminReply = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_to_admin_reply"); else _explicitNullProperties?.Remove("time_to_admin_reply"); } }
+        private int? _explicitNullValueTimeToAdminReply = default!;
         /// <summary>Duration until last assignment before first admin reply. In seconds.</summary>
-        public int? TimeToAssignment { get; set; }
+        public int? TimeToAssignment { get => _explicitNullValueTimeToAssignment; set { _explicitNullValueTimeToAssignment = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_to_assignment"); else _explicitNullProperties?.Remove("time_to_assignment"); } }
+        private int? _explicitNullValueTimeToAssignment = default!;
         /// <summary>Duration until conversation was closed first time. Subtracts out of business hours. In seconds.</summary>
-        public int? TimeToFirstClose { get; set; }
+        public int? TimeToFirstClose { get => _explicitNullValueTimeToFirstClose; set { _explicitNullValueTimeToFirstClose = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_to_first_close"); else _explicitNullProperties?.Remove("time_to_first_close"); } }
+        private int? _explicitNullValueTimeToFirstClose = default!;
         /// <summary>Duration until conversation was closed last time. Subtracts out of business hours. In seconds.</summary>
-        public int? TimeToLastClose { get; set; }
+        public int? TimeToLastClose { get => _explicitNullValueTimeToLastClose; set { _explicitNullValueTimeToLastClose = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_to_last_close"); else _explicitNullProperties?.Remove("time_to_last_close"); } }
+        private int? _explicitNullValueTimeToLastClose = default!;
         /// <summary>The type property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get; set; }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get; set; }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private string _explicitNullValueType = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics"/> and sets the default values.
@@ -100,7 +157,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_statistics(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -165,6 +222,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("time_to_first_close", TimeToFirstClose);
             writer.WriteIntValue("time_to_last_close", TimeToLastClose);
             writer.WriteStringValue("type", Type);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

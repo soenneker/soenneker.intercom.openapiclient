@@ -12,43 +12,64 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class MergePreviewAttributeChange : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("field") is { } nullNodeField && nullNodeField.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Field = null;
+            if (parseNode.GetChildNode("from_value") is { } nullNodeFromValue && nullNodeFromValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FromValue = null;
+            if (parseNode.GetChildNode("into_value") is { } nullNodeIntoValue && nullNodeIntoValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntoValue = null;
+            if (parseNode.GetChildNode("new_into_value") is { } nullNodeNewIntoValue && nullNodeNewIntoValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NewIntoValue = null;
+            if (parseNode.GetChildNode("outcome") is { } nullNodeOutcome && nullNodeOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Outcome = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The contact field that would change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Field { get; set; }
+        public string? Field { get => _explicitNullValueField; set { _explicitNullValueField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("field"); else _explicitNullProperties?.Remove("field"); } }
+        private string? _explicitNullValueField = default!;
 #nullable restore
 #else
-        public string Field { get; set; }
+        public string Field { get => _explicitNullValueField; set { _explicitNullValueField = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("field"); else _explicitNullProperties?.Remove("field"); } }
+        private string _explicitNullValueField = default!;
 #endif
         /// <summary>The source contact&apos;s value. Omitted when null. May be a string, array, or object depending on the field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? FromValue { get; set; }
+        public UntypedNode? FromValue { get => _explicitNullValueFromValue; set { _explicitNullValueFromValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from_value"); else _explicitNullProperties?.Remove("from_value"); } }
+        private UntypedNode? _explicitNullValueFromValue = default!;
 #nullable restore
 #else
-        public UntypedNode FromValue { get; set; }
+        public UntypedNode FromValue { get => _explicitNullValueFromValue; set { _explicitNullValueFromValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from_value"); else _explicitNullProperties?.Remove("from_value"); } }
+        private UntypedNode _explicitNullValueFromValue = default!;
 #endif
         /// <summary>The target contact&apos;s value. Omitted when null. May be a string, array, or object depending on the field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? IntoValue { get; set; }
+        public UntypedNode? IntoValue { get => _explicitNullValueIntoValue; set { _explicitNullValueIntoValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("into_value"); else _explicitNullProperties?.Remove("into_value"); } }
+        private UntypedNode? _explicitNullValueIntoValue = default!;
 #nullable restore
 #else
-        public UntypedNode IntoValue { get; set; }
+        public UntypedNode IntoValue { get => _explicitNullValueIntoValue; set { _explicitNullValueIntoValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("into_value"); else _explicitNullProperties?.Remove("into_value"); } }
+        private UntypedNode _explicitNullValueIntoValue = default!;
 #endif
         /// <summary>The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? NewIntoValue { get; set; }
+        public UntypedNode? NewIntoValue { get => _explicitNullValueNewIntoValue; set { _explicitNullValueNewIntoValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("new_into_value"); else _explicitNullProperties?.Remove("new_into_value"); } }
+        private UntypedNode? _explicitNullValueNewIntoValue = default!;
 #nullable restore
 #else
-        public UntypedNode NewIntoValue { get; set; }
+        public UntypedNode NewIntoValue { get => _explicitNullValueNewIntoValue; set { _explicitNullValueNewIntoValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("new_into_value"); else _explicitNullProperties?.Remove("new_into_value"); } }
+        private UntypedNode _explicitNullValueNewIntoValue = default!;
 #endif
         /// <summary>How the value is resolved. adopted = the source&apos;s value is taken; discarded = the source&apos;s value is dropped and the target&apos;s kept; merged = the two values are combined.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome? Outcome { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome? Outcome { get => _explicitNullValueOutcome; set { _explicitNullValueOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("outcome"); else _explicitNullProperties?.Remove("outcome"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome? _explicitNullValueOutcome = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChange"/> and sets the default values.
         /// </summary>
@@ -64,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChange CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChange();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChange(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -93,6 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<UntypedNode>("into_value", IntoValue);
             writer.WriteObjectValue<UntypedNode>("new_into_value", NewIntoValue);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewAttributeChangeOutcome>("outcome", Outcome);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

@@ -11,19 +11,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     #pragma warning disable CS1591
     public partial class Data_connector_detail_object_mappings_reference_mappings : IAdditionalDataHolder, IParsable
     #pragma warning restore CS1591
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("intercom_attribute_identifier") is { } nullNodeIntercomAttributeIdentifier && nullNodeIntercomAttributeIdentifier.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomAttributeIdentifier = null;
+            if (parseNode.GetChildNode("intercom_object_type") is { } nullNodeIntercomObjectType && nullNodeIntercomObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomObjectType = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The intercom_attribute_identifier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IntercomAttributeIdentifier { get; set; }
+        public string? IntercomAttributeIdentifier { get => _explicitNullValueIntercomAttributeIdentifier; set { _explicitNullValueIntercomAttributeIdentifier = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_attribute_identifier"); else _explicitNullProperties?.Remove("intercom_attribute_identifier"); } }
+        private string? _explicitNullValueIntercomAttributeIdentifier = default!;
 #nullable restore
 #else
-        public string IntercomAttributeIdentifier { get; set; }
+        public string IntercomAttributeIdentifier { get => _explicitNullValueIntercomAttributeIdentifier; set { _explicitNullValueIntercomAttributeIdentifier = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_attribute_identifier"); else _explicitNullProperties?.Remove("intercom_attribute_identifier"); } }
+        private string _explicitNullValueIntercomAttributeIdentifier = default!;
 #endif
         /// <summary>The intercom_object_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings_intercom_object_type? IntercomObjectType { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings_intercom_object_type? IntercomObjectType { get => _explicitNullValueIntercomObjectType; set { _explicitNullValueIntercomObjectType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_object_type"); else _explicitNullProperties?.Remove("intercom_object_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings_intercom_object_type? _explicitNullValueIntercomObjectType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings"/> and sets the default values.
         /// </summary>
@@ -39,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -62,6 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("intercom_attribute_identifier", IntercomAttributeIdentifier);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_reference_mappings_intercom_object_type>("intercom_object_type", IntercomObjectType);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

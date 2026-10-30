@@ -12,66 +12,101 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Activity_log_metadata : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("auto_changed") is { } nullNodeAutoChanged && nullNodeAutoChanged.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AutoChanged = null;
+            if (parseNode.GetChildNode("away_mode") is { } nullNodeAwayMode && nullNodeAwayMode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AwayMode = null;
+            if (parseNode.GetChildNode("away_status_reason") is { } nullNodeAwayStatusReason && nullNodeAwayStatusReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AwayStatusReason = null;
+            if (parseNode.GetChildNode("conversation_assignment_limit") is { } nullNodeConversationAssignmentLimit && nullNodeConversationAssignmentLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationAssignmentLimit = null;
+            if (parseNode.GetChildNode("external_id") is { } nullNodeExternalId && nullNodeExternalId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExternalId = null;
+            if (parseNode.GetChildNode("reassign_conversations") is { } nullNodeReassignConversations && nullNodeReassignConversations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReassignConversations = null;
+            if (parseNode.GetChildNode("sign_in_method") is { } nullNodeSignInMethod && nullNodeSignInMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignInMethod = null;
+            if (parseNode.GetChildNode("source") is { } nullNodeSource && nullNodeSource.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Source = null;
+            if (parseNode.GetChildNode("ticket_assignment_limit") is { } nullNodeTicketAssignmentLimit && nullNodeTicketAssignmentLimit.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketAssignmentLimit = null;
+            if (parseNode.GetChildNode("update_by") is { } nullNodeUpdateBy && nullNodeUpdateBy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdateBy = null;
+            if (parseNode.GetChildNode("update_by_name") is { } nullNodeUpdateByName && nullNodeUpdateByName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdateByName = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Indicates if the status was changed automatically or manually.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AutoChanged { get; set; }
+        public string? AutoChanged { get => _explicitNullValueAutoChanged; set { _explicitNullValueAutoChanged = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auto_changed"); else _explicitNullProperties?.Remove("auto_changed"); } }
+        private string? _explicitNullValueAutoChanged = default!;
 #nullable restore
 #else
-        public string AutoChanged { get; set; }
+        public string AutoChanged { get => _explicitNullValueAutoChanged; set { _explicitNullValueAutoChanged = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auto_changed"); else _explicitNullProperties?.Remove("auto_changed"); } }
+        private string _explicitNullValueAutoChanged = default!;
 #endif
         /// <summary>The away mode status which is set to true when away and false when returned.</summary>
-        public bool? AwayMode { get; set; }
+        public bool? AwayMode { get => _explicitNullValueAwayMode; set { _explicitNullValueAwayMode = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("away_mode"); else _explicitNullProperties?.Remove("away_mode"); } }
+        private bool? _explicitNullValueAwayMode = default!;
         /// <summary>The reason the Admin is away.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AwayStatusReason { get; set; }
+        public string? AwayStatusReason { get => _explicitNullValueAwayStatusReason; set { _explicitNullValueAwayStatusReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("away_status_reason"); else _explicitNullProperties?.Remove("away_status_reason"); } }
+        private string? _explicitNullValueAwayStatusReason = default!;
 #nullable restore
 #else
-        public string AwayStatusReason { get; set; }
+        public string AwayStatusReason { get => _explicitNullValueAwayStatusReason; set { _explicitNullValueAwayStatusReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("away_status_reason"); else _explicitNullProperties?.Remove("away_status_reason"); } }
+        private string _explicitNullValueAwayStatusReason = default!;
 #endif
         /// <summary>The conversation assignment limit value for an admin.</summary>
-        public int? ConversationAssignmentLimit { get; set; }
+        public int? ConversationAssignmentLimit { get => _explicitNullValueConversationAssignmentLimit; set { _explicitNullValueConversationAssignmentLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_assignment_limit"); else _explicitNullProperties?.Remove("conversation_assignment_limit"); } }
+        private int? _explicitNullValueConversationAssignmentLimit = default!;
         /// <summary>The unique identifier for the contact which is provided by the Client.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalId { get; set; }
+        public string? ExternalId { get => _explicitNullValueExternalId; set { _explicitNullValueExternalId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_id"); else _explicitNullProperties?.Remove("external_id"); } }
+        private string? _explicitNullValueExternalId = default!;
 #nullable restore
 #else
-        public string ExternalId { get; set; }
+        public string ExternalId { get => _explicitNullValueExternalId; set { _explicitNullValueExternalId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_id"); else _explicitNullProperties?.Remove("external_id"); } }
+        private string _explicitNullValueExternalId = default!;
 #endif
         /// <summary>Indicates if conversations should be reassigned while an Admin is away.</summary>
-        public bool? ReassignConversations { get; set; }
+        public bool? ReassignConversations { get => _explicitNullValueReassignConversations; set { _explicitNullValueReassignConversations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reassign_conversations"); else _explicitNullProperties?.Remove("reassign_conversations"); } }
+        private bool? _explicitNullValueReassignConversations = default!;
         /// <summary>The way the admin signed in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SignInMethod { get; set; }
+        public string? SignInMethod { get => _explicitNullValueSignInMethod; set { _explicitNullValueSignInMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sign_in_method"); else _explicitNullProperties?.Remove("sign_in_method"); } }
+        private string? _explicitNullValueSignInMethod = default!;
 #nullable restore
 #else
-        public string SignInMethod { get; set; }
+        public string SignInMethod { get => _explicitNullValueSignInMethod; set { _explicitNullValueSignInMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sign_in_method"); else _explicitNullProperties?.Remove("sign_in_method"); } }
+        private string _explicitNullValueSignInMethod = default!;
 #endif
         /// <summary>The action that initiated the status change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Source { get; set; }
+        public string? Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }
+        private string? _explicitNullValueSource = default!;
 #nullable restore
 #else
-        public string Source { get; set; }
+        public string Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }
+        private string _explicitNullValueSource = default!;
 #endif
         /// <summary>The ticket assignment limit value for an admin.</summary>
-        public int? TicketAssignmentLimit { get; set; }
+        public int? TicketAssignmentLimit { get => _explicitNullValueTicketAssignmentLimit; set { _explicitNullValueTicketAssignmentLimit = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_assignment_limit"); else _explicitNullProperties?.Remove("ticket_assignment_limit"); } }
+        private int? _explicitNullValueTicketAssignmentLimit = default!;
         /// <summary>The ID of the Admin who initiated the activity.</summary>
-        public int? UpdateBy { get; set; }
+        public int? UpdateBy { get => _explicitNullValueUpdateBy; set { _explicitNullValueUpdateBy = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("update_by"); else _explicitNullProperties?.Remove("update_by"); } }
+        private int? _explicitNullValueUpdateBy = default!;
         /// <summary>The name of the Admin who initiated the activity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UpdateByName { get; set; }
+        public string? UpdateByName { get => _explicitNullValueUpdateByName; set { _explicitNullValueUpdateByName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("update_by_name"); else _explicitNullProperties?.Remove("update_by_name"); } }
+        private string? _explicitNullValueUpdateByName = default!;
 #nullable restore
 #else
-        public string UpdateByName { get; set; }
+        public string UpdateByName { get => _explicitNullValueUpdateByName; set { _explicitNullValueUpdateByName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("update_by_name"); else _explicitNullProperties?.Remove("update_by_name"); } }
+        private string _explicitNullValueUpdateByName = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_metadata"/> and sets the default values.
@@ -88,7 +123,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_metadata CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_metadata();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_metadata(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -129,6 +164,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("ticket_assignment_limit", TicketAssignmentLimit);
             writer.WriteIntValue("update_by", UpdateBy);
             writer.WriteStringValue("update_by_name", UpdateByName);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

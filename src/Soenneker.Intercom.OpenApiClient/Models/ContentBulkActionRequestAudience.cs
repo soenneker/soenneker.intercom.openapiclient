@@ -12,26 +12,41 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ContentBulkActionRequestAudience : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("add_segment_ids") is { } nullNodeAddSegmentIds && nullNodeAddSegmentIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddSegmentIds = null;
+            if (parseNode.GetChildNode("remove_all") is { } nullNodeRemoveAll && nullNodeRemoveAll.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemoveAll = null;
+            if (parseNode.GetChildNode("remove_segment_ids") is { } nullNodeRemoveSegmentIds && nullNodeRemoveSegmentIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemoveSegmentIds = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Segment IDs to assign to the selected content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? AddSegmentIds { get; set; }
+        public List<int?>? AddSegmentIds { get => _explicitNullValueAddSegmentIds; set { _explicitNullValueAddSegmentIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add_segment_ids"); else _explicitNullProperties?.Remove("add_segment_ids"); } }
+        private List<int?>? _explicitNullValueAddSegmentIds = default!;
 #nullable restore
 #else
-        public List<int?> AddSegmentIds { get; set; }
+        public List<int?> AddSegmentIds { get => _explicitNullValueAddSegmentIds; set { _explicitNullValueAddSegmentIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add_segment_ids"); else _explicitNullProperties?.Remove("add_segment_ids"); } }
+        private List<int?> _explicitNullValueAddSegmentIds = default!;
 #endif
         /// <summary>When `true`, removes all segments from the selected content.</summary>
-        public bool? RemoveAll { get; set; }
+        public bool? RemoveAll { get => _explicitNullValueRemoveAll; set { _explicitNullValueRemoveAll = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_all"); else _explicitNullProperties?.Remove("remove_all"); } }
+        private bool? _explicitNullValueRemoveAll = default!;
         /// <summary>Segment IDs to remove from the selected content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? RemoveSegmentIds { get; set; }
+        public List<int?>? RemoveSegmentIds { get => _explicitNullValueRemoveSegmentIds; set { _explicitNullValueRemoveSegmentIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_segment_ids"); else _explicitNullProperties?.Remove("remove_segment_ids"); } }
+        private List<int?>? _explicitNullValueRemoveSegmentIds = default!;
 #nullable restore
 #else
-        public List<int?> RemoveSegmentIds { get; set; }
+        public List<int?> RemoveSegmentIds { get => _explicitNullValueRemoveSegmentIds; set { _explicitNullValueRemoveSegmentIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_segment_ids"); else _explicitNullProperties?.Remove("remove_segment_ids"); } }
+        private List<int?> _explicitNullValueRemoveSegmentIds = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience"/> and sets the default values.
@@ -48,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAudience(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -73,6 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<int?>("add_segment_ids", AddSegmentIds);
             writer.WriteBoolValue("remove_all", RemoveAll);
             writer.WriteCollectionOfPrimitiveValues<int?>("remove_segment_ids", RemoveSegmentIds);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }

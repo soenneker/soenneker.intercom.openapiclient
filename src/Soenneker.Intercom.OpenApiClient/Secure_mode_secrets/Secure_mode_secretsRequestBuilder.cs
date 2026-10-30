@@ -66,6 +66,8 @@ namespace Soenneker.Intercom.OpenApiClient.Secure_mode_secrets
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -93,6 +95,8 @@ namespace Soenneker.Intercom.OpenApiClient.Secure_mode_secrets
             {
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretWithMaterial>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.IdentityVerificationSecretWithMaterial.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

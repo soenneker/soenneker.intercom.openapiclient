@@ -12,13 +12,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     public partial class Conversation_part_metadata_quick_reply_options : global::Soenneker.Intercom.OpenApiClient.Models.Quick_reply_option, IParsable
     #pragma warning restore CS1591
     {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public override void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            base.CaptureExplicitNulls(parseNode);
+            if (parseNode.GetChildNode("translations") is { } nullNodeTranslations && nullNodeTranslations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Translations = null;
+        }
+
         /// <summary>The translations for the quick reply option.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations? Translations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations? Translations { get => _explicitNullValueTranslations; set { _explicitNullValueTranslations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("translations"); else _explicitNullProperties?.Remove("translations"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations? _explicitNullValueTranslations = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations Translations { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations Translations { get => _explicitNullValueTranslations; set { _explicitNullValueTranslations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("translations"); else _explicitNullProperties?.Remove("translations"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations _explicitNullValueTranslations = default!;
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -28,7 +39,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -49,7 +60,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             base.Serialize(writer);
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations>("translations", Translations);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_metadata_quick_reply_options_translations>("translations", Translations);if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            
         }
     }
 }

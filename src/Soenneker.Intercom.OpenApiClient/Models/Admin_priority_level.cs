@@ -12,24 +12,37 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class Admin_priority_level : IAdditionalDataHolder, IParsable
-    {
+    , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Track explicitly assigned nulls separately from absent properties.
+        private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
+
+        public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
+        {
+            if (parseNode.GetChildNode("primary_admin_ids") is { } nullNodePrimaryAdminIds && nullNodePrimaryAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryAdminIds = null;
+            if (parseNode.GetChildNode("secondary_admin_ids") is { } nullNodeSecondaryAdminIds && nullNodeSecondaryAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryAdminIds = null;
+        }
+
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The primary admin ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? PrimaryAdminIds { get; set; }
+        public List<int?>? PrimaryAdminIds { get => _explicitNullValuePrimaryAdminIds; set { _explicitNullValuePrimaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_admin_ids"); else _explicitNullProperties?.Remove("primary_admin_ids"); } }
+        private List<int?>? _explicitNullValuePrimaryAdminIds = default!;
 #nullable restore
 #else
-        public List<int?> PrimaryAdminIds { get; set; }
+        public List<int?> PrimaryAdminIds { get => _explicitNullValuePrimaryAdminIds; set { _explicitNullValuePrimaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_admin_ids"); else _explicitNullProperties?.Remove("primary_admin_ids"); } }
+        private List<int?> _explicitNullValuePrimaryAdminIds = default!;
 #endif
         /// <summary>The secondary admin ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? SecondaryAdminIds { get; set; }
+        public List<int?>? SecondaryAdminIds { get => _explicitNullValueSecondaryAdminIds; set { _explicitNullValueSecondaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_admin_ids"); else _explicitNullProperties?.Remove("secondary_admin_ids"); } }
+        private List<int?>? _explicitNullValueSecondaryAdminIds = default!;
 #nullable restore
 #else
-        public List<int?> SecondaryAdminIds { get; set; }
+        public List<int?> SecondaryAdminIds { get => _explicitNullValueSecondaryAdminIds; set { _explicitNullValueSecondaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_admin_ids"); else _explicitNullProperties?.Remove("secondary_admin_ids"); } }
+        private List<int?> _explicitNullValueSecondaryAdminIds = default!;
 #endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level"/> and sets the default values.
@@ -46,7 +59,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public static global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
-            return new global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level();
+            return global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.Admin_priority_level(), parseNode);
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -69,6 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<int?>("primary_admin_ids", PrimaryAdminIds);
             writer.WriteCollectionOfPrimitiveValues<int?>("secondary_admin_ids", SecondaryAdminIds);
+            if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
