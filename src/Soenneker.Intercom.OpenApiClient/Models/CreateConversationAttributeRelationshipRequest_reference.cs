@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "object_type_id", n => { ObjectTypeId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationAttributeRelationshipRequest_reference_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

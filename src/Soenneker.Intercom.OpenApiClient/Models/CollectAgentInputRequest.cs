@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("attribute_values") is { } nullNodeAttributeValues && nullNodeAttributeValues.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttributeValues = null;
-            if (parseNode.GetChildNode("step_id") is { } nullNodeStepId && nullNodeStepId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StepId = null;
+            if (parseNode.GetChildNode("attribute_values") is null) { _explicitNullValueAttributeValues = default!; _explicitNullProperties?.Remove("attribute_values"); }
+            else if (parseNode.GetChildNode("attribute_values") is { } nullNodeAttributeValues && nullNodeAttributeValues.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttributeValues = null;
+            if (parseNode.GetChildNode("step_id") is null) { _explicitNullValueStepId = default!; _explicitNullProperties?.Remove("step_id"); }
+            else if (parseNode.GetChildNode("step_id") is { } nullNodeStepId && nullNodeStepId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StepId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Array of attribute values matching the attributes_to_collect from the webhook payload. Must include a value for every attribute listed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem>? AttributeValues { get => _explicitNullValueAttributeValues; set { _explicitNullValueAttributeValues = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_values"); else _explicitNullProperties?.Remove("attribute_values"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem>? AttributeValues { get => _explicitNullValueAttributeValues; set { _explicitNullValueAttributeValues = value; AdditionalData?.Remove("attribute_values"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_values"); else _explicitNullProperties?.Remove("attribute_values"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem>? _explicitNullValueAttributeValues = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem> AttributeValues { get => _explicitNullValueAttributeValues; set { _explicitNullValueAttributeValues = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_values"); else _explicitNullProperties?.Remove("attribute_values"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem> AttributeValues { get => _explicitNullValueAttributeValues; set { _explicitNullValueAttributeValues = value; AdditionalData?.Remove("attribute_values"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_values"); else _explicitNullProperties?.Remove("attribute_values"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.CollectAgentInputRequestAttributeValuesItem> _explicitNullValueAttributeValues = default!;
 #endif
         /// <summary>The step_id from the webhook payload, identifying which HITL step this response is for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step_id"); else _explicitNullProperties?.Remove("step_id"); } }
+        public string? StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; AdditionalData?.Remove("step_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step_id"); else _explicitNullProperties?.Remove("step_id"); } }
         private string? _explicitNullValueStepId = default!;
 #nullable restore
 #else
-        public string StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step_id"); else _explicitNullProperties?.Remove("step_id"); } }
+        public string StepId { get => _explicitNullValueStepId; set { _explicitNullValueStepId = value; AdditionalData?.Remove("step_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("step_id"); else _explicitNullProperties?.Remove("step_id"); } }
         private string _explicitNullValueStepId = default!;
 #endif
         /// <summary>

@@ -17,9 +17,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("conversation_id") is { } nullNodeConversationId && nullNodeConversationId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationId = null;
-            if (parseNode.GetChildNode("rating") is { } nullNodeRating && nullNodeRating.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Rating = null;
-            if (parseNode.GetChildNode("remark") is { } nullNodeRemark && nullNodeRemark.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Remark = null;
+            if (parseNode.GetChildNode("conversation_id") is null) { _explicitNullValueConversationId = default!; _explicitNullProperties?.Remove("conversation_id"); }
+            else if (parseNode.GetChildNode("conversation_id") is { } nullNodeConversationId && nullNodeConversationId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationId = null;
+            if (parseNode.GetChildNode("rating") is null) { _explicitNullValueRating = default!; _explicitNullProperties?.Remove("rating"); }
+            else if (parseNode.GetChildNode("rating") is { } nullNodeRating && nullNodeRating.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Rating = null;
+            if (parseNode.GetChildNode("remark") is null) { _explicitNullValueRemark = default!; _explicitNullProperties?.Remove("remark"); }
+            else if (parseNode.GetChildNode("remark") is { } nullNodeRemark && nullNodeRemark.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Remark = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,24 +30,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Your external conversation ID — the same ID you started the conversation with, and the one echoed on the `csat_requested` event.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationId { get => _explicitNullValueConversationId; set { _explicitNullValueConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_id"); else _explicitNullProperties?.Remove("conversation_id"); } }
+        public string? ConversationId { get => _explicitNullValueConversationId; set { _explicitNullValueConversationId = value; AdditionalData?.Remove("conversation_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_id"); else _explicitNullProperties?.Remove("conversation_id"); } }
         private string? _explicitNullValueConversationId = default!;
 #nullable restore
 #else
-        public string ConversationId { get => _explicitNullValueConversationId; set { _explicitNullValueConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_id"); else _explicitNullProperties?.Remove("conversation_id"); } }
+        public string ConversationId { get => _explicitNullValueConversationId; set { _explicitNullValueConversationId = value; AdditionalData?.Remove("conversation_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_id"); else _explicitNullProperties?.Remove("conversation_id"); } }
         private string _explicitNullValueConversationId = default!;
 #endif
         /// <summary>The rating the user selected — one of the `key` values from the `csat_requested` event&apos;s options.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsatRequestRating? Rating { get => _explicitNullValueRating; set { _explicitNullValueRating = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rating"); else _explicitNullProperties?.Remove("rating"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsatRequestRating? Rating { get => _explicitNullValueRating; set { _explicitNullValueRating = value; AdditionalData?.Remove("rating"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rating"); else _explicitNullProperties?.Remove("rating"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsatRequestRating? _explicitNullValueRating = default!;
         /// <summary>Optional free-text comment the user left alongside the rating. Can be added to an already-rated survey, but only once — the rating locks after a remark is recorded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Remark { get => _explicitNullValueRemark; set { _explicitNullValueRemark = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remark"); else _explicitNullProperties?.Remove("remark"); } }
+        public string? Remark { get => _explicitNullValueRemark; set { _explicitNullValueRemark = value; AdditionalData?.Remove("remark"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remark"); else _explicitNullProperties?.Remove("remark"); } }
         private string? _explicitNullValueRemark = default!;
 #nullable restore
 #else
-        public string Remark { get => _explicitNullValueRemark; set { _explicitNullValueRemark = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remark"); else _explicitNullProperties?.Remove("remark"); } }
+        public string Remark { get => _explicitNullValueRemark; set { _explicitNullValueRemark = value; AdditionalData?.Remove("remark"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remark"); else _explicitNullProperties?.Remove("remark"); } }
         private string _explicitNullValueRemark = default!;
 #endif
         /// <summary>
@@ -73,7 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
-                { "rating", n => { Rating = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsatRequestRating>(); } },
+                { "rating", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubmitFinCsatRequestRating>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueRating = default; _explicitNullProperties?.Remove("rating"); AdditionalData["rating"] = unknown; } else { Rating = parsed; AdditionalData.Remove("rating"); } } },
                 { "remark", n => { Remark = n.GetStringValue(); } },
             };
         }

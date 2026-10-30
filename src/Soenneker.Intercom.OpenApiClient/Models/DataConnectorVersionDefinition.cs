@@ -18,29 +18,52 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("audiences") is { } nullNodeAudiences && nullNodeAudiences.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Audiences = null;
-            if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
-            if (parseNode.GetChildNode("bypass_authentication") is { } nullNodeBypassAuthentication && nullNodeBypassAuthentication.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BypassAuthentication = null;
-            if (parseNode.GetChildNode("client_function_name") is { } nullNodeClientFunctionName && nullNodeClientFunctionName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ClientFunctionName = null;
-            if (parseNode.GetChildNode("client_function_timeout_ms") is { } nullNodeClientFunctionTimeoutMs && nullNodeClientFunctionTimeoutMs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ClientFunctionTimeoutMs = null;
-            if (parseNode.GetChildNode("configuration_response_type") is { } nullNodeConfigurationResponseType && nullNodeConfigurationResponseType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConfigurationResponseType = null;
-            if (parseNode.GetChildNode("customer_authentication") is { } nullNodeCustomerAuthentication && nullNodeCustomerAuthentication.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomerAuthentication = null;
-            if (parseNode.GetChildNode("data_inputs") is { } nullNodeDataInputs && nullNodeDataInputs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataInputs = null;
-            if (parseNode.GetChildNode("data_transformation_type") is { } nullNodeDataTransformationType && nullNodeDataTransformationType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataTransformationType = null;
-            if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
-            if (parseNode.GetChildNode("direct_fin_usage") is { } nullNodeDirectFinUsage && nullNodeDirectFinUsage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DirectFinUsage = null;
-            if (parseNode.GetChildNode("enforce_auth") is { } nullNodeEnforceAuth && nullNodeEnforceAuth.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnforceAuth = null;
-            if (parseNode.GetChildNode("execution_type") is { } nullNodeExecutionType && nullNodeExecutionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExecutionType = null;
-            if (parseNode.GetChildNode("headers") is { } nullNodeHeaders && nullNodeHeaders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Headers = null;
-            if (parseNode.GetChildNode("http_method") is { } nullNodeHttpMethod && nullNodeHttpMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HttpMethod = null;
-            if (parseNode.GetChildNode("internal_description") is { } nullNodeInternalDescription && nullNodeInternalDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InternalDescription = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("object_mappings") is { } nullNodeObjectMappings && nullNodeObjectMappings.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectMappings = null;
-            if (parseNode.GetChildNode("response_fields") is { } nullNodeResponseFields && nullNodeResponseFields.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ResponseFields = null;
-            if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
-            if (parseNode.GetChildNode("token_ids") is { } nullNodeTokenIds && nullNodeTokenIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenIds = null;
-            if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
-            if (parseNode.GetChildNode("validate_missing_attributes") is { } nullNodeValidateMissingAttributes && nullNodeValidateMissingAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ValidateMissingAttributes = null;
+            if (parseNode.GetChildNode("audiences") is null) { _explicitNullValueAudiences = default!; _explicitNullProperties?.Remove("audiences"); }
+            else if (parseNode.GetChildNode("audiences") is { } nullNodeAudiences && nullNodeAudiences.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Audiences = null;
+            if (parseNode.GetChildNode("body") is null) { _explicitNullValueBody = default!; _explicitNullProperties?.Remove("body"); }
+            else if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("bypass_authentication") is null) { _explicitNullValueBypassAuthentication = default!; _explicitNullProperties?.Remove("bypass_authentication"); }
+            else if (parseNode.GetChildNode("bypass_authentication") is { } nullNodeBypassAuthentication && nullNodeBypassAuthentication.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BypassAuthentication = null;
+            if (parseNode.GetChildNode("client_function_name") is null) { _explicitNullValueClientFunctionName = default!; _explicitNullProperties?.Remove("client_function_name"); }
+            else if (parseNode.GetChildNode("client_function_name") is { } nullNodeClientFunctionName && nullNodeClientFunctionName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ClientFunctionName = null;
+            if (parseNode.GetChildNode("client_function_timeout_ms") is null) { _explicitNullValueClientFunctionTimeoutMs = default!; _explicitNullProperties?.Remove("client_function_timeout_ms"); }
+            else if (parseNode.GetChildNode("client_function_timeout_ms") is { } nullNodeClientFunctionTimeoutMs && nullNodeClientFunctionTimeoutMs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ClientFunctionTimeoutMs = null;
+            if (parseNode.GetChildNode("configuration_response_type") is null) { _explicitNullValueConfigurationResponseType = default!; _explicitNullProperties?.Remove("configuration_response_type"); }
+            else if (parseNode.GetChildNode("configuration_response_type") is { } nullNodeConfigurationResponseType && nullNodeConfigurationResponseType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConfigurationResponseType = null;
+            if (parseNode.GetChildNode("customer_authentication") is null) { _explicitNullValueCustomerAuthentication = default!; _explicitNullProperties?.Remove("customer_authentication"); }
+            else if (parseNode.GetChildNode("customer_authentication") is { } nullNodeCustomerAuthentication && nullNodeCustomerAuthentication.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomerAuthentication = null;
+            if (parseNode.GetChildNode("data_inputs") is null) { _explicitNullValueDataInputs = default!; _explicitNullProperties?.Remove("data_inputs"); }
+            else if (parseNode.GetChildNode("data_inputs") is { } nullNodeDataInputs && nullNodeDataInputs.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataInputs = null;
+            if (parseNode.GetChildNode("data_transformation_type") is null) { _explicitNullValueDataTransformationType = default!; _explicitNullProperties?.Remove("data_transformation_type"); }
+            else if (parseNode.GetChildNode("data_transformation_type") is { } nullNodeDataTransformationType && nullNodeDataTransformationType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataTransformationType = null;
+            if (parseNode.GetChildNode("description") is null) { _explicitNullValueDescription = default!; _explicitNullProperties?.Remove("description"); }
+            else if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
+            if (parseNode.GetChildNode("direct_fin_usage") is null) { _explicitNullValueDirectFinUsage = default!; _explicitNullProperties?.Remove("direct_fin_usage"); }
+            else if (parseNode.GetChildNode("direct_fin_usage") is { } nullNodeDirectFinUsage && nullNodeDirectFinUsage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DirectFinUsage = null;
+            if (parseNode.GetChildNode("enforce_auth") is null) { _explicitNullValueEnforceAuth = default!; _explicitNullProperties?.Remove("enforce_auth"); }
+            else if (parseNode.GetChildNode("enforce_auth") is { } nullNodeEnforceAuth && nullNodeEnforceAuth.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnforceAuth = null;
+            if (parseNode.GetChildNode("execution_type") is null) { _explicitNullValueExecutionType = default!; _explicitNullProperties?.Remove("execution_type"); }
+            else if (parseNode.GetChildNode("execution_type") is { } nullNodeExecutionType && nullNodeExecutionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExecutionType = null;
+            if (parseNode.GetChildNode("headers") is null) { _explicitNullValueHeaders = default!; _explicitNullProperties?.Remove("headers"); }
+            else if (parseNode.GetChildNode("headers") is { } nullNodeHeaders && nullNodeHeaders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Headers = null;
+            if (parseNode.GetChildNode("http_method") is null) { _explicitNullValueHttpMethod = default!; _explicitNullProperties?.Remove("http_method"); }
+            else if (parseNode.GetChildNode("http_method") is { } nullNodeHttpMethod && nullNodeHttpMethod.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HttpMethod = null;
+            if (parseNode.GetChildNode("internal_description") is null) { _explicitNullValueInternalDescription = default!; _explicitNullProperties?.Remove("internal_description"); }
+            else if (parseNode.GetChildNode("internal_description") is { } nullNodeInternalDescription && nullNodeInternalDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InternalDescription = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("object_mappings") is null) { _explicitNullValueObjectMappings = default!; _explicitNullProperties?.Remove("object_mappings"); }
+            else if (parseNode.GetChildNode("object_mappings") is { } nullNodeObjectMappings && nullNodeObjectMappings.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectMappings = null;
+            if (parseNode.GetChildNode("response_fields") is null) { _explicitNullValueResponseFields = default!; _explicitNullProperties?.Remove("response_fields"); }
+            else if (parseNode.GetChildNode("response_fields") is { } nullNodeResponseFields && nullNodeResponseFields.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ResponseFields = null;
+            if (parseNode.GetChildNode("state") is null) { _explicitNullValueState = default!; _explicitNullProperties?.Remove("state"); }
+            else if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
+            if (parseNode.GetChildNode("token_ids") is null) { _explicitNullValueTokenIds = default!; _explicitNullProperties?.Remove("token_ids"); }
+            else if (parseNode.GetChildNode("token_ids") is { } nullNodeTokenIds && nullNodeTokenIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenIds = null;
+            if (parseNode.GetChildNode("url") is null) { _explicitNullValueUrl = default!; _explicitNullProperties?.Remove("url"); }
+            else if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("validate_missing_attributes") is null) { _explicitNullValueValidateMissingAttributes = default!; _explicitNullProperties?.Remove("validate_missing_attributes"); }
+            else if (parseNode.GetChildNode("validate_missing_attributes") is { } nullNodeValidateMissingAttributes && nullNodeValidateMissingAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ValidateMissingAttributes = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -48,190 +71,190 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The audience types this connector targets.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Audiences { get => _explicitNullValueAudiences; set { _explicitNullValueAudiences = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audiences"); else _explicitNullProperties?.Remove("audiences"); } }
+        public List<string>? Audiences { get => _explicitNullValueAudiences; set { _explicitNullValueAudiences = value; AdditionalData?.Remove("audiences"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audiences"); else _explicitNullProperties?.Remove("audiences"); } }
         private List<string>? _explicitNullValueAudiences = default!;
 #nullable restore
 #else
-        public List<string> Audiences { get => _explicitNullValueAudiences; set { _explicitNullValueAudiences = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audiences"); else _explicitNullProperties?.Remove("audiences"); } }
+        public List<string> Audiences { get => _explicitNullValueAudiences; set { _explicitNullValueAudiences = value; AdditionalData?.Remove("audiences"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audiences"); else _explicitNullProperties?.Remove("audiences"); } }
         private List<string> _explicitNullValueAudiences = default!;
 #endif
         /// <summary>The request body template. Supports template variables.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string _explicitNullValueBody = default!;
 #endif
         /// <summary>Whether authentication is bypassed for this connector.</summary>
-        public bool? BypassAuthentication { get => _explicitNullValueBypassAuthentication; set { _explicitNullValueBypassAuthentication = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bypass_authentication"); else _explicitNullProperties?.Remove("bypass_authentication"); } }
+        public bool? BypassAuthentication { get => _explicitNullValueBypassAuthentication; set { _explicitNullValueBypassAuthentication = value; AdditionalData?.Remove("bypass_authentication"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("bypass_authentication"); else _explicitNullProperties?.Remove("bypass_authentication"); } }
         private bool? _explicitNullValueBypassAuthentication = default!;
         /// <summary>The name of the client-side function, if applicable.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ClientFunctionName { get => _explicitNullValueClientFunctionName; set { _explicitNullValueClientFunctionName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("client_function_name"); else _explicitNullProperties?.Remove("client_function_name"); } }
+        public string? ClientFunctionName { get => _explicitNullValueClientFunctionName; set { _explicitNullValueClientFunctionName = value; AdditionalData?.Remove("client_function_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("client_function_name"); else _explicitNullProperties?.Remove("client_function_name"); } }
         private string? _explicitNullValueClientFunctionName = default!;
 #nullable restore
 #else
-        public string ClientFunctionName { get => _explicitNullValueClientFunctionName; set { _explicitNullValueClientFunctionName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("client_function_name"); else _explicitNullProperties?.Remove("client_function_name"); } }
+        public string ClientFunctionName { get => _explicitNullValueClientFunctionName; set { _explicitNullValueClientFunctionName = value; AdditionalData?.Remove("client_function_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("client_function_name"); else _explicitNullProperties?.Remove("client_function_name"); } }
         private string _explicitNullValueClientFunctionName = default!;
 #endif
         /// <summary>Timeout in milliseconds for the client function, if applicable.</summary>
-        public int? ClientFunctionTimeoutMs { get => _explicitNullValueClientFunctionTimeoutMs; set { _explicitNullValueClientFunctionTimeoutMs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("client_function_timeout_ms"); else _explicitNullProperties?.Remove("client_function_timeout_ms"); } }
+        public int? ClientFunctionTimeoutMs { get => _explicitNullValueClientFunctionTimeoutMs; set { _explicitNullValueClientFunctionTimeoutMs = value; AdditionalData?.Remove("client_function_timeout_ms"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("client_function_timeout_ms"); else _explicitNullProperties?.Remove("client_function_timeout_ms"); } }
         private int? _explicitNullValueClientFunctionTimeoutMs = default!;
         /// <summary>The expected response format from the connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConfigurationResponseType { get => _explicitNullValueConfigurationResponseType; set { _explicitNullValueConfigurationResponseType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("configuration_response_type"); else _explicitNullProperties?.Remove("configuration_response_type"); } }
+        public string? ConfigurationResponseType { get => _explicitNullValueConfigurationResponseType; set { _explicitNullValueConfigurationResponseType = value; AdditionalData?.Remove("configuration_response_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("configuration_response_type"); else _explicitNullProperties?.Remove("configuration_response_type"); } }
         private string? _explicitNullValueConfigurationResponseType = default!;
 #nullable restore
 #else
-        public string ConfigurationResponseType { get => _explicitNullValueConfigurationResponseType; set { _explicitNullValueConfigurationResponseType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("configuration_response_type"); else _explicitNullProperties?.Remove("configuration_response_type"); } }
+        public string ConfigurationResponseType { get => _explicitNullValueConfigurationResponseType; set { _explicitNullValueConfigurationResponseType = value; AdditionalData?.Remove("configuration_response_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("configuration_response_type"); else _explicitNullProperties?.Remove("configuration_response_type"); } }
         private string _explicitNullValueConfigurationResponseType = default!;
 #endif
         /// <summary>Whether OTP authentication is enabled for this connector.</summary>
-        public bool? CustomerAuthentication { get => _explicitNullValueCustomerAuthentication; set { _explicitNullValueCustomerAuthentication = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_authentication"); else _explicitNullProperties?.Remove("customer_authentication"); } }
+        public bool? CustomerAuthentication { get => _explicitNullValueCustomerAuthentication; set { _explicitNullValueCustomerAuthentication = value; AdditionalData?.Remove("customer_authentication"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_authentication"); else _explicitNullProperties?.Remove("customer_authentication"); } }
         private bool? _explicitNullValueCustomerAuthentication = default!;
         /// <summary>The input parameters accepted by this data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItem>? DataInputs { get => _explicitNullValueDataInputs; set { _explicitNullValueDataInputs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_inputs"); else _explicitNullProperties?.Remove("data_inputs"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItem>? DataInputs { get => _explicitNullValueDataInputs; set { _explicitNullValueDataInputs = value; AdditionalData?.Remove("data_inputs"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_inputs"); else _explicitNullProperties?.Remove("data_inputs"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItem>? _explicitNullValueDataInputs = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItem> DataInputs { get => _explicitNullValueDataInputs; set { _explicitNullValueDataInputs = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_inputs"); else _explicitNullProperties?.Remove("data_inputs"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItem> DataInputs { get => _explicitNullValueDataInputs; set { _explicitNullValueDataInputs = value; AdditionalData?.Remove("data_inputs"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_inputs"); else _explicitNullProperties?.Remove("data_inputs"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionDataInputsItem> _explicitNullValueDataInputs = default!;
 #endif
         /// <summary>The type of data transformation applied to the response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DataTransformationType { get => _explicitNullValueDataTransformationType; set { _explicitNullValueDataTransformationType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_transformation_type"); else _explicitNullProperties?.Remove("data_transformation_type"); } }
+        public string? DataTransformationType { get => _explicitNullValueDataTransformationType; set { _explicitNullValueDataTransformationType = value; AdditionalData?.Remove("data_transformation_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_transformation_type"); else _explicitNullProperties?.Remove("data_transformation_type"); } }
         private string? _explicitNullValueDataTransformationType = default!;
 #nullable restore
 #else
-        public string DataTransformationType { get => _explicitNullValueDataTransformationType; set { _explicitNullValueDataTransformationType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_transformation_type"); else _explicitNullProperties?.Remove("data_transformation_type"); } }
+        public string DataTransformationType { get => _explicitNullValueDataTransformationType; set { _explicitNullValueDataTransformationType = value; AdditionalData?.Remove("data_transformation_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_transformation_type"); else _explicitNullProperties?.Remove("data_transformation_type"); } }
         private string _explicitNullValueDataTransformationType = default!;
 #endif
         /// <summary>A description of what this data connector does.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string? _explicitNullValueDescription = default!;
 #nullable restore
 #else
-        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>Whether this connector is used directly by Fin.</summary>
-        public bool? DirectFinUsage { get => _explicitNullValueDirectFinUsage; set { _explicitNullValueDirectFinUsage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("direct_fin_usage"); else _explicitNullProperties?.Remove("direct_fin_usage"); } }
+        public bool? DirectFinUsage { get => _explicitNullValueDirectFinUsage; set { _explicitNullValueDirectFinUsage = value; AdditionalData?.Remove("direct_fin_usage"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("direct_fin_usage"); else _explicitNullProperties?.Remove("direct_fin_usage"); } }
         private bool? _explicitNullValueDirectFinUsage = default!;
         /// <summary>Whether authentication is enforced for this connector.</summary>
-        public bool? EnforceAuth { get => _explicitNullValueEnforceAuth; set { _explicitNullValueEnforceAuth = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enforce_auth"); else _explicitNullProperties?.Remove("enforce_auth"); } }
+        public bool? EnforceAuth { get => _explicitNullValueEnforceAuth; set { _explicitNullValueEnforceAuth = value; AdditionalData?.Remove("enforce_auth"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("enforce_auth"); else _explicitNullProperties?.Remove("enforce_auth"); } }
         private bool? _explicitNullValueEnforceAuth = default!;
         /// <summary>How the connector executes, for example `server_side` or `client_side`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExecutionType { get => _explicitNullValueExecutionType; set { _explicitNullValueExecutionType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("execution_type"); else _explicitNullProperties?.Remove("execution_type"); } }
+        public string? ExecutionType { get => _explicitNullValueExecutionType; set { _explicitNullValueExecutionType = value; AdditionalData?.Remove("execution_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("execution_type"); else _explicitNullProperties?.Remove("execution_type"); } }
         private string? _explicitNullValueExecutionType = default!;
 #nullable restore
 #else
-        public string ExecutionType { get => _explicitNullValueExecutionType; set { _explicitNullValueExecutionType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("execution_type"); else _explicitNullProperties?.Remove("execution_type"); } }
+        public string ExecutionType { get => _explicitNullValueExecutionType; set { _explicitNullValueExecutionType = value; AdditionalData?.Remove("execution_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("execution_type"); else _explicitNullProperties?.Remove("execution_type"); } }
         private string _explicitNullValueExecutionType = default!;
 #endif
         /// <summary>HTTP headers for the request. Header values are always redacted as `&quot;****&quot;`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionHeadersItem>? Headers { get => _explicitNullValueHeaders; set { _explicitNullValueHeaders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headers"); else _explicitNullProperties?.Remove("headers"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionHeadersItem>? Headers { get => _explicitNullValueHeaders; set { _explicitNullValueHeaders = value; AdditionalData?.Remove("headers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headers"); else _explicitNullProperties?.Remove("headers"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionHeadersItem>? _explicitNullValueHeaders = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionHeadersItem> Headers { get => _explicitNullValueHeaders; set { _explicitNullValueHeaders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headers"); else _explicitNullProperties?.Remove("headers"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionHeadersItem> Headers { get => _explicitNullValueHeaders; set { _explicitNullValueHeaders = value; AdditionalData?.Remove("headers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("headers"); else _explicitNullProperties?.Remove("headers"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionHeadersItem> _explicitNullValueHeaders = default!;
 #endif
         /// <summary>The HTTP method used by the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HttpMethod { get => _explicitNullValueHttpMethod; set { _explicitNullValueHttpMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("http_method"); else _explicitNullProperties?.Remove("http_method"); } }
+        public string? HttpMethod { get => _explicitNullValueHttpMethod; set { _explicitNullValueHttpMethod = value; AdditionalData?.Remove("http_method"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("http_method"); else _explicitNullProperties?.Remove("http_method"); } }
         private string? _explicitNullValueHttpMethod = default!;
 #nullable restore
 #else
-        public string HttpMethod { get => _explicitNullValueHttpMethod; set { _explicitNullValueHttpMethod = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("http_method"); else _explicitNullProperties?.Remove("http_method"); } }
+        public string HttpMethod { get => _explicitNullValueHttpMethod; set { _explicitNullValueHttpMethod = value; AdditionalData?.Remove("http_method"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("http_method"); else _explicitNullProperties?.Remove("http_method"); } }
         private string _explicitNullValueHttpMethod = default!;
 #endif
         /// <summary>The internal description of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InternalDescription { get => _explicitNullValueInternalDescription; set { _explicitNullValueInternalDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_description"); else _explicitNullProperties?.Remove("internal_description"); } }
+        public string? InternalDescription { get => _explicitNullValueInternalDescription; set { _explicitNullValueInternalDescription = value; AdditionalData?.Remove("internal_description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_description"); else _explicitNullProperties?.Remove("internal_description"); } }
         private string? _explicitNullValueInternalDescription = default!;
 #nullable restore
 #else
-        public string InternalDescription { get => _explicitNullValueInternalDescription; set { _explicitNullValueInternalDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_description"); else _explicitNullProperties?.Remove("internal_description"); } }
+        public string InternalDescription { get => _explicitNullValueInternalDescription; set { _explicitNullValueInternalDescription = value; AdditionalData?.Remove("internal_description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_description"); else _explicitNullProperties?.Remove("internal_description"); } }
         private string _explicitNullValueInternalDescription = default!;
 #endif
         /// <summary>The name of the data connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>Mappings from connector response objects to Intercom objects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionObjectMappingsItem>? ObjectMappings { get => _explicitNullValueObjectMappings; set { _explicitNullValueObjectMappings = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_mappings"); else _explicitNullProperties?.Remove("object_mappings"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionObjectMappingsItem>? ObjectMappings { get => _explicitNullValueObjectMappings; set { _explicitNullValueObjectMappings = value; AdditionalData?.Remove("object_mappings"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_mappings"); else _explicitNullProperties?.Remove("object_mappings"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionObjectMappingsItem>? _explicitNullValueObjectMappings = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionObjectMappingsItem> ObjectMappings { get => _explicitNullValueObjectMappings; set { _explicitNullValueObjectMappings = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_mappings"); else _explicitNullProperties?.Remove("object_mappings"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionObjectMappingsItem> ObjectMappings { get => _explicitNullValueObjectMappings; set { _explicitNullValueObjectMappings = value; AdditionalData?.Remove("object_mappings"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_mappings"); else _explicitNullProperties?.Remove("object_mappings"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionObjectMappingsItem> _explicitNullValueObjectMappings = default!;
 #endif
         /// <summary>The fields returned in the connector response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItem>? ResponseFields { get => _explicitNullValueResponseFields; set { _explicitNullValueResponseFields = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("response_fields"); else _explicitNullProperties?.Remove("response_fields"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItem>? ResponseFields { get => _explicitNullValueResponseFields; set { _explicitNullValueResponseFields = value; AdditionalData?.Remove("response_fields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("response_fields"); else _explicitNullProperties?.Remove("response_fields"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItem>? _explicitNullValueResponseFields = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItem> ResponseFields { get => _explicitNullValueResponseFields; set { _explicitNullValueResponseFields = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("response_fields"); else _explicitNullProperties?.Remove("response_fields"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItem> ResponseFields { get => _explicitNullValueResponseFields; set { _explicitNullValueResponseFields = value; AdditionalData?.Remove("response_fields"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("response_fields"); else _explicitNullProperties?.Remove("response_fields"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinitionResponseFieldsItem> _explicitNullValueResponseFields = default!;
 #endif
         /// <summary>The state of the data connector at this version.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        public string? State { get => _explicitNullValueState; set { _explicitNullValueState = value; AdditionalData?.Remove("state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
         private string? _explicitNullValueState = default!;
 #nullable restore
 #else
-        public string State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        public string State { get => _explicitNullValueState; set { _explicitNullValueState = value; AdditionalData?.Remove("state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
         private string _explicitNullValueState = default!;
 #endif
         /// <summary>IDs of authentication tokens associated with this connector.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? TokenIds { get => _explicitNullValueTokenIds; set { _explicitNullValueTokenIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_ids"); else _explicitNullProperties?.Remove("token_ids"); } }
+        public List<string>? TokenIds { get => _explicitNullValueTokenIds; set { _explicitNullValueTokenIds = value; AdditionalData?.Remove("token_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_ids"); else _explicitNullProperties?.Remove("token_ids"); } }
         private List<string>? _explicitNullValueTokenIds = default!;
 #nullable restore
 #else
-        public List<string> TokenIds { get => _explicitNullValueTokenIds; set { _explicitNullValueTokenIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_ids"); else _explicitNullProperties?.Remove("token_ids"); } }
+        public List<string> TokenIds { get => _explicitNullValueTokenIds; set { _explicitNullValueTokenIds = value; AdditionalData?.Remove("token_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_ids"); else _explicitNullProperties?.Remove("token_ids"); } }
         private List<string> _explicitNullValueTokenIds = default!;
 #endif
         /// <summary>The URL of the external API endpoint. Supports template variables like `{{order_id}}`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string? _explicitNullValueUrl = default!;
 #nullable restore
 #else
-        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string _explicitNullValueUrl = default!;
 #endif
         /// <summary>Whether to validate missing attributes before execution.</summary>
-        public bool? ValidateMissingAttributes { get => _explicitNullValueValidateMissingAttributes; set { _explicitNullValueValidateMissingAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("validate_missing_attributes"); else _explicitNullProperties?.Remove("validate_missing_attributes"); } }
+        public bool? ValidateMissingAttributes { get => _explicitNullValueValidateMissingAttributes; set { _explicitNullValueValidateMissingAttributes = value; AdditionalData?.Remove("validate_missing_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("validate_missing_attributes"); else _explicitNullProperties?.Remove("validate_missing_attributes"); } }
         private bool? _explicitNullValueValidateMissingAttributes = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorVersionDefinition"/> and sets the default values.

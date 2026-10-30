@@ -17,8 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_assignee_id") is { } nullNodeAdminAssigneeId && nullNodeAdminAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminAssigneeId = null;
-            if (parseNode.GetChildNode("team_assignee_id") is { } nullNodeTeamAssigneeId && nullNodeTeamAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamAssigneeId = null;
+            if (parseNode.GetChildNode("admin_assignee_id") is null) { _explicitNullValueAdminAssigneeId = default!; _explicitNullProperties?.Remove("admin_assignee_id"); }
+            else if (parseNode.GetChildNode("admin_assignee_id") is { } nullNodeAdminAssigneeId && nullNodeAdminAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminAssigneeId = null;
+            if (parseNode.GetChildNode("team_assignee_id") is null) { _explicitNullValueTeamAssigneeId = default!; _explicitNullProperties?.Remove("team_assignee_id"); }
+            else if (parseNode.GetChildNode("team_assignee_id") is { } nullNodeTeamAssigneeId && nullNodeTeamAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamAssigneeId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The ID of the admin to which the ticket is assigned. If not provided, the ticket will be unassigned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminAssigneeId { get => _explicitNullValueAdminAssigneeId; set { _explicitNullValueAdminAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_assignee_id"); else _explicitNullProperties?.Remove("admin_assignee_id"); } }
+        public string? AdminAssigneeId { get => _explicitNullValueAdminAssigneeId; set { _explicitNullValueAdminAssigneeId = value; AdditionalData?.Remove("admin_assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_assignee_id"); else _explicitNullProperties?.Remove("admin_assignee_id"); } }
         private string? _explicitNullValueAdminAssigneeId = default!;
 #nullable restore
 #else
-        public string AdminAssigneeId { get => _explicitNullValueAdminAssigneeId; set { _explicitNullValueAdminAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_assignee_id"); else _explicitNullProperties?.Remove("admin_assignee_id"); } }
+        public string AdminAssigneeId { get => _explicitNullValueAdminAssigneeId; set { _explicitNullValueAdminAssigneeId = value; AdditionalData?.Remove("admin_assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_assignee_id"); else _explicitNullProperties?.Remove("admin_assignee_id"); } }
         private string _explicitNullValueAdminAssigneeId = default!;
 #endif
         /// <summary>The ID of the team to which the ticket is assigned. If not provided, the ticket will be unassigned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
+        public string? TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; AdditionalData?.Remove("team_assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
         private string? _explicitNullValueTeamAssigneeId = default!;
 #nullable restore
 #else
-        public string TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
+        public string TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; AdditionalData?.Remove("team_assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
         private string _explicitNullValueTeamAssigneeId = default!;
 #endif
         /// <summary>

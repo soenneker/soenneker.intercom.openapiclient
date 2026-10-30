@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "reason", n => { Reason = n.GetStringValue(); } },
                 { "teammate", n => { Teammate = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Teammate_reference>(global::Soenneker.Intercom.OpenApiClient.Models.Teammate_reference.CreateFromDiscriminatorValue); } },
                 { "timestamp", n => { Timestamp = n.GetDateTimeOffsetValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Handling_event_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Handling_event_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("add_tag_ids") is { } nullNodeAddTagIds && nullNodeAddTagIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddTagIds = null;
-            if (parseNode.GetChildNode("remove_tag_ids") is { } nullNodeRemoveTagIds && nullNodeRemoveTagIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemoveTagIds = null;
+            if (parseNode.GetChildNode("add_tag_ids") is null) { _explicitNullValueAddTagIds = default!; _explicitNullProperties?.Remove("add_tag_ids"); }
+            else if (parseNode.GetChildNode("add_tag_ids") is { } nullNodeAddTagIds && nullNodeAddTagIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AddTagIds = null;
+            if (parseNode.GetChildNode("remove_tag_ids") is null) { _explicitNullValueRemoveTagIds = default!; _explicitNullProperties?.Remove("remove_tag_ids"); }
+            else if (parseNode.GetChildNode("remove_tag_ids") is { } nullNodeRemoveTagIds && nullNodeRemoveTagIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RemoveTagIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Tag IDs to apply to the selected content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? AddTagIds { get => _explicitNullValueAddTagIds; set { _explicitNullValueAddTagIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add_tag_ids"); else _explicitNullProperties?.Remove("add_tag_ids"); } }
+        public List<int?>? AddTagIds { get => _explicitNullValueAddTagIds; set { _explicitNullValueAddTagIds = value; AdditionalData?.Remove("add_tag_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add_tag_ids"); else _explicitNullProperties?.Remove("add_tag_ids"); } }
         private List<int?>? _explicitNullValueAddTagIds = default!;
 #nullable restore
 #else
-        public List<int?> AddTagIds { get => _explicitNullValueAddTagIds; set { _explicitNullValueAddTagIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add_tag_ids"); else _explicitNullProperties?.Remove("add_tag_ids"); } }
+        public List<int?> AddTagIds { get => _explicitNullValueAddTagIds; set { _explicitNullValueAddTagIds = value; AdditionalData?.Remove("add_tag_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add_tag_ids"); else _explicitNullProperties?.Remove("add_tag_ids"); } }
         private List<int?> _explicitNullValueAddTagIds = default!;
 #endif
         /// <summary>Tag IDs to remove from the selected content.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? RemoveTagIds { get => _explicitNullValueRemoveTagIds; set { _explicitNullValueRemoveTagIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_tag_ids"); else _explicitNullProperties?.Remove("remove_tag_ids"); } }
+        public List<int?>? RemoveTagIds { get => _explicitNullValueRemoveTagIds; set { _explicitNullValueRemoveTagIds = value; AdditionalData?.Remove("remove_tag_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_tag_ids"); else _explicitNullProperties?.Remove("remove_tag_ids"); } }
         private List<int?>? _explicitNullValueRemoveTagIds = default!;
 #nullable restore
 #else
-        public List<int?> RemoveTagIds { get => _explicitNullValueRemoveTagIds; set { _explicitNullValueRemoveTagIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_tag_ids"); else _explicitNullProperties?.Remove("remove_tag_ids"); } }
+        public List<int?> RemoveTagIds { get => _explicitNullValueRemoveTagIds; set { _explicitNullValueRemoveTagIds = value; AdditionalData?.Remove("remove_tag_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("remove_tag_ids"); else _explicitNullProperties?.Remove("remove_tag_ids"); } }
         private List<int?> _explicitNullValueRemoveTagIds = default!;
 #endif
         /// <summary>

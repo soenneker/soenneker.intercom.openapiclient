@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("original") is { } nullNodeOriginal && nullNodeOriginal.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Original = null;
+            if (parseNode.GetChildNode("original") is null) { _explicitNullValueOriginal = default!; _explicitNullProperties?.Remove("original"); }
+            else if (parseNode.GetChildNode("original") is { } nullNodeOriginal && nullNodeOriginal.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Original = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The locale code identifying the language the reply was originally written in.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Original { get => _explicitNullValueOriginal; set { _explicitNullValueOriginal = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("original"); else _explicitNullProperties?.Remove("original"); } }
+        public string? Original { get => _explicitNullValueOriginal; set { _explicitNullValueOriginal = value; AdditionalData?.Remove("original"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("original"); else _explicitNullProperties?.Remove("original"); } }
         private string? _explicitNullValueOriginal = default!;
 #nullable restore
 #else
-        public string Original { get => _explicitNullValueOriginal; set { _explicitNullValueOriginal = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("original"); else _explicitNullProperties?.Remove("original"); } }
+        public string Original { get => _explicitNullValueOriginal; set { _explicitNullValueOriginal = value; AdditionalData?.Remove("original"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("original"); else _explicitNullProperties?.Remove("original"); } }
         private string _explicitNullValueOriginal = default!;
 #endif
         /// <summary>

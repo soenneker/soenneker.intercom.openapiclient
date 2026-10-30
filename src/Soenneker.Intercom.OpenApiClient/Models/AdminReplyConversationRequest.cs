@@ -18,16 +18,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
-            if (parseNode.GetChildNode("attachment_files") is { } nullNodeAttachmentFiles && nullNodeAttachmentFiles.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentFiles = null;
-            if (parseNode.GetChildNode("attachment_urls") is { } nullNodeAttachmentUrls && nullNodeAttachmentUrls.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentUrls = null;
-            if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
-            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
-            if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
-            if (parseNode.GetChildNode("reply_options") is { } nullNodeReplyOptions && nullNodeReplyOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReplyOptions = null;
-            if (parseNode.GetChildNode("skip_notifications") is { } nullNodeSkipNotifications && nullNodeSkipNotifications.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipNotifications = null;
-            if (parseNode.GetChildNode("skip_unsnooze") is { } nullNodeSkipUnsnooze && nullNodeSkipUnsnooze.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipUnsnooze = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
+            else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("attachment_files") is null) { _explicitNullValueAttachmentFiles = default!; _explicitNullProperties?.Remove("attachment_files"); }
+            else if (parseNode.GetChildNode("attachment_files") is { } nullNodeAttachmentFiles && nullNodeAttachmentFiles.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentFiles = null;
+            if (parseNode.GetChildNode("attachment_urls") is null) { _explicitNullValueAttachmentUrls = default!; _explicitNullProperties?.Remove("attachment_urls"); }
+            else if (parseNode.GetChildNode("attachment_urls") is { } nullNodeAttachmentUrls && nullNodeAttachmentUrls.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentUrls = null;
+            if (parseNode.GetChildNode("body") is null) { _explicitNullValueBody = default!; _explicitNullProperties?.Remove("body"); }
+            else if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("created_at") is null) { _explicitNullValueCreatedAt = default!; _explicitNullProperties?.Remove("created_at"); }
+            else if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("message_type") is null) { _explicitNullValueMessageType = default!; _explicitNullProperties?.Remove("message_type"); }
+            else if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
+            if (parseNode.GetChildNode("reply_options") is null) { _explicitNullValueReplyOptions = default!; _explicitNullProperties?.Remove("reply_options"); }
+            else if (parseNode.GetChildNode("reply_options") is { } nullNodeReplyOptions && nullNodeReplyOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReplyOptions = null;
+            if (parseNode.GetChildNode("skip_notifications") is null) { _explicitNullValueSkipNotifications = default!; _explicitNullProperties?.Remove("skip_notifications"); }
+            else if (parseNode.GetChildNode("skip_notifications") is { } nullNodeSkipNotifications && nullNodeSkipNotifications.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipNotifications = null;
+            if (parseNode.GetChildNode("skip_unsnooze") is null) { _explicitNullValueSkipUnsnooze = default!; _explicitNullProperties?.Remove("skip_unsnooze"); }
+            else if (parseNode.GetChildNode("skip_unsnooze") is { } nullNodeSkipUnsnooze && nullNodeSkipUnsnooze.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipUnsnooze = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -35,67 +45,67 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id of the admin who is authoring the comment.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string? _explicitNullValueAdminId = default!;
 #nullable restore
 #else
-        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string _explicitNullValueAdminId = default!;
 #endif
         /// <summary>A list of files that will be added as attachments. You can include up to 10 files</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? AttachmentFiles { get => _explicitNullValueAttachmentFiles; set { _explicitNullValueAttachmentFiles = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_files"); else _explicitNullProperties?.Remove("attachment_files"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? AttachmentFiles { get => _explicitNullValueAttachmentFiles; set { _explicitNullValueAttachmentFiles = value; AdditionalData?.Remove("attachment_files"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_files"); else _explicitNullProperties?.Remove("attachment_files"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>? _explicitNullValueAttachmentFiles = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> AttachmentFiles { get => _explicitNullValueAttachmentFiles; set { _explicitNullValueAttachmentFiles = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_files"); else _explicitNullProperties?.Remove("attachment_files"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> AttachmentFiles { get => _explicitNullValueAttachmentFiles; set { _explicitNullValueAttachmentFiles = value; AdditionalData?.Remove("attachment_files"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_files"); else _explicitNullProperties?.Remove("attachment_files"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles> _explicitNullValueAttachmentFiles = default!;
 #endif
         /// <summary>A list of image URLs that will be added as attachments. You can include up to 10 URLs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
+        public List<string>? AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; AdditionalData?.Remove("attachment_urls"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
         private List<string>? _explicitNullValueAttachmentUrls = default!;
 #nullable restore
 #else
-        public List<string> AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
+        public List<string> AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; AdditionalData?.Remove("attachment_urls"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
         private List<string> _explicitNullValueAttachmentUrls = default!;
 #endif
         /// <summary>The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string _explicitNullValueBody = default!;
 #endif
         /// <summary>The time the reply was created. If not provided, the current time will be used.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
         private int? _explicitNullValueCreatedAt = default!;
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; AdditionalData?.Remove("message_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType? _explicitNullValueMessageType = default!;
         /// <summary>The quick reply options to display to the end user. Must be present for quick_reply message types.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>? ReplyOptions { get => _explicitNullValueReplyOptions; set { _explicitNullValueReplyOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reply_options"); else _explicitNullProperties?.Remove("reply_options"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>? ReplyOptions { get => _explicitNullValueReplyOptions; set { _explicitNullValueReplyOptions = value; AdditionalData?.Remove("reply_options"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reply_options"); else _explicitNullProperties?.Remove("reply_options"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>? _explicitNullValueReplyOptions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption> ReplyOptions { get => _explicitNullValueReplyOptions; set { _explicitNullValueReplyOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reply_options"); else _explicitNullProperties?.Remove("reply_options"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption> ReplyOptions { get => _explicitNullValueReplyOptions; set { _explicitNullValueReplyOptions = value; AdditionalData?.Remove("reply_options"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reply_options"); else _explicitNullProperties?.Remove("reply_options"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption> _explicitNullValueReplyOptions = default!;
 #endif
         /// <summary>Option to disable notifications when replying to a conversation.</summary>
-        public bool? SkipNotifications { get => _explicitNullValueSkipNotifications; set { _explicitNullValueSkipNotifications = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_notifications"); else _explicitNullProperties?.Remove("skip_notifications"); } }
+        public bool? SkipNotifications { get => _explicitNullValueSkipNotifications; set { _explicitNullValueSkipNotifications = value; AdditionalData?.Remove("skip_notifications"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_notifications"); else _explicitNullProperties?.Remove("skip_notifications"); } }
         private bool? _explicitNullValueSkipNotifications = default!;
         /// <summary>When true, prevents the reply from waking a snoozed conversation. Applies to &apos;comment&apos; and &apos;note&apos; message types. The part is still created and visible in the conversation thread.</summary>
-        public bool? SkipUnsnooze { get => _explicitNullValueSkipUnsnooze; set { _explicitNullValueSkipUnsnooze = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_unsnooze"); else _explicitNullProperties?.Remove("skip_unsnooze"); } }
+        public bool? SkipUnsnooze { get => _explicitNullValueSkipUnsnooze; set { _explicitNullValueSkipUnsnooze = value; AdditionalData?.Remove("skip_unsnooze"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_unsnooze"); else _explicitNullProperties?.Remove("skip_unsnooze"); } }
         private bool? _explicitNullValueSkipUnsnooze = default!;
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AdminType? _explicitNullValueType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequest"/> and sets the default values.
@@ -127,11 +137,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>(); } },
+                { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>(global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
                 { "skip_unsnooze", n => { SkipUnsnooze = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

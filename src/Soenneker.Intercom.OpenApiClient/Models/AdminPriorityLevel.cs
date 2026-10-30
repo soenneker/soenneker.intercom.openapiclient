@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("primary_admin_ids") is { } nullNodePrimaryAdminIds && nullNodePrimaryAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryAdminIds = null;
-            if (parseNode.GetChildNode("secondary_admin_ids") is { } nullNodeSecondaryAdminIds && nullNodeSecondaryAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryAdminIds = null;
+            if (parseNode.GetChildNode("primary_admin_ids") is null) { _explicitNullValuePrimaryAdminIds = default!; _explicitNullProperties?.Remove("primary_admin_ids"); }
+            else if (parseNode.GetChildNode("primary_admin_ids") is { } nullNodePrimaryAdminIds && nullNodePrimaryAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryAdminIds = null;
+            if (parseNode.GetChildNode("secondary_admin_ids") is null) { _explicitNullValueSecondaryAdminIds = default!; _explicitNullProperties?.Remove("secondary_admin_ids"); }
+            else if (parseNode.GetChildNode("secondary_admin_ids") is { } nullNodeSecondaryAdminIds && nullNodeSecondaryAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryAdminIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The primary admin ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? PrimaryAdminIds { get => _explicitNullValuePrimaryAdminIds; set { _explicitNullValuePrimaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_admin_ids"); else _explicitNullProperties?.Remove("primary_admin_ids"); } }
+        public List<int?>? PrimaryAdminIds { get => _explicitNullValuePrimaryAdminIds; set { _explicitNullValuePrimaryAdminIds = value; AdditionalData?.Remove("primary_admin_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_admin_ids"); else _explicitNullProperties?.Remove("primary_admin_ids"); } }
         private List<int?>? _explicitNullValuePrimaryAdminIds = default!;
 #nullable restore
 #else
-        public List<int?> PrimaryAdminIds { get => _explicitNullValuePrimaryAdminIds; set { _explicitNullValuePrimaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_admin_ids"); else _explicitNullProperties?.Remove("primary_admin_ids"); } }
+        public List<int?> PrimaryAdminIds { get => _explicitNullValuePrimaryAdminIds; set { _explicitNullValuePrimaryAdminIds = value; AdditionalData?.Remove("primary_admin_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_admin_ids"); else _explicitNullProperties?.Remove("primary_admin_ids"); } }
         private List<int?> _explicitNullValuePrimaryAdminIds = default!;
 #endif
         /// <summary>The secondary admin ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? SecondaryAdminIds { get => _explicitNullValueSecondaryAdminIds; set { _explicitNullValueSecondaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_admin_ids"); else _explicitNullProperties?.Remove("secondary_admin_ids"); } }
+        public List<int?>? SecondaryAdminIds { get => _explicitNullValueSecondaryAdminIds; set { _explicitNullValueSecondaryAdminIds = value; AdditionalData?.Remove("secondary_admin_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_admin_ids"); else _explicitNullProperties?.Remove("secondary_admin_ids"); } }
         private List<int?>? _explicitNullValueSecondaryAdminIds = default!;
 #nullable restore
 #else
-        public List<int?> SecondaryAdminIds { get => _explicitNullValueSecondaryAdminIds; set { _explicitNullValueSecondaryAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_admin_ids"); else _explicitNullProperties?.Remove("secondary_admin_ids"); } }
+        public List<int?> SecondaryAdminIds { get => _explicitNullValueSecondaryAdminIds; set { _explicitNullValueSecondaryAdminIds = value; AdditionalData?.Remove("secondary_admin_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_admin_ids"); else _explicitNullProperties?.Remove("secondary_admin_ids"); } }
         private List<int?> _explicitNullValueSecondaryAdminIds = default!;
 #endif
         /// <summary>

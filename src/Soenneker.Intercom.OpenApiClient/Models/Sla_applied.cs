@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },
-                { "sla_status", n => { SlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied_sla_status>(); } },
+                { "sla_status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Sla_applied_sla_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSlaStatus = default; _explicitNullProperties?.Remove("sla_status"); AdditionalData["sla_status"] = unknown; } else { SlaStatus = parsed; AdditionalData.Remove("sla_status"); } } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }

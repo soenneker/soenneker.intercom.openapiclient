@@ -174,7 +174,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "description", n => { Description = n.GetStringValue(); } },
                 { "direct_fin_usage", n => { DirectFinUsage = n.GetBoolValue(); } },
                 { "headers", n => { Headers = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers>(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_headers.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "http_method", n => { HttpMethod = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method>(); } },
+                { "http_method", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_http_method>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueHttpMethod = default; _explicitNullProperties?.Remove("http_method"); AdditionalData["http_method"] = unknown; } else { HttpMethod = parsed; AdditionalData.Remove("http_method"); } } },
                 { "mock_response", n => { MockResponse = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response>(global::Soenneker.Intercom.OpenApiClient.Models.Create_data_connector_request_mock_response.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "token_ids", n => { TokenIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },

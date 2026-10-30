@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "content_sources", n => { ContentSources = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Content_source>(global::Soenneker.Intercom.OpenApiClient.Models.Content_source.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

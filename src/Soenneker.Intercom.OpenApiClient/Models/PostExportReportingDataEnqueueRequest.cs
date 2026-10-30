@@ -17,10 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("attribute_ids") is { } nullNodeAttributeIds && nullNodeAttributeIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttributeIds = null;
-            if (parseNode.GetChildNode("dataset_id") is { } nullNodeDatasetId && nullNodeDatasetId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DatasetId = null;
-            if (parseNode.GetChildNode("end_time") is { } nullNodeEndTime && nullNodeEndTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndTime = null;
-            if (parseNode.GetChildNode("start_time") is { } nullNodeStartTime && nullNodeStartTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartTime = null;
+            if (parseNode.GetChildNode("attribute_ids") is null) { _explicitNullValueAttributeIds = default!; _explicitNullProperties?.Remove("attribute_ids"); }
+            else if (parseNode.GetChildNode("attribute_ids") is { } nullNodeAttributeIds && nullNodeAttributeIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttributeIds = null;
+            if (parseNode.GetChildNode("dataset_id") is null) { _explicitNullValueDatasetId = default!; _explicitNullProperties?.Remove("dataset_id"); }
+            else if (parseNode.GetChildNode("dataset_id") is { } nullNodeDatasetId && nullNodeDatasetId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DatasetId = null;
+            if (parseNode.GetChildNode("end_time") is null) { _explicitNullValueEndTime = default!; _explicitNullProperties?.Remove("end_time"); }
+            else if (parseNode.GetChildNode("end_time") is { } nullNodeEndTime && nullNodeEndTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndTime = null;
+            if (parseNode.GetChildNode("start_time") is null) { _explicitNullValueStartTime = default!; _explicitNullProperties?.Remove("start_time"); }
+            else if (parseNode.GetChildNode("start_time") is { } nullNodeStartTime && nullNodeStartTime.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartTime = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,28 +32,28 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>List of attribute identifiers to include in the export. Requires qualified_id format (e.g., &quot;people.Brand&quot;, &quot;standard.conversation_id&quot;). Use the qualified_id returned from the get_datasets response.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? AttributeIds { get => _explicitNullValueAttributeIds; set { _explicitNullValueAttributeIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_ids"); else _explicitNullProperties?.Remove("attribute_ids"); } }
+        public List<string>? AttributeIds { get => _explicitNullValueAttributeIds; set { _explicitNullValueAttributeIds = value; AdditionalData?.Remove("attribute_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_ids"); else _explicitNullProperties?.Remove("attribute_ids"); } }
         private List<string>? _explicitNullValueAttributeIds = default!;
 #nullable restore
 #else
-        public List<string> AttributeIds { get => _explicitNullValueAttributeIds; set { _explicitNullValueAttributeIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_ids"); else _explicitNullProperties?.Remove("attribute_ids"); } }
+        public List<string> AttributeIds { get => _explicitNullValueAttributeIds; set { _explicitNullValueAttributeIds = value; AdditionalData?.Remove("attribute_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute_ids"); else _explicitNullProperties?.Remove("attribute_ids"); } }
         private List<string> _explicitNullValueAttributeIds = default!;
 #endif
         /// <summary>The dataset_id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DatasetId { get => _explicitNullValueDatasetId; set { _explicitNullValueDatasetId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dataset_id"); else _explicitNullProperties?.Remove("dataset_id"); } }
+        public string? DatasetId { get => _explicitNullValueDatasetId; set { _explicitNullValueDatasetId = value; AdditionalData?.Remove("dataset_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dataset_id"); else _explicitNullProperties?.Remove("dataset_id"); } }
         private string? _explicitNullValueDatasetId = default!;
 #nullable restore
 #else
-        public string DatasetId { get => _explicitNullValueDatasetId; set { _explicitNullValueDatasetId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dataset_id"); else _explicitNullProperties?.Remove("dataset_id"); } }
+        public string DatasetId { get => _explicitNullValueDatasetId; set { _explicitNullValueDatasetId = value; AdditionalData?.Remove("dataset_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("dataset_id"); else _explicitNullProperties?.Remove("dataset_id"); } }
         private string _explicitNullValueDatasetId = default!;
 #endif
         /// <summary>End of the export period, as a Unix timestamp in seconds. Must not be earlier than start_time and must also be within the retention period.</summary>
-        public long? EndTime { get => _explicitNullValueEndTime; set { _explicitNullValueEndTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_time"); else _explicitNullProperties?.Remove("end_time"); } }
+        public long? EndTime { get => _explicitNullValueEndTime; set { _explicitNullValueEndTime = value; AdditionalData?.Remove("end_time"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_time"); else _explicitNullProperties?.Remove("end_time"); } }
         private long? _explicitNullValueEndTime = default!;
         /// <summary>Start of the export period, as a Unix timestamp in seconds. Must be within your workspace&apos;s reporting data retention period, which is 2 years by default (3 years for workspaces with extended retention).</summary>
-        public long? StartTime { get => _explicitNullValueStartTime; set { _explicitNullValueStartTime = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_time"); else _explicitNullProperties?.Remove("start_time"); } }
+        public long? StartTime { get => _explicitNullValueStartTime; set { _explicitNullValueStartTime = value; AdditionalData?.Remove("start_time"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_time"); else _explicitNullProperties?.Remove("start_time"); } }
         private long? _explicitNullValueStartTime = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.PostExportReportingDataEnqueueRequest"/> and sets the default values.

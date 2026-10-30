@@ -18,23 +18,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("operator") is { } nullNodeOperator && nullNodeOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Operator = null;
-            if (parseNode.GetChildNode("value") is { } nullNodeValue && nullNodeValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Value = null;
+            if (parseNode.GetChildNode("operator") is null) { _explicitNullValueOperator = default!; _explicitNullProperties?.Remove("operator"); }
+            else if (parseNode.GetChildNode("operator") is { } nullNodeOperator && nullNodeOperator.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Operator = null;
+            if (parseNode.GetChildNode("value") is null) { _explicitNullValueValue = default!; _explicitNullProperties?.Remove("value"); }
+            else if (parseNode.GetChildNode("value") is { } nullNodeValue && nullNodeValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Value = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>An operator to allow boolean inspection between multiple fields.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator? Operator { get => _explicitNullValueOperator; set { _explicitNullValueOperator = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("operator"); else _explicitNullProperties?.Remove("operator"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator? Operator { get => _explicitNullValueOperator; set { _explicitNullValueOperator = value; AdditionalData?.Remove("operator"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("operator"); else _explicitNullProperties?.Remove("operator"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator? _explicitNullValueOperator = default!;
         /// <summary>The value property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue? Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue? Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; AdditionalData?.Remove("value"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue? _explicitNullValueValue = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; AdditionalData?.Remove("value"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue _explicitNullValueValue = default!;
 #endif
         /// <summary>
@@ -62,7 +64,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "operator", n => { Operator = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator>(); } },
+                { "operator", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestOperator>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueOperator = default; _explicitNullProperties?.Remove("operator"); AdditionalData["operator"] = unknown; } else { Operator = parsed; AdditionalData.Remove("operator"); } } },
                 { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue>(global::Soenneker.Intercom.OpenApiClient.Models.MultipleFilterSearchRequestValue.CreateFromDiscriminatorValue); } },
             };
         }

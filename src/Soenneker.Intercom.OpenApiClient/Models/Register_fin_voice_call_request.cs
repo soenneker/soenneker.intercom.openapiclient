@@ -87,7 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "call_id", n => { CallId = n.GetStringValue(); } },
                 { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request_data>(global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request_data.CreateFromDiscriminatorValue); } },
                 { "phone_number", n => { PhoneNumber = n.GetStringValue(); } },
-                { "source", n => { Source = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request_source>(); } },
+                { "source", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Register_fin_voice_call_request_source>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSource = default; _explicitNullProperties?.Remove("source"); AdditionalData["source"] = unknown; } else { Source = parsed; AdditionalData.Remove("source"); } } },
             };
         }
         /// <summary>

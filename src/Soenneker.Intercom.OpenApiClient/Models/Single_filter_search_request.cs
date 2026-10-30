@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "field", n => { Field = n.GetStringValue(); } },
-                { "operator", n => { Operator = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Single_filter_search_request_operator>(); } },
+                { "operator", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Single_filter_search_request_operator>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueOperator = default; _explicitNullProperties?.Remove("operator"); AdditionalData["operator"] = unknown; } else { Operator = parsed; AdditionalData.Remove("operator"); } } },
                 { "value", n => { Value = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch>(global::Soenneker.Intercom.OpenApiClient.Models.UnionBranch.CreateFromDiscriminatorValue); } },
             };
         }

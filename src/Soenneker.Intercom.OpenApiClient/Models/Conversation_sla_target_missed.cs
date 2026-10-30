@@ -77,10 +77,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "current_sla_status", n => { CurrentSlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_target_missed_current_sla_status>(); } },
+                { "current_sla_status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_target_missed_current_sla_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCurrentSlaStatus = default; _explicitNullProperties?.Remove("current_sla_status"); AdditionalData["current_sla_status"] = unknown; } else { CurrentSlaStatus = parsed; AdditionalData.Remove("current_sla_status"); } } },
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },
                 { "sla_states", n => { SlaStates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_target_missed_sla_states>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_target_missed_sla_states.CreateFromDiscriminatorValue); } },
-                { "sla_target_type", n => { SlaTargetType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_target_missed_sla_target_type>(); } },
+                { "sla_target_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_target_missed_sla_target_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSlaTargetType = default; _explicitNullProperties?.Remove("sla_target_type"); AdditionalData["sla_target_type"] = unknown; } else { SlaTargetType = parsed; AdditionalData.Remove("sla_target_type"); } } },
             };
         }
         /// <summary>

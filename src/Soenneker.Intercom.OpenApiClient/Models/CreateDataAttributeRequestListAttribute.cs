@@ -17,23 +17,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("data_type") is { } nullNodeDataType && nullNodeDataType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataType = null;
-            if (parseNode.GetChildNode("options") is { } nullNodeOptions && nullNodeOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Options = null;
+            if (parseNode.GetChildNode("data_type") is null) { _explicitNullValueDataType = default!; _explicitNullProperties?.Remove("data_type"); }
+            else if (parseNode.GetChildNode("data_type") is { } nullNodeDataType && nullNodeDataType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataType = null;
+            if (parseNode.GetChildNode("options") is null) { _explicitNullValueOptions = default!; _explicitNullProperties?.Remove("options"); }
+            else if (parseNode.GetChildNode("options") is { } nullNodeOptions && nullNodeOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Options = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The data_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType? DataType { get => _explicitNullValueDataType; set { _explicitNullValueDataType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_type"); else _explicitNullProperties?.Remove("data_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType? DataType { get => _explicitNullValueDataType; set { _explicitNullValueDataType = value; AdditionalData?.Remove("data_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_type"); else _explicitNullProperties?.Remove("data_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType? _explicitNullValueDataType = default!;
         /// <summary>Array of objects representing the options of the list, with `value` as the key and the option as the value. At least two options are required.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem>? Options { get => _explicitNullValueOptions; set { _explicitNullValueOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("options"); else _explicitNullProperties?.Remove("options"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem>? Options { get => _explicitNullValueOptions; set { _explicitNullValueOptions = value; AdditionalData?.Remove("options"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("options"); else _explicitNullProperties?.Remove("options"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem>? _explicitNullValueOptions = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem> Options { get => _explicitNullValueOptions; set { _explicitNullValueOptions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("options"); else _explicitNullProperties?.Remove("options"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem> Options { get => _explicitNullValueOptions; set { _explicitNullValueOptions = value; AdditionalData?.Remove("options"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("options"); else _explicitNullProperties?.Remove("options"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem> _explicitNullValueOptions = default!;
 #endif
         /// <summary>
@@ -61,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType>(); } },
+                { "data_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OptionsDataType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDataType = default; _explicitNullProperties?.Remove("data_type"); AdditionalData["data_type"] = unknown; } else { DataType = parsed; AdditionalData.Remove("data_type"); } } },
                 { "options", n => { Options = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestListAttributeOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },
             };
         }

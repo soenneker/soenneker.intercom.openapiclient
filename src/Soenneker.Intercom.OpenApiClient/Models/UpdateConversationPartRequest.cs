@@ -18,12 +18,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
-            if (parseNode.GetChildNode("experimental") is { } nullNodeExperimental && nullNodeExperimental.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Experimental = null;
-            if (parseNode.GetChildNode("info_message") is { } nullNodeInfoMessage && nullNodeInfoMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InfoMessage = null;
-            if (parseNode.GetChildNode("secret") is { } nullNodeSecret && nullNodeSecret.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Secret = null;
-            if (parseNode.GetChildNode("seen") is { } nullNodeSeen && nullNodeSeen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Seen = null;
-            if (parseNode.GetChildNode("send_state") is { } nullNodeSendState && nullNodeSendState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendState = null;
+            if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
+            else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("experimental") is null) { _explicitNullValueExperimental = default!; _explicitNullProperties?.Remove("experimental"); }
+            else if (parseNode.GetChildNode("experimental") is { } nullNodeExperimental && nullNodeExperimental.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Experimental = null;
+            if (parseNode.GetChildNode("info_message") is null) { _explicitNullValueInfoMessage = default!; _explicitNullProperties?.Remove("info_message"); }
+            else if (parseNode.GetChildNode("info_message") is { } nullNodeInfoMessage && nullNodeInfoMessage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InfoMessage = null;
+            if (parseNode.GetChildNode("secret") is null) { _explicitNullValueSecret = default!; _explicitNullProperties?.Remove("secret"); }
+            else if (parseNode.GetChildNode("secret") is { } nullNodeSecret && nullNodeSecret.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Secret = null;
+            if (parseNode.GetChildNode("seen") is null) { _explicitNullValueSeen = default!; _explicitNullProperties?.Remove("seen"); }
+            else if (parseNode.GetChildNode("seen") is { } nullNodeSeen && nullNodeSeen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Seen = null;
+            if (parseNode.GetChildNode("send_state") is null) { _explicitNullValueSendState = default!; _explicitNullProperties?.Remove("send_state"); }
+            else if (parseNode.GetChildNode("send_state") is { } nullNodeSendState && nullNodeSendState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendState = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -31,47 +37,47 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id of the admin marking the part as seen.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string? _explicitNullValueAdminId = default!;
 #nullable restore
 #else
-        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string _explicitNullValueAdminId = default!;
 #endif
         /// <summary>Must be true to use this experimental endpoint.</summary>
-        public bool? Experimental { get => _explicitNullValueExperimental; set { _explicitNullValueExperimental = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("experimental"); else _explicitNullProperties?.Remove("experimental"); } }
+        public bool? Experimental { get => _explicitNullValueExperimental; set { _explicitNullValueExperimental = value; AdditionalData?.Remove("experimental"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("experimental"); else _explicitNullProperties?.Remove("experimental"); } }
         private bool? _explicitNullValueExperimental = default!;
         /// <summary>An informational message about the send state update.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InfoMessage { get => _explicitNullValueInfoMessage; set { _explicitNullValueInfoMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("info_message"); else _explicitNullProperties?.Remove("info_message"); } }
+        public string? InfoMessage { get => _explicitNullValueInfoMessage; set { _explicitNullValueInfoMessage = value; AdditionalData?.Remove("info_message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("info_message"); else _explicitNullProperties?.Remove("info_message"); } }
         private string? _explicitNullValueInfoMessage = default!;
 #nullable restore
 #else
-        public string InfoMessage { get => _explicitNullValueInfoMessage; set { _explicitNullValueInfoMessage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("info_message"); else _explicitNullProperties?.Remove("info_message"); } }
+        public string InfoMessage { get => _explicitNullValueInfoMessage; set { _explicitNullValueInfoMessage = value; AdditionalData?.Remove("info_message"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("info_message"); else _explicitNullProperties?.Remove("info_message"); } }
         private string _explicitNullValueInfoMessage = default!;
 #endif
         /// <summary>HMAC secret for authenticating the experimental request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Secret { get => _explicitNullValueSecret; set { _explicitNullValueSecret = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secret"); else _explicitNullProperties?.Remove("secret"); } }
+        public string? Secret { get => _explicitNullValueSecret; set { _explicitNullValueSecret = value; AdditionalData?.Remove("secret"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secret"); else _explicitNullProperties?.Remove("secret"); } }
         private string? _explicitNullValueSecret = default!;
 #nullable restore
 #else
-        public string Secret { get => _explicitNullValueSecret; set { _explicitNullValueSecret = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secret"); else _explicitNullProperties?.Remove("secret"); } }
+        public string Secret { get => _explicitNullValueSecret; set { _explicitNullValueSecret = value; AdditionalData?.Remove("secret"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secret"); else _explicitNullProperties?.Remove("secret"); } }
         private string _explicitNullValueSecret = default!;
 #endif
         /// <summary>Set to true to mark the conversation part as seen.</summary>
-        public bool? Seen { get => _explicitNullValueSeen; set { _explicitNullValueSeen = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("seen"); else _explicitNullProperties?.Remove("seen"); } }
+        public bool? Seen { get => _explicitNullValueSeen; set { _explicitNullValueSeen = value; AdditionalData?.Remove("seen"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("seen"); else _explicitNullProperties?.Remove("seen"); } }
         private bool? _explicitNullValueSeen = default!;
         /// <summary>The send state to set on the external reply.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SendState { get => _explicitNullValueSendState; set { _explicitNullValueSendState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("send_state"); else _explicitNullProperties?.Remove("send_state"); } }
+        public string? SendState { get => _explicitNullValueSendState; set { _explicitNullValueSendState = value; AdditionalData?.Remove("send_state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("send_state"); else _explicitNullProperties?.Remove("send_state"); } }
         private string? _explicitNullValueSendState = default!;
 #nullable restore
 #else
-        public string SendState { get => _explicitNullValueSendState; set { _explicitNullValueSendState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("send_state"); else _explicitNullProperties?.Remove("send_state"); } }
+        public string SendState { get => _explicitNullValueSendState; set { _explicitNullValueSendState = value; AdditionalData?.Remove("send_state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("send_state"); else _explicitNullProperties?.Remove("send_state"); } }
         private string _explicitNullValueSendState = default!;
 #endif
         /// <summary>

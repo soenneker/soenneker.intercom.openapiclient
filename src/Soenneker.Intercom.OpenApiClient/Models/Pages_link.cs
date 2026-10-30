@@ -78,7 +78,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
                 { "total_pages", n => { TotalPages = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Pages_link_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Pages_link_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

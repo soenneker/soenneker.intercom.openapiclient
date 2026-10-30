@@ -17,7 +17,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("team_handling_segments") is { } nullNodeTeamHandlingSegments && nullNodeTeamHandlingSegments.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamHandlingSegments = null;
+            if (parseNode.GetChildNode("team_handling_segments") is null) { _explicitNullValueTeamHandlingSegments = default!; _explicitNullProperties?.Remove("team_handling_segments"); }
+            else if (parseNode.GetChildNode("team_handling_segments") is { } nullNodeTeamHandlingSegments && nullNodeTeamHandlingSegments.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeamHandlingSegments = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The team_handling_segments property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegment>? TeamHandlingSegments { get => _explicitNullValueTeamHandlingSegments; set { _explicitNullValueTeamHandlingSegments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_handling_segments"); else _explicitNullProperties?.Remove("team_handling_segments"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegment>? TeamHandlingSegments { get => _explicitNullValueTeamHandlingSegments; set { _explicitNullValueTeamHandlingSegments = value; AdditionalData?.Remove("team_handling_segments"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_handling_segments"); else _explicitNullProperties?.Remove("team_handling_segments"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegment>? _explicitNullValueTeamHandlingSegments = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegment> TeamHandlingSegments { get => _explicitNullValueTeamHandlingSegments; set { _explicitNullValueTeamHandlingSegments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_handling_segments"); else _explicitNullProperties?.Remove("team_handling_segments"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegment> TeamHandlingSegments { get => _explicitNullValueTeamHandlingSegments; set { _explicitNullValueTeamHandlingSegments = value; AdditionalData?.Remove("team_handling_segments"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_handling_segments"); else _explicitNullProperties?.Remove("team_handling_segments"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegment> _explicitNullValueTeamHandlingSegments = default!;
 #endif
         /// <summary>

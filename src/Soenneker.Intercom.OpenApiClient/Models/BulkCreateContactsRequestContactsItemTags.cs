@@ -18,17 +18,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("add") is { } nullNodeAdd && nullNodeAdd.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Add = null;
+            if (parseNode.GetChildNode("add") is null) { _explicitNullValueAdd = default!; _explicitNullProperties?.Remove("add"); }
+            else if (parseNode.GetChildNode("add") is { } nullNodeAdd && nullNodeAdd.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Add = null;
         }
 
         /// <summary>Tags to add to the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTagsAddItem>? Add { get => _explicitNullValueAdd; set { _explicitNullValueAdd = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add"); else _explicitNullProperties?.Remove("add"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTagsAddItem>? Add { get => _explicitNullValueAdd; set { _explicitNullValueAdd = value; AdditionalData?.Remove("add"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add"); else _explicitNullProperties?.Remove("add"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTagsAddItem>? _explicitNullValueAdd = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTagsAddItem> Add { get => _explicitNullValueAdd; set { _explicitNullValueAdd = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add"); else _explicitNullProperties?.Remove("add"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTagsAddItem> Add { get => _explicitNullValueAdd; set { _explicitNullValueAdd = value; AdditionalData?.Remove("add"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("add"); else _explicitNullProperties?.Remove("add"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateContactsRequestContactsItemTagsAddItem> _explicitNullValueAdd = default!;
 #endif
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>

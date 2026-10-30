@@ -18,17 +18,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("created_at_after") is { } nullNodeCreatedAtAfter && nullNodeCreatedAtAfter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtAfter = null;
-            if (parseNode.GetChildNode("created_at_before") is { } nullNodeCreatedAtBefore && nullNodeCreatedAtBefore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtBefore = null;
+            if (parseNode.GetChildNode("created_at_after") is null) { _explicitNullValueCreatedAtAfter = default!; _explicitNullProperties?.Remove("created_at_after"); }
+            else if (parseNode.GetChildNode("created_at_after") is { } nullNodeCreatedAtAfter && nullNodeCreatedAtAfter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtAfter = null;
+            if (parseNode.GetChildNode("created_at_before") is null) { _explicitNullValueCreatedAtBefore = default!; _explicitNullProperties?.Remove("created_at_before"); }
+            else if (parseNode.GetChildNode("created_at_before") is { } nullNodeCreatedAtBefore && nullNodeCreatedAtBefore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtBefore = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The start date that you request data for. It must be formatted as a unix timestamp.</summary>
-        public int? CreatedAtAfter { get => _explicitNullValueCreatedAtAfter; set { _explicitNullValueCreatedAtAfter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_after"); else _explicitNullProperties?.Remove("created_at_after"); } }
+        public int? CreatedAtAfter { get => _explicitNullValueCreatedAtAfter; set { _explicitNullValueCreatedAtAfter = value; AdditionalData?.Remove("created_at_after"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_after"); else _explicitNullProperties?.Remove("created_at_after"); } }
         private int? _explicitNullValueCreatedAtAfter = default!;
         /// <summary>The end date that you request data for. It must be formatted as a unix timestamp.</summary>
-        public int? CreatedAtBefore { get => _explicitNullValueCreatedAtBefore; set { _explicitNullValueCreatedAtBefore = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_before"); else _explicitNullProperties?.Remove("created_at_before"); } }
+        public int? CreatedAtBefore { get => _explicitNullValueCreatedAtBefore; set { _explicitNullValueCreatedAtBefore = value; AdditionalData?.Remove("created_at_before"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_before"); else _explicitNullProperties?.Remove("created_at_before"); } }
         private int? _explicitNullValueCreatedAtBefore = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataExportsRequest"/> and sets the default values.

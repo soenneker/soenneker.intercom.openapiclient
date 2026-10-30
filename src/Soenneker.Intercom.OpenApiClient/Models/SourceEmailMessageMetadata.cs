@@ -18,10 +18,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("email_address_headers") is { } nullNodeEmailAddressHeaders && nullNodeEmailAddressHeaders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailAddressHeaders = null;
-            if (parseNode.GetChildNode("history") is { } nullNodeHistory && nullNodeHistory.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) History = null;
-            if (parseNode.GetChildNode("message_id") is { } nullNodeMessageId && nullNodeMessageId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageId = null;
-            if (parseNode.GetChildNode("subject") is { } nullNodeSubject && nullNodeSubject.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subject = null;
+            if (parseNode.GetChildNode("email_address_headers") is null) { _explicitNullValueEmailAddressHeaders = default!; _explicitNullProperties?.Remove("email_address_headers"); }
+            else if (parseNode.GetChildNode("email_address_headers") is { } nullNodeEmailAddressHeaders && nullNodeEmailAddressHeaders.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmailAddressHeaders = null;
+            if (parseNode.GetChildNode("history") is null) { _explicitNullValueHistory = default!; _explicitNullProperties?.Remove("history"); }
+            else if (parseNode.GetChildNode("history") is { } nullNodeHistory && nullNodeHistory.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) History = null;
+            if (parseNode.GetChildNode("message_id") is null) { _explicitNullValueMessageId = default!; _explicitNullProperties?.Remove("message_id"); }
+            else if (parseNode.GetChildNode("message_id") is { } nullNodeMessageId && nullNodeMessageId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageId = null;
+            if (parseNode.GetChildNode("subject") is null) { _explicitNullValueSubject = default!; _explicitNullProperties?.Remove("subject"); }
+            else if (parseNode.GetChildNode("subject") is { } nullNodeSubject && nullNodeSubject.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Subject = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -29,41 +33,41 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A list of an email address headers.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EmailAddressHeader>? EmailAddressHeaders { get => _explicitNullValueEmailAddressHeaders; set { _explicitNullValueEmailAddressHeaders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email_address_headers"); else _explicitNullProperties?.Remove("email_address_headers"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EmailAddressHeader>? EmailAddressHeaders { get => _explicitNullValueEmailAddressHeaders; set { _explicitNullValueEmailAddressHeaders = value; AdditionalData?.Remove("email_address_headers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email_address_headers"); else _explicitNullProperties?.Remove("email_address_headers"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.EmailAddressHeader>? _explicitNullValueEmailAddressHeaders = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.EmailAddressHeader> EmailAddressHeaders { get => _explicitNullValueEmailAddressHeaders; set { _explicitNullValueEmailAddressHeaders = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email_address_headers"); else _explicitNullProperties?.Remove("email_address_headers"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.EmailAddressHeader> EmailAddressHeaders { get => _explicitNullValueEmailAddressHeaders; set { _explicitNullValueEmailAddressHeaders = value; AdditionalData?.Remove("email_address_headers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("email_address_headers"); else _explicitNullProperties?.Remove("email_address_headers"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.EmailAddressHeader> _explicitNullValueEmailAddressHeaders = default!;
 #endif
         /// <summary>The HTML content of any quoted or forwarded email history from the initial inbound message</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? History { get => _explicitNullValueHistory; set { _explicitNullValueHistory = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("history"); else _explicitNullProperties?.Remove("history"); } }
+        public string? History { get => _explicitNullValueHistory; set { _explicitNullValueHistory = value; AdditionalData?.Remove("history"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("history"); else _explicitNullProperties?.Remove("history"); } }
         private string? _explicitNullValueHistory = default!;
 #nullable restore
 #else
-        public string History { get => _explicitNullValueHistory; set { _explicitNullValueHistory = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("history"); else _explicitNullProperties?.Remove("history"); } }
+        public string History { get => _explicitNullValueHistory; set { _explicitNullValueHistory = value; AdditionalData?.Remove("history"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("history"); else _explicitNullProperties?.Remove("history"); } }
         private string _explicitNullValueHistory = default!;
 #endif
         /// <summary>The unique identifier for the email message as specified in the Message-ID header</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MessageId { get => _explicitNullValueMessageId; set { _explicitNullValueMessageId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_id"); else _explicitNullProperties?.Remove("message_id"); } }
+        public string? MessageId { get => _explicitNullValueMessageId; set { _explicitNullValueMessageId = value; AdditionalData?.Remove("message_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_id"); else _explicitNullProperties?.Remove("message_id"); } }
         private string? _explicitNullValueMessageId = default!;
 #nullable restore
 #else
-        public string MessageId { get => _explicitNullValueMessageId; set { _explicitNullValueMessageId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_id"); else _explicitNullProperties?.Remove("message_id"); } }
+        public string MessageId { get => _explicitNullValueMessageId; set { _explicitNullValueMessageId = value; AdditionalData?.Remove("message_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_id"); else _explicitNullProperties?.Remove("message_id"); } }
         private string _explicitNullValueMessageId = default!;
 #endif
         /// <summary>The subject of the email</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        public string? Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; AdditionalData?.Remove("subject"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
         private string? _explicitNullValueSubject = default!;
 #nullable restore
 #else
-        public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
+        public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; AdditionalData?.Remove("subject"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
         private string _explicitNullValueSubject = default!;
 #endif
         /// <summary>

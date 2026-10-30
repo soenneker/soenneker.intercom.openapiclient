@@ -115,9 +115,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_content_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_content_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_content_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_content_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };

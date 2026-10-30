@@ -153,7 +153,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "create_conversation_without_contact_reply", n => { CreateConversationWithoutContactReply = n.GetBoolValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request_from>(global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request_from.CreateFromDiscriminatorValue); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request_message_type>(); } },
+                { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request_message_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "template", n => { Template = n.GetStringValue(); } },
                 { "to", n => { To = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request.Create_message_request_to>(global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request.Create_message_request_to.CreateFromDiscriminatorValue); } },

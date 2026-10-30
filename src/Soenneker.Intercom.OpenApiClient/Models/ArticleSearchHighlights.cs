@@ -18,9 +18,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("article_id") is { } nullNodeArticleId && nullNodeArticleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ArticleId = null;
-            if (parseNode.GetChildNode("highlighted_summary") is { } nullNodeHighlightedSummary && nullNodeHighlightedSummary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HighlightedSummary = null;
-            if (parseNode.GetChildNode("highlighted_title") is { } nullNodeHighlightedTitle && nullNodeHighlightedTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HighlightedTitle = null;
+            if (parseNode.GetChildNode("article_id") is null) { _explicitNullValueArticleId = default!; _explicitNullProperties?.Remove("article_id"); }
+            else if (parseNode.GetChildNode("article_id") is { } nullNodeArticleId && nullNodeArticleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ArticleId = null;
+            if (parseNode.GetChildNode("highlighted_summary") is null) { _explicitNullValueHighlightedSummary = default!; _explicitNullProperties?.Remove("highlighted_summary"); }
+            else if (parseNode.GetChildNode("highlighted_summary") is { } nullNodeHighlightedSummary && nullNodeHighlightedSummary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HighlightedSummary = null;
+            if (parseNode.GetChildNode("highlighted_title") is null) { _explicitNullValueHighlightedTitle = default!; _explicitNullProperties?.Remove("highlighted_title"); }
+            else if (parseNode.GetChildNode("highlighted_title") is { } nullNodeHighlightedTitle && nullNodeHighlightedTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HighlightedTitle = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,31 +31,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The ID of the corresponding article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ArticleId { get => _explicitNullValueArticleId; set { _explicitNullValueArticleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("article_id"); else _explicitNullProperties?.Remove("article_id"); } }
+        public string? ArticleId { get => _explicitNullValueArticleId; set { _explicitNullValueArticleId = value; AdditionalData?.Remove("article_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("article_id"); else _explicitNullProperties?.Remove("article_id"); } }
         private string? _explicitNullValueArticleId = default!;
 #nullable restore
 #else
-        public string ArticleId { get => _explicitNullValueArticleId; set { _explicitNullValueArticleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("article_id"); else _explicitNullProperties?.Remove("article_id"); } }
+        public string ArticleId { get => _explicitNullValueArticleId; set { _explicitNullValueArticleId = value; AdditionalData?.Remove("article_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("article_id"); else _explicitNullProperties?.Remove("article_id"); } }
         private string _explicitNullValueArticleId = default!;
 #endif
         /// <summary>An Article description and body text highlighted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? HighlightedSummary { get => _explicitNullValueHighlightedSummary; set { _explicitNullValueHighlightedSummary = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_summary"); else _explicitNullProperties?.Remove("highlighted_summary"); } }
+        public UntypedNode? HighlightedSummary { get => _explicitNullValueHighlightedSummary; set { _explicitNullValueHighlightedSummary = value; AdditionalData?.Remove("highlighted_summary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_summary"); else _explicitNullProperties?.Remove("highlighted_summary"); } }
         private UntypedNode? _explicitNullValueHighlightedSummary = default!;
 #nullable restore
 #else
-        public UntypedNode HighlightedSummary { get => _explicitNullValueHighlightedSummary; set { _explicitNullValueHighlightedSummary = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_summary"); else _explicitNullProperties?.Remove("highlighted_summary"); } }
+        public UntypedNode HighlightedSummary { get => _explicitNullValueHighlightedSummary; set { _explicitNullValueHighlightedSummary = value; AdditionalData?.Remove("highlighted_summary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_summary"); else _explicitNullProperties?.Remove("highlighted_summary"); } }
         private UntypedNode _explicitNullValueHighlightedSummary = default!;
 #endif
         /// <summary>An Article title highlighted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem>? HighlightedTitle { get => _explicitNullValueHighlightedTitle; set { _explicitNullValueHighlightedTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_title"); else _explicitNullProperties?.Remove("highlighted_title"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem>? HighlightedTitle { get => _explicitNullValueHighlightedTitle; set { _explicitNullValueHighlightedTitle = value; AdditionalData?.Remove("highlighted_title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_title"); else _explicitNullProperties?.Remove("highlighted_title"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem>? _explicitNullValueHighlightedTitle = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem> HighlightedTitle { get => _explicitNullValueHighlightedTitle; set { _explicitNullValueHighlightedTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_title"); else _explicitNullProperties?.Remove("highlighted_title"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem> HighlightedTitle { get => _explicitNullValueHighlightedTitle; set { _explicitNullValueHighlightedTitle = value; AdditionalData?.Remove("highlighted_title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlighted_title"); else _explicitNullProperties?.Remove("highlighted_title"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlightsHighlightedTitleItem> _explicitNullValueHighlightedTitle = default!;
 #endif
         /// <summary>

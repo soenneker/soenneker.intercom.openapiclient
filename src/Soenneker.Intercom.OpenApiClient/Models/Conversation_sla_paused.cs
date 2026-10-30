@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "current_sla_status", n => { CurrentSlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_paused_current_sla_status>(); } },
+                { "current_sla_status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_paused_current_sla_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCurrentSlaStatus = default; _explicitNullProperties?.Remove("current_sla_status"); AdditionalData["current_sla_status"] = unknown; } else { CurrentSlaStatus = parsed; AdditionalData.Remove("current_sla_status"); } } },
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },
                 { "sla_states", n => { SlaStates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_paused_sla_states>(global::Soenneker.Intercom.OpenApiClient.Models.Conversation_sla_paused_sla_states.CreateFromDiscriminatorValue); } },
             };

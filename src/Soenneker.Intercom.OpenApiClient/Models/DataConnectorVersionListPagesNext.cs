@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("starting_after") is { } nullNodeStartingAfter && nullNodeStartingAfter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartingAfter = null;
+            if (parseNode.GetChildNode("starting_after") is null) { _explicitNullValueStartingAfter = default!; _explicitNullProperties?.Remove("starting_after"); }
+            else if (parseNode.GetChildNode("starting_after") is { } nullNodeStartingAfter && nullNodeStartingAfter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartingAfter = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The cursor value to use for the next page.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StartingAfter { get => _explicitNullValueStartingAfter; set { _explicitNullValueStartingAfter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("starting_after"); else _explicitNullProperties?.Remove("starting_after"); } }
+        public string? StartingAfter { get => _explicitNullValueStartingAfter; set { _explicitNullValueStartingAfter = value; AdditionalData?.Remove("starting_after"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("starting_after"); else _explicitNullProperties?.Remove("starting_after"); } }
         private string? _explicitNullValueStartingAfter = default!;
 #nullable restore
 #else
-        public string StartingAfter { get => _explicitNullValueStartingAfter; set { _explicitNullValueStartingAfter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("starting_after"); else _explicitNullProperties?.Remove("starting_after"); } }
+        public string StartingAfter { get => _explicitNullValueStartingAfter; set { _explicitNullValueStartingAfter = value; AdditionalData?.Remove("starting_after"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("starting_after"); else _explicitNullProperties?.Remove("starting_after"); } }
         private string _explicitNullValueStartingAfter = default!;
 #endif
         /// <summary>

@@ -124,7 +124,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "parent_id", n => { ParentId = n.GetIntValue(); } },
                 { "parent_type", n => { ParentType = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_article_request_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_article_request_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "translated_content", n => { TranslatedContent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_translated_content>(global::Soenneker.Intercom.OpenApiClient.Models.Article_translated_content.CreateFromDiscriminatorValue); } },
             };

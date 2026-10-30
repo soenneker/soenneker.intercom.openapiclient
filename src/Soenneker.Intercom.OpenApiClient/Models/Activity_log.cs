@@ -100,7 +100,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "activity_description", n => { ActivityDescription = n.GetStringValue(); } },
-                { "activity_type", n => { ActivityType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_activity_type>(); } },
+                { "activity_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_activity_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueActivityType = default; _explicitNullProperties?.Remove("activity_type"); AdditionalData["activity_type"] = unknown; } else { ActivityType = parsed; AdditionalData.Remove("activity_type"); } } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_metadata>(global::Soenneker.Intercom.OpenApiClient.Models.Activity_log_metadata.CreateFromDiscriminatorValue); } },

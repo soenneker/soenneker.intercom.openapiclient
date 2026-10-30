@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_search_response_data>(global::Soenneker.Intercom.OpenApiClient.Models.Article_search_response_data.CreateFromDiscriminatorValue); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Cursor_pages>(global::Soenneker.Intercom.OpenApiClient.Models.Cursor_pages.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_search_response_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_search_response_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

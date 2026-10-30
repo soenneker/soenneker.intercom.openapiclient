@@ -18,12 +18,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
-            if (parseNode.GetChildNode("assignee_id") is { } nullNodeAssigneeId && nullNodeAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssigneeId = null;
-            if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
-            if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
-            if (parseNode.GetChildNode("skip_reopen") is { } nullNodeSkipReopen && nullNodeSkipReopen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipReopen = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
+            else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("assignee_id") is null) { _explicitNullValueAssigneeId = default!; _explicitNullProperties?.Remove("assignee_id"); }
+            else if (parseNode.GetChildNode("assignee_id") is { } nullNodeAssigneeId && nullNodeAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssigneeId = null;
+            if (parseNode.GetChildNode("body") is null) { _explicitNullValueBody = default!; _explicitNullProperties?.Remove("body"); }
+            else if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("message_type") is null) { _explicitNullValueMessageType = default!; _explicitNullProperties?.Remove("message_type"); }
+            else if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
+            if (parseNode.GetChildNode("skip_reopen") is null) { _explicitNullValueSkipReopen = default!; _explicitNullProperties?.Remove("skip_reopen"); }
+            else if (parseNode.GetChildNode("skip_reopen") is { } nullNodeSkipReopen && nullNodeSkipReopen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipReopen = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -31,41 +37,41 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id of the admin who is performing the action.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string? _explicitNullValueAdminId = default!;
 #nullable restore
 #else
-        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string _explicitNullValueAdminId = default!;
 #endif
         /// <summary>The `id` of the `admin` or `team` which will be assigned the conversation. A conversation can be assigned both an admin and a team.\nSet `0` if you want this assign to no admin or team (ie. Unassigned).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
+        public string? AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; AdditionalData?.Remove("assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
         private string? _explicitNullValueAssigneeId = default!;
 #nullable restore
 #else
-        public string AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
+        public string AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; AdditionalData?.Remove("assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
         private string _explicitNullValueAssigneeId = default!;
 #endif
         /// <summary>Optionally you can send a response in the conversation when it is assigned.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string _explicitNullValueBody = default!;
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; AdditionalData?.Remove("message_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType? _explicitNullValueMessageType = default!;
         /// <summary>When true, assigning a closed conversation leaves it closed instead of reopening it. No reopen event is recorded, so the conversation keeps its original close timestamp and the assignment does not count as a new closure in reporting.</summary>
-        public bool? SkipReopen { get => _explicitNullValueSkipReopen; set { _explicitNullValueSkipReopen = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_reopen"); else _explicitNullProperties?.Remove("skip_reopen"); } }
+        public bool? SkipReopen { get => _explicitNullValueSkipReopen; set { _explicitNullValueSkipReopen = value; AdditionalData?.Remove("skip_reopen"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_reopen"); else _explicitNullProperties?.Remove("skip_reopen"); } }
         private bool? _explicitNullValueSkipReopen = default!;
         /// <summary>The type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType? _explicitNullValueType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequest"/> and sets the default values.
@@ -96,9 +102,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "assignee_id", n => { AssigneeId = n.GetStringValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType>(); } },
+                { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignmentMessageType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "skip_reopen", n => { SkipReopen = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AssignConversationRequestType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

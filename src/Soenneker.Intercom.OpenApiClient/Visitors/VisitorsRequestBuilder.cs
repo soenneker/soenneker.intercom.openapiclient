@@ -111,7 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Visitors.VisitorsRequestBuilder.VisitorsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, "{+baseurl}/visitors?user_id={user_id}", PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve("{+baseurl}/visitors?user_id={user_id}", RequestAdapter.BaseUrl, "https://api.intercom.io", "/visitors", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
@@ -132,7 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.Visitors
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.PUT, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.PUT, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.intercom.io", "/visitors", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);

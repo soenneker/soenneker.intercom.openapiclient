@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("case_id") is { } nullNodeCaseId && nullNodeCaseId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CaseId = null;
-            if (parseNode.GetChildNode("case_number") is { } nullNodeCaseNumber && nullNodeCaseNumber.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CaseNumber = null;
+            if (parseNode.GetChildNode("case_id") is null) { _explicitNullValueCaseId = default!; _explicitNullProperties?.Remove("case_id"); }
+            else if (parseNode.GetChildNode("case_id") is { } nullNodeCaseId && nullNodeCaseId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CaseId = null;
+            if (parseNode.GetChildNode("case_number") is null) { _explicitNullValueCaseNumber = default!; _explicitNullProperties?.Remove("case_number"); }
+            else if (parseNode.GetChildNode("case_number") is { } nullNodeCaseNumber && nullNodeCaseNumber.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CaseNumber = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The ID of the Salesforce Case created by the handoff.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CaseId { get => _explicitNullValueCaseId; set { _explicitNullValueCaseId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_id"); else _explicitNullProperties?.Remove("case_id"); } }
+        public string? CaseId { get => _explicitNullValueCaseId; set { _explicitNullValueCaseId = value; AdditionalData?.Remove("case_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_id"); else _explicitNullProperties?.Remove("case_id"); } }
         private string? _explicitNullValueCaseId = default!;
 #nullable restore
 #else
-        public string CaseId { get => _explicitNullValueCaseId; set { _explicitNullValueCaseId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_id"); else _explicitNullProperties?.Remove("case_id"); } }
+        public string CaseId { get => _explicitNullValueCaseId; set { _explicitNullValueCaseId = value; AdditionalData?.Remove("case_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_id"); else _explicitNullProperties?.Remove("case_id"); } }
         private string _explicitNullValueCaseId = default!;
 #endif
         /// <summary>The number of the Salesforce Case created by the handoff.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CaseNumber { get => _explicitNullValueCaseNumber; set { _explicitNullValueCaseNumber = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_number"); else _explicitNullProperties?.Remove("case_number"); } }
+        public string? CaseNumber { get => _explicitNullValueCaseNumber; set { _explicitNullValueCaseNumber = value; AdditionalData?.Remove("case_number"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_number"); else _explicitNullProperties?.Remove("case_number"); } }
         private string? _explicitNullValueCaseNumber = default!;
 #nullable restore
 #else
-        public string CaseNumber { get => _explicitNullValueCaseNumber; set { _explicitNullValueCaseNumber = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_number"); else _explicitNullProperties?.Remove("case_number"); } }
+        public string CaseNumber { get => _explicitNullValueCaseNumber; set { _explicitNullValueCaseNumber = value; AdditionalData?.Remove("case_number"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("case_number"); else _explicitNullProperties?.Remove("case_number"); } }
         private string _explicitNullValueCaseNumber = default!;
 #endif
         /// <summary>

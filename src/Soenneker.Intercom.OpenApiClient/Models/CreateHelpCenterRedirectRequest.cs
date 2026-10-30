@@ -18,10 +18,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("from_url") is { } nullNodeFromUrl && nullNodeFromUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FromUrl = null;
-            if (parseNode.GetChildNode("locale") is { } nullNodeLocale && nullNodeLocale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Locale = null;
-            if (parseNode.GetChildNode("target_id") is { } nullNodeTargetId && nullNodeTargetId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TargetId = null;
-            if (parseNode.GetChildNode("target_type") is { } nullNodeTargetType && nullNodeTargetType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TargetType = null;
+            if (parseNode.GetChildNode("from_url") is null) { _explicitNullValueFromUrl = default!; _explicitNullProperties?.Remove("from_url"); }
+            else if (parseNode.GetChildNode("from_url") is { } nullNodeFromUrl && nullNodeFromUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FromUrl = null;
+            if (parseNode.GetChildNode("locale") is null) { _explicitNullValueLocale = default!; _explicitNullProperties?.Remove("locale"); }
+            else if (parseNode.GetChildNode("locale") is { } nullNodeLocale && nullNodeLocale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Locale = null;
+            if (parseNode.GetChildNode("target_id") is null) { _explicitNullValueTargetId = default!; _explicitNullProperties?.Remove("target_id"); }
+            else if (parseNode.GetChildNode("target_id") is { } nullNodeTargetId && nullNodeTargetId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TargetId = null;
+            if (parseNode.GetChildNode("target_type") is null) { _explicitNullValueTargetType = default!; _explicitNullProperties?.Remove("target_type"); }
+            else if (parseNode.GetChildNode("target_type") is { } nullNodeTargetType && nullNodeTargetType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TargetType = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -29,35 +33,35 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The source URL to redirect. Must be an absolute URL within the help center&apos;s URL space.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FromUrl { get => _explicitNullValueFromUrl; set { _explicitNullValueFromUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from_url"); else _explicitNullProperties?.Remove("from_url"); } }
+        public string? FromUrl { get => _explicitNullValueFromUrl; set { _explicitNullValueFromUrl = value; AdditionalData?.Remove("from_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from_url"); else _explicitNullProperties?.Remove("from_url"); } }
         private string? _explicitNullValueFromUrl = default!;
 #nullable restore
 #else
-        public string FromUrl { get => _explicitNullValueFromUrl; set { _explicitNullValueFromUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from_url"); else _explicitNullProperties?.Remove("from_url"); } }
+        public string FromUrl { get => _explicitNullValueFromUrl; set { _explicitNullValueFromUrl = value; AdditionalData?.Remove("from_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from_url"); else _explicitNullProperties?.Remove("from_url"); } }
         private string _explicitNullValueFromUrl = default!;
 #endif
         /// <summary>The locale of the target translation (e.g. `en`, `fr`). For article targets this selects the ArticleContent variant.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Locale { get => _explicitNullValueLocale; set { _explicitNullValueLocale = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("locale"); else _explicitNullProperties?.Remove("locale"); } }
+        public string? Locale { get => _explicitNullValueLocale; set { _explicitNullValueLocale = value; AdditionalData?.Remove("locale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("locale"); else _explicitNullProperties?.Remove("locale"); } }
         private string? _explicitNullValueLocale = default!;
 #nullable restore
 #else
-        public string Locale { get => _explicitNullValueLocale; set { _explicitNullValueLocale = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("locale"); else _explicitNullProperties?.Remove("locale"); } }
+        public string Locale { get => _explicitNullValueLocale; set { _explicitNullValueLocale = value; AdditionalData?.Remove("locale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("locale"); else _explicitNullProperties?.Remove("locale"); } }
         private string _explicitNullValueLocale = default!;
 #endif
         /// <summary>The unique identifier of the target article, collection or help center. The target must be a member of the help center. Required unless `target_type` is `help_center`, where it defaults to the help center in the path and must match it if provided.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TargetId { get => _explicitNullValueTargetId; set { _explicitNullValueTargetId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_id"); else _explicitNullProperties?.Remove("target_id"); } }
+        public string? TargetId { get => _explicitNullValueTargetId; set { _explicitNullValueTargetId = value; AdditionalData?.Remove("target_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_id"); else _explicitNullProperties?.Remove("target_id"); } }
         private string? _explicitNullValueTargetId = default!;
 #nullable restore
 #else
-        public string TargetId { get => _explicitNullValueTargetId; set { _explicitNullValueTargetId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_id"); else _explicitNullProperties?.Remove("target_id"); } }
+        public string TargetId { get => _explicitNullValueTargetId; set { _explicitNullValueTargetId = value; AdditionalData?.Remove("target_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_id"); else _explicitNullProperties?.Remove("target_id"); } }
         private string _explicitNullValueTargetId = default!;
 #endif
         /// <summary>The type of the redirect target. `help_center` targets the help center&apos;s home page.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequestTargetType? TargetType { get => _explicitNullValueTargetType; set { _explicitNullValueTargetType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_type"); else _explicitNullProperties?.Remove("target_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequestTargetType? TargetType { get => _explicitNullValueTargetType; set { _explicitNullValueTargetType = value; AdditionalData?.Remove("target_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_type"); else _explicitNullProperties?.Remove("target_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequestTargetType? _explicitNullValueTargetType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequest"/> and sets the default values.
@@ -87,7 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "from_url", n => { FromUrl = n.GetStringValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "target_id", n => { TargetId = n.GetStringValue(); } },
-                { "target_type", n => { TargetType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequestTargetType>(); } },
+                { "target_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateHelpCenterRedirectRequestTargetType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueTargetType = default; _explicitNullProperties?.Remove("target_type"); AdditionalData["target_type"] = unknown; } else { TargetType = parsed; AdditionalData.Remove("target_type"); } } },
             };
         }
         /// <summary>

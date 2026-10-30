@@ -18,14 +18,22 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("auth") is { } nullNodeAuth && nullNodeAuth.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Auth = null;
-            if (parseNode.GetChildNode("base_url") is { } nullNodeBaseUrl && nullNodeBaseUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BaseUrl = null;
-            if (parseNode.GetChildNode("body_format") is { } nullNodeBodyFormat && nullNodeBodyFormat.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BodyFormat = null;
-            if (parseNode.GetChildNode("item") is { } nullNodeItem && nullNodeItem.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Item = null;
-            if (parseNode.GetChildNode("mapping") is { } nullNodeMapping && nullNodeMapping.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mapping = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("tree") is { } nullNodeTree && nullNodeTree.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tree = null;
-            if (parseNode.GetChildNode("variables") is { } nullNodeVariables && nullNodeVariables.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variables = null;
+            if (parseNode.GetChildNode("auth") is null) { _explicitNullValueAuth = default!; _explicitNullProperties?.Remove("auth"); }
+            else if (parseNode.GetChildNode("auth") is { } nullNodeAuth && nullNodeAuth.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Auth = null;
+            if (parseNode.GetChildNode("base_url") is null) { _explicitNullValueBaseUrl = default!; _explicitNullProperties?.Remove("base_url"); }
+            else if (parseNode.GetChildNode("base_url") is { } nullNodeBaseUrl && nullNodeBaseUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BaseUrl = null;
+            if (parseNode.GetChildNode("body_format") is null) { _explicitNullValueBodyFormat = default!; _explicitNullProperties?.Remove("body_format"); }
+            else if (parseNode.GetChildNode("body_format") is { } nullNodeBodyFormat && nullNodeBodyFormat.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BodyFormat = null;
+            if (parseNode.GetChildNode("item") is null) { _explicitNullValueItem = default!; _explicitNullProperties?.Remove("item"); }
+            else if (parseNode.GetChildNode("item") is { } nullNodeItem && nullNodeItem.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Item = null;
+            if (parseNode.GetChildNode("mapping") is null) { _explicitNullValueMapping = default!; _explicitNullProperties?.Remove("mapping"); }
+            else if (parseNode.GetChildNode("mapping") is { } nullNodeMapping && nullNodeMapping.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Mapping = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("tree") is null) { _explicitNullValueTree = default!; _explicitNullProperties?.Remove("tree"); }
+            else if (parseNode.GetChildNode("tree") is { } nullNodeTree && nullNodeTree.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tree = null;
+            if (parseNode.GetChildNode("variables") is null) { _explicitNullValueVariables = default!; _explicitNullProperties?.Remove("variables"); }
+            else if (parseNode.GetChildNode("variables") is { } nullNodeVariables && nullNodeVariables.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variables = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -33,74 +41,74 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>How the token is sent to the vendor. It must be an object (`invalid`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth? Auth { get => _explicitNullValueAuth; set { _explicitNullValueAuth = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auth"); else _explicitNullProperties?.Remove("auth"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth? Auth { get => _explicitNullValueAuth; set { _explicitNullValueAuth = value; AdditionalData?.Remove("auth"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auth"); else _explicitNullProperties?.Remove("auth"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth? _explicitNullValueAuth = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth Auth { get => _explicitNullValueAuth; set { _explicitNullValueAuth = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auth"); else _explicitNullProperties?.Remove("auth"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth Auth { get => _explicitNullValueAuth; set { _explicitNullValueAuth = value; AdditionalData?.Remove("auth"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("auth"); else _explicitNullProperties?.Remove("auth"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth _explicitNullValueAuth = default!;
 #endif
         /// <summary>The base URL of the vendor&apos;s API. It must be an `https` URL with a host (`not_https`); a URL that can&apos;t be parsed, including one with malformed percent-encoding, also fails `not_https`. It must have no query or fragment (`query_or_fragment`) and no user name or password (`userinfo`), and can&apos;t be on an Intercom domain (`intercom_host`). It can use placeholders from `variables` (`undeclared_placeholder`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? BaseUrl { get => _explicitNullValueBaseUrl; set { _explicitNullValueBaseUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("base_url"); else _explicitNullProperties?.Remove("base_url"); } }
+        public string? BaseUrl { get => _explicitNullValueBaseUrl; set { _explicitNullValueBaseUrl = value; AdditionalData?.Remove("base_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("base_url"); else _explicitNullProperties?.Remove("base_url"); } }
         private string? _explicitNullValueBaseUrl = default!;
 #nullable restore
 #else
-        public string BaseUrl { get => _explicitNullValueBaseUrl; set { _explicitNullValueBaseUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("base_url"); else _explicitNullProperties?.Remove("base_url"); } }
+        public string BaseUrl { get => _explicitNullValueBaseUrl; set { _explicitNullValueBaseUrl = value; AdditionalData?.Remove("base_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("base_url"); else _explicitNullProperties?.Remove("base_url"); } }
         private string _explicitNullValueBaseUrl = default!;
 #endif
         /// <summary>The format of the body (`unknown`). HTML is sanitized, Markdown is converted to HTML without any front matter, and plain text keeps its line breaks.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateBodyFormat? BodyFormat { get => _explicitNullValueBodyFormat; set { _explicitNullValueBodyFormat = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body_format"); else _explicitNullProperties?.Remove("body_format"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateBodyFormat? BodyFormat { get => _explicitNullValueBodyFormat; set { _explicitNullValueBodyFormat = value; AdditionalData?.Remove("body_format"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body_format"); else _explicitNullProperties?.Remove("body_format"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateBodyFormat? _explicitNullValueBodyFormat = default!;
         /// <summary>The request that fetches a content node&apos;s item, made once for each node that matches `tree.content_if`. It must be an object (`invalid`) with a `path` (`missing_keys`). Its path and query values can use placeholders from `variables` and `node_values` (`undeclared_placeholder`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem? Item { get => _explicitNullValueItem; set { _explicitNullValueItem = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("item"); else _explicitNullProperties?.Remove("item"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem? Item { get => _explicitNullValueItem; set { _explicitNullValueItem = value; AdditionalData?.Remove("item"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("item"); else _explicitNullProperties?.Remove("item"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem? _explicitNullValueItem = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem Item { get => _explicitNullValueItem; set { _explicitNullValueItem = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("item"); else _explicitNullProperties?.Remove("item"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem Item { get => _explicitNullValueItem; set { _explicitNullValueItem = value; AdditionalData?.Remove("item"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("item"); else _explicitNullProperties?.Remove("item"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem _explicitNullValueItem = default!;
 #endif
         /// <summary>Where each field of the imported content comes from. Each value is a list that starts with `node` or `item`, followed by the keys to follow in it. An integer key indexes into a list. It must be an object (`invalid`) with `id`, `title`, `body` and `updated_at` (`missing_keys`), and each value must have this form (`invalid`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping? Mapping { get => _explicitNullValueMapping; set { _explicitNullValueMapping = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mapping"); else _explicitNullProperties?.Remove("mapping"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping? Mapping { get => _explicitNullValueMapping; set { _explicitNullValueMapping = value; AdditionalData?.Remove("mapping"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mapping"); else _explicitNullProperties?.Remove("mapping"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping? _explicitNullValueMapping = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping Mapping { get => _explicitNullValueMapping; set { _explicitNullValueMapping = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mapping"); else _explicitNullProperties?.Remove("mapping"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping Mapping { get => _explicitNullValueMapping; set { _explicitNullValueMapping = value; AdditionalData?.Remove("mapping"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("mapping"); else _explicitNullProperties?.Remove("mapping"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping _explicitNullValueMapping = default!;
 #endif
         /// <summary>The name of the knowledge base. The imported content is filed in a folder with this name. It can&apos;t be blank (`blank`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>The request that lists the knowledge base&apos;s nodes. It must be an object (`invalid`) with `path`, `nodes` and `content_if` (`missing_keys`). Its path and query values can only use placeholders from `variables` (`undeclared_placeholder`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree? Tree { get => _explicitNullValueTree; set { _explicitNullValueTree = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tree"); else _explicitNullProperties?.Remove("tree"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree? Tree { get => _explicitNullValueTree; set { _explicitNullValueTree = value; AdditionalData?.Remove("tree"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tree"); else _explicitNullProperties?.Remove("tree"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree? _explicitNullValueTree = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree Tree { get => _explicitNullValueTree; set { _explicitNullValueTree = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tree"); else _explicitNullProperties?.Remove("tree"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree Tree { get => _explicitNullValueTree; set { _explicitNullValueTree = value; AdditionalData?.Remove("tree"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("tree"); else _explicitNullProperties?.Remove("tree"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree _explicitNullValueTree = default!;
 #endif
         /// <summary>The names of the template&apos;s variables. Each name may only use letters, digits and underscores (`invalid`), and can&apos;t look like a credential, such as `api_key`, `token` or `secret` (`credential_name`). Use an empty list if the template has no variables.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Variables { get => _explicitNullValueVariables; set { _explicitNullValueVariables = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variables"); else _explicitNullProperties?.Remove("variables"); } }
+        public List<string>? Variables { get => _explicitNullValueVariables; set { _explicitNullValueVariables = value; AdditionalData?.Remove("variables"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variables"); else _explicitNullProperties?.Remove("variables"); } }
         private List<string>? _explicitNullValueVariables = default!;
 #nullable restore
 #else
-        public List<string> Variables { get => _explicitNullValueVariables; set { _explicitNullValueVariables = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variables"); else _explicitNullProperties?.Remove("variables"); } }
+        public List<string> Variables { get => _explicitNullValueVariables; set { _explicitNullValueVariables = value; AdditionalData?.Remove("variables"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variables"); else _explicitNullProperties?.Remove("variables"); } }
         private List<string> _explicitNullValueVariables = default!;
 #endif
         /// <summary>
@@ -130,7 +138,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "auth", n => { Auth = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth>(global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateAuth.CreateFromDiscriminatorValue); } },
                 { "base_url", n => { BaseUrl = n.GetStringValue(); } },
-                { "body_format", n => { BodyFormat = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateBodyFormat>(); } },
+                { "body_format", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateBodyFormat>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueBodyFormat = default; _explicitNullProperties?.Remove("body_format"); AdditionalData["body_format"] = unknown; } else { BodyFormat = parsed; AdditionalData.Remove("body_format"); } } },
                 { "item", n => { Item = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem>(global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateItem.CreateFromDiscriminatorValue); } },
                 { "mapping", n => { Mapping = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping>(global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateMapping.CreateFromDiscriminatorValue); } },
                 { "name", n => { Name = n.GetStringValue(); } },

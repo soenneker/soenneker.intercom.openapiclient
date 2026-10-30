@@ -89,7 +89,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Versions
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Versions.VersionsRequestBuilder.VersionsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.intercom.io", "/data_connectors/{id}/versions", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;

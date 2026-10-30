@@ -17,36 +17,41 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("created_at_after") is { } nullNodeCreatedAtAfter && nullNodeCreatedAtAfter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtAfter = null;
-            if (parseNode.GetChildNode("created_at_before") is { } nullNodeCreatedAtBefore && nullNodeCreatedAtBefore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtBefore = null;
-            if (parseNode.GetChildNode("event_types") is { } nullNodeEventTypes && nullNodeEventTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EventTypes = null;
-            if (parseNode.GetChildNode("page") is { } nullNodePage && nullNodePage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Page = null;
-            if (parseNode.GetChildNode("per_page") is { } nullNodePerPage && nullNodePerPage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PerPage = null;
+            if (parseNode.GetChildNode("created_at_after") is null) { _explicitNullValueCreatedAtAfter = default!; _explicitNullProperties?.Remove("created_at_after"); }
+            else if (parseNode.GetChildNode("created_at_after") is { } nullNodeCreatedAtAfter && nullNodeCreatedAtAfter.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtAfter = null;
+            if (parseNode.GetChildNode("created_at_before") is null) { _explicitNullValueCreatedAtBefore = default!; _explicitNullProperties?.Remove("created_at_before"); }
+            else if (parseNode.GetChildNode("created_at_before") is { } nullNodeCreatedAtBefore && nullNodeCreatedAtBefore.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAtBefore = null;
+            if (parseNode.GetChildNode("event_types") is null) { _explicitNullValueEventTypes = default!; _explicitNullProperties?.Remove("event_types"); }
+            else if (parseNode.GetChildNode("event_types") is { } nullNodeEventTypes && nullNodeEventTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EventTypes = null;
+            if (parseNode.GetChildNode("page") is null) { _explicitNullValuePage = default!; _explicitNullProperties?.Remove("page"); }
+            else if (parseNode.GetChildNode("page") is { } nullNodePage && nullNodePage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Page = null;
+            if (parseNode.GetChildNode("per_page") is null) { _explicitNullValuePerPage = default!; _explicitNullProperties?.Remove("per_page"); }
+            else if (parseNode.GetChildNode("per_page") is { } nullNodePerPage && nullNodePerPage.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PerPage = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to 30 days before the request.</summary>
-        public int? CreatedAtAfter { get => _explicitNullValueCreatedAtAfter; set { _explicitNullValueCreatedAtAfter = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_after"); else _explicitNullProperties?.Remove("created_at_after"); } }
+        public int? CreatedAtAfter { get => _explicitNullValueCreatedAtAfter; set { _explicitNullValueCreatedAtAfter = value; AdditionalData?.Remove("created_at_after"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_after"); else _explicitNullProperties?.Remove("created_at_after"); } }
         private int? _explicitNullValueCreatedAtAfter = default!;
         /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to the time of the request.</summary>
-        public int? CreatedAtBefore { get => _explicitNullValueCreatedAtBefore; set { _explicitNullValueCreatedAtBefore = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_before"); else _explicitNullProperties?.Remove("created_at_before"); } }
+        public int? CreatedAtBefore { get => _explicitNullValueCreatedAtBefore; set { _explicitNullValueCreatedAtBefore = value; AdditionalData?.Remove("created_at_before"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_before"); else _explicitNullProperties?.Remove("created_at_before"); } }
         private int? _explicitNullValueCreatedAtBefore = default!;
         /// <summary>An optional list of event types to filter activity logs by. Use the list all activity log event types endpoint to retrieve available values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? EventTypes { get => _explicitNullValueEventTypes; set { _explicitNullValueEventTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_types"); else _explicitNullProperties?.Remove("event_types"); } }
+        public List<string>? EventTypes { get => _explicitNullValueEventTypes; set { _explicitNullValueEventTypes = value; AdditionalData?.Remove("event_types"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_types"); else _explicitNullProperties?.Remove("event_types"); } }
         private List<string>? _explicitNullValueEventTypes = default!;
 #nullable restore
 #else
-        public List<string> EventTypes { get => _explicitNullValueEventTypes; set { _explicitNullValueEventTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_types"); else _explicitNullProperties?.Remove("event_types"); } }
+        public List<string> EventTypes { get => _explicitNullValueEventTypes; set { _explicitNullValueEventTypes = value; AdditionalData?.Remove("event_types"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_types"); else _explicitNullProperties?.Remove("event_types"); } }
         private List<string> _explicitNullValueEventTypes = default!;
 #endif
         /// <summary>The page number of results to return.</summary>
-        public int? Page { get => _explicitNullValuePage; set { _explicitNullValuePage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("page"); else _explicitNullProperties?.Remove("page"); } }
+        public int? Page { get => _explicitNullValuePage; set { _explicitNullValuePage = value; AdditionalData?.Remove("page"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("page"); else _explicitNullProperties?.Remove("page"); } }
         private int? _explicitNullValuePage = default!;
         /// <summary>The number of results per page. Must be between 1 and 250.</summary>
-        public int? PerPage { get => _explicitNullValuePerPage; set { _explicitNullValuePerPage = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("per_page"); else _explicitNullProperties?.Remove("per_page"); } }
+        public int? PerPage { get => _explicitNullValuePerPage; set { _explicitNullValuePerPage = value; AdditionalData?.Remove("per_page"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("per_page"); else _explicitNullProperties?.Remove("per_page"); } }
         private int? _explicitNullValuePerPage = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SearchActivityLogsRequest"/> and sets the default values.

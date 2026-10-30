@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
-            if (parseNode.GetChildNode("customer") is { } nullNodeCustomer && nullNodeCustomer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Customer = null;
+            if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
+            else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("customer") is null) { _explicitNullValueCustomer = default!; _explicitNullProperties?.Remove("customer"); }
+            else if (parseNode.GetChildNode("customer") is { } nullNodeCustomer && nullNodeCustomer.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Customer = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The `id` of the admin who is adding the new participant.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string? _explicitNullValueAdminId = default!;
 #nullable restore
 #else
-        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string _explicitNullValueAdminId = default!;
 #endif
         /// <summary>The customer property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.AttachContactToConversationRequestCustomer? Customer { get => _explicitNullValueCustomer; set { _explicitNullValueCustomer = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer"); else _explicitNullProperties?.Remove("customer"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AttachContactToConversationRequestCustomer? Customer { get => _explicitNullValueCustomer; set { _explicitNullValueCustomer = value; AdditionalData?.Remove("customer"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer"); else _explicitNullProperties?.Remove("customer"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AttachContactToConversationRequestCustomer? _explicitNullValueCustomer = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.AttachContactToConversationRequestCustomer Customer { get => _explicitNullValueCustomer; set { _explicitNullValueCustomer = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer"); else _explicitNullProperties?.Remove("customer"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AttachContactToConversationRequestCustomer Customer { get => _explicitNullValueCustomer; set { _explicitNullValueCustomer = value; AdditionalData?.Remove("customer"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer"); else _explicitNullProperties?.Remove("customer"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AttachContactToConversationRequestCustomer _explicitNullValueCustomer = default!;
 #endif
         /// <summary>

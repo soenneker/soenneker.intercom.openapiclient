@@ -17,13 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("data_type") is { } nullNodeDataType && nullNodeDataType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataType = null;
+            if (parseNode.GetChildNode("data_type") is null) { _explicitNullValueDataType = default!; _explicitNullProperties?.Remove("data_type"); }
+            else if (parseNode.GetChildNode("data_type") is { } nullNodeDataType && nullNodeDataType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DataType = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The data_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherTypeDataType? DataType { get => _explicitNullValueDataType; set { _explicitNullValueDataType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_type"); else _explicitNullProperties?.Remove("data_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherTypeDataType? DataType { get => _explicitNullValueDataType; set { _explicitNullValueDataType = value; AdditionalData?.Remove("data_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data_type"); else _explicitNullProperties?.Remove("data_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherTypeDataType? _explicitNullValueDataType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherType"/> and sets the default values.
@@ -50,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "data_type", n => { DataType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherTypeDataType>(); } },
+                { "data_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOtherTypeDataType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDataType = default; _explicitNullProperties?.Remove("data_type"); AdditionalData["data_type"] = unknown; } else { DataType = parsed; AdditionalData.Remove("data_type"); } } },
             };
         }
         /// <summary>

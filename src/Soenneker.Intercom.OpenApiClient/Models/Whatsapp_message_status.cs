@@ -118,7 +118,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "error", n => { Error = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_error>(global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_error.CreateFromDiscriminatorValue); } },
                 { "message_id", n => { MessageId = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_status>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "template_name", n => { TemplateName = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },

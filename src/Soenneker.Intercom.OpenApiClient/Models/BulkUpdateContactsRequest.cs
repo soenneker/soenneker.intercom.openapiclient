@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("contacts") is { } nullNodeContacts && nullNodeContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Contacts = null;
-            if (parseNode.GetChildNode("job") is { } nullNodeJob && nullNodeJob.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Job = null;
+            if (parseNode.GetChildNode("contacts") is null) { _explicitNullValueContacts = default!; _explicitNullProperties?.Remove("contacts"); }
+            else if (parseNode.GetChildNode("contacts") is { } nullNodeContacts && nullNodeContacts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Contacts = null;
+            if (parseNode.GetChildNode("job") is null) { _explicitNullValueJob = default!; _explicitNullProperties?.Remove("job"); }
+            else if (parseNode.GetChildNode("job") is { } nullNodeJob && nullNodeJob.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Job = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of contact objects to update. Each must include an `id` and the fields to update. Maximum 100 contacts per request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem>? Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem>? Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; AdditionalData?.Remove("contacts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem>? _explicitNullValueContacts = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem> Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem> Contacts { get => _explicitNullValueContacts; set { _explicitNullValueContacts = value; AdditionalData?.Remove("contacts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("contacts"); else _explicitNullProperties?.Remove("contacts"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem> _explicitNullValueContacts = default!;
 #endif
         /// <summary>Optional. Include to append tasks to an existing job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob? Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob? Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; AdditionalData?.Remove("job"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob? _explicitNullValueJob = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; AdditionalData?.Remove("job"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestJob _explicitNullValueJob = default!;
 #endif
         /// <summary>

@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("sla_definition") is { } nullNodeSlaDefinition && nullNodeSlaDefinition.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaDefinition = null;
-            if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
+            if (parseNode.GetChildNode("sla_definition") is null) { _explicitNullValueSlaDefinition = default!; _explicitNullProperties?.Remove("sla_definition"); }
+            else if (parseNode.GetChildNode("sla_definition") is { } nullNodeSlaDefinition && nullNodeSlaDefinition.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaDefinition = null;
+            if (parseNode.GetChildNode("sla_name") is null) { _explicitNullValueSlaName = default!; _explicitNullProperties?.Remove("sla_name"); }
+            else if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Target times configured for the SLA (in seconds)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition? SlaDefinition { get => _explicitNullValueSlaDefinition; set { _explicitNullValueSlaDefinition = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_definition"); else _explicitNullProperties?.Remove("sla_definition"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition? SlaDefinition { get => _explicitNullValueSlaDefinition; set { _explicitNullValueSlaDefinition = value; AdditionalData?.Remove("sla_definition"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_definition"); else _explicitNullProperties?.Remove("sla_definition"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition? _explicitNullValueSlaDefinition = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition SlaDefinition { get => _explicitNullValueSlaDefinition; set { _explicitNullValueSlaDefinition = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_definition"); else _explicitNullProperties?.Remove("sla_definition"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition SlaDefinition { get => _explicitNullValueSlaDefinition; set { _explicitNullValueSlaDefinition = value; AdditionalData?.Remove("sla_definition"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_definition"); else _explicitNullProperties?.Remove("sla_definition"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaAppliedByWorkflowSlaDefinition _explicitNullValueSlaDefinition = default!;
 #endif
         /// <summary>Name of the SLA that was applied</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; AdditionalData?.Remove("sla_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
         private string? _explicitNullValueSlaName = default!;
 #nullable restore
 #else
-        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; AdditionalData?.Remove("sla_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
         private string _explicitNullValueSlaName = default!;
 #endif
         /// <summary>

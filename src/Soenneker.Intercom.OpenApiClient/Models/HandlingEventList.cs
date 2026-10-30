@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("handling_events") is { } nullNodeHandlingEvents && nullNodeHandlingEvents.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HandlingEvents = null;
+            if (parseNode.GetChildNode("handling_events") is null) { _explicitNullValueHandlingEvents = default!; _explicitNullProperties?.Remove("handling_events"); }
+            else if (parseNode.GetChildNode("handling_events") is { } nullNodeHandlingEvents && nullNodeHandlingEvents.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HandlingEvents = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Array of handling events</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent>? HandlingEvents { get => _explicitNullValueHandlingEvents; set { _explicitNullValueHandlingEvents = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handling_events"); else _explicitNullProperties?.Remove("handling_events"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent>? HandlingEvents { get => _explicitNullValueHandlingEvents; set { _explicitNullValueHandlingEvents = value; AdditionalData?.Remove("handling_events"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handling_events"); else _explicitNullProperties?.Remove("handling_events"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent>? _explicitNullValueHandlingEvents = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent> HandlingEvents { get => _explicitNullValueHandlingEvents; set { _explicitNullValueHandlingEvents = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handling_events"); else _explicitNullProperties?.Remove("handling_events"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent> HandlingEvents { get => _explicitNullValueHandlingEvents; set { _explicitNullValueHandlingEvents = value; AdditionalData?.Remove("handling_events"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handling_events"); else _explicitNullProperties?.Remove("handling_events"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.HandlingEvent> _explicitNullValueHandlingEvents = default!;
 #endif
         /// <summary>

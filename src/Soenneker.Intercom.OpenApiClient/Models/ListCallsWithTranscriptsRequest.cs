@@ -17,7 +17,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("conversation_ids") is { } nullNodeConversationIds && nullNodeConversationIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationIds = null;
+            if (parseNode.GetChildNode("conversation_ids") is null) { _explicitNullValueConversationIds = default!; _explicitNullProperties?.Remove("conversation_ids"); }
+            else if (parseNode.GetChildNode("conversation_ids") is { } nullNodeConversationIds && nullNodeConversationIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -25,11 +26,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A list of conversation ids to fetch calls for. Maximum 20.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? ConversationIds { get => _explicitNullValueConversationIds; set { _explicitNullValueConversationIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_ids"); else _explicitNullProperties?.Remove("conversation_ids"); } }
+        public List<string>? ConversationIds { get => _explicitNullValueConversationIds; set { _explicitNullValueConversationIds = value; AdditionalData?.Remove("conversation_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_ids"); else _explicitNullProperties?.Remove("conversation_ids"); } }
         private List<string>? _explicitNullValueConversationIds = default!;
 #nullable restore
 #else
-        public List<string> ConversationIds { get => _explicitNullValueConversationIds; set { _explicitNullValueConversationIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_ids"); else _explicitNullProperties?.Remove("conversation_ids"); } }
+        public List<string> ConversationIds { get => _explicitNullValueConversationIds; set { _explicitNullValueConversationIds = value; AdditionalData?.Remove("conversation_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_ids"); else _explicitNullProperties?.Remove("conversation_ids"); } }
         private List<string> _explicitNullValueConversationIds = default!;
 #endif
         /// <summary>

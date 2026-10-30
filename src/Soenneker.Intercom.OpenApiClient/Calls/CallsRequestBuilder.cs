@@ -93,7 +93,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Calls.CallsRequestBuilder.CallsRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.intercom.io", "/calls", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;

@@ -111,7 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "archived", n => { Archived = n.GetBoolValue(); } },
-                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state_detailed_category>(); } },
+                { "category", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_state_detailed_category>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCategory = default; _explicitNullProperties?.Remove("category"); AdditionalData["category"] = unknown; } else { Category = parsed; AdditionalData.Remove("category"); } } },
                 { "external_label", n => { ExternalLabel = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "internal_label", n => { InternalLabel = n.GetStringValue(); } },

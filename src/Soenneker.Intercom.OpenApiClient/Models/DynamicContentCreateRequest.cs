@@ -18,45 +18,49 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("content_type") is { } nullNodeContentType && nullNodeContentType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentType = null;
-            if (parseNode.GetChildNode("default_locale") is { } nullNodeDefaultLocale && nullNodeDefaultLocale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DefaultLocale = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("variations") is { } nullNodeVariations && nullNodeVariations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variations = null;
+            if (parseNode.GetChildNode("content_type") is null) { _explicitNullValueContentType = default!; _explicitNullProperties?.Remove("content_type"); }
+            else if (parseNode.GetChildNode("content_type") is { } nullNodeContentType && nullNodeContentType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentType = null;
+            if (parseNode.GetChildNode("default_locale") is null) { _explicitNullValueDefaultLocale = default!; _explicitNullProperties?.Remove("default_locale"); }
+            else if (parseNode.GetChildNode("default_locale") is { } nullNodeDefaultLocale && nullNodeDefaultLocale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DefaultLocale = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("variations") is null) { _explicitNullValueVariations = default!; _explicitNullProperties?.Remove("variations"); }
+            else if (parseNode.GetChildNode("variations") is { } nullNodeVariations && nullNodeVariations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Variations = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the dynamic content is a short inline value (`inline`) or one or more blocks of content (`block`). Can&apos;t be changed later.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentCreateRequestContentType? ContentType { get => _explicitNullValueContentType; set { _explicitNullValueContentType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_type"); else _explicitNullProperties?.Remove("content_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentCreateRequestContentType? ContentType { get => _explicitNullValueContentType; set { _explicitNullValueContentType = value; AdditionalData?.Remove("content_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_type"); else _explicitNullProperties?.Remove("content_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentCreateRequestContentType? _explicitNullValueContentType = default!;
         /// <summary>The locale whose variation is used when there&apos;s no variation for the requested locale. `variations` must include a variation for this locale that applies to all brands.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DefaultLocale { get => _explicitNullValueDefaultLocale; set { _explicitNullValueDefaultLocale = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_locale"); else _explicitNullProperties?.Remove("default_locale"); } }
+        public string? DefaultLocale { get => _explicitNullValueDefaultLocale; set { _explicitNullValueDefaultLocale = value; AdditionalData?.Remove("default_locale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_locale"); else _explicitNullProperties?.Remove("default_locale"); } }
         private string? _explicitNullValueDefaultLocale = default!;
 #nullable restore
 #else
-        public string DefaultLocale { get => _explicitNullValueDefaultLocale; set { _explicitNullValueDefaultLocale = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_locale"); else _explicitNullProperties?.Remove("default_locale"); } }
+        public string DefaultLocale { get => _explicitNullValueDefaultLocale; set { _explicitNullValueDefaultLocale = value; AdditionalData?.Remove("default_locale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_locale"); else _explicitNullProperties?.Remove("default_locale"); } }
         private string _explicitNullValueDefaultLocale = default!;
 #endif
         /// <summary>The name of the dynamic content. Must be unique in the workspace.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>The variations of the dynamic content, one per locale and optionally per brand. Set `brand_id` on a variation to override the all-brands value for that brand. At least one is required.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest>? Variations { get => _explicitNullValueVariations; set { _explicitNullValueVariations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variations"); else _explicitNullProperties?.Remove("variations"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest>? Variations { get => _explicitNullValueVariations; set { _explicitNullValueVariations = value; AdditionalData?.Remove("variations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variations"); else _explicitNullProperties?.Remove("variations"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest>? _explicitNullValueVariations = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest> Variations { get => _explicitNullValueVariations; set { _explicitNullValueVariations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variations"); else _explicitNullProperties?.Remove("variations"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest> Variations { get => _explicitNullValueVariations; set { _explicitNullValueVariations = value; AdditionalData?.Remove("variations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("variations"); else _explicitNullProperties?.Remove("variations"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest> _explicitNullValueVariations = default!;
 #endif
         /// <summary>
@@ -84,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "content_type", n => { ContentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentCreateRequestContentType>(); } },
+                { "content_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentCreateRequestContentType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueContentType = default; _explicitNullProperties?.Remove("content_type"); AdditionalData["content_type"] = unknown; } else { ContentType = parsed; AdditionalData.Remove("content_type"); } } },
                 { "default_locale", n => { DefaultLocale = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "variations", n => { Variations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest>(global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationRequest.CreateFromDiscriminatorValue)?.AsList(); } },

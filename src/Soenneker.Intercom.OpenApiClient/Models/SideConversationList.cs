@@ -18,10 +18,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("pages") is { } nullNodePages && nullNodePages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Pages = null;
-            if (parseNode.GetChildNode("side_conversations") is { } nullNodeSideConversations && nullNodeSideConversations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SideConversations = null;
-            if (parseNode.GetChildNode("total_count") is { } nullNodeTotalCount && nullNodeTotalCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TotalCount = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("pages") is null) { _explicitNullValuePages = default!; _explicitNullProperties?.Remove("pages"); }
+            else if (parseNode.GetChildNode("pages") is { } nullNodePages && nullNodePages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Pages = null;
+            if (parseNode.GetChildNode("side_conversations") is null) { _explicitNullValueSideConversations = default!; _explicitNullProperties?.Remove("side_conversations"); }
+            else if (parseNode.GetChildNode("side_conversations") is { } nullNodeSideConversations && nullNodeSideConversations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SideConversations = null;
+            if (parseNode.GetChildNode("total_count") is null) { _explicitNullValueTotalCount = default!; _explicitNullProperties?.Remove("total_count"); }
+            else if (parseNode.GetChildNode("total_count") is { } nullNodeTotalCount && nullNodeTotalCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TotalCount = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -29,28 +33,28 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Pagination metadata.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages? Pages { get => _explicitNullValuePages; set { _explicitNullValuePages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pages"); else _explicitNullProperties?.Remove("pages"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages? Pages { get => _explicitNullValuePages; set { _explicitNullValuePages = value; AdditionalData?.Remove("pages"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pages"); else _explicitNullProperties?.Remove("pages"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages? _explicitNullValuePages = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages Pages { get => _explicitNullValuePages; set { _explicitNullValuePages = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pages"); else _explicitNullProperties?.Remove("pages"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages Pages { get => _explicitNullValuePages; set { _explicitNullValuePages = value; AdditionalData?.Remove("pages"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pages"); else _explicitNullProperties?.Remove("pages"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages _explicitNullValuePages = default!;
 #endif
         /// <summary>An array of side conversation objects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary>? SideConversations { get => _explicitNullValueSideConversations; set { _explicitNullValueSideConversations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("side_conversations"); else _explicitNullProperties?.Remove("side_conversations"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary>? SideConversations { get => _explicitNullValueSideConversations; set { _explicitNullValueSideConversations = value; AdditionalData?.Remove("side_conversations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("side_conversations"); else _explicitNullProperties?.Remove("side_conversations"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary>? _explicitNullValueSideConversations = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary> SideConversations { get => _explicitNullValueSideConversations; set { _explicitNullValueSideConversations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("side_conversations"); else _explicitNullProperties?.Remove("side_conversations"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary> SideConversations { get => _explicitNullValueSideConversations; set { _explicitNullValueSideConversations = value; AdditionalData?.Remove("side_conversations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("side_conversations"); else _explicitNullProperties?.Remove("side_conversations"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary> _explicitNullValueSideConversations = default!;
 #endif
         /// <summary>The total number of side conversations.</summary>
-        public int? TotalCount { get => _explicitNullValueTotalCount; set { _explicitNullValueTotalCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total_count"); else _explicitNullProperties?.Remove("total_count"); } }
+        public int? TotalCount { get => _explicitNullValueTotalCount; set { _explicitNullValueTotalCount = value; AdditionalData?.Remove("total_count"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total_count"); else _explicitNullProperties?.Remove("total_count"); } }
         private int? _explicitNullValueTotalCount = default!;
         /// <summary>The type of the response object.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType? _explicitNullValueType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.SideConversationList"/> and sets the default values.
@@ -80,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages>(global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListPages.CreateFromDiscriminatorValue); } },
                 { "side_conversations", n => { SideConversations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary>(global::Soenneker.Intercom.OpenApiClient.Models.SideConversationSummary.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SideConversationListType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

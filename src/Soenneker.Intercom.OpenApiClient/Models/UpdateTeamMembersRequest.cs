@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_ids") is { } nullNodeAdminIds && nullNodeAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminIds = null;
-            if (parseNode.GetChildNode("admin_priority_level") is { } nullNodeAdminPriorityLevel && nullNodeAdminPriorityLevel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminPriorityLevel = null;
+            if (parseNode.GetChildNode("admin_ids") is null) { _explicitNullValueAdminIds = default!; _explicitNullProperties?.Remove("admin_ids"); }
+            else if (parseNode.GetChildNode("admin_ids") is { } nullNodeAdminIds && nullNodeAdminIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminIds = null;
+            if (parseNode.GetChildNode("admin_priority_level") is null) { _explicitNullValueAdminPriorityLevel = default!; _explicitNullProperties?.Remove("admin_priority_level"); }
+            else if (parseNode.GetChildNode("admin_priority_level") is { } nullNodeAdminPriorityLevel && nullNodeAdminPriorityLevel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminPriorityLevel = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The ids of every teammate who should be a member of the team. Must contain at least one id, and no more than 1000.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? AdminIds { get => _explicitNullValueAdminIds; set { _explicitNullValueAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_ids"); else _explicitNullProperties?.Remove("admin_ids"); } }
+        public List<int?>? AdminIds { get => _explicitNullValueAdminIds; set { _explicitNullValueAdminIds = value; AdditionalData?.Remove("admin_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_ids"); else _explicitNullProperties?.Remove("admin_ids"); } }
         private List<int?>? _explicitNullValueAdminIds = default!;
 #nullable restore
 #else
-        public List<int?> AdminIds { get => _explicitNullValueAdminIds; set { _explicitNullValueAdminIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_ids"); else _explicitNullProperties?.Remove("admin_ids"); } }
+        public List<int?> AdminIds { get => _explicitNullValueAdminIds; set { _explicitNullValueAdminIds = value; AdditionalData?.Remove("admin_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_ids"); else _explicitNullProperties?.Remove("admin_ids"); } }
         private List<int?> _explicitNullValueAdminIds = default!;
 #endif
         /// <summary>The priority levels to set, naming only the teammates whose level is being set</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest? AdminPriorityLevel { get => _explicitNullValueAdminPriorityLevel; set { _explicitNullValueAdminPriorityLevel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_priority_level"); else _explicitNullProperties?.Remove("admin_priority_level"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest? AdminPriorityLevel { get => _explicitNullValueAdminPriorityLevel; set { _explicitNullValueAdminPriorityLevel = value; AdditionalData?.Remove("admin_priority_level"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_priority_level"); else _explicitNullProperties?.Remove("admin_priority_level"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest? _explicitNullValueAdminPriorityLevel = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest AdminPriorityLevel { get => _explicitNullValueAdminPriorityLevel; set { _explicitNullValueAdminPriorityLevel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_priority_level"); else _explicitNullProperties?.Remove("admin_priority_level"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest AdminPriorityLevel { get => _explicitNullValueAdminPriorityLevel; set { _explicitNullValueAdminPriorityLevel = value; AdditionalData?.Remove("admin_priority_level"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_priority_level"); else _explicitNullProperties?.Remove("admin_priority_level"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AdminPriorityLevelRequest _explicitNullValueAdminPriorityLevel = default!;
 #endif
         /// <summary>

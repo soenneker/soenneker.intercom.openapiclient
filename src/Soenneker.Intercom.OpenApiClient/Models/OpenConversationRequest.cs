@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
-            if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
+            if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
+            else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("message_type") is null) { _explicitNullValueMessageType = default!; _explicitNullProperties?.Remove("message_type"); }
+            else if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,15 +29,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id of the admin who is performing the action.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string? _explicitNullValueAdminId = default!;
 #nullable restore
 #else
-        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string _explicitNullValueAdminId = default!;
 #endif
         /// <summary>The message_type property</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.OpenMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OpenMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; AdditionalData?.Remove("message_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.OpenMessageType? _explicitNullValueMessageType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OpenConversationRequest"/> and sets the default values.
@@ -63,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenMessageType>(); } },
+                { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.OpenMessageType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
             };
         }
         /// <summary>

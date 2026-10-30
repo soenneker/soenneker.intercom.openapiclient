@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object>(global::Soenneker.Intercom.OpenApiClient.Models.Linked_object.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "has_more", n => { HasMore = n.GetBoolValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Linked_object_list_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

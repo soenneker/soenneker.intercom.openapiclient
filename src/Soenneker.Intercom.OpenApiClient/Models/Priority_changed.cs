@@ -55,8 +55,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "current_priority", n => { CurrentPriority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Priority_changed_current_priority>(); } },
-                { "previous_priority", n => { PreviousPriority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Priority_changed_previous_priority>(); } },
+                { "current_priority", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Priority_changed_current_priority>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCurrentPriority = default; _explicitNullProperties?.Remove("current_priority"); AdditionalData["current_priority"] = unknown; } else { CurrentPriority = parsed; AdditionalData.Remove("current_priority"); } } },
+                { "previous_priority", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Priority_changed_previous_priority>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValuePreviousPriority = default; _explicitNullProperties?.Remove("previous_priority"); AdditionalData["previous_priority"] = unknown; } else { PreviousPriority = parsed; AdditionalData.Remove("previous_priority"); } } },
             };
         }
         /// <summary>

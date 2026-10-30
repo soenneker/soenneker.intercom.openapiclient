@@ -17,10 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("download_expires_at") is { } nullNodeDownloadExpiresAt && nullNodeDownloadExpiresAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DownloadExpiresAt = null;
-            if (parseNode.GetChildNode("download_url") is { } nullNodeDownloadUrl && nullNodeDownloadUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DownloadUrl = null;
-            if (parseNode.GetChildNode("job_identifier") is { } nullNodeJobIdentifier && nullNodeJobIdentifier.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) JobIdentifier = null;
-            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("download_expires_at") is null) { _explicitNullValueDownloadExpiresAt = default!; _explicitNullProperties?.Remove("download_expires_at"); }
+            else if (parseNode.GetChildNode("download_expires_at") is { } nullNodeDownloadExpiresAt && nullNodeDownloadExpiresAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DownloadExpiresAt = null;
+            if (parseNode.GetChildNode("download_url") is null) { _explicitNullValueDownloadUrl = default!; _explicitNullProperties?.Remove("download_url"); }
+            else if (parseNode.GetChildNode("download_url") is { } nullNodeDownloadUrl && nullNodeDownloadUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DownloadUrl = null;
+            if (parseNode.GetChildNode("job_identifier") is null) { _explicitNullValueJobIdentifier = default!; _explicitNullProperties?.Remove("job_identifier"); }
+            else if (parseNode.GetChildNode("job_identifier") is { } nullNodeJobIdentifier && nullNodeJobIdentifier.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) JobIdentifier = null;
+            if (parseNode.GetChildNode("status") is null) { _explicitNullValueStatus = default!; _explicitNullProperties?.Remove("status"); }
+            else if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,41 +32,41 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Empty until the job is complete.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DownloadExpiresAt { get => _explicitNullValueDownloadExpiresAt; set { _explicitNullValueDownloadExpiresAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_expires_at"); else _explicitNullProperties?.Remove("download_expires_at"); } }
+        public string? DownloadExpiresAt { get => _explicitNullValueDownloadExpiresAt; set { _explicitNullValueDownloadExpiresAt = value; AdditionalData?.Remove("download_expires_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_expires_at"); else _explicitNullProperties?.Remove("download_expires_at"); } }
         private string? _explicitNullValueDownloadExpiresAt = default!;
 #nullable restore
 #else
-        public string DownloadExpiresAt { get => _explicitNullValueDownloadExpiresAt; set { _explicitNullValueDownloadExpiresAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_expires_at"); else _explicitNullProperties?.Remove("download_expires_at"); } }
+        public string DownloadExpiresAt { get => _explicitNullValueDownloadExpiresAt; set { _explicitNullValueDownloadExpiresAt = value; AdditionalData?.Remove("download_expires_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_expires_at"); else _explicitNullProperties?.Remove("download_expires_at"); } }
         private string _explicitNullValueDownloadExpiresAt = default!;
 #endif
         /// <summary>Empty until the job is complete.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? DownloadUrl { get => _explicitNullValueDownloadUrl; set { _explicitNullValueDownloadUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_url"); else _explicitNullProperties?.Remove("download_url"); } }
+        public string? DownloadUrl { get => _explicitNullValueDownloadUrl; set { _explicitNullValueDownloadUrl = value; AdditionalData?.Remove("download_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_url"); else _explicitNullProperties?.Remove("download_url"); } }
         private string? _explicitNullValueDownloadUrl = default!;
 #nullable restore
 #else
-        public string DownloadUrl { get => _explicitNullValueDownloadUrl; set { _explicitNullValueDownloadUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_url"); else _explicitNullProperties?.Remove("download_url"); } }
+        public string DownloadUrl { get => _explicitNullValueDownloadUrl; set { _explicitNullValueDownloadUrl = value; AdditionalData?.Remove("download_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("download_url"); else _explicitNullProperties?.Remove("download_url"); } }
         private string _explicitNullValueDownloadUrl = default!;
 #endif
         /// <summary>The job_identifier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? JobIdentifier { get => _explicitNullValueJobIdentifier; set { _explicitNullValueJobIdentifier = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_identifier"); else _explicitNullProperties?.Remove("job_identifier"); } }
+        public string? JobIdentifier { get => _explicitNullValueJobIdentifier; set { _explicitNullValueJobIdentifier = value; AdditionalData?.Remove("job_identifier"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_identifier"); else _explicitNullProperties?.Remove("job_identifier"); } }
         private string? _explicitNullValueJobIdentifier = default!;
 #nullable restore
 #else
-        public string JobIdentifier { get => _explicitNullValueJobIdentifier; set { _explicitNullValueJobIdentifier = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_identifier"); else _explicitNullProperties?.Remove("job_identifier"); } }
+        public string JobIdentifier { get => _explicitNullValueJobIdentifier; set { _explicitNullValueJobIdentifier = value; AdditionalData?.Remove("job_identifier"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job_identifier"); else _explicitNullProperties?.Remove("job_identifier"); } }
         private string _explicitNullValueJobIdentifier = default!;
 #endif
         /// <summary>The status of the job. A newly enqueued job is `pending`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        public string? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private string? _explicitNullValueStatus = default!;
 #nullable restore
 #else
-        public string Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        public string Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private string _explicitNullValueStatus = default!;
 #endif
         /// <summary>

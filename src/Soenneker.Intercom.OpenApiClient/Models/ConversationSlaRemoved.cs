@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
+            if (parseNode.GetChildNode("sla_name") is null) { _explicitNullValueSlaName = default!; _explicitNullProperties?.Remove("sla_name"); }
+            else if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Name of the SLA that was removed</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; AdditionalData?.Remove("sla_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
         private string? _explicitNullValueSlaName = default!;
 #nullable restore
 #else
-        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; AdditionalData?.Remove("sla_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
         private string _explicitNullValueSlaName = default!;
 #endif
         /// <summary>

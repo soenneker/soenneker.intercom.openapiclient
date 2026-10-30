@@ -114,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200_message_type>(); } },
+                { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation_200_message_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };

@@ -107,7 +107,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "fin_availability", n => { FinAvailability = n.GetBoolValue(); } },
                 { "html", n => { Html = n.GetStringValue(); } },
-                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_external_page_request_locale>(); } },
+                { "locale", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Update_external_page_request_locale>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLocale = default; _explicitNullProperties?.Remove("locale"); AdditionalData["locale"] = unknown; } else { Locale = parsed; AdditionalData.Remove("locale"); } } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },

@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("handoff") is { } nullNodeHandoff && nullNodeHandoff.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Handoff = null;
+            if (parseNode.GetChildNode("handoff") is null) { _explicitNullValueHandoff = default!; _explicitNullProperties?.Remove("handoff"); }
+            else if (parseNode.GetChildNode("handoff") is { } nullNodeHandoff && nullNodeHandoff.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Handoff = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The handoff Fin attempted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff? Handoff { get => _explicitNullValueHandoff; set { _explicitNullValueHandoff = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handoff"); else _explicitNullProperties?.Remove("handoff"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff? Handoff { get => _explicitNullValueHandoff; set { _explicitNullValueHandoff = value; AdditionalData?.Remove("handoff"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handoff"); else _explicitNullProperties?.Remove("handoff"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff? _explicitNullValueHandoff = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff Handoff { get => _explicitNullValueHandoff; set { _explicitNullValueHandoff = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handoff"); else _explicitNullProperties?.Remove("handoff"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff Handoff { get => _explicitNullValueHandoff; set { _explicitNullValueHandoff = value; AdditionalData?.Remove("handoff"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handoff"); else _explicitNullProperties?.Remove("handoff"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.StandalonePlatformHandoffHandoff _explicitNullValueHandoff = default!;
 #endif
         /// <summary>

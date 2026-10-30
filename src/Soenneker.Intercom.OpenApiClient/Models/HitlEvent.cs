@@ -18,13 +18,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("conversation_part_id") is { } nullNodeConversationPartId && nullNodeConversationPartId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationPartId = null;
-            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
-            if (parseNode.GetChildNode("data") is { } nullNodeData && nullNodeData.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Data = null;
-            if (parseNode.GetChildNode("event_type") is { } nullNodeEventType && nullNodeEventType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EventType = null;
-            if (parseNode.GetChildNode("hitl_cycle_id") is { } nullNodeHitlCycleId && nullNodeHitlCycleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HitlCycleId = null;
-            if (parseNode.GetChildNode("rule_id") is { } nullNodeRuleId && nullNodeRuleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleId = null;
-            if (parseNode.GetChildNode("rule_name") is { } nullNodeRuleName && nullNodeRuleName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleName = null;
+            if (parseNode.GetChildNode("conversation_part_id") is null) { _explicitNullValueConversationPartId = default!; _explicitNullProperties?.Remove("conversation_part_id"); }
+            else if (parseNode.GetChildNode("conversation_part_id") is { } nullNodeConversationPartId && nullNodeConversationPartId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationPartId = null;
+            if (parseNode.GetChildNode("created_at") is null) { _explicitNullValueCreatedAt = default!; _explicitNullProperties?.Remove("created_at"); }
+            else if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("data") is null) { _explicitNullValueData = default!; _explicitNullProperties?.Remove("data"); }
+            else if (parseNode.GetChildNode("data") is { } nullNodeData && nullNodeData.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Data = null;
+            if (parseNode.GetChildNode("event_type") is null) { _explicitNullValueEventType = default!; _explicitNullProperties?.Remove("event_type"); }
+            else if (parseNode.GetChildNode("event_type") is { } nullNodeEventType && nullNodeEventType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EventType = null;
+            if (parseNode.GetChildNode("hitl_cycle_id") is null) { _explicitNullValueHitlCycleId = default!; _explicitNullProperties?.Remove("hitl_cycle_id"); }
+            else if (parseNode.GetChildNode("hitl_cycle_id") is { } nullNodeHitlCycleId && nullNodeHitlCycleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) HitlCycleId = null;
+            if (parseNode.GetChildNode("rule_id") is null) { _explicitNullValueRuleId = default!; _explicitNullProperties?.Remove("rule_id"); }
+            else if (parseNode.GetChildNode("rule_id") is { } nullNodeRuleId && nullNodeRuleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleId = null;
+            if (parseNode.GetChildNode("rule_name") is null) { _explicitNullValueRuleName = default!; _explicitNullProperties?.Remove("rule_name"); }
+            else if (parseNode.GetChildNode("rule_name") is { } nullNodeRuleName && nullNodeRuleName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleName = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -32,57 +39,57 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The conversation part this event relates to, where one exists.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ConversationPartId { get => _explicitNullValueConversationPartId; set { _explicitNullValueConversationPartId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_part_id"); else _explicitNullProperties?.Remove("conversation_part_id"); } }
+        public string? ConversationPartId { get => _explicitNullValueConversationPartId; set { _explicitNullValueConversationPartId = value; AdditionalData?.Remove("conversation_part_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_part_id"); else _explicitNullProperties?.Remove("conversation_part_id"); } }
         private string? _explicitNullValueConversationPartId = default!;
 #nullable restore
 #else
-        public string ConversationPartId { get => _explicitNullValueConversationPartId; set { _explicitNullValueConversationPartId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_part_id"); else _explicitNullProperties?.Remove("conversation_part_id"); } }
+        public string ConversationPartId { get => _explicitNullValueConversationPartId; set { _explicitNullValueConversationPartId = value; AdditionalData?.Remove("conversation_part_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_part_id"); else _explicitNullProperties?.Remove("conversation_part_id"); } }
         private string _explicitNullValueConversationPartId = default!;
 #endif
         /// <summary>Unix timestamp for when the event occurred. Approximate on `fin_draft_proposed`.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
         private int? _explicitNullValueCreatedAt = default!;
         /// <summary>Fields specific to this event. Which are present depends on `event_type` — see the endpoint description for the full mapping.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData? Data { get => _explicitNullValueData; set { _explicitNullValueData = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData? Data { get => _explicitNullValueData; set { _explicitNullValueData = value; AdditionalData?.Remove("data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData? _explicitNullValueData = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData Data { get => _explicitNullValueData; set { _explicitNullValueData = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData Data { get => _explicitNullValueData; set { _explicitNullValueData = value; AdditionalData?.Remove("data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData _explicitNullValueData = default!;
 #endif
         /// <summary>What happened.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventEventType? EventType { get => _explicitNullValueEventType; set { _explicitNullValueEventType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_type"); else _explicitNullProperties?.Remove("event_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventEventType? EventType { get => _explicitNullValueEventType; set { _explicitNullValueEventType = value; AdditionalData?.Remove("event_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_type"); else _explicitNullProperties?.Remove("event_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.HitlEventEventType? _explicitNullValueEventType = default!;
         /// <summary>Identifies the consultation this event belongs to. The same on every event of one consultation, so it is not unique per event.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? HitlCycleId { get => _explicitNullValueHitlCycleId; set { _explicitNullValueHitlCycleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hitl_cycle_id"); else _explicitNullProperties?.Remove("hitl_cycle_id"); } }
+        public string? HitlCycleId { get => _explicitNullValueHitlCycleId; set { _explicitNullValueHitlCycleId = value; AdditionalData?.Remove("hitl_cycle_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hitl_cycle_id"); else _explicitNullProperties?.Remove("hitl_cycle_id"); } }
         private string? _explicitNullValueHitlCycleId = default!;
 #nullable restore
 #else
-        public string HitlCycleId { get => _explicitNullValueHitlCycleId; set { _explicitNullValueHitlCycleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hitl_cycle_id"); else _explicitNullProperties?.Remove("hitl_cycle_id"); } }
+        public string HitlCycleId { get => _explicitNullValueHitlCycleId; set { _explicitNullValueHitlCycleId = value; AdditionalData?.Remove("hitl_cycle_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("hitl_cycle_id"); else _explicitNullProperties?.Remove("hitl_cycle_id"); } }
         private string _explicitNullValueHitlCycleId = default!;
 #endif
         /// <summary>The escalation rule that triggered the consultation, as recorded when it began. Null if no rule triggered it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
+        public string? RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; AdditionalData?.Remove("rule_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
         private string? _explicitNullValueRuleId = default!;
 #nullable restore
 #else
-        public string RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
+        public string RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; AdditionalData?.Remove("rule_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
         private string _explicitNullValueRuleId = default!;
 #endif
         /// <summary>The rule&apos;s name as recorded when the consultation began, which may differ from its current name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RuleName { get => _explicitNullValueRuleName; set { _explicitNullValueRuleName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_name"); else _explicitNullProperties?.Remove("rule_name"); } }
+        public string? RuleName { get => _explicitNullValueRuleName; set { _explicitNullValueRuleName = value; AdditionalData?.Remove("rule_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_name"); else _explicitNullProperties?.Remove("rule_name"); } }
         private string? _explicitNullValueRuleName = default!;
 #nullable restore
 #else
-        public string RuleName { get => _explicitNullValueRuleName; set { _explicitNullValueRuleName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_name"); else _explicitNullProperties?.Remove("rule_name"); } }
+        public string RuleName { get => _explicitNullValueRuleName; set { _explicitNullValueRuleName = value; AdditionalData?.Remove("rule_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_name"); else _explicitNullProperties?.Remove("rule_name"); } }
         private string _explicitNullValueRuleName = default!;
 #endif
         /// <summary>
@@ -113,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_part_id", n => { ConversationPartId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "data", n => { Data = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData>(global::Soenneker.Intercom.OpenApiClient.Models.HitlEventData.CreateFromDiscriminatorValue); } },
-                { "event_type", n => { EventType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventEventType>(); } },
+                { "event_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventEventType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueEventType = default; _explicitNullProperties?.Remove("event_type"); AdditionalData["event_type"] = unknown; } else { EventType = parsed; AdditionalData.Remove("event_type"); } } },
                 { "hitl_cycle_id", n => { HitlCycleId = n.GetStringValue(); } },
                 { "rule_id", n => { RuleId = n.GetStringValue(); } },
                 { "rule_name", n => { RuleName = n.GetStringValue(); } },

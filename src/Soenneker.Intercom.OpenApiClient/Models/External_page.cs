@@ -147,10 +147,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "html", n => { Html = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "last_ingested_at", n => { LastIngestedAt = n.GetIntValue(); } },
-                { "locale", n => { Locale = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.External_page_locale>(); } },
+                { "locale", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.External_page_locale>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLocale = default; _explicitNullProperties?.Remove("locale"); AdditionalData["locale"] = unknown; } else { Locale = parsed; AdditionalData.Remove("locale"); } } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.External_page_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.External_page_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };

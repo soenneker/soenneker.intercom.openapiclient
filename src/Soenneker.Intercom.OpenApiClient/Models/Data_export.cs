@@ -87,7 +87,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "download_expires_at", n => { DownloadExpiresAt = n.GetStringValue(); } },
                 { "download_url", n => { DownloadUrl = n.GetStringValue(); } },
                 { "job_identfier", n => { JobIdentfier = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_export_status>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_export_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
             };
         }
         /// <summary>

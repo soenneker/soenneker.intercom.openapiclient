@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("otp_email_verification_failed") is { } nullNodeOtpEmailVerificationFailed && nullNodeOtpEmailVerificationFailed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OtpEmailVerificationFailed = null;
+            if (parseNode.GetChildNode("otp_email_verification_failed") is null) { _explicitNullValueOtpEmailVerificationFailed = default!; _explicitNullProperties?.Remove("otp_email_verification_failed"); }
+            else if (parseNode.GetChildNode("otp_email_verification_failed") is { } nullNodeOtpEmailVerificationFailed && nullNodeOtpEmailVerificationFailed.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OtpEmailVerificationFailed = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Details of the failed verification</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed? OtpEmailVerificationFailed { get => _explicitNullValueOtpEmailVerificationFailed; set { _explicitNullValueOtpEmailVerificationFailed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("otp_email_verification_failed"); else _explicitNullProperties?.Remove("otp_email_verification_failed"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed? OtpEmailVerificationFailed { get => _explicitNullValueOtpEmailVerificationFailed; set { _explicitNullValueOtpEmailVerificationFailed = value; AdditionalData?.Remove("otp_email_verification_failed"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("otp_email_verification_failed"); else _explicitNullProperties?.Remove("otp_email_verification_failed"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed? _explicitNullValueOtpEmailVerificationFailed = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed OtpEmailVerificationFailed { get => _explicitNullValueOtpEmailVerificationFailed; set { _explicitNullValueOtpEmailVerificationFailed = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("otp_email_verification_failed"); else _explicitNullProperties?.Remove("otp_email_verification_failed"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed OtpEmailVerificationFailed { get => _explicitNullValueOtpEmailVerificationFailed; set { _explicitNullValueOtpEmailVerificationFailed = value; AdditionalData?.Remove("otp_email_verification_failed"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("otp_email_verification_failed"); else _explicitNullProperties?.Remove("otp_email_verification_failed"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentEventOtpEmailVerificationFailedEventDataOtpEmailVerificationFailed _explicitNullValueOtpEmailVerificationFailed = default!;
 #endif
         /// <summary>

@@ -120,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "newsfeed_assignments", n => { NewsfeedAssignments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed_assignment>(global::Soenneker.Intercom.OpenApiClient.Models.Newsfeed_assignment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "reactions", n => { Reactions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "sender_id", n => { SenderId = n.GetIntValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.News_item_request_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.News_item_request_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
         }

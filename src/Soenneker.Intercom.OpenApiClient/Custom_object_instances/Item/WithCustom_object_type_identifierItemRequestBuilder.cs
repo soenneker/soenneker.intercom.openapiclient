@@ -143,7 +143,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.DELETE, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}?external_id={external_id}", PathParameters);
+            var requestInfo = new RequestInformation(Method.DELETE, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve("{+baseurl}/custom_object_instances/{custom_object_type_identifier}?external_id={external_id}", RequestAdapter.BaseUrl, "https://api.intercom.io", "/custom_object_instances/{custom_object_type_identifier}", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
@@ -162,7 +162,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         public RequestInformation ToGetRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item.WithCustom_object_type_identifierItemRequestBuilder.WithCustom_object_type_identifierItemRequestBuilderGetQueryParameters>> requestConfiguration = default)
         {
 #endif
-            var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
+            var requestInfo = new RequestInformation(Method.GET, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve(UrlTemplate, RequestAdapter.BaseUrl, "https://api.intercom.io", "/custom_object_instances/{custom_object_type_identifier}", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
@@ -183,7 +183,7 @@ namespace Soenneker.Intercom.OpenApiClient.Custom_object_instances.Item
         {
 #endif
             if(ReferenceEquals(body, null)) throw new ArgumentNullException(nameof(body));
-            var requestInfo = new RequestInformation(Method.POST, "{+baseurl}/custom_object_instances/{custom_object_type_identifier}", PathParameters);
+            var requestInfo = new RequestInformation(Method.POST, global::Soenneker.OpenApi.Generated.OpenApiServiceRoutes.Resolve("{+baseurl}/custom_object_instances/{custom_object_type_identifier}", RequestAdapter.BaseUrl, "https://api.intercom.io", "/custom_object_instances/{custom_object_type_identifier}", PathParameters.ContainsKey("request-raw-url")), PathParameters);
             requestInfo.Configure(requestConfiguration);
             requestInfo.Headers.TryAdd("Accept", "application/json");
             requestInfo.SetContentFromParsable(RequestAdapter, "application/json", body);

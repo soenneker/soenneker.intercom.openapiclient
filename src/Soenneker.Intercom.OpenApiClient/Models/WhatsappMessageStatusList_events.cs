@@ -109,9 +109,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events_status>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "template_name", n => { TemplateName = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WhatsappMessageStatusList_events_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "whatsapp_message_id", n => { WhatsappMessageId = n.GetStringValue(); } },
             };

@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "content_type", n => { ContentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_source_content_type>(); } },
+                { "content_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_source_content_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueContentType = default; _explicitNullProperties?.Remove("content_type"); AdditionalData["content_type"] = unknown; } else { ContentType = parsed; AdditionalData.Remove("content_type"); } } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },

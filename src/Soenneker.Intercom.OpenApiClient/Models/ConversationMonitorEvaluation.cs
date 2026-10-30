@@ -18,67 +18,73 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("evaluated_at") is { } nullNodeEvaluatedAt && nullNodeEvaluatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EvaluatedAt = null;
-            if (parseNode.GetChildNode("explanation") is { } nullNodeExplanation && nullNodeExplanation.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Explanation = null;
-            if (parseNode.GetChildNode("monitor_id") is { } nullNodeMonitorId && nullNodeMonitorId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorId = null;
-            if (parseNode.GetChildNode("monitor_name") is { } nullNodeMonitorName && nullNodeMonitorName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorName = null;
-            if (parseNode.GetChildNode("monitor_type") is { } nullNodeMonitorType && nullNodeMonitorType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorType = null;
-            if (parseNode.GetChildNode("result") is { } nullNodeResult && nullNodeResult.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Result = null;
+            if (parseNode.GetChildNode("evaluated_at") is null) { _explicitNullValueEvaluatedAt = default!; _explicitNullProperties?.Remove("evaluated_at"); }
+            else if (parseNode.GetChildNode("evaluated_at") is { } nullNodeEvaluatedAt && nullNodeEvaluatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EvaluatedAt = null;
+            if (parseNode.GetChildNode("explanation") is null) { _explicitNullValueExplanation = default!; _explicitNullProperties?.Remove("explanation"); }
+            else if (parseNode.GetChildNode("explanation") is { } nullNodeExplanation && nullNodeExplanation.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Explanation = null;
+            if (parseNode.GetChildNode("monitor_id") is null) { _explicitNullValueMonitorId = default!; _explicitNullProperties?.Remove("monitor_id"); }
+            else if (parseNode.GetChildNode("monitor_id") is { } nullNodeMonitorId && nullNodeMonitorId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorId = null;
+            if (parseNode.GetChildNode("monitor_name") is null) { _explicitNullValueMonitorName = default!; _explicitNullProperties?.Remove("monitor_name"); }
+            else if (parseNode.GetChildNode("monitor_name") is { } nullNodeMonitorName && nullNodeMonitorName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorName = null;
+            if (parseNode.GetChildNode("monitor_type") is null) { _explicitNullValueMonitorType = default!; _explicitNullProperties?.Remove("monitor_type"); }
+            else if (parseNode.GetChildNode("monitor_type") is { } nullNodeMonitorType && nullNodeMonitorType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MonitorType = null;
+            if (parseNode.GetChildNode("result") is null) { _explicitNullValueResult = default!; _explicitNullProperties?.Remove("result"); }
+            else if (parseNode.GetChildNode("result") is { } nullNodeResult && nullNodeResult.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Result = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the monitor evaluated this conversation. Null in the rare case the underlying record&apos;s timestamp is not yet set.</summary>
-        public int? EvaluatedAt { get => _explicitNullValueEvaluatedAt; set { _explicitNullValueEvaluatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluated_at"); else _explicitNullProperties?.Remove("evaluated_at"); } }
+        public int? EvaluatedAt { get => _explicitNullValueEvaluatedAt; set { _explicitNullValueEvaluatedAt = value; AdditionalData?.Remove("evaluated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluated_at"); else _explicitNullProperties?.Remove("evaluated_at"); } }
         private int? _explicitNullValueEvaluatedAt = default!;
         /// <summary>The reasoning provided by the monitor for its result. May be null if no reasoning was generated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Explanation { get => _explicitNullValueExplanation; set { _explicitNullValueExplanation = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanation"); else _explicitNullProperties?.Remove("explanation"); } }
+        public string? Explanation { get => _explicitNullValueExplanation; set { _explicitNullValueExplanation = value; AdditionalData?.Remove("explanation"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanation"); else _explicitNullProperties?.Remove("explanation"); } }
         private string? _explicitNullValueExplanation = default!;
 #nullable restore
 #else
-        public string Explanation { get => _explicitNullValueExplanation; set { _explicitNullValueExplanation = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanation"); else _explicitNullProperties?.Remove("explanation"); } }
+        public string Explanation { get => _explicitNullValueExplanation; set { _explicitNullValueExplanation = value; AdditionalData?.Remove("explanation"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("explanation"); else _explicitNullProperties?.Remove("explanation"); } }
         private string _explicitNullValueExplanation = default!;
 #endif
         /// <summary>The unique identifier of the monitor that produced this evaluation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MonitorId { get => _explicitNullValueMonitorId; set { _explicitNullValueMonitorId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_id"); else _explicitNullProperties?.Remove("monitor_id"); } }
+        public string? MonitorId { get => _explicitNullValueMonitorId; set { _explicitNullValueMonitorId = value; AdditionalData?.Remove("monitor_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_id"); else _explicitNullProperties?.Remove("monitor_id"); } }
         private string? _explicitNullValueMonitorId = default!;
 #nullable restore
 #else
-        public string MonitorId { get => _explicitNullValueMonitorId; set { _explicitNullValueMonitorId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_id"); else _explicitNullProperties?.Remove("monitor_id"); } }
+        public string MonitorId { get => _explicitNullValueMonitorId; set { _explicitNullValueMonitorId = value; AdditionalData?.Remove("monitor_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_id"); else _explicitNullProperties?.Remove("monitor_id"); } }
         private string _explicitNullValueMonitorId = default!;
 #endif
         /// <summary>The name of the monitor at the time of evaluation. Null if the monitor has since been deleted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MonitorName { get => _explicitNullValueMonitorName; set { _explicitNullValueMonitorName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_name"); else _explicitNullProperties?.Remove("monitor_name"); } }
+        public string? MonitorName { get => _explicitNullValueMonitorName; set { _explicitNullValueMonitorName = value; AdditionalData?.Remove("monitor_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_name"); else _explicitNullProperties?.Remove("monitor_name"); } }
         private string? _explicitNullValueMonitorName = default!;
 #nullable restore
 #else
-        public string MonitorName { get => _explicitNullValueMonitorName; set { _explicitNullValueMonitorName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_name"); else _explicitNullProperties?.Remove("monitor_name"); } }
+        public string MonitorName { get => _explicitNullValueMonitorName; set { _explicitNullValueMonitorName = value; AdditionalData?.Remove("monitor_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_name"); else _explicitNullProperties?.Remove("monitor_name"); } }
         private string _explicitNullValueMonitorName = default!;
 #endif
         /// <summary>The type of the monitor. Null if the monitor has since been deleted.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MonitorType { get => _explicitNullValueMonitorType; set { _explicitNullValueMonitorType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_type"); else _explicitNullProperties?.Remove("monitor_type"); } }
+        public string? MonitorType { get => _explicitNullValueMonitorType; set { _explicitNullValueMonitorType = value; AdditionalData?.Remove("monitor_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_type"); else _explicitNullProperties?.Remove("monitor_type"); } }
         private string? _explicitNullValueMonitorType = default!;
 #nullable restore
 #else
-        public string MonitorType { get => _explicitNullValueMonitorType; set { _explicitNullValueMonitorType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_type"); else _explicitNullProperties?.Remove("monitor_type"); } }
+        public string MonitorType { get => _explicitNullValueMonitorType; set { _explicitNullValueMonitorType = value; AdditionalData?.Remove("monitor_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_type"); else _explicitNullProperties?.Remove("monitor_type"); } }
         private string _explicitNullValueMonitorType = default!;
 #endif
         /// <summary>The evaluation outcome reported by the monitor.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Result { get => _explicitNullValueResult; set { _explicitNullValueResult = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("result"); else _explicitNullProperties?.Remove("result"); } }
+        public string? Result { get => _explicitNullValueResult; set { _explicitNullValueResult = value; AdditionalData?.Remove("result"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("result"); else _explicitNullProperties?.Remove("result"); } }
         private string? _explicitNullValueResult = default!;
 #nullable restore
 #else
-        public string Result { get => _explicitNullValueResult; set { _explicitNullValueResult = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("result"); else _explicitNullProperties?.Remove("result"); } }
+        public string Result { get => _explicitNullValueResult; set { _explicitNullValueResult = value; AdditionalData?.Remove("result"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("result"); else _explicitNullProperties?.Remove("result"); } }
         private string _explicitNullValueResult = default!;
 #endif
         /// <summary>

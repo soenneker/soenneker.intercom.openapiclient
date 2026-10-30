@@ -107,9 +107,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "message_type", n => { MessageType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request_message_type>(); } },
+                { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request_message_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request_reply_options>(global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request_reply_options.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Admin_reply_ticket_request_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

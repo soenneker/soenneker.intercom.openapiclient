@@ -82,7 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "item_count", n => { ItemCount = n.GetIntValue(); } },
                 { "started_at", n => { StartedAt = n.GetIntValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactsBulkJob_tasks_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
             };
         }
         /// <summary>

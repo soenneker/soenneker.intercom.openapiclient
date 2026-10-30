@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("object_type_id") is { } nullNodeObjectTypeId && nullNodeObjectTypeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectTypeId = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("object_type_id") is null) { _explicitNullValueObjectTypeId = default!; _explicitNullProperties?.Remove("object_type_id"); }
+            else if (parseNode.GetChildNode("object_type_id") is { } nullNodeObjectTypeId && nullNodeObjectTypeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ObjectTypeId = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,15 +29,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The ID of the related custom object type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ObjectTypeId { get => _explicitNullValueObjectTypeId; set { _explicitNullValueObjectTypeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_type_id"); else _explicitNullProperties?.Remove("object_type_id"); } }
+        public string? ObjectTypeId { get => _explicitNullValueObjectTypeId; set { _explicitNullValueObjectTypeId = value; AdditionalData?.Remove("object_type_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_type_id"); else _explicitNullProperties?.Remove("object_type_id"); } }
         private string? _explicitNullValueObjectTypeId = default!;
 #nullable restore
 #else
-        public string ObjectTypeId { get => _explicitNullValueObjectTypeId; set { _explicitNullValueObjectTypeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_type_id"); else _explicitNullProperties?.Remove("object_type_id"); } }
+        public string ObjectTypeId { get => _explicitNullValueObjectTypeId; set { _explicitNullValueObjectTypeId = value; AdditionalData?.Remove("object_type_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("object_type_id"); else _explicitNullProperties?.Remove("object_type_id"); } }
         private string _explicitNullValueObjectTypeId = default!;
 #endif
         /// <summary>The cardinality of the relationship: `one` or `many`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipTypeAllOf2ReferenceType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipTypeAllOf2ReferenceType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipTypeAllOf2ReferenceType? _explicitNullValueType = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipTypeAllOf2Reference"/> and sets the default values.
@@ -63,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "object_type_id", n => { ObjectTypeId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipTypeAllOf2ReferenceType>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeRelationshipTypeAllOf2ReferenceType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

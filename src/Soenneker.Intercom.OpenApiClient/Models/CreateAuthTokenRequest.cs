@@ -18,13 +18,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("oauth_configuration") is { } nullNodeOauthConfiguration && nullNodeOauthConfiguration.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OauthConfiguration = null;
-            if (parseNode.GetChildNode("request_header_key") is { } nullNodeRequestHeaderKey && nullNodeRequestHeaderKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequestHeaderKey = null;
-            if (parseNode.GetChildNode("token_prefix") is { } nullNodeTokenPrefix && nullNodeTokenPrefix.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenPrefix = null;
-            if (parseNode.GetChildNode("token_type") is { } nullNodeTokenType && nullNodeTokenType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenType = null;
-            if (parseNode.GetChildNode("token_value") is { } nullNodeTokenValue && nullNodeTokenValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenValue = null;
+            if (parseNode.GetChildNode("description") is null) { _explicitNullValueDescription = default!; _explicitNullProperties?.Remove("description"); }
+            else if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("oauth_configuration") is null) { _explicitNullValueOauthConfiguration = default!; _explicitNullProperties?.Remove("oauth_configuration"); }
+            else if (parseNode.GetChildNode("oauth_configuration") is { } nullNodeOauthConfiguration && nullNodeOauthConfiguration.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OauthConfiguration = null;
+            if (parseNode.GetChildNode("request_header_key") is null) { _explicitNullValueRequestHeaderKey = default!; _explicitNullProperties?.Remove("request_header_key"); }
+            else if (parseNode.GetChildNode("request_header_key") is { } nullNodeRequestHeaderKey && nullNodeRequestHeaderKey.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RequestHeaderKey = null;
+            if (parseNode.GetChildNode("token_prefix") is null) { _explicitNullValueTokenPrefix = default!; _explicitNullProperties?.Remove("token_prefix"); }
+            else if (parseNode.GetChildNode("token_prefix") is { } nullNodeTokenPrefix && nullNodeTokenPrefix.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenPrefix = null;
+            if (parseNode.GetChildNode("token_type") is null) { _explicitNullValueTokenType = default!; _explicitNullProperties?.Remove("token_type"); }
+            else if (parseNode.GetChildNode("token_type") is { } nullNodeTokenType && nullNodeTokenType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenType = null;
+            if (parseNode.GetChildNode("token_value") is null) { _explicitNullValueTokenValue = default!; _explicitNullProperties?.Remove("token_value"); }
+            else if (parseNode.GetChildNode("token_value") is { } nullNodeTokenValue && nullNodeTokenValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TokenValue = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -32,64 +39,64 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An optional description of what the credential is used for.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string? _explicitNullValueDescription = default!;
 #nullable restore
 #else
-        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>A name for the credential, so a teammate can identify it later.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>The OAuth client-credentials configuration Intercom uses to obtain and refresh an access token. Required when `token_type` is `oauth`. Must be omitted when `token_type` is `text`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration? OauthConfiguration { get => _explicitNullValueOauthConfiguration; set { _explicitNullValueOauthConfiguration = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("oauth_configuration"); else _explicitNullProperties?.Remove("oauth_configuration"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration? OauthConfiguration { get => _explicitNullValueOauthConfiguration; set { _explicitNullValueOauthConfiguration = value; AdditionalData?.Remove("oauth_configuration"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("oauth_configuration"); else _explicitNullProperties?.Remove("oauth_configuration"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration? _explicitNullValueOauthConfiguration = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration OauthConfiguration { get => _explicitNullValueOauthConfiguration; set { _explicitNullValueOauthConfiguration = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("oauth_configuration"); else _explicitNullProperties?.Remove("oauth_configuration"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration OauthConfiguration { get => _explicitNullValueOauthConfiguration; set { _explicitNullValueOauthConfiguration = value; AdditionalData?.Remove("oauth_configuration"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("oauth_configuration"); else _explicitNullProperties?.Remove("oauth_configuration"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration _explicitNullValueOauthConfiguration = default!;
 #endif
         /// <summary>The request header the credential is sent in. Required when `token_type` is `text`. Must be omitted when `token_type` is `oauth`, where it is fixed to `Authorization`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RequestHeaderKey { get => _explicitNullValueRequestHeaderKey; set { _explicitNullValueRequestHeaderKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("request_header_key"); else _explicitNullProperties?.Remove("request_header_key"); } }
+        public string? RequestHeaderKey { get => _explicitNullValueRequestHeaderKey; set { _explicitNullValueRequestHeaderKey = value; AdditionalData?.Remove("request_header_key"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("request_header_key"); else _explicitNullProperties?.Remove("request_header_key"); } }
         private string? _explicitNullValueRequestHeaderKey = default!;
 #nullable restore
 #else
-        public string RequestHeaderKey { get => _explicitNullValueRequestHeaderKey; set { _explicitNullValueRequestHeaderKey = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("request_header_key"); else _explicitNullProperties?.Remove("request_header_key"); } }
+        public string RequestHeaderKey { get => _explicitNullValueRequestHeaderKey; set { _explicitNullValueRequestHeaderKey = value; AdditionalData?.Remove("request_header_key"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("request_header_key"); else _explicitNullProperties?.Remove("request_header_key"); } }
         private string _explicitNullValueRequestHeaderKey = default!;
 #endif
         /// <summary>An optional prefix placed before the credential value in the header, for example `Bearer`. Must be omitted when `token_type` is `oauth`, where it is fixed to `Bearer`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TokenPrefix { get => _explicitNullValueTokenPrefix; set { _explicitNullValueTokenPrefix = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_prefix"); else _explicitNullProperties?.Remove("token_prefix"); } }
+        public string? TokenPrefix { get => _explicitNullValueTokenPrefix; set { _explicitNullValueTokenPrefix = value; AdditionalData?.Remove("token_prefix"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_prefix"); else _explicitNullProperties?.Remove("token_prefix"); } }
         private string? _explicitNullValueTokenPrefix = default!;
 #nullable restore
 #else
-        public string TokenPrefix { get => _explicitNullValueTokenPrefix; set { _explicitNullValueTokenPrefix = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_prefix"); else _explicitNullProperties?.Remove("token_prefix"); } }
+        public string TokenPrefix { get => _explicitNullValueTokenPrefix; set { _explicitNullValueTokenPrefix = value; AdditionalData?.Remove("token_prefix"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_prefix"); else _explicitNullProperties?.Remove("token_prefix"); } }
         private string _explicitNullValueTokenPrefix = default!;
 #endif
         /// <summary>The type of credential to store. Defaults to `text`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType? TokenType { get => _explicitNullValueTokenType; set { _explicitNullValueTokenType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_type"); else _explicitNullProperties?.Remove("token_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType? TokenType { get => _explicitNullValueTokenType; set { _explicitNullValueTokenType = value; AdditionalData?.Remove("token_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_type"); else _explicitNullProperties?.Remove("token_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType? _explicitNullValueTokenType = default!;
         /// <summary>The credential value. Required when `token_type` is `text`. Must be omitted when `token_type` is `oauth`. Stored encrypted and never returned by any endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TokenValue { get => _explicitNullValueTokenValue; set { _explicitNullValueTokenValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_value"); else _explicitNullProperties?.Remove("token_value"); } }
+        public string? TokenValue { get => _explicitNullValueTokenValue; set { _explicitNullValueTokenValue = value; AdditionalData?.Remove("token_value"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_value"); else _explicitNullProperties?.Remove("token_value"); } }
         private string? _explicitNullValueTokenValue = default!;
 #nullable restore
 #else
-        public string TokenValue { get => _explicitNullValueTokenValue; set { _explicitNullValueTokenValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_value"); else _explicitNullProperties?.Remove("token_value"); } }
+        public string TokenValue { get => _explicitNullValueTokenValue; set { _explicitNullValueTokenValue = value; AdditionalData?.Remove("token_value"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("token_value"); else _explicitNullProperties?.Remove("token_value"); } }
         private string _explicitNullValueTokenValue = default!;
 #endif
         /// <summary>
@@ -122,7 +129,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "oauth_configuration", n => { OauthConfiguration = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration>(global::Soenneker.Intercom.OpenApiClient.Models.OAuthConfiguration.CreateFromDiscriminatorValue); } },
                 { "request_header_key", n => { RequestHeaderKey = n.GetStringValue(); } },
                 { "token_prefix", n => { TokenPrefix = n.GetStringValue(); } },
-                { "token_type", n => { TokenType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType>(); } },
+                { "token_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateAuthTokenRequestTokenType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueTokenType = default; _explicitNullProperties?.Remove("token_type"); AdditionalData["token_type"] = unknown; } else { TokenType = parsed; AdditionalData.Remove("token_type"); } } },
                 { "token_value", n => { TokenValue = n.GetStringValue(); } },
             };
         }

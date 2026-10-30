@@ -110,11 +110,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "consent_type", n => { ConsentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_consent_type>(); } },
+                { "consent_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_consent_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueConsentType = default; _explicitNullProperties?.Remove("consent_type"); AdditionalData["consent_type"] = unknown; } else { ConsentType = parsed; AdditionalData.Remove("consent_type"); } } },
                 { "content_types", n => { ContentTypes = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_content_types>()?.AsList(); } },
                 { "default_translation", n => { DefaultTranslation = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Translation>(global::Soenneker.Intercom.OpenApiClient.Models.Translation.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Subscription_type_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "translations", n => { Translations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Translation>(global::Soenneker.Intercom.OpenApiClient.Models.Translation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };

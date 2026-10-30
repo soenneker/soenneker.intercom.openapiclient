@@ -106,12 +106,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "content_sources", n => { ContentSources = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list>(global::Soenneker.Intercom.OpenApiClient.Models.Content_sources_list.CreateFromDiscriminatorValue); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "last_answer_type", n => { LastAnswerType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_last_answer_type>(); } },
+                { "last_answer_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_last_answer_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLastAnswerType = default; _explicitNullProperties?.Remove("last_answer_type"); AdditionalData["last_answer_type"] = unknown; } else { LastAnswerType = parsed; AdditionalData.Remove("last_answer_type"); } } },
                 { "rating", n => { Rating = n.GetIntValue(); } },
                 { "rating_remark", n => { RatingRemark = n.GetStringValue(); } },
-                { "resolution_state", n => { ResolutionState = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_resolution_state>(); } },
+                { "resolution_state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_resolution_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueResolutionState = default; _explicitNullProperties?.Remove("resolution_state"); AdditionalData["resolution_state"] = unknown; } else { ResolutionState = parsed; AdditionalData.Remove("resolution_state"); } } },
                 { "source_title", n => { SourceTitle = n.GetStringValue(); } },
-                { "source_type", n => { SourceType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_source_type>(); } },
+                { "source_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ai_agent_source_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSourceType = default; _explicitNullProperties?.Remove("source_type"); AdditionalData["source_type"] = unknown; } else { SourceType = parsed; AdditionalData.Remove("source_type"); } } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }

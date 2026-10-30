@@ -18,10 +18,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("audience_ids") is { } nullNodeAudienceIds && nullNodeAudienceIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AudienceIds = null;
-            if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
-            if (parseNode.GetChildNode("sync_behavior") is { } nullNodeSyncBehavior && nullNodeSyncBehavior.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SyncBehavior = null;
-            if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("audience_ids") is null) { _explicitNullValueAudienceIds = default!; _explicitNullProperties?.Remove("audience_ids"); }
+            else if (parseNode.GetChildNode("audience_ids") is { } nullNodeAudienceIds && nullNodeAudienceIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AudienceIds = null;
+            if (parseNode.GetChildNode("status") is null) { _explicitNullValueStatus = default!; _explicitNullProperties?.Remove("status"); }
+            else if (parseNode.GetChildNode("status") is { } nullNodeStatus && nullNodeStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Status = null;
+            if (parseNode.GetChildNode("sync_behavior") is null) { _explicitNullValueSyncBehavior = default!; _explicitNullProperties?.Remove("sync_behavior"); }
+            else if (parseNode.GetChildNode("sync_behavior") is { } nullNodeSyncBehavior && nullNodeSyncBehavior.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SyncBehavior = null;
+            if (parseNode.GetChildNode("url") is null) { _explicitNullValueUrl = default!; _explicitNullProperties?.Remove("url"); }
+            else if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -29,27 +33,27 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds? AudienceIds { get => _explicitNullValueAudienceIds; set { _explicitNullValueAudienceIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audience_ids"); else _explicitNullProperties?.Remove("audience_ids"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds? AudienceIds { get => _explicitNullValueAudienceIds; set { _explicitNullValueAudienceIds = value; AdditionalData?.Remove("audience_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audience_ids"); else _explicitNullProperties?.Remove("audience_ids"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds? _explicitNullValueAudienceIds = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds AudienceIds { get => _explicitNullValueAudienceIds; set { _explicitNullValueAudienceIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audience_ids"); else _explicitNullProperties?.Remove("audience_ids"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds AudienceIds { get => _explicitNullValueAudienceIds; set { _explicitNullValueAudienceIds = value; AdditionalData?.Remove("audience_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("audience_ids"); else _explicitNullProperties?.Remove("audience_ids"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds _explicitNullValueAudienceIds = default!;
 #endif
         /// <summary>The status of the content import source.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestStatus? _explicitNullValueStatus = default!;
         /// <summary>If you intend to create or update External Pages via the API, this should be set to `api`.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiSyncBehavior? SyncBehavior { get => _explicitNullValueSyncBehavior; set { _explicitNullValueSyncBehavior = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sync_behavior"); else _explicitNullProperties?.Remove("sync_behavior"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiSyncBehavior? SyncBehavior { get => _explicitNullValueSyncBehavior; set { _explicitNullValueSyncBehavior = value; AdditionalData?.Remove("sync_behavior"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sync_behavior"); else _explicitNullProperties?.Remove("sync_behavior"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiSyncBehavior? _explicitNullValueSyncBehavior = default!;
         /// <summary>The URL of the content import source. It must be an http or https URL whose host is a valid public domain name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        public string? Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string? _explicitNullValueUrl = default!;
 #nullable restore
 #else
-        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
+        public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string _explicitNullValueUrl = default!;
 #endif
         /// <summary>
@@ -78,8 +82,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "audience_ids", n => { AudienceIds = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds>(global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestAudienceIds.CreateFromDiscriminatorValue); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestStatus>(); } },
-                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiSyncBehavior>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateContentImportSourceRequestStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
+                { "sync_behavior", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiSyncBehavior>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSyncBehavior = default; _explicitNullProperties?.Remove("sync_behavior"); AdditionalData["sync_behavior"] = unknown; } else { SyncBehavior = parsed; AdditionalData.Remove("sync_behavior"); } } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }

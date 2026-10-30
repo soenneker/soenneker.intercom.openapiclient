@@ -18,71 +18,78 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("consent_type") is { } nullNodeConsentType && nullNodeConsentType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConsentType = null;
-            if (parseNode.GetChildNode("content_types") is { } nullNodeContentTypes && nullNodeContentTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentTypes = null;
-            if (parseNode.GetChildNode("default_translation") is { } nullNodeDefaultTranslation && nullNodeDefaultTranslation.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DefaultTranslation = null;
-            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
-            if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
-            if (parseNode.GetChildNode("translations") is { } nullNodeTranslations && nullNodeTranslations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Translations = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("consent_type") is null) { _explicitNullValueConsentType = default!; _explicitNullProperties?.Remove("consent_type"); }
+            else if (parseNode.GetChildNode("consent_type") is { } nullNodeConsentType && nullNodeConsentType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConsentType = null;
+            if (parseNode.GetChildNode("content_types") is null) { _explicitNullValueContentTypes = default!; _explicitNullProperties?.Remove("content_types"); }
+            else if (parseNode.GetChildNode("content_types") is { } nullNodeContentTypes && nullNodeContentTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentTypes = null;
+            if (parseNode.GetChildNode("default_translation") is null) { _explicitNullValueDefaultTranslation = default!; _explicitNullProperties?.Remove("default_translation"); }
+            else if (parseNode.GetChildNode("default_translation") is { } nullNodeDefaultTranslation && nullNodeDefaultTranslation.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DefaultTranslation = null;
+            if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
+            else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("state") is null) { _explicitNullValueState = default!; _explicitNullProperties?.Remove("state"); }
+            else if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
+            if (parseNode.GetChildNode("translations") is null) { _explicitNullValueTranslations = default!; _explicitNullProperties?.Remove("translations"); }
+            else if (parseNode.GetChildNode("translations") is { } nullNodeTranslations && nullNodeTranslations.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Translations = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Describes the type of consent.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType? ConsentType { get => _explicitNullValueConsentType; set { _explicitNullValueConsentType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("consent_type"); else _explicitNullProperties?.Remove("consent_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType? ConsentType { get => _explicitNullValueConsentType; set { _explicitNullValueConsentType = value; AdditionalData?.Remove("consent_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("consent_type"); else _explicitNullProperties?.Remove("consent_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType? _explicitNullValueConsentType = default!;
         /// <summary>The message types that this subscription supports - can contain `email` or `sms_message`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?>? ContentTypes { get => _explicitNullValueContentTypes; set { _explicitNullValueContentTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_types"); else _explicitNullProperties?.Remove("content_types"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?>? ContentTypes { get => _explicitNullValueContentTypes; set { _explicitNullValueContentTypes = value; AdditionalData?.Remove("content_types"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_types"); else _explicitNullProperties?.Remove("content_types"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?>? _explicitNullValueContentTypes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?> ContentTypes { get => _explicitNullValueContentTypes; set { _explicitNullValueContentTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_types"); else _explicitNullProperties?.Remove("content_types"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?> ContentTypes { get => _explicitNullValueContentTypes; set { _explicitNullValueContentTypes = value; AdditionalData?.Remove("content_types"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_types"); else _explicitNullProperties?.Remove("content_types"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem?> _explicitNullValueContentTypes = default!;
 #endif
         /// <summary>A translation object contains the localised details of a subscription type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.Translation? DefaultTranslation { get => _explicitNullValueDefaultTranslation; set { _explicitNullValueDefaultTranslation = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_translation"); else _explicitNullProperties?.Remove("default_translation"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Translation? DefaultTranslation { get => _explicitNullValueDefaultTranslation; set { _explicitNullValueDefaultTranslation = value; AdditionalData?.Remove("default_translation"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_translation"); else _explicitNullProperties?.Remove("default_translation"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.Translation? _explicitNullValueDefaultTranslation = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.Translation DefaultTranslation { get => _explicitNullValueDefaultTranslation; set { _explicitNullValueDefaultTranslation = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_translation"); else _explicitNullProperties?.Remove("default_translation"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.Translation DefaultTranslation { get => _explicitNullValueDefaultTranslation; set { _explicitNullValueDefaultTranslation = value; AdditionalData?.Remove("default_translation"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("default_translation"); else _explicitNullProperties?.Remove("default_translation"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.Translation _explicitNullValueDefaultTranslation = default!;
 #endif
         /// <summary>The unique identifier representing the subscription type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string _explicitNullValueId = default!;
 #endif
         /// <summary>The state of the subscription type.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; AdditionalData?.Remove("state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState? _explicitNullValueState = default!;
         /// <summary>An array of translations objects with the localised version of the subscription type in each available locale within your translation settings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Translation>? Translations { get => _explicitNullValueTranslations; set { _explicitNullValueTranslations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("translations"); else _explicitNullProperties?.Remove("translations"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Translation>? Translations { get => _explicitNullValueTranslations; set { _explicitNullValueTranslations = value; AdditionalData?.Remove("translations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("translations"); else _explicitNullProperties?.Remove("translations"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Translation>? _explicitNullValueTranslations = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Translation> Translations { get => _explicitNullValueTranslations; set { _explicitNullValueTranslations = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("translations"); else _explicitNullProperties?.Remove("translations"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Translation> Translations { get => _explicitNullValueTranslations; set { _explicitNullValueTranslations = value; AdditionalData?.Remove("translations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("translations"); else _explicitNullProperties?.Remove("translations"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Translation> _explicitNullValueTranslations = default!;
 #endif
         /// <summary>The type of the object - subscription</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>
@@ -110,11 +117,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "consent_type", n => { ConsentType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType>(); } },
+                { "consent_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeConsentType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueConsentType = default; _explicitNullProperties?.Remove("consent_type"); AdditionalData["consent_type"] = unknown; } else { ConsentType = parsed; AdditionalData.Remove("consent_type"); } } },
                 { "content_types", n => { ContentTypes = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeContentTypesItem>()?.AsList(); } },
                 { "default_translation", n => { DefaultTranslation = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Translation>(global::Soenneker.Intercom.OpenApiClient.Models.Translation.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SubscriptionTypeState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "translations", n => { Translations = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Translation>(global::Soenneker.Intercom.OpenApiClient.Models.Translation.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };

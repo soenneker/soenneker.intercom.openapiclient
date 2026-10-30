@@ -18,13 +18,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("children") is { } nullNodeChildren && nullNodeChildren.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Children = null;
-            if (parseNode.GetChildNode("content_if") is { } nullNodeContentIf && nullNodeContentIf.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentIf = null;
-            if (parseNode.GetChildNode("folder_if") is { } nullNodeFolderIf && nullNodeFolderIf.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FolderIf = null;
-            if (parseNode.GetChildNode("folder_if_has_children") is { } nullNodeFolderIfHasChildren && nullNodeFolderIfHasChildren.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FolderIfHasChildren = null;
-            if (parseNode.GetChildNode("nodes") is { } nullNodeNodes && nullNodeNodes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Nodes = null;
-            if (parseNode.GetChildNode("path") is { } nullNodePath && nullNodePath.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Path = null;
-            if (parseNode.GetChildNode("query") is { } nullNodeQuery && nullNodeQuery.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Query = null;
+            if (parseNode.GetChildNode("children") is null) { _explicitNullValueChildren = default!; _explicitNullProperties?.Remove("children"); }
+            else if (parseNode.GetChildNode("children") is { } nullNodeChildren && nullNodeChildren.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Children = null;
+            if (parseNode.GetChildNode("content_if") is null) { _explicitNullValueContentIf = default!; _explicitNullProperties?.Remove("content_if"); }
+            else if (parseNode.GetChildNode("content_if") is { } nullNodeContentIf && nullNodeContentIf.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ContentIf = null;
+            if (parseNode.GetChildNode("folder_if") is null) { _explicitNullValueFolderIf = default!; _explicitNullProperties?.Remove("folder_if"); }
+            else if (parseNode.GetChildNode("folder_if") is { } nullNodeFolderIf && nullNodeFolderIf.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FolderIf = null;
+            if (parseNode.GetChildNode("folder_if_has_children") is null) { _explicitNullValueFolderIfHasChildren = default!; _explicitNullProperties?.Remove("folder_if_has_children"); }
+            else if (parseNode.GetChildNode("folder_if_has_children") is { } nullNodeFolderIfHasChildren && nullNodeFolderIfHasChildren.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FolderIfHasChildren = null;
+            if (parseNode.GetChildNode("nodes") is null) { _explicitNullValueNodes = default!; _explicitNullProperties?.Remove("nodes"); }
+            else if (parseNode.GetChildNode("nodes") is { } nullNodeNodes && nullNodeNodes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Nodes = null;
+            if (parseNode.GetChildNode("path") is null) { _explicitNullValuePath = default!; _explicitNullProperties?.Remove("path"); }
+            else if (parseNode.GetChildNode("path") is { } nullNodePath && nullNodePath.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Path = null;
+            if (parseNode.GetChildNode("query") is null) { _explicitNullValueQuery = default!; _explicitNullProperties?.Remove("query"); }
+            else if (parseNode.GetChildNode("query") is { } nullNodeQuery && nullNodeQuery.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Query = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -32,64 +39,64 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The key on a node that holds its child nodes, for a tree whose nodes are nested.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Children { get => _explicitNullValueChildren; set { _explicitNullValueChildren = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("children"); else _explicitNullProperties?.Remove("children"); } }
+        public string? Children { get => _explicitNullValueChildren; set { _explicitNullValueChildren = value; AdditionalData?.Remove("children"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("children"); else _explicitNullProperties?.Remove("children"); } }
         private string? _explicitNullValueChildren = default!;
 #nullable restore
 #else
-        public string Children { get => _explicitNullValueChildren; set { _explicitNullValueChildren = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("children"); else _explicitNullProperties?.Remove("children"); } }
+        public string Children { get => _explicitNullValueChildren; set { _explicitNullValueChildren = value; AdditionalData?.Remove("children"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("children"); else _explicitNullProperties?.Remove("children"); } }
         private string _explicitNullValueChildren = default!;
 #endif
         /// <summary>The conditions for a node to be imported as content. A condition is an object of keys and values, and a node matches it when the node has each of those values at those keys. A node is imported when it matches any condition. It must be a non-empty list of objects (`invalid`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty>? ContentIf { get => _explicitNullValueContentIf; set { _explicitNullValueContentIf = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_if"); else _explicitNullProperties?.Remove("content_if"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty>? ContentIf { get => _explicitNullValueContentIf; set { _explicitNullValueContentIf = value; AdditionalData?.Remove("content_if"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_if"); else _explicitNullProperties?.Remove("content_if"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty>? _explicitNullValueContentIf = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty> ContentIf { get => _explicitNullValueContentIf; set { _explicitNullValueContentIf = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_if"); else _explicitNullProperties?.Remove("content_if"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty> ContentIf { get => _explicitNullValueContentIf; set { _explicitNullValueContentIf = value; AdditionalData?.Remove("content_if"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("content_if"); else _explicitNullProperties?.Remove("content_if"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty> _explicitNullValueContentIf = default!;
 #endif
         /// <summary>The conditions, in the same form as `content_if`, for a node to become a folder. A folder&apos;s child nodes are filed in it. A folder is named with `mapping.title` read from the node, and a node without a title doesn&apos;t become a folder. It must be a list of objects (`invalid`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeFolderIfItemProperty>? FolderIf { get => _explicitNullValueFolderIf; set { _explicitNullValueFolderIf = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_if"); else _explicitNullProperties?.Remove("folder_if"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeFolderIfItemProperty>? FolderIf { get => _explicitNullValueFolderIf; set { _explicitNullValueFolderIf = value; AdditionalData?.Remove("folder_if"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_if"); else _explicitNullProperties?.Remove("folder_if"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeFolderIfItemProperty>? _explicitNullValueFolderIf = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeFolderIfItemProperty> FolderIf { get => _explicitNullValueFolderIf; set { _explicitNullValueFolderIf = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_if"); else _explicitNullProperties?.Remove("folder_if"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeFolderIfItemProperty> FolderIf { get => _explicitNullValueFolderIf; set { _explicitNullValueFolderIf = value; AdditionalData?.Remove("folder_if"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_if"); else _explicitNullProperties?.Remove("folder_if"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeFolderIfItemProperty> _explicitNullValueFolderIf = default!;
 #endif
         /// <summary>Whether a node that has child nodes becomes a folder.</summary>
-        public bool? FolderIfHasChildren { get => _explicitNullValueFolderIfHasChildren; set { _explicitNullValueFolderIfHasChildren = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_if_has_children"); else _explicitNullProperties?.Remove("folder_if_has_children"); } }
+        public bool? FolderIfHasChildren { get => _explicitNullValueFolderIfHasChildren; set { _explicitNullValueFolderIfHasChildren = value; AdditionalData?.Remove("folder_if_has_children"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_if_has_children"); else _explicitNullProperties?.Remove("folder_if_has_children"); } }
         private bool? _explicitNullValueFolderIfHasChildren = default!;
         /// <summary>The keys to follow in the tree response to reach the list of nodes. Use an empty list if the response is the list.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree.ApiTemplateTree_nodes>? Nodes { get => _explicitNullValueNodes; set { _explicitNullValueNodes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nodes"); else _explicitNullProperties?.Remove("nodes"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree.ApiTemplateTree_nodes>? Nodes { get => _explicitNullValueNodes; set { _explicitNullValueNodes = value; AdditionalData?.Remove("nodes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nodes"); else _explicitNullProperties?.Remove("nodes"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree.ApiTemplateTree_nodes>? _explicitNullValueNodes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree.ApiTemplateTree_nodes> Nodes { get => _explicitNullValueNodes; set { _explicitNullValueNodes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nodes"); else _explicitNullProperties?.Remove("nodes"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree.ApiTemplateTree_nodes> Nodes { get => _explicitNullValueNodes; set { _explicitNullValueNodes = value; AdditionalData?.Remove("nodes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("nodes"); else _explicitNullProperties?.Remove("nodes"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTree.ApiTemplateTree_nodes> _explicitNullValueNodes = default!;
 #endif
         /// <summary>The request path, relative to `base_url`. It can&apos;t be an absolute URL, contain `//` or have a `:` in its first segment (`not_relative`), can&apos;t contain `?` or `#` (`query_or_fragment`), and must be a valid URL path (`invalid`). Use `query` for query parameters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Path { get => _explicitNullValuePath; set { _explicitNullValuePath = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("path"); else _explicitNullProperties?.Remove("path"); } }
+        public string? Path { get => _explicitNullValuePath; set { _explicitNullValuePath = value; AdditionalData?.Remove("path"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("path"); else _explicitNullProperties?.Remove("path"); } }
         private string? _explicitNullValuePath = default!;
 #nullable restore
 #else
-        public string Path { get => _explicitNullValuePath; set { _explicitNullValuePath = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("path"); else _explicitNullProperties?.Remove("path"); } }
+        public string Path { get => _explicitNullValuePath; set { _explicitNullValuePath = value; AdditionalData?.Remove("path"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("path"); else _explicitNullProperties?.Remove("path"); } }
         private string _explicitNullValuePath = default!;
 #endif
         /// <summary>The query parameters to send. Values must be strings (`invalid`). A value of exactly `{token}` is replaced with the source&apos;s token. A parameter whose name looks like a credential, such as `api_key` or `access_token`, must have the value `{token}` (`literal_credential`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeQueryProperty? Query { get => _explicitNullValueQuery; set { _explicitNullValueQuery = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("query"); else _explicitNullProperties?.Remove("query"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeQueryProperty? Query { get => _explicitNullValueQuery; set { _explicitNullValueQuery = value; AdditionalData?.Remove("query"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("query"); else _explicitNullProperties?.Remove("query"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeQueryProperty? _explicitNullValueQuery = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeQueryProperty Query { get => _explicitNullValueQuery; set { _explicitNullValueQuery = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("query"); else _explicitNullProperties?.Remove("query"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeQueryProperty Query { get => _explicitNullValueQuery; set { _explicitNullValueQuery = value; AdditionalData?.Remove("query"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("query"); else _explicitNullProperties?.Remove("query"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeQueryProperty _explicitNullValueQuery = default!;
 #endif
         /// <summary>

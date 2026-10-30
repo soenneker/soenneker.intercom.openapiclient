@@ -17,8 +17,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("intercom_attribute_identifier") is { } nullNodeIntercomAttributeIdentifier && nullNodeIntercomAttributeIdentifier.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomAttributeIdentifier = null;
-            if (parseNode.GetChildNode("intercom_object_type") is { } nullNodeIntercomObjectType && nullNodeIntercomObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomObjectType = null;
+            if (parseNode.GetChildNode("intercom_attribute_identifier") is null) { _explicitNullValueIntercomAttributeIdentifier = default!; _explicitNullProperties?.Remove("intercom_attribute_identifier"); }
+            else if (parseNode.GetChildNode("intercom_attribute_identifier") is { } nullNodeIntercomAttributeIdentifier && nullNodeIntercomAttributeIdentifier.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomAttributeIdentifier = null;
+            if (parseNode.GetChildNode("intercom_object_type") is null) { _explicitNullValueIntercomObjectType = default!; _explicitNullProperties?.Remove("intercom_object_type"); }
+            else if (parseNode.GetChildNode("intercom_object_type") is { } nullNodeIntercomObjectType && nullNodeIntercomObjectType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IntercomObjectType = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,21 +28,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The intercom_attribute_identifier property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IntercomAttributeIdentifier { get => _explicitNullValueIntercomAttributeIdentifier; set { _explicitNullValueIntercomAttributeIdentifier = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_attribute_identifier"); else _explicitNullProperties?.Remove("intercom_attribute_identifier"); } }
+        public string? IntercomAttributeIdentifier { get => _explicitNullValueIntercomAttributeIdentifier; set { _explicitNullValueIntercomAttributeIdentifier = value; AdditionalData?.Remove("intercom_attribute_identifier"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_attribute_identifier"); else _explicitNullProperties?.Remove("intercom_attribute_identifier"); } }
         private string? _explicitNullValueIntercomAttributeIdentifier = default!;
 #nullable restore
 #else
-        public string IntercomAttributeIdentifier { get => _explicitNullValueIntercomAttributeIdentifier; set { _explicitNullValueIntercomAttributeIdentifier = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_attribute_identifier"); else _explicitNullProperties?.Remove("intercom_attribute_identifier"); } }
+        public string IntercomAttributeIdentifier { get => _explicitNullValueIntercomAttributeIdentifier; set { _explicitNullValueIntercomAttributeIdentifier = value; AdditionalData?.Remove("intercom_attribute_identifier"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_attribute_identifier"); else _explicitNullProperties?.Remove("intercom_attribute_identifier"); } }
         private string _explicitNullValueIntercomAttributeIdentifier = default!;
 #endif
         /// <summary>The intercom_object_type property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IntercomObjectType { get => _explicitNullValueIntercomObjectType; set { _explicitNullValueIntercomObjectType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_object_type"); else _explicitNullProperties?.Remove("intercom_object_type"); } }
+        public string? IntercomObjectType { get => _explicitNullValueIntercomObjectType; set { _explicitNullValueIntercomObjectType = value; AdditionalData?.Remove("intercom_object_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_object_type"); else _explicitNullProperties?.Remove("intercom_object_type"); } }
         private string? _explicitNullValueIntercomObjectType = default!;
 #nullable restore
 #else
-        public string IntercomObjectType { get => _explicitNullValueIntercomObjectType; set { _explicitNullValueIntercomObjectType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_object_type"); else _explicitNullProperties?.Remove("intercom_object_type"); } }
+        public string IntercomObjectType { get => _explicitNullValueIntercomObjectType; set { _explicitNullValueIntercomObjectType = value; AdditionalData?.Remove("intercom_object_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("intercom_object_type"); else _explicitNullProperties?.Remove("intercom_object_type"); } }
         private string _explicitNullValueIntercomObjectType = default!;
 #endif
         /// <summary>

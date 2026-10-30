@@ -62,7 +62,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "name", n => { Name = n.GetStringValue(); } },
-                { "result", n => { Result = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Custom_action_finished_action_result>(); } },
+                { "result", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Custom_action_finished_action_result>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueResult = default; _explicitNullProperties?.Remove("result"); AdditionalData["result"] = unknown; } else { Result = parsed; AdditionalData.Remove("result"); } } },
             };
         }
         /// <summary>

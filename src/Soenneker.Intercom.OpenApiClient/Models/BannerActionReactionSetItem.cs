@@ -17,23 +17,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("index") is { } nullNodeIndex && nullNodeIndex.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Index = null;
-            if (parseNode.GetChildNode("unicode_emoticon") is { } nullNodeUnicodeEmoticon && nullNodeUnicodeEmoticon.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UnicodeEmoticon = null;
+            if (parseNode.GetChildNode("index") is null) { _explicitNullValueIndex = default!; _explicitNullProperties?.Remove("index"); }
+            else if (parseNode.GetChildNode("index") is { } nullNodeIndex && nullNodeIndex.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Index = null;
+            if (parseNode.GetChildNode("unicode_emoticon") is null) { _explicitNullValueUnicodeEmoticon = default!; _explicitNullProperties?.Remove("unicode_emoticon"); }
+            else if (parseNode.GetChildNode("unicode_emoticon") is { } nullNodeUnicodeEmoticon && nullNodeUnicodeEmoticon.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UnicodeEmoticon = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The reaction&apos;s position in the set.</summary>
-        public int? Index { get => _explicitNullValueIndex; set { _explicitNullValueIndex = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("index"); else _explicitNullProperties?.Remove("index"); } }
+        public int? Index { get => _explicitNullValueIndex; set { _explicitNullValueIndex = value; AdditionalData?.Remove("index"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("index"); else _explicitNullProperties?.Remove("index"); } }
         private int? _explicitNullValueIndex = default!;
         /// <summary>The reaction&apos;s unicode emoji.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? UnicodeEmoticon { get => _explicitNullValueUnicodeEmoticon; set { _explicitNullValueUnicodeEmoticon = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unicode_emoticon"); else _explicitNullProperties?.Remove("unicode_emoticon"); } }
+        public string? UnicodeEmoticon { get => _explicitNullValueUnicodeEmoticon; set { _explicitNullValueUnicodeEmoticon = value; AdditionalData?.Remove("unicode_emoticon"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unicode_emoticon"); else _explicitNullProperties?.Remove("unicode_emoticon"); } }
         private string? _explicitNullValueUnicodeEmoticon = default!;
 #nullable restore
 #else
-        public string UnicodeEmoticon { get => _explicitNullValueUnicodeEmoticon; set { _explicitNullValueUnicodeEmoticon = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unicode_emoticon"); else _explicitNullProperties?.Remove("unicode_emoticon"); } }
+        public string UnicodeEmoticon { get => _explicitNullValueUnicodeEmoticon; set { _explicitNullValueUnicodeEmoticon = value; AdditionalData?.Remove("unicode_emoticon"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unicode_emoticon"); else _explicitNullProperties?.Remove("unicode_emoticon"); } }
         private string _explicitNullValueUnicodeEmoticon = default!;
 #endif
         /// <summary>

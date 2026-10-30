@@ -18,11 +18,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("attribute") is { } nullNodeAttribute && nullNodeAttribute.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Attribute = null;
-            if (parseNode.GetChildNode("comparison") is { } nullNodeComparison && nullNodeComparison.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Comparison = null;
-            if (parseNode.GetChildNode("predicates") is { } nullNodePredicates && nullNodePredicates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Predicates = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
-            if (parseNode.GetChildNode("value") is { } nullNodeValue && nullNodeValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Value = null;
+            if (parseNode.GetChildNode("attribute") is null) { _explicitNullValueAttribute = default!; _explicitNullProperties?.Remove("attribute"); }
+            else if (parseNode.GetChildNode("attribute") is { } nullNodeAttribute && nullNodeAttribute.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Attribute = null;
+            if (parseNode.GetChildNode("comparison") is null) { _explicitNullValueComparison = default!; _explicitNullProperties?.Remove("comparison"); }
+            else if (parseNode.GetChildNode("comparison") is { } nullNodeComparison && nullNodeComparison.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Comparison = null;
+            if (parseNode.GetChildNode("predicates") is null) { _explicitNullValuePredicates = default!; _explicitNullProperties?.Remove("predicates"); }
+            else if (parseNode.GetChildNode("predicates") is { } nullNodePredicates && nullNodePredicates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Predicates = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("value") is null) { _explicitNullValueValue = default!; _explicitNullProperties?.Remove("value"); }
+            else if (parseNode.GetChildNode("value") is { } nullNodeValue && nullNodeValue.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Value = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -30,51 +35,51 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The attribute to filter on. Required on an attribute predicate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Attribute { get => _explicitNullValueAttribute; set { _explicitNullValueAttribute = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute"); else _explicitNullProperties?.Remove("attribute"); } }
+        public string? Attribute { get => _explicitNullValueAttribute; set { _explicitNullValueAttribute = value; AdditionalData?.Remove("attribute"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute"); else _explicitNullProperties?.Remove("attribute"); } }
         private string? _explicitNullValueAttribute = default!;
 #nullable restore
 #else
-        public string Attribute { get => _explicitNullValueAttribute; set { _explicitNullValueAttribute = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute"); else _explicitNullProperties?.Remove("attribute"); } }
+        public string Attribute { get => _explicitNullValueAttribute; set { _explicitNullValueAttribute = value; AdditionalData?.Remove("attribute"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attribute"); else _explicitNullProperties?.Remove("attribute"); } }
         private string _explicitNullValueAttribute = default!;
 #endif
         /// <summary>The comparison operator. Required on an attribute predicate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Comparison { get => _explicitNullValueComparison; set { _explicitNullValueComparison = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("comparison"); else _explicitNullProperties?.Remove("comparison"); } }
+        public string? Comparison { get => _explicitNullValueComparison; set { _explicitNullValueComparison = value; AdditionalData?.Remove("comparison"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("comparison"); else _explicitNullProperties?.Remove("comparison"); } }
         private string? _explicitNullValueComparison = default!;
 #nullable restore
 #else
-        public string Comparison { get => _explicitNullValueComparison; set { _explicitNullValueComparison = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("comparison"); else _explicitNullProperties?.Remove("comparison"); } }
+        public string Comparison { get => _explicitNullValueComparison; set { _explicitNullValueComparison = value; AdditionalData?.Remove("comparison"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("comparison"); else _explicitNullProperties?.Remove("comparison"); } }
         private string _explicitNullValueComparison = default!;
 #endif
         /// <summary>The predicates grouped by a logical predicate. Only used when `type` is `and`, `or` or `not`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; AdditionalData?.Remove("predicates"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? _explicitNullValuePredicates = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; AdditionalData?.Remove("predicates"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> _explicitNullValuePredicates = default!;
 #endif
         /// <summary>The type of the attribute, or `and`, `or` or `not` on a logical predicate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The value to compare against. The accepted value depends on the attribute and the comparison, and can be a string, a number, a boolean, an array or `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public UntypedNode? Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
+        public UntypedNode? Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; AdditionalData?.Remove("value"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
         private UntypedNode? _explicitNullValueValue = default!;
 #nullable restore
 #else
-        public UntypedNode Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
+        public UntypedNode Value { get => _explicitNullValueValue; set { _explicitNullValueValue = value; AdditionalData?.Remove("value"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("value"); else _explicitNullProperties?.Remove("value"); } }
         private UntypedNode _explicitNullValueValue = default!;
 #endif
         /// <summary>

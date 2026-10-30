@@ -18,21 +18,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("ai_agent") is { } nullNodeAiAgent && nullNodeAiAgent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiAgent = null;
-            if (parseNode.GetChildNode("copilot") is { } nullNodeCopilot && nullNodeCopilot.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Copilot = null;
-            if (parseNode.GetChildNode("sales_agent") is { } nullNodeSalesAgent && nullNodeSalesAgent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SalesAgent = null;
+            if (parseNode.GetChildNode("ai_agent") is null) { _explicitNullValueAiAgent = default!; _explicitNullProperties?.Remove("ai_agent"); }
+            else if (parseNode.GetChildNode("ai_agent") is { } nullNodeAiAgent && nullNodeAiAgent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiAgent = null;
+            if (parseNode.GetChildNode("copilot") is null) { _explicitNullValueCopilot = default!; _explicitNullProperties?.Remove("copilot"); }
+            else if (parseNode.GetChildNode("copilot") is { } nullNodeCopilot && nullNodeCopilot.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Copilot = null;
+            if (parseNode.GetChildNode("sales_agent") is null) { _explicitNullValueSalesAgent = default!; _explicitNullProperties?.Remove("sales_agent"); }
+            else if (parseNode.GetChildNode("sales_agent") is { } nullNodeSalesAgent && nullNodeSalesAgent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SalesAgent = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Toggle Fin AI Agent availability.</summary>
-        public bool? AiAgent { get => _explicitNullValueAiAgent; set { _explicitNullValueAiAgent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_agent"); else _explicitNullProperties?.Remove("ai_agent"); } }
+        public bool? AiAgent { get => _explicitNullValueAiAgent; set { _explicitNullValueAiAgent = value; AdditionalData?.Remove("ai_agent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_agent"); else _explicitNullProperties?.Remove("ai_agent"); } }
         private bool? _explicitNullValueAiAgent = default!;
         /// <summary>Toggle Copilot availability.</summary>
-        public bool? Copilot { get => _explicitNullValueCopilot; set { _explicitNullValueCopilot = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("copilot"); else _explicitNullProperties?.Remove("copilot"); } }
+        public bool? Copilot { get => _explicitNullValueCopilot; set { _explicitNullValueCopilot = value; AdditionalData?.Remove("copilot"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("copilot"); else _explicitNullProperties?.Remove("copilot"); } }
         private bool? _explicitNullValueCopilot = default!;
         /// <summary>Toggle Sales Agent availability.</summary>
-        public bool? SalesAgent { get => _explicitNullValueSalesAgent; set { _explicitNullValueSalesAgent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sales_agent"); else _explicitNullProperties?.Remove("sales_agent"); } }
+        public bool? SalesAgent { get => _explicitNullValueSalesAgent; set { _explicitNullValueSalesAgent = value; AdditionalData?.Remove("sales_agent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sales_agent"); else _explicitNullProperties?.Remove("sales_agent"); } }
         private bool? _explicitNullValueSalesAgent = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContentBulkActionRequestAvailability"/> and sets the default values.

@@ -98,7 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "events", n => { Events = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_event_summary_item>(global::Soenneker.Intercom.OpenApiClient.Models.Data_event_summary_item.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "intercom_user_id", n => { IntercomUserId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_event_summary_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_event_summary_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
         }

@@ -18,9 +18,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("predicates") is { } nullNodePredicates && nullNodePredicates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Predicates = null;
-            if (parseNode.GetChildNode("role_predicates") is { } nullNodeRolePredicates && nullNodeRolePredicates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RolePredicates = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("predicates") is null) { _explicitNullValuePredicates = default!; _explicitNullProperties?.Remove("predicates"); }
+            else if (parseNode.GetChildNode("predicates") is { } nullNodePredicates && nullNodePredicates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Predicates = null;
+            if (parseNode.GetChildNode("role_predicates") is null) { _explicitNullValueRolePredicates = default!; _explicitNullProperties?.Remove("role_predicates"); }
+            else if (parseNode.GetChildNode("role_predicates") is { } nullNodeRolePredicates && nullNodeRolePredicates.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RolePredicates = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,31 +31,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The name of the audience.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>The predicates that define which contacts belong to the audience.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; AdditionalData?.Remove("predicates"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? _explicitNullValuePredicates = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> Predicates { get => _explicitNullValuePredicates; set { _explicitNullValuePredicates = value; AdditionalData?.Remove("predicates"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("predicates"); else _explicitNullProperties?.Remove("predicates"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> _explicitNullValuePredicates = default!;
 #endif
         /// <summary>Role-based predicates that further filter audience membership by contact role.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? RolePredicates { get => _explicitNullValueRolePredicates; set { _explicitNullValueRolePredicates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("role_predicates"); else _explicitNullProperties?.Remove("role_predicates"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? RolePredicates { get => _explicitNullValueRolePredicates; set { _explicitNullValueRolePredicates = value; AdditionalData?.Remove("role_predicates"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("role_predicates"); else _explicitNullProperties?.Remove("role_predicates"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate>? _explicitNullValueRolePredicates = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> RolePredicates { get => _explicitNullValueRolePredicates; set { _explicitNullValueRolePredicates = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("role_predicates"); else _explicitNullProperties?.Remove("role_predicates"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> RolePredicates { get => _explicitNullValueRolePredicates; set { _explicitNullValueRolePredicates = value; AdditionalData?.Remove("role_predicates"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("role_predicates"); else _explicitNullProperties?.Remove("role_predicates"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Predicate> _explicitNullValueRolePredicates = default!;
 #endif
         /// <summary>

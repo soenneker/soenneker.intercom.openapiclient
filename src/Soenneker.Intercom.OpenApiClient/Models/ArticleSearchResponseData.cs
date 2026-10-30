@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("articles") is { } nullNodeArticles && nullNodeArticles.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Articles = null;
-            if (parseNode.GetChildNode("highlights") is { } nullNodeHighlights && nullNodeHighlights.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Highlights = null;
+            if (parseNode.GetChildNode("articles") is null) { _explicitNullValueArticles = default!; _explicitNullProperties?.Remove("articles"); }
+            else if (parseNode.GetChildNode("articles") is { } nullNodeArticles && nullNodeArticles.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Articles = null;
+            if (parseNode.GetChildNode("highlights") is null) { _explicitNullValueHighlights = default!; _explicitNullProperties?.Remove("highlights"); }
+            else if (parseNode.GetChildNode("highlights") is { } nullNodeHighlights && nullNodeHighlights.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Highlights = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of Article objects</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Article>? Articles { get => _explicitNullValueArticles; set { _explicitNullValueArticles = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("articles"); else _explicitNullProperties?.Remove("articles"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Article>? Articles { get => _explicitNullValueArticles; set { _explicitNullValueArticles = value; AdditionalData?.Remove("articles"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("articles"); else _explicitNullProperties?.Remove("articles"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Article>? _explicitNullValueArticles = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.Article> Articles { get => _explicitNullValueArticles; set { _explicitNullValueArticles = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("articles"); else _explicitNullProperties?.Remove("articles"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.Article> Articles { get => _explicitNullValueArticles; set { _explicitNullValueArticles = value; AdditionalData?.Remove("articles"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("articles"); else _explicitNullProperties?.Remove("articles"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.Article> _explicitNullValueArticles = default!;
 #endif
         /// <summary>A corresponding array of highlighted Article content</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights>? Highlights { get => _explicitNullValueHighlights; set { _explicitNullValueHighlights = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlights"); else _explicitNullProperties?.Remove("highlights"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights>? Highlights { get => _explicitNullValueHighlights; set { _explicitNullValueHighlights = value; AdditionalData?.Remove("highlights"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlights"); else _explicitNullProperties?.Remove("highlights"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights>? _explicitNullValueHighlights = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights> Highlights { get => _explicitNullValueHighlights; set { _explicitNullValueHighlights = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlights"); else _explicitNullProperties?.Remove("highlights"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights> Highlights { get => _explicitNullValueHighlights; set { _explicitNullValueHighlights = value; AdditionalData?.Remove("highlights"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("highlights"); else _explicitNullProperties?.Remove("highlights"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ArticleSearchHighlights> _explicitNullValueHighlights = default!;
 #endif
         /// <summary>

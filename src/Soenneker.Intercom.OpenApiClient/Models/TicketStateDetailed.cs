@@ -18,71 +18,78 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("archived") is { } nullNodeArchived && nullNodeArchived.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Archived = null;
-            if (parseNode.GetChildNode("category") is { } nullNodeCategory && nullNodeCategory.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Category = null;
-            if (parseNode.GetChildNode("external_label") is { } nullNodeExternalLabel && nullNodeExternalLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExternalLabel = null;
-            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
-            if (parseNode.GetChildNode("internal_label") is { } nullNodeInternalLabel && nullNodeInternalLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InternalLabel = null;
-            if (parseNode.GetChildNode("ticket_types") is { } nullNodeTicketTypes && nullNodeTicketTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketTypes = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("archived") is null) { _explicitNullValueArchived = default!; _explicitNullProperties?.Remove("archived"); }
+            else if (parseNode.GetChildNode("archived") is { } nullNodeArchived && nullNodeArchived.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Archived = null;
+            if (parseNode.GetChildNode("category") is null) { _explicitNullValueCategory = default!; _explicitNullProperties?.Remove("category"); }
+            else if (parseNode.GetChildNode("category") is { } nullNodeCategory && nullNodeCategory.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Category = null;
+            if (parseNode.GetChildNode("external_label") is null) { _explicitNullValueExternalLabel = default!; _explicitNullProperties?.Remove("external_label"); }
+            else if (parseNode.GetChildNode("external_label") is { } nullNodeExternalLabel && nullNodeExternalLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExternalLabel = null;
+            if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
+            else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("internal_label") is null) { _explicitNullValueInternalLabel = default!; _explicitNullProperties?.Remove("internal_label"); }
+            else if (parseNode.GetChildNode("internal_label") is { } nullNodeInternalLabel && nullNodeInternalLabel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) InternalLabel = null;
+            if (parseNode.GetChildNode("ticket_types") is null) { _explicitNullValueTicketTypes = default!; _explicitNullProperties?.Remove("ticket_types"); }
+            else if (parseNode.GetChildNode("ticket_types") is { } nullNodeTicketTypes && nullNodeTicketTypes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketTypes = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the ticket state is archived</summary>
-        public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
+        public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; AdditionalData?.Remove("archived"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
         private bool? _explicitNullValueArchived = default!;
         /// <summary>The category of the ticket state</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory? Category { get => _explicitNullValueCategory; set { _explicitNullValueCategory = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("category"); else _explicitNullProperties?.Remove("category"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory? Category { get => _explicitNullValueCategory; set { _explicitNullValueCategory = value; AdditionalData?.Remove("category"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("category"); else _explicitNullProperties?.Remove("category"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory? _explicitNullValueCategory = default!;
         /// <summary>The state the ticket is currently in, in a human readable form - visible to customers, in the messenger, email and tickets portal.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ExternalLabel { get => _explicitNullValueExternalLabel; set { _explicitNullValueExternalLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_label"); else _explicitNullProperties?.Remove("external_label"); } }
+        public string? ExternalLabel { get => _explicitNullValueExternalLabel; set { _explicitNullValueExternalLabel = value; AdditionalData?.Remove("external_label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_label"); else _explicitNullProperties?.Remove("external_label"); } }
         private string? _explicitNullValueExternalLabel = default!;
 #nullable restore
 #else
-        public string ExternalLabel { get => _explicitNullValueExternalLabel; set { _explicitNullValueExternalLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_label"); else _explicitNullProperties?.Remove("external_label"); } }
+        public string ExternalLabel { get => _explicitNullValueExternalLabel; set { _explicitNullValueExternalLabel = value; AdditionalData?.Remove("external_label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_label"); else _explicitNullProperties?.Remove("external_label"); } }
         private string _explicitNullValueExternalLabel = default!;
 #endif
         /// <summary>The id of the ticket state</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string _explicitNullValueId = default!;
 #endif
         /// <summary>The state the ticket is currently in, in a human readable form - visible in Intercom</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? InternalLabel { get => _explicitNullValueInternalLabel; set { _explicitNullValueInternalLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_label"); else _explicitNullProperties?.Remove("internal_label"); } }
+        public string? InternalLabel { get => _explicitNullValueInternalLabel; set { _explicitNullValueInternalLabel = value; AdditionalData?.Remove("internal_label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_label"); else _explicitNullProperties?.Remove("internal_label"); } }
         private string? _explicitNullValueInternalLabel = default!;
 #nullable restore
 #else
-        public string InternalLabel { get => _explicitNullValueInternalLabel; set { _explicitNullValueInternalLabel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_label"); else _explicitNullProperties?.Remove("internal_label"); } }
+        public string InternalLabel { get => _explicitNullValueInternalLabel; set { _explicitNullValueInternalLabel = value; AdditionalData?.Remove("internal_label"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("internal_label"); else _explicitNullProperties?.Remove("internal_label"); } }
         private string _explicitNullValueInternalLabel = default!;
 #endif
         /// <summary>A list of the ticket types that use this ticket state.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes? TicketTypes { get => _explicitNullValueTicketTypes; set { _explicitNullValueTicketTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_types"); else _explicitNullProperties?.Remove("ticket_types"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes? TicketTypes { get => _explicitNullValueTicketTypes; set { _explicitNullValueTicketTypes = value; AdditionalData?.Remove("ticket_types"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_types"); else _explicitNullProperties?.Remove("ticket_types"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes? _explicitNullValueTicketTypes = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes TicketTypes { get => _explicitNullValueTicketTypes; set { _explicitNullValueTicketTypes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_types"); else _explicitNullProperties?.Remove("ticket_types"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes TicketTypes { get => _explicitNullValueTicketTypes; set { _explicitNullValueTicketTypes = value; AdditionalData?.Remove("ticket_types"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_types"); else _explicitNullProperties?.Remove("ticket_types"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedTicketTypes _explicitNullValueTicketTypes = default!;
 #endif
         /// <summary>String representing the object&apos;s type. Always has the value `ticket_state`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>
@@ -113,7 +120,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "archived", n => { Archived = n.GetBoolValue(); } },
-                { "category", n => { Category = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory>(); } },
+                { "category", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketStateDetailedCategory>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCategory = default; _explicitNullProperties?.Remove("category"); AdditionalData["category"] = unknown; } else { Category = parsed; AdditionalData.Remove("category"); } } },
                 { "external_label", n => { ExternalLabel = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "internal_label", n => { InternalLabel = n.GetStringValue(); } },

@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("conversation") is { } nullNodeConversation && nullNodeConversation.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Conversation = null;
-            if (parseNode.GetChildNode("user") is { } nullNodeUser && nullNodeUser.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) User = null;
+            if (parseNode.GetChildNode("conversation") is null) { _explicitNullValueConversation = default!; _explicitNullProperties?.Remove("conversation"); }
+            else if (parseNode.GetChildNode("conversation") is { } nullNodeConversation && nullNodeConversation.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Conversation = null;
+            if (parseNode.GetChildNode("user") is null) { _explicitNullValueUser = default!; _explicitNullProperties?.Remove("user"); }
+            else if (parseNode.GetChildNode("user") is { } nullNodeUser && nullNodeUser.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) User = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Conversation-related attribute errors.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsConversation? Conversation { get => _explicitNullValueConversation; set { _explicitNullValueConversation = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation"); else _explicitNullProperties?.Remove("conversation"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsConversation? Conversation { get => _explicitNullValueConversation; set { _explicitNullValueConversation = value; AdditionalData?.Remove("conversation"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation"); else _explicitNullProperties?.Remove("conversation"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsConversation? _explicitNullValueConversation = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsConversation Conversation { get => _explicitNullValueConversation; set { _explicitNullValueConversation = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation"); else _explicitNullProperties?.Remove("conversation"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsConversation Conversation { get => _explicitNullValueConversation; set { _explicitNullValueConversation = value; AdditionalData?.Remove("conversation"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation"); else _explicitNullProperties?.Remove("conversation"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsConversation _explicitNullValueConversation = default!;
 #endif
         /// <summary>User-related attribute errors.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser? User { get => _explicitNullValueUser; set { _explicitNullValueUser = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user"); else _explicitNullProperties?.Remove("user"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser? User { get => _explicitNullValueUser; set { _explicitNullValueUser = value; AdditionalData?.Remove("user"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user"); else _explicitNullProperties?.Remove("user"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser? _explicitNullValueUser = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser User { get => _explicitNullValueUser; set { _explicitNullValueUser = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user"); else _explicitNullProperties?.Remove("user"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser User { get => _explicitNullValueUser; set { _explicitNullValueUser = value; AdditionalData?.Remove("user"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user"); else _explicitNullProperties?.Remove("user"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrorsUser _explicitNullValueUser = default!;
 #endif
         /// <summary>

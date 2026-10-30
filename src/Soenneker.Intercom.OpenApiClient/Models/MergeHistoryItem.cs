@@ -18,38 +18,42 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("merged_at") is { } nullNodeMergedAt && nullNodeMergedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MergedAt = null;
-            if (parseNode.GetChildNode("source_contact_id") is { } nullNodeSourceContactId && nullNodeSourceContactId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SourceContactId = null;
-            if (parseNode.GetChildNode("source_contact_role") is { } nullNodeSourceContactRole && nullNodeSourceContactRole.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SourceContactRole = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("merged_at") is null) { _explicitNullValueMergedAt = default!; _explicitNullProperties?.Remove("merged_at"); }
+            else if (parseNode.GetChildNode("merged_at") is { } nullNodeMergedAt && nullNodeMergedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MergedAt = null;
+            if (parseNode.GetChildNode("source_contact_id") is null) { _explicitNullValueSourceContactId = default!; _explicitNullProperties?.Remove("source_contact_id"); }
+            else if (parseNode.GetChildNode("source_contact_id") is { } nullNodeSourceContactId && nullNodeSourceContactId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SourceContactId = null;
+            if (parseNode.GetChildNode("source_contact_role") is null) { _explicitNullValueSourceContactRole = default!; _explicitNullProperties?.Remove("source_contact_role"); }
+            else if (parseNode.GetChildNode("source_contact_role") is { } nullNodeSourceContactRole && nullNodeSourceContactRole.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SourceContactRole = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>(Unix timestamp in seconds) The time when the merge occurred.</summary>
-        public int? MergedAt { get => _explicitNullValueMergedAt; set { _explicitNullValueMergedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("merged_at"); else _explicitNullProperties?.Remove("merged_at"); } }
+        public int? MergedAt { get => _explicitNullValueMergedAt; set { _explicitNullValueMergedAt = value; AdditionalData?.Remove("merged_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("merged_at"); else _explicitNullProperties?.Remove("merged_at"); } }
         private int? _explicitNullValueMergedAt = default!;
         /// <summary>The Intercom ID of the contact that was merged into this contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SourceContactId { get => _explicitNullValueSourceContactId; set { _explicitNullValueSourceContactId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_contact_id"); else _explicitNullProperties?.Remove("source_contact_id"); } }
+        public string? SourceContactId { get => _explicitNullValueSourceContactId; set { _explicitNullValueSourceContactId = value; AdditionalData?.Remove("source_contact_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_contact_id"); else _explicitNullProperties?.Remove("source_contact_id"); } }
         private string? _explicitNullValueSourceContactId = default!;
 #nullable restore
 #else
-        public string SourceContactId { get => _explicitNullValueSourceContactId; set { _explicitNullValueSourceContactId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_contact_id"); else _explicitNullProperties?.Remove("source_contact_id"); } }
+        public string SourceContactId { get => _explicitNullValueSourceContactId; set { _explicitNullValueSourceContactId = value; AdditionalData?.Remove("source_contact_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_contact_id"); else _explicitNullProperties?.Remove("source_contact_id"); } }
         private string _explicitNullValueSourceContactId = default!;
 #endif
         /// <summary>The role of the contact that was merged in.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole? SourceContactRole { get => _explicitNullValueSourceContactRole; set { _explicitNullValueSourceContactRole = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_contact_role"); else _explicitNullProperties?.Remove("source_contact_role"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole? SourceContactRole { get => _explicitNullValueSourceContactRole; set { _explicitNullValueSourceContactRole = value; AdditionalData?.Remove("source_contact_role"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_contact_role"); else _explicitNullProperties?.Remove("source_contact_role"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole? _explicitNullValueSourceContactRole = default!;
         /// <summary>The type of object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>
@@ -79,7 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "merged_at", n => { MergedAt = n.GetIntValue(); } },
                 { "source_contact_id", n => { SourceContactId = n.GetStringValue(); } },
-                { "source_contact_role", n => { SourceContactRole = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole>(); } },
+                { "source_contact_role", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSourceContactRole = default; _explicitNullProperties?.Remove("source_contact_role"); AdditionalData["source_contact_role"] = unknown; } else { SourceContactRole = parsed; AdditionalData.Remove("source_contact_role"); } } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }

@@ -91,7 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list_pages>(global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list_pages.CreateFromDiscriminatorValue); } },
                 { "ruleset_id", n => { RulesetId = n.GetStringValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Whatsapp_message_status_list_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

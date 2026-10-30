@@ -84,7 +84,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "attribute_mappings", n => { AttributeMappings = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "intercom_object_type", n => { IntercomObjectType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_intercom_object_type>(); } },
+                { "intercom_object_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_intercom_object_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueIntercomObjectType = default; _explicitNullProperties?.Remove("intercom_object_type"); AdditionalData["intercom_object_type"] = unknown; } else { IntercomObjectType = parsed; AdditionalData.Remove("intercom_object_type"); } } },
                 { "reference_mappings", n => { ReferenceMappings = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings>(global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_reference_mappings.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "response_object_path", n => { ResponseObjectPath = n.GetStringValue(); } },
             };

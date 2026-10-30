@@ -68,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "ticket_parts", n => { TicketParts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_part>(global::Soenneker.Intercom.OpenApiClient.Models.Ticket_part.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_parts_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

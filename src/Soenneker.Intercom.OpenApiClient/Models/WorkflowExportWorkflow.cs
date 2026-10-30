@@ -18,19 +18,32 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("attributes") is { } nullNodeAttributes && nullNodeAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Attributes = null;
-            if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
-            if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
-            if (parseNode.GetChildNode("embedded_rules") is { } nullNodeEmbeddedRules && nullNodeEmbeddedRules.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmbeddedRules = null;
-            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
-            if (parseNode.GetChildNode("preferred_devices") is { } nullNodePreferredDevices && nullNodePreferredDevices.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PreferredDevices = null;
-            if (parseNode.GetChildNode("snapshot") is { } nullNodeSnapshot && nullNodeSnapshot.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Snapshot = null;
-            if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
-            if (parseNode.GetChildNode("target_channels") is { } nullNodeTargetChannels && nullNodeTargetChannels.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TargetChannels = null;
-            if (parseNode.GetChildNode("targeting") is { } nullNodeTargeting && nullNodeTargeting.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Targeting = null;
-            if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
-            if (parseNode.GetChildNode("trigger_type") is { } nullNodeTriggerType && nullNodeTriggerType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TriggerType = null;
-            if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+            if (parseNode.GetChildNode("attributes") is null) { _explicitNullValueAttributes = default!; _explicitNullProperties?.Remove("attributes"); }
+            else if (parseNode.GetChildNode("attributes") is { } nullNodeAttributes && nullNodeAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Attributes = null;
+            if (parseNode.GetChildNode("created_at") is null) { _explicitNullValueCreatedAt = default!; _explicitNullProperties?.Remove("created_at"); }
+            else if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
+            if (parseNode.GetChildNode("description") is null) { _explicitNullValueDescription = default!; _explicitNullProperties?.Remove("description"); }
+            else if (parseNode.GetChildNode("description") is { } nullNodeDescription && nullNodeDescription.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Description = null;
+            if (parseNode.GetChildNode("embedded_rules") is null) { _explicitNullValueEmbeddedRules = default!; _explicitNullProperties?.Remove("embedded_rules"); }
+            else if (parseNode.GetChildNode("embedded_rules") is { } nullNodeEmbeddedRules && nullNodeEmbeddedRules.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EmbeddedRules = null;
+            if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
+            else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("preferred_devices") is null) { _explicitNullValuePreferredDevices = default!; _explicitNullProperties?.Remove("preferred_devices"); }
+            else if (parseNode.GetChildNode("preferred_devices") is { } nullNodePreferredDevices && nullNodePreferredDevices.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PreferredDevices = null;
+            if (parseNode.GetChildNode("snapshot") is null) { _explicitNullValueSnapshot = default!; _explicitNullProperties?.Remove("snapshot"); }
+            else if (parseNode.GetChildNode("snapshot") is { } nullNodeSnapshot && nullNodeSnapshot.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Snapshot = null;
+            if (parseNode.GetChildNode("state") is null) { _explicitNullValueState = default!; _explicitNullProperties?.Remove("state"); }
+            else if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
+            if (parseNode.GetChildNode("target_channels") is null) { _explicitNullValueTargetChannels = default!; _explicitNullProperties?.Remove("target_channels"); }
+            else if (parseNode.GetChildNode("target_channels") is { } nullNodeTargetChannels && nullNodeTargetChannels.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TargetChannels = null;
+            if (parseNode.GetChildNode("targeting") is null) { _explicitNullValueTargeting = default!; _explicitNullProperties?.Remove("targeting"); }
+            else if (parseNode.GetChildNode("targeting") is { } nullNodeTargeting && nullNodeTargeting.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Targeting = null;
+            if (parseNode.GetChildNode("title") is null) { _explicitNullValueTitle = default!; _explicitNullProperties?.Remove("title"); }
+            else if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("trigger_type") is null) { _explicitNullValueTriggerType = default!; _explicitNullProperties?.Remove("trigger_type"); }
+            else if (parseNode.GetChildNode("trigger_type") is { } nullNodeTriggerType && nullNodeTriggerType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TriggerType = null;
+            if (parseNode.GetChildNode("updated_at") is null) { _explicitNullValueUpdatedAt = default!; _explicitNullProperties?.Remove("updated_at"); }
+            else if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -38,111 +51,111 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Custom attributes defined for this workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowAttributesItemProperty>? Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowAttributesItemProperty>? Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; AdditionalData?.Remove("attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowAttributesItemProperty>? _explicitNullValueAttributes = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowAttributesItemProperty> Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowAttributesItemProperty> Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; AdditionalData?.Remove("attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowAttributesItemProperty> _explicitNullValueAttributes = default!;
 #endif
         /// <summary>When the workflow was created.</summary>
-        public DateTimeOffset? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        public DateTimeOffset? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
         private DateTimeOffset? _explicitNullValueCreatedAt = default!;
         /// <summary>The description of the workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        public string? Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string? _explicitNullValueDescription = default!;
 #nullable restore
 #else
-        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
+        public string Description { get => _explicitNullValueDescription; set { _explicitNullValueDescription = value; AdditionalData?.Remove("description"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("description"); else _explicitNullProperties?.Remove("description"); } }
         private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>Rules embedded within the workflow steps.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty>? EmbeddedRules { get => _explicitNullValueEmbeddedRules; set { _explicitNullValueEmbeddedRules = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("embedded_rules"); else _explicitNullProperties?.Remove("embedded_rules"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty>? EmbeddedRules { get => _explicitNullValueEmbeddedRules; set { _explicitNullValueEmbeddedRules = value; AdditionalData?.Remove("embedded_rules"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("embedded_rules"); else _explicitNullProperties?.Remove("embedded_rules"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty>? _explicitNullValueEmbeddedRules = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty> EmbeddedRules { get => _explicitNullValueEmbeddedRules; set { _explicitNullValueEmbeddedRules = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("embedded_rules"); else _explicitNullProperties?.Remove("embedded_rules"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty> EmbeddedRules { get => _explicitNullValueEmbeddedRules; set { _explicitNullValueEmbeddedRules = value; AdditionalData?.Remove("embedded_rules"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("embedded_rules"); else _explicitNullProperties?.Remove("embedded_rules"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowEmbeddedRulesItemProperty> _explicitNullValueEmbeddedRules = default!;
 #endif
         /// <summary>The unique identifier for the workflow. This is not the ruleset ID that the export endpoint&apos;s `id` path parameter expects.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string? _explicitNullValueId = default!;
 #nullable restore
 #else
-        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public string Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private string _explicitNullValueId = default!;
 #endif
         /// <summary>The preferred devices for this workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? PreferredDevices { get => _explicitNullValuePreferredDevices; set { _explicitNullValuePreferredDevices = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("preferred_devices"); else _explicitNullProperties?.Remove("preferred_devices"); } }
+        public List<string>? PreferredDevices { get => _explicitNullValuePreferredDevices; set { _explicitNullValuePreferredDevices = value; AdditionalData?.Remove("preferred_devices"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("preferred_devices"); else _explicitNullProperties?.Remove("preferred_devices"); } }
         private List<string>? _explicitNullValuePreferredDevices = default!;
 #nullable restore
 #else
-        public List<string> PreferredDevices { get => _explicitNullValuePreferredDevices; set { _explicitNullValuePreferredDevices = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("preferred_devices"); else _explicitNullProperties?.Remove("preferred_devices"); } }
+        public List<string> PreferredDevices { get => _explicitNullValuePreferredDevices; set { _explicitNullValuePreferredDevices = value; AdditionalData?.Remove("preferred_devices"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("preferred_devices"); else _explicitNullProperties?.Remove("preferred_devices"); } }
         private List<string> _explicitNullValuePreferredDevices = default!;
 #endif
         /// <summary>The current snapshot of workflow steps and configuration.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty? Snapshot { get => _explicitNullValueSnapshot; set { _explicitNullValueSnapshot = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snapshot"); else _explicitNullProperties?.Remove("snapshot"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty? Snapshot { get => _explicitNullValueSnapshot; set { _explicitNullValueSnapshot = value; AdditionalData?.Remove("snapshot"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snapshot"); else _explicitNullProperties?.Remove("snapshot"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty? _explicitNullValueSnapshot = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty Snapshot { get => _explicitNullValueSnapshot; set { _explicitNullValueSnapshot = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snapshot"); else _explicitNullProperties?.Remove("snapshot"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty Snapshot { get => _explicitNullValueSnapshot; set { _explicitNullValueSnapshot = value; AdditionalData?.Remove("snapshot"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snapshot"); else _explicitNullProperties?.Remove("snapshot"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty _explicitNullValueSnapshot = default!;
 #endif
         /// <summary>The current state of the workflow.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; AdditionalData?.Remove("state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState? _explicitNullValueState = default!;
         /// <summary>The channels this workflow targets.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? TargetChannels { get => _explicitNullValueTargetChannels; set { _explicitNullValueTargetChannels = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_channels"); else _explicitNullProperties?.Remove("target_channels"); } }
+        public List<string>? TargetChannels { get => _explicitNullValueTargetChannels; set { _explicitNullValueTargetChannels = value; AdditionalData?.Remove("target_channels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_channels"); else _explicitNullProperties?.Remove("target_channels"); } }
         private List<string>? _explicitNullValueTargetChannels = default!;
 #nullable restore
 #else
-        public List<string> TargetChannels { get => _explicitNullValueTargetChannels; set { _explicitNullValueTargetChannels = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_channels"); else _explicitNullProperties?.Remove("target_channels"); } }
+        public List<string> TargetChannels { get => _explicitNullValueTargetChannels; set { _explicitNullValueTargetChannels = value; AdditionalData?.Remove("target_channels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("target_channels"); else _explicitNullProperties?.Remove("target_channels"); } }
         private List<string> _explicitNullValueTargetChannels = default!;
 #endif
         /// <summary>The targeting rules for this workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty? Targeting { get => _explicitNullValueTargeting; set { _explicitNullValueTargeting = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("targeting"); else _explicitNullProperties?.Remove("targeting"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty? Targeting { get => _explicitNullValueTargeting; set { _explicitNullValueTargeting = value; AdditionalData?.Remove("targeting"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("targeting"); else _explicitNullProperties?.Remove("targeting"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty? _explicitNullValueTargeting = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty Targeting { get => _explicitNullValueTargeting; set { _explicitNullValueTargeting = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("targeting"); else _explicitNullProperties?.Remove("targeting"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty Targeting { get => _explicitNullValueTargeting; set { _explicitNullValueTargeting = value; AdditionalData?.Remove("targeting"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("targeting"); else _explicitNullProperties?.Remove("targeting"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty _explicitNullValueTargeting = default!;
 #endif
         /// <summary>The title of the workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string? _explicitNullValueTitle = default!;
 #nullable restore
 #else
-        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>The type of trigger that starts this workflow.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TriggerType { get => _explicitNullValueTriggerType; set { _explicitNullValueTriggerType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trigger_type"); else _explicitNullProperties?.Remove("trigger_type"); } }
+        public string? TriggerType { get => _explicitNullValueTriggerType; set { _explicitNullValueTriggerType = value; AdditionalData?.Remove("trigger_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trigger_type"); else _explicitNullProperties?.Remove("trigger_type"); } }
         private string? _explicitNullValueTriggerType = default!;
 #nullable restore
 #else
-        public string TriggerType { get => _explicitNullValueTriggerType; set { _explicitNullValueTriggerType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trigger_type"); else _explicitNullProperties?.Remove("trigger_type"); } }
+        public string TriggerType { get => _explicitNullValueTriggerType; set { _explicitNullValueTriggerType = value; AdditionalData?.Remove("trigger_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("trigger_type"); else _explicitNullProperties?.Remove("trigger_type"); } }
         private string _explicitNullValueTriggerType = default!;
 #endif
         /// <summary>When the workflow was last updated.</summary>
-        public DateTimeOffset? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        public DateTimeOffset? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
         private DateTimeOffset? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflow"/> and sets the default values.
@@ -176,7 +189,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "preferred_devices", n => { PreferredDevices = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "snapshot", n => { Snapshot = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowSnapshotProperty.CreateFromDiscriminatorValue); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "target_channels", n => { TargetChannels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "targeting", n => { Targeting = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty>(global::Soenneker.Intercom.OpenApiClient.Models.WorkflowExportWorkflowTargetingProperty.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },

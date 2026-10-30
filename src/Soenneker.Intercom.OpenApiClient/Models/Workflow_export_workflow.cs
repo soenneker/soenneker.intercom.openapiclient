@@ -176,7 +176,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "preferred_devices", n => { PreferredDevices = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "snapshot", n => { Snapshot = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export_workflow_snapshot>(global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export_workflow_snapshot.CreateFromDiscriminatorValue); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export_workflow_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export_workflow_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "target_channels", n => { TargetChannels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "targeting", n => { Targeting = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export_workflow_targeting>(global::Soenneker.Intercom.OpenApiClient.Models.Workflow_export_workflow_targeting.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },

@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "intercom_attribute_identifier", n => { IntercomAttributeIdentifier = n.GetStringValue(); } },
-                { "mapping_type", n => { MappingType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings_mapping_type>(); } },
+                { "mapping_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorDetail_object_mappings_attribute_mappings_mapping_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMappingType = default; _explicitNullProperties?.Remove("mapping_type"); AdditionalData["mapping_type"] = unknown; } else { MappingType = parsed; AdditionalData.Remove("mapping_type"); } } },
                 { "response_attribute_path", n => { ResponseAttributePath = n.GetStringValue(); } },
             };
         }

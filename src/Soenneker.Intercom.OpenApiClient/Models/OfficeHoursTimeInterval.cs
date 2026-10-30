@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("end_minute") is { } nullNodeEndMinute && nullNodeEndMinute.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndMinute = null;
-            if (parseNode.GetChildNode("start_minute") is { } nullNodeStartMinute && nullNodeStartMinute.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartMinute = null;
+            if (parseNode.GetChildNode("end_minute") is null) { _explicitNullValueEndMinute = default!; _explicitNullProperties?.Remove("end_minute"); }
+            else if (parseNode.GetChildNode("end_minute") is { } nullNodeEndMinute && nullNodeEndMinute.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndMinute = null;
+            if (parseNode.GetChildNode("start_minute") is null) { _explicitNullValueStartMinute = default!; _explicitNullProperties?.Remove("start_minute"); }
+            else if (parseNode.GetChildNode("start_minute") is { } nullNodeStartMinute && nullNodeStartMinute.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartMinute = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,10 +29,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Derived day of the week the interval falls on (0 = Monday … 6 = Sunday). For exceptions, this is derived from `exception_date`. It is returned in responses only; a request that includes it is rejected with a 400 error.</summary>
         public int? DayOfWeek { get; private set; }
         /// <summary>Minute the interval ends. For schedules, offset from the start of the week (Monday 00:00 = 0); for exceptions, offset from midnight on `exception_date`.</summary>
-        public int? EndMinute { get => _explicitNullValueEndMinute; set { _explicitNullValueEndMinute = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_minute"); else _explicitNullProperties?.Remove("end_minute"); } }
+        public int? EndMinute { get => _explicitNullValueEndMinute; set { _explicitNullValueEndMinute = value; AdditionalData?.Remove("end_minute"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_minute"); else _explicitNullProperties?.Remove("end_minute"); } }
         private int? _explicitNullValueEndMinute = default!;
         /// <summary>Minute the interval starts. For schedules, offset from the start of the week (Monday 00:00 = 0); for exceptions, offset from midnight on `exception_date`.</summary>
-        public int? StartMinute { get => _explicitNullValueStartMinute; set { _explicitNullValueStartMinute = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_minute"); else _explicitNullProperties?.Remove("start_minute"); } }
+        public int? StartMinute { get => _explicitNullValueStartMinute; set { _explicitNullValueStartMinute = value; AdditionalData?.Remove("start_minute"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_minute"); else _explicitNullProperties?.Remove("start_minute"); } }
         private int? _explicitNullValueStartMinute = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval"/> and sets the default values.

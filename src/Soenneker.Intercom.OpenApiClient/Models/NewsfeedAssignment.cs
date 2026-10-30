@@ -18,17 +18,19 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("newsfeed_id") is { } nullNodeNewsfeedId && nullNodeNewsfeedId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NewsfeedId = null;
-            if (parseNode.GetChildNode("published_at") is { } nullNodePublishedAt && nullNodePublishedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PublishedAt = null;
+            if (parseNode.GetChildNode("newsfeed_id") is null) { _explicitNullValueNewsfeedId = default!; _explicitNullProperties?.Remove("newsfeed_id"); }
+            else if (parseNode.GetChildNode("newsfeed_id") is { } nullNodeNewsfeedId && nullNodeNewsfeedId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NewsfeedId = null;
+            if (parseNode.GetChildNode("published_at") is null) { _explicitNullValuePublishedAt = default!; _explicitNullProperties?.Remove("published_at"); }
+            else if (parseNode.GetChildNode("published_at") is { } nullNodePublishedAt && nullNodePublishedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PublishedAt = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The unique identifier for the newsfeed which is given by Intercom.</summary>
-        public int? NewsfeedId { get => _explicitNullValueNewsfeedId; set { _explicitNullValueNewsfeedId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_id"); else _explicitNullProperties?.Remove("newsfeed_id"); } }
+        public int? NewsfeedId { get => _explicitNullValueNewsfeedId; set { _explicitNullValueNewsfeedId = value; AdditionalData?.Remove("newsfeed_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_id"); else _explicitNullProperties?.Remove("newsfeed_id"); } }
         private int? _explicitNullValueNewsfeedId = default!;
         /// <summary>Publish date of the news item on the newsfeed, use this field if you want to set a publish date in the past (e.g. when importing existing news items). On write, this field will be ignored if the news item state is &quot;draft&quot;, and a date in the future is rejected with a `400`. Null while the news item isn&apos;t live.</summary>
-        public int? PublishedAt { get => _explicitNullValuePublishedAt; set { _explicitNullValuePublishedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("published_at"); else _explicitNullProperties?.Remove("published_at"); } }
+        public int? PublishedAt { get => _explicitNullValuePublishedAt; set { _explicitNullValuePublishedAt = value; AdditionalData?.Remove("published_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("published_at"); else _explicitNullProperties?.Remove("published_at"); } }
         private int? _explicitNullValuePublishedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment"/> and sets the default values.

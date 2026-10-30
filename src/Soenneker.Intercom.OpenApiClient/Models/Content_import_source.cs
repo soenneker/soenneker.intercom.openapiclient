@@ -90,9 +90,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "last_synced_at", n => { LastSyncedAt = n.GetIntValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_import_source_status>(); } },
-                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_import_source_sync_behavior>(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_import_source_type>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_import_source_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
+                { "sync_behavior", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_import_source_sync_behavior>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSyncBehavior = default; _explicitNullProperties?.Remove("sync_behavior"); AdditionalData["sync_behavior"] = unknown; } else { SyncBehavior = parsed; AdditionalData.Remove("sync_behavior"); } } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Content_import_source_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };

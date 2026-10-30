@@ -18,9 +18,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("attributes") is { } nullNodeAttributes && nullNodeAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Attributes = null;
-            if (parseNode.GetChildNode("ticket_state_id") is { } nullNodeTicketStateId && nullNodeTicketStateId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketStateId = null;
-            if (parseNode.GetChildNode("ticket_type_id") is { } nullNodeTicketTypeId && nullNodeTicketTypeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketTypeId = null;
+            if (parseNode.GetChildNode("attributes") is null) { _explicitNullValueAttributes = default!; _explicitNullProperties?.Remove("attributes"); }
+            else if (parseNode.GetChildNode("attributes") is { } nullNodeAttributes && nullNodeAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Attributes = null;
+            if (parseNode.GetChildNode("ticket_state_id") is null) { _explicitNullValueTicketStateId = default!; _explicitNullProperties?.Remove("ticket_state_id"); }
+            else if (parseNode.GetChildNode("ticket_state_id") is { } nullNodeTicketStateId && nullNodeTicketStateId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketStateId = null;
+            if (parseNode.GetChildNode("ticket_type_id") is null) { _explicitNullValueTicketTypeId = default!; _explicitNullProperties?.Remove("ticket_type_id"); }
+            else if (parseNode.GetChildNode("ticket_type_id") is { } nullNodeTicketTypeId && nullNodeTicketTypeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketTypeId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,31 +31,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are `_default_title_` and `_default_description_`. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called `priority` of type `list`, the key should be `priority` and the value of the attribute should be the guid of the list item (e.g. `de1825a0-0164-4070-8ca6-13e22462fa7e`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes? Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes? Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; AdditionalData?.Remove("attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes? _explicitNullValueAttributes = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes Attributes { get => _explicitNullValueAttributes; set { _explicitNullValueAttributes = value; AdditionalData?.Remove("attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attributes"); else _explicitNullProperties?.Remove("attributes"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ConvertConversationToTicketRequestAttributes _explicitNullValueAttributes = default!;
 #endif
         /// <summary>The ID of the ticket state associated with the ticket type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
+        public string? TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; AdditionalData?.Remove("ticket_state_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
         private string? _explicitNullValueTicketStateId = default!;
 #nullable restore
 #else
-        public string TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
+        public string TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; AdditionalData?.Remove("ticket_state_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
         private string _explicitNullValueTicketStateId = default!;
 #endif
         /// <summary>The ID of the type of ticket you want to convert the conversation to</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TicketTypeId { get => _explicitNullValueTicketTypeId; set { _explicitNullValueTicketTypeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_type_id"); else _explicitNullProperties?.Remove("ticket_type_id"); } }
+        public string? TicketTypeId { get => _explicitNullValueTicketTypeId; set { _explicitNullValueTicketTypeId = value; AdditionalData?.Remove("ticket_type_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_type_id"); else _explicitNullProperties?.Remove("ticket_type_id"); } }
         private string? _explicitNullValueTicketTypeId = default!;
 #nullable restore
 #else
-        public string TicketTypeId { get => _explicitNullValueTicketTypeId; set { _explicitNullValueTicketTypeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_type_id"); else _explicitNullProperties?.Remove("ticket_type_id"); } }
+        public string TicketTypeId { get => _explicitNullValueTicketTypeId; set { _explicitNullValueTicketTypeId = value; AdditionalData?.Remove("ticket_type_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_type_id"); else _explicitNullProperties?.Remove("ticket_type_id"); } }
         private string _explicitNullValueTicketTypeId = default!;
 #endif
         /// <summary>

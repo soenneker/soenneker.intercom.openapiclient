@@ -18,11 +18,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("environment_id") is { } nullNodeEnvironmentId && nullNodeEnvironmentId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnvironmentId = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("supports_android") is { } nullNodeSupportsAndroid && nullNodeSupportsAndroid.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SupportsAndroid = null;
-            if (parseNode.GetChildNode("supports_ios") is { } nullNodeSupportsIos && nullNodeSupportsIos.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SupportsIos = null;
-            if (parseNode.GetChildNode("supports_web") is { } nullNodeSupportsWeb && nullNodeSupportsWeb.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SupportsWeb = null;
+            if (parseNode.GetChildNode("environment_id") is null) { _explicitNullValueEnvironmentId = default!; _explicitNullProperties?.Remove("environment_id"); }
+            else if (parseNode.GetChildNode("environment_id") is { } nullNodeEnvironmentId && nullNodeEnvironmentId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EnvironmentId = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("supports_android") is null) { _explicitNullValueSupportsAndroid = default!; _explicitNullProperties?.Remove("supports_android"); }
+            else if (parseNode.GetChildNode("supports_android") is { } nullNodeSupportsAndroid && nullNodeSupportsAndroid.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SupportsAndroid = null;
+            if (parseNode.GetChildNode("supports_ios") is null) { _explicitNullValueSupportsIos = default!; _explicitNullProperties?.Remove("supports_ios"); }
+            else if (parseNode.GetChildNode("supports_ios") is { } nullNodeSupportsIos && nullNodeSupportsIos.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SupportsIos = null;
+            if (parseNode.GetChildNode("supports_web") is null) { _explicitNullValueSupportsWeb = default!; _explicitNullProperties?.Remove("supports_web"); }
+            else if (parseNode.GetChildNode("supports_web") is { } nullNodeSupportsWeb && nullNodeSupportsWeb.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SupportsWeb = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -30,31 +35,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Limit this secret to one environment, using the `messenger_environment` value from your Messenger installation code. Omit it for a secret that works in every environment.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? EnvironmentId { get => _explicitNullValueEnvironmentId; set { _explicitNullValueEnvironmentId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("environment_id"); else _explicitNullProperties?.Remove("environment_id"); } }
+        public string? EnvironmentId { get => _explicitNullValueEnvironmentId; set { _explicitNullValueEnvironmentId = value; AdditionalData?.Remove("environment_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("environment_id"); else _explicitNullProperties?.Remove("environment_id"); } }
         private string? _explicitNullValueEnvironmentId = default!;
 #nullable restore
 #else
-        public string EnvironmentId { get => _explicitNullValueEnvironmentId; set { _explicitNullValueEnvironmentId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("environment_id"); else _explicitNullProperties?.Remove("environment_id"); } }
+        public string EnvironmentId { get => _explicitNullValueEnvironmentId; set { _explicitNullValueEnvironmentId = value; AdditionalData?.Remove("environment_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("environment_id"); else _explicitNullProperties?.Remove("environment_id"); } }
         private string _explicitNullValueEnvironmentId = default!;
 #endif
         /// <summary>Human-readable name for the secret.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>Enable this secret for the Android SDK.</summary>
-        public bool? SupportsAndroid { get => _explicitNullValueSupportsAndroid; set { _explicitNullValueSupportsAndroid = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("supports_android"); else _explicitNullProperties?.Remove("supports_android"); } }
+        public bool? SupportsAndroid { get => _explicitNullValueSupportsAndroid; set { _explicitNullValueSupportsAndroid = value; AdditionalData?.Remove("supports_android"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("supports_android"); else _explicitNullProperties?.Remove("supports_android"); } }
         private bool? _explicitNullValueSupportsAndroid = default!;
         /// <summary>Enable this secret for the iOS SDK.</summary>
-        public bool? SupportsIos { get => _explicitNullValueSupportsIos; set { _explicitNullValueSupportsIos = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("supports_ios"); else _explicitNullProperties?.Remove("supports_ios"); } }
+        public bool? SupportsIos { get => _explicitNullValueSupportsIos; set { _explicitNullValueSupportsIos = value; AdditionalData?.Remove("supports_ios"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("supports_ios"); else _explicitNullProperties?.Remove("supports_ios"); } }
         private bool? _explicitNullValueSupportsIos = default!;
         /// <summary>Enable this secret for the Messenger on web.</summary>
-        public bool? SupportsWeb { get => _explicitNullValueSupportsWeb; set { _explicitNullValueSupportsWeb = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("supports_web"); else _explicitNullProperties?.Remove("supports_web"); } }
+        public bool? SupportsWeb { get => _explicitNullValueSupportsWeb; set { _explicitNullValueSupportsWeb = value; AdditionalData?.Remove("supports_web"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("supports_web"); else _explicitNullProperties?.Remove("supports_web"); } }
         private bool? _explicitNullValueSupportsWeb = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateIdentityVerificationSecretRequest"/> and sets the default values.

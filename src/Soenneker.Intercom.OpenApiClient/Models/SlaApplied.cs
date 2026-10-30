@@ -18,9 +18,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
-            if (parseNode.GetChildNode("sla_status") is { } nullNodeSlaStatus && nullNodeSlaStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaStatus = null;
-            if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("sla_name") is null) { _explicitNullValueSlaName = default!; _explicitNullProperties?.Remove("sla_name"); }
+            else if (parseNode.GetChildNode("sla_name") is { } nullNodeSlaName && nullNodeSlaName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaName = null;
+            if (parseNode.GetChildNode("sla_status") is null) { _explicitNullValueSlaStatus = default!; _explicitNullProperties?.Remove("sla_status"); }
+            else if (parseNode.GetChildNode("sla_status") is { } nullNodeSlaStatus && nullNodeSlaStatus.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SlaStatus = null;
+            if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
+            else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,24 +31,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The name of the SLA as given by the teammate when it was created.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        public string? SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; AdditionalData?.Remove("sla_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
         private string? _explicitNullValueSlaName = default!;
 #nullable restore
 #else
-        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
+        public string SlaName { get => _explicitNullValueSlaName; set { _explicitNullValueSlaName = value; AdditionalData?.Remove("sla_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_name"); else _explicitNullProperties?.Remove("sla_name"); } }
         private string _explicitNullValueSlaName = default!;
 #endif
         /// <summary>SLA statuses:            - `hit`: If there’s at least one hit event in the underlying sla_events table, and no “missed” or “canceled” events for the conversation.            - `missed`: If there are any missed sla_events for the conversation and no canceled events. If there’s even a single missed sla event, the status will always be missed. A missed status is not applied when the SLA expires, only the next time a teammate replies.            - `active`: An SLA has been applied to a conversation, but has not yet been fulfilled. SLA status is active only if there are no “hit, “missed”, or “canceled” events.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus? SlaStatus { get => _explicitNullValueSlaStatus; set { _explicitNullValueSlaStatus = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_status"); else _explicitNullProperties?.Remove("sla_status"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus? SlaStatus { get => _explicitNullValueSlaStatus; set { _explicitNullValueSlaStatus = value; AdditionalData?.Remove("sla_status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sla_status"); else _explicitNullProperties?.Remove("sla_status"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus? _explicitNullValueSlaStatus = default!;
         /// <summary>object type</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string? _explicitNullValueType = default!;
 #nullable restore
 #else
-        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        public string Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>
@@ -76,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },
-                { "sla_status", n => { SlaStatus = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus>(); } },
+                { "sla_status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaAppliedSlaStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSlaStatus = default; _explicitNullProperties?.Remove("sla_status"); AdditionalData["sla_status"] = unknown; } else { SlaStatus = parsed; AdditionalData.Remove("sla_status"); } } },
                 { "type", n => { Type = n.GetStringValue(); } },
             };
         }

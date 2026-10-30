@@ -18,34 +18,37 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
-            if (parseNode.GetChildNode("subtopic_name") is { } nullNodeSubtopicName && nullNodeSubtopicName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SubtopicName = null;
-            if (parseNode.GetChildNode("topic_name") is { } nullNodeTopicName && nullNodeTopicName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TopicName = null;
+            if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
+            else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
+            if (parseNode.GetChildNode("subtopic_name") is null) { _explicitNullValueSubtopicName = default!; _explicitNullProperties?.Remove("subtopic_name"); }
+            else if (parseNode.GetChildNode("subtopic_name") is { } nullNodeSubtopicName && nullNodeSubtopicName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SubtopicName = null;
+            if (parseNode.GetChildNode("topic_name") is null) { _explicitNullValueTopicName = default!; _explicitNullProperties?.Remove("topic_name"); }
+            else if (parseNode.GetChildNode("topic_name") is { } nullNodeTopicName && nullNodeTopicName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TopicName = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The id of the subtopic.</summary>
-        public int? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
+        public int? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private int? _explicitNullValueId = default!;
         /// <summary>The name of the AI-generated subtopic, if any.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SubtopicName { get => _explicitNullValueSubtopicName; set { _explicitNullValueSubtopicName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subtopic_name"); else _explicitNullProperties?.Remove("subtopic_name"); } }
+        public string? SubtopicName { get => _explicitNullValueSubtopicName; set { _explicitNullValueSubtopicName = value; AdditionalData?.Remove("subtopic_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subtopic_name"); else _explicitNullProperties?.Remove("subtopic_name"); } }
         private string? _explicitNullValueSubtopicName = default!;
 #nullable restore
 #else
-        public string SubtopicName { get => _explicitNullValueSubtopicName; set { _explicitNullValueSubtopicName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subtopic_name"); else _explicitNullProperties?.Remove("subtopic_name"); } }
+        public string SubtopicName { get => _explicitNullValueSubtopicName; set { _explicitNullValueSubtopicName = value; AdditionalData?.Remove("subtopic_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subtopic_name"); else _explicitNullProperties?.Remove("subtopic_name"); } }
         private string _explicitNullValueSubtopicName = default!;
 #endif
         /// <summary>The name of the AI-generated topic.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TopicName { get => _explicitNullValueTopicName; set { _explicitNullValueTopicName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("topic_name"); else _explicitNullProperties?.Remove("topic_name"); } }
+        public string? TopicName { get => _explicitNullValueTopicName; set { _explicitNullValueTopicName = value; AdditionalData?.Remove("topic_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("topic_name"); else _explicitNullProperties?.Remove("topic_name"); } }
         private string? _explicitNullValueTopicName = default!;
 #nullable restore
 #else
-        public string TopicName { get => _explicitNullValueTopicName; set { _explicitNullValueTopicName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("topic_name"); else _explicitNullProperties?.Remove("topic_name"); } }
+        public string TopicName { get => _explicitNullValueTopicName; set { _explicitNullValueTopicName = value; AdditionalData?.Remove("topic_name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("topic_name"); else _explicitNullProperties?.Remove("topic_name"); } }
         private string _explicitNullValueTopicName = default!;
 #endif
         /// <summary>

@@ -18,9 +18,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("collected_data") is { } nullNodeCollectedData && nullNodeCollectedData.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CollectedData = null;
-            if (parseNode.GetChildNode("outcome") is { } nullNodeOutcome && nullNodeOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Outcome = null;
-            if (parseNode.GetChildNode("routing_outcome") is { } nullNodeRoutingOutcome && nullNodeRoutingOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RoutingOutcome = null;
+            if (parseNode.GetChildNode("collected_data") is null) { _explicitNullValueCollectedData = default!; _explicitNullProperties?.Remove("collected_data"); }
+            else if (parseNode.GetChildNode("collected_data") is { } nullNodeCollectedData && nullNodeCollectedData.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CollectedData = null;
+            if (parseNode.GetChildNode("outcome") is null) { _explicitNullValueOutcome = default!; _explicitNullProperties?.Remove("outcome"); }
+            else if (parseNode.GetChildNode("outcome") is { } nullNodeOutcome && nullNodeOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Outcome = null;
+            if (parseNode.GetChildNode("routing_outcome") is null) { _explicitNullValueRoutingOutcome = default!; _explicitNullProperties?.Remove("routing_outcome"); }
+            else if (parseNode.GetChildNode("routing_outcome") is { } nullNodeRoutingOutcome && nullNodeRoutingOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RoutingOutcome = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -28,24 +31,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>A flat key-value map of memory fields collected by the sales agent during the conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty? CollectedData { get => _explicitNullValueCollectedData; set { _explicitNullValueCollectedData = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("collected_data"); else _explicitNullProperties?.Remove("collected_data"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty? CollectedData { get => _explicitNullValueCollectedData; set { _explicitNullValueCollectedData = value; AdditionalData?.Remove("collected_data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("collected_data"); else _explicitNullProperties?.Remove("collected_data"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty? _explicitNullValueCollectedData = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty CollectedData { get => _explicitNullValueCollectedData; set { _explicitNullValueCollectedData = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("collected_data"); else _explicitNullProperties?.Remove("collected_data"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty CollectedData { get => _explicitNullValueCollectedData; set { _explicitNullValueCollectedData = value; AdditionalData?.Remove("collected_data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("collected_data"); else _explicitNullProperties?.Remove("collected_data"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty _explicitNullValueCollectedData = default!;
 #endif
         /// <summary>The fixed outcome of the sales agent interaction, used for billing and tracking.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome? Outcome { get => _explicitNullValueOutcome; set { _explicitNullValueOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("outcome"); else _explicitNullProperties?.Remove("outcome"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome? Outcome { get => _explicitNullValueOutcome; set { _explicitNullValueOutcome = value; AdditionalData?.Remove("outcome"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("outcome"); else _explicitNullProperties?.Remove("outcome"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome? _explicitNullValueOutcome = default!;
         /// <summary>The identifier of the user-defined routing outcome selected by the sales agent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RoutingOutcome { get => _explicitNullValueRoutingOutcome; set { _explicitNullValueRoutingOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("routing_outcome"); else _explicitNullProperties?.Remove("routing_outcome"); } }
+        public string? RoutingOutcome { get => _explicitNullValueRoutingOutcome; set { _explicitNullValueRoutingOutcome = value; AdditionalData?.Remove("routing_outcome"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("routing_outcome"); else _explicitNullProperties?.Remove("routing_outcome"); } }
         private string? _explicitNullValueRoutingOutcome = default!;
 #nullable restore
 #else
-        public string RoutingOutcome { get => _explicitNullValueRoutingOutcome; set { _explicitNullValueRoutingOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("routing_outcome"); else _explicitNullProperties?.Remove("routing_outcome"); } }
+        public string RoutingOutcome { get => _explicitNullValueRoutingOutcome; set { _explicitNullValueRoutingOutcome = value; AdditionalData?.Remove("routing_outcome"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("routing_outcome"); else _explicitNullProperties?.Remove("routing_outcome"); } }
         private string _explicitNullValueRoutingOutcome = default!;
 #endif
         /// <summary>
@@ -74,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "collected_data", n => { CollectedData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty>(global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentCollectedDataProperty.CreateFromDiscriminatorValue); } },
-                { "outcome", n => { Outcome = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome>(); } },
+                { "outcome", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.SalesAgentOutcome>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueOutcome = default; _explicitNullProperties?.Remove("outcome"); AdditionalData["outcome"] = unknown; } else { Outcome = parsed; AdditionalData.Remove("outcome"); } } },
                 { "routing_outcome", n => { RoutingOutcome = n.GetStringValue(); } },
             };
         }

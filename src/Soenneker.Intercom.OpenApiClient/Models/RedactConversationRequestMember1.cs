@@ -75,7 +75,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "conversation_part_id", n => { ConversationPartId = n.GetStringValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestMember1_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>

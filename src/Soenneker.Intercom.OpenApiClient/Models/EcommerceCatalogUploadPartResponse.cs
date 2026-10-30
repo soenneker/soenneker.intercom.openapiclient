@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("import_job_id") is { } nullNodeImportJobId && nullNodeImportJobId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImportJobId = null;
-            if (parseNode.GetChildNode("next_part_number") is { } nullNodeNextPartNumber && nullNodeNextPartNumber.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NextPartNumber = null;
+            if (parseNode.GetChildNode("import_job_id") is null) { _explicitNullValueImportJobId = default!; _explicitNullProperties?.Remove("import_job_id"); }
+            else if (parseNode.GetChildNode("import_job_id") is { } nullNodeImportJobId && nullNodeImportJobId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ImportJobId = null;
+            if (parseNode.GetChildNode("next_part_number") is null) { _explicitNullValueNextPartNumber = default!; _explicitNullProperties?.Remove("next_part_number"); }
+            else if (parseNode.GetChildNode("next_part_number") is { } nullNodeNextPartNumber && nullNodeNextPartNumber.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NextPartNumber = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,15 +29,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The unique identifier for the active upload session. Pass this as `import_job_id`in subsequent part uploads and in the finalization request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
+        public string? ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; AdditionalData?.Remove("import_job_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
         private string? _explicitNullValueImportJobId = default!;
 #nullable restore
 #else
-        public string ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
+        public string ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; AdditionalData?.Remove("import_job_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
         private string _explicitNullValueImportJobId = default!;
 #endif
         /// <summary>The part number to use in the next upload request.</summary>
-        public int? NextPartNumber { get => _explicitNullValueNextPartNumber; set { _explicitNullValueNextPartNumber = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("next_part_number"); else _explicitNullProperties?.Remove("next_part_number"); } }
+        public int? NextPartNumber { get => _explicitNullValueNextPartNumber; set { _explicitNullValueNextPartNumber = value; AdditionalData?.Remove("next_part_number"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("next_part_number"); else _explicitNullProperties?.Remove("next_part_number"); } }
         private int? _explicitNullValueNextPartNumber = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse"/> and sets the default values.

@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("customers") is { } nullNodeCustomers && nullNodeCustomers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Customers = null;
+            if (parseNode.GetChildNode("customers") is null) { _explicitNullValueCustomers = default!; _explicitNullProperties?.Remove("customers"); }
+            else if (parseNode.GetChildNode("customers") is { } nullNodeCustomers && nullNodeCustomers.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Customers = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The conversation participants after the change</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponseCustomersItem>? Customers { get => _explicitNullValueCustomers; set { _explicitNullValueCustomers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customers"); else _explicitNullProperties?.Remove("customers"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponseCustomersItem>? Customers { get => _explicitNullValueCustomers; set { _explicitNullValueCustomers = value; AdditionalData?.Remove("customers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customers"); else _explicitNullProperties?.Remove("customers"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponseCustomersItem>? _explicitNullValueCustomers = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponseCustomersItem> Customers { get => _explicitNullValueCustomers; set { _explicitNullValueCustomers = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customers"); else _explicitNullProperties?.Remove("customers"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponseCustomersItem> Customers { get => _explicitNullValueCustomers; set { _explicitNullValueCustomers = value; AdditionalData?.Remove("customers"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customers"); else _explicitNullProperties?.Remove("customers"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponseCustomersItem> _explicitNullValueCustomers = default!;
 #endif
         /// <summary>

@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("primary_team_ids") is { } nullNodePrimaryTeamIds && nullNodePrimaryTeamIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryTeamIds = null;
-            if (parseNode.GetChildNode("secondary_team_ids") is { } nullNodeSecondaryTeamIds && nullNodeSecondaryTeamIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryTeamIds = null;
+            if (parseNode.GetChildNode("primary_team_ids") is null) { _explicitNullValuePrimaryTeamIds = default!; _explicitNullProperties?.Remove("primary_team_ids"); }
+            else if (parseNode.GetChildNode("primary_team_ids") is { } nullNodePrimaryTeamIds && nullNodePrimaryTeamIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PrimaryTeamIds = null;
+            if (parseNode.GetChildNode("secondary_team_ids") is null) { _explicitNullValueSecondaryTeamIds = default!; _explicitNullProperties?.Remove("secondary_team_ids"); }
+            else if (parseNode.GetChildNode("secondary_team_ids") is { } nullNodeSecondaryTeamIds && nullNodeSecondaryTeamIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SecondaryTeamIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The primary team ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? PrimaryTeamIds { get => _explicitNullValuePrimaryTeamIds; set { _explicitNullValuePrimaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_team_ids"); else _explicitNullProperties?.Remove("primary_team_ids"); } }
+        public List<int?>? PrimaryTeamIds { get => _explicitNullValuePrimaryTeamIds; set { _explicitNullValuePrimaryTeamIds = value; AdditionalData?.Remove("primary_team_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_team_ids"); else _explicitNullProperties?.Remove("primary_team_ids"); } }
         private List<int?>? _explicitNullValuePrimaryTeamIds = default!;
 #nullable restore
 #else
-        public List<int?> PrimaryTeamIds { get => _explicitNullValuePrimaryTeamIds; set { _explicitNullValuePrimaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_team_ids"); else _explicitNullProperties?.Remove("primary_team_ids"); } }
+        public List<int?> PrimaryTeamIds { get => _explicitNullValuePrimaryTeamIds; set { _explicitNullValuePrimaryTeamIds = value; AdditionalData?.Remove("primary_team_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("primary_team_ids"); else _explicitNullProperties?.Remove("primary_team_ids"); } }
         private List<int?> _explicitNullValuePrimaryTeamIds = default!;
 #endif
         /// <summary>The secondary team ids for the team</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<int?>? SecondaryTeamIds { get => _explicitNullValueSecondaryTeamIds; set { _explicitNullValueSecondaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_team_ids"); else _explicitNullProperties?.Remove("secondary_team_ids"); } }
+        public List<int?>? SecondaryTeamIds { get => _explicitNullValueSecondaryTeamIds; set { _explicitNullValueSecondaryTeamIds = value; AdditionalData?.Remove("secondary_team_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_team_ids"); else _explicitNullProperties?.Remove("secondary_team_ids"); } }
         private List<int?>? _explicitNullValueSecondaryTeamIds = default!;
 #nullable restore
 #else
-        public List<int?> SecondaryTeamIds { get => _explicitNullValueSecondaryTeamIds; set { _explicitNullValueSecondaryTeamIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_team_ids"); else _explicitNullProperties?.Remove("secondary_team_ids"); } }
+        public List<int?> SecondaryTeamIds { get => _explicitNullValueSecondaryTeamIds; set { _explicitNullValueSecondaryTeamIds = value; AdditionalData?.Remove("secondary_team_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("secondary_team_ids"); else _explicitNullProperties?.Remove("secondary_team_ids"); } }
         private List<int?> _explicitNullValueSecondaryTeamIds = default!;
 #endif
         /// <summary>

@@ -18,15 +18,24 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
-            if (parseNode.GetChildNode("cover_image_url") is { } nullNodeCoverImageUrl && nullNodeCoverImageUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CoverImageUrl = null;
-            if (parseNode.GetChildNode("deliver_silently") is { } nullNodeDeliverSilently && nullNodeDeliverSilently.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DeliverSilently = null;
-            if (parseNode.GetChildNode("labels") is { } nullNodeLabels && nullNodeLabels.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Labels = null;
-            if (parseNode.GetChildNode("newsfeed_assignments") is { } nullNodeNewsfeedAssignments && nullNodeNewsfeedAssignments.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NewsfeedAssignments = null;
-            if (parseNode.GetChildNode("reactions") is { } nullNodeReactions && nullNodeReactions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reactions = null;
-            if (parseNode.GetChildNode("sender_id") is { } nullNodeSenderId && nullNodeSenderId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderId = null;
-            if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
-            if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
+            if (parseNode.GetChildNode("body") is null) { _explicitNullValueBody = default!; _explicitNullProperties?.Remove("body"); }
+            else if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("cover_image_url") is null) { _explicitNullValueCoverImageUrl = default!; _explicitNullProperties?.Remove("cover_image_url"); }
+            else if (parseNode.GetChildNode("cover_image_url") is { } nullNodeCoverImageUrl && nullNodeCoverImageUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CoverImageUrl = null;
+            if (parseNode.GetChildNode("deliver_silently") is null) { _explicitNullValueDeliverSilently = default!; _explicitNullProperties?.Remove("deliver_silently"); }
+            else if (parseNode.GetChildNode("deliver_silently") is { } nullNodeDeliverSilently && nullNodeDeliverSilently.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DeliverSilently = null;
+            if (parseNode.GetChildNode("labels") is null) { _explicitNullValueLabels = default!; _explicitNullProperties?.Remove("labels"); }
+            else if (parseNode.GetChildNode("labels") is { } nullNodeLabels && nullNodeLabels.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Labels = null;
+            if (parseNode.GetChildNode("newsfeed_assignments") is null) { _explicitNullValueNewsfeedAssignments = default!; _explicitNullProperties?.Remove("newsfeed_assignments"); }
+            else if (parseNode.GetChildNode("newsfeed_assignments") is { } nullNodeNewsfeedAssignments && nullNodeNewsfeedAssignments.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NewsfeedAssignments = null;
+            if (parseNode.GetChildNode("reactions") is null) { _explicitNullValueReactions = default!; _explicitNullProperties?.Remove("reactions"); }
+            else if (parseNode.GetChildNode("reactions") is { } nullNodeReactions && nullNodeReactions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Reactions = null;
+            if (parseNode.GetChildNode("sender_id") is null) { _explicitNullValueSenderId = default!; _explicitNullProperties?.Remove("sender_id"); }
+            else if (parseNode.GetChildNode("sender_id") is { } nullNodeSenderId && nullNodeSenderId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SenderId = null;
+            if (parseNode.GetChildNode("state") is null) { _explicitNullValueState = default!; _explicitNullProperties?.Remove("state"); }
+            else if (parseNode.GetChildNode("state") is { } nullNodeState && nullNodeState.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) State = null;
+            if (parseNode.GetChildNode("title") is null) { _explicitNullValueTitle = default!; _explicitNullProperties?.Remove("title"); }
+            else if (parseNode.GetChildNode("title") is { } nullNodeTitle && nullNodeTitle.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Title = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -34,70 +43,70 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The news item body, which may contain HTML.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string _explicitNullValueBody = default!;
 #endif
         /// <summary>URL of the image to use as the cover. Must contain `.png` or `.jpg` in lower case, so `.jpeg` and `.PNG` are rejected. Intercom copies the image and serves it from its own signed URL.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CoverImageUrl { get => _explicitNullValueCoverImageUrl; set { _explicitNullValueCoverImageUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cover_image_url"); else _explicitNullProperties?.Remove("cover_image_url"); } }
+        public string? CoverImageUrl { get => _explicitNullValueCoverImageUrl; set { _explicitNullValueCoverImageUrl = value; AdditionalData?.Remove("cover_image_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cover_image_url"); else _explicitNullProperties?.Remove("cover_image_url"); } }
         private string? _explicitNullValueCoverImageUrl = default!;
 #nullable restore
 #else
-        public string CoverImageUrl { get => _explicitNullValueCoverImageUrl; set { _explicitNullValueCoverImageUrl = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cover_image_url"); else _explicitNullProperties?.Remove("cover_image_url"); } }
+        public string CoverImageUrl { get => _explicitNullValueCoverImageUrl; set { _explicitNullValueCoverImageUrl = value; AdditionalData?.Remove("cover_image_url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cover_image_url"); else _explicitNullProperties?.Remove("cover_image_url"); } }
         private string _explicitNullValueCoverImageUrl = default!;
 #endif
         /// <summary>When set to `true`, the news item will appear in the messenger newsfeed without showing a notification badge.</summary>
-        public bool? DeliverSilently { get => _explicitNullValueDeliverSilently; set { _explicitNullValueDeliverSilently = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliver_silently"); else _explicitNullProperties?.Remove("deliver_silently"); } }
+        public bool? DeliverSilently { get => _explicitNullValueDeliverSilently; set { _explicitNullValueDeliverSilently = value; AdditionalData?.Remove("deliver_silently"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliver_silently"); else _explicitNullProperties?.Remove("deliver_silently"); } }
         private bool? _explicitNullValueDeliverSilently = default!;
         /// <summary>Label names displayed to users to categorize the news item. Send the full list; the labels you leave out are removed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
+        public List<string>? Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; AdditionalData?.Remove("labels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
         private List<string>? _explicitNullValueLabels = default!;
 #nullable restore
 #else
-        public List<string> Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
+        public List<string> Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; AdditionalData?.Remove("labels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
         private List<string> _explicitNullValueLabels = default!;
 #endif
         /// <summary>A list of newsfeed_assignments to assign to the specified newsfeed. Send the full list; the assignments you leave out are removed.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>? NewsfeedAssignments { get => _explicitNullValueNewsfeedAssignments; set { _explicitNullValueNewsfeedAssignments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_assignments"); else _explicitNullProperties?.Remove("newsfeed_assignments"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>? NewsfeedAssignments { get => _explicitNullValueNewsfeedAssignments; set { _explicitNullValueNewsfeedAssignments = value; AdditionalData?.Remove("newsfeed_assignments"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_assignments"); else _explicitNullProperties?.Remove("newsfeed_assignments"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>? _explicitNullValueNewsfeedAssignments = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment> NewsfeedAssignments { get => _explicitNullValueNewsfeedAssignments; set { _explicitNullValueNewsfeedAssignments = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_assignments"); else _explicitNullProperties?.Remove("newsfeed_assignments"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment> NewsfeedAssignments { get => _explicitNullValueNewsfeedAssignments; set { _explicitNullValueNewsfeedAssignments = value; AdditionalData?.Remove("newsfeed_assignments"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_assignments"); else _explicitNullProperties?.Remove("newsfeed_assignments"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment> _explicitNullValueNewsfeedAssignments = default!;
 #endif
         /// <summary>Ordered list of emoji reactions to the news item. Send an empty list to disable reactions. Send at most five, each a single Unicode code point, so an emoji with a skin tone, a joiner sequence or a variation selector (such as ❤️) is rejected.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? Reactions { get => _explicitNullValueReactions; set { _explicitNullValueReactions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reactions"); else _explicitNullProperties?.Remove("reactions"); } }
+        public List<string>? Reactions { get => _explicitNullValueReactions; set { _explicitNullValueReactions = value; AdditionalData?.Remove("reactions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reactions"); else _explicitNullProperties?.Remove("reactions"); } }
         private List<string>? _explicitNullValueReactions = default!;
 #nullable restore
 #else
-        public List<string> Reactions { get => _explicitNullValueReactions; set { _explicitNullValueReactions = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reactions"); else _explicitNullProperties?.Remove("reactions"); } }
+        public List<string> Reactions { get => _explicitNullValueReactions; set { _explicitNullValueReactions = value; AdditionalData?.Remove("reactions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reactions"); else _explicitNullProperties?.Remove("reactions"); } }
         private List<string> _explicitNullValueReactions = default!;
 #endif
         /// <summary>The id of the sender of the news item. Must be a teammate on the workspace.</summary>
-        public int? SenderId { get => _explicitNullValueSenderId; set { _explicitNullValueSenderId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sender_id"); else _explicitNullProperties?.Remove("sender_id"); } }
+        public int? SenderId { get => _explicitNullValueSenderId; set { _explicitNullValueSenderId = value; AdditionalData?.Remove("sender_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sender_id"); else _explicitNullProperties?.Remove("sender_id"); } }
         private int? _explicitNullValueSenderId = default!;
         /// <summary>News items will not be visible to your users in the assigned newsfeeds until they are set live.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequestState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequestState? State { get => _explicitNullValueState; set { _explicitNullValueState = value; AdditionalData?.Remove("state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("state"); else _explicitNullProperties?.Remove("state"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequestState? _explicitNullValueState = default!;
         /// <summary>The title of the news item.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        public string? Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string? _explicitNullValueTitle = default!;
 #nullable restore
 #else
-        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
+        public string Title { get => _explicitNullValueTitle; set { _explicitNullValueTitle = value; AdditionalData?.Remove("title"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("title"); else _explicitNullProperties?.Remove("title"); } }
         private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>
@@ -132,7 +141,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "newsfeed_assignments", n => { NewsfeedAssignments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "reactions", n => { Reactions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "sender_id", n => { SenderId = n.GetIntValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequestState>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateNewsItemRequestState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "title", n => { Title = n.GetStringValue(); } },
             };
         }

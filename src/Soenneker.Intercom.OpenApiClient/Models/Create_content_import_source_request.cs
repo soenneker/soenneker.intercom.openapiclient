@@ -67,8 +67,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_content_import_source_request_status>(); } },
-                { "sync_behavior", n => { SyncBehavior = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_content_import_source_request_sync_behavior>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_content_import_source_request_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
+                { "sync_behavior", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_content_import_source_request_sync_behavior>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSyncBehavior = default; _explicitNullProperties?.Remove("sync_behavior"); AdditionalData["sync_behavior"] = unknown; } else { SyncBehavior = parsed; AdditionalData.Remove("sync_behavior"); } } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }

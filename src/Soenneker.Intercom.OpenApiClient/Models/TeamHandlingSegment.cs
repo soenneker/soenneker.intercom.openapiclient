@@ -18,49 +18,54 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("ended_at") is { } nullNodeEndedAt && nullNodeEndedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndedAt = null;
-            if (parseNode.GetChildNode("end_reason") is { } nullNodeEndReason && nullNodeEndReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndReason = null;
-            if (parseNode.GetChildNode("started_at") is { } nullNodeStartedAt && nullNodeStartedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartedAt = null;
-            if (parseNode.GetChildNode("start_reason") is { } nullNodeStartReason && nullNodeStartReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartReason = null;
-            if (parseNode.GetChildNode("team") is { } nullNodeTeam && nullNodeTeam.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Team = null;
+            if (parseNode.GetChildNode("ended_at") is null) { _explicitNullValueEndedAt = default!; _explicitNullProperties?.Remove("ended_at"); }
+            else if (parseNode.GetChildNode("ended_at") is { } nullNodeEndedAt && nullNodeEndedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndedAt = null;
+            if (parseNode.GetChildNode("end_reason") is null) { _explicitNullValueEndReason = default!; _explicitNullProperties?.Remove("end_reason"); }
+            else if (parseNode.GetChildNode("end_reason") is { } nullNodeEndReason && nullNodeEndReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EndReason = null;
+            if (parseNode.GetChildNode("started_at") is null) { _explicitNullValueStartedAt = default!; _explicitNullProperties?.Remove("started_at"); }
+            else if (parseNode.GetChildNode("started_at") is { } nullNodeStartedAt && nullNodeStartedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartedAt = null;
+            if (parseNode.GetChildNode("start_reason") is null) { _explicitNullValueStartReason = default!; _explicitNullProperties?.Remove("start_reason"); }
+            else if (parseNode.GetChildNode("start_reason") is { } nullNodeStartReason && nullNodeStartReason.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) StartReason = null;
+            if (parseNode.GetChildNode("team") is null) { _explicitNullValueTeam = default!; _explicitNullProperties?.Remove("team"); }
+            else if (parseNode.GetChildNode("team") is { } nullNodeTeam && nullNodeTeam.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Team = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Null while the period is still open</summary>
-        public DateTimeOffset? EndedAt { get => _explicitNullValueEndedAt; set { _explicitNullValueEndedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ended_at"); else _explicitNullProperties?.Remove("ended_at"); } }
+        public DateTimeOffset? EndedAt { get => _explicitNullValueEndedAt; set { _explicitNullValueEndedAt = value; AdditionalData?.Remove("ended_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ended_at"); else _explicitNullProperties?.Remove("ended_at"); } }
         private DateTimeOffset? _explicitNullValueEndedAt = default!;
         /// <summary>Why the period ended (switch, assignment, reassign, snooze, close, away, auto_away, session_drop, team_change). Null while the period is still open.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? EndReason { get => _explicitNullValueEndReason; set { _explicitNullValueEndReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_reason"); else _explicitNullProperties?.Remove("end_reason"); } }
+        public string? EndReason { get => _explicitNullValueEndReason; set { _explicitNullValueEndReason = value; AdditionalData?.Remove("end_reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_reason"); else _explicitNullProperties?.Remove("end_reason"); } }
         private string? _explicitNullValueEndReason = default!;
 #nullable restore
 #else
-        public string EndReason { get => _explicitNullValueEndReason; set { _explicitNullValueEndReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_reason"); else _explicitNullProperties?.Remove("end_reason"); } }
+        public string EndReason { get => _explicitNullValueEndReason; set { _explicitNullValueEndReason = value; AdditionalData?.Remove("end_reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("end_reason"); else _explicitNullProperties?.Remove("end_reason"); } }
         private string _explicitNullValueEndReason = default!;
 #endif
         /// <summary>The started_at property</summary>
-        public DateTimeOffset? StartedAt { get => _explicitNullValueStartedAt; set { _explicitNullValueStartedAt = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("started_at"); else _explicitNullProperties?.Remove("started_at"); } }
+        public DateTimeOffset? StartedAt { get => _explicitNullValueStartedAt; set { _explicitNullValueStartedAt = value; AdditionalData?.Remove("started_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("started_at"); else _explicitNullProperties?.Remove("started_at"); } }
         private DateTimeOffset? _explicitNullValueStartedAt = default!;
         /// <summary>team_change when the team changed while the teammate kept handling without a break, otherwise null</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? StartReason { get => _explicitNullValueStartReason; set { _explicitNullValueStartReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_reason"); else _explicitNullProperties?.Remove("start_reason"); } }
+        public string? StartReason { get => _explicitNullValueStartReason; set { _explicitNullValueStartReason = value; AdditionalData?.Remove("start_reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_reason"); else _explicitNullProperties?.Remove("start_reason"); } }
         private string? _explicitNullValueStartReason = default!;
 #nullable restore
 #else
-        public string StartReason { get => _explicitNullValueStartReason; set { _explicitNullValueStartReason = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_reason"); else _explicitNullProperties?.Remove("start_reason"); } }
+        public string StartReason { get => _explicitNullValueStartReason; set { _explicitNullValueStartReason = value; AdditionalData?.Remove("start_reason"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("start_reason"); else _explicitNullProperties?.Remove("start_reason"); } }
         private string _explicitNullValueStartReason = default!;
 #endif
         /// <summary>The team assigned when the period ran, or null if no team was assigned</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegmentTeam? Team { get => _explicitNullValueTeam; set { _explicitNullValueTeam = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team"); else _explicitNullProperties?.Remove("team"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegmentTeam? Team { get => _explicitNullValueTeam; set { _explicitNullValueTeam = value; AdditionalData?.Remove("team"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team"); else _explicitNullProperties?.Remove("team"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegmentTeam? _explicitNullValueTeam = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegmentTeam Team { get => _explicitNullValueTeam; set { _explicitNullValueTeam = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team"); else _explicitNullProperties?.Remove("team"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegmentTeam Team { get => _explicitNullValueTeam; set { _explicitNullValueTeam = value; AdditionalData?.Remove("team"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team"); else _explicitNullProperties?.Remove("team"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TeamHandlingSegmentTeam _explicitNullValueTeam = default!;
 #endif
         /// <summary>

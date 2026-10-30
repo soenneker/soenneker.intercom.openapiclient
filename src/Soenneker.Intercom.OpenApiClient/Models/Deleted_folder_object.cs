@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
-                { "object", n => { Object = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_folder_object_object>(); } },
+                { "object", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Deleted_folder_object_object>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueObject = default; _explicitNullProperties?.Remove("object"); AdditionalData["object"] = unknown; } else { Object = parsed; AdditionalData.Remove("object"); } } },
             };
         }
         /// <summary>

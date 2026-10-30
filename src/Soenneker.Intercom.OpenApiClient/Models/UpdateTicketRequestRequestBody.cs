@@ -17,76 +17,86 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
-            if (parseNode.GetChildNode("assignee_id") is { } nullNodeAssigneeId && nullNodeAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssigneeId = null;
-            if (parseNode.GetChildNode("company_id") is { } nullNodeCompanyId && nullNodeCompanyId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyId = null;
-            if (parseNode.GetChildNode("is_shared") is { } nullNodeIsShared && nullNodeIsShared.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IsShared = null;
-            if (parseNode.GetChildNode("open") is { } nullNodeOpen && nullNodeOpen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Open = null;
-            if (parseNode.GetChildNode("priority") is { } nullNodePriority && nullNodePriority.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Priority = null;
-            if (parseNode.GetChildNode("skip_notifications") is { } nullNodeSkipNotifications && nullNodeSkipNotifications.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipNotifications = null;
-            if (parseNode.GetChildNode("snoozed_until") is { } nullNodeSnoozedUntil && nullNodeSnoozedUntil.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SnoozedUntil = null;
-            if (parseNode.GetChildNode("ticket_attributes") is { } nullNodeTicketAttributes && nullNodeTicketAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketAttributes = null;
-            if (parseNode.GetChildNode("ticket_state_id") is { } nullNodeTicketStateId && nullNodeTicketStateId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketStateId = null;
+            if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
+            else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("assignee_id") is null) { _explicitNullValueAssigneeId = default!; _explicitNullProperties?.Remove("assignee_id"); }
+            else if (parseNode.GetChildNode("assignee_id") is { } nullNodeAssigneeId && nullNodeAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssigneeId = null;
+            if (parseNode.GetChildNode("company_id") is null) { _explicitNullValueCompanyId = default!; _explicitNullProperties?.Remove("company_id"); }
+            else if (parseNode.GetChildNode("company_id") is { } nullNodeCompanyId && nullNodeCompanyId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyId = null;
+            if (parseNode.GetChildNode("is_shared") is null) { _explicitNullValueIsShared = default!; _explicitNullProperties?.Remove("is_shared"); }
+            else if (parseNode.GetChildNode("is_shared") is { } nullNodeIsShared && nullNodeIsShared.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IsShared = null;
+            if (parseNode.GetChildNode("open") is null) { _explicitNullValueOpen = default!; _explicitNullProperties?.Remove("open"); }
+            else if (parseNode.GetChildNode("open") is { } nullNodeOpen && nullNodeOpen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Open = null;
+            if (parseNode.GetChildNode("priority") is null) { _explicitNullValuePriority = default!; _explicitNullProperties?.Remove("priority"); }
+            else if (parseNode.GetChildNode("priority") is { } nullNodePriority && nullNodePriority.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Priority = null;
+            if (parseNode.GetChildNode("skip_notifications") is null) { _explicitNullValueSkipNotifications = default!; _explicitNullProperties?.Remove("skip_notifications"); }
+            else if (parseNode.GetChildNode("skip_notifications") is { } nullNodeSkipNotifications && nullNodeSkipNotifications.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipNotifications = null;
+            if (parseNode.GetChildNode("snoozed_until") is null) { _explicitNullValueSnoozedUntil = default!; _explicitNullProperties?.Remove("snoozed_until"); }
+            else if (parseNode.GetChildNode("snoozed_until") is { } nullNodeSnoozedUntil && nullNodeSnoozedUntil.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SnoozedUntil = null;
+            if (parseNode.GetChildNode("ticket_attributes") is null) { _explicitNullValueTicketAttributes = default!; _explicitNullProperties?.Remove("ticket_attributes"); }
+            else if (parseNode.GetChildNode("ticket_attributes") is { } nullNodeTicketAttributes && nullNodeTicketAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketAttributes = null;
+            if (parseNode.GetChildNode("ticket_state_id") is null) { _explicitNullValueTicketStateId = default!; _explicitNullProperties?.Remove("ticket_state_id"); }
+            else if (parseNode.GetChildNode("ticket_state_id") is { } nullNodeTicketStateId && nullNodeTicketStateId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TicketStateId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The ID of the admin performing ticket update. Needed for workflows execution and attributing actions to specific admins.</summary>
-        public int? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
+        public int? AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private int? _explicitNullValueAdminId = default!;
         /// <summary>The ID of the admin or team to which the ticket is assigned. Set this 0 to unassign it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
+        public string? AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; AdditionalData?.Remove("assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
         private string? _explicitNullValueAssigneeId = default!;
 #nullable restore
 #else
-        public string AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
+        public string AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; AdditionalData?.Remove("assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
         private string _explicitNullValueAssigneeId = default!;
 #endif
         /// <summary>The ID of the company that the ticket is associated with. The unique identifier for the company which is given by Intercom. The company must be associated with one of the contacts on the ticket, otherwise the request will fail with a `parameter_invalid` error. Set to nil to remove company.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CompanyId { get => _explicitNullValueCompanyId; set { _explicitNullValueCompanyId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_id"); else _explicitNullProperties?.Remove("company_id"); } }
+        public string? CompanyId { get => _explicitNullValueCompanyId; set { _explicitNullValueCompanyId = value; AdditionalData?.Remove("company_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_id"); else _explicitNullProperties?.Remove("company_id"); } }
         private string? _explicitNullValueCompanyId = default!;
 #nullable restore
 #else
-        public string CompanyId { get => _explicitNullValueCompanyId; set { _explicitNullValueCompanyId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_id"); else _explicitNullProperties?.Remove("company_id"); } }
+        public string CompanyId { get => _explicitNullValueCompanyId; set { _explicitNullValueCompanyId = value; AdditionalData?.Remove("company_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_id"); else _explicitNullProperties?.Remove("company_id"); } }
         private string _explicitNullValueCompanyId = default!;
 #endif
         /// <summary>Set to `true` to share a ticket with the customer. Only a ticket that isn&apos;t shared yet can be shared: a Back-office ticket, of a ticket type that isn&apos;t internal, that is linked to a conversation with no other shared linked ticket. Sending `false`, or `true` for a ticket that is already shared (Customer tickets are shared by default) or can&apos;t be shared (Tracker tickets), returns a `400`.</summary>
-        public bool? IsShared { get => _explicitNullValueIsShared; set { _explicitNullValueIsShared = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("is_shared"); else _explicitNullProperties?.Remove("is_shared"); } }
+        public bool? IsShared { get => _explicitNullValueIsShared; set { _explicitNullValueIsShared = value; AdditionalData?.Remove("is_shared"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("is_shared"); else _explicitNullProperties?.Remove("is_shared"); } }
         private bool? _explicitNullValueIsShared = default!;
         /// <summary>Specify if a ticket is open. Set to false to close a ticket. Closing a ticket will also unsnooze it.</summary>
-        public bool? Open { get => _explicitNullValueOpen; set { _explicitNullValueOpen = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("open"); else _explicitNullProperties?.Remove("open"); } }
+        public bool? Open { get => _explicitNullValueOpen; set { _explicitNullValueOpen = value; AdditionalData?.Remove("open"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("open"); else _explicitNullProperties?.Remove("open"); } }
         private bool? _explicitNullValueOpen = default!;
         /// <summary>The priority level to set on the ticket. Accepts one of none, low, medium, high, or urgent. Set none to clear an existing priority. The change is attributed to admin_id, or to Operator when admin_id is omitted.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority? Priority { get => _explicitNullValuePriority; set { _explicitNullValuePriority = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("priority"); else _explicitNullProperties?.Remove("priority"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority? Priority { get => _explicitNullValuePriority; set { _explicitNullValuePriority = value; AdditionalData?.Remove("priority"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("priority"); else _explicitNullProperties?.Remove("priority"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority? _explicitNullValuePriority = default!;
         /// <summary>Option to disable notifications when a Ticket is updated.</summary>
-        public bool? SkipNotifications { get => _explicitNullValueSkipNotifications; set { _explicitNullValueSkipNotifications = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_notifications"); else _explicitNullProperties?.Remove("skip_notifications"); } }
+        public bool? SkipNotifications { get => _explicitNullValueSkipNotifications; set { _explicitNullValueSkipNotifications = value; AdditionalData?.Remove("skip_notifications"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_notifications"); else _explicitNullProperties?.Remove("skip_notifications"); } }
         private bool? _explicitNullValueSkipNotifications = default!;
         /// <summary>The time you want the ticket to reopen.</summary>
-        public int? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
+        public int? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
         private int? _explicitNullValueSnoozedUntil = default!;
         /// <summary>The attributes set on the ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes? TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes? TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; AdditionalData?.Remove("ticket_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes? _explicitNullValueTicketAttributes = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; AdditionalData?.Remove("ticket_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes _explicitNullValueTicketAttributes = default!;
 #endif
         /// <summary>The ID of the ticket state associated with the ticket type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
+        public string? TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; AdditionalData?.Remove("ticket_state_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
         private string? _explicitNullValueTicketStateId = default!;
 #nullable restore
 #else
-        public string TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
+        public string TicketStateId { get => _explicitNullValueTicketStateId; set { _explicitNullValueTicketStateId = value; AdditionalData?.Remove("ticket_state_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_state_id"); else _explicitNullProperties?.Remove("ticket_state_id"); } }
         private string _explicitNullValueTicketStateId = default!;
 #endif
         /// <summary>
@@ -119,7 +129,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "is_shared", n => { IsShared = n.GetBoolValue(); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
-                { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>(); } },
+                { "priority", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValuePriority = default; _explicitNullProperties?.Remove("priority"); AdditionalData["priority"] = unknown; } else { Priority = parsed; AdditionalData.Remove("priority"); } } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
                 { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
                 { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes.CreateFromDiscriminatorValue); } },

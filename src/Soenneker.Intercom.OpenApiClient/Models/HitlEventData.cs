@@ -18,165 +18,185 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("approved_draft_type") is { } nullNodeApprovedDraftType && nullNodeApprovedDraftType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ApprovedDraftType = null;
-            if (parseNode.GetChildNode("ask_rationale") is { } nullNodeAskRationale && nullNodeAskRationale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AskRationale = null;
-            if (parseNode.GetChildNode("channel") is { } nullNodeChannel && nullNodeChannel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Channel = null;
-            if (parseNode.GetChildNode("confidence_percent") is { } nullNodeConfidencePercent && nullNodeConfidencePercent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConfidencePercent = null;
-            if (parseNode.GetChildNode("customer_question") is { } nullNodeCustomerQuestion && nullNodeCustomerQuestion.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomerQuestion = null;
-            if (parseNode.GetChildNode("draft") is { } nullNodeDraft && nullNodeDraft.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Draft = null;
-            if (parseNode.GetChildNode("duration_seconds") is { } nullNodeDurationSeconds && nullNodeDurationSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DurationSeconds = null;
-            if (parseNode.GetChildNode("final_draft") is { } nullNodeFinalDraft && nullNodeFinalDraft.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FinalDraft = null;
-            if (parseNode.GetChildNode("issue_summary") is { } nullNodeIssueSummary && nullNodeIssueSummary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IssueSummary = null;
-            if (parseNode.GetChildNode("outcome") is { } nullNodeOutcome && nullNodeOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Outcome = null;
-            if (parseNode.GetChildNode("payload_truncated") is { } nullNodePayloadTruncated && nullNodePayloadTruncated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PayloadTruncated = null;
-            if (parseNode.GetChildNode("regeneration_outcome") is { } nullNodeRegenerationOutcome && nullNodeRegenerationOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RegenerationOutcome = null;
-            if (parseNode.GetChildNode("reviewer_admin_id") is { } nullNodeReviewerAdminId && nullNodeReviewerAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReviewerAdminId = null;
-            if (parseNode.GetChildNode("revised_draft") is { } nullNodeRevisedDraft && nullNodeRevisedDraft.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RevisedDraft = null;
-            if (parseNode.GetChildNode("round_index") is { } nullNodeRoundIndex && nullNodeRoundIndex.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RoundIndex = null;
-            if (parseNode.GetChildNode("rounds_count") is { } nullNodeRoundsCount && nullNodeRoundsCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RoundsCount = null;
-            if (parseNode.GetChildNode("rule_threshold_percent") is { } nullNodeRuleThresholdPercent && nullNodeRuleThresholdPercent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleThresholdPercent = null;
-            if (parseNode.GetChildNode("sent_text") is { } nullNodeSentText && nullNodeSentText.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SentText = null;
-            if (parseNode.GetChildNode("sharp_ask") is { } nullNodeSharpAsk && nullNodeSharpAsk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SharpAsk = null;
-            if (parseNode.GetChildNode("teammate_input") is { } nullNodeTeammateInput && nullNodeTeammateInput.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeammateInput = null;
+            if (parseNode.GetChildNode("approved_draft_type") is null) { _explicitNullValueApprovedDraftType = default!; _explicitNullProperties?.Remove("approved_draft_type"); }
+            else if (parseNode.GetChildNode("approved_draft_type") is { } nullNodeApprovedDraftType && nullNodeApprovedDraftType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ApprovedDraftType = null;
+            if (parseNode.GetChildNode("ask_rationale") is null) { _explicitNullValueAskRationale = default!; _explicitNullProperties?.Remove("ask_rationale"); }
+            else if (parseNode.GetChildNode("ask_rationale") is { } nullNodeAskRationale && nullNodeAskRationale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AskRationale = null;
+            if (parseNode.GetChildNode("channel") is null) { _explicitNullValueChannel = default!; _explicitNullProperties?.Remove("channel"); }
+            else if (parseNode.GetChildNode("channel") is { } nullNodeChannel && nullNodeChannel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Channel = null;
+            if (parseNode.GetChildNode("confidence_percent") is null) { _explicitNullValueConfidencePercent = default!; _explicitNullProperties?.Remove("confidence_percent"); }
+            else if (parseNode.GetChildNode("confidence_percent") is { } nullNodeConfidencePercent && nullNodeConfidencePercent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConfidencePercent = null;
+            if (parseNode.GetChildNode("customer_question") is null) { _explicitNullValueCustomerQuestion = default!; _explicitNullProperties?.Remove("customer_question"); }
+            else if (parseNode.GetChildNode("customer_question") is { } nullNodeCustomerQuestion && nullNodeCustomerQuestion.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomerQuestion = null;
+            if (parseNode.GetChildNode("draft") is null) { _explicitNullValueDraft = default!; _explicitNullProperties?.Remove("draft"); }
+            else if (parseNode.GetChildNode("draft") is { } nullNodeDraft && nullNodeDraft.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Draft = null;
+            if (parseNode.GetChildNode("duration_seconds") is null) { _explicitNullValueDurationSeconds = default!; _explicitNullProperties?.Remove("duration_seconds"); }
+            else if (parseNode.GetChildNode("duration_seconds") is { } nullNodeDurationSeconds && nullNodeDurationSeconds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) DurationSeconds = null;
+            if (parseNode.GetChildNode("final_draft") is null) { _explicitNullValueFinalDraft = default!; _explicitNullProperties?.Remove("final_draft"); }
+            else if (parseNode.GetChildNode("final_draft") is { } nullNodeFinalDraft && nullNodeFinalDraft.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) FinalDraft = null;
+            if (parseNode.GetChildNode("issue_summary") is null) { _explicitNullValueIssueSummary = default!; _explicitNullProperties?.Remove("issue_summary"); }
+            else if (parseNode.GetChildNode("issue_summary") is { } nullNodeIssueSummary && nullNodeIssueSummary.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) IssueSummary = null;
+            if (parseNode.GetChildNode("outcome") is null) { _explicitNullValueOutcome = default!; _explicitNullProperties?.Remove("outcome"); }
+            else if (parseNode.GetChildNode("outcome") is { } nullNodeOutcome && nullNodeOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Outcome = null;
+            if (parseNode.GetChildNode("payload_truncated") is null) { _explicitNullValuePayloadTruncated = default!; _explicitNullProperties?.Remove("payload_truncated"); }
+            else if (parseNode.GetChildNode("payload_truncated") is { } nullNodePayloadTruncated && nullNodePayloadTruncated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PayloadTruncated = null;
+            if (parseNode.GetChildNode("regeneration_outcome") is null) { _explicitNullValueRegenerationOutcome = default!; _explicitNullProperties?.Remove("regeneration_outcome"); }
+            else if (parseNode.GetChildNode("regeneration_outcome") is { } nullNodeRegenerationOutcome && nullNodeRegenerationOutcome.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RegenerationOutcome = null;
+            if (parseNode.GetChildNode("reviewer_admin_id") is null) { _explicitNullValueReviewerAdminId = default!; _explicitNullProperties?.Remove("reviewer_admin_id"); }
+            else if (parseNode.GetChildNode("reviewer_admin_id") is { } nullNodeReviewerAdminId && nullNodeReviewerAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReviewerAdminId = null;
+            if (parseNode.GetChildNode("revised_draft") is null) { _explicitNullValueRevisedDraft = default!; _explicitNullProperties?.Remove("revised_draft"); }
+            else if (parseNode.GetChildNode("revised_draft") is { } nullNodeRevisedDraft && nullNodeRevisedDraft.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RevisedDraft = null;
+            if (parseNode.GetChildNode("round_index") is null) { _explicitNullValueRoundIndex = default!; _explicitNullProperties?.Remove("round_index"); }
+            else if (parseNode.GetChildNode("round_index") is { } nullNodeRoundIndex && nullNodeRoundIndex.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RoundIndex = null;
+            if (parseNode.GetChildNode("rounds_count") is null) { _explicitNullValueRoundsCount = default!; _explicitNullProperties?.Remove("rounds_count"); }
+            else if (parseNode.GetChildNode("rounds_count") is { } nullNodeRoundsCount && nullNodeRoundsCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RoundsCount = null;
+            if (parseNode.GetChildNode("rule_threshold_percent") is null) { _explicitNullValueRuleThresholdPercent = default!; _explicitNullProperties?.Remove("rule_threshold_percent"); }
+            else if (parseNode.GetChildNode("rule_threshold_percent") is { } nullNodeRuleThresholdPercent && nullNodeRuleThresholdPercent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleThresholdPercent = null;
+            if (parseNode.GetChildNode("sent_text") is null) { _explicitNullValueSentText = default!; _explicitNullProperties?.Remove("sent_text"); }
+            else if (parseNode.GetChildNode("sent_text") is { } nullNodeSentText && nullNodeSentText.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SentText = null;
+            if (parseNode.GetChildNode("sharp_ask") is null) { _explicitNullValueSharpAsk = default!; _explicitNullProperties?.Remove("sharp_ask"); }
+            else if (parseNode.GetChildNode("sharp_ask") is { } nullNodeSharpAsk && nullNodeSharpAsk.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SharpAsk = null;
+            if (parseNode.GetChildNode("teammate_input") is null) { _explicitNullValueTeammateInput = default!; _explicitNullProperties?.Remove("teammate_input"); }
+            else if (parseNode.GetChildNode("teammate_input") is { } nullNodeTeammateInput && nullNodeTeammateInput.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TeammateInput = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>Whether the teammate approved Fin&apos;s original draft or the one it revised after their feedback.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataApprovedDraftType? ApprovedDraftType { get => _explicitNullValueApprovedDraftType; set { _explicitNullValueApprovedDraftType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("approved_draft_type"); else _explicitNullProperties?.Remove("approved_draft_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataApprovedDraftType? ApprovedDraftType { get => _explicitNullValueApprovedDraftType; set { _explicitNullValueApprovedDraftType = value; AdditionalData?.Remove("approved_draft_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("approved_draft_type"); else _explicitNullProperties?.Remove("approved_draft_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataApprovedDraftType? _explicitNullValueApprovedDraftType = default!;
         /// <summary>Why Fin needed to ask.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? AskRationale { get => _explicitNullValueAskRationale; set { _explicitNullValueAskRationale = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ask_rationale"); else _explicitNullProperties?.Remove("ask_rationale"); } }
+        public string? AskRationale { get => _explicitNullValueAskRationale; set { _explicitNullValueAskRationale = value; AdditionalData?.Remove("ask_rationale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ask_rationale"); else _explicitNullProperties?.Remove("ask_rationale"); } }
         private string? _explicitNullValueAskRationale = default!;
 #nullable restore
 #else
-        public string AskRationale { get => _explicitNullValueAskRationale; set { _explicitNullValueAskRationale = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ask_rationale"); else _explicitNullProperties?.Remove("ask_rationale"); } }
+        public string AskRationale { get => _explicitNullValueAskRationale; set { _explicitNullValueAskRationale = value; AdditionalData?.Remove("ask_rationale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ask_rationale"); else _explicitNullProperties?.Remove("ask_rationale"); } }
         private string _explicitNullValueAskRationale = default!;
 #endif
         /// <summary>The channel the conversation was on when Fin consulted a teammate.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataChannel? Channel { get => _explicitNullValueChannel; set { _explicitNullValueChannel = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("channel"); else _explicitNullProperties?.Remove("channel"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataChannel? Channel { get => _explicitNullValueChannel; set { _explicitNullValueChannel = value; AdditionalData?.Remove("channel"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("channel"); else _explicitNullProperties?.Remove("channel"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataChannel? _explicitNullValueChannel = default!;
         /// <summary>How confident Fin was in its answer, as a percentage. Compare against `rule_threshold_percent`.</summary>
-        public int? ConfidencePercent { get => _explicitNullValueConfidencePercent; set { _explicitNullValueConfidencePercent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("confidence_percent"); else _explicitNullProperties?.Remove("confidence_percent"); } }
+        public int? ConfidencePercent { get => _explicitNullValueConfidencePercent; set { _explicitNullValueConfidencePercent = value; AdditionalData?.Remove("confidence_percent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("confidence_percent"); else _explicitNullProperties?.Remove("confidence_percent"); } }
         private int? _explicitNullValueConfidencePercent = default!;
         /// <summary>The customer&apos;s message that prompted the consultation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? CustomerQuestion { get => _explicitNullValueCustomerQuestion; set { _explicitNullValueCustomerQuestion = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_question"); else _explicitNullProperties?.Remove("customer_question"); } }
+        public string? CustomerQuestion { get => _explicitNullValueCustomerQuestion; set { _explicitNullValueCustomerQuestion = value; AdditionalData?.Remove("customer_question"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_question"); else _explicitNullProperties?.Remove("customer_question"); } }
         private string? _explicitNullValueCustomerQuestion = default!;
 #nullable restore
 #else
-        public string CustomerQuestion { get => _explicitNullValueCustomerQuestion; set { _explicitNullValueCustomerQuestion = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_question"); else _explicitNullProperties?.Remove("customer_question"); } }
+        public string CustomerQuestion { get => _explicitNullValueCustomerQuestion; set { _explicitNullValueCustomerQuestion = value; AdditionalData?.Remove("customer_question"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("customer_question"); else _explicitNullProperties?.Remove("customer_question"); } }
         private string _explicitNullValueCustomerQuestion = default!;
 #endif
         /// <summary>The reply Fin proposed to the teammate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Draft { get => _explicitNullValueDraft; set { _explicitNullValueDraft = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draft"); else _explicitNullProperties?.Remove("draft"); } }
+        public string? Draft { get => _explicitNullValueDraft; set { _explicitNullValueDraft = value; AdditionalData?.Remove("draft"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draft"); else _explicitNullProperties?.Remove("draft"); } }
         private string? _explicitNullValueDraft = default!;
 #nullable restore
 #else
-        public string Draft { get => _explicitNullValueDraft; set { _explicitNullValueDraft = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draft"); else _explicitNullProperties?.Remove("draft"); } }
+        public string Draft { get => _explicitNullValueDraft; set { _explicitNullValueDraft = value; AdditionalData?.Remove("draft"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draft"); else _explicitNullProperties?.Remove("draft"); } }
         private string _explicitNullValueDraft = default!;
 #endif
         /// <summary>How long the consultation took, in seconds.</summary>
-        public int? DurationSeconds { get => _explicitNullValueDurationSeconds; set { _explicitNullValueDurationSeconds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("duration_seconds"); else _explicitNullProperties?.Remove("duration_seconds"); } }
+        public int? DurationSeconds { get => _explicitNullValueDurationSeconds; set { _explicitNullValueDurationSeconds = value; AdditionalData?.Remove("duration_seconds"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("duration_seconds"); else _explicitNullProperties?.Remove("duration_seconds"); } }
         private int? _explicitNullValueDurationSeconds = default!;
         /// <summary>The reply as it stood when the consultation ended.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? FinalDraft { get => _explicitNullValueFinalDraft; set { _explicitNullValueFinalDraft = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("final_draft"); else _explicitNullProperties?.Remove("final_draft"); } }
+        public string? FinalDraft { get => _explicitNullValueFinalDraft; set { _explicitNullValueFinalDraft = value; AdditionalData?.Remove("final_draft"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("final_draft"); else _explicitNullProperties?.Remove("final_draft"); } }
         private string? _explicitNullValueFinalDraft = default!;
 #nullable restore
 #else
-        public string FinalDraft { get => _explicitNullValueFinalDraft; set { _explicitNullValueFinalDraft = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("final_draft"); else _explicitNullProperties?.Remove("final_draft"); } }
+        public string FinalDraft { get => _explicitNullValueFinalDraft; set { _explicitNullValueFinalDraft = value; AdditionalData?.Remove("final_draft"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("final_draft"); else _explicitNullProperties?.Remove("final_draft"); } }
         private string _explicitNullValueFinalDraft = default!;
 #endif
         /// <summary>Fin&apos;s summary of what the customer needs.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? IssueSummary { get => _explicitNullValueIssueSummary; set { _explicitNullValueIssueSummary = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("issue_summary"); else _explicitNullProperties?.Remove("issue_summary"); } }
+        public string? IssueSummary { get => _explicitNullValueIssueSummary; set { _explicitNullValueIssueSummary = value; AdditionalData?.Remove("issue_summary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("issue_summary"); else _explicitNullProperties?.Remove("issue_summary"); } }
         private string? _explicitNullValueIssueSummary = default!;
 #nullable restore
 #else
-        public string IssueSummary { get => _explicitNullValueIssueSummary; set { _explicitNullValueIssueSummary = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("issue_summary"); else _explicitNullProperties?.Remove("issue_summary"); } }
+        public string IssueSummary { get => _explicitNullValueIssueSummary; set { _explicitNullValueIssueSummary = value; AdditionalData?.Remove("issue_summary"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("issue_summary"); else _explicitNullProperties?.Remove("issue_summary"); } }
         private string _explicitNullValueIssueSummary = default!;
 #endif
         /// <summary>How the consultation ended.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataOutcome? Outcome { get => _explicitNullValueOutcome; set { _explicitNullValueOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("outcome"); else _explicitNullProperties?.Remove("outcome"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataOutcome? Outcome { get => _explicitNullValueOutcome; set { _explicitNullValueOutcome = value; AdditionalData?.Remove("outcome"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("outcome"); else _explicitNullProperties?.Remove("outcome"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataOutcome? _explicitNullValueOutcome = default!;
         /// <summary>Whether any text on this consultation was too long to store in full and was cut.</summary>
-        public bool? PayloadTruncated { get => _explicitNullValuePayloadTruncated; set { _explicitNullValuePayloadTruncated = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("payload_truncated"); else _explicitNullProperties?.Remove("payload_truncated"); } }
+        public bool? PayloadTruncated { get => _explicitNullValuePayloadTruncated; set { _explicitNullValuePayloadTruncated = value; AdditionalData?.Remove("payload_truncated"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("payload_truncated"); else _explicitNullProperties?.Remove("payload_truncated"); } }
         private bool? _explicitNullValuePayloadTruncated = default!;
         /// <summary>How Fin responded to the feedback. `answer` means it produced a revised draft, and is the only value accompanied by a `fin_draft_revised` event. `no_answer` means it had nothing to send, `failed` that regeneration failed, `consult_teammate` that it asked the teammate again, and `pending` that the consultation ended before Fin responded.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RegenerationOutcome { get => _explicitNullValueRegenerationOutcome; set { _explicitNullValueRegenerationOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("regeneration_outcome"); else _explicitNullProperties?.Remove("regeneration_outcome"); } }
+        public string? RegenerationOutcome { get => _explicitNullValueRegenerationOutcome; set { _explicitNullValueRegenerationOutcome = value; AdditionalData?.Remove("regeneration_outcome"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("regeneration_outcome"); else _explicitNullProperties?.Remove("regeneration_outcome"); } }
         private string? _explicitNullValueRegenerationOutcome = default!;
 #nullable restore
 #else
-        public string RegenerationOutcome { get => _explicitNullValueRegenerationOutcome; set { _explicitNullValueRegenerationOutcome = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("regeneration_outcome"); else _explicitNullProperties?.Remove("regeneration_outcome"); } }
+        public string RegenerationOutcome { get => _explicitNullValueRegenerationOutcome; set { _explicitNullValueRegenerationOutcome = value; AdditionalData?.Remove("regeneration_outcome"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("regeneration_outcome"); else _explicitNullProperties?.Remove("regeneration_outcome"); } }
         private string _explicitNullValueRegenerationOutcome = default!;
 #endif
         /// <summary>The teammate involved in this event — who gave the feedback, or who approved the draft or took over.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? ReviewerAdminId { get => _explicitNullValueReviewerAdminId; set { _explicitNullValueReviewerAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewer_admin_id"); else _explicitNullProperties?.Remove("reviewer_admin_id"); } }
+        public string? ReviewerAdminId { get => _explicitNullValueReviewerAdminId; set { _explicitNullValueReviewerAdminId = value; AdditionalData?.Remove("reviewer_admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewer_admin_id"); else _explicitNullProperties?.Remove("reviewer_admin_id"); } }
         private string? _explicitNullValueReviewerAdminId = default!;
 #nullable restore
 #else
-        public string ReviewerAdminId { get => _explicitNullValueReviewerAdminId; set { _explicitNullValueReviewerAdminId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewer_admin_id"); else _explicitNullProperties?.Remove("reviewer_admin_id"); } }
+        public string ReviewerAdminId { get => _explicitNullValueReviewerAdminId; set { _explicitNullValueReviewerAdminId = value; AdditionalData?.Remove("reviewer_admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reviewer_admin_id"); else _explicitNullProperties?.Remove("reviewer_admin_id"); } }
         private string _explicitNullValueReviewerAdminId = default!;
 #endif
         /// <summary>The reply Fin produced after the teammate&apos;s feedback.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RevisedDraft { get => _explicitNullValueRevisedDraft; set { _explicitNullValueRevisedDraft = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("revised_draft"); else _explicitNullProperties?.Remove("revised_draft"); } }
+        public string? RevisedDraft { get => _explicitNullValueRevisedDraft; set { _explicitNullValueRevisedDraft = value; AdditionalData?.Remove("revised_draft"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("revised_draft"); else _explicitNullProperties?.Remove("revised_draft"); } }
         private string? _explicitNullValueRevisedDraft = default!;
 #nullable restore
 #else
-        public string RevisedDraft { get => _explicitNullValueRevisedDraft; set { _explicitNullValueRevisedDraft = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("revised_draft"); else _explicitNullProperties?.Remove("revised_draft"); } }
+        public string RevisedDraft { get => _explicitNullValueRevisedDraft; set { _explicitNullValueRevisedDraft = value; AdditionalData?.Remove("revised_draft"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("revised_draft"); else _explicitNullProperties?.Remove("revised_draft"); } }
         private string _explicitNullValueRevisedDraft = default!;
 #endif
         /// <summary>Which round of teammate feedback this event belongs to, starting at 1.</summary>
-        public int? RoundIndex { get => _explicitNullValueRoundIndex; set { _explicitNullValueRoundIndex = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("round_index"); else _explicitNullProperties?.Remove("round_index"); } }
+        public int? RoundIndex { get => _explicitNullValueRoundIndex; set { _explicitNullValueRoundIndex = value; AdditionalData?.Remove("round_index"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("round_index"); else _explicitNullProperties?.Remove("round_index"); } }
         private int? _explicitNullValueRoundIndex = default!;
         /// <summary>How many rounds of teammate feedback the consultation had. Only the ten most recent are returned as events, so this can exceed the number of `fin_teammate_input_received` events.</summary>
-        public int? RoundsCount { get => _explicitNullValueRoundsCount; set { _explicitNullValueRoundsCount = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rounds_count"); else _explicitNullProperties?.Remove("rounds_count"); } }
+        public int? RoundsCount { get => _explicitNullValueRoundsCount; set { _explicitNullValueRoundsCount = value; AdditionalData?.Remove("rounds_count"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rounds_count"); else _explicitNullProperties?.Remove("rounds_count"); } }
         private int? _explicitNullValueRoundsCount = default!;
         /// <summary>The confidence threshold the rule required, as a percentage.</summary>
-        public int? RuleThresholdPercent { get => _explicitNullValueRuleThresholdPercent; set { _explicitNullValueRuleThresholdPercent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_threshold_percent"); else _explicitNullProperties?.Remove("rule_threshold_percent"); } }
+        public int? RuleThresholdPercent { get => _explicitNullValueRuleThresholdPercent; set { _explicitNullValueRuleThresholdPercent = value; AdditionalData?.Remove("rule_threshold_percent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_threshold_percent"); else _explicitNullProperties?.Remove("rule_threshold_percent"); } }
         private int? _explicitNullValueRuleThresholdPercent = default!;
         /// <summary>What was sent to the customer. Null when nothing was sent.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SentText { get => _explicitNullValueSentText; set { _explicitNullValueSentText = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent_text"); else _explicitNullProperties?.Remove("sent_text"); } }
+        public string? SentText { get => _explicitNullValueSentText; set { _explicitNullValueSentText = value; AdditionalData?.Remove("sent_text"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent_text"); else _explicitNullProperties?.Remove("sent_text"); } }
         private string? _explicitNullValueSentText = default!;
 #nullable restore
 #else
-        public string SentText { get => _explicitNullValueSentText; set { _explicitNullValueSentText = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent_text"); else _explicitNullProperties?.Remove("sent_text"); } }
+        public string SentText { get => _explicitNullValueSentText; set { _explicitNullValueSentText = value; AdditionalData?.Remove("sent_text"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sent_text"); else _explicitNullProperties?.Remove("sent_text"); } }
         private string _explicitNullValueSentText = default!;
 #endif
         /// <summary>The question Fin put to the teammate.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? SharpAsk { get => _explicitNullValueSharpAsk; set { _explicitNullValueSharpAsk = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sharp_ask"); else _explicitNullProperties?.Remove("sharp_ask"); } }
+        public string? SharpAsk { get => _explicitNullValueSharpAsk; set { _explicitNullValueSharpAsk = value; AdditionalData?.Remove("sharp_ask"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sharp_ask"); else _explicitNullProperties?.Remove("sharp_ask"); } }
         private string? _explicitNullValueSharpAsk = default!;
 #nullable restore
 #else
-        public string SharpAsk { get => _explicitNullValueSharpAsk; set { _explicitNullValueSharpAsk = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sharp_ask"); else _explicitNullProperties?.Remove("sharp_ask"); } }
+        public string SharpAsk { get => _explicitNullValueSharpAsk; set { _explicitNullValueSharpAsk = value; AdditionalData?.Remove("sharp_ask"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sharp_ask"); else _explicitNullProperties?.Remove("sharp_ask"); } }
         private string _explicitNullValueSharpAsk = default!;
 #endif
         /// <summary>The feedback the teammate gave Fin.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? TeammateInput { get => _explicitNullValueTeammateInput; set { _explicitNullValueTeammateInput = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teammate_input"); else _explicitNullProperties?.Remove("teammate_input"); } }
+        public string? TeammateInput { get => _explicitNullValueTeammateInput; set { _explicitNullValueTeammateInput = value; AdditionalData?.Remove("teammate_input"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teammate_input"); else _explicitNullProperties?.Remove("teammate_input"); } }
         private string? _explicitNullValueTeammateInput = default!;
 #nullable restore
 #else
-        public string TeammateInput { get => _explicitNullValueTeammateInput; set { _explicitNullValueTeammateInput = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teammate_input"); else _explicitNullProperties?.Remove("teammate_input"); } }
+        public string TeammateInput { get => _explicitNullValueTeammateInput; set { _explicitNullValueTeammateInput = value; AdditionalData?.Remove("teammate_input"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("teammate_input"); else _explicitNullProperties?.Remove("teammate_input"); } }
         private string _explicitNullValueTeammateInput = default!;
 #endif
         /// <summary>
@@ -204,16 +224,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "approved_draft_type", n => { ApprovedDraftType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataApprovedDraftType>(); } },
+                { "approved_draft_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataApprovedDraftType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueApprovedDraftType = default; _explicitNullProperties?.Remove("approved_draft_type"); AdditionalData["approved_draft_type"] = unknown; } else { ApprovedDraftType = parsed; AdditionalData.Remove("approved_draft_type"); } } },
                 { "ask_rationale", n => { AskRationale = n.GetStringValue(); } },
-                { "channel", n => { Channel = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataChannel>(); } },
+                { "channel", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataChannel>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueChannel = default; _explicitNullProperties?.Remove("channel"); AdditionalData["channel"] = unknown; } else { Channel = parsed; AdditionalData.Remove("channel"); } } },
                 { "confidence_percent", n => { ConfidencePercent = n.GetIntValue(); } },
                 { "customer_question", n => { CustomerQuestion = n.GetStringValue(); } },
                 { "draft", n => { Draft = n.GetStringValue(); } },
                 { "duration_seconds", n => { DurationSeconds = n.GetIntValue(); } },
                 { "final_draft", n => { FinalDraft = n.GetStringValue(); } },
                 { "issue_summary", n => { IssueSummary = n.GetStringValue(); } },
-                { "outcome", n => { Outcome = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataOutcome>(); } },
+                { "outcome", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.HitlEventDataOutcome>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueOutcome = default; _explicitNullProperties?.Remove("outcome"); AdditionalData["outcome"] = unknown; } else { Outcome = parsed; AdditionalData.Remove("outcome"); } } },
                 { "payload_truncated", n => { PayloadTruncated = n.GetBoolValue(); } },
                 { "regeneration_outcome", n => { RegenerationOutcome = n.GetStringValue(); } },
                 { "reviewer_admin_id", n => { ReviewerAdminId = n.GetStringValue(); } },

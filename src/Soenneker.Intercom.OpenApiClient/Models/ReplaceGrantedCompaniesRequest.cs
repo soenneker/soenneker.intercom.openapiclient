@@ -18,7 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("company_ids") is { } nullNodeCompanyIds && nullNodeCompanyIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyIds = null;
+            if (parseNode.GetChildNode("company_ids") is null) { _explicitNullValueCompanyIds = default!; _explicitNullProperties?.Remove("company_ids"); }
+            else if (parseNode.GetChildNode("company_ids") is { } nullNodeCompanyIds && nullNodeCompanyIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CompanyIds = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -26,11 +27,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The `company_id` values of the companies to grant the contact access to. Send an empty array to drop every grant. Maximum of 100 ids.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<string>? CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_ids"); else _explicitNullProperties?.Remove("company_ids"); } }
+        public List<string>? CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; AdditionalData?.Remove("company_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_ids"); else _explicitNullProperties?.Remove("company_ids"); } }
         private List<string>? _explicitNullValueCompanyIds = default!;
 #nullable restore
 #else
-        public List<string> CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_ids"); else _explicitNullProperties?.Remove("company_ids"); } }
+        public List<string> CompanyIds { get => _explicitNullValueCompanyIds; set { _explicitNullValueCompanyIds = value; AdditionalData?.Remove("company_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("company_ids"); else _explicitNullProperties?.Remove("company_ids"); } }
         private List<string> _explicitNullValueCompanyIds = default!;
 #endif
         /// <summary>

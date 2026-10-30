@@ -18,13 +18,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("merge_into_conversation_id") is { } nullNodeMergeIntoConversationId && nullNodeMergeIntoConversationId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MergeIntoConversationId = null;
+            if (parseNode.GetChildNode("merge_into_conversation_id") is null) { _explicitNullValueMergeIntoConversationId = default!; _explicitNullProperties?.Remove("merge_into_conversation_id"); }
+            else if (parseNode.GetChildNode("merge_into_conversation_id") is { } nullNodeMergeIntoConversationId && nullNodeMergeIntoConversationId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MergeIntoConversationId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The ID of the primary (target) conversation to merge into.</summary>
-        public int? MergeIntoConversationId { get => _explicitNullValueMergeIntoConversationId; set { _explicitNullValueMergeIntoConversationId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("merge_into_conversation_id"); else _explicitNullProperties?.Remove("merge_into_conversation_id"); } }
+        public int? MergeIntoConversationId { get => _explicitNullValueMergeIntoConversationId; set { _explicitNullValueMergeIntoConversationId = value; AdditionalData?.Remove("merge_into_conversation_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("merge_into_conversation_id"); else _explicitNullProperties?.Remove("merge_into_conversation_id"); } }
         private int? _explicitNullValueMergeIntoConversationId = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.MergeConversationsRequest"/> and sets the default values.

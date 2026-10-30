@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("companies") is { } nullNodeCompanies && nullNodeCompanies.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Companies = null;
-            if (parseNode.GetChildNode("job") is { } nullNodeJob && nullNodeJob.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Job = null;
+            if (parseNode.GetChildNode("companies") is null) { _explicitNullValueCompanies = default!; _explicitNullProperties?.Remove("companies"); }
+            else if (parseNode.GetChildNode("companies") is { } nullNodeCompanies && nullNodeCompanies.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Companies = null;
+            if (parseNode.GetChildNode("job") is null) { _explicitNullValueJob = default!; _explicitNullProperties?.Remove("job"); }
+            else if (parseNode.GetChildNode("job") is { } nullNodeJob && nullNodeJob.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Job = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>An array of company objects to create or update. Maximum 100 companies per request.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestCompaniesItem>? Companies { get => _explicitNullValueCompanies; set { _explicitNullValueCompanies = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companies"); else _explicitNullProperties?.Remove("companies"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestCompaniesItem>? Companies { get => _explicitNullValueCompanies; set { _explicitNullValueCompanies = value; AdditionalData?.Remove("companies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companies"); else _explicitNullProperties?.Remove("companies"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestCompaniesItem>? _explicitNullValueCompanies = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestCompaniesItem> Companies { get => _explicitNullValueCompanies; set { _explicitNullValueCompanies = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companies"); else _explicitNullProperties?.Remove("companies"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestCompaniesItem> Companies { get => _explicitNullValueCompanies; set { _explicitNullValueCompanies = value; AdditionalData?.Remove("companies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companies"); else _explicitNullProperties?.Remove("companies"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestCompaniesItem> _explicitNullValueCompanies = default!;
 #endif
         /// <summary>Optional. Include to append tasks to an existing job.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestJob? Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestJob? Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; AdditionalData?.Remove("job"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestJob? _explicitNullValueJob = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestJob Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestJob Job { get => _explicitNullValueJob; set { _explicitNullValueJob = value; AdditionalData?.Remove("job"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("job"); else _explicitNullProperties?.Remove("job"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.BulkCreateCompaniesRequestJob _explicitNullValueJob = default!;
 #endif
         /// <summary>

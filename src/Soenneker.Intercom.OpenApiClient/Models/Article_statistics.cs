@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "neutral_reaction_percentage", n => { NeutralReactionPercentage = n.GetFloatValue(); } },
                 { "reactions", n => { Reactions = n.GetIntValue(); } },
                 { "sad_reaction_percentage", n => { SadReactionPercentage = n.GetFloatValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Article_statistics_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "views", n => { Views = n.GetIntValue(); } },
             };
         }

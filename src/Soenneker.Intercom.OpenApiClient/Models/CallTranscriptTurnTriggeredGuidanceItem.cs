@@ -17,9 +17,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("match_type") is { } nullNodeMatchType && nullNodeMatchType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MatchType = null;
-            if (parseNode.GetChildNode("rule_id") is { } nullNodeRuleId && nullNodeRuleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleId = null;
-            if (parseNode.GetChildNode("rule_text") is { } nullNodeRuleText && nullNodeRuleText.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleText = null;
+            if (parseNode.GetChildNode("match_type") is null) { _explicitNullValueMatchType = default!; _explicitNullProperties?.Remove("match_type"); }
+            else if (parseNode.GetChildNode("match_type") is { } nullNodeMatchType && nullNodeMatchType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MatchType = null;
+            if (parseNode.GetChildNode("rule_id") is null) { _explicitNullValueRuleId = default!; _explicitNullProperties?.Remove("rule_id"); }
+            else if (parseNode.GetChildNode("rule_id") is { } nullNodeRuleId && nullNodeRuleId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleId = null;
+            if (parseNode.GetChildNode("rule_text") is null) { _explicitNullValueRuleText = default!; _explicitNullProperties?.Remove("rule_text"); }
+            else if (parseNode.GetChildNode("rule_text") is { } nullNodeRuleText && nullNodeRuleText.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RuleText = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,31 +30,31 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>How the rule was matched.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? MatchType { get => _explicitNullValueMatchType; set { _explicitNullValueMatchType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("match_type"); else _explicitNullProperties?.Remove("match_type"); } }
+        public string? MatchType { get => _explicitNullValueMatchType; set { _explicitNullValueMatchType = value; AdditionalData?.Remove("match_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("match_type"); else _explicitNullProperties?.Remove("match_type"); } }
         private string? _explicitNullValueMatchType = default!;
 #nullable restore
 #else
-        public string MatchType { get => _explicitNullValueMatchType; set { _explicitNullValueMatchType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("match_type"); else _explicitNullProperties?.Remove("match_type"); } }
+        public string MatchType { get => _explicitNullValueMatchType; set { _explicitNullValueMatchType = value; AdditionalData?.Remove("match_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("match_type"); else _explicitNullProperties?.Remove("match_type"); } }
         private string _explicitNullValueMatchType = default!;
 #endif
         /// <summary>The id of the matched guidance rule.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
+        public string? RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; AdditionalData?.Remove("rule_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
         private string? _explicitNullValueRuleId = default!;
 #nullable restore
 #else
-        public string RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
+        public string RuleId { get => _explicitNullValueRuleId; set { _explicitNullValueRuleId = value; AdditionalData?.Remove("rule_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_id"); else _explicitNullProperties?.Remove("rule_id"); } }
         private string _explicitNullValueRuleId = default!;
 #endif
         /// <summary>The text of the matched guidance rule.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? RuleText { get => _explicitNullValueRuleText; set { _explicitNullValueRuleText = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_text"); else _explicitNullProperties?.Remove("rule_text"); } }
+        public string? RuleText { get => _explicitNullValueRuleText; set { _explicitNullValueRuleText = value; AdditionalData?.Remove("rule_text"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_text"); else _explicitNullProperties?.Remove("rule_text"); } }
         private string? _explicitNullValueRuleText = default!;
 #nullable restore
 #else
-        public string RuleText { get => _explicitNullValueRuleText; set { _explicitNullValueRuleText = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_text"); else _explicitNullProperties?.Remove("rule_text"); } }
+        public string RuleText { get => _explicitNullValueRuleText; set { _explicitNullValueRuleText = value; AdditionalData?.Remove("rule_text"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rule_text"); else _explicitNullProperties?.Remove("rule_text"); } }
         private string _explicitNullValueRuleText = default!;
 #endif
         /// <summary>

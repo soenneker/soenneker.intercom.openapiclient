@@ -103,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Reply
                 { "created_at_ms", n => { CreatedAtMs = n.GetDateTimeOffsetValue(); } },
                 { "errors", n => { Errors = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors>(global::Soenneker.Intercom.OpenApiClient.Models.FinAgentAttributeErrors.CreateFromDiscriminatorValue); } },
                 { "sse_subscription_url", n => { SseSubscriptionUrl = n.GetStringValue(); } },
-                { "status", n => { Status = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Fin.Reply.ReplyPostResponse_status>(); } },
+                { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Fin.Reply.ReplyPostResponse_status>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "user_id", n => { UserId = n.GetStringValue(); } },
             };
         }

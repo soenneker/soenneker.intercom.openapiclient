@@ -19899,7 +19899,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateContactRequestRequestBody"
+                "$ref": "#/components/schemas/CreateContactRequest"
               },
               "examples": {
                 "successful": {
@@ -56369,7 +56369,7 @@
         "type": "object",
         "properties": {
           "query": {
-            "$ref": "#/components/schemas/ContactSearchRequestQuery"
+            "$ref": "#/components/schemas/CompanySearchRequestQuery"
           },
           "pagination": {
             "$ref": "#/components/schemas/StartingAfterPaging"
@@ -60499,7 +60499,7 @@
         "title": "Custom Attributes (write)",
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CustomAttributesRequestAdditionalProperties"
+          "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set should be sent here \u2014 attributes Intercom generates are returned in responses only.",
         "example": {
@@ -66500,7 +66500,7 @@
         "type": "object",
         "properties": {
           "query": {
-            "$ref": "#/components/schemas/SearchRequestQuery"
+            "$ref": "#/components/schemas/CompanySearchRequestQuery"
           },
           "pagination": {
             "$ref": "#/components/schemas/StartingAfterPaging"
@@ -69187,9 +69187,6 @@
             "nullable": true
           },
           {
-            "type": "integer"
-          },
-          {
             "type": "number"
           },
           {
@@ -69506,9 +69503,6 @@
             "nullable": true
           },
           {
-            "type": "integer"
-          },
-          {
             "type": "number"
           },
           {
@@ -69523,9 +69517,6 @@
             "nullable": true
           },
           {
-            "type": "integer"
-          },
-          {
             "type": "number"
           },
           {
@@ -69538,9 +69529,6 @@
           {
             "type": "string",
             "nullable": true
-          },
-          {
-            "type": "integer"
           },
           {
             "type": "number"
@@ -69575,9 +69563,6 @@
             "type": "string"
           },
           {
-            "type": "integer"
-          },
-          {
             "type": "number"
           },
           {
@@ -69595,9 +69580,6 @@
         "anyOf": [
           {
             "type": "string"
-          },
-          {
-            "type": "integer"
           },
           {
             "type": "number"
@@ -69618,9 +69600,6 @@
           {
             "type": "string",
             "nullable": true
-          },
-          {
-            "type": "integer"
           },
           {
             "type": "number"
@@ -70321,9 +70300,6 @@
             "nullable": true
           },
           {
-            "type": "integer"
-          },
-          {
             "type": "number"
           },
           {
@@ -70336,9 +70312,6 @@
           {
             "type": "string",
             "nullable": true
-          },
-          {
-            "type": "integer"
           },
           {
             "type": "number"
@@ -71887,7 +71860,7 @@
       "CreateOrUpdateCompanyRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CreateOrUpdateCompanyRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "Values for custom attributes that already exist in your workspace. Each value can be a string, integer, number, boolean or null. Arrays and objects aren\u0027t accepted.",
         "example": {
@@ -71899,7 +71872,7 @@
       "UpdateCompanyRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/UpdateCompanyRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "Values for custom attributes that already exist in your workspace. Each value can be a string, integer, number, boolean or null. Arrays and objects aren\u0027t accepted.",
         "example": {
@@ -72500,7 +72473,7 @@
       "DataEventMetadata": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/DataEventMetadataAdditionalProperties"
+          "$ref": "#/components/schemas/CreateDataEventRequestMetadataAdditionalProperties"
         },
         "description": "Optional metadata about the event. Values keep the type they were sent with.",
         "example": {
@@ -73665,7 +73638,7 @@
       "UpdateVisitorRequestCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/UpdateVisitorRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set for the visitor.",
         "example": {
@@ -73798,7 +73771,7 @@
       "VisitorCustomAttributes": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/VisitorCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes you have set on the Visitor."
       },
@@ -74168,9 +74141,6 @@
             "type": "boolean"
           },
           {
-            "type": "integer"
-          },
-          {
             "type": "number"
           },
           {
@@ -74316,9 +74286,6 @@
         "anyOf": [
           {
             "type": "boolean"
-          },
-          {
-            "type": "integer"
           },
           {
             "type": "number"
@@ -78499,7 +78466,7 @@
       "CreateOrUpdateCompanyRequestCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CreateOrUpdateCompanyRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "Values for custom attributes that already exist in your workspace. Each value can be a string, integer, number, boolean or null. Arrays and objects aren\u0027t accepted.",
         "example": {
@@ -78511,7 +78478,7 @@
       "UpdateCompanyRequestCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/UpdateCompanyRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "Values for custom attributes that already exist in your workspace. Each value can be a string, integer, number, boolean or null. Arrays and objects aren\u0027t accepted.",
         "example": {
@@ -78536,7 +78503,7 @@
         "title": "Custom Attributes (write)",
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CustomAttributesRequestAdditionalProperties"
+          "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set should be sent here \u2014 attributes Intercom generates are returned in responses only.",
         "example": {
@@ -78597,7 +78564,7 @@
       "DataEventMetadataProperty": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/DataEventMetadataAdditionalProperties"
+          "$ref": "#/components/schemas/CreateDataEventRequestMetadataAdditionalProperties"
         },
         "description": "Optional metadata about the event. Values keep the type they were sent with.",
         "example": {
@@ -78708,7 +78675,7 @@
         "title": "Custom Attributes (write)",
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/CustomAttributesRequestAdditionalProperties"
+          "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set should be sent here \u2014 attributes Intercom generates are returned in responses only.",
         "example": {
@@ -78733,7 +78700,7 @@
       "UpdateVisitorRequestCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/UpdateVisitorRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes which are set for the visitor.",
         "example": {
@@ -78745,7 +78712,7 @@
       "VisitorCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/VisitorCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
         "description": "The custom attributes you have set on the Visitor."
       },

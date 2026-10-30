@@ -116,9 +116,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "part_type", n => { PartType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply_part_type>(); } },
+                { "part_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply_part_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValuePartType = default; _explicitNullProperties?.Remove("part_type"); AdditionalData["part_type"] = unknown; } else { PartType = parsed; AdditionalData.Remove("part_type"); } } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Ticket_reply_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
             };
         }

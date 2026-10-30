@@ -47,6 +47,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             
             
             var unionPayload = parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue);
+            bool matchesUnionBranch0 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => ((unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject)) && (unionPayload is not global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject shapeObject0 || (shapeObject0.GetValue() is var shapeMembers1 && ((!shapeMembers1.ContainsKey("import_job_id") || (((shapeMembers1["import_job_id"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))) && (!shapeMembers1.ContainsKey("next_part_number") || ((((shapeMembers1["next_part_number"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedInteger or global::Microsoft.Kiota.Abstractions.Serialization.UntypedLong || (shapeMembers1["next_part_number"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedDouble integral4 && integral4.GetValue() % 1 == 0) || (shapeMembers1["next_part_number"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedDecimal integral5 && integral5.GetValue() % 1 == 0) || (shapeMembers1["next_part_number"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedFloat integral6 && integral6.GetValue() % 1 == 0)))))))))))();
+            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => ((unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject)) && (unionPayload is not global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject shapeObject0 || (shapeObject0.GetValue() is var shapeMembers1 && ((!shapeMembers1.ContainsKey("import_job_id") || (((shapeMembers1["import_job_id"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))) && (!shapeMembers1.ContainsKey("status") || (((shapeMembers1["status"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)) && ((shapeMembers1["status"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal4 && "processing".Equals(literal4.GetValue(), global::System.StringComparison.Ordinal))))) && (!shapeMembers1.ContainsKey("message") || (((shapeMembers1["message"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))))))))();
+            int matchingUnionBranches = 0;
+            if (matchesUnionBranch0) matchingUnionBranches++;
+            if (matchesUnionBranch1) matchingUnionBranches++;
+            bool noSelectedUnionBranch = result.EcommerceCatalogUploadPartResponse == null && result.EcommerceCatalogUploadResponse == null;
+            if (noSelectedUnionBranch && matchesUnionBranch0 && matchingUnionBranches == 1) result.EcommerceCatalogUploadPartResponse = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse(), parseNode);
+            if (noSelectedUnionBranch && matchesUnionBranch1 && matchingUnionBranches == 1) result.EcommerceCatalogUploadResponse = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadResponse(), parseNode);
             if (result.EcommerceCatalogUploadPartResponse == null && result.EcommerceCatalogUploadResponse == null) result.UnrecognizedValue = unionPayload;
 return result;
         }
@@ -56,6 +64,8 @@ return result;
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
+            if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawFields) { var fields = new global::System.Collections.Generic.Dictionary<string, global::System.Action<IParseNode>>(); foreach (var entry in rawFields.GetValue()) fields[entry.Key] = _ => { }; return fields; }
+
             if(EcommerceCatalogUploadPartResponse != null || EcommerceCatalogUploadResponse != null)
             {
                 return ParseNodeHelper.MergeDeserializersForIntersectionWrapper(EcommerceCatalogUploadPartResponse, EcommerceCatalogUploadResponse);
@@ -70,8 +80,11 @@ return result;
         {
             if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
             if (EcommerceCatalogUploadPartResponse == null && EcommerceCatalogUploadResponse == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
-            if (EcommerceCatalogUploadPartResponse != null && EcommerceCatalogUploadResponse == null) { if (EcommerceCatalogUploadPartResponse is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, EcommerceCatalogUploadPartResponse); return; }
-            if (EcommerceCatalogUploadResponse != null && EcommerceCatalogUploadPartResponse == null) { if (EcommerceCatalogUploadResponse is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, EcommerceCatalogUploadResponse); return; }
+            int selectedUnionBranches = 0;
+            if (EcommerceCatalogUploadPartResponse != null) selectedUnionBranches++;
+            if (EcommerceCatalogUploadResponse != null) selectedUnionBranches++;
+            if (EcommerceCatalogUploadPartResponse != null && selectedUnionBranches == 1) { if (EcommerceCatalogUploadPartResponse is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, EcommerceCatalogUploadPartResponse); return; }
+            if (EcommerceCatalogUploadResponse != null && selectedUnionBranches == 1) { if (EcommerceCatalogUploadResponse is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, EcommerceCatalogUploadResponse); return; }
 
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogUploadPartResponse>(null, EcommerceCatalogUploadPartResponse, EcommerceCatalogUploadResponse);

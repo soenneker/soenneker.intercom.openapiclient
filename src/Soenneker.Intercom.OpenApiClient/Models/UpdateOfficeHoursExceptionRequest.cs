@@ -19,42 +19,47 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("exception_date") is { } nullNodeExceptionDate && nullNodeExceptionDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExceptionDate = null;
-            if (parseNode.GetChildNode("exception_type") is { } nullNodeExceptionType && nullNodeExceptionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExceptionType = null;
-            if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
-            if (parseNode.GetChildNode("recurring_annually") is { } nullNodeRecurringAnnually && nullNodeRecurringAnnually.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecurringAnnually = null;
-            if (parseNode.GetChildNode("time_intervals") is { } nullNodeTimeIntervals && nullNodeTimeIntervals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeIntervals = null;
+            if (parseNode.GetChildNode("exception_date") is null) { _explicitNullValueExceptionDate = default!; _explicitNullProperties?.Remove("exception_date"); }
+            else if (parseNode.GetChildNode("exception_date") is { } nullNodeExceptionDate && nullNodeExceptionDate.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExceptionDate = null;
+            if (parseNode.GetChildNode("exception_type") is null) { _explicitNullValueExceptionType = default!; _explicitNullProperties?.Remove("exception_type"); }
+            else if (parseNode.GetChildNode("exception_type") is { } nullNodeExceptionType && nullNodeExceptionType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ExceptionType = null;
+            if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
+            else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
+            if (parseNode.GetChildNode("recurring_annually") is null) { _explicitNullValueRecurringAnnually = default!; _explicitNullProperties?.Remove("recurring_annually"); }
+            else if (parseNode.GetChildNode("recurring_annually") is { } nullNodeRecurringAnnually && nullNodeRecurringAnnually.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) RecurringAnnually = null;
+            if (parseNode.GetChildNode("time_intervals") is null) { _explicitNullValueTimeIntervals = default!; _explicitNullProperties?.Remove("time_intervals"); }
+            else if (parseNode.GetChildNode("time_intervals") is { } nullNodeTimeIntervals && nullNodeTimeIntervals.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TimeIntervals = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The date the exception applies to, in `YYYY-MM-DD` format. A schedule can have only one exception for each date.</summary>
-        public Date? ExceptionDate { get => _explicitNullValueExceptionDate; set { _explicitNullValueExceptionDate = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("exception_date"); else _explicitNullProperties?.Remove("exception_date"); } }
+        public Date? ExceptionDate { get => _explicitNullValueExceptionDate; set { _explicitNullValueExceptionDate = value; AdditionalData?.Remove("exception_date"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("exception_date"); else _explicitNullProperties?.Remove("exception_date"); } }
         private Date? _explicitNullValueExceptionDate = default!;
         /// <summary>The type of exception.</summary>
-        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? ExceptionType { get => _explicitNullValueExceptionType; set { _explicitNullValueExceptionType = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("exception_type"); else _explicitNullProperties?.Remove("exception_type"); } }
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? ExceptionType { get => _explicitNullValueExceptionType; set { _explicitNullValueExceptionType = value; AdditionalData?.Remove("exception_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("exception_type"); else _explicitNullProperties?.Remove("exception_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType? _explicitNullValueExceptionType = default!;
         /// <summary>An optional name for the exception.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string? Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string? _explicitNullValueName = default!;
 #nullable restore
 #else
-        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
+        public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
         /// <summary>Whether the exception repeats every year on the same date.</summary>
-        public bool? RecurringAnnually { get => _explicitNullValueRecurringAnnually; set { _explicitNullValueRecurringAnnually = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recurring_annually"); else _explicitNullProperties?.Remove("recurring_annually"); } }
+        public bool? RecurringAnnually { get => _explicitNullValueRecurringAnnually; set { _explicitNullValueRecurringAnnually = value; AdditionalData?.Remove("recurring_annually"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("recurring_annually"); else _explicitNullProperties?.Remove("recurring_annually"); } }
         private bool? _explicitNullValueRecurringAnnually = default!;
         /// <summary>The open intervals for the exception date. Required for `custom_hours`; omit for `closed`, which returns a 422 error if intervals are sent. `start_minute` and `end_minute` must be on a 15-minute boundary. Don&apos;t send `day_of_week`; it is read-only and a request that includes it is rejected with a 400 error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? TimeIntervals { get => _explicitNullValueTimeIntervals; set { _explicitNullValueTimeIntervals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_intervals"); else _explicitNullProperties?.Remove("time_intervals"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? TimeIntervals { get => _explicitNullValueTimeIntervals; set { _explicitNullValueTimeIntervals = value; AdditionalData?.Remove("time_intervals"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_intervals"); else _explicitNullProperties?.Remove("time_intervals"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>? _explicitNullValueTimeIntervals = default!;
 #nullable restore
 #else
-        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval> TimeIntervals { get => _explicitNullValueTimeIntervals; set { _explicitNullValueTimeIntervals = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_intervals"); else _explicitNullProperties?.Remove("time_intervals"); } }
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval> TimeIntervals { get => _explicitNullValueTimeIntervals; set { _explicitNullValueTimeIntervals = value; AdditionalData?.Remove("time_intervals"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("time_intervals"); else _explicitNullProperties?.Remove("time_intervals"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval> _explicitNullValueTimeIntervals = default!;
 #endif
         /// <summary>
@@ -83,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "exception_date", n => { ExceptionDate = n.GetDateValue(); } },
-                { "exception_type", n => { ExceptionType = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType>(); } },
+                { "exception_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateOfficeHoursExceptionRequestExceptionType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueExceptionType = default; _explicitNullProperties?.Remove("exception_type"); AdditionalData["exception_type"] = unknown; } else { ExceptionType = parsed; AdditionalData.Remove("exception_type"); } } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "recurring_annually", n => { RecurringAnnually = n.GetBoolValue(); } },
                 { "time_intervals", n => { TimeIntervals = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval>(global::Soenneker.Intercom.OpenApiClient.Models.OfficeHoursTimeInterval.CreateFromDiscriminatorValue)?.AsList(); } },

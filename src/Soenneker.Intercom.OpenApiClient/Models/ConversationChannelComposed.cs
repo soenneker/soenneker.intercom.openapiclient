@@ -18,8 +18,10 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
-            if (parseNode.GetChildNode("current") is { } nullNodeCurrent && nullNodeCurrent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Current = null;
-            if (parseNode.GetChildNode("initial") is { } nullNodeInitial && nullNodeInitial.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Initial = null;
+            if (parseNode.GetChildNode("current") is null) { _explicitNullValueCurrent = default!; _explicitNullProperties?.Remove("current"); }
+            else if (parseNode.GetChildNode("current") is { } nullNodeCurrent && nullNodeCurrent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Current = null;
+            if (parseNode.GetChildNode("initial") is null) { _explicitNullValueInitial = default!; _explicitNullProperties?.Remove("initial"); }
+            else if (parseNode.GetChildNode("initial") is { } nullNodeInitial && nullNodeInitial.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Initial = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -27,21 +29,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The current channel of the conversation. May differ from `initial` if the conversation was migrated between channels. Returns `null` if channel data is unavailable.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Current { get => _explicitNullValueCurrent; set { _explicitNullValueCurrent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("current"); else _explicitNullProperties?.Remove("current"); } }
+        public string? Current { get => _explicitNullValueCurrent; set { _explicitNullValueCurrent = value; AdditionalData?.Remove("current"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("current"); else _explicitNullProperties?.Remove("current"); } }
         private string? _explicitNullValueCurrent = default!;
 #nullable restore
 #else
-        public string Current { get => _explicitNullValueCurrent; set { _explicitNullValueCurrent = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("current"); else _explicitNullProperties?.Remove("current"); } }
+        public string Current { get => _explicitNullValueCurrent; set { _explicitNullValueCurrent = value; AdditionalData?.Remove("current"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("current"); else _explicitNullProperties?.Remove("current"); } }
         private string _explicitNullValueCurrent = default!;
 #endif
         /// <summary>The channel through which the conversation was originally initiated. Possible values include `messenger`, `zendesk_sunshine`, `zendesk_ticket`, `twitter`, `email`. Returns `null` if channel data is unavailable.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public string? Initial { get => _explicitNullValueInitial; set { _explicitNullValueInitial = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("initial"); else _explicitNullProperties?.Remove("initial"); } }
+        public string? Initial { get => _explicitNullValueInitial; set { _explicitNullValueInitial = value; AdditionalData?.Remove("initial"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("initial"); else _explicitNullProperties?.Remove("initial"); } }
         private string? _explicitNullValueInitial = default!;
 #nullable restore
 #else
-        public string Initial { get => _explicitNullValueInitial; set { _explicitNullValueInitial = value; if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("initial"); else _explicitNullProperties?.Remove("initial"); } }
+        public string Initial { get => _explicitNullValueInitial; set { _explicitNullValueInitial = value; AdditionalData?.Remove("initial"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("initial"); else _explicitNullProperties?.Remove("initial"); } }
         private string _explicitNullValueInitial = default!;
 #endif
         /// <summary>

@@ -224,7 +224,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "notified_at", n => { NotifiedAt = n.GetIntValue(); } },
                 { "part_type", n => { PartType = n.GetStringValue(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
-                { "state", n => { State = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_state>(); } },
+                { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Conversation_part_state>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Tag_basic>(global::Soenneker.Intercom.OpenApiClient.Models.Tag_basic.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },

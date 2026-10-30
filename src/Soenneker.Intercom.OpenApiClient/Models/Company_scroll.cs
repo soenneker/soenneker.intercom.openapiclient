@@ -92,7 +92,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Cursor_pages>(global::Soenneker.Intercom.OpenApiClient.Models.Cursor_pages.CreateFromDiscriminatorValue); } },
                 { "scroll_param", n => { ScrollParam = n.GetStringValue(); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
-                { "type", n => { Type = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll_type>(); } },
+                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Company_scroll_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
         }
         /// <summary>
