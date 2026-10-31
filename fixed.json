@@ -2014,6 +2014,93 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiTemplateSource"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "api_template_source",
+                      "id": "494",
+                      "template": {
+                        "name": "Example Docs",
+                        "base_url": "https://api.example.com/v1",
+                        "variables": [
+                          "space_id"
+                        ],
+                        "auth": {
+                          "header": "Authorization",
+                          "value": "Bearer {token}"
+                        },
+                        "tree": {
+                          "path": "/spaces/{space_id}/pages",
+                          "query": {},
+                          "nodes": [
+                            "pages"
+                          ],
+                          "children": "pages",
+                          "folder_if": [
+                            {
+                              "type": "group"
+                            }
+                          ],
+                          "folder_if_has_children": true,
+                          "content_if": [
+                            {
+                              "type": "document"
+                            }
+                          ]
+                        },
+                        "item": {
+                          "path": "/spaces/{space_id}/pages/{page_id}",
+                          "query": {},
+                          "node_values": {
+                            "page_id": [
+                              "id"
+                            ]
+                          }
+                        },
+                        "mapping": {
+                          "id": [
+                            "node",
+                            "id"
+                          ],
+                          "title": [
+                            "node",
+                            "title"
+                          ],
+                          "body": [
+                            "item",
+                            "body"
+                          ],
+                          "updated_at": [
+                            "item",
+                            "updatedAt"
+                          ]
+                        },
+                        "body_format": "html"
+                      },
+                      "variables": {
+                        "space_id": "help-center"
+                      },
+                      "created_at": 1734537259,
+                      "latest_sync": {
+                        "id": "1287",
+                        "status": "in_progress",
+                        "created_at": 1734537259,
+                        "updated_at": 1734537259
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -2443,6 +2530,93 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiTemplateSource"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "api_template_source",
+                      "id": "494",
+                      "template": {
+                        "name": "Example Docs",
+                        "base_url": "https://api.example.com/v1",
+                        "variables": [
+                          "space_id"
+                        ],
+                        "auth": {
+                          "header": "Authorization",
+                          "value": "Bearer {token}"
+                        },
+                        "tree": {
+                          "path": "/spaces/{space_id}/pages",
+                          "query": {},
+                          "nodes": [
+                            "pages"
+                          ],
+                          "children": "pages",
+                          "folder_if": [
+                            {
+                              "type": "group"
+                            }
+                          ],
+                          "folder_if_has_children": true,
+                          "content_if": [
+                            {
+                              "type": "document"
+                            }
+                          ]
+                        },
+                        "item": {
+                          "path": "/spaces/{space_id}/pages/{page_id}",
+                          "query": {},
+                          "node_values": {
+                            "page_id": [
+                              "id"
+                            ]
+                          }
+                        },
+                        "mapping": {
+                          "id": [
+                            "node",
+                            "id"
+                          ],
+                          "title": [
+                            "node",
+                            "title"
+                          ],
+                          "body": [
+                            "item",
+                            "body"
+                          ],
+                          "updated_at": [
+                            "item",
+                            "updatedAt"
+                          ]
+                        },
+                        "body_format": "html"
+                      },
+                      "variables": {
+                        "space_id": "help-center"
+                      },
+                      "created_at": 1734537259,
+                      "latest_sync": {
+                        "id": "1311",
+                        "status": "in_progress",
+                        "created_at": 1734623659,
+                        "updated_at": 1734623659
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       },
@@ -6605,6 +6779,48 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Audience created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Audience"
+                },
+                "examples": {
+                  "Audience created": {
+                    "value": {
+                      "type": "audience",
+                      "id": "789",
+                      "name": "VIP Customers",
+                      "predicates": [
+                        {
+                          "attribute": "company.name",
+                          "type": "string",
+                          "comparison": "contains",
+                          "value": "Acme"
+                        }
+                      ],
+                      "role_predicates": [
+                        {
+                          "attribute": "role",
+                          "type": "role",
+                          "comparison": "in",
+                          "value": [
+                            "user_role",
+                            "contact_role",
+                            "visitor_role"
+                          ]
+                        }
+                      ],
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -7271,6 +7487,37 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Office hours schedule created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficeHoursSchedule"
+                },
+                "examples": {
+                  "Office hours schedule created": {
+                    "value": {
+                      "type": "office_hours_schedule",
+                      "id": "125",
+                      "name": "Standard Support Hours",
+                      "time_zone_name": "America/New_York",
+                      "time_intervals": [
+                        {
+                          "start_minute": 540,
+                          "end_minute": 1020,
+                          "day_of_week": 0
+                        }
+                      ],
+                      "twenty_four_seven": false,
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -7943,6 +8190,33 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Office hours exception created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficeHoursException"
+                },
+                "examples": {
+                  "Office hours exception created": {
+                    "value": {
+                      "type": "office_hours_exception",
+                      "id": "458",
+                      "office_hours_schedule_id": "123",
+                      "exception_date": "2026-12-25",
+                      "exception_type": "closed",
+                      "name": "Christmas Day",
+                      "time_intervals": null,
+                      "recurring_annually": true,
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -15879,6 +16153,40 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       },
@@ -16126,6 +16434,40 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       }
@@ -16361,6 +16703,40 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "companies.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/companies/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       }
@@ -21419,6 +21795,40 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_2",
+                      "type": "contacts.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_2",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_2"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       },
@@ -21746,6 +22156,40 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_1",
+                      "type": "contacts.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_1",
+                          "item_count": 3,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_1"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       }
@@ -21993,6 +22437,40 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactsBulkJob"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "job_v2_3",
+                      "type": "contacts.bulk.job",
+                      "state": "running",
+                      "created_at": 1713360000,
+                      "updated_at": 1713360060,
+                      "completed_at": null,
+                      "tasks": [
+                        {
+                          "id": "task_v2_3",
+                          "item_count": 2,
+                          "state": "pending",
+                          "created_at": 1713360000,
+                          "started_at": null,
+                          "completed_at": null
+                        }
+                      ],
+                      "url": "https://api.intercom.io/contacts/bulk/job_v2_3"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       }
@@ -22319,6 +22797,26 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Accepted \u2014 work has been enqueued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentBulkActionResponse"
+                },
+                "examples": {
+                  "Queued": {
+                    "summary": "Queued",
+                    "value": {
+                      "type": "content_bulk_action",
+                      "status": "queued"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       }
@@ -23044,6 +23542,45 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Content snippet created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentSnippet"
+                },
+                "examples": {
+                  "Content snippet created": {
+                    "value": {
+                      "type": "content_snippet",
+                      "id": "456",
+                      "title": "How to reset your password",
+                      "locale": "en",
+                      "json_blocks": [
+                        {
+                          "type": "paragraph",
+                          "text": "Navigate to Settings \u003E Security \u003E Reset password."
+                        }
+                      ],
+                      "body_markdown": "Navigate to Settings \\\u003E Security \\\u003E Reset password.\n",
+                      "chatbot_availability": 2,
+                      "copilot_availability": 2,
+                      "ai_chatbot_availability": true,
+                      "ai_copilot_availability": true,
+                      "ai_sales_agent_availability": true,
+                      "created_at": 1663597223,
+                      "updated_at": 1663597223,
+                      "audience_ids": [
+                        1,
+                        2
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -24197,6 +24734,55 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Dynamic content created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DynamicContent"
+                },
+                "examples": {
+                  "Dynamic content created": {
+                    "value": {
+                      "type": "dynamic_content",
+                      "id": "123",
+                      "name": "Support phone number",
+                      "key": "support-phone-number",
+                      "content_type": "inline",
+                      "default_locale": "en",
+                      "variations": [
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "456",
+                          "locale": "en",
+                          "brand_id": null,
+                          "text_content": "\u002B1-555-0100",
+                          "json_blocks": null,
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        },
+                        {
+                          "type": "dynamic_content_variation",
+                          "id": "457",
+                          "locale": "fr",
+                          "brand_id": null,
+                          "text_content": "\u002B33 1 23 45 67 89",
+                          "json_blocks": null,
+                          "intentionally_empty": false,
+                          "created_at": 1663597223,
+                          "updated_at": 1663597223
+                        }
+                      ],
+                      "created_at": 1663597223,
+                      "updated_at": 1663597223
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -33176,6 +33762,47 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthToken"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "auth_token",
+                      "id": "12345",
+                      "name": "Fulfilment API key",
+                      "description": "Used by the order status connector",
+                      "token_type": "text",
+                      "request_header_key": "Authorization",
+                      "token_prefix": "Bearer",
+                      "domain": null,
+                      "created_at": "2025-11-15T09:30:00Z",
+                      "updated_at": "2025-11-15T09:30:00Z"
+                    }
+                  },
+                  "OAuth credential": {
+                    "value": {
+                      "type": "auth_token",
+                      "id": "12346",
+                      "name": "Fulfilment OAuth credential",
+                      "description": "Used by the order status connector",
+                      "token_type": "oauth",
+                      "request_header_key": "Authorization",
+                      "token_prefix": "Bearer",
+                      "domain": null,
+                      "created_at": "2025-11-15T09:30:00Z",
+                      "updated_at": "2025-11-15T09:30:00Z"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -33887,6 +34514,67 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Data connector created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectorDetail"
+                },
+                "examples": {
+                  "Data connector created": {
+                    "value": {
+                      "type": "data_connector",
+                      "id": "125",
+                      "name": "Get Order Status",
+                      "description": "Looks up order status from an external service",
+                      "internal_description": "",
+                      "state": "draft",
+                      "url": "https://api.example.com/orders/{{order_id}}/status",
+                      "headers": [
+                        {
+                          "name": "Content-Type",
+                          "value": "****"
+                        }
+                      ],
+                      "http_method": "get",
+                      "direct_fin_usage": true,
+                      "audiences": [
+                        "leads",
+                        "visitors"
+                      ],
+                      "execution_type": "server_side",
+                      "configuration_response_type": "test_response_type",
+                      "data_transformation_type": "full_access",
+                      "client_function_timeout_ms": 30000,
+                      "data_inputs": [
+                        {
+                          "name": "order_id",
+                          "type": "string",
+                          "description": "The order ID to look up",
+                          "required": true,
+                          "default_value": ""
+                        }
+                      ],
+                      "response_fields": [],
+                      "object_mappings": [],
+                      "token_ids": [],
+                      "customer_authentication": true,
+                      "bypass_authentication": false,
+                      "enforce_auth": true,
+                      "validate_missing_attributes": true,
+                      "created_by_admin_id": "128",
+                      "updated_by_admin_id": "128",
+                      "created_at": "2026-03-19T11:27:36Z",
+                      "updated_at": "2026-03-19T11:27:36Z",
+                      "execution_results_url": "/data_connectors/125/execution_results"
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -36280,6 +36968,24 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Event accepted and queued for processing.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EcommerceProductEventResponse"
+                },
+                "examples": {
+                  "Event accepted": {
+                    "value": {
+                      "event_id": 81273
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "202"
           }
         }
       }
@@ -41063,6 +41769,32 @@
                 }
               }
             }
+          },
+          "200": {
+            "description": "Secret created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentityVerificationSecretWithMaterial"
+                },
+                "examples": {
+                  "Secret created": {
+                    "value": {
+                      "type": "identity_verification_secret",
+                      "id": "103",
+                      "name": "Production Web",
+                      "secret": "9Zw0xNs3vKk0fPz9rwKqNbzH3mPVQmQxL9vhSm9Tk4A",
+                      "supports_android": false,
+                      "supports_ios": false,
+                      "supports_web": true,
+                      "created_at": 1734537500,
+                      "environment_id": null
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
           }
         }
       }
@@ -59410,40 +60142,14 @@
       },
       "CreateDataAttributeRequest": {
         "title": "Create Data Attribute Request",
-        "required": [
-          "name",
-          "model",
-          "data_type"
-        ],
-        "type": "object",
         "oneOf": [
           {
-            "$ref": "#/components/schemas/CreateDataAttributeRequestListAttribute"
+            "$ref": "#/components/schemas/CreateDataAttributeRequestOneOf1"
           },
           {
-            "$ref": "#/components/schemas/CreateDataAttributeRequestOtherType"
+            "$ref": "#/components/schemas/CreateDataAttributeRequestOneOf2"
           }
         ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the data attribute.",
-            "example": "My Data Attribute"
-          },
-          "model": {
-            "$ref": "#/components/schemas/CreateDataAttributeRequestModel"
-          },
-          "description": {
-            "type": "string",
-            "description": "The readable description you see in the UI for the attribute.",
-            "example": "My Data Attribute Description"
-          },
-          "messenger_writable": {
-            "type": "boolean",
-            "description": "Can this attribute be updated by the Messenger",
-            "example": false
-          }
-        },
         "description": ""
       },
       "CreateDataEventRequest": {
@@ -77294,22 +78000,14 @@
         ]
       },
       "ReplyTicketRequest": {
-        "type": "object",
         "oneOf": [
           {
-            "$ref": "#/components/schemas/ContactReplyTicketRequest"
+            "$ref": "#/components/schemas/ReplyTicketRequestOneOf1"
           },
           {
-            "$ref": "#/components/schemas/AdminReplyTicketRequest"
+            "$ref": "#/components/schemas/ReplyTicketRequestOneOf2"
           }
-        ],
-        "properties": {
-          "skip_notifications": {
-            "type": "boolean",
-            "description": "Option to disable notifications when replying to a Ticket.",
-            "example": true
-          }
-        }
+        ]
       },
       "AttachTagToTicketRequest": {
         "required": [
@@ -88831,6 +89529,84 @@
           ]
         }
       },
+      "CreateDataAttributeRequestOneOf1": {
+        "type": "object",
+        "properties": {
+          "data_type": {
+            "$ref": "#/components/schemas/OptionsDataType"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateDataAttributeRequestListAttributeOptionsItem"
+            },
+            "description": "Array of objects representing the options of the list, with \u0060value\u0060 as the key and the option as the value. At least two options are required.",
+            "example": [
+              {
+                "value": "1-10"
+              },
+              {
+                "value": "11-50"
+              }
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the data attribute.",
+            "example": "My Data Attribute"
+          },
+          "model": {
+            "$ref": "#/components/schemas/CreateDataAttributeRequestModel"
+          },
+          "description": {
+            "type": "string",
+            "description": "The readable description you see in the UI for the attribute.",
+            "example": "My Data Attribute Description"
+          },
+          "messenger_writable": {
+            "type": "boolean",
+            "description": "Can this attribute be updated by the Messenger",
+            "example": false
+          }
+        },
+        "required": [
+          "options",
+          "name",
+          "model",
+          "data_type"
+        ]
+      },
+      "CreateDataAttributeRequestOneOf2": {
+        "type": "object",
+        "properties": {
+          "data_type": {
+            "$ref": "#/components/schemas/CreateDataAttributeRequestOtherTypeDataType"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the data attribute.",
+            "example": "My Data Attribute"
+          },
+          "model": {
+            "$ref": "#/components/schemas/CreateDataAttributeRequestModel"
+          },
+          "description": {
+            "type": "string",
+            "description": "The readable description you see in the UI for the attribute.",
+            "example": "My Data Attribute Description"
+          },
+          "messenger_writable": {
+            "type": "boolean",
+            "description": "Can this attribute be updated by the Messenger",
+            "example": false
+          }
+        },
+        "required": [
+          "name",
+          "model",
+          "data_type"
+        ]
+      },
       "ConversationAttributeOneOf1": {
         "type": "object",
         "properties": {
@@ -89484,6 +90260,236 @@
         },
         "required": [
           "data_type"
+        ]
+      },
+      "ReplyTicketRequestOneOf1": {
+        "title": "Contact Reply on ticket",
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "intercom_user_id": {
+                "type": "string",
+                "description": "The identifier for the contact as given by Intercom."
+              },
+              "message_type": {
+                "$ref": "#/components/schemas/CommentMessageType"
+              },
+              "type": {
+                "$ref": "#/components/schemas/UserType"
+              },
+              "body": {
+                "type": "string",
+                "description": "The text body of the comment."
+              },
+              "created_at": {
+                "type": "integer",
+                "description": "The time the reply was created. If not provided, the current time will be used.",
+                "example": 1590000000
+              },
+              "attachment_urls": {
+                "title": "Attachment URLs",
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+              },
+              "reply_options": {
+                "title": "Contact Quick Reply",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContactReplyBaseRequestReplyOptionsItem"
+                },
+                "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
+              },
+              "skip_notifications": {
+                "type": "boolean",
+                "description": "Option to disable notifications when replying to a Ticket.",
+                "example": true
+              }
+            },
+            "required": [
+              "intercom_user_id",
+              "message_type",
+              "type",
+              "body"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "string",
+                "description": "The external_id you have defined for the contact."
+              },
+              "message_type": {
+                "$ref": "#/components/schemas/CommentMessageType"
+              },
+              "type": {
+                "$ref": "#/components/schemas/UserType"
+              },
+              "body": {
+                "type": "string",
+                "description": "The text body of the comment."
+              },
+              "created_at": {
+                "type": "integer",
+                "description": "The time the reply was created. If not provided, the current time will be used.",
+                "example": 1590000000
+              },
+              "attachment_urls": {
+                "title": "Attachment URLs",
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+              },
+              "reply_options": {
+                "title": "Contact Quick Reply",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContactReplyBaseRequestReplyOptionsItem"
+                },
+                "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
+              },
+              "skip_notifications": {
+                "type": "boolean",
+                "description": "Option to disable notifications when replying to a Ticket.",
+                "example": true
+              }
+            },
+            "required": [
+              "user_id",
+              "message_type",
+              "type",
+              "body"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "The email you have defined for the user."
+              },
+              "message_type": {
+                "$ref": "#/components/schemas/CommentMessageType"
+              },
+              "type": {
+                "$ref": "#/components/schemas/UserType"
+              },
+              "body": {
+                "type": "string",
+                "description": "The text body of the comment."
+              },
+              "created_at": {
+                "type": "integer",
+                "description": "The time the reply was created. If not provided, the current time will be used.",
+                "example": 1590000000
+              },
+              "attachment_urls": {
+                "title": "Attachment URLs",
+                "maxItems": 10,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+              },
+              "reply_options": {
+                "title": "Contact Quick Reply",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContactReplyBaseRequestReplyOptionsItem"
+                },
+                "description": "The quick reply selection the contact wishes to respond with. These map to buttons displayed in the Messenger UI if sent by a bot, or the reply options sent by an Admin via the API."
+              },
+              "skip_notifications": {
+                "type": "boolean",
+                "description": "Option to disable notifications when replying to a Ticket.",
+                "example": true
+              }
+            },
+            "required": [
+              "email",
+              "message_type",
+              "type",
+              "body"
+            ]
+          }
+        ]
+      },
+      "ReplyTicketRequestOneOf2": {
+        "type": "object",
+        "properties": {
+          "message_type": {
+            "$ref": "#/components/schemas/AdminReplyTicketRequestMessageType"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AdminType"
+          },
+          "body": {
+            "type": "string",
+            "description": "The text body of the reply. Notes accept some HTML formatting. Must be present for comment and note message types.",
+            "example": "Hello there!"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The id of the admin who is authoring the comment.",
+            "example": "3156780"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the reply was created. If not provided, the current time will be used.",
+            "example": 1590000000
+          },
+          "reply_options": {
+            "title": "Quick Reply Options",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminReplyTicketRequestReplyOptionsItem"
+            },
+            "description": "The quick reply options to display. Must be present for quick_reply message types."
+          },
+          "attachment_urls": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "A list of image URLs that will be added as attachments. You can include up to 10 URLs."
+          },
+          "attachment_files": {
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationAttachmentFiles"
+            },
+            "description": "A list of files that will be added as attachments. You can include up to 10 files. If both attachment_files and attachment_urls are provided, attachment_files takes precedence."
+          },
+          "cross_post": {
+            "type": "boolean",
+            "description": "If set to true, the note will be cross-posted to all linked conversations. Only applicable to note message types on back-office tickets.",
+            "example": true
+          },
+          "skip_notifications": {
+            "type": "boolean",
+            "description": "Option to disable notifications when replying to a Ticket.",
+            "example": true
+          }
+        },
+        "required": [
+          "message_type",
+          "type",
+          "admin_id"
         ]
       },
       "FilterOneOf1": {

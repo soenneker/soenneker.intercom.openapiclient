@@ -13,6 +13,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateTicketRequest : IAdditionalDataHolder, IParsable
     , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Restore fields omitted by the generator's model-depth limit.
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel? Channel { get; set; }
+#nullable restore
+
         // Track explicitly assigned nulls separately from absent properties.
         private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
 
@@ -117,6 +122,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "channel", n => { Channel = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel>(); } },
+
                 { "assignment", n => { Assignment = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment.CreateFromDiscriminatorValue); } },
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts>(global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest.CreateTicketRequest_contacts.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -141,6 +148,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequest_ticket_attributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_type_id", TicketTypeId);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel>("channel", Channel);
             writer.WriteAdditionalData(AdditionalData);
         }
         /// <summary>

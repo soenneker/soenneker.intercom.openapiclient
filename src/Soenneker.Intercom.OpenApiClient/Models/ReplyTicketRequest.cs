@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest"/>
+    /// Composed type wrapper for classes <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf1"/>, <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf2"/>
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ReplyTicketRequest : IComposedTypeWrapper, IParsable
@@ -18,21 +18,21 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode UnrecognizedValue { get; set; } = null!;
         public global::System.Collections.Generic.IDictionary<string, object> AdditionalData { get; set; } = new global::System.Collections.Generic.Dictionary<string, object>();
 
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf1"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest? AdminReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf1? ReplyTicketRequestOneOf1 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest AdminReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf1 ReplyTicketRequestOneOf1 { get; set; }
 #endif
-        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest"/></summary>
+        /// <summary>Composed type representation for type <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf2"/></summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest? ContactReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf2? ReplyTicketRequestOneOf2 { get; set; }
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest ContactReplyTicketRequest { get; set; }
+        public global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf2 ReplyTicketRequestOneOf2 { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -44,20 +44,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(parseNode, null)) throw new ArgumentNullException(nameof(parseNode));
             var mappingValue = parseNode.GetChildNode("")?.GetStringValue();
             var result = new global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequest();
-            if("AdminReplyTicketRequest".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
+            if("ReplyTicketRequestOneOf2".Equals(mappingValue, StringComparison.OrdinalIgnoreCase))
             {
                 
             }
             
             var unionPayload = parseNode.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue);
             bool matchesUnionBranch0 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => true))();
-            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => ((unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject)) && (unionPayload is not global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject shapeObject0 || (shapeObject0.GetValue() is var shapeMembers1 && (shapeMembers1.ContainsKey("message_type") && shapeMembers1.ContainsKey("type") && shapeMembers1.ContainsKey("admin_id") && (!shapeMembers1.ContainsKey("message_type") || (((shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)) && ((shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal2 && "comment".Equals(literal2.GetValue(), global::System.StringComparison.Ordinal)) || (shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal3 && "note".Equals(literal3.GetValue(), global::System.StringComparison.Ordinal)) || (shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal4 && "quick_reply".Equals(literal4.GetValue(), global::System.StringComparison.Ordinal))))) && (!shapeMembers1.ContainsKey("type") || (((shapeMembers1["type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)) && ((shapeMembers1["type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal7 && "admin".Equals(literal7.GetValue(), global::System.StringComparison.Ordinal))))) && (!shapeMembers1.ContainsKey("body") || (((shapeMembers1["body"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))) && (!shapeMembers1.ContainsKey("admin_id") || (((shapeMembers1["admin_id"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))) && (!shapeMembers1.ContainsKey("created_at") || ((((shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedInteger or global::Microsoft.Kiota.Abstractions.Serialization.UntypedLong || (shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedDouble integral14 && integral14.GetValue() % 1 == 0) || (shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedDecimal integral15 && integral15.GetValue() % 1 == 0) || (shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedFloat integral16 && integral16.GetValue() % 1 == 0)))))) && (!shapeMembers1.ContainsKey("reply_options") || (((shapeMembers1["reply_options"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray)))) && (!shapeMembers1.ContainsKey("attachment_urls") || (((shapeMembers1["attachment_urls"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray)))) && (!shapeMembers1.ContainsKey("attachment_files") || (((shapeMembers1["attachment_files"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray)))) && (!shapeMembers1.ContainsKey("cross_post") || (((shapeMembers1["cross_post"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedBoolean)))))))))();
+            bool matchesUnionBranch1 = unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject && ((global::System.Func<bool>)(() => ((unionPayload is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject)) && (unionPayload is not global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject shapeObject0 || (shapeObject0.GetValue() is var shapeMembers1 && (shapeMembers1.ContainsKey("message_type") && shapeMembers1.ContainsKey("type") && shapeMembers1.ContainsKey("admin_id") && (!shapeMembers1.ContainsKey("message_type") || (((shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)) && ((shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal2 && "comment".Equals(literal2.GetValue(), global::System.StringComparison.Ordinal)) || (shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal3 && "note".Equals(literal3.GetValue(), global::System.StringComparison.Ordinal)) || (shapeMembers1["message_type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal4 && "quick_reply".Equals(literal4.GetValue(), global::System.StringComparison.Ordinal))))) && (!shapeMembers1.ContainsKey("type") || (((shapeMembers1["type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)) && ((shapeMembers1["type"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString literal7 && "admin".Equals(literal7.GetValue(), global::System.StringComparison.Ordinal))))) && (!shapeMembers1.ContainsKey("body") || (((shapeMembers1["body"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))) && (!shapeMembers1.ContainsKey("admin_id") || (((shapeMembers1["admin_id"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedString)))) && (!shapeMembers1.ContainsKey("created_at") || ((((shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedInteger or global::Microsoft.Kiota.Abstractions.Serialization.UntypedLong || (shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedDouble integral14 && integral14.GetValue() % 1 == 0) || (shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedDecimal integral15 && integral15.GetValue() % 1 == 0) || (shapeMembers1["created_at"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedFloat integral16 && integral16.GetValue() % 1 == 0)))))) && (!shapeMembers1.ContainsKey("reply_options") || (((shapeMembers1["reply_options"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray)))) && (!shapeMembers1.ContainsKey("attachment_urls") || (((shapeMembers1["attachment_urls"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray)))) && (!shapeMembers1.ContainsKey("attachment_files") || (((shapeMembers1["attachment_files"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedArray)))) && (!shapeMembers1.ContainsKey("cross_post") || (((shapeMembers1["cross_post"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedBoolean)))) && (!shapeMembers1.ContainsKey("skip_notifications") || (((shapeMembers1["skip_notifications"] is global::Microsoft.Kiota.Abstractions.Serialization.UntypedBoolean)))))))))();
             int matchingUnionBranches = 0;
             if (matchesUnionBranch0) matchingUnionBranches++;
             if (matchesUnionBranch1) matchingUnionBranches++;
-            bool noSelectedUnionBranch = result.AdminReplyTicketRequest == null && result.ContactReplyTicketRequest == null;
-            if (noSelectedUnionBranch && matchesUnionBranch1 && matchingUnionBranches == 1) result.AdminReplyTicketRequest = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest(), parseNode);
-            if (result.AdminReplyTicketRequest == null && result.ContactReplyTicketRequest == null) result.UnrecognizedValue = unionPayload;
+            bool noSelectedUnionBranch = result.ReplyTicketRequestOneOf1 == null && result.ReplyTicketRequestOneOf2 == null;
+            if (noSelectedUnionBranch && matchesUnionBranch1 && matchingUnionBranches == 1) result.ReplyTicketRequestOneOf2 = global::Soenneker.OpenApi.Generated.OpenApiNullTracking.Capture(new global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf2(), parseNode);
+            if (result.ReplyTicketRequestOneOf1 == null && result.ReplyTicketRequestOneOf2 == null) result.UnrecognizedValue = unionPayload;
 return result;
         }
         /// <summary>
@@ -68,13 +68,13 @@ return result;
         {
             if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawFields) { var fields = new global::System.Collections.Generic.Dictionary<string, global::System.Action<IParseNode>>(); foreach (var entry in rawFields.GetValue()) fields[entry.Key] = _ => { }; return fields; }
 
-            if(AdminReplyTicketRequest != null)
+            if(ReplyTicketRequestOneOf1 != null)
             {
-                return AdminReplyTicketRequest.GetFieldDeserializers();
+                return ReplyTicketRequestOneOf1.GetFieldDeserializers();
             }
-            else if(ContactReplyTicketRequest != null)
+            else if(ReplyTicketRequestOneOf2 != null)
             {
-                return ContactReplyTicketRequest.GetFieldDeserializers();
+                return ReplyTicketRequestOneOf2.GetFieldDeserializers();
             }
             return new Dictionary<string, Action<IParseNode>>();
         }
@@ -85,22 +85,22 @@ return result;
         public virtual void Serialize(ISerializationWriter writer)
         {
             if (global::System.Object.ReferenceEquals(writer, null)) throw new global::System.ArgumentNullException(nameof(writer));
-            if (AdminReplyTicketRequest == null && ContactReplyTicketRequest == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
+            if (ReplyTicketRequestOneOf1 == null && ReplyTicketRequestOneOf2 == null) { if (UnrecognizedValue is global::Microsoft.Kiota.Abstractions.Serialization.UntypedObject rawObject) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData, rawObject)); else if (UnrecognizedValue != null) writer.WriteObjectValue(null, UnrecognizedValue); else if (AdditionalData.Count > 0) writer.WriteObjectValue(null, new global::Soenneker.OpenApi.Generated.OpenApiUnionAdditionalData(AdditionalData)); else writer.WriteNullValue(null); return; }
             int selectedUnionBranches = 0;
-            if (AdminReplyTicketRequest != null) selectedUnionBranches++;
-            if (ContactReplyTicketRequest != null) selectedUnionBranches++;
-            if (AdminReplyTicketRequest != null && selectedUnionBranches == 1) { if (AdminReplyTicketRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, AdminReplyTicketRequest); return; }
+            if (ReplyTicketRequestOneOf1 != null) selectedUnionBranches++;
+            if (ReplyTicketRequestOneOf2 != null) selectedUnionBranches++;
+            if (ReplyTicketRequestOneOf2 != null && selectedUnionBranches == 1) { if (ReplyTicketRequestOneOf2 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder selectedData) foreach (var entry in AdditionalData) selectedData.AdditionalData[entry.Key] = entry.Value; writer.WriteObjectValue(null, ReplyTicketRequestOneOf2); return; }
 
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            if(AdminReplyTicketRequest != null)
+            if(ReplyTicketRequestOneOf1 != null)
             {
-                if (AdminReplyTicketRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyTicketRequest>(null, AdminReplyTicketRequest);
+                if (ReplyTicketRequestOneOf1 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf1>(null, ReplyTicketRequestOneOf1);
             }
-            else if(ContactReplyTicketRequest != null)
+            else if(ReplyTicketRequestOneOf2 != null)
             {
-                if (ContactReplyTicketRequest is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
-                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactReplyTicketRequest>(null, ContactReplyTicketRequest);
+                if (ReplyTicketRequestOneOf2 is global::Microsoft.Kiota.Abstractions.Serialization.IAdditionalDataHolder unionData) foreach (var entry in AdditionalData) unionData.AdditionalData[entry.Key] = entry.Value;
+                writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ReplyTicketRequestOneOf2>(null, ReplyTicketRequestOneOf2);
             }
         }
     }

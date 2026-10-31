@@ -13,6 +13,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateTicketRequest : IAdditionalDataHolder, IParsable
     , global::Soenneker.OpenApi.Generated.IOpenApiExplicitNulls {
+        // Restore fields omitted by the generator's model-depth limit.
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority? Priority { get; set; }
+#nullable restore
+
         // Track explicitly assigned nulls separately from absent properties.
         private global::System.Collections.Generic.HashSet<string> _explicitNullProperties = null!;
 
@@ -107,6 +112,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "priority", n => { Priority = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>(); } },
+
                 { "admin_id", n => { AdminId = n.GetIntValue(); } },
                 { "assignee_id", n => { AssigneeId = n.GetStringValue(); } },
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
@@ -133,6 +140,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequest_ticket_attributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_state_id", TicketStateId);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
+            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>("priority", Priority);
             writer.WriteAdditionalData(AdditionalData);
         }
     }
