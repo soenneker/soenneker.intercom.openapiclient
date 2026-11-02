@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The attributes set on the ticket.
+    /// The attributes set on the ticket. HTML markup sent in a string attribute&apos;s value is stripped to its text before the ticket is stored. For a `files` attribute, pass an array of upload ids; for a `relationship` attribute, pass an array of related object ids as strings.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateTicketRequestRequestBodyTicketAttributes : IAdditionalDataHolder, IParsable

@@ -51,12 +51,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             var mappingValue = parseNode.GetChildNode("data_type")?.GetStringValue();
             return mappingValue switch
             {
-                "boolean" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestCreateDataAttributeRequestOneOf2(),
-                "date" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestCreateDataAttributeRequestOneOf2(),
-                "float" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestCreateDataAttributeRequestOneOf2(),
-                "integer" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestCreateDataAttributeRequestOneOf2(),
-                "options" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestCreateDataAttributeRequestOneOf1(),
-                "string" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestCreateDataAttributeRequestOneOf2(),
+                "boolean" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOneOf2Variant(),
+                "date" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOneOf2Variant(),
+                "float" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOneOf2Variant(),
+                "integer" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOneOf2Variant(),
+                "options" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOneOf1Variant(),
+                "string" => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequestOneOf2Variant(),
                 _ => new global::Soenneker.Intercom.OpenApiClient.Models.CreateDataAttributeRequest(),
             };
         }

@@ -79,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The time you want the ticket to reopen.</summary>
         public long? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
         private long? _explicitNullValueSnoozedUntil = default!;
-        /// <summary>The attributes set on the ticket.</summary>
+        /// <summary>The attributes set on the ticket. HTML markup sent in a string attribute&apos;s value is stripped to its text before the ticket is stored. For a `files` attribute, pass an array of upload ids; for a `relationship` attribute, pass an array of related object ids as strings.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes? TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; AdditionalData?.Remove("ticket_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }

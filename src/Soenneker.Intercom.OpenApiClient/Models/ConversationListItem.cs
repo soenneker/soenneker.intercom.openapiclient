@@ -24,6 +24,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("ai_agent") is { } nullNodeAiAgent && nullNodeAiAgent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiAgent = null;
             if (parseNode.GetChildNode("ai_agent_participated") is null) { _explicitNullValueAiAgentParticipated = default!; _explicitNullProperties?.Remove("ai_agent_participated"); }
             else if (parseNode.GetChildNode("ai_agent_participated") is { } nullNodeAiAgentParticipated && nullNodeAiAgentParticipated.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AiAgentParticipated = null;
+            if (parseNode.GetChildNode("call_ids") is null) { _explicitNullValueCallIds = default!; _explicitNullProperties?.Remove("call_ids"); }
+            else if (parseNode.GetChildNode("call_ids") is { } nullNodeCallIds && nullNodeCallIds.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CallIds = null;
             if (parseNode.GetChildNode("channel") is null) { _explicitNullValueChannel = default!; _explicitNullProperties?.Remove("channel"); }
             else if (parseNode.GetChildNode("channel") is { } nullNodeChannel && nullNodeChannel.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Channel = null;
             if (parseNode.GetChildNode("company") is null) { _explicitNullValueCompany = default!; _explicitNullProperties?.Remove("company"); }
@@ -106,6 +108,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Indicates whether the AI Agent participated in the conversation.</summary>
         public bool? AiAgentParticipated { get => _explicitNullValueAiAgentParticipated; set { _explicitNullValueAiAgentParticipated = value; AdditionalData?.Remove("ai_agent_participated"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ai_agent_participated"); else _explicitNullProperties?.Remove("ai_agent_participated"); } }
         private bool? _explicitNullValueAiAgentParticipated = default!;
+        /// <summary>The ids of the calls associated with this conversation. Empty when the conversation has no calls.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? CallIds { get => _explicitNullValueCallIds; set { _explicitNullValueCallIds = value; AdditionalData?.Remove("call_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("call_ids"); else _explicitNullProperties?.Remove("call_ids"); } }
+        private List<string>? _explicitNullValueCallIds = default!;
+#nullable restore
+#else
+        public List<string> CallIds { get => _explicitNullValueCallIds; set { _explicitNullValueCallIds = value; AdditionalData?.Remove("call_ids"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("call_ids"); else _explicitNullProperties?.Remove("call_ids"); } }
+        private List<string> _explicitNullValueCallIds = default!;
+#endif
         /// <summary>The channel through which the conversation was initiated and its current channel.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -374,6 +386,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgent.CreateFromDiscriminatorValue); } },
                 { "ai_agent_participated", n => { AiAgentParticipated = n.GetBoolValue(); } },
+                { "call_ids", n => { CallIds = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "channel", n => { Channel = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItemChannel>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItemChannel.CreateFromDiscriminatorValue); } },
                 { "company", n => { Company = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts.CreateFromDiscriminatorValue); } },
@@ -417,6 +430,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("admin_assignee_id", AdminAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>("ai_agent", AiAgent);
             writer.WriteBoolValue("ai_agent_participated", AiAgentParticipated);
+            writer.WriteCollectionOfPrimitiveValues<string>("call_ids", CallIds);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationListItemChannel>("channel", Channel);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Company>("company", Company);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>("contacts", Contacts);

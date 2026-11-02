@@ -46,6 +46,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("notified_at") is { } nullNodeNotifiedAt && nullNodeNotifiedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) NotifiedAt = null;
             if (parseNode.GetChildNode("part_type") is null) { _explicitNullValuePartType = default!; _explicitNullProperties?.Remove("part_type"); }
             else if (parseNode.GetChildNode("part_type") is { } nullNodePartType && nullNodePartType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) PartType = null;
+            if (parseNode.GetChildNode("receipts") is null) { _explicitNullValueReceipts = default!; _explicitNullProperties?.Remove("receipts"); }
+            else if (parseNode.GetChildNode("receipts") is { } nullNodeReceipts && nullNodeReceipts.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Receipts = null;
             if (parseNode.GetChildNode("redacted") is null) { _explicitNullValueRedacted = default!; _explicitNullProperties?.Remove("redacted"); }
             else if (parseNode.GetChildNode("redacted") is { } nullNodeRedacted && nullNodeRedacted.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Redacted = null;
             if (parseNode.GetChildNode("state") is null) { _explicitNullValueState = default!; _explicitNullProperties?.Remove("state"); }
@@ -60,6 +62,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
             if (parseNode.GetChildNode("updated_at") is null) { _explicitNullValueUpdatedAt = default!; _explicitNullProperties?.Remove("updated_at"); }
             else if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
+            if (parseNode.GetChildNode("user_ip") is null) { _explicitNullValueUserIp = default!; _explicitNullProperties?.Remove("user_ip"); }
+            else if (parseNode.GetChildNode("user_ip") is { } nullNodeUserIp && nullNodeUserIp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserIp = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -183,6 +187,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string PartType { get => _explicitNullValuePartType; set { _explicitNullValuePartType = value; AdditionalData?.Remove("part_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("part_type"); else _explicitNullProperties?.Remove("part_type"); } }
         private string _explicitNullValuePartType = default!;
 #endif
+        /// <summary>What happened to this part for each recipient it was sent to. Null when delivery receipts have not been recorded for this part.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts? Receipts { get => _explicitNullValueReceipts; set { _explicitNullValueReceipts = value; AdditionalData?.Remove("receipts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("receipts"); else _explicitNullProperties?.Remove("receipts"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts? _explicitNullValueReceipts = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts Receipts { get => _explicitNullValueReceipts; set { _explicitNullValueReceipts = value; AdditionalData?.Remove("receipts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("receipts"); else _explicitNullProperties?.Remove("receipts"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts _explicitNullValueReceipts = default!;
+#endif
         /// <summary>Whether or not the conversation part has been redacted.</summary>
         public bool? Redacted { get => _explicitNullValueRedacted; set { _explicitNullValueRedacted = value; AdditionalData?.Remove("redacted"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("redacted"); else _explicitNullProperties?.Remove("redacted"); } }
         private bool? _explicitNullValueRedacted = default!;
@@ -225,6 +239,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The last time the conversation part was updated.</summary>
         public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
         private long? _explicitNullValueUpdatedAt = default!;
+        /// <summary>The IP address of the end user who authored this conversation part, when available. Null otherwise, including for parts not authored by an end user.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UserIp { get => _explicitNullValueUserIp; set { _explicitNullValueUserIp = value; AdditionalData?.Remove("user_ip"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_ip"); else _explicitNullProperties?.Remove("user_ip"); } }
+        private string? _explicitNullValueUserIp = default!;
+#nullable restore
+#else
+        public string UserIp { get => _explicitNullValueUserIp; set { _explicitNullValueUserIp = value; AdditionalData?.Remove("user_ip"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_ip"); else _explicitNullProperties?.Remove("user_ip"); } }
+        private string _explicitNullValueUserIp = default!;
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart"/> and sets the default values.
         /// </summary>
@@ -264,6 +288,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata.CreateFromDiscriminatorValue); } },
                 { "notified_at", n => { NotifiedAt = n.GetLongValue(); } },
                 { "part_type", n => { PartType = n.GetStringValue(); } },
+                { "receipts", n => { Receipts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts.CreateFromDiscriminatorValue); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "tags", n => { Tags = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>(global::Soenneker.Intercom.OpenApiClient.Models.TagBasic.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -271,6 +296,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslations>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslations.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
+                { "user_ip", n => { UserIp = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -294,6 +320,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata>("metadata", Metadata);
             writer.WriteLongValue("notified_at", NotifiedAt);
             writer.WriteStringValue("part_type", PartType);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartReceipts>("receipts", Receipts);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>("state", State);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagBasic>("tags", Tags);
@@ -301,6 +328,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslations>("translations", Translations);
             writer.WriteStringValue("type", Type);
             writer.WriteLongValue("updated_at", UpdatedAt);
+            writer.WriteStringValue("user_ip", UserIp);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

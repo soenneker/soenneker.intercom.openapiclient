@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Source of the call. Can be &quot;five9&quot;, &quot;zoom_phone&quot;, &quot;nice_cxone&quot;, &quot;dialpad&quot;, &quot;generic&quot;, or &quot;aws_connect&quot;. Defaults to &quot;aws_connect&quot;, and any other value is treated as &quot;aws_connect&quot;.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource? Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; AdditionalData?.Remove("source"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.RegisterFinVoiceCallRequestSource? _explicitNullValueSource = default!;
-        /// <summary>Optional vendor-supplied identifier for linking the Fin Voice session to records in the vendor&apos;s own systems. Stored as-is and returned on every lookup.</summary>
+        /// <summary>Optional vendor-supplied identifier for linking the Fin Voice session to records in the vendor&apos;s own systems. Stored as-is and returned on every lookup. Cannot exceed 191 characters.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? VendorInternalId { get => _explicitNullValueVendorInternalId; set { _explicitNullValueVendorInternalId = value; AdditionalData?.Remove("vendor_internal_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("vendor_internal_id"); else _explicitNullProperties?.Remove("vendor_internal_id"); } }

@@ -88,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithConversationItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversationId}{?display_as*,exclude_part_types,include_email_history*,include_monitors*,include_part_types,include_scorecards*,include_translations*,parts_created_after*,parts_created_before*,retain_metrics*}", pathParameters)
+        public WithConversationItemRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversationId}{?display_as*,exclude_part_types,include_email_history*,include_monitors*,include_part_types,include_scorecards*,include_translations*,page*,parts_created_after*,parts_created_before*,per_page*,retain_metrics*}", pathParameters)
         {
         }
         /// <summary>
@@ -96,7 +96,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public WithConversationItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversationId}{?display_as*,exclude_part_types,include_email_history*,include_monitors*,include_part_types,include_scorecards*,include_translations*,parts_created_after*,parts_created_before*,retain_metrics*}", rawUrl)
+        public WithConversationItemRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/conversations/{conversationId}{?display_as*,exclude_part_types,include_email_history*,include_monitors*,include_part_types,include_scorecards*,include_translations*,page*,parts_created_after*,parts_created_before*,per_page*,retain_metrics*}", rawUrl)
         {
         }
         /// <summary>
@@ -129,7 +129,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationDeleted.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. `include_part_types` and `exclude_part_types` are applied before this limit, so filtering returns the 500 most recent matching parts. `conversation_parts.total_count` counts the parts in this response, after filtering — it is not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).If the conversation is a ticket, the access token must include the `read_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
+        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;info&quot; name=&quot;Conversation parts limit&quot; %}Without `page`, the response returns the 500 most recent conversation parts. If you need more than the 500 most recent parts, send `page` (and optionally `per_page`) to page through every part, oldest first, following `conversation_parts.pages.next`. Part type and `parts_created_after`/`parts_created_before` filters are applied first. `conversation_parts.total_count` counts the parts in this response after filtering, not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).If the conversation is a ticket, the access token must include the `read_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -212,7 +212,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. `include_part_types` and `exclude_part_types` are applied before this limit, so filtering returns the 500 most recent matching parts. `conversation_parts.total_count` counts the parts in this response, after filtering — it is not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).If the conversation is a ticket, the access token must include the `read_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
+        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;info&quot; name=&quot;Conversation parts limit&quot; %}Without `page`, the response returns the 500 most recent conversation parts. If you need more than the 500 most recent parts, send `page` (and optionally `per_page`) to page through every part, oldest first, following `conversation_parts.pages.next`. Part type and `parts_created_after`/`parts_created_before` filters are applied first. `conversation_parts.total_count` counts the parts in this response after filtering, not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).If the conversation is a ticket, the access token must include the `read_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -272,12 +272,12 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             public bool? RetainMetrics { get; set; }
         }
         /// <summary>
-        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;warning&quot; name=&quot;Hard limit of 500 parts&quot; %}The maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. `include_part_types` and `exclude_part_types` are applied before this limit, so filtering returns the 500 most recent matching parts. `conversation_parts.total_count` counts the parts in this response, after filtering — it is not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).If the conversation is a ticket, the access token must include the `read_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
+        /// You can fetch the details of a single conversation.This will return a single Conversation model with all its conversation parts.{% admonition type=&quot;info&quot; name=&quot;Conversation parts limit&quot; %}Without `page`, the response returns the 500 most recent conversation parts. If you need more than the 500 most recent parts, send `page` (and optionally `per_page`) to page through every part, oldest first, following `conversation_parts.pages.next`. Part type and `parts_created_after`/`parts_created_before` filters are applied first. `conversation_parts.total_count` counts the parts in this response after filtering, not the conversation&apos;s total part count.{% /admonition %}For AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).If the conversation is a ticket, the access token must include the `read_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithConversationItemRequestBuilderGetQueryParameters 
         {
-            /// <summary>Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as `label (url)`, preserving the link URL alongside the visible text.</summary>
+            /// <summary>Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as `label (url)`, preserving the link URL alongside the visible text. Line breaks inside a paragraph are rendered as newlines.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("display_as")]
@@ -319,12 +319,18 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
             /// <summary>If set to true, conversation parts will be translated to the detected language of the conversation.</summary>
             [QueryParameter("include_translations")]
             public bool? IncludeTranslations { get; set; }
+            /// <summary>The page of conversation parts to return. When sent, parts are paginated oldest first, so page 1 holds the oldest parts. A page past the end returns an empty list.</summary>
+            [QueryParameter("page")]
+            public int? Page { get; set; }
             /// <summary>Only include conversation parts created at or after this time, as a Unix timestamp in seconds.</summary>
             [QueryParameter("parts_created_after")]
             public int? PartsCreatedAfter { get; set; }
             /// <summary>Only include conversation parts created at or before this time, as a Unix timestamp in seconds.</summary>
             [QueryParameter("parts_created_before")]
             public int? PartsCreatedBefore { get; set; }
+            /// <summary>The number of conversation parts per page, between 1 and 500. Only used when `page` is sent.</summary>
+            [QueryParameter("per_page")]
+            public int? PerPage { get; set; }
         }
         /// <summary>
         /// You can update an existing conversation.{% admonition type=&quot;info&quot; name=&quot;Replying and other actions&quot; %}If you want to reply to a coveration or take an action such as assign, unassign, open, close or snooze, take a look at the reply and manage endpoints.{% /admonition %}{% admonition type=&quot;info&quot; %}  This endpoint handles both **conversation updates** and **custom object associations**.  See _`update a conversation with an association to a custom object instance`_ in the request/response examples to see the custom object association format.{% /admonition %}{% admonition type=&quot;danger&quot; name=&quot;Breaking change: duplicate custom attribute names&quot; %}The `PUT /conversations/{id}` endpoint now returns a `400 INVALID_PARAMETER` error when the request includes `custom_attributes` and your workspace contains multiple non-archived conversation custom attributes with the same name. Previously, the update would silently apply to a non-deterministic attribute.To resolve, rename or archive the duplicate attribute so each name is unique, then retry the request. You can do this through:- The [Conversation Attributes API](/docs/references/preview/rest-api/api.intercom.io/conversations-attributes/listconversationattributes) — list with `GET /conversations/attributes`, then rename with `PUT /conversations/attributes/{id}` or archive with `DELETE /conversations/attributes/{id}`- Your workspace settings (Settings → Data → Conversations){% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
@@ -332,7 +338,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class WithConversationItemRequestBuilderPutQueryParameters 
         {
-            /// <summary>Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as `label (url)`, preserving the link URL alongside the visible text.</summary>
+            /// <summary>Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as `label (url)`, preserving the link URL alongside the visible text. Line breaks inside a paragraph are rendered as newlines.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
             [QueryParameter("display_as")]

@@ -42,6 +42,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
             if (parseNode.GetChildNode("url") is null) { _explicitNullValueUrl = default!; _explicitNullProperties?.Remove("url"); }
             else if (parseNode.GetChildNode("url") is { } nullNodeUrl && nullNodeUrl.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Url = null;
+            if (parseNode.GetChildNode("user_ip") is null) { _explicitNullValueUserIp = default!; _explicitNullProperties?.Remove("user_ip"); }
+            else if (parseNode.GetChildNode("user_ip") is { } nullNodeUserIp && nullNodeUserIp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserIp = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -159,6 +161,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Url { get => _explicitNullValueUrl; set { _explicitNullValueUrl = value; AdditionalData?.Remove("url"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("url"); else _explicitNullProperties?.Remove("url"); } }
         private string _explicitNullValueUrl = default!;
 #endif
+        /// <summary>The IP address of the end user who opened this conversation, when available. Null otherwise, including when the conversation was not opened by an end user.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UserIp { get => _explicitNullValueUserIp; set { _explicitNullValueUserIp = value; AdditionalData?.Remove("user_ip"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_ip"); else _explicitNullProperties?.Remove("user_ip"); } }
+        private string? _explicitNullValueUserIp = default!;
+#nullable restore
+#else
+        public string UserIp { get => _explicitNullValueUserIp; set { _explicitNullValueUserIp = value; AdditionalData?.Remove("user_ip"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_ip"); else _explicitNullProperties?.Remove("user_ip"); } }
+        private string _explicitNullValueUserIp = default!;
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource"/> and sets the default values.
         /// </summary>
@@ -196,6 +208,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
+                { "user_ip", n => { UserIp = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -217,6 +230,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("subject", Subject);
             writer.WriteStringValue("type", Type);
             writer.WriteStringValue("url", Url);
+            writer.WriteStringValue("user_ip", UserIp);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

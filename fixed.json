@@ -143,7 +143,7 @@
           "Admins"
         ],
         "summary": "Set an admin to away",
-        "description": "You can set an Admin as away for the Inbox.\n\nRequires the \u0060update_admins\u0060 OAuth scope.\n",
+        "description": "You can set an Admin as away for the Inbox.\n\nWhen \u0060away_mode_reassign\u0060 is \u0060true\u0060, the request can return a \u0060403\u0060 if the teammate does not have Inbox access.\n\nRequires the \u0060update_admins\u0060 OAuth scope.\n",
         "operationId": "SetAwayAdmin",
         "parameters": [
           {
@@ -344,6 +344,30 @@
                         {
                           "code": "parameter_missing",
                           "message": "param is missing or the value is empty or invalid: away_mode_enabled"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden. Can be returned when \u0060away_mode_reassign\u0060 is \u0060true\u0060 and the admin does not have Inbox access for the workspace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Admin without Inbox access": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8e4a1ee0-2a4c-4a9f-9c3f-1c2b6d7e5f01",
+                      "errors": [
+                        {
+                          "code": "action_forbidden",
+                          "message": "This admin does not have Inbox access permissions"
                         }
                       ]
                     }
@@ -557,6 +581,19 @@
                         }
                       ]
                     }
+                  },
+                  "per_page above 250": {
+                    "summary": "Example of a per_page greater than 250",
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "816186b3-3187-4b47-adf8-e201bea32208",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "Please provide the following parameters: max_per_page"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -684,6 +721,31 @@
                           "created_at": 1734537253,
                           "activity_type": "app_name_change",
                           "activity_description": "Ciaran5 Lee changed your app name from before to after."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "per_page above 250": {
+                    "summary": "Example of a per_page greater than 250",
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "816186b3-3187-4b47-adf8-e201bea32208",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "Please provide the following parameters: max_per_page"
                         }
                       ]
                     }
@@ -4245,6 +4307,280 @@
           }
         }
       ]
+    },
+    "/ai/external_pages/{id}/tags": {
+      "post": {
+        "tags": [
+          "AI Content",
+          "Tags"
+        ],
+        "summary": "Add a tag to an external page",
+        "description": "Apply an existing tag to an external page. Returns the tag that was applied.\n\nThe tag must already exist in the workspace (create tags with the Tags API),\nand the authenticating teammate must have the \u0060manage_knowledge_base_content\u0060\npermission. Pages uploaded as files can\u0027t be tagged and return a 404.\n\nOAuth tokens must have the \u0060read_write_ai_content\u0060 scope.\n",
+        "operationId": "AttachTagToExternalPage",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the external page which is given by Intercom.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachTagToExternalPageRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "Apply a tag",
+                  "value": {
+                    "id": "7522907"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tag applied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                },
+                "examples": {
+                  "Tag applied": {
+                    "value": {
+                      "type": "tag",
+                      "id": "7522907",
+                      "name": "Independent",
+                      "applied_at": 1663597223,
+                      "applied_by": {
+                        "type": "admin",
+                        "id": "1234"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Forbidden": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Not authorized to manage knowledge base content"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "External page, tag or teammate not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "External page not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "302049fb-b8c1-4dc8-a327-a8f6e1923484",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Tag not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8a3e4f88-ae65-433a-b4eb-46780ffc5402",
+                      "errors": [
+                        {
+                          "code": "tag_not_found",
+                          "message": "Tag not found"
+                        }
+                      ]
+                    }
+                  },
+                  "Admin not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7a34a204-9fae-5335-b818-1da0df3b5234",
+                      "errors": [
+                        {
+                          "code": "admin_not_found",
+                          "message": "Admin not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/ai/external_pages/{id}/tags/{id2}": {
+      "delete": {
+        "tags": [
+          "AI Content",
+          "Tags"
+        ],
+        "summary": "Remove a tag from an external page",
+        "description": "Remove a tag from an external page. Returns the tag that was removed, with\nnull \u0060applied_at\u0060 and \u0060applied_by\u0060.\n\nThe authenticating teammate must have the \u0060manage_knowledge_base_content\u0060\npermission. Pages uploaded as files can\u0027t be tagged and return a 404.\n\nOAuth tokens must have the \u0060read_write_ai_content\u0060 scope.\n",
+        "operationId": "DetachTagFromExternalPage",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the external page which is given by Intercom.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          },
+          {
+            "name": "id2",
+            "in": "path",
+            "description": "The unique identifier of the tag to remove, as given by Intercom.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "7522907"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tag removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                },
+                "examples": {
+                  "Tag removed": {
+                    "value": {
+                      "type": "tag",
+                      "id": "7522907",
+                      "name": "Independent",
+                      "applied_at": null,
+                      "applied_by": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Forbidden": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6f3c2b1a-2d4e-4f6a-9b8c-1a2b3c4d5e6f",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "Not authorized to manage knowledge base content"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "External page or tag not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "External page not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "302049fb-b8c1-4dc8-a327-a8f6e1923484",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Tag not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8a3e4f88-ae65-433a-b4eb-46780ffc5402",
+                      "errors": [
+                        {
+                          "code": "tag_not_found",
+                          "message": "Tag not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
     },
     "/articles": {
       "get": {
@@ -26113,7 +26449,7 @@
           "Conversations"
         ],
         "summary": "Retrieve a conversation",
-        "description": "\nYou can fetch the details of a single conversation.\n\nThis will return a single Conversation model with all its conversation parts.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Hard limit of 500 parts\u0022 %}\nThe maximum number of conversation parts that can be returned via the API is 500. If you have more than that we will return the 500 most recent conversation parts. \u0060include_part_types\u0060 and \u0060exclude_part_types\u0060 are applied before this limit, so filtering returns the 500 most recent matching parts. \u0060conversation_parts.total_count\u0060 counts the parts in this response, after filtering \u2014 it is not the conversation\u0027s total part count.\n{% /admonition %}\n\nFor AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).\n\nIf the conversation is a ticket, the access token must include the \u0060read_tickets\u0060 scope. Without it, the request returns a \u0060401\u0060 with the error code \u0060token_unauthorized\u0060.\n",
+        "description": "\nYou can fetch the details of a single conversation.\n\nThis will return a single Conversation model with all its conversation parts.\n\n{% admonition type=\u0022info\u0022 name=\u0022Conversation parts limit\u0022 %}\nWithout \u0060page\u0060, the response returns the 500 most recent conversation parts. If you need more than the 500 most recent parts, send \u0060page\u0060 (and optionally \u0060per_page\u0060) to page through every part, oldest first, following \u0060conversation_parts.pages.next\u0060. Part type and \u0060parts_created_after\u0060/\u0060parts_created_before\u0060 filters are applied first. \u0060conversation_parts.total_count\u0060 counts the parts in this response after filtering, not the conversation\u0027s total part count.\n{% /admonition %}\n\nFor AI agent conversation metadata, please note that you need to have the agent enabled in your workspace, which is a [paid feature](https://www.intercom.com/help/en/articles/8205718-fin-resolutions#h_97f8c2e671).\n\nIf the conversation is a ticket, the access token must include the \u0060read_tickets\u0060 scope. Without it, the request returns a \u0060401\u0060 with the error code \u0060token_unauthorized\u0060.\n",
         "operationId": "RetrieveConversation",
         "parameters": [
           {
@@ -26136,7 +26472,7 @@
           {
             "name": "display_as",
             "in": "query",
-            "description": "Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as \u0060label (url)\u0060, preserving the link URL alongside the visible text.",
+            "description": "Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as \u0060label (url)\u0060, preserving the link URL alongside the visible text. Line breaks inside a paragraph are rendered as newlines.",
             "schema": {
               "type": "string"
             },
@@ -26227,6 +26563,28 @@
               }
             },
             "example": "assignment"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page of conversation parts to return. When sent, parts are paginated oldest first, so page 1 holds the oldest parts. A page past the end returns an empty list.",
+            "schema": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "example": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of conversation parts per page, between 1 and 500. Only used when \u0060page\u0060 is sent.",
+            "schema": {
+              "maximum": 500,
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            },
+            "example": 50
           }
         ],
         "responses": {
@@ -27059,6 +27417,30 @@
                         }
                       ]
                     }
+                  },
+                  "Invalid page": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8091a2b3-c4d5-4e6f-8a7b-9c0d1e2f3a4b",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "page must be a positive integer"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid per_page": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "91a2b3c4-d5e6-4f70-9b8c-0d1e2f3a4b5c",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "per_page must be an integer between 1 and 500"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -27095,7 +27477,7 @@
           {
             "name": "display_as",
             "in": "query",
-            "description": "Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as \u0060label (url)\u0060, preserving the link URL alongside the visible text.",
+            "description": "Set to plaintext to retrieve conversation messages in plain text. This affects both the body and subject fields. Inline links are rendered as \u0060label (url)\u0060, preserving the link URL alongside the visible text. Line breaks inside a paragraph are rendered as newlines.",
             "schema": {
               "type": "string"
             },
@@ -44756,7 +45138,8 @@
                       "type": "team",
                       "id": "991267902",
                       "name": "team 1",
-                      "admin_ids": []
+                      "admin_ids": [],
+                      "distribution_method": "round_robin"
                     }
                   }
                 }
@@ -49081,7 +49464,7 @@
           "Tickets"
         ],
         "summary": "Search tickets",
-        "description": "You can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for tickets, you send a \u0060POST\u0060 request to \u0060https://api.intercom.io/tickets/search\u0060.\n\nThis will accept a query object in the body which will define your filters.\n{% admonition type=\u0022warning\u0022 name=\u0022Optimizing search queries\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006020\u0060 results per page and maximum is \u0060150\u0060.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiples there can be:\n- There\u0027s a limit of max 2 nested filters\n- There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\u0022foobar\u0022\u0060).\nFields not in the table below, such as \u0060source.body\u0060, are rejected with a \u0060400\u0060 error.\n\n| Field                                     | Type                                                                                     |\n| :---------------------------------------- | :--------------------------------------------------------------------------------------- |\n| id                                        | Integer                                                                                  |\n| created_at                                | Date (Unix timestamp in seconds)                                                                    |\n| updated_at                                | Date (Unix timestamp in seconds)                                                                    |\n| title                           | String                                                                                   |\n| description                     | String                                                                                   |\n| category                                  | String                                                                                   |\n| ticket_type_id                            | Integer                                                                                  |\n| contact_ids                               | String                                                                                   |\n| admin_assignee_id                         | Integer                                                                                  |\n| team_assignee_id                          | Integer                                                                                  |\n| open                                      | Boolean                                                                                  |\n| state                                     | String                                                                                   |\n| snoozed_until                             | Date (Unix timestamp in seconds)                                                                    |\n| ticket_attribute.{id}                     | String or Boolean or Date (Unix timestamp in seconds) or Float or Integer                           |\n\n{% admonition type=\u0022info\u0022 name=\u0022Searching by Category\u0022 %}\nWhen searching for tickets by the **\u0060category\u0060** field, specific terms must be used instead of the category names:\n* For **Customer** category tickets, use the term \u0060request\u0060.\n* For **Back-office** category tickets, use the term \u0060task\u0060.\n* For **Tracker** category tickets, use the term \u0060tracker\u0060.\n{% /admonition %}\n\n### Sorting\n\nYou can sort the results with a \u0060sort\u0060 object, for example \u0060{\u0022field\u0022: \u0022created_at\u0022, \u0022order\u0022: \u0022ascending\u0022}\u0060. \u0060field\u0060 must be one of the fields in the table above, other than \u0060ticket_attribute.{id}\u0060, \u0060title\u0060 and \u0060description\u0060. \u0060order\u0060 is \u0060ascending\u0060 or \u0060descending\u0060, and any other value is treated as \u0060descending\u0060. Without \u0060sort\u0060, results are sorted by \u0060updated_at\u0060, newest first.\n\n### Accepted Operators\n\n{% admonition type=\u0022info\u0022 name=\u0022Searching based on \u0060created_at\u0060\u0022 %}\n  You may use the \u0060\u003C=\u0060 or \u0060\u003E=\u0060 operators to search by \u0060created_at\u0060.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\u0022=\u0022\u0060). The operator has to be compatible with the field\u0027s type  (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn\u0027t Equal                                                |\n| IN       | All                            | In  Shortcut for \u0060OR\u0060 queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for \u0060OR !\u0060 queries  Values must be in Array |\n| \u003E        | Integer  Date (Unix timestamp in seconds) | Greater (or equal) than                                      |\n| \u003C       | Integer  Date (Unix timestamp in seconds) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn\u0027t Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |\n",
+        "description": "You can search for multiple tickets by the value of their attributes in order to fetch exactly which ones you want.\n\nTo search for tickets, you send a \u0060POST\u0060 request to \u0060https://api.intercom.io/tickets/search\u0060.\n\nThis will accept a query object in the body which will define your filters.\n{% admonition type=\u0022warning\u0022 name=\u0022Optimizing search queries\u0022 %}\n  Search queries can be complex, so optimizing them can help the performance of your search.\n  Use the \u0060AND\u0060 and \u0060OR\u0060 operators to combine multiple filters to get the exact results you need and utilize\n  pagination to limit the number of results returned. The default is \u006020\u0060 results per page and maximum is \u0060150\u0060.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#example-search-conversations-request) for more details on how to use the \u0060starting_after\u0060 param.\n{% /admonition %}\n\n### Nesting \u0026 Limitations\n\nYou can nest these filters in order to get even more granular insights that pinpoint exactly what you need. Example: (1 OR 2) AND (3 OR 4).\nThere are some limitations to the amount of multiples there can be:\n- There\u0027s a limit of max 2 nested filters\n- There\u0027s a limit of max 15 filters for each AND or OR group\n\n### Accepted Fields\n\nMost keys listed as part of the Ticket model are searchable, whether writeable or not. The value you search for has to match the accepted type, otherwise the query will fail (ie. as \u0060created_at\u0060 accepts a date, the \u0060value\u0060 cannot be a string such as \u0060\u0022foobar\u0022\u0060).\nFields not in the table below, such as \u0060source.body\u0060, are rejected with a \u0060400\u0060 error.\n\n| Field                                     | Type                                                                                     |\n| :---------------------------------------- | :--------------------------------------------------------------------------------------- |\n| id                                        | Integer                                                                                  |\n| created_at                                | Date (Unix timestamp in seconds)                                                                    |\n| updated_at                                | Date (Unix timestamp in seconds)                                                                    |\n| title                           | String                                                                                   |\n| description                     | String                                                                                   |\n| category                                  | String                                                                                   |\n| ticket_type_id                            | Integer                                                                                  |\n| contact_ids                               | String                                                                                   |\n| admin_assignee_id                         | Integer                                                                                  |\n| team_assignee_id                          | Integer                                                                                  |\n| open                                      | Boolean                                                                                  |\n| state                                     | String                                                                                   |\n| snoozed_until                             | Date (Unix timestamp in seconds)                                                                    |\n| ticket_attribute.{id}                     | String or Boolean or Date (Unix timestamp in seconds) or Float or Integer                           |\n\n{% admonition type=\u0022info\u0022 name=\u0022Searching by Category\u0022 %}\nWhen searching for tickets by the **\u0060category\u0060** field, specific terms must be used instead of the category names:\n* For **Customer** category tickets, use the term \u0060request\u0060.\n* For **Back-office** category tickets, use the term \u0060task\u0060.\n* For **Tracker** category tickets, use the term \u0060tracker\u0060.\n{% /admonition %}\n\n### Sorting\n\nYou can sort the results with a \u0060sort\u0060 object, for example \u0060{\u0022field\u0022: \u0022created_at\u0022, \u0022order\u0022: \u0022ascending\u0022}\u0060. \u0060field\u0060 must be one of the fields in the table above, other than \u0060ticket_attribute.{id}\u0060, \u0060title\u0060 and \u0060description\u0060. \u0060order\u0060 is \u0060ascending\u0060 or \u0060descending\u0060. Without \u0060sort\u0060, results are sorted by \u0060updated_at\u0060, newest first.\n\n### Accepted Operators\n\n{% admonition type=\u0022info\u0022 name=\u0022Searching based on \u0060created_at\u0060\u0022 %}\n  You may use the \u0060\u003C=\u0060 or \u0060\u003E=\u0060 operators to search by \u0060created_at\u0060.\n{% /admonition %}\n\nThe table below shows the operators you can use to define how you want to search for the value.  The operator should be put in as a string (\u0060\u0022=\u0022\u0060). The operator has to be compatible with the field\u0027s type  (eg. you cannot search with \u0060\u003E\u0060 for a given string value as it\u0027s only compatible for integer\u0027s and dates).\n\n| Operator | Valid Types                    | Description                                                  |\n| :------- | :----------------------------- | :----------------------------------------------------------- |\n| =        | All                            | Equals                                                       |\n| !=       | All                            | Doesn\u0027t Equal                                                |\n| IN       | All                            | In  Shortcut for \u0060OR\u0060 queries  Values most be in Array       |\n| NIN      | All                            | Not In  Shortcut for \u0060OR !\u0060 queries  Values must be in Array |\n| \u003E        | Integer  Date (Unix timestamp in seconds) | Greater (or equal) than                                      |\n| \u003C       | Integer  Date (Unix timestamp in seconds) | Lower (or equal) than                                        |\n| ~        | String                         | Contains                                                     |\n| !~       | String                         | Doesn\u0027t Contain                                              |\n| ^        | String                         | Starts With                                                  |\n| $        | String                         | Ends With                                                    |\n",
         "operationId": "SearchTickets",
         "parameters": [
           {
@@ -52705,6 +53088,460 @@
         ]
       }
     },
+    "/fin/tasks": {
+      "get": {
+        "tags": [
+          "Fin Tasks"
+        ],
+        "summary": "List all Fin Tasks",
+        "description": "You can fetch a list of all Fin Tasks (AI agent workflows) configured for your workspace.",
+        "operationId": "ListFinTasks",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinTaskList"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "task",
+                          "id": "1",
+                          "title": "Refund request",
+                          "description": "Handles refund requests end to end",
+                          "state": "live",
+                          "created_at": "2026-01-24T10:01:20Z",
+                          "updated_at": "2026-01-24T10:01:20Z",
+                          "segment_ids": [
+                            12
+                          ]
+                        }
+                      ],
+                      "total_count": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Fin Tasks"
+        ],
+        "summary": "Create a Fin Task",
+        "description": "You can create a new Fin Task (AI agent workflow). Set \u0060activate\u0060 to \u0060true\u0060 to make the task live immediately, otherwise it is created as a draft. If activation fails, the task is still created as a draft. The workspace must have access to Fin.",
+        "operationId": "CreateFinTask",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFinTaskRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "successful",
+                  "value": {
+                    "title": "Refund request",
+                    "description": "Handles refund requests end to end",
+                    "activate": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinTask"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "task",
+                      "id": "1",
+                      "title": "Refund request",
+                      "description": "Handles refund requests end to end",
+                      "state": "draft",
+                      "created_at": "2026-01-24T10:01:20Z",
+                      "updated_at": "2026-01-24T10:01:20Z",
+                      "segment_ids": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Title missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "00000000-0000-4000-8000-000000000021",
+                      "errors": [
+                        {
+                          "code": "parameter_missing",
+                          "message": "param is missing or the value is empty or invalid: title"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinTask"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "task",
+                      "id": "1",
+                      "title": "Refund request",
+                      "description": "Handles refund requests end to end",
+                      "state": "draft",
+                      "created_at": "2026-01-24T10:01:20Z",
+                      "updated_at": "2026-01-24T10:01:20Z",
+                      "segment_ids": []
+                    }
+                  }
+                }
+              }
+            },
+            "x-client-success-response-status": "201"
+          }
+        }
+      }
+    },
+    "/fin/tasks/{id}": {
+      "get": {
+        "tags": [
+          "Fin Tasks"
+        ],
+        "summary": "Retrieve a Fin Task",
+        "description": "You can fetch the details of a single Fin Task by its id.",
+        "operationId": "RetrieveFinTask",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of a given Fin Task",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinTask"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "task",
+                      "id": "1",
+                      "title": "Refund request",
+                      "description": "Handles refund requests end to end",
+                      "state": "live",
+                      "created_at": "2026-01-24T10:01:20Z",
+                      "updated_at": "2026-01-24T10:01:20Z",
+                      "segment_ids": [
+                        12
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Task not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e20c89d2-29c6-4abb-aa3d-c860e1cec1ca",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Task not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Fin Tasks"
+        ],
+        "summary": "Update a Fin Task",
+        "description": "You can update the title and description of an existing Fin Task, and set the audience segments it is available to. \u0060title\u0060 and \u0060description\u0060 must always be sent together, including when you only want to change \u0060segment_ids\u0060.",
+        "operationId": "UpdateFinTask",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of a given Fin Task",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFinTaskRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "successful",
+                  "value": {
+                    "title": "Refund request (updated)",
+                    "description": "Handles refund requests end to end",
+                    "segment_ids": [
+                      12
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinTask"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "task",
+                      "id": "1",
+                      "title": "Refund request (updated)",
+                      "description": "Handles refund requests end to end",
+                      "state": "live",
+                      "created_at": "2026-01-24T10:01:20Z",
+                      "updated_at": "2026-01-24T10:05:00Z",
+                      "segment_ids": [
+                        12
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Title and description missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "00000000-0000-4000-8000-000000000022",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Name \u0026 description must both be set for a Task"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Task not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e20c89d2-29c6-4abb-aa3d-c860e1cec1ca",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Task not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Fin Tasks"
+        ],
+        "summary": "Delete a Fin Task",
+        "description": "You can delete a Fin Task by passing in its id. This deactivates the task, if live, before deleting it.",
+        "operationId": "DeleteFinTask",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of a given Fin Task",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteFinTask200Response"
+                },
+                "examples": {
+                  "Successful": {
+                    "value": {
+                      "message": "Task deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Task not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Task not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e20c89d2-29c6-4abb-aa3d-c860e1cec1ca",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Task not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
     "/procedures/{conversationId}/collect_agent_input": {
       "post": {
         "tags": [
@@ -54241,6 +55078,14 @@
             "nullable": true,
             "example": "http://intercom.test/help/en/articles/3-default-language"
           },
+          "url_redirects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs that redirect to this article. Null when the article has no content yet.",
+            "nullable": true
+          },
           "parent_ids": {
             "type": "array",
             "items": {
@@ -54758,6 +55603,14 @@
             "description": "The URL of the article. For multilingual articles, this will be the URL of the default language\u0027s content.",
             "nullable": true,
             "example": "http://intercom.test/help/en/articles/3-default-language"
+          },
+          "url_redirects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs that redirect to this article. Null when the article has no content yet.",
+            "nullable": true
           },
           "parent_ids": {
             "type": "array",
@@ -58641,6 +59494,16 @@
             "description": "The id representing the conversation.",
             "example": "1295"
           },
+          "call_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The ids of the calls associated with this conversation. Empty when the conversation has no calls.",
+            "example": [
+              "4567"
+            ]
+          },
           "title": {
             "type": "string",
             "description": "The title given to the conversation.",
@@ -58811,6 +59674,16 @@
             "type": "string",
             "description": "The id representing the conversation.",
             "example": "1295"
+          },
+          "call_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The ids of the calls associated with this conversation. Empty when the conversation has no calls.",
+            "example": [
+              "4567"
+            ]
           },
           "title": {
             "type": "string",
@@ -59518,6 +60391,12 @@
             "example": 1663597260,
             "x-client-original-format": "date-time"
           },
+          "user_ip": {
+            "type": "string",
+            "description": "The IP address of the end user who authored this conversation part, when available. Null otherwise, including for parts not authored by an end user.",
+            "nullable": true,
+            "example": "203.0.113.42"
+          },
           "assigned_to": {
             "$ref": "#/components/schemas/Reference"
           },
@@ -59554,6 +60433,9 @@
             "type": "boolean",
             "description": "Whether or not the conversation part has been redacted.",
             "example": false
+          },
+          "receipts": {
+            "$ref": "#/components/schemas/ConversationPartReceipts"
           },
           "email_message_metadata": {
             "$ref": "#/components/schemas/EmailMessageMetadata"
@@ -59644,8 +60526,11 @@
           },
           "total_count": {
             "type": "integer",
-            "description": "A count of the conversation parts in this response, after any \u0060include_part_types\u0060 or \u0060exclude_part_types\u0060 filter has been applied. This is not the conversation\u0027s total part count.",
+            "description": "A count of the conversation parts in this response, after any \u0060include_part_types\u0060 or \u0060exclude_part_types\u0060 filter has been applied. When paginating, this is the number of parts on the current page. This is not the conversation\u0027s total part count.",
             "example": 1
+          },
+          "pages": {
+            "$ref": "#/components/schemas/ConversationPartsPages"
           }
         },
         "description": "A list of Conversation Part objects for each part message in the conversation. This is only returned when Retrieving a Conversation, and ignored when Listing all Conversations. There is a limit of 500 parts."
@@ -59749,6 +60634,12 @@
             "type": "string",
             "description": "How the conversation was initiated.",
             "example": "operator_initiated"
+          },
+          "user_ip": {
+            "type": "string",
+            "description": "The IP address of the end user who opened this conversation, when available. Null otherwise, including when the conversation was not opened by an end user.",
+            "nullable": true,
+            "example": "203.0.113.42"
           },
           "recipients": {
             "type": "array",
@@ -60134,7 +61025,7 @@
           },
           "body": {
             "type": "string",
-            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060.",
+            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060. Empty \u0060\u003Cp\u003E\u0060 tags are kept as blank paragraphs instead of being dropped.",
             "example": "\u003Cp\u003EThis is the body in html\u003C/p\u003E"
           },
           "body_markdown": {
@@ -60179,6 +61070,16 @@
             "description": "The ID of the folder to place this article in, or null to leave it without a folder.",
             "nullable": true,
             "example": 6
+          },
+          "url_redirects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs that should redirect to this article. Accepts up to 100 entries. Absolute URLs must match the help center\u0027s domain. A URL that already redirects to another article is moved to this article.",
+            "example": [
+              "/help/old-article-slug"
+            ]
           },
           "audience_ids": {
             "type": "array",
@@ -60529,12 +61430,12 @@
         "discriminator": {
           "propertyName": "data_type",
           "mapping": {
-            "options": "#/components/schemas/CreateDataAttributeRequestCreateDataAttributeRequestOneOf1",
-            "string": "#/components/schemas/CreateDataAttributeRequestCreateDataAttributeRequestOneOf2",
-            "integer": "#/components/schemas/CreateDataAttributeRequestCreateDataAttributeRequestOneOf2",
-            "float": "#/components/schemas/CreateDataAttributeRequestCreateDataAttributeRequestOneOf2",
-            "boolean": "#/components/schemas/CreateDataAttributeRequestCreateDataAttributeRequestOneOf2",
-            "date": "#/components/schemas/CreateDataAttributeRequestCreateDataAttributeRequestOneOf2"
+            "options": "#/components/schemas/CreateDataAttributeRequestOneOf1Variant",
+            "string": "#/components/schemas/CreateDataAttributeRequestOneOf2Variant",
+            "integer": "#/components/schemas/CreateDataAttributeRequestOneOf2Variant",
+            "float": "#/components/schemas/CreateDataAttributeRequestOneOf2Variant",
+            "boolean": "#/components/schemas/CreateDataAttributeRequestOneOf2Variant",
+            "date": "#/components/schemas/CreateDataAttributeRequestOneOf2Variant"
           }
         },
         "x-client-original-tagged-union": {
@@ -61939,14 +62840,14 @@
         "discriminator": {
           "propertyName": "data_type",
           "mapping": {
-            "string": "#/components/schemas/ConversationAttributeConversationAttributeOneOf1",
-            "integer": "#/components/schemas/ConversationAttributeConversationAttributeOneOf2",
-            "list": "#/components/schemas/ConversationAttributeConversationAttributeOneOf3",
-            "decimal": "#/components/schemas/ConversationAttributeConversationAttributeOneOf4",
-            "boolean": "#/components/schemas/ConversationAttributeConversationAttributeOneOf5",
-            "datetime": "#/components/schemas/ConversationAttributeConversationAttributeOneOf6",
-            "relationship": "#/components/schemas/ConversationAttributeConversationAttributeOneOf7",
-            "files": "#/components/schemas/ConversationAttributeConversationAttributeOneOf8"
+            "string": "#/components/schemas/ConversationAttributeOneOf1Variant",
+            "integer": "#/components/schemas/ConversationAttributeOneOf2Variant",
+            "list": "#/components/schemas/ConversationAttributeOneOf3Variant",
+            "decimal": "#/components/schemas/ConversationAttributeOneOf4Variant",
+            "boolean": "#/components/schemas/ConversationAttributeOneOf5Variant",
+            "datetime": "#/components/schemas/ConversationAttributeOneOf6Variant",
+            "relationship": "#/components/schemas/ConversationAttributeOneOf7Variant",
+            "files": "#/components/schemas/ConversationAttributeOneOf8Variant"
           }
         },
         "x-client-original-tagged-union": {
@@ -64294,6 +65195,139 @@
           "Fin Agent"
         ]
       },
+      "FinTask": {
+        "title": "Fin Task",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Always task.",
+            "example": "task"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the Fin Task.",
+            "example": "1"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the Fin Task.",
+            "example": "Refund request"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the Fin Task.",
+            "example": "Handles refund requests end to end"
+          },
+          "state": {
+            "$ref": "#/components/schemas/FinTaskState"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The time the Fin Task was created, as an ISO 8601 timestamp.",
+            "format": "date-time",
+            "example": "2026-01-24T10:01:20Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The last time the Fin Task was updated, as an ISO 8601 timestamp.",
+            "format": "date-time",
+            "example": "2026-01-24T10:01:20Z"
+          },
+          "segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the audience segments the Fin Task is available to. Empty when it has none.",
+            "example": [
+              12
+            ]
+          }
+        },
+        "description": "A Fin Task is an AI agent workflow that Fin can run.",
+        "x-tags": [
+          "Fin Tasks"
+        ]
+      },
+      "FinTaskList": {
+        "title": "Fin Task List",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FinTask"
+            },
+            "description": "A list of Fin Task objects."
+          },
+          "total_count": {
+            "type": "integer",
+            "description": "The total number of Fin Tasks.",
+            "example": 1
+          }
+        },
+        "description": "A list of Fin Task objects."
+      },
+      "CreateFinTaskRequest": {
+        "title": "Create Fin Task Request Payload",
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the Fin Task. Cannot exceed 255 characters.",
+            "example": "Refund request"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the Fin Task.",
+            "example": "Handles refund requests end to end"
+          },
+          "activate": {
+            "type": "boolean",
+            "description": "Set to true to make the Fin Task live immediately. Defaults to false (draft).",
+            "example": false
+          }
+        },
+        "description": "You can create a new Fin Task."
+      },
+      "UpdateFinTaskRequest": {
+        "title": "Update Fin Task Request Payload",
+        "required": [
+          "title",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The title of the Fin Task. Cannot exceed 255 characters. Must be sent together with \u0060description\u0060.",
+            "example": "Refund request (updated)"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the Fin Task. Must be sent together with \u0060title\u0060.",
+            "example": "Handles refund requests end to end"
+          },
+          "segment_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "The ids of the audience segments the Fin Task is available to. This replaces the task\u0027s current segments, so send an empty array to remove them all. Each id must be an integer.",
+            "example": [
+              12
+            ]
+          }
+        },
+        "description": "You can update the title and description of an existing Fin Task, and set the audience segments it is available to. \u0060title\u0060 and \u0060description\u0060 must always be sent together, including when you only want to change \u0060segment_ids\u0060."
+      },
       "FileAttribute": {
         "title": "File",
         "type": "object",
@@ -66347,8 +67381,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "conversation_part": "#/components/schemas/RedactConversationRequestRedactConversationRequestRedactConversationPartRequest",
-            "source": "#/components/schemas/RedactConversationRequestRedactConversationRequestRedactConversationSourceRequest"
+            "conversation_part": "#/components/schemas/RedactConversationRequestRedactConversationPartRequestVariant",
+            "source": "#/components/schemas/RedactConversationRequestRedactConversationSourceRequestVariant"
           }
         },
         "x-client-original-tagged-union": {
@@ -66840,7 +67874,7 @@
           },
           "applied_at": {
             "type": "integer",
-            "description": "The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. \u0060null\u0060 when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.",
+            "description": "The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, content snippet, or external page, when listing the tags on a contact, or when it is returned as part of an external page. \u0060null\u0060 when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.",
             "format": "int64",
             "nullable": true,
             "example": 1663597223,
@@ -66850,7 +67884,7 @@
             "$ref": "#/components/schemas/TagAppliedBy"
           }
         },
-        "description": "A tag allows you to label your contacts, companies, conversations, tickets, articles, internal articles and content snippets, and list them using that tag.",
+        "description": "A tag allows you to label your contacts, companies, conversations, tickets, articles, internal articles, content snippets and external pages, and list them using that tag.",
         "x-tags": [
           "Tags"
         ]
@@ -68039,7 +69073,7 @@
           },
           "body": {
             "type": "string",
-            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060.",
+            "description": "The content of the article in HTML. For multilingual articles, this will be the body of the default language\u0027s content. Mutually exclusive with \u0060body_markdown\u0060. Empty \u0060\u003Cp\u003E\u0060 tags are kept as blank paragraphs instead of being dropped.",
             "example": "\u003Cp\u003EThis is the body in html\u003C/p\u003E"
           },
           "body_markdown": {
@@ -68080,6 +69114,16 @@
             "description": "The ID of the folder to place this article in, or null to remove it from its folder.",
             "nullable": true,
             "example": 6
+          },
+          "url_redirects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs that should redirect to this article. Accepts up to 100 entries. Absolute URLs must match the help center\u0027s domain. On update the list replaces the existing redirects, so send an empty array to remove them all; omit the field to leave them unchanged. A URL that already redirects to another article is moved to this article.",
+            "example": [
+              "/help/old-article-slug"
+            ]
           },
           "audience_ids": {
             "type": "array",
@@ -68938,8 +69982,9 @@
             "$ref": "#/components/schemas/RegisterFinVoiceCallRequestSource"
           },
           "vendor_internal_id": {
+            "maxLength": 191,
             "type": "string",
-            "description": "Optional vendor-supplied identifier for linking the Fin Voice session to records in the vendor\u0027s own systems. Stored as-is and returned on every lookup.",
+            "description": "Optional vendor-supplied identifier for linking the Fin Voice session to records in the vendor\u0027s own systems. Stored as-is and returned on every lookup. Cannot exceed 191 characters.",
             "nullable": true,
             "example": "vendor-internal-abc-123"
           },
@@ -68949,6 +69994,32 @@
         },
         "description": "Register a Fin Voice call with Intercom",
         "nullable": true
+      },
+      "ChangeTicketTypeRequestTicketAttributesAdditionalProperties": {
+        "anyOf": [
+          {
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
       },
       "CompanyCustomAttributesAdditionalProperties": {
         "anyOf": [
@@ -69074,6 +70145,39 @@
         },
         "description": "The evaluator\u0027s result for this conversation. Null if the evaluator was not scored.",
         "nullable": true
+      },
+      "ConversationPartsPages": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PagesType"
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "next": {
+            "type": "string",
+            "description": "A link to the next page of results. Omitted or \u0060null\u0060 on the last page, depending on the list. Some lists never include \u0060next\u0060 or \u0060prev\u0060, so compare \u0060page\u0060 with \u0060total_pages\u0060 to tell whether more pages remain.",
+            "nullable": true,
+            "x-client-original-format": "uri"
+          },
+          "prev": {
+            "type": "string",
+            "description": "A link to the previous page of results. Omitted on the first page.",
+            "nullable": true,
+            "x-client-original-format": "uri"
+          },
+          "per_page": {
+            "type": "integer",
+            "example": 50
+          },
+          "total_pages": {
+            "type": "integer",
+            "example": 1
+          }
+        },
+        "description": "Pagination details for the conversation parts. Only returned when the \u0060page\u0060 query parameter is sent. \u0060next\u0060 is null on the last page."
       },
       "ConversationPartMetadataQuickReplyOptionsItem": {
         "required": [
@@ -69633,7 +70737,7 @@
             "example": "1a2b3c"
           }
         },
-        "description": "The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. \u0060null\u0060 when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value. When no admin is recorded, \u0060type\u0060 is \u0060nobody_admin\u0060 and \u0060id\u0060 is \u0060null\u0060."
+        "description": "The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, content snippet, or external page, when listing the tags on a contact, or when it is returned as part of an external page. \u0060null\u0060 when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value. When no admin is recorded, \u0060type\u0060 is \u0060nobody_admin\u0060 and \u0060id\u0060 is \u0060null\u0060."
       },
       "TicketCustomAttributesAdditionalProperties": {
         "anyOf": [
@@ -69694,26 +70798,6 @@
             "example": [
               "photo.png"
             ]
-          }
-        ]
-      },
-      "TicketRequestCustomAttributesAdditionalProperties": {
-        "anyOf": [
-          {
-            "type": "string",
-            "nullable": true
-          },
-          {
-            "type": "number"
-          },
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "array",
-            "items": {
-              "description": "Fallback array item schema"
-            }
           }
         ]
       },
@@ -71081,6 +72165,23 @@
           }
         },
         "description": "The ticket details when the conversation is a ticket. \u0060null\u0060 for any other conversation.",
+        "nullable": true
+      },
+      "ConversationPartReceipts": {
+        "type": "object",
+        "properties": {
+          "overall_state": {
+            "$ref": "#/components/schemas/ConversationPartReceiptsOverallState"
+          },
+          "recipients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationPartReceiptsRecipientsItem"
+            },
+            "description": "One entry per recipient the part was sent to, in send order."
+          }
+        },
+        "description": "What happened to this part for each recipient it was sent to. Null when delivery receipts have not been recorded for this part.",
         "nullable": true
       },
       "ConversationPartTranslations": {
@@ -73184,6 +74285,43 @@
           }
         }
       },
+      "ConversationPartReceiptsRecipientsItem": {
+        "type": "object",
+        "properties": {
+          "participant_id": {
+            "type": "string",
+            "description": "The id of the recipient, a contact id or an admin id.",
+            "example": "6762f0dd1bb69f9f2193bb83"
+          },
+          "participant_type": {
+            "$ref": "#/components/schemas/ConversationPartReceiptsRecipientsItemParticipantType"
+          },
+          "state": {
+            "$ref": "#/components/schemas/ConversationPartReceiptsRecipientsItemState"
+          },
+          "channel": {
+            "type": "string",
+            "description": "The channel the part was sent on.",
+            "example": "email"
+          },
+          "state_updated_at": {
+            "type": "integer",
+            "description": "The time the state last changed, as a UTC Unix timestamp.",
+            "format": "int64",
+            "example": 1663597223,
+            "x-client-original-format": "date-time"
+          },
+          "error_code": {
+            "$ref": "#/components/schemas/ConversationPartReceiptsRecipientsItemErrorCode"
+          },
+          "address": {
+            "type": "string",
+            "description": "The email address the part was sent to, for contact recipients. Null for teammates or when it is not known.",
+            "nullable": true,
+            "example": "joe@example.com"
+          }
+        }
+      },
       "CreateDataEventRequestMetadataAdditionalProperties": {
         "anyOf": [
           {
@@ -73677,7 +74815,6 @@
           "away_mode_reassign": {
             "type": "boolean",
             "description": "Set to \u0022true\u0022 to assign any new conversation replies to your default inbox.",
-            "default": false,
             "example": false
           },
           "away_status_reason_id": {
@@ -73744,6 +74881,25 @@
           },
           "removed": {
             "$ref": "#/components/schemas/TrueValueRemoved"
+          }
+        }
+      },
+      "AttachTagToExternalPageRequest": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the tag to apply, as given by Intercom.",
+            "example": "7522907"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "Optional id of the teammate to attribute the tagging to. Defaults to the authenticating teammate.",
+            "nullable": true,
+            "example": "1234"
           }
         }
       },
@@ -76771,6 +77927,16 @@
           }
         }
       },
+      "DeleteFinTask200Response": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A confirmation that the Fin Task was deleted.",
+            "example": "Task deleted successfully"
+          }
+        }
+      },
       "GetDownloadReportingDataByJobIdentifier200OctetStreamResponseSchema": {
         "type": "string",
         "format": "binary"
@@ -77138,7 +78304,10 @@
       },
       "ChangeTicketTypeRequestTicketAttributesProperty": {
         "type": "object",
-        "description": "The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
+        },
+        "description": "The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values. HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
         "example": {
           "_default_title_": "example",
           "_default_description_": "having a problem"
@@ -77184,9 +78353,9 @@
         "title": "Ticket Attributes",
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/TicketRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
         },
-        "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060).",
+        "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060). HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
         "example": {
           "_default_title_": "Found a bug",
           "_default_description_": "The button is not working"
@@ -77836,9 +79005,9 @@
         "title": "Ticket Attributes",
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/TicketRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
         },
-        "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060).",
+        "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060). HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
         "example": {
           "_default_title_": "Found a bug",
           "_default_description_": "The button is not working"
@@ -77848,9 +79017,9 @@
         "title": "Ticket Attributes",
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/components/schemas/TicketRequestCustomAttributesAdditionalProperties"
+          "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
         },
-        "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060).",
+        "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060). HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
         "example": {
           "_default_title_": "Found a bug",
           "_default_description_": "The button is not working"
@@ -77858,7 +79027,10 @@
       },
       "UpdateTicketRequestRequestBodyTicketAttributes": {
         "type": "object",
-        "description": "The attributes set on the ticket.",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
+        },
+        "description": "The attributes set on the ticket. HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
         "example": {
           "_default_title_": "example",
           "_default_description_": "having a problem"
@@ -83645,6 +84817,29 @@
           ]
         }
       },
+      "FinTaskState": {
+        "enum": [
+          "live",
+          "draft"
+        ],
+        "type": "string",
+        "description": "Whether the Fin Task is live or still a draft.",
+        "example": "live",
+        "x-ms-enum": {
+          "name": "FinTaskState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "live",
+              "name": "Live"
+            },
+            {
+              "value": "draft",
+              "name": "Draft"
+            }
+          ]
+        }
+      },
       "GroupContentType": {
         "description": "The type of object - \u0060group_content\u0060 .",
         "example": "group_content",
@@ -85440,6 +86635,44 @@
           ]
         }
       },
+      "ConversationPartReceiptsOverallState": {
+        "enum": [
+          "failed_to_send",
+          "sending",
+          "sent",
+          "seen",
+          "partially_sent"
+        ],
+        "type": "string",
+        "description": "The state of the part across all recipients. The worst recipient state wins, except \u0060partially_sent\u0060, which means some recipients have it and others do not.",
+        "example": "sent",
+        "x-ms-enum": {
+          "name": "ConversationPartReceiptsOverallState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "failed_to_send",
+              "name": "FailedToSend"
+            },
+            {
+              "value": "sending",
+              "name": "Sending"
+            },
+            {
+              "value": "sent",
+              "name": "Sent"
+            },
+            {
+              "value": "seen",
+              "name": "Seen"
+            },
+            {
+              "value": "partially_sent",
+              "name": "PartiallySent"
+            }
+          ]
+        }
+      },
       "ConversationRatingTeammateType": {
         "enum": [
           "admin",
@@ -86037,6 +87270,134 @@
             }
           ]
         }
+      },
+      "ConversationPartReceiptsRecipientsItemParticipantType": {
+        "enum": [
+          "user",
+          "admin"
+        ],
+        "type": "string",
+        "description": "Whether the recipient is a contact (\u0060user\u0060) or a teammate (\u0060admin\u0060).",
+        "example": "user",
+        "x-ms-enum": {
+          "name": "ConversationPartReceiptsRecipientsItemParticipantType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "admin",
+              "name": "Admin"
+            }
+          ]
+        }
+      },
+      "ConversationPartReceiptsRecipientsItemState": {
+        "enum": [
+          "sending",
+          "sent",
+          "seen",
+          "failed_to_send"
+        ],
+        "type": "string",
+        "description": "The delivery state for this recipient.",
+        "example": "sent",
+        "x-ms-enum": {
+          "name": "ConversationPartReceiptsRecipientsItemState",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "sending",
+              "name": "Sending"
+            },
+            {
+              "value": "sent",
+              "name": "Sent"
+            },
+            {
+              "value": "seen",
+              "name": "Seen"
+            },
+            {
+              "value": "failed_to_send",
+              "name": "FailedToSend"
+            }
+          ]
+        }
+      },
+      "ConversationPartReceiptsRecipientsItemErrorCode": {
+        "description": "The reason Intercom could not send to this recipient, when it could not. Null otherwise.",
+        "example": "user_bounced",
+        "anyOf": [
+          {
+            "enum": [
+              "email_address_ignored",
+              "user_suppressed",
+              "user_marked_as_spam",
+              "user_mailbox_full_suppressed",
+              "user_bounced",
+              "user_not_contactable",
+              "banned_domain",
+              "reply_to_sender_only",
+              "suppress_cc_emails",
+              "unverified_cc_recipient"
+            ],
+            "type": "string",
+            "description": "The reason Intercom could not send to this recipient, when it could not. Null otherwise.",
+            "example": "user_bounced",
+            "x-ms-enum": {
+              "name": "ConversationPartReceiptsRecipientsItemErrorCode",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "email_address_ignored",
+                  "name": "EmailAddressIgnored"
+                },
+                {
+                  "value": "user_suppressed",
+                  "name": "UserSuppressed"
+                },
+                {
+                  "value": "user_marked_as_spam",
+                  "name": "UserMarkedAsSpam"
+                },
+                {
+                  "value": "user_mailbox_full_suppressed",
+                  "name": "UserMailboxFullSuppressed"
+                },
+                {
+                  "value": "user_bounced",
+                  "name": "UserBounced"
+                },
+                {
+                  "value": "user_not_contactable",
+                  "name": "UserNotContactable"
+                },
+                {
+                  "value": "banned_domain",
+                  "name": "BannedDomain"
+                },
+                {
+                  "value": "reply_to_sender_only",
+                  "name": "ReplyToSenderOnly"
+                },
+                {
+                  "value": "suppress_cc_emails",
+                  "name": "SuppressCcEmails"
+                },
+                {
+                  "value": "unverified_cc_recipient",
+                  "name": "UnverifiedCcRecipient"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/schemas/OpenApiNullValue"
+          }
+        ]
       },
       "DataConnectorDetailObjectMappingsItemAttributeMappingsItemMappingType": {
         "enum": [
@@ -87597,7 +88958,7 @@
           }
         ]
       },
-      "CreateDataAttributeRequestCreateDataAttributeRequestOneOf1": {
+      "CreateDataAttributeRequestOneOf1Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/CreateDataAttributeRequest"
@@ -87651,7 +89012,7 @@
           }
         ]
       },
-      "CreateDataAttributeRequestCreateDataAttributeRequestOneOf2": {
+      "CreateDataAttributeRequestOneOf2Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/CreateDataAttributeRequest"
@@ -87689,7 +89050,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf1": {
+      "ConversationAttributeOneOf1Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -87783,7 +89144,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf2": {
+      "ConversationAttributeOneOf2Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -87872,7 +89233,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf3": {
+      "ConversationAttributeOneOf3Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -87968,7 +89329,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf4": {
+      "ConversationAttributeOneOf4Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -88057,7 +89418,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf5": {
+      "ConversationAttributeOneOf5Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -88146,7 +89507,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf6": {
+      "ConversationAttributeOneOf6Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -88235,7 +89596,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf7": {
+      "ConversationAttributeOneOf7Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -88327,7 +89688,7 @@
           }
         ]
       },
-      "ConversationAttributeConversationAttributeOneOf8": {
+      "ConversationAttributeOneOf8Variant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/ConversationAttribute"
@@ -88778,7 +90139,7 @@
           }
         ]
       },
-      "RedactConversationRequestRedactConversationRequestRedactConversationPartRequest": {
+      "RedactConversationRequestRedactConversationPartRequestVariant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/RedactConversationRequest"
@@ -88810,7 +90171,7 @@
           }
         ]
       },
-      "RedactConversationRequestRedactConversationRequestRedactConversationSourceRequest": {
+      "RedactConversationRequestRedactConversationSourceRequestVariant": {
         "allOf": [
           {
             "$ref": "#/components/schemas/RedactConversationRequest"
@@ -89252,6 +90613,10 @@
     {
       "name": "Fin Agent",
       "description": "Access Fin programmatically via the Fin Agent API endpoints.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nTo request access to the Fin Agent API, go to **Settings \u003E Integrations \u003E Fin Agent API** in your workspace and tell us about your use case. Once access is granted, **Fin Agent API** appears under **Fin AI Agent \u003E Deploy**.\n{% /admonition %}\n\n\u0026nbsp;\n\nOrchestrate Fin from your own agent: discover what Fin can do with \u0060/fin/capabilities\u0060, ask a one-shot question with \u0060/fin/ask\u0060, run a specific procedure with \u0060/fin/procedures/{procedure_id}/run\u0060, continue a conversation with \u0060/fin/reply\u0060, escalate to a human with \u0060/fin/escalate\u0060, and record a satisfaction rating with \u0060/fin/csat\u0060. Fin notifies your application of its status and responses through a set of events, delivered via webhooks.\n\n\u0026nbsp;\n\nStarting a standalone conversation with \u0060/fin/start\u0060 remains available for existing conversational integrations and is documented below.\n\n\u0026nbsp;\n\n**Events**\n\nConfigure a webhook endpoint in the Fin Agent API settings to receive events. See the [setup guide](/docs/guides/fin-agent-api/setup) for configuration details.\n\n- \u0060fin_status_updated\u0060 - Fired when Fin\u0027s status changes (awaiting_user_reply, escalated, resolved, complete)\n- \u0060fin_replied\u0060 - Fired when Fin sends a reply to the user\n- \u0060csat_requested\u0060 - Fired when Fin asks the user to rate the conversation (submit the choice with \u0060POST /fin/csat\u0060)\n\nAll webhook requests include an \u0060X-Fin-Agent-API-Webhook-Signature\u0060 header for request validation.\n"
+    },
+    {
+      "name": "Fin Tasks",
+      "description": "Everything about your Fin Tasks, the AI agent workflows that Fin can run."
     },
     {
       "name": "Help Center",
@@ -91303,9 +92668,9 @@
       "title": "Ticket Attributes",
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/components/schemas/TicketRequestCustomAttributesAdditionalProperties"
+        "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
       },
-      "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060).",
+      "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060). HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
       "example": {
         "_default_title_": "Found a bug",
         "_default_description_": "The button is not working"
@@ -91882,6 +93247,58 @@
         }
       }
     },
+    "TicketRequestCustomAttributesAdditionalProperties": {
+      "anyOf": [
+        {
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "UpdateTicketRequestTicketAttributesAdditionalProperties": {
+      "anyOf": [
+        {
+          "type": "string",
+          "nullable": true
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "UpdateVisitorRequestCustomAttributesAdditionalProperties": {
       "anyOf": [
         {
@@ -91948,7 +93365,10 @@
     },
     "ChangeTicketTypeRequestTicketAttributes": {
       "type": "object",
-      "description": "The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
+      },
+      "description": "The attributes to set on the ticket for the new type. Attributes matching by name and type are transferred automatically from the old type; values provided here override the transferred values. HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
       "example": {
         "_default_title_": "example",
         "_default_description_": "having a problem"
@@ -92288,7 +93708,10 @@
     },
     "UpdateTicketRequestTicketAttributes": {
       "type": "object",
-      "description": "The attributes set on the ticket.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
+      },
+      "description": "The attributes set on the ticket. HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
       "example": {
         "_default_title_": "example",
         "_default_description_": "having a problem"
@@ -92807,9 +94230,9 @@
       "title": "Ticket Attributes",
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/components/schemas/TicketRequestCustomAttributesAdditionalProperties"
+        "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
       },
-      "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060).",
+      "description": "The attributes set on the ticket. When setting the default title and description attributes, the attribute keys that should be used are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. When setting ticket type attributes of the list attribute type, the key should be the attribute name and the value of the attribute should be the list item id, obtainable by [listing the ticket type](ref:get_ticket-types). For example, if the ticket type has an attribute called \u0060priority\u0060 of type \u0060list\u0060, the key should be \u0060priority\u0060 and the value of the attribute should be the guid of the list item (e.g. \u0060de1825a0-0164-4070-8ca6-13e22462fa7e\u0060). HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
       "example": {
         "_default_title_": "Found a bug",
         "_default_description_": "The button is not working"
@@ -92826,7 +94249,10 @@
     },
     "UpdateTicketRequestTicketAttributesProperty": {
       "type": "object",
-      "description": "The attributes set on the ticket.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/ChangeTicketTypeRequestTicketAttributesAdditionalProperties"
+      },
+      "description": "The attributes set on the ticket. HTML markup sent in a string attribute\u0027s value is stripped to its text before the ticket is stored. For a \u0060files\u0060 attribute, pass an array of upload ids; for a \u0060relationship\u0060 attribute, pass an array of related object ids as strings.",
       "example": {
         "_default_title_": "example",
         "_default_description_": "having a problem"

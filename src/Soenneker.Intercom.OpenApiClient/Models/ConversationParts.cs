@@ -20,6 +20,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if (parseNode.GetChildNode("conversation_parts") is null) { _explicitNullValueConversationPartsProp = default!; _explicitNullProperties?.Remove("conversation_parts"); }
             else if (parseNode.GetChildNode("conversation_parts") is { } nullNodeConversationPartsProp && nullNodeConversationPartsProp.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ConversationPartsProp = null;
+            if (parseNode.GetChildNode("pages") is null) { _explicitNullValuePages = default!; _explicitNullProperties?.Remove("pages"); }
+            else if (parseNode.GetChildNode("pages") is { } nullNodePages && nullNodePages.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Pages = null;
             if (parseNode.GetChildNode("total_count") is null) { _explicitNullValueTotalCount = default!; _explicitNullProperties?.Remove("total_count"); }
             else if (parseNode.GetChildNode("total_count") is { } nullNodeTotalCount && nullNodeTotalCount.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) TotalCount = null;
             if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
@@ -38,7 +40,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart> ConversationPartsProp { get => _explicitNullValueConversationPartsProp; set { _explicitNullValueConversationPartsProp = value; AdditionalData?.Remove("conversation_parts"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("conversation_parts"); else _explicitNullProperties?.Remove("conversation_parts"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart> _explicitNullValueConversationPartsProp = default!;
 #endif
-        /// <summary>A count of the conversation parts in this response, after any `include_part_types` or `exclude_part_types` filter has been applied. This is not the conversation&apos;s total part count.</summary>
+        /// <summary>Pagination details for the conversation parts. Only returned when the `page` query parameter is sent. `next` is null on the last page.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages? Pages { get => _explicitNullValuePages; set { _explicitNullValuePages = value; AdditionalData?.Remove("pages"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pages"); else _explicitNullProperties?.Remove("pages"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages? _explicitNullValuePages = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages Pages { get => _explicitNullValuePages; set { _explicitNullValuePages = value; AdditionalData?.Remove("pages"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("pages"); else _explicitNullProperties?.Remove("pages"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages _explicitNullValuePages = default!;
+#endif
+        /// <summary>A count of the conversation parts in this response, after any `include_part_types` or `exclude_part_types` filter has been applied. When paginating, this is the number of parts on the current page. This is not the conversation&apos;s total part count.</summary>
         public int? TotalCount { get => _explicitNullValueTotalCount; set { _explicitNullValueTotalCount = value; AdditionalData?.Remove("total_count"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total_count"); else _explicitNullProperties?.Remove("total_count"); } }
         private int? _explicitNullValueTotalCount = default!;
         /// <summary>The type property</summary>
@@ -70,6 +82,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "conversation_parts", n => { ConversationPartsProp = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart.CreateFromDiscriminatorValue)?.AsList(); } },
+                { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages.CreateFromDiscriminatorValue); } },
                 { "total_count", n => { TotalCount = n.GetIntValue(); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartListType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
@@ -82,6 +95,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart>("conversation_parts", ConversationPartsProp);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartsPages>("pages", Pages);
             writer.WriteIntValue("total_count", TotalCount);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartListType>("type", Type);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

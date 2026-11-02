@@ -9,6 +9,7 @@ using Soenneker.Intercom.OpenApiClient.Fin.Escalate;
 using Soenneker.Intercom.OpenApiClient.Fin.Procedures;
 using Soenneker.Intercom.OpenApiClient.Fin.Reply;
 using Soenneker.Intercom.OpenApiClient.Fin.Start;
+using Soenneker.Intercom.OpenApiClient.Fin.Tasks;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -55,6 +56,11 @@ namespace Soenneker.Intercom.OpenApiClient.Fin
         public global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartRequestBuilder Start
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Fin.Start.StartRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The tasks property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Fin.Tasks.TasksRequestBuilder Tasks
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Fin.Tasks.TasksRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Fin.FinRequestBuilder"/> and sets the default values.

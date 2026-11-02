@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item.Away
         {
         }
         /// <summary>
-        /// You can set an Admin as away for the Inbox.Requires the `update_admins` OAuth scope.
+        /// You can set an Admin as away for the Inbox.When `away_mode_reassign` is `true`, the request can return a `403` if the teammate does not have Inbox access.Requires the `update_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Admin"/></returns>
         /// <param name="body">The request body</param>
@@ -42,6 +42,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item.Away
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 405 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -59,6 +60,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item.Away
             {
                 { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "405", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -67,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item.Away
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Admin>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Admin.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can set an Admin as away for the Inbox.Requires the `update_admins` OAuth scope.
+        /// You can set an Admin as away for the Inbox.When `away_mode_reassign` is `true`, the request can return a `403` if the teammate does not have Inbox access.Requires the `update_admins` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

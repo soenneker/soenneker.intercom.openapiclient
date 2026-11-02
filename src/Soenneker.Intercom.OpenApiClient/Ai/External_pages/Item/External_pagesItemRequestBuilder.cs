@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Soenneker.Intercom.OpenApiClient.Ai.External_pages.Item.Tags;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,11 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.External_pages.Item
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class External_pagesItemRequestBuilder : BaseRequestBuilder
     {
+        /// <summary>The tags property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Ai.External_pages.Item.Tags.TagsRequestBuilder Tags
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Ai.External_pages.Item.Tags.TagsRequestBuilder(PathParameters, RequestAdapter);
+        }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Ai.External_pages.Item.External_pagesItemRequestBuilder"/> and sets the default values.
         /// </summary>

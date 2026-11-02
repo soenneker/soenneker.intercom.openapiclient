@@ -51,8 +51,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             var mappingValue = parseNode.GetChildNode("type")?.GetStringValue();
             return mappingValue switch
             {
-                "conversation_part" => new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationRequestRedactConversationPartRequest(),
-                "source" => new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationRequestRedactConversationSourceRequest(),
+                "conversation_part" => new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationPartRequestVariant(),
+                "source" => new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequestRedactConversationSourceRequestVariant(),
                 _ => new global::Soenneker.Intercom.OpenApiClient.Models.RedactConversationRequest(),
             };
         }

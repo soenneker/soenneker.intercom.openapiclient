@@ -52,14 +52,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             var mappingValue = parseNode.GetChildNode("data_type")?.GetStringValue();
             return mappingValue switch
             {
-                "boolean" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf5(),
-                "datetime" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf6(),
-                "decimal" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf4(),
-                "files" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf8(),
-                "integer" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf2(),
-                "list" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf3(),
-                "relationship" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf7(),
-                "string" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeConversationAttributeOneOf1(),
+                "boolean" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf5Variant(),
+                "datetime" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf6Variant(),
+                "decimal" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf4Variant(),
+                "files" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf8Variant(),
+                "integer" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf2Variant(),
+                "list" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf3Variant(),
+                "relationship" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf7Variant(),
+                "string" => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttributeOneOf1Variant(),
                 _ => new global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttribute(),
             };
         }
