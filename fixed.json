@@ -66206,13 +66206,16 @@
             "$ref": "#/components/schemas/MergePreviewAttributeChangeOutcome"
           },
           "from_value": {
-            "description": "The source contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field."
+            "description": "The source contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field.",
+            "nullable": true
           },
           "into_value": {
-            "description": "The target contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field."
+            "description": "The target contact\u0027s value. Omitted when null. May be a string, array, or object depending on the field.",
+            "nullable": true
           },
           "new_into_value": {
-            "description": "The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field."
+            "description": "The resulting value on the surviving contact. Always present; may be null. May be a string, array, or object depending on the field.",
+            "nullable": true
           }
         },
         "description": "A single attribute change on the surviving contact."
@@ -69994,7 +69997,8 @@
             "example": "Agent acknowledged the issue but missed the follow-up question about billing."
           }
         },
-        "description": "The evaluator\u0027s result for this conversation. Null if the evaluator was not scored."
+        "description": "The evaluator\u0027s result for this conversation. Null if the evaluator was not scored.",
+        "nullable": true
       },
       "ConversationPartMetadataQuickReplyOptionsItem": {
         "required": [
@@ -70100,7 +70104,8 @@
             }
           }
         ],
-        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers."
+        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers.",
+        "nullable": true
       },
       "CreateDataAttributeRequestListAttribute": {
         "title": "list attribute",
@@ -70553,7 +70558,8 @@
             ]
           }
         ],
-        "description": "Hierarchical category breadcrumb for the product. Fin understands the hierarchy \u2014 a\nshopper asking about \u0022Clothing\u0022 will see products from all subcategories underneath it.\nThe most specific category is shown in search results. Strongly recommended. Provide as\na pre-formatted string (e.g. \u0060\u0022Clothing \u003E T-Shirts\u0022\u0060) or as an array of path segments\n(e.g. \u0060[\u0022Clothing\u0022, \u0022T-Shirts\u0022]\u0060). Array segments are joined with \u0060 \u003E \u0060.\n"
+        "description": "Hierarchical category breadcrumb for the product. Fin understands the hierarchy \u2014 a\nshopper asking about \u0022Clothing\u0022 will see products from all subcategories underneath it.\nThe most specific category is shown in search results. Strongly recommended. Provide as\na pre-formatted string (e.g. \u0060\u0022Clothing \u003E T-Shirts\u0022\u0060) or as an array of path segments\n(e.g. \u0060[\u0022Clothing\u0022, \u0022T-Shirts\u0022]\u0060). Array segments are joined with \u0060 \u003E \u0060.\n",
+        "nullable": true
       },
       "EcommerceProductEventProductAllOf2": {
         "required": [
@@ -70837,7 +70843,8 @@
           }
         ],
         "description": "The value that you want to search on.",
-        "example": "73732934"
+        "example": "73732934",
+        "nullable": true
       },
       "TagAppliedBy": {
         "type": "object",
@@ -70973,7 +70980,8 @@
             }
           }
         ],
-        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences."
+        "description": "The unique identifiers for the audiences to associate with this content import source. Can be a single integer or an array of integers. Set to null or an empty array to remove all audiences.",
+        "nullable": true
       },
       "UpdateDataAttributeRequestListAttribute": {
         "title": "list attribute",
@@ -72945,7 +72953,8 @@
           },
           "example_value": {
             "description": "An example value for this field.",
-            "example": "ok"
+            "example": "ok",
+            "nullable": true
           },
           "redacted": {
             "type": "boolean",
