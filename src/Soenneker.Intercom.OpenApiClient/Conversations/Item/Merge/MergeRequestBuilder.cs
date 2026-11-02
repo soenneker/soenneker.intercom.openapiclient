@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Merge
         {
         }
         /// <summary>
-        /// Merge a secondary (source) conversation into a primary (target) conversation.The secondary conversation is closed and linked to the primary, whichbecomes the surviving thread. Returns the primary conversation on success.Requires `write_conversations` OAuth scope. When the secondary is a ticket,`write_tickets` scope is also required.
+        /// Merge a secondary (source) conversation into a primary (target) conversation.The secondary conversation is closed and linked to the primary, whichbecomes the surviving thread. Returns the primary conversation on success.Requires `write_conversations` OAuth scope. When either conversation is a ticket,the `read_tickets` and `write_tickets` scopes are also required. Without them,the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="body">Payload to merge a secondary conversation into a primary conversation.</param>
@@ -67,7 +67,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Merge
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Merge a secondary (source) conversation into a primary (target) conversation.The secondary conversation is closed and linked to the primary, whichbecomes the surviving thread. Returns the primary conversation on success.Requires `write_conversations` OAuth scope. When the secondary is a ticket,`write_tickets` scope is also required.
+        /// Merge a secondary (source) conversation into a primary (target) conversation.The secondary conversation is closed and linked to the primary, whichbecomes the surviving thread. Returns the primary conversation on success.Requires `write_conversations` OAuth scope. When either conversation is a ticket,the `read_tickets` and `write_tickets` scopes are also required. Without them,the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Payload to merge a secondary conversation into a primary conversation.</param>

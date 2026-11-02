@@ -35,7 +35,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.External_pages
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public External_pagesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/external_pages{?page*,per_page*}", pathParameters)
+        public External_pagesRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/external_pages{?external_id*,page*,per_page*,source_id*}", pathParameters)
         {
         }
         /// <summary>
@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.External_pages
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public External_pagesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/external_pages{?page*,per_page*}", rawUrl)
+        public External_pagesRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/ai/external_pages{?external_id*,page*,per_page*,source_id*}", rawUrl)
         {
         }
         /// <summary>
-        /// You can retrieve a list of all external pages for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// You can retrieve a list of all external pages for a workspace.Send `source_id` and `external_id` together to get only the external page with that external ID. If no external page matches, the list is empty.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ExternalPagesList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -105,7 +105,7 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.External_pages
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ExternalPage.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can retrieve a list of all external pages for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// You can retrieve a list of all external pages for a workspace.Send `source_id` and `external_id` together to get only the external page with that external ID. If no external page matches, the list is empty.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -155,17 +155,30 @@ namespace Soenneker.Intercom.OpenApiClient.Ai.External_pages
             return new global::Soenneker.Intercom.OpenApiClient.Ai.External_pages.External_pagesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can retrieve a list of all external pages for a workspace.OAuth tokens must have the `read_write_ai_content` scope.
+        /// You can retrieve a list of all external pages for a workspace.Send `source_id` and `external_id` together to get only the external page with that external ID. If no external page matches, the list is empty.OAuth tokens must have the `read_write_ai_content` scope.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class External_pagesRequestBuilderGetQueryParameters 
         {
+            /// <summary>The identifier for the external page which was given by the source. Must be sent with `source_id`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("external_id")]
+            public string? ExternalId { get; set; }
+#nullable restore
+#else
+            [QueryParameter("external_id")]
+            public string ExternalId { get; set; }
+#endif
             /// <summary>The page of results to fetch. Defaults to the first page. `page` cannot exceed 5,001, and `page` multiplied by `per_page` cannot exceed 10,000. Past 5,001 the API returns a 400 `parameter_invalid` error; past 10,000 results it returns a 400 `bad_request` error with the message `page limit reached, please use scroll API`.</summary>
             [QueryParameter("page")]
             public int? Page { get; set; }
             /// <summary>The number of results to return per page. Maximum 150.</summary>
             [QueryParameter("per_page")]
             public int? PerPage { get; set; }
+            /// <summary>The unique identifier for the source of the external page which was given by Intercom. Must be sent with `external_id`.</summary>
+            [QueryParameter("source_id")]
+            public int? SourceId { get; set; }
         }
     }
 }

@@ -50,8 +50,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the activity was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The id representing the activity.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -121,7 +121,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "activity_description", n => { ActivityDescription = n.GetStringValue(); } },
                 { "activity_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogActivityType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueActivityType = default; _explicitNullProperties?.Remove("activity_type"); AdditionalData["activity_type"] = unknown; } else { ActivityType = parsed; AdditionalData.Remove("activity_type"); } } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata.CreateFromDiscriminatorValue); } },
                 { "performed_by", n => { PerformedBy = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy.CreateFromDiscriminatorValue); } },
@@ -137,7 +137,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("activity_description", ActivityDescription);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogActivityType>("activity_type", ActivityType);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadata>("metadata", Metadata);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogPerformedBy>("performed_by", PerformedBy);

@@ -32,11 +32,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The start date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to 30 days before the request.</summary>
-        public int? CreatedAtAfter { get => _explicitNullValueCreatedAtAfter; set { _explicitNullValueCreatedAtAfter = value; AdditionalData?.Remove("created_at_after"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_after"); else _explicitNullProperties?.Remove("created_at_after"); } }
-        private int? _explicitNullValueCreatedAtAfter = default!;
+        public long? CreatedAtAfter { get => _explicitNullValueCreatedAtAfter; set { _explicitNullValueCreatedAtAfter = value; AdditionalData?.Remove("created_at_after"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_after"); else _explicitNullProperties?.Remove("created_at_after"); } }
+        private long? _explicitNullValueCreatedAtAfter = default!;
         /// <summary>The end date that you request data for. It must be formatted as a Unix timestamp. If you leave it out, it defaults to the time of the request.</summary>
-        public int? CreatedAtBefore { get => _explicitNullValueCreatedAtBefore; set { _explicitNullValueCreatedAtBefore = value; AdditionalData?.Remove("created_at_before"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_before"); else _explicitNullProperties?.Remove("created_at_before"); } }
-        private int? _explicitNullValueCreatedAtBefore = default!;
+        public long? CreatedAtBefore { get => _explicitNullValueCreatedAtBefore; set { _explicitNullValueCreatedAtBefore = value; AdditionalData?.Remove("created_at_before"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at_before"); else _explicitNullProperties?.Remove("created_at_before"); } }
+        private long? _explicitNullValueCreatedAtBefore = default!;
         /// <summary>An optional list of event types to filter activity logs by. Use the list all activity log event types endpoint to retrieve available values.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -80,8 +80,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at_after", n => { CreatedAtAfter = n.GetIntValue(); } },
-                { "created_at_before", n => { CreatedAtBefore = n.GetIntValue(); } },
+                { "created_at_after", n => { CreatedAtAfter = n.GetLongValue(); } },
+                { "created_at_before", n => { CreatedAtBefore = n.GetLongValue(); } },
                 { "event_types", n => { EventTypes = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "page", n => { Page = n.GetIntValue(); } },
                 { "per_page", n => { PerPage = n.GetIntValue(); } },
@@ -94,8 +94,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("created_at_after", CreatedAtAfter);
-            writer.WriteIntValue("created_at_before", CreatedAtBefore);
+            writer.WriteLongValue("created_at_after", CreatedAtAfter);
+            writer.WriteLongValue("created_at_before", CreatedAtBefore);
             writer.WriteCollectionOfPrimitiveValues<string>("event_types", EventTypes);
             writer.WriteIntValue("page", Page);
             writer.WriteIntValue("per_page", PerPage);

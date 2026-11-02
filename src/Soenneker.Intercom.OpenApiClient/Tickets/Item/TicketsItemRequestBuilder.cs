@@ -58,7 +58,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item
         {
         }
         /// <summary>
-        /// {% admonition type=&quot;warning&quot; name=&quot;Irreversible operation&quot; %}Deleting a ticket is permanent and cannot be reversed.{% /admonition %}Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.
+        /// {% admonition type=&quot;warning&quot; name=&quot;Irreversible operation&quot; %}Deleting a ticket is permanent and cannot be reversed.{% /admonition %}Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.Requires the `write_conversations` OAuth scope. If the ID refers to a ticket, the access token must also include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.TicketDeleted"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -151,7 +151,7 @@ namespace Soenneker.Intercom.OpenApiClient.Tickets.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Ticket>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Ticket.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// {% admonition type=&quot;warning&quot; name=&quot;Irreversible operation&quot; %}Deleting a ticket is permanent and cannot be reversed.{% /admonition %}Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.
+        /// {% admonition type=&quot;warning&quot; name=&quot;Irreversible operation&quot; %}Deleting a ticket is permanent and cannot be reversed.{% /admonition %}Deleting a ticket permanently removes it from the inbox. All sensitive data is deleted, including admin and user replies, ticket attributes, uploads, and related content. The ticket will still appear in reporting, though some data may be incomplete due to the deletion.Requires the `write_conversations` OAuth scope. If the ID refers to a ticket, the access token must also include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

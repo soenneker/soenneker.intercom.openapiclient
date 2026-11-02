@@ -31,8 +31,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time when the conversation was deleted.</summary>
-        public int? DeletedAt { get => _explicitNullValueDeletedAt; set { _explicitNullValueDeletedAt = value; AdditionalData?.Remove("deleted_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deleted_at"); else _explicitNullProperties?.Remove("deleted_at"); } }
-        private int? _explicitNullValueDeletedAt = default!;
+        public long? DeletedAt { get => _explicitNullValueDeletedAt; set { _explicitNullValueDeletedAt = value; AdditionalData?.Remove("deleted_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deleted_at"); else _explicitNullProperties?.Remove("deleted_at"); } }
+        private long? _explicitNullValueDeletedAt = default!;
         /// <summary>The ID of the deleted conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "deleted_at", n => { DeletedAt = n.GetIntValue(); } },
+                { "deleted_at", n => { DeletedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "metrics_retained", n => { MetricsRetained = n.GetBoolValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -94,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("deleted_at", DeletedAt);
+            writer.WriteLongValue("deleted_at", DeletedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("metrics_retained", MetricsRetained);
             writer.WriteStringValue("type", Type);

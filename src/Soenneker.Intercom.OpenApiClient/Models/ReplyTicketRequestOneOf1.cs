@@ -51,7 +51,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<string> AttachmentUrls { get => _explicitNullValueAttachmentUrls; set { _explicitNullValueAttachmentUrls = value; AdditionalData?.Remove("attachment_urls"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("attachment_urls"); else _explicitNullProperties?.Remove("attachment_urls"); } }
         private List<string> _explicitNullValueAttachmentUrls = default!;
 #endif
-        /// <summary>The text body of the comment.</summary>
+        /// <summary>The text body of the comment. Required unless the reply includes attachments. Always required when replying to a ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }

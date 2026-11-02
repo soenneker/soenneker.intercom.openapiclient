@@ -77,8 +77,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? SkipNotifications { get => _explicitNullValueSkipNotifications; set { _explicitNullValueSkipNotifications = value; AdditionalData?.Remove("skip_notifications"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_notifications"); else _explicitNullProperties?.Remove("skip_notifications"); } }
         private bool? _explicitNullValueSkipNotifications = default!;
         /// <summary>The time you want the ticket to reopen.</summary>
-        public int? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
-        private int? _explicitNullValueSnoozedUntil = default!;
+        public long? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
+        private long? _explicitNullValueSnoozedUntil = default!;
         /// <summary>The attributes set on the ticket.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -131,7 +131,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "open", n => { Open = n.GetBoolValue(); } },
                 { "priority", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValuePriority = default; _explicitNullProperties?.Remove("priority"); AdditionalData["priority"] = unknown; } else { Priority = parsed; AdditionalData.Remove("priority"); } } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
-                { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
+                { "snoozed_until", n => { SnoozedUntil = n.GetLongValue(); } },
                 { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes.CreateFromDiscriminatorValue); } },
                 { "ticket_state_id", n => { TicketStateId = n.GetStringValue(); } },
             };
@@ -150,7 +150,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("open", Open);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestPriority>("priority", Priority);
             writer.WriteBoolValue("skip_notifications", SkipNotifications);
-            writer.WriteIntValue("snoozed_until", SnoozedUntil);
+            writer.WriteLongValue("snoozed_until", SnoozedUntil);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.UpdateTicketRequestRequestBodyTicketAttributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_state_id", TicketStateId);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

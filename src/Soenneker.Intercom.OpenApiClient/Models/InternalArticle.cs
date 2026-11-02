@@ -95,8 +95,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueBodyMarkdown = default!;
 #endif
         /// <summary>The time when the article was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The ID of the folder this article belongs to, or null if not in a folder.</summary>
         public int? FolderId { get => _explicitNullValueFolderId; set { _explicitNullValueFolderId = value; AdditionalData?.Remove("folder_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("folder_id"); else _explicitNullProperties?.Remove("folder_id"); } }
         private int? _explicitNullValueFolderId = default!;
@@ -137,8 +137,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>The time when the article was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.InternalArticle"/> and sets the default values.
         /// </summary>
@@ -171,14 +171,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "author_id", n => { AuthorId = n.GetIntValue(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "folder_id", n => { FolderId = n.GetIntValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetIntValue(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>(global::Soenneker.Intercom.OpenApiClient.Models.Tags.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -195,14 +195,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteIntValue("folder_id", FolderId);
             writer.WriteIntValue("id", Id);
             writer.WriteStringValue("locale", Locale);
             writer.WriteIntValue("owner_id", OwnerId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Tags>("tags", Tags);
             writer.WriteStringValue("title", Title);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -51,8 +51,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueBrandId = default!;
 #endif
         /// <summary>The time the variation was created as a Unix timestamp.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The unique identifier for the variation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -107,8 +107,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The time the variation was last updated as a Unix timestamp.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariation"/> and sets the default values.
         /// </summary>
@@ -135,14 +135,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "brand_id", n => { BrandId = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "intentionally_empty", n => { IntentionallyEmpty = n.GetBoolValue(); } },
                 { "json_blocks", n => { JsonBlocks = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "text_content", n => { TextContent = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -153,14 +153,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("brand_id", BrandId);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("intentionally_empty", IntentionallyEmpty);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.DynamicContentVariationJsonBlocksItemProperty>("json_blocks", JsonBlocks);
             writer.WriteStringValue("locale", Locale);
             writer.WriteStringValue("text_content", TextContent);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

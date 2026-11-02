@@ -47,10 +47,10 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers
         {
         }
         /// <summary>
-        /// You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.{% admonition type=&quot;warning&quot; name=&quot;Contacts without an email&quot; %}If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.{% /admonition %}
+        /// You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.{% admonition type=&quot;warning&quot; name=&quot;Contacts without an email&quot; %}If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponse"/></returns>
-        /// <param name="body">Payload of the request to assign a conversation</param>
+        /// <param name="body">Payload of the request to add a contact to a conversation. Say who is adding the contact in one of two ways: send `admin_id` to act as an admin, or send one of `intercom_user_id`, `user_id` or `email` to act as a contact. Sending both, or neither, returns a `422` error. Use `customer` to identify the contact to add.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -80,10 +80,10 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.{% admonition type=&quot;warning&quot; name=&quot;Contacts without an email&quot; %}If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.{% /admonition %}
+        /// You can add participants who are contacts to a conversation, on behalf of either another contact or an admin.{% admonition type=&quot;warning&quot; name=&quot;Contacts without an email&quot; %}If you add a contact via the email parameter and there is no user/lead found on that workspace with he given email, then we will create a new contact with `role` set to `lead`.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">Payload of the request to assign a conversation</param>
+        /// <param name="body">Payload of the request to add a contact to a conversation. Say who is adding the contact in one of two ways: send `admin_id` to act as an admin, or send one of `intercom_user_id`, `user_id` or `email` to act as a contact. Sending both, or neither, returns a `422` error. Use `customer` to identify the contact to add.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

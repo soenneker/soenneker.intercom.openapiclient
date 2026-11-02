@@ -108,8 +108,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueExternalId = default!;
 #endif
         /// <summary>The time of the Admin&apos;s last recorded activity.</summary>
-        public int? LastActivityAt { get => _explicitNullValueLastActivityAt; set { _explicitNullValueLastActivityAt = value; AdditionalData?.Remove("last_activity_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_activity_at"); else _explicitNullProperties?.Remove("last_activity_at"); } }
-        private int? _explicitNullValueLastActivityAt = default!;
+        public long? LastActivityAt { get => _explicitNullValueLastActivityAt; set { _explicitNullValueLastActivityAt = value; AdditionalData?.Remove("last_activity_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_activity_at"); else _explicitNullProperties?.Remove("last_activity_at"); } }
+        private long? _explicitNullValueLastActivityAt = default!;
         /// <summary>The state after the change. `idle` or `occupied` for an occupancy change; `enabled` or `disabled` for an IP allowlist change.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -216,7 +216,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "changes", n => { Changes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty.CreateFromDiscriminatorValue); } },
                 { "conversation_assignment_limit", n => { ConversationAssignmentLimit = n.GetIntValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
-                { "last_activity_at", n => { LastActivityAt = n.GetIntValue(); } },
+                { "last_activity_at", n => { LastActivityAt = n.GetLongValue(); } },
                 { "new_state", n => { NewState = n.GetStringValue(); } },
                 { "previous_state", n => { PreviousState = n.GetStringValue(); } },
                 { "reassign_conversations", n => { ReassignConversations = n.GetBoolValue(); } },
@@ -243,7 +243,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ActivityLogMetadataChangesProperty>("changes", Changes);
             writer.WriteIntValue("conversation_assignment_limit", ConversationAssignmentLimit);
             writer.WriteStringValue("external_id", ExternalId);
-            writer.WriteIntValue("last_activity_at", LastActivityAt);
+            writer.WriteLongValue("last_activity_at", LastActivityAt);
             writer.WriteStringValue("new_state", NewState);
             writer.WriteStringValue("previous_state", PreviousState);
             writer.WriteBoolValue("reassign_conversations", ReassignConversations);

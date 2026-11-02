@@ -439,8 +439,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent _explicitNullValueTr = default!;
 #endif
         /// <summary>The type of object - article_translated_content.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType? _explicitNullValueType = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType _explicitNullValueType = default!;
+#endif
         /// <summary>The Content of an Article.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -532,7 +539,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "sr", n => { Sr = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "sv", n => { Sv = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "tr", n => { Tr = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
-                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
+                { "type", n => { Type = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType.CreateFromDiscriminatorValue); } },
                 { "vi", n => { Vi = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "zh-CN", n => { ZhCN = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
                 { "zh-TW", n => { ZhTW = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent.CreateFromDiscriminatorValue); } },
@@ -579,7 +586,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("sr", Sr);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("sv", Sv);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("tr", Tr);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType>("type", Type);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleTranslatedContentType>("type", Type);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("vi", Vi);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("zh-CN", ZhCN);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContent>("zh-TW", ZhTW);

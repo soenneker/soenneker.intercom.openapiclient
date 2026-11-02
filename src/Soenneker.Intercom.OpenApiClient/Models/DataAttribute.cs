@@ -73,8 +73,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; AdditionalData?.Remove("archived"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
         private bool? _explicitNullValueArchived = default!;
         /// <summary>The time the attribute was created as a UTC Unix timestamp</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>Set to true if this is a CDA</summary>
         public bool? Custom { get => _explicitNullValueCustom; set { _explicitNullValueCustom = value; AdditionalData?.Remove("custom"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom"); else _explicitNullProperties?.Remove("custom"); } }
         private bool? _explicitNullValueCustom = default!;
@@ -147,8 +147,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? UiWritable { get => _explicitNullValueUiWritable; set { _explicitNullValueUiWritable = value; AdditionalData?.Remove("ui_writable"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ui_writable"); else _explicitNullProperties?.Remove("ui_writable"); } }
         private bool? _explicitNullValueUiWritable = default!;
         /// <summary>The time the attribute was last updated as a UTC Unix timestamp</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute"/> and sets the default values.
         /// </summary>
@@ -177,7 +177,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
                 { "api_writable", n => { ApiWritable = n.GetBoolValue(); } },
                 { "archived", n => { Archived = n.GetBoolValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "custom", n => { Custom = n.GetBoolValue(); } },
                 { "data_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeDataType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueDataType = default; _explicitNullProperties?.Remove("data_type"); AdditionalData["data_type"] = unknown; } else { DataType = parsed; AdditionalData.Remove("data_type"); } } },
                 { "description", n => { Description = n.GetStringValue(); } },
@@ -190,7 +190,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "options", n => { Options = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
                 { "ui_writable", n => { UiWritable = n.GetBoolValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -203,7 +203,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("admin_id", AdminId);
             writer.WriteBoolValue("api_writable", ApiWritable);
             writer.WriteBoolValue("archived", Archived);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteBoolValue("custom", Custom);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeDataType>("data_type", DataType);
             writer.WriteStringValue("description", Description);
@@ -216,7 +216,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<string>("options", Options);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.DataAttributeType>("type", Type);
             writer.WriteBoolValue("ui_writable", UiWritable);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

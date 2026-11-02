@@ -112,8 +112,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueBody = default!;
 #endif
         /// <summary>The time the ticket part was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The external id of the ticket part</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -177,8 +177,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The last time the ticket part was updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The updated attribute data of the ticket part. Only present for attribute update parts.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -220,7 +220,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPartAuthor.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "part_type", n => { PartType = n.GetStringValue(); } },
@@ -230,7 +230,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ticket_state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTicketState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueTicketState = default; _explicitNullProperties?.Remove("ticket_state"); AdditionalData["ticket_state"] = unknown; } else { TicketState = parsed; AdditionalData.Remove("ticket_state"); } } },
                 { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTranslations>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTranslations.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "updated_attribute_data", n => { UpdatedAttributeData = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData>(global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData.CreateFromDiscriminatorValue); } },
             };
         }
@@ -247,7 +247,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>("attachments", Attachments);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartAuthor>("author", Author);
             writer.WriteStringValue("body", Body);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("part_type", PartType);
@@ -257,7 +257,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTicketState>("ticket_state", TicketState);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartTranslations>("translations", Translations);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketPartUpdatedAttributeData>("updated_attribute_data", UpdatedAttributeData);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

@@ -51,14 +51,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private List<int?> _explicitNullValueAudienceIds = default!;
 #endif
         /// <summary>The time when the content import source was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The unique identifier for the content import source which is given by Intercom.</summary>
         public int? Id { get => _explicitNullValueId; set { _explicitNullValueId = value; AdditionalData?.Remove("id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("id"); else _explicitNullProperties?.Remove("id"); } }
         private int? _explicitNullValueId = default!;
         /// <summary>The time when the content import source was last synced.</summary>
-        public int? LastSyncedAt { get => _explicitNullValueLastSyncedAt; set { _explicitNullValueLastSyncedAt = value; AdditionalData?.Remove("last_synced_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_synced_at"); else _explicitNullProperties?.Remove("last_synced_at"); } }
-        private int? _explicitNullValueLastSyncedAt = default!;
+        public long? LastSyncedAt { get => _explicitNullValueLastSyncedAt; set { _explicitNullValueLastSyncedAt = value; AdditionalData?.Remove("last_synced_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_synced_at"); else _explicitNullProperties?.Remove("last_synced_at"); } }
+        private long? _explicitNullValueLastSyncedAt = default!;
         /// <summary>The status of the content import source. A source that is being deleted has the status `deletion_in_progress`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus? Status { get => _explicitNullValueStatus; set { _explicitNullValueStatus = value; AdditionalData?.Remove("status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("status"); else _explicitNullProperties?.Remove("status"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus? _explicitNullValueStatus = default!;
@@ -69,8 +69,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType? _explicitNullValueType = default!;
         /// <summary>The time when the content import source was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The URL of the root of the external source.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -107,13 +107,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetIntValue(); } },
-                { "last_synced_at", n => { LastSyncedAt = n.GetIntValue(); } },
+                { "last_synced_at", n => { LastSyncedAt = n.GetLongValue(); } },
                 { "status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueStatus = default; _explicitNullProperties?.Remove("status"); AdditionalData["status"] = unknown; } else { Status = parsed; AdditionalData.Remove("status"); } } },
                 { "sync_behavior", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceSyncBehavior>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSyncBehavior = default; _explicitNullProperties?.Remove("sync_behavior"); AdditionalData["sync_behavior"] = unknown; } else { SyncBehavior = parsed; AdditionalData.Remove("sync_behavior"); } } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -125,13 +125,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteIntValue("id", Id);
-            writer.WriteIntValue("last_synced_at", LastSyncedAt);
+            writer.WriteLongValue("last_synced_at", LastSyncedAt);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceStatus>("status", Status);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceSyncBehavior>("sync_behavior", SyncBehavior);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentImportSourceType>("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

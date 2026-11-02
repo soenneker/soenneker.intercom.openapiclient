@@ -51,11 +51,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList _explicitNullValueContentSources = default!;
 #endif
         /// <summary>The time when the AI agent rating was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The type of the last answer delivered by AI Agent. If no answer was delivered then this will return `null`</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType? LastAnswerType { get => _explicitNullValueLastAnswerType; set { _explicitNullValueLastAnswerType = value; AdditionalData?.Remove("last_answer_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_answer_type"); else _explicitNullProperties?.Remove("last_answer_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType? _explicitNullValueLastAnswerType = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType LastAnswerType { get => _explicitNullValueLastAnswerType; set { _explicitNullValueLastAnswerType = value; AdditionalData?.Remove("last_answer_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_answer_type"); else _explicitNullProperties?.Remove("last_answer_type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType _explicitNullValueLastAnswerType = default!;
+#endif
         /// <summary>The customer satisfaction rating given to AI Agent, from 1-5.</summary>
         public int? Rating { get => _explicitNullValueRating; set { _explicitNullValueRating = value; AdditionalData?.Remove("rating"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("rating"); else _explicitNullProperties?.Remove("rating"); } }
         private int? _explicitNullValueRating = default!;
@@ -70,8 +77,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueRatingRemark = default!;
 #endif
         /// <summary>The resolution state of AI Agent. If no AI or custom answer has been delivered then this will return `null`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState? ResolutionState { get => _explicitNullValueResolutionState; set { _explicitNullValueResolutionState = value; AdditionalData?.Remove("resolution_state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("resolution_state"); else _explicitNullProperties?.Remove("resolution_state"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState? _explicitNullValueResolutionState = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState ResolutionState { get => _explicitNullValueResolutionState; set { _explicitNullValueResolutionState = value; AdditionalData?.Remove("resolution_state"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("resolution_state"); else _explicitNullProperties?.Remove("resolution_state"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState _explicitNullValueResolutionState = default!;
+#endif
         /// <summary>The title of the source that triggered AI Agent involvement in the conversation. If this is `essentials_plan_setup` then it will return `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -86,8 +100,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType? SourceType { get => _explicitNullValueSourceType; set { _explicitNullValueSourceType = value; AdditionalData?.Remove("source_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source_type"); else _explicitNullProperties?.Remove("source_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType? _explicitNullValueSourceType = default!;
         /// <summary>The time when the AI agent rating was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.AiAgent"/> and sets the default values.
         /// </summary>
@@ -114,14 +128,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "content_sources", n => { ContentSources = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList>(global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList.CreateFromDiscriminatorValue); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
-                { "last_answer_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueLastAnswerType = default; _explicitNullProperties?.Remove("last_answer_type"); AdditionalData["last_answer_type"] = unknown; } else { LastAnswerType = parsed; AdditionalData.Remove("last_answer_type"); } } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
+                { "last_answer_type", n => { LastAnswerType = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType.CreateFromDiscriminatorValue); } },
                 { "rating", n => { Rating = n.GetIntValue(); } },
                 { "rating_remark", n => { RatingRemark = n.GetStringValue(); } },
-                { "resolution_state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueResolutionState = default; _explicitNullProperties?.Remove("resolution_state"); AdditionalData["resolution_state"] = unknown; } else { ResolutionState = parsed; AdditionalData.Remove("resolution_state"); } } },
+                { "resolution_state", n => { ResolutionState = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState.CreateFromDiscriminatorValue); } },
                 { "source_title", n => { SourceTitle = n.GetStringValue(); } },
                 { "source_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSourceType = default; _explicitNullProperties?.Remove("source_type"); AdditionalData["source_type"] = unknown; } else { SourceType = parsed; AdditionalData.Remove("source_type"); } } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -132,14 +146,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContentSourcesList>("content_sources", ContentSources);
-            writer.WriteIntValue("created_at", CreatedAt);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType>("last_answer_type", LastAnswerType);
+            writer.WriteLongValue("created_at", CreatedAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentLastAnswerType>("last_answer_type", LastAnswerType);
             writer.WriteIntValue("rating", Rating);
             writer.WriteStringValue("rating_remark", RatingRemark);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState>("resolution_state", ResolutionState);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentResolutionState>("resolution_state", ResolutionState);
             writer.WriteStringValue("source_title", SourceTitle);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgentSourceType>("source_type", SourceType);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

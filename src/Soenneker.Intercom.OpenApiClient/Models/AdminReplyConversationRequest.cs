@@ -20,6 +20,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if (parseNode.GetChildNode("admin_id") is null) { _explicitNullValueAdminId = default!; _explicitNullProperties?.Remove("admin_id"); }
             else if (parseNode.GetChildNode("admin_id") is { } nullNodeAdminId && nullNodeAdminId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AdminId = null;
+            if (parseNode.GetChildNode("assignee_id") is null) { _explicitNullValueAssigneeId = default!; _explicitNullProperties?.Remove("assignee_id"); }
+            else if (parseNode.GetChildNode("assignee_id") is { } nullNodeAssigneeId && nullNodeAssigneeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AssigneeId = null;
             if (parseNode.GetChildNode("attachment_files") is null) { _explicitNullValueAttachmentFiles = default!; _explicitNullProperties?.Remove("attachment_files"); }
             else if (parseNode.GetChildNode("attachment_files") is { } nullNodeAttachmentFiles && nullNodeAttachmentFiles.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AttachmentFiles = null;
             if (parseNode.GetChildNode("attachment_urls") is null) { _explicitNullValueAttachmentUrls = default!; _explicitNullProperties?.Remove("attachment_urls"); }
@@ -34,6 +36,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("reply_options") is { } nullNodeReplyOptions && nullNodeReplyOptions.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ReplyOptions = null;
             if (parseNode.GetChildNode("skip_notifications") is null) { _explicitNullValueSkipNotifications = default!; _explicitNullProperties?.Remove("skip_notifications"); }
             else if (parseNode.GetChildNode("skip_notifications") is { } nullNodeSkipNotifications && nullNodeSkipNotifications.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipNotifications = null;
+            if (parseNode.GetChildNode("skip_reopen") is null) { _explicitNullValueSkipReopen = default!; _explicitNullProperties?.Remove("skip_reopen"); }
+            else if (parseNode.GetChildNode("skip_reopen") is { } nullNodeSkipReopen && nullNodeSkipReopen.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipReopen = null;
             if (parseNode.GetChildNode("skip_unsnooze") is null) { _explicitNullValueSkipUnsnooze = default!; _explicitNullProperties?.Remove("skip_unsnooze"); }
             else if (parseNode.GetChildNode("skip_unsnooze") is { } nullNodeSkipUnsnooze && nullNodeSkipUnsnooze.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SkipUnsnooze = null;
             if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
@@ -51,6 +55,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public string AdminId { get => _explicitNullValueAdminId; set { _explicitNullValueAdminId = value; AdditionalData?.Remove("admin_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("admin_id"); else _explicitNullProperties?.Remove("admin_id"); } }
         private string _explicitNullValueAdminId = default!;
+#endif
+        /// <summary>The `id` of the admin or team to assign the conversation to with this reply.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; AdditionalData?.Remove("assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
+        private string? _explicitNullValueAssigneeId = default!;
+#nullable restore
+#else
+        public string AssigneeId { get => _explicitNullValueAssigneeId; set { _explicitNullValueAssigneeId = value; AdditionalData?.Remove("assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("assignee_id"); else _explicitNullProperties?.Remove("assignee_id"); } }
+        private string _explicitNullValueAssigneeId = default!;
 #endif
         /// <summary>A list of files that will be added as attachments. You can include up to 10 files</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -101,6 +115,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Option to disable notifications when replying to a conversation.</summary>
         public bool? SkipNotifications { get => _explicitNullValueSkipNotifications; set { _explicitNullValueSkipNotifications = value; AdditionalData?.Remove("skip_notifications"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_notifications"); else _explicitNullProperties?.Remove("skip_notifications"); } }
         private bool? _explicitNullValueSkipNotifications = default!;
+        /// <summary>When true, a reply that assigns the conversation (a `comment` with `assignee_id`) doesn&apos;t reopen or unsnooze it. A plain `comment` still reopens a closed conversation. Available from API version 2.17.</summary>
+        public bool? SkipReopen { get => _explicitNullValueSkipReopen; set { _explicitNullValueSkipReopen = value; AdditionalData?.Remove("skip_reopen"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_reopen"); else _explicitNullProperties?.Remove("skip_reopen"); } }
+        private bool? _explicitNullValueSkipReopen = default!;
         /// <summary>When true, prevents the reply from waking a snoozed conversation. Applies to &apos;comment&apos; and &apos;note&apos; message types. The part is still created and visible in the conversation thread.</summary>
         public bool? SkipUnsnooze { get => _explicitNullValueSkipUnsnooze; set { _explicitNullValueSkipUnsnooze = value; AdditionalData?.Remove("skip_unsnooze"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("skip_unsnooze"); else _explicitNullProperties?.Remove("skip_unsnooze"); } }
         private bool? _explicitNullValueSkipUnsnooze = default!;
@@ -113,6 +130,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public AdminReplyConversationRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            SkipReopen = false;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -133,6 +151,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "admin_id", n => { AdminId = n.GetStringValue(); } },
+                { "assignee_id", n => { AssigneeId = n.GetStringValue(); } },
                 { "attachment_files", n => { AttachmentFiles = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
@@ -140,6 +159,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "reply_options", n => { ReplyOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>(global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "skip_notifications", n => { SkipNotifications = n.GetBoolValue(); } },
+                { "skip_reopen", n => { SkipReopen = n.GetBoolValue(); } },
                 { "skip_unsnooze", n => { SkipUnsnooze = n.GetBoolValue(); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
             };
@@ -152,6 +172,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("admin_id", AdminId);
+            writer.WriteStringValue("assignee_id", AssigneeId);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationAttachmentFiles>("attachment_files", AttachmentFiles);
             writer.WriteCollectionOfPrimitiveValues<string>("attachment_urls", AttachmentUrls);
             writer.WriteStringValue("body", Body);
@@ -159,6 +180,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminReplyConversationRequestMessageType>("message_type", MessageType);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.QuickReplyOption>("reply_options", ReplyOptions);
             writer.WriteBoolValue("skip_notifications", SkipNotifications);
+            writer.WriteBoolValue("skip_reopen", SkipReopen);
             writer.WriteBoolValue("skip_unsnooze", SkipUnsnooze);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>("type", Type);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

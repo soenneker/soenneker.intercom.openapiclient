@@ -18,23 +18,51 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("body") is null) { _explicitNullValueBody = default!; _explicitNullProperties?.Remove("body"); }
+            else if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("country") is null) { _explicitNullValueCountry = default!; _explicitNullProperties?.Remove("country"); }
+            else if (parseNode.GetChildNode("country") is { } nullNodeCountry && nullNodeCountry.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Country = null;
             if (parseNode.GetChildNode("custom_attributes") is null) { _explicitNullValueCustomAttributes = default!; _explicitNullProperties?.Remove("custom_attributes"); }
             else if (parseNode.GetChildNode("custom_attributes") is { } nullNodeCustomAttributes && nullNodeCustomAttributes.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CustomAttributes = null;
             if (parseNode.GetChildNode("phone") is null) { _explicitNullValuePhone = default!; _explicitNullProperties?.Remove("phone"); }
             else if (parseNode.GetChildNode("phone") is { } nullNodePhone && nullNodePhone.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Phone = null;
+            if (parseNode.GetChildNode("send_notification") is null) { _explicitNullValueSendNotification = default!; _explicitNullProperties?.Remove("send_notification"); }
+            else if (parseNode.GetChildNode("send_notification") is { } nullNodeSendNotification && nullNodeSendNotification.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SendNotification = null;
+            if (parseNode.GetChildNode("user_input_phone") is null) { _explicitNullValueUserInputPhone = default!; _explicitNullProperties?.Remove("user_input_phone"); }
+            else if (parseNode.GetChildNode("user_input_phone") is { } nullNodeUserInputPhone && nullNodeUserInputPhone.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UserInputPhone = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The custom attributes which are set on this object, as key-value pairs. For relationship attributes the value should be a list of custom object instance models. Only attributes a caller may set should be sent here — attributes Intercom generates are returned in responses only.</summary>
+        /// <summary>The text of the contact&apos;s first message. When you send it, a conversation is created straight away with this text as its first message.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes? CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; AdditionalData?.Remove("custom_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }
-        private global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes? _explicitNullValueCustomAttributes = default!;
+        public string? Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        private string? _explicitNullValueBody = default!;
 #nullable restore
 #else
-        public global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; AdditionalData?.Remove("custom_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }
-        private global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes _explicitNullValueCustomAttributes = default!;
+        public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
+        private string _explicitNullValueBody = default!;
+#endif
+        /// <summary>The two-letter country code used to read `user_input_phone`. When `country` is `US`, Intercom also looks up the carrier to detect landlines.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Country { get => _explicitNullValueCountry; set { _explicitNullValueCountry = value; AdditionalData?.Remove("country"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("country"); else _explicitNullProperties?.Remove("country"); } }
+        private string? _explicitNullValueCountry = default!;
+#nullable restore
+#else
+        public string Country { get => _explicitNullValueCountry; set { _explicitNullValueCountry = value; AdditionalData?.Remove("country"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("country"); else _explicitNullProperties?.Remove("country"); } }
+        private string _explicitNullValueCountry = default!;
+#endif
+        /// <summary>Custom attributes to add to the user or lead&apos;s custom data attributes. Values are strings. Numbers and booleans are converted to strings. An empty string, or any array or object value, returns a `422` error with the key `context`. A `null` value is ignored.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty? CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; AdditionalData?.Remove("custom_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty? _explicitNullValueCustomAttributes = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; AdditionalData?.Remove("custom_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty _explicitNullValueCustomAttributes = default!;
 #endif
         /// <summary>Phone number in E.164 format, that will receive the SMS to continue the conversation in the Messenger.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -46,12 +74,26 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Phone { get => _explicitNullValuePhone; set { _explicitNullValuePhone = value; AdditionalData?.Remove("phone"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("phone"); else _explicitNullProperties?.Remove("phone"); } }
         private string _explicitNullValuePhone = default!;
 #endif
+        /// <summary>Whether to send the SMS with the link to the Messenger. When `false`, no SMS is sent.</summary>
+        public bool? SendNotification { get => _explicitNullValueSendNotification; set { _explicitNullValueSendNotification = value; AdditionalData?.Remove("send_notification"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("send_notification"); else _explicitNullProperties?.Remove("send_notification"); } }
+        private bool? _explicitNullValueSendNotification = default!;
+        /// <summary>The phone number as the contact typed it, in national format. When sent with `country`, used in place of `phone` to read the number. `phone` is still required.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? UserInputPhone { get => _explicitNullValueUserInputPhone; set { _explicitNullValueUserInputPhone = value; AdditionalData?.Remove("user_input_phone"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_input_phone"); else _explicitNullProperties?.Remove("user_input_phone"); } }
+        private string? _explicitNullValueUserInputPhone = default!;
+#nullable restore
+#else
+        public string UserInputPhone { get => _explicitNullValueUserInputPhone; set { _explicitNullValueUserInputPhone = value; AdditionalData?.Remove("user_input_phone"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("user_input_phone"); else _explicitNullProperties?.Remove("user_input_phone"); } }
+        private string _explicitNullValueUserInputPhone = default!;
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequest"/> and sets the default values.
         /// </summary>
         public CreatePhoneSwitchRequest()
         {
             AdditionalData = new Dictionary<string, object>();
+            SendNotification = true;
         }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -73,8 +115,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes.CreateFromDiscriminatorValue); } },
+                { "body", n => { Body = n.GetStringValue(); } },
+                { "country", n => { Country = n.GetStringValue(); } },
+                { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty.CreateFromDiscriminatorValue); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
+                { "send_notification", n => { SendNotification = n.GetBoolValue(); } },
+                { "user_input_phone", n => { UserInputPhone = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -84,8 +130,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributes>("custom_attributes", CustomAttributes);
+            writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("country", Country);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreatePhoneSwitchRequestCustomAttributesProperty>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("phone", Phone);
+            writer.WriteBoolValue("send_notification", SendNotification);
+            writer.WriteStringValue("user_input_phone", UserInputPhone);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

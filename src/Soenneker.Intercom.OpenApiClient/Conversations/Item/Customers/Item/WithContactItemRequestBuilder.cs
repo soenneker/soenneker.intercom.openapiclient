@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item
         {
         }
         /// <summary>
-        /// You can remove participants who are contacts from a group conversation, on behalf of an admin.{% admonition type=&quot;warning&quot; name=&quot;Removing the last participant&quot; %}You cannot remove the last remaining contact from a conversation.{% /admonition %}
+        /// You can remove participants who are contacts from a group conversation, on behalf of an admin.{% admonition type=&quot;warning&quot; name=&quot;Removing the last participant&quot; %}You cannot remove the last remaining contact from a conversation.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponse"/></returns>
         /// <param name="body">The request body</param>
@@ -69,7 +69,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Customers.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponse>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationParticipantsResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can remove participants who are contacts from a group conversation, on behalf of an admin.{% admonition type=&quot;warning&quot; name=&quot;Removing the last participant&quot; %}You cannot remove the last remaining contact from a conversation.{% /admonition %}
+        /// You can remove participants who are contacts from a group conversation, on behalf of an admin.{% admonition type=&quot;warning&quot; name=&quot;Removing the last participant&quot; %}You cannot remove the last remaining contact from a conversation.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

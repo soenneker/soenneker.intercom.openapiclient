@@ -101,32 +101,32 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public int? CountReopens { get => _explicitNullValueCountReopens; set { _explicitNullValueCountReopens = value; AdditionalData?.Remove("count_reopens"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("count_reopens"); else _explicitNullProperties?.Remove("count_reopens"); } }
         private int? _explicitNullValueCountReopens = default!;
         /// <summary>Time of first admin reply after first_contact_reply_at.</summary>
-        public int? FirstAdminReplyAt { get => _explicitNullValueFirstAdminReplyAt; set { _explicitNullValueFirstAdminReplyAt = value; AdditionalData?.Remove("first_admin_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_admin_reply_at"); else _explicitNullProperties?.Remove("first_admin_reply_at"); } }
-        private int? _explicitNullValueFirstAdminReplyAt = default!;
+        public long? FirstAdminReplyAt { get => _explicitNullValueFirstAdminReplyAt; set { _explicitNullValueFirstAdminReplyAt = value; AdditionalData?.Remove("first_admin_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_admin_reply_at"); else _explicitNullProperties?.Remove("first_admin_reply_at"); } }
+        private long? _explicitNullValueFirstAdminReplyAt = default!;
         /// <summary>Time of first assignment after first_contact_reply_at.</summary>
-        public int? FirstAssignmentAt { get => _explicitNullValueFirstAssignmentAt; set { _explicitNullValueFirstAssignmentAt = value; AdditionalData?.Remove("first_assignment_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_assignment_at"); else _explicitNullProperties?.Remove("first_assignment_at"); } }
-        private int? _explicitNullValueFirstAssignmentAt = default!;
+        public long? FirstAssignmentAt { get => _explicitNullValueFirstAssignmentAt; set { _explicitNullValueFirstAssignmentAt = value; AdditionalData?.Remove("first_assignment_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_assignment_at"); else _explicitNullProperties?.Remove("first_assignment_at"); } }
+        private long? _explicitNullValueFirstAssignmentAt = default!;
         /// <summary>Time of first close after first_contact_reply_at.</summary>
-        public int? FirstCloseAt { get => _explicitNullValueFirstCloseAt; set { _explicitNullValueFirstCloseAt = value; AdditionalData?.Remove("first_close_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_close_at"); else _explicitNullProperties?.Remove("first_close_at"); } }
-        private int? _explicitNullValueFirstCloseAt = default!;
+        public long? FirstCloseAt { get => _explicitNullValueFirstCloseAt; set { _explicitNullValueFirstCloseAt = value; AdditionalData?.Remove("first_close_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_close_at"); else _explicitNullProperties?.Remove("first_close_at"); } }
+        private long? _explicitNullValueFirstCloseAt = default!;
         /// <summary>Time of first text conversation part from a contact.</summary>
-        public int? FirstContactReplyAt { get => _explicitNullValueFirstContactReplyAt; set { _explicitNullValueFirstContactReplyAt = value; AdditionalData?.Remove("first_contact_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_contact_reply_at"); else _explicitNullProperties?.Remove("first_contact_reply_at"); } }
-        private int? _explicitNullValueFirstContactReplyAt = default!;
+        public long? FirstContactReplyAt { get => _explicitNullValueFirstContactReplyAt; set { _explicitNullValueFirstContactReplyAt = value; AdditionalData?.Remove("first_contact_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first_contact_reply_at"); else _explicitNullProperties?.Remove("first_contact_reply_at"); } }
+        private long? _explicitNullValueFirstContactReplyAt = default!;
         /// <summary>Time from conversation assignment to conversation close in seconds.</summary>
         public int? HandlingTime { get => _explicitNullValueHandlingTime; set { _explicitNullValueHandlingTime = value; AdditionalData?.Remove("handling_time"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("handling_time"); else _explicitNullProperties?.Remove("handling_time"); } }
         private int? _explicitNullValueHandlingTime = default!;
         /// <summary>Time of the last conversation part from an admin.</summary>
-        public int? LastAdminReplyAt { get => _explicitNullValueLastAdminReplyAt; set { _explicitNullValueLastAdminReplyAt = value; AdditionalData?.Remove("last_admin_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_admin_reply_at"); else _explicitNullProperties?.Remove("last_admin_reply_at"); } }
-        private int? _explicitNullValueLastAdminReplyAt = default!;
+        public long? LastAdminReplyAt { get => _explicitNullValueLastAdminReplyAt; set { _explicitNullValueLastAdminReplyAt = value; AdditionalData?.Remove("last_admin_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_admin_reply_at"); else _explicitNullProperties?.Remove("last_admin_reply_at"); } }
+        private long? _explicitNullValueLastAdminReplyAt = default!;
         /// <summary>Time of first admin reply since most recent assignment.</summary>
-        public int? LastAssignmentAdminReplyAt { get => _explicitNullValueLastAssignmentAdminReplyAt; set { _explicitNullValueLastAssignmentAdminReplyAt = value; AdditionalData?.Remove("last_assignment_admin_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_assignment_admin_reply_at"); else _explicitNullProperties?.Remove("last_assignment_admin_reply_at"); } }
-        private int? _explicitNullValueLastAssignmentAdminReplyAt = default!;
+        public long? LastAssignmentAdminReplyAt { get => _explicitNullValueLastAssignmentAdminReplyAt; set { _explicitNullValueLastAssignmentAdminReplyAt = value; AdditionalData?.Remove("last_assignment_admin_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_assignment_admin_reply_at"); else _explicitNullProperties?.Remove("last_assignment_admin_reply_at"); } }
+        private long? _explicitNullValueLastAssignmentAdminReplyAt = default!;
         /// <summary>Time of last assignment after first_contact_reply_at.</summary>
-        public int? LastAssignmentAt { get => _explicitNullValueLastAssignmentAt; set { _explicitNullValueLastAssignmentAt = value; AdditionalData?.Remove("last_assignment_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_assignment_at"); else _explicitNullProperties?.Remove("last_assignment_at"); } }
-        private int? _explicitNullValueLastAssignmentAt = default!;
+        public long? LastAssignmentAt { get => _explicitNullValueLastAssignmentAt; set { _explicitNullValueLastAssignmentAt = value; AdditionalData?.Remove("last_assignment_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_assignment_at"); else _explicitNullProperties?.Remove("last_assignment_at"); } }
+        private long? _explicitNullValueLastAssignmentAt = default!;
         /// <summary>Time of the last conversation close.</summary>
-        public int? LastCloseAt { get => _explicitNullValueLastCloseAt; set { _explicitNullValueLastCloseAt = value; AdditionalData?.Remove("last_close_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_close_at"); else _explicitNullProperties?.Remove("last_close_at"); } }
-        private int? _explicitNullValueLastCloseAt = default!;
+        public long? LastCloseAt { get => _explicitNullValueLastCloseAt; set { _explicitNullValueLastCloseAt = value; AdditionalData?.Remove("last_close_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_close_at"); else _explicitNullProperties?.Remove("last_close_at"); } }
+        private long? _explicitNullValueLastCloseAt = default!;
         /// <summary>The last admin who closed the conversation. Returns a reference to an Admin object.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -138,8 +138,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueLastClosedById = default!;
 #endif
         /// <summary>Time of the last conversation part from a contact.</summary>
-        public int? LastContactReplyAt { get => _explicitNullValueLastContactReplyAt; set { _explicitNullValueLastContactReplyAt = value; AdditionalData?.Remove("last_contact_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_contact_reply_at"); else _explicitNullProperties?.Remove("last_contact_reply_at"); } }
-        private int? _explicitNullValueLastContactReplyAt = default!;
+        public long? LastContactReplyAt { get => _explicitNullValueLastContactReplyAt; set { _explicitNullValueLastContactReplyAt = value; AdditionalData?.Remove("last_contact_reply_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_contact_reply_at"); else _explicitNullProperties?.Remove("last_contact_reply_at"); } }
+        private long? _explicitNullValueLastContactReplyAt = default!;
         /// <summary>Median based on all admin replies after a contact reply. Subtracts out of business hours. In seconds.</summary>
         public int? MedianTimeToReply { get => _explicitNullValueMedianTimeToReply; set { _explicitNullValueMedianTimeToReply = value; AdditionalData?.Remove("median_time_to_reply"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("median_time_to_reply"); else _explicitNullProperties?.Remove("median_time_to_reply"); } }
         private int? _explicitNullValueMedianTimeToReply = default!;
@@ -198,17 +198,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "count_assignments", n => { CountAssignments = n.GetIntValue(); } },
                 { "count_conversation_parts", n => { CountConversationParts = n.GetIntValue(); } },
                 { "count_reopens", n => { CountReopens = n.GetIntValue(); } },
-                { "first_admin_reply_at", n => { FirstAdminReplyAt = n.GetIntValue(); } },
-                { "first_assignment_at", n => { FirstAssignmentAt = n.GetIntValue(); } },
-                { "first_close_at", n => { FirstCloseAt = n.GetIntValue(); } },
-                { "first_contact_reply_at", n => { FirstContactReplyAt = n.GetIntValue(); } },
+                { "first_admin_reply_at", n => { FirstAdminReplyAt = n.GetLongValue(); } },
+                { "first_assignment_at", n => { FirstAssignmentAt = n.GetLongValue(); } },
+                { "first_close_at", n => { FirstCloseAt = n.GetLongValue(); } },
+                { "first_contact_reply_at", n => { FirstContactReplyAt = n.GetLongValue(); } },
                 { "handling_time", n => { HandlingTime = n.GetIntValue(); } },
-                { "last_admin_reply_at", n => { LastAdminReplyAt = n.GetIntValue(); } },
-                { "last_assignment_admin_reply_at", n => { LastAssignmentAdminReplyAt = n.GetIntValue(); } },
-                { "last_assignment_at", n => { LastAssignmentAt = n.GetIntValue(); } },
-                { "last_close_at", n => { LastCloseAt = n.GetIntValue(); } },
+                { "last_admin_reply_at", n => { LastAdminReplyAt = n.GetLongValue(); } },
+                { "last_assignment_admin_reply_at", n => { LastAssignmentAdminReplyAt = n.GetLongValue(); } },
+                { "last_assignment_at", n => { LastAssignmentAt = n.GetLongValue(); } },
+                { "last_close_at", n => { LastCloseAt = n.GetLongValue(); } },
                 { "last_closed_by_id", n => { LastClosedById = n.GetStringValue(); } },
-                { "last_contact_reply_at", n => { LastContactReplyAt = n.GetIntValue(); } },
+                { "last_contact_reply_at", n => { LastContactReplyAt = n.GetLongValue(); } },
                 { "median_time_to_reply", n => { MedianTimeToReply = n.GetIntValue(); } },
                 { "time_to_admin_reply", n => { TimeToAdminReply = n.GetIntValue(); } },
                 { "time_to_assignment", n => { TimeToAssignment = n.GetIntValue(); } },
@@ -230,17 +230,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("count_assignments", CountAssignments);
             writer.WriteIntValue("count_conversation_parts", CountConversationParts);
             writer.WriteIntValue("count_reopens", CountReopens);
-            writer.WriteIntValue("first_admin_reply_at", FirstAdminReplyAt);
-            writer.WriteIntValue("first_assignment_at", FirstAssignmentAt);
-            writer.WriteIntValue("first_close_at", FirstCloseAt);
-            writer.WriteIntValue("first_contact_reply_at", FirstContactReplyAt);
+            writer.WriteLongValue("first_admin_reply_at", FirstAdminReplyAt);
+            writer.WriteLongValue("first_assignment_at", FirstAssignmentAt);
+            writer.WriteLongValue("first_close_at", FirstCloseAt);
+            writer.WriteLongValue("first_contact_reply_at", FirstContactReplyAt);
             writer.WriteIntValue("handling_time", HandlingTime);
-            writer.WriteIntValue("last_admin_reply_at", LastAdminReplyAt);
-            writer.WriteIntValue("last_assignment_admin_reply_at", LastAssignmentAdminReplyAt);
-            writer.WriteIntValue("last_assignment_at", LastAssignmentAt);
-            writer.WriteIntValue("last_close_at", LastCloseAt);
+            writer.WriteLongValue("last_admin_reply_at", LastAdminReplyAt);
+            writer.WriteLongValue("last_assignment_admin_reply_at", LastAssignmentAdminReplyAt);
+            writer.WriteLongValue("last_assignment_at", LastAssignmentAt);
+            writer.WriteLongValue("last_close_at", LastCloseAt);
             writer.WriteStringValue("last_closed_by_id", LastClosedById);
-            writer.WriteIntValue("last_contact_reply_at", LastContactReplyAt);
+            writer.WriteLongValue("last_contact_reply_at", LastContactReplyAt);
             writer.WriteIntValue("median_time_to_reply", MedianTimeToReply);
             writer.WriteIntValue("time_to_admin_reply", TimeToAdminReply);
             writer.WriteIntValue("time_to_assignment", TimeToAssignment);

@@ -27,7 +27,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time when the API template source was created.</summary>
-        public int? CreatedAt { get; private set; }
+        public long? CreatedAt { get; private set; }
         /// <summary>The unique identifier for the API template source, which is given by Intercom.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -91,7 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "latest_sync", n => { LatestSync = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateSourceLatestSync>(global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateSourceLatestSync.CreateFromDiscriminatorValue); } },
                 { "template", n => { Template = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate>(global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplate.CreateFromDiscriminatorValue); } },

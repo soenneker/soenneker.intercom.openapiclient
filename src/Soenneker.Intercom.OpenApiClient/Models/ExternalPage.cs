@@ -76,8 +76,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private List<int?> _explicitNullValueAudienceIds = default!;
 #endif
         /// <summary>The time when the external page was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The identifier for the external page which was given by the source. Must be unique for the source.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -112,8 +112,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueId = default!;
 #endif
         /// <summary>The time when the external page was last ingested.</summary>
-        public int? LastIngestedAt { get => _explicitNullValueLastIngestedAt; set { _explicitNullValueLastIngestedAt = value; AdditionalData?.Remove("last_ingested_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_ingested_at"); else _explicitNullProperties?.Remove("last_ingested_at"); } }
-        private int? _explicitNullValueLastIngestedAt = default!;
+        public long? LastIngestedAt { get => _explicitNullValueLastIngestedAt; set { _explicitNullValueLastIngestedAt = value; AdditionalData?.Remove("last_ingested_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_ingested_at"); else _explicitNullProperties?.Remove("last_ingested_at"); } }
+        private long? _explicitNullValueLastIngestedAt = default!;
         /// <summary>The language code of the external page, for example `en` or `fr`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -151,8 +151,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType? _explicitNullValueType = default!;
         /// <summary>The time when the external page was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The URL of the external page. This will be used by Fin to link end users to the page it based its answer on.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -192,18 +192,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ai_copilot_availability", n => { AiCopilotAvailability = n.GetBoolValue(); } },
                 { "ai_sales_agent_availability", n => { AiSalesAgentAvailability = n.GetBoolValue(); } },
                 { "audience_ids", n => { AudienceIds = n.GetCollectionOfPrimitiveValues<int?>()?.AsList(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "fin_availability", n => { FinAvailability = n.GetBoolValue(); } },
                 { "html", n => { Html = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
-                { "last_ingested_at", n => { LastIngestedAt = n.GetIntValue(); } },
+                { "last_ingested_at", n => { LastIngestedAt = n.GetLongValue(); } },
                 { "locale", n => { Locale = n.GetStringValue(); } },
                 { "source_id", n => { SourceId = n.GetIntValue(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags>(global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
         }
@@ -218,18 +218,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("ai_copilot_availability", AiCopilotAvailability);
             writer.WriteBoolValue("ai_sales_agent_availability", AiSalesAgentAvailability);
             writer.WriteCollectionOfPrimitiveValues<int?>("audience_ids", AudienceIds);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteBoolValue("fin_availability", FinAvailability);
             writer.WriteStringValue("html", Html);
             writer.WriteStringValue("id", Id);
-            writer.WriteIntValue("last_ingested_at", LastIngestedAt);
+            writer.WriteLongValue("last_ingested_at", LastIngestedAt);
             writer.WriteStringValue("locale", Locale);
             writer.WriteIntValue("source_id", SourceId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageTags>("tags", Tags);
             writer.WriteStringValue("title", Title);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ExternalPageType>("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

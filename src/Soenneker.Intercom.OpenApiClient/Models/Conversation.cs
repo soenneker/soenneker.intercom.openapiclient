@@ -155,8 +155,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating _explicitNullValueConversationRating = default!;
 #endif
         /// <summary>The time the conversation was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>An object containing the custom attributes on a conversation as key-value pairs. For relationship attributes the value is a list of custom object instance models. System-defined attributes such as &quot;AI Topic and Subtopic&quot;, &quot;CX Score rating&quot;, &quot;CX Score explanation&quot; and &quot;CX Score reasons&quot; may also be included.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -207,7 +207,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList LinkedObjects { get => _explicitNullValueLinkedObjects; set { _explicitNullValueLinkedObjects = value; AdditionalData?.Remove("linked_objects"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("linked_objects"); else _explicitNullProperties?.Remove("linked_objects"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList _explicitNullValueLinkedObjects = default!;
 #endif
-        /// <summary>QA monitor evaluations that flagged this conversation. Only included when `include_monitors=true` is passed as a query parameter.</summary>
+        /// <summary>The latest QA monitor evaluation for each monitor that has evaluated this conversation, whatever its result. Only included when `include_monitors=true` is passed as a query parameter.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.ConversationMonitorEvaluation>? MonitorEvaluations { get => _explicitNullValueMonitorEvaluations; set { _explicitNullValueMonitorEvaluations = value; AdditionalData?.Remove("monitor_evaluations"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_evaluations"); else _explicitNullProperties?.Remove("monitor_evaluations"); } }
@@ -260,8 +260,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied _explicitNullValueSlaApplied = default!;
 #endif
         /// <summary>If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.</summary>
-        public int? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
-        private int? _explicitNullValueSnoozedUntil = default!;
+        public long? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
+        private long? _explicitNullValueSnoozedUntil = default!;
         /// <summary>The first message or event that started this conversation. Describes the origin and who initiated it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -329,11 +329,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The last time the conversation was updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The last time a Contact responded to an Admin. In other words, the time a customer started waiting for a response. Set to null if last reply is from an Admin.</summary>
-        public int? WaitingSince { get => _explicitNullValueWaitingSince; set { _explicitNullValueWaitingSince = value; AdditionalData?.Remove("waiting_since"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("waiting_since"); else _explicitNullProperties?.Remove("waiting_since"); } }
-        private int? _explicitNullValueWaitingSince = default!;
+        public long? WaitingSince { get => _explicitNullValueWaitingSince; set { _explicitNullValueWaitingSince = value; AdditionalData?.Remove("waiting_since"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("waiting_since"); else _explicitNullProperties?.Remove("waiting_since"); } }
+        private long? _explicitNullValueWaitingSince = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/> and sets the default values.
         /// </summary>
@@ -367,7 +367,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts.CreateFromDiscriminatorValue); } },
                 { "conversation_parts", n => { ConversationParts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts.CreateFromDiscriminatorValue); } },
                 { "conversation_rating", n => { ConversationRating = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating.CreateFromDiscriminatorValue); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.CustomAttributes.CreateFromDiscriminatorValue); } },
                 { "external_references", n => { ExternalReferences = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "first_contact_reply", n => { FirstContactReply = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply.CreateFromDiscriminatorValue); } },
@@ -381,7 +381,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "sales_agent_participated", n => { SalesAgentParticipated = n.GetBoolValue(); } },
                 { "scorecards", n => { Scorecards = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "sla_applied", n => { SlaApplied = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>(global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied.CreateFromDiscriminatorValue); } },
-                { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
+                { "snoozed_until", n => { SnoozedUntil = n.GetLongValue(); } },
                 { "source", n => { Source = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource.CreateFromDiscriminatorValue); } },
                 { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "statistics", n => { Statistics = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics.CreateFromDiscriminatorValue); } },
@@ -390,8 +390,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "teammates", n => { Teammates = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates.CreateFromDiscriminatorValue); } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
-                { "waiting_since", n => { WaitingSince = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
+                { "waiting_since", n => { WaitingSince = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -409,7 +409,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationContacts>("contacts", Contacts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationParts>("conversation_parts", ConversationParts);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationRating>("conversation_rating", ConversationRating);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomAttributes>("custom_attributes", CustomAttributes);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationExternalReference>("external_references", ExternalReferences);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationFirstContactReply>("first_contact_reply", FirstContactReply);
@@ -423,7 +423,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("sales_agent_participated", SalesAgentParticipated);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ConversationScorecard>("scorecards", Scorecards);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.SlaApplied>("sla_applied", SlaApplied);
-            writer.WriteIntValue("snoozed_until", SnoozedUntil);
+            writer.WriteLongValue("snoozed_until", SnoozedUntil);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource>("source", Source);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationState>("state", State);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationStatistics>("statistics", Statistics);
@@ -432,8 +432,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationTeammates>("teammates", Teammates);
             writer.WriteStringValue("title", Title);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
-            writer.WriteIntValue("waiting_since", WaitingSince);
+            writer.WriteLongValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("waiting_since", WaitingSince);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

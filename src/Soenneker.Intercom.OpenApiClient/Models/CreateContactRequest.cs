@@ -106,8 +106,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueLanguageOverride = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).</summary>
-        public int? LastSeenAt { get => _explicitNullValueLastSeenAt; set { _explicitNullValueLastSeenAt = value; AdditionalData?.Remove("last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_seen_at"); else _explicitNullProperties?.Remove("last_seen_at"); } }
-        private int? _explicitNullValueLastSeenAt = default!;
+        public long? LastSeenAt { get => _explicitNullValueLastSeenAt; set { _explicitNullValueLastSeenAt = value; AdditionalData?.Remove("last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_seen_at"); else _explicitNullProperties?.Remove("last_seen_at"); } }
+        private long? _explicitNullValueLastSeenAt = default!;
         /// <summary>The contacts name</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -149,8 +149,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueRole = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
-        public int? SignedUpAt { get => _explicitNullValueSignedUpAt; set { _explicitNullValueSignedUpAt = value; AdditionalData?.Remove("signed_up_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signed_up_at"); else _explicitNullProperties?.Remove("signed_up_at"); } }
-        private int? _explicitNullValueSignedUpAt = default!;
+        public long? SignedUpAt { get => _explicitNullValueSignedUpAt; set { _explicitNullValueSignedUpAt = value; AdditionalData?.Remove("signed_up_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signed_up_at"); else _explicitNullProperties?.Remove("signed_up_at"); } }
+        private long? _explicitNullValueSignedUpAt = default!;
         /// <summary>Whether the contact has consented to receive SMS messages.</summary>
         public bool? SmsConsent { get => _explicitNullValueSmsConsent; set { _explicitNullValueSmsConsent = value; AdditionalData?.Remove("sms_consent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sms_consent"); else _explicitNullProperties?.Remove("sms_consent"); } }
         private bool? _explicitNullValueSmsConsent = default!;
@@ -191,12 +191,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "email_verified", n => { EmailVerified = n.GetBoolValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
-                { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
+                { "last_seen_at", n => { LastSeenAt = n.GetLongValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
-                { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
+                { "signed_up_at", n => { SignedUpAt = n.GetLongValue(); } },
                 { "sms_consent", n => { SmsConsent = n.GetBoolValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
                 { "unsubscribed_from_sms", n => { UnsubscribedFromSms = n.GetBoolValue(); } },
@@ -215,12 +215,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("email_verified", EmailVerified);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("language_override", LanguageOverride);
-            writer.WriteIntValue("last_seen_at", LastSeenAt);
+            writer.WriteLongValue("last_seen_at", LastSeenAt);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
-            writer.WriteIntValue("signed_up_at", SignedUpAt);
+            writer.WriteLongValue("signed_up_at", SignedUpAt);
             writer.WriteBoolValue("sms_consent", SmsConsent);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteBoolValue("unsubscribed_from_sms", UnsubscribedFromSms);

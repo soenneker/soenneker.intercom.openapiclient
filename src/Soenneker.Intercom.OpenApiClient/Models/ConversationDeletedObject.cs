@@ -3,13 +3,17 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>always conversation</summary>
+    /// <summary>`conversation`, or `ticket` when the deleted item is a ticket.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum ConversationDeletedObject
     {
         [EnumMember(Value = "conversation")]
         #pragma warning disable CS1591
         Conversation,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "ticket")]
+        #pragma warning disable CS1591
+        Ticket,
         #pragma warning restore CS1591
     }
 }

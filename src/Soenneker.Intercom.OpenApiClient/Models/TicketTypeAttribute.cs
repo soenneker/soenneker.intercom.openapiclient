@@ -60,8 +60,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; AdditionalData?.Remove("archived"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
         private bool? _explicitNullValueArchived = default!;
         /// <summary>The date and time the ticket type attribute was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The type of the data attribute (allowed values: &quot;string list integer decimal boolean datetime files&quot;)</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -138,8 +138,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The date and time the ticket type attribute was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>Whether the attribute is visible or not to teammates.</summary>
         public bool? VisibleOnCreate { get => _explicitNullValueVisibleOnCreate; set { _explicitNullValueVisibleOnCreate = value; AdditionalData?.Remove("visible_on_create"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("visible_on_create"); else _explicitNullProperties?.Remove("visible_on_create"); } }
         private bool? _explicitNullValueVisibleOnCreate = default!;
@@ -188,7 +188,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "archived", n => { Archived = n.GetBoolValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "data_type", n => { DataType = n.GetStringValue(); } },
                 { "default", n => { Default = n.GetBoolValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
@@ -200,7 +200,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "required_to_create_for_contacts", n => { RequiredToCreateForContacts = n.GetBoolValue(); } },
                 { "ticket_type_id", n => { TicketTypeId = n.GetIntValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "visible_on_create", n => { VisibleOnCreate = n.GetBoolValue(); } },
                 { "visible_to_contacts", n => { VisibleToContacts = n.GetBoolValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
@@ -214,7 +214,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteBoolValue("archived", Archived);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("data_type", DataType);
             writer.WriteBoolValue("default", Default);
             writer.WriteStringValue("description", Description);
@@ -226,7 +226,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteBoolValue("required_to_create_for_contacts", RequiredToCreateForContacts);
             writer.WriteIntValue("ticket_type_id", TicketTypeId);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteBoolValue("visible_on_create", VisibleOnCreate);
             writer.WriteBoolValue("visible_to_contacts", VisibleToContacts);
             writer.WriteStringValue("workspace_id", WorkspaceId);

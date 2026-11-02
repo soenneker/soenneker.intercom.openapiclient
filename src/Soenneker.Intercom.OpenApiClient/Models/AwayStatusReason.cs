@@ -36,8 +36,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The phone status this away status reason is configured for, or null if it is not associated with one.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus? AssociatedToPhoneStatus { get => _explicitNullValueAssociatedToPhoneStatus; set { _explicitNullValueAssociatedToPhoneStatus = value; AdditionalData?.Remove("associated_to_phone_status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("associated_to_phone_status"); else _explicitNullProperties?.Remove("associated_to_phone_status"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus? _explicitNullValueAssociatedToPhoneStatus = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus AssociatedToPhoneStatus { get => _explicitNullValueAssociatedToPhoneStatus; set { _explicitNullValueAssociatedToPhoneStatus = value; AdditionalData?.Remove("associated_to_phone_status"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("associated_to_phone_status"); else _explicitNullProperties?.Remove("associated_to_phone_status"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus _explicitNullValueAssociatedToPhoneStatus = default!;
+#endif
         /// <summary>Whether the status reason has been soft deleted</summary>
         public bool? Deleted { get => _explicitNullValueDeleted; set { _explicitNullValueDeleted = value; AdditionalData?.Remove("deleted"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deleted"); else _explicitNullProperties?.Remove("deleted"); } }
         private bool? _explicitNullValueDeleted = default!;
@@ -109,7 +116,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "associated_to_phone_status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueAssociatedToPhoneStatus = default; _explicitNullProperties?.Remove("associated_to_phone_status"); AdditionalData["associated_to_phone_status"] = unknown; } else { AssociatedToPhoneStatus = parsed; AdditionalData.Remove("associated_to_phone_status"); } } },
+                { "associated_to_phone_status", n => { AssociatedToPhoneStatus = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus>(global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus.CreateFromDiscriminatorValue); } },
                 { "deleted", n => { Deleted = n.GetBoolValue(); } },
                 { "emoji", n => { Emoji = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
@@ -125,7 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus>("associated_to_phone_status", AssociatedToPhoneStatus);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AwayStatusReasonAssociatedToPhoneStatus>("associated_to_phone_status", AssociatedToPhoneStatus);
             writer.WriteBoolValue("deleted", Deleted);
             writer.WriteStringValue("emoji", Emoji);
             writer.WriteStringValue("id", Id);

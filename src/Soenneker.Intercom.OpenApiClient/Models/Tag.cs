@@ -33,8 +33,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. `null` when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.</summary>
-        public int? AppliedAt { get => _explicitNullValueAppliedAt; set { _explicitNullValueAppliedAt = value; AdditionalData?.Remove("applied_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied_at"); else _explicitNullProperties?.Remove("applied_at"); } }
-        private int? _explicitNullValueAppliedAt = default!;
+        public long? AppliedAt { get => _explicitNullValueAppliedAt; set { _explicitNullValueAppliedAt = value; AdditionalData?.Remove("applied_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied_at"); else _explicitNullProperties?.Remove("applied_at"); } }
+        private long? _explicitNullValueAppliedAt = default!;
         /// <summary>The admin who applied the tag. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, or content snippet, when listing the tags on a contact, or when it is returned as part of an external page. `null` when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value. When no admin is recorded, `type` is `nobody_admin` and `id` is `null`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -100,7 +100,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "applied_at", n => { AppliedAt = n.GetIntValue(); } },
+                { "applied_at", n => { AppliedAt = n.GetLongValue(); } },
                 { "applied_by", n => { AppliedBy = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy>(global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy.CreateFromDiscriminatorValue); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -114,7 +114,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("applied_at", AppliedAt);
+            writer.WriteLongValue("applied_at", AppliedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy>("applied_by", AppliedBy);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);

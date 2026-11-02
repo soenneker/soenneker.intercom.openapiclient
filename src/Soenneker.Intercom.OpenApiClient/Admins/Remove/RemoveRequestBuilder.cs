@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Remove
         {
         }
         /// <summary>
-        /// You can remove a single admin (teammate) from your workspace.Requires the `remove_admins` OAuth scope.This removes the admin&apos;s access to the workspace and reassigns theirwork — auto-messages, ownership, article authorship, and conversationreplies — to the admins named by the `reassign_*` parameters.
+        /// You can remove a single admin (teammate) from your workspace.Requires the `remove_admins` OAuth scope.This removes the admin&apos;s access to the workspace. In most cases theirwork is reassigned to the IDs given in the `reassign_*` parameters. Inworkspaces with more than one seat type, no reassignment happens if theadmin has no seat, a Collaborator seat or a Lite seat.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Remove
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.RemoveAdmin200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can remove a single admin (teammate) from your workspace.Requires the `remove_admins` OAuth scope.This removes the admin&apos;s access to the workspace and reassigns theirwork — auto-messages, ownership, article authorship, and conversationreplies — to the admins named by the `reassign_*` parameters.
+        /// You can remove a single admin (teammate) from your workspace.Requires the `remove_admins` OAuth scope.This removes the admin&apos;s access to the workspace. In most cases theirwork is reassigned to the IDs given in the `reassign_*` parameters. Inworkspaces with more than one seat type, no reassignment happens if theadmin has no seat, a Collaborator seat or a Lite seat.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -93,7 +93,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Remove
             return new global::Soenneker.Intercom.OpenApiClient.Admins.Remove.RemoveRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can remove a single admin (teammate) from your workspace.Requires the `remove_admins` OAuth scope.This removes the admin&apos;s access to the workspace and reassigns theirwork — auto-messages, ownership, article authorship, and conversationreplies — to the admins named by the `reassign_*` parameters.
+        /// You can remove a single admin (teammate) from your workspace.Requires the `remove_admins` OAuth scope.This removes the admin&apos;s access to the workspace. In most cases theirwork is reassigned to the IDs given in the `reassign_*` parameters. Inworkspaces with more than one seat type, no reassignment happens if theadmin has no seat, a Collaborator seat or a Lite seat.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class RemoveRequestBuilderDeleteQueryParameters 
@@ -104,7 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Remove
             /// <summary>The unique identifier of a human admin to reassign the removed admin&apos;s article authorship to.</summary>
             [QueryParameter("reassign_articles_author_id")]
             public int? ReassignArticlesAuthorId { get; set; }
-            /// <summary>The unique identifier of a human admin with Inbox access to reassign the removed admin&apos;s conversation replies to. Pass `0` to leave conversations unassigned.</summary>
+            /// <summary>The ID of an admin with Inbox access, or a team, to reassign the removed admin&apos;s conversation replies to. Pass `0` to leave conversations unassigned.</summary>
             [QueryParameter("reassign_conversations_admin_id")]
             public int? ReassignConversationsAdminId { get; set; }
             /// <summary>The unique identifier of a human admin to reassign the removed admin&apos;s auto-message ownership to.</summary>

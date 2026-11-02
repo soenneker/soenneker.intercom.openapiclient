@@ -53,8 +53,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueBrandId = default!;
 #endif
         /// <summary>Unix timestamp of creation</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>Domain portion of the email address</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -76,8 +76,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueEmail = default!;
 #endif
         /// <summary>Unix timestamp of last forwarded email received (null if never)</summary>
-        public int? ForwardedEmailLastReceivedAt { get => _explicitNullValueForwardedEmailLastReceivedAt; set { _explicitNullValueForwardedEmailLastReceivedAt = value; AdditionalData?.Remove("forwarded_email_last_received_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("forwarded_email_last_received_at"); else _explicitNullProperties?.Remove("forwarded_email_last_received_at"); } }
-        private int? _explicitNullValueForwardedEmailLastReceivedAt = default!;
+        public long? ForwardedEmailLastReceivedAt { get => _explicitNullValueForwardedEmailLastReceivedAt; set { _explicitNullValueForwardedEmailLastReceivedAt = value; AdditionalData?.Remove("forwarded_email_last_received_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("forwarded_email_last_received_at"); else _explicitNullProperties?.Remove("forwarded_email_last_received_at"); } }
+        private long? _explicitNullValueForwardedEmailLastReceivedAt = default!;
         /// <summary>Whether email forwarding is active</summary>
         public bool? ForwardingEnabled { get => _explicitNullValueForwardingEnabled; set { _explicitNullValueForwardingEnabled = value; AdditionalData?.Remove("forwarding_enabled"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("forwarding_enabled"); else _explicitNullProperties?.Remove("forwarding_enabled"); } }
         private bool? _explicitNullValueForwardingEnabled = default!;
@@ -102,8 +102,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>Unix timestamp of last modification</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>Whether the email address has been verified</summary>
         public bool? Verified { get => _explicitNullValueVerified; set { _explicitNullValueVerified = value; AdditionalData?.Remove("verified"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("verified"); else _explicitNullProperties?.Remove("verified"); } }
         private bool? _explicitNullValueVerified = default!;
@@ -133,14 +133,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "brand_id", n => { BrandId = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "domain", n => { Domain = n.GetStringValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
-                { "forwarded_email_last_received_at", n => { ForwardedEmailLastReceivedAt = n.GetIntValue(); } },
+                { "forwarded_email_last_received_at", n => { ForwardedEmailLastReceivedAt = n.GetLongValue(); } },
                 { "forwarding_enabled", n => { ForwardingEnabled = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "verified", n => { Verified = n.GetBoolValue(); } },
             };
         }
@@ -152,14 +152,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("brand_id", BrandId);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("domain", Domain);
             writer.WriteStringValue("email", Email);
-            writer.WriteIntValue("forwarded_email_last_received_at", ForwardedEmailLastReceivedAt);
+            writer.WriteLongValue("forwarded_email_last_received_at", ForwardedEmailLastReceivedAt);
             writer.WriteBoolValue("forwarding_enabled", ForwardingEnabled);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteBoolValue("verified", Verified);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

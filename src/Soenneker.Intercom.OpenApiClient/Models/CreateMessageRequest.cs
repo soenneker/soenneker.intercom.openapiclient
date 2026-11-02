@@ -22,14 +22,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("bcc") is { } nullNodeBcc && nullNodeBcc.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Bcc = null;
             if (parseNode.GetChildNode("body") is null) { _explicitNullValueBody = default!; _explicitNullProperties?.Remove("body"); }
             else if (parseNode.GetChildNode("body") is { } nullNodeBody && nullNodeBody.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Body = null;
+            if (parseNode.GetChildNode("brand_id") is null) { _explicitNullValueBrandId = default!; _explicitNullProperties?.Remove("brand_id"); }
+            else if (parseNode.GetChildNode("brand_id") is { } nullNodeBrandId && nullNodeBrandId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) BrandId = null;
             if (parseNode.GetChildNode("cc") is null) { _explicitNullValueCc = default!; _explicitNullProperties?.Remove("cc"); }
             else if (parseNode.GetChildNode("cc") is { } nullNodeCc && nullNodeCc.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Cc = null;
+            if (parseNode.GetChildNode("components") is null) { _explicitNullValueComponents = default!; _explicitNullProperties?.Remove("components"); }
+            else if (parseNode.GetChildNode("components") is { } nullNodeComponents && nullNodeComponents.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Components = null;
             if (parseNode.GetChildNode("create_conversation_without_contact_reply") is null) { _explicitNullValueCreateConversationWithoutContactReply = default!; _explicitNullProperties?.Remove("create_conversation_without_contact_reply"); }
             else if (parseNode.GetChildNode("create_conversation_without_contact_reply") is { } nullNodeCreateConversationWithoutContactReply && nullNodeCreateConversationWithoutContactReply.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreateConversationWithoutContactReply = null;
             if (parseNode.GetChildNode("created_at") is null) { _explicitNullValueCreatedAt = default!; _explicitNullProperties?.Remove("created_at"); }
             else if (parseNode.GetChildNode("created_at") is { } nullNodeCreatedAt && nullNodeCreatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) CreatedAt = null;
             if (parseNode.GetChildNode("from") is null) { _explicitNullValueFrom = default!; _explicitNullProperties?.Remove("from"); }
             else if (parseNode.GetChildNode("from") is { } nullNodeFrom && nullNodeFrom.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) From = null;
+            if (parseNode.GetChildNode("locale") is null) { _explicitNullValueLocale = default!; _explicitNullProperties?.Remove("locale"); }
+            else if (parseNode.GetChildNode("locale") is { } nullNodeLocale && nullNodeLocale.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Locale = null;
             if (parseNode.GetChildNode("message_type") is null) { _explicitNullValueMessageType = default!; _explicitNullProperties?.Remove("message_type"); }
             else if (parseNode.GetChildNode("message_type") is { } nullNodeMessageType && nullNodeMessageType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) MessageType = null;
             if (parseNode.GetChildNode("subject") is null) { _explicitNullValueSubject = default!; _explicitNullProperties?.Remove("subject"); }
@@ -62,6 +68,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Body { get => _explicitNullValueBody; set { _explicitNullValueBody = value; AdditionalData?.Remove("body"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("body"); else _explicitNullProperties?.Remove("body"); } }
         private string _explicitNullValueBody = default!;
 #endif
+        /// <summary>The id of the brand to send the message from. Not used for `whatsapp` messages. A brand that doesn&apos;t exist returns a `400` error.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? BrandId { get => _explicitNullValueBrandId; set { _explicitNullValueBrandId = value; AdditionalData?.Remove("brand_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("brand_id"); else _explicitNullProperties?.Remove("brand_id"); } }
+        private string? _explicitNullValueBrandId = default!;
+#nullable restore
+#else
+        public string BrandId { get => _explicitNullValueBrandId; set { _explicitNullValueBrandId = value; AdditionalData?.Remove("brand_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("brand_id"); else _explicitNullProperties?.Remove("brand_id"); } }
+        private string _explicitNullValueBrandId = default!;
+#endif
         /// <summary>The cc property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -71,6 +87,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 #else
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc Cc { get => _explicitNullValueCc; set { _explicitNullValueCc = value; AdditionalData?.Remove("cc"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("cc"); else _explicitNullProperties?.Remove("cc"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc _explicitNullValueCc = default!;
+#endif
+        /// <summary>The components of the WhatsApp template, with the values for its variables. Required for `whatsapp` messages.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty>? Components { get => _explicitNullValueComponents; set { _explicitNullValueComponents = value; AdditionalData?.Remove("components"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("components"); else _explicitNullProperties?.Remove("components"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty>? _explicitNullValueComponents = default!;
+#nullable restore
+#else
+        public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty> Components { get => _explicitNullValueComponents; set { _explicitNullValueComponents = value; AdditionalData?.Remove("components"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("components"); else _explicitNullProperties?.Remove("components"); } }
+        private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty> _explicitNullValueComponents = default!;
 #endif
         /// <summary>Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided.</summary>
         public bool? CreateConversationWithoutContactReply { get => _explicitNullValueCreateConversationWithoutContactReply; set { _explicitNullValueCreateConversationWithoutContactReply = value; AdditionalData?.Remove("create_conversation_without_contact_reply"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("create_conversation_without_contact_reply"); else _explicitNullProperties?.Remove("create_conversation_without_contact_reply"); } }
@@ -88,7 +114,17 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom From { get => _explicitNullValueFrom; set { _explicitNullValueFrom = value; AdditionalData?.Remove("from"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from"); else _explicitNullProperties?.Remove("from"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom _explicitNullValueFrom = default!;
 #endif
-        /// <summary>The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`.</summary>
+        /// <summary>The locale of the WhatsApp template to send, such as `en`. If you leave it out, the contact&apos;s messenger locale is used, then the workspace locale. A template that isn&apos;t available in the locale returns a `400` error.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? Locale { get => _explicitNullValueLocale; set { _explicitNullValueLocale = value; AdditionalData?.Remove("locale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("locale"); else _explicitNullProperties?.Remove("locale"); } }
+        private string? _explicitNullValueLocale = default!;
+#nullable restore
+#else
+        public string Locale { get => _explicitNullValueLocale; set { _explicitNullValueLocale = value; AdditionalData?.Remove("locale"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("locale"); else _explicitNullProperties?.Remove("locale"); } }
+        private string _explicitNullValueLocale = default!;
+#endif
+        /// <summary>The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`. `inapp` is also accepted for in-app messages, and responses always show in-app messages as `inapp`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType? MessageType { get => _explicitNullValueMessageType; set { _explicitNullValueMessageType = value; AdditionalData?.Remove("message_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("message_type"); else _explicitNullProperties?.Remove("message_type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType? _explicitNullValueMessageType = default!;
         /// <summary>The title of the email.</summary>
@@ -151,10 +187,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "bcc", n => { Bcc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
+                { "brand_id", n => { BrandId = n.GetStringValue(); } },
                 { "cc", n => { Cc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc.CreateFromDiscriminatorValue); } },
+                { "components", n => { Components = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "create_conversation_without_contact_reply", n => { CreateConversationWithoutContactReply = n.GetBoolValue(); } },
                 { "created_at", n => { CreatedAt = n.GetIntValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom>(global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom.CreateFromDiscriminatorValue); } },
+                { "locale", n => { Locale = n.GetStringValue(); } },
                 { "message_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueMessageType = default; _explicitNullProperties?.Remove("message_type"); AdditionalData["message_type"] = unknown; } else { MessageType = parsed; AdditionalData.Remove("message_type"); } } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
                 { "template", n => { Template = n.GetStringValue(); } },
@@ -170,10 +209,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestBcc>("bcc", Bcc);
             writer.WriteStringValue("body", Body);
+            writer.WriteStringValue("brand_id", BrandId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestCc>("cc", Cc);
+            writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty>("components", Components);
             writer.WriteBoolValue("create_conversation_without_contact_reply", CreateConversationWithoutContactReply);
             writer.WriteIntValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom>("from", From);
+            writer.WriteStringValue("locale", Locale);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestMessageType>("message_type", MessageType);
             writer.WriteStringValue("subject", Subject);
             writer.WriteStringValue("template", Template);

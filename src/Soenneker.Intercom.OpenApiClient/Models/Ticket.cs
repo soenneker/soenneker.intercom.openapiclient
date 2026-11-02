@@ -99,8 +99,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts _explicitNullValueContacts = default!;
 #endif
         /// <summary>The time the ticket was created as a UTC Unix timestamp.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The unique identifier for the ticket which is given by Intercom.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -138,8 +138,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValuePreviousTicketStateId = default!;
 #endif
         /// <summary>The time the ticket will be snoozed until as a UTC Unix timestamp. If null, the ticket is not currently snoozed.</summary>
-        public int? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
-        private int? _explicitNullValueSnoozedUntil = default!;
+        public long? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
+        private long? _explicitNullValueSnoozedUntil = default!;
         /// <summary>The id representing the team assigned to the ticket. If it&apos;s not assigned to a team it will return 0.</summary>
         public int? TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; AdditionalData?.Remove("team_assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
         private int? _explicitNullValueTeamAssigneeId = default!;
@@ -197,8 +197,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeEnum? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeEnum? _explicitNullValueType = default!;
         /// <summary>The last time the ticket was updated as a UTC Unix timestamp.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Ticket"/> and sets the default values.
         /// </summary>
@@ -231,13 +231,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "channel", n => { Channel = n.GetStringValue(); } },
                 { "company_id", n => { CompanyId = n.GetStringValue(); } },
                 { "contacts", n => { Contacts = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>(global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts.CreateFromDiscriminatorValue); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "is_shared", n => { IsShared = n.GetBoolValue(); } },
                 { "linked_objects", n => { LinkedObjects = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>(global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList.CreateFromDiscriminatorValue); } },
                 { "open", n => { Open = n.GetBoolValue(); } },
                 { "previous_ticket_state_id", n => { PreviousTicketStateId = n.GetStringValue(); } },
-                { "snoozed_until", n => { SnoozedUntil = n.GetIntValue(); } },
+                { "snoozed_until", n => { SnoozedUntil = n.GetLongValue(); } },
                 { "team_assignee_id", n => { TeamAssigneeId = n.GetIntValue(); } },
                 { "ticket_attributes", n => { TicketAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTicketAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.TicketTicketAttributes.CreateFromDiscriminatorValue); } },
                 { "ticket_id", n => { TicketId = n.GetStringValue(); } },
@@ -245,7 +245,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ticket_state", n => { TicketState = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketState>(global::Soenneker.Intercom.OpenApiClient.Models.TicketState.CreateFromDiscriminatorValue); } },
                 { "ticket_type", n => { TicketType = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>(global::Soenneker.Intercom.OpenApiClient.Models.TicketType.CreateFromDiscriminatorValue); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeEnum>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -260,13 +260,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("channel", Channel);
             writer.WriteStringValue("company_id", CompanyId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketContacts>("contacts", Contacts);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteBoolValue("is_shared", IsShared);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.LinkedObjectList>("linked_objects", LinkedObjects);
             writer.WriteBoolValue("open", Open);
             writer.WriteStringValue("previous_ticket_state_id", PreviousTicketStateId);
-            writer.WriteIntValue("snoozed_until", SnoozedUntil);
+            writer.WriteLongValue("snoozed_until", SnoozedUntil);
             writer.WriteIntValue("team_assignee_id", TeamAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTicketAttributes>("ticket_attributes", TicketAttributes);
             writer.WriteStringValue("ticket_id", TicketId);
@@ -274,7 +274,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketState>("ticket_state", TicketState);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketType>("ticket_type", TicketType);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.TicketTypeEnum>("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

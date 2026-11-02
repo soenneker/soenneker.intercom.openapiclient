@@ -31,8 +31,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>(Unix timestamp in seconds) The time when the merge occurred.</summary>
-        public int? MergedAt { get => _explicitNullValueMergedAt; set { _explicitNullValueMergedAt = value; AdditionalData?.Remove("merged_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("merged_at"); else _explicitNullProperties?.Remove("merged_at"); } }
-        private int? _explicitNullValueMergedAt = default!;
+        public long? MergedAt { get => _explicitNullValueMergedAt; set { _explicitNullValueMergedAt = value; AdditionalData?.Remove("merged_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("merged_at"); else _explicitNullProperties?.Remove("merged_at"); } }
+        private long? _explicitNullValueMergedAt = default!;
         /// <summary>The Intercom ID of the contact that was merged into this contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "merged_at", n => { MergedAt = n.GetIntValue(); } },
+                { "merged_at", n => { MergedAt = n.GetLongValue(); } },
                 { "source_contact_id", n => { SourceContactId = n.GetStringValue(); } },
                 { "source_contact_role", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueSourceContactRole = default; _explicitNullProperties?.Remove("source_contact_role"); AdditionalData["source_contact_role"] = unknown; } else { SourceContactRole = parsed; AdditionalData.Remove("source_contact_role"); } } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -94,7 +94,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("merged_at", MergedAt);
+            writer.WriteLongValue("merged_at", MergedAt);
             writer.WriteStringValue("source_contact_id", SourceContactId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItemSourceContactRole>("source_contact_role", SourceContactRole);
             writer.WriteStringValue("type", Type);

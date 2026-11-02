@@ -71,11 +71,12 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         {
         }
         /// <summary>
-        /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Tickets are only included in the results if the access token has the `read_tickets` scope. Without it, tickets are left out and no error is returned.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
@@ -90,6 +91,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
@@ -104,9 +106,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         /// <param name="body">Conversations are how you can communicate with users in Intercom. They are created when a contact replies to an outbound message, or when one admin directly sends a message to a single contact.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation200Response?> PostAsync(global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequest body, Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -120,16 +124,18 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
             var requestInfo = ToPostRequestInformation(body, requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
+                { "400", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
                 { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation200Response>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CreateConversation200Response.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Tickets are only included in the results if the access token has the `read_tickets` scope. Without it, tickets are left out and no error is returned.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -179,12 +185,12 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
             return new global::Soenneker.Intercom.OpenApiClient.Conversations.ConversationsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}
+        /// You can fetch a list of all conversations.You can optionally request the result page size and the cursor to start after to fetch the result.{% admonition type=&quot;warning&quot; name=&quot;Pagination&quot; %}  You can use pagination to limit the number of results returned. The default is `20` results per page.  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details on how to use the `starting_after` param.{% /admonition %}Tickets are only included in the results if the access token has the `read_tickets` scope. Without it, tickets are left out and no error is returned.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ConversationsRequestBuilderGetQueryParameters 
         {
-            /// <summary>If set to true, the response will include a `monitor_evaluations` array on each conversation with any QA monitor results that flagged it.</summary>
+            /// <summary>If set to true, the response will include a `monitor_evaluations` array on each conversation with the latest QA monitor evaluation for each monitor that has evaluated it.</summary>
             [QueryParameter("include_monitors")]
             public bool? IncludeMonitors { get; set; }
             /// <summary>If set to true, the response will include a `scorecards` array on each conversation with any QA scorecard results.</summary>

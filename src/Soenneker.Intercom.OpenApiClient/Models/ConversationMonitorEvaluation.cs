@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A QA monitor evaluation that flagged this conversation. Returned in the `monitor_evaluations` array on conversation responses when `include_monitors=true` is passed.
+    /// A QA monitor evaluation of this conversation. Returned in the `monitor_evaluations` array on conversation responses when `include_monitors=true` is passed.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationMonitorEvaluation : IAdditionalDataHolder, IParsable
@@ -35,8 +35,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the monitor evaluated this conversation. Null in the rare case the underlying record&apos;s timestamp is not yet set.</summary>
-        public int? EvaluatedAt { get => _explicitNullValueEvaluatedAt; set { _explicitNullValueEvaluatedAt = value; AdditionalData?.Remove("evaluated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluated_at"); else _explicitNullProperties?.Remove("evaluated_at"); } }
-        private int? _explicitNullValueEvaluatedAt = default!;
+        public long? EvaluatedAt { get => _explicitNullValueEvaluatedAt; set { _explicitNullValueEvaluatedAt = value; AdditionalData?.Remove("evaluated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("evaluated_at"); else _explicitNullProperties?.Remove("evaluated_at"); } }
+        private long? _explicitNullValueEvaluatedAt = default!;
         /// <summary>The reasoning provided by the monitor for its result. May be null if no reasoning was generated.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string MonitorType { get => _explicitNullValueMonitorType; set { _explicitNullValueMonitorType = value; AdditionalData?.Remove("monitor_type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("monitor_type"); else _explicitNullProperties?.Remove("monitor_type"); } }
         private string _explicitNullValueMonitorType = default!;
 #endif
-        /// <summary>The evaluation outcome reported by the monitor.</summary>
+        /// <summary>The evaluation outcome reported by the monitor: `included` (the conversation matches the monitor&apos;s criteria), `excluded`, `error` or `awaiting_async_data`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Result { get => _explicitNullValueResult; set { _explicitNullValueResult = value; AdditionalData?.Remove("result"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("result"); else _explicitNullProperties?.Remove("result"); } }
@@ -112,7 +112,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "evaluated_at", n => { EvaluatedAt = n.GetIntValue(); } },
+                { "evaluated_at", n => { EvaluatedAt = n.GetLongValue(); } },
                 { "explanation", n => { Explanation = n.GetStringValue(); } },
                 { "monitor_id", n => { MonitorId = n.GetStringValue(); } },
                 { "monitor_name", n => { MonitorName = n.GetStringValue(); } },
@@ -127,7 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("evaluated_at", EvaluatedAt);
+            writer.WriteLongValue("evaluated_at", EvaluatedAt);
             writer.WriteStringValue("explanation", Explanation);
             writer.WriteStringValue("monitor_id", MonitorId);
             writer.WriteStringValue("monitor_name", MonitorName);

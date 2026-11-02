@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags.Item
         {
         }
         /// <summary>
-        /// You can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.
+        /// You can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag"/></returns>
         /// <param name="body">The request body</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Tag>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Tag.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.
+        /// You can remove tag from a specific conversation. This will return a tag object for the tag that was removed from the conversation.If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

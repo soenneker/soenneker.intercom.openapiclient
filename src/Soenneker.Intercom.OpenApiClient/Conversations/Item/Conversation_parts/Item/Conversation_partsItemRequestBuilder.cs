@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
         {
         }
         /// <summary>
-        /// You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.{% admonition type=&quot;warning&quot; name=&quot;Experimental&quot; %}  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.{% /admonition %}
+        /// You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.{% admonition type=&quot;warning&quot; name=&quot;Experimental&quot; %}  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart"/></returns>
         /// <param name="body">Payload for updating a conversation part. Supports two operations:1. Updating the send state of an external reply (requires `send_state` and `info_message`).2. Marking a part as seen by an admin (requires `seen` and `admin_id`).Both operations require `experimental` and `secret` for HMAC authentication.</param>
@@ -65,7 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item.Conversation_parts
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.{% admonition type=&quot;warning&quot; name=&quot;Experimental&quot; %}  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.{% /admonition %}
+        /// You can update properties of a conversation part. Currently supports updating the send state of an external reply or marking a part as seen by an admin.{% admonition type=&quot;warning&quot; name=&quot;Experimental&quot; %}  This is an experimental endpoint. It requires a valid HMAC secret for authentication in addition to the standard bearer token.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">Payload for updating a conversation part. Supports two operations:1. Updating the send state of an external reply (requires `send_state` and `info_message`).2. Marking a part as seen by an admin (requires `seen` and `admin_id`).Both operations require `experimental` and `secret` for HMAC authentication.</param>

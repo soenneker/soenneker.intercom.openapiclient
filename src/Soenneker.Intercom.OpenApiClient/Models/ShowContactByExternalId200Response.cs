@@ -172,8 +172,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueAndroidDevice = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The time when the contact was last seen on an Android device.</summary>
-        public int? AndroidLastSeenAt { get => _explicitNullValueAndroidLastSeenAt; set { _explicitNullValueAndroidLastSeenAt = value; AdditionalData?.Remove("android_last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("android_last_seen_at"); else _explicitNullProperties?.Remove("android_last_seen_at"); } }
-        private int? _explicitNullValueAndroidLastSeenAt = default!;
+        public long? AndroidLastSeenAt { get => _explicitNullValueAndroidLastSeenAt; set { _explicitNullValueAndroidLastSeenAt = value; AdditionalData?.Remove("android_last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("android_last_seen_at"); else _explicitNullProperties?.Remove("android_last_seen_at"); } }
+        private long? _explicitNullValueAndroidLastSeenAt = default!;
         /// <summary>The version of the Android OS which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -245,8 +245,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies _explicitNullValueCompanies = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The time when the contact was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The custom attributes which are set for the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -347,8 +347,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueIosDevice = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The last time the contact used the iOS app.</summary>
-        public int? IosLastSeenAt { get => _explicitNullValueIosLastSeenAt; set { _explicitNullValueIosLastSeenAt = value; AdditionalData?.Remove("ios_last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ios_last_seen_at"); else _explicitNullProperties?.Remove("ios_last_seen_at"); } }
-        private int? _explicitNullValueIosLastSeenAt = default!;
+        public long? IosLastSeenAt { get => _explicitNullValueIosLastSeenAt; set { _explicitNullValueIosLastSeenAt = value; AdditionalData?.Remove("ios_last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ios_last_seen_at"); else _explicitNullProperties?.Remove("ios_last_seen_at"); } }
+        private long? _explicitNullValueIosLastSeenAt = default!;
         /// <summary>The version of iOS which the contact is using.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -380,20 +380,20 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueLanguageOverride = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The time when the contact was last messaged.</summary>
-        public int? LastContactedAt { get => _explicitNullValueLastContactedAt; set { _explicitNullValueLastContactedAt = value; AdditionalData?.Remove("last_contacted_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_contacted_at"); else _explicitNullProperties?.Remove("last_contacted_at"); } }
-        private int? _explicitNullValueLastContactedAt = default!;
+        public long? LastContactedAt { get => _explicitNullValueLastContactedAt; set { _explicitNullValueLastContactedAt = value; AdditionalData?.Remove("last_contacted_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_contacted_at"); else _explicitNullProperties?.Remove("last_contacted_at"); } }
+        private long? _explicitNullValueLastContactedAt = default!;
         /// <summary>(Unix timestamp in seconds) The time when the contact last clicked a link in an email.</summary>
-        public int? LastEmailClickedAt { get => _explicitNullValueLastEmailClickedAt; set { _explicitNullValueLastEmailClickedAt = value; AdditionalData?.Remove("last_email_clicked_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_email_clicked_at"); else _explicitNullProperties?.Remove("last_email_clicked_at"); } }
-        private int? _explicitNullValueLastEmailClickedAt = default!;
+        public long? LastEmailClickedAt { get => _explicitNullValueLastEmailClickedAt; set { _explicitNullValueLastEmailClickedAt = value; AdditionalData?.Remove("last_email_clicked_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_email_clicked_at"); else _explicitNullProperties?.Remove("last_email_clicked_at"); } }
+        private long? _explicitNullValueLastEmailClickedAt = default!;
         /// <summary>(Unix timestamp in seconds) The time when the contact last opened an email.</summary>
-        public int? LastEmailOpenedAt { get => _explicitNullValueLastEmailOpenedAt; set { _explicitNullValueLastEmailOpenedAt = value; AdditionalData?.Remove("last_email_opened_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_email_opened_at"); else _explicitNullProperties?.Remove("last_email_opened_at"); } }
-        private int? _explicitNullValueLastEmailOpenedAt = default!;
+        public long? LastEmailOpenedAt { get => _explicitNullValueLastEmailOpenedAt; set { _explicitNullValueLastEmailOpenedAt = value; AdditionalData?.Remove("last_email_opened_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_email_opened_at"); else _explicitNullProperties?.Remove("last_email_opened_at"); } }
+        private long? _explicitNullValueLastEmailOpenedAt = default!;
         /// <summary>(Unix timestamp in seconds) The time when the contact last messaged in.</summary>
-        public int? LastRepliedAt { get => _explicitNullValueLastRepliedAt; set { _explicitNullValueLastRepliedAt = value; AdditionalData?.Remove("last_replied_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_replied_at"); else _explicitNullProperties?.Remove("last_replied_at"); } }
-        private int? _explicitNullValueLastRepliedAt = default!;
+        public long? LastRepliedAt { get => _explicitNullValueLastRepliedAt; set { _explicitNullValueLastRepliedAt = value; AdditionalData?.Remove("last_replied_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_replied_at"); else _explicitNullProperties?.Remove("last_replied_at"); } }
+        private long? _explicitNullValueLastRepliedAt = default!;
         /// <summary>(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).</summary>
-        public int? LastSeenAt { get => _explicitNullValueLastSeenAt; set { _explicitNullValueLastSeenAt = value; AdditionalData?.Remove("last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_seen_at"); else _explicitNullProperties?.Remove("last_seen_at"); } }
-        private int? _explicitNullValueLastSeenAt = default!;
+        public long? LastSeenAt { get => _explicitNullValueLastSeenAt; set { _explicitNullValueLastSeenAt = value; AdditionalData?.Remove("last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_seen_at"); else _explicitNullProperties?.Remove("last_seen_at"); } }
+        private long? _explicitNullValueLastSeenAt = default!;
         /// <summary>An object containing location meta data about a Intercom contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -508,8 +508,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueRole = default!;
 #endif
         /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
-        public int? SignedUpAt { get => _explicitNullValueSignedUpAt; set { _explicitNullValueSignedUpAt = value; AdditionalData?.Remove("signed_up_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signed_up_at"); else _explicitNullProperties?.Remove("signed_up_at"); } }
-        private int? _explicitNullValueSignedUpAt = default!;
+        public long? SignedUpAt { get => _explicitNullValueSignedUpAt; set { _explicitNullValueSignedUpAt = value; AdditionalData?.Remove("signed_up_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signed_up_at"); else _explicitNullProperties?.Remove("signed_up_at"); } }
+        private long? _explicitNullValueSignedUpAt = default!;
         /// <summary>Whether the contact has consented to receive SMS messages.</summary>
         public bool? SmsConsent { get => _explicitNullValueSmsConsent; set { _explicitNullValueSmsConsent = value; AdditionalData?.Remove("sms_consent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sms_consent"); else _explicitNullProperties?.Remove("sms_consent"); } }
         private bool? _explicitNullValueSmsConsent = default!;
@@ -550,8 +550,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public bool? UnsubscribedFromSms { get => _explicitNullValueUnsubscribedFromSms; set { _explicitNullValueUnsubscribedFromSms = value; AdditionalData?.Remove("unsubscribed_from_sms"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unsubscribed_from_sms"); else _explicitNullProperties?.Remove("unsubscribed_from_sms"); } }
         private bool? _explicitNullValueUnsubscribedFromSms = default!;
         /// <summary>(Unix timestamp in seconds) The time when the contact was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The `utm_campaign` value recorded for the contact.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -650,7 +650,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "android_app_name", n => { AndroidAppName = n.GetStringValue(); } },
                 { "android_app_version", n => { AndroidAppVersion = n.GetStringValue(); } },
                 { "android_device", n => { AndroidDevice = n.GetStringValue(); } },
-                { "android_last_seen_at", n => { AndroidLastSeenAt = n.GetIntValue(); } },
+                { "android_last_seen_at", n => { AndroidLastSeenAt = n.GetLongValue(); } },
                 { "android_os_version", n => { AndroidOsVersion = n.GetStringValue(); } },
                 { "android_sdk_version", n => { AndroidSdkVersion = n.GetStringValue(); } },
                 { "avatar", n => { Avatar = n.GetStringValue(); } },
@@ -658,7 +658,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "browser_language", n => { BrowserLanguage = n.GetStringValue(); } },
                 { "browser_version", n => { BrowserVersion = n.GetStringValue(); } },
                 { "companies", n => { Companies = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>(global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies.CreateFromDiscriminatorValue); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200ResponseCustomAttributes>(global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200ResponseCustomAttributes.CreateFromDiscriminatorValue); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "email_domain", n => { EmailDomain = n.GetStringValue(); } },
@@ -671,15 +671,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "ios_app_name", n => { IosAppName = n.GetStringValue(); } },
                 { "ios_app_version", n => { IosAppVersion = n.GetStringValue(); } },
                 { "ios_device", n => { IosDevice = n.GetStringValue(); } },
-                { "ios_last_seen_at", n => { IosLastSeenAt = n.GetIntValue(); } },
+                { "ios_last_seen_at", n => { IosLastSeenAt = n.GetLongValue(); } },
                 { "ios_os_version", n => { IosOsVersion = n.GetStringValue(); } },
                 { "ios_sdk_version", n => { IosSdkVersion = n.GetStringValue(); } },
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
-                { "last_contacted_at", n => { LastContactedAt = n.GetIntValue(); } },
-                { "last_email_clicked_at", n => { LastEmailClickedAt = n.GetIntValue(); } },
-                { "last_email_opened_at", n => { LastEmailOpenedAt = n.GetIntValue(); } },
-                { "last_replied_at", n => { LastRepliedAt = n.GetIntValue(); } },
-                { "last_seen_at", n => { LastSeenAt = n.GetIntValue(); } },
+                { "last_contacted_at", n => { LastContactedAt = n.GetLongValue(); } },
+                { "last_email_clicked_at", n => { LastEmailClickedAt = n.GetLongValue(); } },
+                { "last_email_opened_at", n => { LastEmailOpenedAt = n.GetLongValue(); } },
+                { "last_replied_at", n => { LastRepliedAt = n.GetLongValue(); } },
+                { "last_seen_at", n => { LastSeenAt = n.GetLongValue(); } },
                 { "location", n => { Location = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>(global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation.CreateFromDiscriminatorValue); } },
                 { "marked_email_as_spam", n => { MarkedEmailAsSpam = n.GetBoolValue(); } },
                 { "merge_history", n => { MergeHistory = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>(global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem.CreateFromDiscriminatorValue)?.AsList(); } },
@@ -692,14 +692,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "referrer", n => { Referrer = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
-                { "signed_up_at", n => { SignedUpAt = n.GetIntValue(); } },
+                { "signed_up_at", n => { SignedUpAt = n.GetLongValue(); } },
                 { "sms_consent", n => { SmsConsent = n.GetBoolValue(); } },
                 { "social_profiles", n => { SocialProfiles = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>(global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles.CreateFromDiscriminatorValue); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>(global::Soenneker.Intercom.OpenApiClient.Models.ContactTags.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
                 { "unsubscribed_from_sms", n => { UnsubscribedFromSms = n.GetBoolValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "utm_campaign", n => { UtmCampaign = n.GetStringValue(); } },
                 { "utm_content", n => { UtmContent = n.GetStringValue(); } },
                 { "utm_medium", n => { UtmMedium = n.GetStringValue(); } },
@@ -719,7 +719,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("android_app_name", AndroidAppName);
             writer.WriteStringValue("android_app_version", AndroidAppVersion);
             writer.WriteStringValue("android_device", AndroidDevice);
-            writer.WriteIntValue("android_last_seen_at", AndroidLastSeenAt);
+            writer.WriteLongValue("android_last_seen_at", AndroidLastSeenAt);
             writer.WriteStringValue("android_os_version", AndroidOsVersion);
             writer.WriteStringValue("android_sdk_version", AndroidSdkVersion);
             writer.WriteStringValue("avatar", Avatar);
@@ -727,7 +727,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("browser_language", BrowserLanguage);
             writer.WriteStringValue("browser_version", BrowserVersion);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactCompanies>("companies", Companies);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ShowContactByExternalId200ResponseCustomAttributes>("custom_attributes", CustomAttributes);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("email_domain", EmailDomain);
@@ -740,15 +740,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("ios_app_name", IosAppName);
             writer.WriteStringValue("ios_app_version", IosAppVersion);
             writer.WriteStringValue("ios_device", IosDevice);
-            writer.WriteIntValue("ios_last_seen_at", IosLastSeenAt);
+            writer.WriteLongValue("ios_last_seen_at", IosLastSeenAt);
             writer.WriteStringValue("ios_os_version", IosOsVersion);
             writer.WriteStringValue("ios_sdk_version", IosSdkVersion);
             writer.WriteStringValue("language_override", LanguageOverride);
-            writer.WriteIntValue("last_contacted_at", LastContactedAt);
-            writer.WriteIntValue("last_email_clicked_at", LastEmailClickedAt);
-            writer.WriteIntValue("last_email_opened_at", LastEmailOpenedAt);
-            writer.WriteIntValue("last_replied_at", LastRepliedAt);
-            writer.WriteIntValue("last_seen_at", LastSeenAt);
+            writer.WriteLongValue("last_contacted_at", LastContactedAt);
+            writer.WriteLongValue("last_email_clicked_at", LastEmailClickedAt);
+            writer.WriteLongValue("last_email_opened_at", LastEmailOpenedAt);
+            writer.WriteLongValue("last_replied_at", LastRepliedAt);
+            writer.WriteLongValue("last_seen_at", LastSeenAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactLocation>("location", Location);
             writer.WriteBoolValue("marked_email_as_spam", MarkedEmailAsSpam);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.MergeHistoryItem>("merge_history", MergeHistory);
@@ -761,14 +761,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("referrer", Referrer);
             writer.WriteStringValue("role", Role);
-            writer.WriteIntValue("signed_up_at", SignedUpAt);
+            writer.WriteLongValue("signed_up_at", SignedUpAt);
             writer.WriteBoolValue("sms_consent", SmsConsent);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactSocialProfiles>("social_profiles", SocialProfiles);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ContactTags>("tags", Tags);
             writer.WriteStringValue("type", Type);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
             writer.WriteBoolValue("unsubscribed_from_sms", UnsubscribedFromSms);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteStringValue("utm_campaign", UtmCampaign);
             writer.WriteStringValue("utm_content", UtmContent);
             writer.WriteStringValue("utm_medium", UtmMedium);

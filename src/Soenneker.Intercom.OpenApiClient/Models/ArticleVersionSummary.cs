@@ -65,8 +65,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueAuthorId = default!;
 #endif
         /// <summary>The time the version was created, as a UTC Unix timestamp.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The id of the teammate who created this version.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -160,7 +160,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "article_id", n => { ArticleId = n.GetStringValue(); } },
                 { "author_id", n => { AuthorId = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "created_by_id", n => { CreatedById = n.GetStringValue(); } },
                 { "created_via", n => { CreatedVia = n.GetStringValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
@@ -180,7 +180,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("article_id", ArticleId);
             writer.WriteStringValue("author_id", AuthorId);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("created_by_id", CreatedById);
             writer.WriteStringValue("created_via", CreatedVia);
             writer.WriteStringValue("description", Description);

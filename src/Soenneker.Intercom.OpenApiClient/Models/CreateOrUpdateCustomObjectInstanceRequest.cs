@@ -41,8 +41,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty _explicitNullValueCustomAttributes = default!;
 #endif
         /// <summary>The time when the Custom Object instance was created in the external system it originated from. A value that cannot be read as a time is stored as `null` rather than rejected.</summary>
-        public int? ExternalCreatedAt { get => _explicitNullValueExternalCreatedAt; set { _explicitNullValueExternalCreatedAt = value; AdditionalData?.Remove("external_created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_created_at"); else _explicitNullProperties?.Remove("external_created_at"); } }
-        private int? _explicitNullValueExternalCreatedAt = default!;
+        public long? ExternalCreatedAt { get => _explicitNullValueExternalCreatedAt; set { _explicitNullValueExternalCreatedAt = value; AdditionalData?.Remove("external_created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_created_at"); else _explicitNullProperties?.Remove("external_created_at"); } }
+        private long? _explicitNullValueExternalCreatedAt = default!;
         /// <summary>A unique identifier for the Custom Object instance in the external system it originated from. The value `reference_not_found` is reserved and is rejected with a `400`. Omitting this field creates a new instance on every request instead of updating an existing one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,8 +54,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueExternalId = default!;
 #endif
         /// <summary>The time when the Custom Object instance was last updated in the external system it originated from. A value that cannot be read as a time is stored as `null` rather than rejected.</summary>
-        public int? ExternalUpdatedAt { get => _explicitNullValueExternalUpdatedAt; set { _explicitNullValueExternalUpdatedAt = value; AdditionalData?.Remove("external_updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_updated_at"); else _explicitNullProperties?.Remove("external_updated_at"); } }
-        private int? _explicitNullValueExternalUpdatedAt = default!;
+        public long? ExternalUpdatedAt { get => _explicitNullValueExternalUpdatedAt; set { _explicitNullValueExternalUpdatedAt = value; AdditionalData?.Remove("external_updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_updated_at"); else _explicitNullProperties?.Remove("external_updated_at"); } }
+        private long? _explicitNullValueExternalUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequest"/> and sets the default values.
         /// </summary>
@@ -82,9 +82,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty.CreateFromDiscriminatorValue); } },
-                { "external_created_at", n => { ExternalCreatedAt = n.GetIntValue(); } },
+                { "external_created_at", n => { ExternalCreatedAt = n.GetLongValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
-                { "external_updated_at", n => { ExternalUpdatedAt = n.GetIntValue(); } },
+                { "external_updated_at", n => { ExternalUpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -95,9 +95,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOrUpdateCustomObjectInstanceRequestCustomAttributesProperty>("custom_attributes", CustomAttributes);
-            writer.WriteIntValue("external_created_at", ExternalCreatedAt);
+            writer.WriteLongValue("external_created_at", ExternalCreatedAt);
             writer.WriteStringValue("external_id", ExternalId);
-            writer.WriteIntValue("external_updated_at", ExternalUpdatedAt);
+            writer.WriteLongValue("external_updated_at", ExternalUpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

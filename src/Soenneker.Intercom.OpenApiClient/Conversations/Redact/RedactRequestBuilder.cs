@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Redact
         {
         }
         /// <summary>
-        /// You can redact a conversation part or the source message of a conversation (as seen in the source object).{% admonition type=&quot;info&quot; name=&quot;Redacting parts and messages&quot; %}If you are redacting a conversation part, it must have a `body`. If you are redacting a source message, it must have been created by a contact. We will return a `conversation_part_not_redactable` error if these criteria are not met.{% /admonition %}
+        /// You can redact a conversation part or the source message of a conversation (as seen in the source object).{% admonition type=&quot;info&quot; name=&quot;Redacting parts and messages&quot; %}If you are redacting a conversation part, it must have a `body`. If you are redacting a source message, it must have been created by a contact. We will return a `conversation_part_not_redactable` error if these criteria are not met.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Conversation"/></returns>
         /// <param name="body">The request body</param>
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Redact
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Conversation>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Conversation.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can redact a conversation part or the source message of a conversation (as seen in the source object).{% admonition type=&quot;info&quot; name=&quot;Redacting parts and messages&quot; %}If you are redacting a conversation part, it must have a `body`. If you are redacting a source message, it must have been created by a contact. We will return a `conversation_part_not_redactable` error if these criteria are not met.{% /admonition %}
+        /// You can redact a conversation part or the source message of a conversation (as seen in the source object).{% admonition type=&quot;info&quot; name=&quot;Redacting parts and messages&quot; %}If you are redacting a conversation part, it must have a `body`. If you are redacting a source message, it must have been created by a contact. We will return a `conversation_part_not_redactable` error if these criteria are not met.{% /admonition %}If the conversation is a ticket, the access token must include the `write_tickets` scope. Without it, the request returns a `401` with the error code `token_unauthorized`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

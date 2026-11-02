@@ -75,8 +75,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BannerClientTargetingItemProperty> _explicitNullValueClientTargeting = default!;
 #endif
         /// <summary>The time the contact&apos;s view of this banner was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The id of the banner.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -168,7 +168,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "action", n => { Action = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BannerAction>(global::Soenneker.Intercom.OpenApiClient.Models.BannerAction.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "client_targeting", n => { ClientTargeting = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BannerClientTargetingItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.BannerClientTargetingItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "position", n => { Position = n.GetStringValue(); } },
                 { "show_dismiss_button", n => { ShowDismissButton = n.GetBoolValue(); } },
@@ -188,7 +188,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BannerAction>("action", Action);
             writer.WriteStringValue("body", Body);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.BannerClientTargetingItemProperty>("client_targeting", ClientTargeting);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("position", Position);
             writer.WriteBoolValue("show_dismiss_button", ShowDismissButton);

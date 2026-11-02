@@ -73,8 +73,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueCoverImageUrl = default!;
 #endif
         /// <summary>Timestamp for when the news item was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>When set to true, the news item will appear in the messenger newsfeed without showing a notification badge.</summary>
         public bool? DeliverSilently { get => _explicitNullValueDeliverSilently; set { _explicitNullValueDeliverSilently = value; AdditionalData?.Remove("deliver_silently"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliver_silently"); else _explicitNullProperties?.Remove("deliver_silently"); } }
         private bool? _explicitNullValueDeliverSilently = default!;
@@ -109,8 +109,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment> _explicitNullValueNewsfeedAssignments = default!;
 #endif
         /// <summary>Timestamp for when the news item last went live. Null if the news item has never been live.</summary>
-        public int? PublishedAt { get => _explicitNullValuePublishedAt; set { _explicitNullValuePublishedAt = value; AdditionalData?.Remove("published_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("published_at"); else _explicitNullProperties?.Remove("published_at"); } }
-        private int? _explicitNullValuePublishedAt = default!;
+        public long? PublishedAt { get => _explicitNullValuePublishedAt; set { _explicitNullValuePublishedAt = value; AdditionalData?.Remove("published_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("published_at"); else _explicitNullProperties?.Remove("published_at"); } }
+        private long? _explicitNullValuePublishedAt = default!;
         /// <summary>Ordered list of emoji reactions to the news item. When empty, reactions are disabled. An update that leaves out `reactions` also disables them but leaves this list as it was.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -141,8 +141,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType? _explicitNullValueType = default!;
         /// <summary>Timestamp for when the news item was last updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The id of the workspace which the news item belongs to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -180,18 +180,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "cover_image_url", n => { CoverImageUrl = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "deliver_silently", n => { DeliverSilently = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "labels", n => { Labels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "newsfeed_assignments", n => { NewsfeedAssignments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment.CreateFromDiscriminatorValue)?.AsList(); } },
-                { "published_at", n => { PublishedAt = n.GetIntValue(); } },
+                { "published_at", n => { PublishedAt = n.GetLongValue(); } },
                 { "reactions", n => { Reactions = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "sender_id", n => { SenderId = n.GetIntValue(); } },
                 { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "title", n => { Title = n.GetStringValue(); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "workspace_id", n => { WorkspaceId = n.GetStringValue(); } },
             };
         }
@@ -204,18 +204,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("cover_image_url", CoverImageUrl);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteBoolValue("deliver_silently", DeliverSilently);
             writer.WriteStringValue("id", Id);
             writer.WriteCollectionOfPrimitiveValues<string>("labels", Labels);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>("newsfeed_assignments", NewsfeedAssignments);
-            writer.WriteIntValue("published_at", PublishedAt);
+            writer.WriteLongValue("published_at", PublishedAt);
             writer.WriteCollectionOfPrimitiveValues<string>("reactions", Reactions);
             writer.WriteIntValue("sender_id", SenderId);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemState>("state", State);
             writer.WriteStringValue("title", Title);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.NewsItemType>("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteStringValue("workspace_id", WorkspaceId);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

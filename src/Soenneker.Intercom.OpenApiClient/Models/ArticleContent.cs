@@ -105,8 +105,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ContentId { get; private set; }
 #endif
         /// <summary>The time when the article was created (seconds).</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The ID of the teammate who created this content version.</summary>
         public int? CreatedById { get; private set; }
         /// <summary>The description of the article.</summary>
@@ -120,8 +120,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueDescription = default!;
 #endif
         /// <summary>The time, in seconds, when this locale&apos;s staged draft was last edited, or `null` when there is no staged draft. Only returned on the `Preview` API version.</summary>
-        public int? DraftUpdatedAt { get => _explicitNullValueDraftUpdatedAt; set { _explicitNullValueDraftUpdatedAt = value; AdditionalData?.Remove("draft_updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draft_updated_at"); else _explicitNullProperties?.Remove("draft_updated_at"); } }
-        private int? _explicitNullValueDraftUpdatedAt = default!;
+        public long? DraftUpdatedAt { get => _explicitNullValueDraftUpdatedAt; set { _explicitNullValueDraftUpdatedAt = value; AdditionalData?.Remove("draft_updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("draft_updated_at"); else _explicitNullProperties?.Remove("draft_updated_at"); } }
+        private long? _explicitNullValueDraftUpdatedAt = default!;
         /// <summary>Whether this locale&apos;s published content has unpublished changes staged as a draft on top of its live content. Only returned on the `Preview` API version.</summary>
         public bool? HasUnpublishedChanges { get => _explicitNullValueHasUnpublishedChanges; set { _explicitNullValueHasUnpublishedChanges = value; AdditionalData?.Remove("has_unpublished_changes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("has_unpublished_changes"); else _explicitNullProperties?.Remove("has_unpublished_changes"); } }
         private bool? _explicitNullValueHasUnpublishedChanges = default!;
@@ -139,11 +139,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueTitle = default!;
 #endif
         /// <summary>The type of object - `article_content` .</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType? _explicitNullValueType = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType _explicitNullValueType = default!;
+#endif
         /// <summary>The time when the article was last updated (seconds).</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>The ID of the teammate who last updated this content version.</summary>
         public int? UpdatedById { get; private set; }
         /// <summary>The URL of the article.</summary>
@@ -191,15 +198,15 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "body_markdown", n => { BodyMarkdown = n.GetStringValue(); } },
                 { "content_id", n => { ContentId = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "created_by_id", n => { CreatedById = n.GetIntValue(); } },
                 { "description", n => { Description = n.GetStringValue(); } },
-                { "draft_updated_at", n => { DraftUpdatedAt = n.GetIntValue(); } },
+                { "draft_updated_at", n => { DraftUpdatedAt = n.GetLongValue(); } },
                 { "has_unpublished_changes", n => { HasUnpublishedChanges = n.GetBoolValue(); } },
                 { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
                 { "title", n => { Title = n.GetStringValue(); } },
-                { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "type", n => { Type = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType>(global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType.CreateFromDiscriminatorValue); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
                 { "updated_by_id", n => { UpdatedById = n.GetIntValue(); } },
                 { "url", n => { Url = n.GetStringValue(); } },
             };
@@ -218,14 +225,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("author_id", AuthorId);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("body_markdown", BodyMarkdown);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteStringValue("description", Description);
-            writer.WriteIntValue("draft_updated_at", DraftUpdatedAt);
+            writer.WriteLongValue("draft_updated_at", DraftUpdatedAt);
             writer.WriteBoolValue("has_unpublished_changes", HasUnpublishedChanges);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentState>("state", State);
             writer.WriteStringValue("title", Title);
-            writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType>("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ArticleContentType>("type", Type);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             writer.WriteStringValue("url", Url);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);

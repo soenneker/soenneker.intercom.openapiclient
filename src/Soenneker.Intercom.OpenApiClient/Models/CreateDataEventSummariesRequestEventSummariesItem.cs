@@ -43,11 +43,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueEventName = default!;
 #endif
         /// <summary>The first time the event was sent</summary>
-        public int? First { get => _explicitNullValueFirst; set { _explicitNullValueFirst = value; AdditionalData?.Remove("first"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first"); else _explicitNullProperties?.Remove("first"); } }
-        private int? _explicitNullValueFirst = default!;
+        public long? First { get => _explicitNullValueFirst; set { _explicitNullValueFirst = value; AdditionalData?.Remove("first"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("first"); else _explicitNullProperties?.Remove("first"); } }
+        private long? _explicitNullValueFirst = default!;
         /// <summary>The last time the event was sent</summary>
-        public int? Last { get => _explicitNullValueLast; set { _explicitNullValueLast = value; AdditionalData?.Remove("last"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last"); else _explicitNullProperties?.Remove("last"); } }
-        private int? _explicitNullValueLast = default!;
+        public long? Last { get => _explicitNullValueLast; set { _explicitNullValueLast = value; AdditionalData?.Remove("last"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last"); else _explicitNullProperties?.Remove("last"); } }
+        private long? _explicitNullValueLast = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateDataEventSummariesRequestEventSummariesItem"/> and sets the default values.
         /// </summary>
@@ -75,8 +75,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "count", n => { Count = n.GetIntValue(); } },
                 { "event_name", n => { EventName = n.GetStringValue(); } },
-                { "first", n => { First = n.GetIntValue(); } },
-                { "last", n => { Last = n.GetIntValue(); } },
+                { "first", n => { First = n.GetLongValue(); } },
+                { "last", n => { Last = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -88,8 +88,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("count", Count);
             writer.WriteStringValue("event_name", EventName);
-            writer.WriteIntValue("first", First);
-            writer.WriteIntValue("last", Last);
+            writer.WriteLongValue("first", First);
+            writer.WriteLongValue("last", Last);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

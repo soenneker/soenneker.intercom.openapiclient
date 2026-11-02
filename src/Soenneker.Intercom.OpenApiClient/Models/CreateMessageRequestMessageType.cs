@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`.</summary>
+    /// <summary>The kind of message being created. Values: `in_app`, `email`, `sms` or `whatsapp`. `inapp` is also accepted for in-app messages, and responses always show in-app messages as `inapp`.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum CreateMessageRequestMessageType
     {

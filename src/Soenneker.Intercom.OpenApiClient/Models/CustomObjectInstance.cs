@@ -39,8 +39,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The time the attribute was created as a UTC Unix timestamp</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The custom attributes you have set on the custom object instance.Each value is returned with the type of the attribute it is set on: a string, integer, number or boolean, or `null` when the attribute is unset. A list attribute returns the label of the selected option. A reference attribute returns an object holding the referenced records, under `contacts` for a contact reference, `conversations` for a conversation reference, or `instances` for a reference to another custom object type.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -52,8 +52,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceCustomAttributesProperty _explicitNullValueCustomAttributes = default!;
 #endif
         /// <summary>The time when the Custom Object instance was created in the external system it originated from.</summary>
-        public int? ExternalCreatedAt { get => _explicitNullValueExternalCreatedAt; set { _explicitNullValueExternalCreatedAt = value; AdditionalData?.Remove("external_created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_created_at"); else _explicitNullProperties?.Remove("external_created_at"); } }
-        private int? _explicitNullValueExternalCreatedAt = default!;
+        public long? ExternalCreatedAt { get => _explicitNullValueExternalCreatedAt; set { _explicitNullValueExternalCreatedAt = value; AdditionalData?.Remove("external_created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_created_at"); else _explicitNullProperties?.Remove("external_created_at"); } }
+        private long? _explicitNullValueExternalCreatedAt = default!;
         /// <summary>The id you have defined for the custom object instance.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -65,8 +65,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueExternalId = default!;
 #endif
         /// <summary>The time when the Custom Object instance was last updated in the external system it originated from.</summary>
-        public int? ExternalUpdatedAt { get => _explicitNullValueExternalUpdatedAt; set { _explicitNullValueExternalUpdatedAt = value; AdditionalData?.Remove("external_updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_updated_at"); else _explicitNullProperties?.Remove("external_updated_at"); } }
-        private int? _explicitNullValueExternalUpdatedAt = default!;
+        public long? ExternalUpdatedAt { get => _explicitNullValueExternalUpdatedAt; set { _explicitNullValueExternalUpdatedAt = value; AdditionalData?.Remove("external_updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("external_updated_at"); else _explicitNullProperties?.Remove("external_updated_at"); } }
+        private long? _explicitNullValueExternalUpdatedAt = default!;
         /// <summary>The Intercom defined id representing the custom object instance.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -88,8 +88,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The time the attribute was last updated as a UTC Unix timestamp</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstance"/> and sets the default values.
         /// </summary>
@@ -117,14 +117,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "custom_attributes", n => { CustomAttributes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceCustomAttributesProperty>(global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceCustomAttributesProperty.CreateFromDiscriminatorValue); } },
-                { "external_created_at", n => { ExternalCreatedAt = n.GetIntValue(); } },
+                { "external_created_at", n => { ExternalCreatedAt = n.GetLongValue(); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
-                { "external_updated_at", n => { ExternalUpdatedAt = n.GetIntValue(); } },
+                { "external_updated_at", n => { ExternalUpdatedAt = n.GetLongValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -134,14 +134,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CustomObjectInstanceCustomAttributesProperty>("custom_attributes", CustomAttributes);
-            writer.WriteIntValue("external_created_at", ExternalCreatedAt);
+            writer.WriteLongValue("external_created_at", ExternalCreatedAt);
             writer.WriteStringValue("external_id", ExternalId);
-            writer.WriteIntValue("external_updated_at", ExternalUpdatedAt);
+            writer.WriteLongValue("external_updated_at", ExternalUpdatedAt);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

@@ -65,8 +65,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueBrandId = default!;
 #endif
         /// <summary>The time the conversation was created as a UTC Unix timestamp. If not provided, the current time will be used. This field is only recommneded for migrating past conversations from another source into Intercom.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>The from property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -115,7 +115,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachment_urls", n => { AttachmentUrls = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "brand_id", n => { BrandId = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "from", n => { From = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom>(global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom.CreateFromDiscriminatorValue); } },
                 { "subject", n => { Subject = n.GetStringValue(); } },
             };
@@ -130,7 +130,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfPrimitiveValues<string>("attachment_urls", AttachmentUrls);
             writer.WriteStringValue("body", Body);
             writer.WriteStringValue("brand_id", BrandId);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateConversationRequestFrom>("from", From);
             writer.WriteStringValue("subject", Subject);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);

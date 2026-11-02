@@ -118,8 +118,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueBody = default!;
 #endif
         /// <summary>The time the conversation part was created.</summary>
-        public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
-        private int? _explicitNullValueCreatedAt = default!;
+        public long? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
+        private long? _explicitNullValueCreatedAt = default!;
         /// <summary>Contains metadata if the message was sent as an email</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -171,8 +171,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata _explicitNullValueMetadata = default!;
 #endif
         /// <summary>The time the user was notified with the conversation part.</summary>
-        public int? NotifiedAt { get => _explicitNullValueNotifiedAt; set { _explicitNullValueNotifiedAt = value; AdditionalData?.Remove("notified_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notified_at"); else _explicitNullProperties?.Remove("notified_at"); } }
-        private int? _explicitNullValueNotifiedAt = default!;
+        public long? NotifiedAt { get => _explicitNullValueNotifiedAt; set { _explicitNullValueNotifiedAt = value; AdditionalData?.Remove("notified_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("notified_at"); else _explicitNullProperties?.Remove("notified_at"); } }
+        private long? _explicitNullValueNotifiedAt = default!;
         /// <summary>The type of conversation part. On the Preview version a part type the API does not recognise is returned as `unknown`; on earlier versions those parts are returned as `comment`. Every value other than `unknown` is also accepted by the `include_part_types` and `exclude_part_types` query parameters when retrieving a conversation.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -223,8 +223,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         private string _explicitNullValueType = default!;
 #endif
         /// <summary>The last time the conversation part was updated.</summary>
-        public int? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
-        private int? _explicitNullValueUpdatedAt = default!;
+        public long? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private long? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ConversationPart"/> and sets the default values.
         /// </summary>
@@ -256,13 +256,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },
-                { "created_at", n => { CreatedAt = n.GetIntValue(); } },
+                { "created_at", n => { CreatedAt = n.GetLongValue(); } },
                 { "email_message_metadata", n => { EmailMessageMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailMessageMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.EmailMessageMetadata.CreateFromDiscriminatorValue); } },
                 { "event_details", n => { EventDetails = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EventDetails>(global::Soenneker.Intercom.OpenApiClient.Models.EventDetails.CreateFromDiscriminatorValue); } },
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "metadata", n => { Metadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata.CreateFromDiscriminatorValue); } },
-                { "notified_at", n => { NotifiedAt = n.GetIntValue(); } },
+                { "notified_at", n => { NotifiedAt = n.GetLongValue(); } },
                 { "part_type", n => { PartType = n.GetStringValue(); } },
                 { "redacted", n => { Redacted = n.GetBoolValue(); } },
                 { "state", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueState = default; _explicitNullProperties?.Remove("state"); AdditionalData["state"] = unknown; } else { State = parsed; AdditionalData.Remove("state"); } } },
@@ -270,7 +270,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "team_assignee_id", n => { TeamAssigneeId = n.GetIntValue(); } },
                 { "translations", n => { Translations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslations>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslations.CreateFromDiscriminatorValue); } },
                 { "type", n => { Type = n.GetStringValue(); } },
-                { "updated_at", n => { UpdatedAt = n.GetIntValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -286,13 +286,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>("attachments", Attachments);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartAuthor>("author", Author);
             writer.WriteStringValue("body", Body);
-            writer.WriteIntValue("created_at", CreatedAt);
+            writer.WriteLongValue("created_at", CreatedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailMessageMetadata>("email_message_metadata", EmailMessageMetadata);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EventDetails>("event_details", EventDetails);
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("id", Id);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartMetadata>("metadata", Metadata);
-            writer.WriteIntValue("notified_at", NotifiedAt);
+            writer.WriteLongValue("notified_at", NotifiedAt);
             writer.WriteStringValue("part_type", PartType);
             writer.WriteBoolValue("redacted", Redacted);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartState>("state", State);
@@ -300,7 +300,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteIntValue("team_assignee_id", TeamAssigneeId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationPartTranslations>("translations", Translations);
             writer.WriteStringValue("type", Type);
-            writer.WriteIntValue("updated_at", UpdatedAt);
+            writer.WriteLongValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
