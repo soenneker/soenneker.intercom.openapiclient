@@ -33,6 +33,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
             if (parseNode.GetChildNode("language_override") is null) { _explicitNullValueLanguageOverride = default!; _explicitNullProperties?.Remove("language_override"); }
             else if (parseNode.GetChildNode("language_override") is { } nullNodeLanguageOverride && nullNodeLanguageOverride.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LanguageOverride = null;
+            if (parseNode.GetChildNode("last_seen_at") is null) { _explicitNullValueLastSeenAt = default!; _explicitNullProperties?.Remove("last_seen_at"); }
+            else if (parseNode.GetChildNode("last_seen_at") is { } nullNodeLastSeenAt && nullNodeLastSeenAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) LastSeenAt = null;
             if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
             else if (parseNode.GetChildNode("name") is { } nullNodeName && nullNodeName.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Name = null;
             if (parseNode.GetChildNode("owner_id") is null) { _explicitNullValueOwnerId = default!; _explicitNullProperties?.Remove("owner_id"); }
@@ -41,10 +43,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("phone") is { } nullNodePhone && nullNodePhone.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Phone = null;
             if (parseNode.GetChildNode("role") is null) { _explicitNullValueRole = default!; _explicitNullProperties?.Remove("role"); }
             else if (parseNode.GetChildNode("role") is { } nullNodeRole && nullNodeRole.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Role = null;
+            if (parseNode.GetChildNode("signed_up_at") is null) { _explicitNullValueSignedUpAt = default!; _explicitNullProperties?.Remove("signed_up_at"); }
+            else if (parseNode.GetChildNode("signed_up_at") is { } nullNodeSignedUpAt && nullNodeSignedUpAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SignedUpAt = null;
+            if (parseNode.GetChildNode("sms_consent") is null) { _explicitNullValueSmsConsent = default!; _explicitNullProperties?.Remove("sms_consent"); }
+            else if (parseNode.GetChildNode("sms_consent") is { } nullNodeSmsConsent && nullNodeSmsConsent.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) SmsConsent = null;
             if (parseNode.GetChildNode("tags") is null) { _explicitNullValueTags = default!; _explicitNullProperties?.Remove("tags"); }
             else if (parseNode.GetChildNode("tags") is { } nullNodeTags && nullNodeTags.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Tags = null;
             if (parseNode.GetChildNode("unsubscribed_from_emails") is null) { _explicitNullValueUnsubscribedFromEmails = default!; _explicitNullProperties?.Remove("unsubscribed_from_emails"); }
             else if (parseNode.GetChildNode("unsubscribed_from_emails") is { } nullNodeUnsubscribedFromEmails && nullNodeUnsubscribedFromEmails.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UnsubscribedFromEmails = null;
+            if (parseNode.GetChildNode("unsubscribed_from_sms") is null) { _explicitNullValueUnsubscribedFromSms = default!; _explicitNullProperties?.Remove("unsubscribed_from_sms"); }
+            else if (parseNode.GetChildNode("unsubscribed_from_sms") is { } nullNodeUnsubscribedFromSms && nullNodeUnsubscribedFromSms.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UnsubscribedFromSms = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -122,6 +130,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string LanguageOverride { get => _explicitNullValueLanguageOverride; set { _explicitNullValueLanguageOverride = value; AdditionalData?.Remove("language_override"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("language_override"); else _explicitNullProperties?.Remove("language_override"); } }
         private string _explicitNullValueLanguageOverride = default!;
 #endif
+        /// <summary>(Unix timestamp in seconds) The time when the contact was last seen.</summary>
+        public long? LastSeenAt { get => _explicitNullValueLastSeenAt; set { _explicitNullValueLastSeenAt = value; AdditionalData?.Remove("last_seen_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("last_seen_at"); else _explicitNullProperties?.Remove("last_seen_at"); } }
+        private long? _explicitNullValueLastSeenAt = default!;
         /// <summary>The contact&apos;s name.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -162,6 +173,12 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Role { get => _explicitNullValueRole; set { _explicitNullValueRole = value; AdditionalData?.Remove("role"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("role"); else _explicitNullProperties?.Remove("role"); } }
         private string _explicitNullValueRole = default!;
 #endif
+        /// <summary>(Unix timestamp in seconds) The time specified for when a contact signed up.</summary>
+        public long? SignedUpAt { get => _explicitNullValueSignedUpAt; set { _explicitNullValueSignedUpAt = value; AdditionalData?.Remove("signed_up_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("signed_up_at"); else _explicitNullProperties?.Remove("signed_up_at"); } }
+        private long? _explicitNullValueSignedUpAt = default!;
+        /// <summary>Whether the contact has consented to receive SMS messages.</summary>
+        public bool? SmsConsent { get => _explicitNullValueSmsConsent; set { _explicitNullValueSmsConsent = value; AdditionalData?.Remove("sms_consent"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("sms_consent"); else _explicitNullProperties?.Remove("sms_consent"); } }
+        private bool? _explicitNullValueSmsConsent = default!;
         /// <summary>Tags to add to or remove from the contact. Each tag is identified by its `id`, which must be a positive integer for a tag that already exists in your workspace. Tag application is best-effort: unknown tag IDs are skipped while the rest of the contact update still applies. Per-tag results are not yet returned in the job status.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -175,6 +192,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Whether the contact is unsubscribed from emails.</summary>
         public bool? UnsubscribedFromEmails { get => _explicitNullValueUnsubscribedFromEmails; set { _explicitNullValueUnsubscribedFromEmails = value; AdditionalData?.Remove("unsubscribed_from_emails"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unsubscribed_from_emails"); else _explicitNullProperties?.Remove("unsubscribed_from_emails"); } }
         private bool? _explicitNullValueUnsubscribedFromEmails = default!;
+        /// <summary>Whether the contact is unsubscribed from SMS messages.</summary>
+        public bool? UnsubscribedFromSms { get => _explicitNullValueUnsubscribedFromSms; set { _explicitNullValueUnsubscribedFromSms = value; AdditionalData?.Remove("unsubscribed_from_sms"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("unsubscribed_from_sms"); else _explicitNullProperties?.Remove("unsubscribed_from_sms"); } }
+        private bool? _explicitNullValueUnsubscribedFromSms = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItem"/> and sets the default values.
         /// </summary>
@@ -208,12 +228,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
                 { "external_id", n => { ExternalId = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "language_override", n => { LanguageOverride = n.GetStringValue(); } },
+                { "last_seen_at", n => { LastSeenAt = n.GetLongValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "owner_id", n => { OwnerId = n.GetStringValue(); } },
                 { "phone", n => { Phone = n.GetStringValue(); } },
                 { "role", n => { Role = n.GetStringValue(); } },
+                { "signed_up_at", n => { SignedUpAt = n.GetLongValue(); } },
+                { "sms_consent", n => { SmsConsent = n.GetBoolValue(); } },
                 { "tags", n => { Tags = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags>(global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags.CreateFromDiscriminatorValue); } },
                 { "unsubscribed_from_emails", n => { UnsubscribedFromEmails = n.GetBoolValue(); } },
+                { "unsubscribed_from_sms", n => { UnsubscribedFromSms = n.GetBoolValue(); } },
             };
         }
         /// <summary>
@@ -231,12 +255,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             writer.WriteStringValue("external_id", ExternalId);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("language_override", LanguageOverride);
+            writer.WriteLongValue("last_seen_at", LastSeenAt);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("owner_id", OwnerId);
             writer.WriteStringValue("phone", Phone);
             writer.WriteStringValue("role", Role);
+            writer.WriteLongValue("signed_up_at", SignedUpAt);
+            writer.WriteBoolValue("sms_consent", SmsConsent);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemTags>("tags", Tags);
             writer.WriteBoolValue("unsubscribed_from_emails", UnsubscribedFromEmails);
+            writer.WriteBoolValue("unsubscribed_from_sms", UnsubscribedFromSms);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

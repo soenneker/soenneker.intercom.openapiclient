@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Name { get => _explicitNullValueName; set { _explicitNullValueName = value; AdditionalData?.Remove("name"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("name"); else _explicitNullProperties?.Remove("name"); } }
         private string _explicitNullValueName = default!;
 #endif
-        /// <summary>A namespaced identifier that uniquely identifies the attribute across all types. Format is &quot;prefix.name&quot; (e.g., &quot;people.Brand&quot;, &quot;conversation.Brand&quot;). Required when calling the enqueue endpoint.</summary>
+        /// <summary>A namespaced identifier that uniquely identifies the attribute across all types. Format is &quot;prefix.name&quot; (e.g., &quot;people.Brand&quot;, &quot;conversation.Brand&quot;). A ticket field also includes its ticket type (e.g., &quot;ticket.Bug.Priority&quot;). Required when calling the enqueue endpoint.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? QualifiedId { get => _explicitNullValueQualifiedId; set { _explicitNullValueQualifiedId = value; AdditionalData?.Remove("qualified_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("qualified_id"); else _explicitNullProperties?.Remove("qualified_id"); } }

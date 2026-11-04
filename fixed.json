@@ -22226,6 +22226,10 @@
                         "avatar": "https://www.example.com/avatar_image.jpg",
                         "owner_id": "321",
                         "unsubscribed_from_emails": false,
+                        "signed_up_at": 1571672154,
+                        "last_seen_at": 1571672154,
+                        "sms_consent": true,
+                        "unsubscribed_from_sms": false,
                         "language_override": "fr",
                         "custom_attributes": {
                           "plan": "pro"
@@ -36538,6 +36542,229 @@
                         {
                           "code": "execution_result_not_found",
                           "message": "Execution result not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data_connectors/{id}/health": {
+      "get": {
+        "tags": [
+          "Data Connectors"
+        ],
+        "summary": "Retrieve health metrics for a data connector",
+        "description": "Retrieve aggregated execution health for a data connector: success rate, latency and payload size percentiles, a breakdown of HTTP statuses and failure reasons, and a time series over the requested range.\n\nMetrics from the last 7 days are returned by default. Use \u0060start_ts\u0060 and \u0060end_ts\u0060 to set the range, which may span at most 14 days. How far back data is available depends on your workspace\u0027s data connector log retention.\n\nAn execution counts as successful when it completed and the external service returned a 2xx status. An execution that recorded no HTTP status counts as a failure.\n\nResponses are cached for up to a minute, so consecutive calls may return identical data.\n",
+        "operationId": "GetDataConnectorHealth",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier for the data connector.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345"
+            }
+          },
+          {
+            "name": "start_ts",
+            "in": "query",
+            "description": "Unix timestamp for the start of the time range. Defaults to 7 days before \u0060end_ts\u0060.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "end_ts",
+            "in": "query",
+            "description": "Unix timestamp for the end of the time range. Defaults to the current time rounded down to the minute, so the \u0060end_ts\u0060 in the response may be up to a minute earlier than the moment you called.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "bucket_size_minutes",
+            "in": "query",
+            "description": "Width of each interval in \u0060time_series\u0060, in minutes. Defaults to the narrowest whole number of minutes that divides the requested range into 300 intervals or fewer. The time range divided by this width may not exceed 2000 intervals, so a narrow width needs a shorter range.",
+            "schema": {
+              "maximum": 1440,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DataConnectorHealth"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "data_connector_health",
+                      "start_ts": 1755000000,
+                      "end_ts": 1755604800,
+                      "bucket_size_minutes": 34,
+                      "summary": {
+                        "total_executions": 1420,
+                        "success_rate": 0.9754,
+                        "overall_status": "healthy",
+                        "external_latency_ms": {
+                          "p50": 120,
+                          "p90": 340,
+                          "p99": 890
+                        },
+                        "internal_latency_ms": {
+                          "p50": 18,
+                          "p90": 42,
+                          "p99": 96
+                        },
+                        "response_payload_size_bytes": {
+                          "p50": 2048,
+                          "p90": 8192,
+                          "p99": 20480
+                        },
+                        "http_status_distribution": [
+                          {
+                            "http_status": 200,
+                            "count": 1385
+                          },
+                          {
+                            "http_status": 500,
+                            "count": 35
+                          }
+                        ],
+                        "failure_types_distribution": [
+                          {
+                            "error_type": "faraday_error",
+                            "count": 22
+                          },
+                          {
+                            "error_type": "response_mapping_error",
+                            "count": 13
+                          }
+                        ]
+                      },
+                      "time_series": [
+                        {
+                          "bucket_start": 1754999760,
+                          "execution_count": 12,
+                          "external_latency_avg_ms": 133,
+                          "external_latency_max_ms": 402,
+                          "internal_latency_avg_ms": 21,
+                          "internal_latency_max_ms": 58
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Inverted time range": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "end_ts must not be before start_ts"
+                        }
+                      ]
+                    }
+                  },
+                  "Time range too long": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "the requested window may not exceed 336 hours"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid bucket size": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "bucket_size_minutes must be between 1 and 1440"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data connector not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Data connector not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "data_connector_not_found",
+                          "message": "Data connector not found"
                         }
                       ]
                     }
@@ -63703,6 +63930,170 @@
         },
         "description": "A paginated list of data connector execution results."
       },
+      "DataConnectorHealth": {
+        "title": "Data Connector Health",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/DataConnectorHealthType"
+          },
+          "start_ts": {
+            "type": "integer",
+            "description": "Unix timestamp marking the start of the time range this report covers.",
+            "example": 1755000000
+          },
+          "end_ts": {
+            "type": "integer",
+            "description": "Unix timestamp marking the end of the time range this report covers.",
+            "example": 1755604800
+          },
+          "bucket_size_minutes": {
+            "type": "integer",
+            "description": "The width, in minutes, of each interval in \u0060time_series\u0060.",
+            "example": 34
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DataConnectorHealthSummary"
+          },
+          "time_series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorHealthTimeSeriesPoint"
+            },
+            "description": "Intervals covering the requested time range, ordered oldest first. Interval boundaries are aligned to multiples of \u0060bucket_size_minutes\u0060 from the Unix epoch rather than to \u0060start_ts\u0060, so the first interval may begin before \u0060start_ts\u0060. An interval with no executions is omitted rather than returned with zero counts."
+          }
+        },
+        "description": "Aggregated execution health for a data connector over a time range.",
+        "x-tags": [
+          "Data Connectors"
+        ]
+      },
+      "DataConnectorHealthSummary": {
+        "title": "Data Connector Health Summary",
+        "type": "object",
+        "properties": {
+          "total_executions": {
+            "type": "integer",
+            "description": "The total number of executions in the requested time range.",
+            "example": 1420
+          },
+          "success_rate": {
+            "type": "number",
+            "description": "The proportion of executions that completed and returned a 2xx status, as a decimal between 0.0 and 1.0.",
+            "example": 0.9754
+          },
+          "overall_status": {
+            "$ref": "#/components/schemas/DataConnectorHealthSummaryOverallStatus"
+          },
+          "external_latency_ms": {
+            "$ref": "#/components/schemas/DataConnectorHealthSummaryExternalLatencyMs"
+          },
+          "internal_latency_ms": {
+            "$ref": "#/components/schemas/DataConnectorHealthSummaryInternalLatencyMs"
+          },
+          "response_payload_size_bytes": {
+            "$ref": "#/components/schemas/DataConnectorHealthSummaryResponsePayloadSizeBytes"
+          },
+          "http_status_distribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorHealthStatusCount"
+            },
+            "description": "A breakdown of executions by the HTTP status code returned, ordered by status code ascending. An execution that recorded no HTTP status is absent, so these counts may add up to less than \u0060total_executions\u0060."
+          },
+          "failure_types_distribution": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataConnectorHealthFailureCount"
+            },
+            "description": "A breakdown of failed executions by failure reason, ordered by count descending."
+          }
+        },
+        "description": "Aggregate health metrics for the requested time range.",
+        "x-tags": [
+          "Data Connectors"
+        ]
+      },
+      "DataConnectorHealthStatusCount": {
+        "title": "Data Connector Health Status Count",
+        "type": "object",
+        "properties": {
+          "http_status": {
+            "type": "integer",
+            "description": "The HTTP status code returned by the external service.",
+            "example": 200
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of executions that received this status code.",
+            "example": 1385
+          }
+        },
+        "description": "The number of executions that received a given HTTP status code.",
+        "x-tags": [
+          "Data Connectors"
+        ]
+      },
+      "DataConnectorHealthFailureCount": {
+        "title": "Data Connector Health Failure Count",
+        "type": "object",
+        "properties": {
+          "error_type": {
+            "type": "string",
+            "description": "A machine-readable failure reason. Values match the \u0060error_type\u0060 field on the execution results endpoint, plus \u0060unknown\u0060 for a failed execution that recorded no reason.",
+            "example": "faraday_error"
+          },
+          "count": {
+            "type": "integer",
+            "description": "The number of executions that failed for this reason.",
+            "example": 22
+          }
+        },
+        "description": "The number of executions that failed for a given reason.",
+        "x-tags": [
+          "Data Connectors"
+        ]
+      },
+      "DataConnectorHealthTimeSeriesPoint": {
+        "title": "Data Connector Health Time Series Point",
+        "type": "object",
+        "properties": {
+          "bucket_start": {
+            "type": "integer",
+            "description": "Unix timestamp marking the start of this interval.",
+            "example": 1754999760
+          },
+          "execution_count": {
+            "type": "integer",
+            "description": "The number of executions in this interval.",
+            "example": 12
+          },
+          "external_latency_avg_ms": {
+            "type": "integer",
+            "description": "The average time, in milliseconds, spent waiting on the external service across executions in this interval. Reported as 0 when no execution in this interval carried the measurement.",
+            "example": 133
+          },
+          "external_latency_max_ms": {
+            "type": "integer",
+            "description": "The highest time, in milliseconds, spent waiting on the external service in this interval. Reported as 0 when no execution in this interval carried the measurement.",
+            "example": 402
+          },
+          "internal_latency_avg_ms": {
+            "type": "integer",
+            "description": "The average time, in milliseconds, Intercom spent processing executions in this interval. Reported as 0 when no execution in this interval carried the measurement.",
+            "example": 21
+          },
+          "internal_latency_max_ms": {
+            "type": "integer",
+            "description": "The highest time, in milliseconds, Intercom spent processing an execution in this interval. Reported as 0 when no execution in this interval carried the measurement.",
+            "example": 58
+          }
+        },
+        "description": "Execution metrics for one interval of the requested time range.",
+        "x-tags": [
+          "Data Connectors"
+        ]
+      },
       "DataConnectorList": {
         "title": "Data Connector List",
         "type": "object",
@@ -70478,6 +70869,78 @@
           }
         }
       },
+      "DataConnectorHealthSummaryExternalLatencyMs": {
+        "type": "object",
+        "properties": {
+          "p50": {
+            "type": "integer",
+            "description": "The 50th percentile (median) value.",
+            "nullable": true,
+            "example": 120
+          },
+          "p90": {
+            "type": "integer",
+            "description": "The 90th percentile value.",
+            "nullable": true,
+            "example": 340
+          },
+          "p99": {
+            "type": "integer",
+            "description": "The 99th percentile value.",
+            "nullable": true,
+            "example": 890
+          }
+        },
+        "description": "Latency percentiles, in milliseconds, for time spent waiting on the external service this connector calls."
+      },
+      "DataConnectorHealthSummaryInternalLatencyMs": {
+        "type": "object",
+        "properties": {
+          "p50": {
+            "type": "integer",
+            "description": "The 50th percentile (median) value.",
+            "nullable": true,
+            "example": 120
+          },
+          "p90": {
+            "type": "integer",
+            "description": "The 90th percentile value.",
+            "nullable": true,
+            "example": 340
+          },
+          "p99": {
+            "type": "integer",
+            "description": "The 99th percentile value.",
+            "nullable": true,
+            "example": 890
+          }
+        },
+        "description": "Latency percentiles, in milliseconds, for time Intercom spent processing each execution, excluding time spent waiting on the external service."
+      },
+      "DataConnectorHealthSummaryResponsePayloadSizeBytes": {
+        "type": "object",
+        "properties": {
+          "p50": {
+            "type": "integer",
+            "description": "The 50th percentile (median) value.",
+            "nullable": true,
+            "example": 120
+          },
+          "p90": {
+            "type": "integer",
+            "description": "The 90th percentile value.",
+            "nullable": true,
+            "example": 340
+          },
+          "p99": {
+            "type": "integer",
+            "description": "The 99th percentile value.",
+            "nullable": true,
+            "example": 890
+          }
+        },
+        "description": "Response payload size percentiles, in bytes, for the external service\u0027s responses."
+      },
       "EcommerceCatalogProductCollectionsItem": {
         "oneOf": [
           {
@@ -71629,6 +72092,32 @@
             "type": "string",
             "description": "The updated contact\u0027s role (optional).",
             "example": "user"
+          },
+          "signed_up_at": {
+            "type": "integer",
+            "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
+            "format": "int64",
+            "nullable": true,
+            "example": 1571672154,
+            "x-client-original-format": "date-time"
+          },
+          "last_seen_at": {
+            "type": "integer",
+            "description": "(Unix timestamp in seconds) The time when the contact was last seen.",
+            "format": "int64",
+            "nullable": true,
+            "example": 1571672154,
+            "x-client-original-format": "date-time"
+          },
+          "sms_consent": {
+            "type": "boolean",
+            "description": "Whether the contact has consented to receive SMS messages.",
+            "example": false
+          },
+          "unsubscribed_from_sms": {
+            "type": "boolean",
+            "description": "Whether the contact is unsubscribed from SMS messages.",
+            "example": false
           },
           "external_id": {
             "type": "string",
@@ -79231,7 +79720,7 @@
           },
           "qualified_id": {
             "type": "string",
-            "description": "A namespaced identifier that uniquely identifies the attribute across all types. Format is \u0022prefix.name\u0022 (e.g., \u0022people.Brand\u0022, \u0022conversation.Brand\u0022). Required when calling the enqueue endpoint.",
+            "description": "A namespaced identifier that uniquely identifies the attribute across all types. Format is \u0022prefix.name\u0022 (e.g., \u0022people.Brand\u0022, \u0022conversation.Brand\u0022). A ticket field also includes its ticket type (e.g., \u0022ticket.Bug.Priority\u0022). Required when calling the enqueue endpoint.",
             "example": "standard.conversation_id"
           },
           "name": {
@@ -84211,6 +84700,53 @@
             {
               "value": "synthetic_test",
               "name": "SyntheticTest"
+            }
+          ]
+        }
+      },
+      "DataConnectorHealthType": {
+        "enum": [
+          "data_connector_health"
+        ],
+        "type": "string",
+        "description": "The type of object - \u0060data_connector_health\u0060.",
+        "example": "data_connector_health",
+        "x-ms-enum": {
+          "name": "DataConnectorHealthType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "data_connector_health",
+              "name": "DataConnectorHealth"
+            }
+          ]
+        }
+      },
+      "DataConnectorHealthSummaryOverallStatus": {
+        "enum": [
+          "healthy",
+          "degraded",
+          "unhealthy"
+        ],
+        "type": "string",
+        "description": "A high-level health signal for the requested time range. This is an advisory heuristic that Intercom may retune, not a stable classification - build on \u0060success_rate\u0060 and the latency percentiles if you need consistent behaviour across changes. Null when the range contains no executions.",
+        "nullable": true,
+        "example": "healthy",
+        "x-ms-enum": {
+          "name": "DataConnectorHealthSummaryOverallStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "healthy",
+              "name": "Healthy"
+            },
+            {
+              "value": "degraded",
+              "name": "Degraded"
+            },
+            {
+              "value": "unhealthy",
+              "name": "Unhealthy"
             }
           ]
         }
@@ -92240,6 +92776,34 @@
           "example": []
         }
       }
+    },
+    "DataConnectorHealthPercentiles": {
+      "title": "Data Connector Health Percentiles",
+      "type": "object",
+      "properties": {
+        "p50": {
+          "type": "integer",
+          "description": "The 50th percentile (median) value.",
+          "nullable": true,
+          "example": 120
+        },
+        "p90": {
+          "type": "integer",
+          "description": "The 90th percentile value.",
+          "nullable": true,
+          "example": 340
+        },
+        "p99": {
+          "type": "integer",
+          "description": "The 99th percentile value.",
+          "nullable": true,
+          "example": 890
+        }
+      },
+      "description": "Percentile values computed over successful executions. Each is null when no successful execution in the range carried the measurement.",
+      "x-tags": [
+        "Data Connectors"
+      ]
     },
     "DataExportCsv": {
       "title": "Data Export CSV",

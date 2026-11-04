@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results;
+using Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Health;
 using Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Versions;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
@@ -23,6 +24,11 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item
         public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder Execution_results
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_results.Execution_resultsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The health property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Health.HealthRequestBuilder Health
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Health.HealthRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The versions property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Versions.VersionsRequestBuilder Versions
