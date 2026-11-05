@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Custom attributes to update on the contact.
+    /// Custom attributes to update on the contact. For a relationship attribute, send the IDs of the custom object records to link the contact to.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class BulkUpdateContactsRequestContactsItemCustomAttributesProperty : IAdditionalDataHolder, IParsable

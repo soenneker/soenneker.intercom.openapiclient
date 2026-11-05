@@ -13101,7 +13101,7 @@
                       "request_id": null,
                       "errors": [
                         {
-                          "code": 422,
+                          "code": "422",
                           "message": "invalid company data structure"
                         }
                       ]
@@ -37428,13 +37428,13 @@
         }
       }
     },
-    "/ecommerce/connectors/{id}/catalog": {
+    "/ecommerce/connectors/{importSourceId}/catalog": {
       "post": {
         "tags": [
           "Ecommerce Connectors"
         ],
         "summary": "Upload a product catalog",
-        "description": "Upload a product catalog to an ecommerce connector. The catalog must be a JSON\narray of product objects. There are two upload modes:\n\n**Single-file upload** \u2014 POST a single catalog file (up to 99 MB per request).\nOmit \u0060finalize\u0060 and \u0060import_job_id\u0060. Returns \u0060202 Accepted\u0060 when sync has started.\n\n**Multipart upload** \u2014 For catalogs that must be split across multiple requests:\n\n1. POST the first part with \u0060finalize=false\u0060 (no \u0060import_job_id\u0060). The response\n   returns an \u0060import_job_id\u0060 and \u0060next_part_number\u0060.\n2. POST each subsequent part with \u0060finalize=false\u0060, the \u0060import_job_id\u0060 from step 1,\n   and the \u0060part_number\u0060 from the previous response. Each part must be \u2264 99 MB.\n3. POST with \u0060finalize=true\u0060 and the \u0060import_job_id\u0060 to complete the upload and\n   start the sync. No catalog file is required in the finalization request.\n\nPart uploads are idempotent \u2014 retrying the same \u0060part_number\u0060 does not create\na duplicate. If a response is lost, retry with the same \u0060part_number\u0060.\n\n## Product object structure\n\nThe catalog file must be a JSON array where each element is a product object.\nOnly \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 are required \u2014 all other fields are optional.\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| \u0060id\u0060 | string | \u2713 | Your unique product identifier. Used to match products on re-upload so only changed products are re-indexed. Also the delete key \u2014 any product ID absent from a new upload is removed from Fin\u0027s knowledge. Must be stable across uploads. |\n| \u0060title\u0060 | string | \u2713 | Product name. Used by Fin when searching for and recommending products. |\n| \u0060url\u0060 | string | \u2713 | Canonical product page URL shown in Fin\u0027s product recommendations. Must be a valid \u0060https://\u0060 URL. |\n| \u0060description\u0060 | string | | Product description that Fin reads to understand what the product is. HTML formatting is supported and safely sanitized (\u0060description_html\u0060 takes precedence if both are provided). This is the primary field Fin uses to match products to shopper questions \u2014 a richer description leads to better recommendations. |\n| \u0060featured_image_url\u0060 | string | | Primary product image shown in Fin\u0027s recommendation cards. Falls back to the first entry of \u0060image_urls\u0060 if not provided. If no valid image can be resolved for a variant, that variant\u0027s card is not shown to the shopper. |\n| \u0060image_urls\u0060 | string[] | | Additional product images. Used as a fallback when \u0060featured_image_url\u0060 is absent or when a variant has no specific image. |\n| \u0060price_min\u0060 | number | | Lowest price across all variants. If omitted, derived automatically from variant prices. Fin uses this to filter products when a shopper mentions a budget (e.g. \u0022under $100\u0022). Displayed as a range alongside \u0060price_max\u0060, or as a single value if both are equal. |\n| \u0060price_max\u0060 | number | | Highest price across all variants. If omitted, derived from variant prices. Used alongside \u0060price_min\u0060 for budget filtering and price display. |\n| \u0060currency\u0060 | string | | ISO 4217 currency code (e.g. \u0060\u0022USD\u0022\u0060, \u0060\u0022EUR\u0022\u0060, \u0060\u0022GBP\u0022\u0060). Defaults to USD if omitted. Used to format prices with the correct symbol in Fin\u0027s responses and product cards. |\n| \u0060in_stock\u0060 | boolean | | Whether the product is available to purchase. If omitted, derived from variant stock \u2014 the product is in stock if at least one variant has \u0060in_stock: true\u0060. Products with no in-stock variants are hidden from Fin entirely. |\n| \u0060category_path\u0060 | string or string[] | Strongly recommended | Hierarchical category breadcrumb (e.g. \u0060[\u0022Clothing\u0022, \u0022Outerwear\u0022, \u0022Jackets\u0022]\u0060). Fin understands the hierarchy \u2014 a shopper asking about \u0022Clothing\u0022 sees products from all subcategories underneath it. The most specific category is shown in search results. |\n| \u0060collections\u0060 | string[] | Strongly recommended | Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog\u0027s structure and answer questions like \u0022what\u0027s in the sale collection?\u0022. |\n| \u0060tags\u0060 | string[] | | Free-form keywords matching how shoppers phrase needs in chat (e.g. \u0060[\u0022waterproof\u0022, \u0022gift\u0022, \u0022plus-size\u0022]\u0060). Complements \u0060category_path\u0060 and \u0060collections\u0060. |\n| \u0060available_options\u0060 | object[] | | Option types and their possible values (e.g. \u0060{\u0022name\u0022: \u0022Size\u0022, \u0022values\u0022: [\u0022S\u0022, \u0022M\u0022, \u0022L\u0022]}\u0060). Fin uses these to understand what choices a shopper can make and to correctly filter variants when asked for a specific size, colour, or other attribute. |\n| \u0060additional_data\u0060 | object | | Custom attributes for your business. Fin uses these to show each customer only relevant products. All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file. |\n| \u0060variants\u0060 | object[] | | Individual purchasable variants. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See the variant table below. |\n\n### Variant object structure\n\nEach object in the \u0060variants\u0060 array may contain:\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| \u0060id\u0060 | string | \u2713 | Unique identifier for this variant within the product. |\n| \u0060title\u0060 | string | | Variant display name shown to shoppers (e.g. \u0060\u0022Small / Blue\u0022\u0060). |\n| \u0060price\u0060 | number | | Price of this specific variant. Fin uses variant prices for precise budget filtering and displays the variant price in recommendation cards. |\n| \u0060compare_at_price\u0060 | number | | Original price before a discount. When provided, Fin will naturally mention the saving (e.g. \u0022down from $129 to $99\u0022). |\n| \u0060in_stock\u0060 | boolean | | Whether this variant is currently available. Out-of-stock variants are not shown in Fin\u0027s recommendation cards and Fin will not suggest them to shoppers. |\n| \u0060image_url\u0060 | string | | Image specific to this variant. Takes precedence over the product\u0027s \u0060featured_image_url\u0060. Falls back to \u0060featured_image_url\u0060, then \u0060image_urls\u0060. If no valid image can be resolved, this variant\u0027s recommendation card will not be shown. |\n| \u0060selected_options\u0060 | object[] | | The specific option values that define this variant (e.g. \u0060[{\u0022name\u0022: \u0022Size\u0022, \u0022value\u0022: \u0022Small\u0022}, {\u0022name\u0022: \u0022Color\u0022, \u0022value\u0022: \u0022Blue\u0022}]\u0060). Fin uses these to match shopper requests like \u0022do you have this in medium?\u0022 to the correct variant. |\n| \u0060url\u0060 | string | | Direct link to this variant\u0027s page. Takes precedence over the product URL in recommendation cards. If omitted, constructed automatically as \u0060{product_url}?variant={id}\u0060. |\n\n### Example catalog file\n\n\u0060\u0060\u0060json\n[\n  {\n    \u0022id\u0022: \u0022prod-12345\u0022,\n    \u0022title\u0022: \u0022Classic Cotton T-Shirt\u0022,\n    \u0022url\u0022: \u0022https://example.com/products/classic-cotton-t-shirt\u0022,\n    \u0022description\u0022: \u0022A comfortable everyday t-shirt.\u0022,\n    \u0022featured_image_url\u0022: \u0022https://cdn.example.com/images/t-shirt.jpg\u0022,\n    \u0022price_min\u0022: 19.99,\n    \u0022price_max\u0022: 29.99,\n    \u0022currency\u0022: \u0022USD\u0022,\n    \u0022in_stock\u0022: true,\n    \u0022tags\u0022: [\u0022organic\u0022, \u0022bestseller\u0022],\n    \u0022collections\u0022: [\u0022Summer Collection\u0022],\n    \u0022category_path\u0022: \u0022Clothing \u003E T-Shirts\u0022,\n    \u0022available_options\u0022: [\n      {\u0022name\u0022: \u0022Size\u0022, \u0022values\u0022: [\u0022S\u0022, \u0022M\u0022, \u0022L\u0022]},\n      {\u0022name\u0022: \u0022Color\u0022, \u0022values\u0022: [\u0022White\u0022, \u0022Blue\u0022]}\n    ],\n    \u0022variants\u0022: [\n      {\n        \u0022id\u0022: \u0022var-001\u0022,\n        \u0022title\u0022: \u0022S / White\u0022,\n        \u0022price\u0022: 19.99,\n        \u0022in_stock\u0022: true,\n        \u0022selected_options\u0022: [\n          {\u0022name\u0022: \u0022Size\u0022, \u0022value\u0022: \u0022S\u0022},\n          {\u0022name\u0022: \u0022Color\u0022, \u0022value\u0022: \u0022White\u0022}\n        ]\n      },\n      {\n        \u0022id\u0022: \u0022var-002\u0022,\n        \u0022title\u0022: \u0022M / Blue\u0022,\n        \u0022price\u0022: 29.99,\n        \u0022in_stock\u0022: true,\n        \u0022selected_options\u0022: [\n          {\u0022name\u0022: \u0022Size\u0022, \u0022value\u0022: \u0022M\u0022},\n          {\u0022name\u0022: \u0022Color\u0022, \u0022value\u0022: \u0022Blue\u0022}\n        ]\n      }\n    ],\n    \u0022additional_data\u0022: {\n      \u0022sku\u0022: \u0022TSHIRT-WHT-S\u0022,\n      \u0022vendor\u0022: \u0022Acme Apparel\u0022\n    }\n  }\n]\n\u0060\u0060\u0060\n",
+        "description": "Upload a product catalog to an ecommerce connector. The catalog must be a JSON\narray of product objects. There are two upload modes:\n\n**Single-file upload** \u2014 POST a single catalog file (up to 99 MB per request).\nOmit \u0060finalize\u0060 and \u0060import_job_id\u0060. Returns \u0060202 Accepted\u0060 when sync has started.\n\n**Multipart upload** \u2014 For catalogs that must be split across multiple requests:\n\n1. POST the first part with \u0060finalize=false\u0060 (no \u0060import_job_id\u0060). The response\n   returns an \u0060import_job_id\u0060 and \u0060next_part_number\u0060.\n2. POST each subsequent part with \u0060finalize=false\u0060, the \u0060import_job_id\u0060 from step 1,\n   and the \u0060part_number\u0060 from the previous response. Each part must be \u2264 99 MB.\n3. POST with \u0060finalize=true\u0060 and the \u0060import_job_id\u0060 to complete the upload and\n   start the sync. No catalog file is required in the finalization request.\n\nPart uploads are idempotent \u2014 retrying the same \u0060part_number\u0060 does not create\na duplicate. If a response is lost, retry with the same \u0060part_number\u0060.\n\n## Limits\n\n- **Request size:** each request, whether a single-file upload or one part of a multipart\n  upload, can carry a catalog file of up to 99 MB. A larger file is rejected with\n  \u0060422 Unprocessable Content\u0060 and the \u0060payload_too_large\u0060 error code.\n- **Part order:** parts must be uploaded in order, starting at \u0060part_number\u0060 1. A part that\n  is out of sequence is rejected with \u0060422\u0060 and the \u0060invalid_part_number\u0060 error code.\n- **Session expiry:** a multipart upload session expires 7 days after its first part is\n  uploaded. An expired session cannot be continued or finalized. Start a new upload instead.\n- **One upload at a time:** a connector accepts one catalog upload at a time. A new upload\n  while another is in progress is rejected with \u0060409 Conflict\u0060.\n\n## Product object structure\n\nThe catalog file must be a JSON array where each element is a product object.\nOnly \u0060id\u0060, \u0060title\u0060, and \u0060url\u0060 are required \u2014 all other fields are optional.\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| \u0060id\u0060 | string | \u2713 | Your unique product identifier. Used to match products on re-upload so only changed products are re-indexed. Also the delete key \u2014 any product ID absent from a new upload is removed from Fin\u0027s knowledge. Must be stable across uploads. |\n| \u0060title\u0060 | string | \u2713 | Product name. Used by Fin when searching for and recommending products. |\n| \u0060url\u0060 | string | \u2713 | Canonical product page URL shown in Fin\u0027s product recommendations. Must be a valid \u0060https://\u0060 URL. |\n| \u0060description\u0060 | string | | Product description that Fin reads to understand what the product is. HTML formatting is supported and safely sanitized (\u0060description_html\u0060 takes precedence if both are provided). This is the primary field Fin uses to match products to shopper questions \u2014 a richer description leads to better recommendations. |\n| \u0060featured_image_url\u0060 | string | | Primary product image shown in Fin\u0027s recommendation cards. Falls back to the first entry of \u0060image_urls\u0060 if not provided. If no valid image can be resolved for a variant, that variant\u0027s card is not shown to the shopper. |\n| \u0060image_urls\u0060 | string[] | | Additional product images. Used as a fallback when \u0060featured_image_url\u0060 is absent or when a variant has no specific image. |\n| \u0060price_min\u0060 | number | | Lowest price across all variants. If omitted, derived automatically from variant prices. Fin uses this to filter products when a shopper mentions a budget (e.g. \u0022under $100\u0022). Displayed as a range alongside \u0060price_max\u0060, or as a single value if both are equal. |\n| \u0060price_max\u0060 | number | | Highest price across all variants. If omitted, derived from variant prices. Used alongside \u0060price_min\u0060 for budget filtering and price display. |\n| \u0060currency\u0060 | string | | ISO 4217 currency code (e.g. \u0060\u0022USD\u0022\u0060, \u0060\u0022EUR\u0022\u0060, \u0060\u0022GBP\u0022\u0060). Defaults to USD if omitted. Used to format prices with the correct symbol in Fin\u0027s responses and product cards. |\n| \u0060in_stock\u0060 | boolean | | Whether the product is available to purchase. If omitted, derived from variant stock \u2014 the product is in stock if at least one variant has \u0060in_stock: true\u0060. Products with no in-stock variants are hidden from Fin entirely. |\n| \u0060category_path\u0060 | string or string[] | Strongly recommended | Hierarchical category breadcrumb (e.g. \u0060[\u0022Clothing\u0022, \u0022Outerwear\u0022, \u0022Jackets\u0022]\u0060). Fin understands the hierarchy \u2014 a shopper asking about \u0022Clothing\u0022 sees products from all subcategories underneath it. The most specific category is shown in search results. |\n| \u0060collections\u0060 | string[] | Strongly recommended | Collections or groupings this product belongs to in your store. Fin uses collections to understand your catalog\u0027s structure and answer questions like \u0022what\u0027s in the sale collection?\u0022. |\n| \u0060tags\u0060 | string[] | | Free-form keywords matching how shoppers phrase needs in chat (e.g. \u0060[\u0022waterproof\u0022, \u0022gift\u0022, \u0022plus-size\u0022]\u0060). Complements \u0060category_path\u0060 and \u0060collections\u0060. |\n| \u0060available_options\u0060 | object[] | | Option types and their possible values (e.g. \u0060{\u0022name\u0022: \u0022Size\u0022, \u0022values\u0022: [\u0022S\u0022, \u0022M\u0022, \u0022L\u0022]}\u0060). Fin uses these to understand what choices a shopper can make and to correctly filter variants when asked for a specific size, colour, or other attribute. |\n| \u0060additional_data\u0060 | object | | Custom attributes for your business. Fin uses these to show each customer only relevant products. All keys must be consistent across all products in your catalog \u2014 the attribute schema is read from the first product in the file. |\n| \u0060variants\u0060 | object[] | | Individual purchasable variants. Fin recommends specific variants (not just products), so populating variants with accurate stock, price, and option data leads to more precise recommendations. See the variant table below. |\n\n### Variant object structure\n\nEach object in the \u0060variants\u0060 array may contain:\n\n| Field | Type | Required | Description |\n|---|---|---|---|\n| \u0060id\u0060 | string | \u2713 | Unique identifier for this variant within the product. |\n| \u0060title\u0060 | string | | Variant display name shown to shoppers (e.g. \u0060\u0022Small / Blue\u0022\u0060). |\n| \u0060price\u0060 | number | | Price of this specific variant. Fin uses variant prices for precise budget filtering and displays the variant price in recommendation cards. |\n| \u0060compare_at_price\u0060 | number | | Original price before a discount. When provided, Fin will naturally mention the saving (e.g. \u0022down from $129 to $99\u0022). |\n| \u0060in_stock\u0060 | boolean | | Whether this variant is currently available. Out-of-stock variants are not shown in Fin\u0027s recommendation cards and Fin will not suggest them to shoppers. |\n| \u0060image_url\u0060 | string | | Image specific to this variant. Takes precedence over the product\u0027s \u0060featured_image_url\u0060. Falls back to \u0060featured_image_url\u0060, then \u0060image_urls\u0060. If no valid image can be resolved, this variant\u0027s recommendation card will not be shown. |\n| \u0060selected_options\u0060 | object[] | | The specific option values that define this variant (e.g. \u0060[{\u0022name\u0022: \u0022Size\u0022, \u0022value\u0022: \u0022Small\u0022}, {\u0022name\u0022: \u0022Color\u0022, \u0022value\u0022: \u0022Blue\u0022}]\u0060). Fin uses these to match shopper requests like \u0022do you have this in medium?\u0022 to the correct variant. |\n| \u0060url\u0060 | string | | Direct link to this variant\u0027s page. Takes precedence over the product URL in recommendation cards. If omitted, constructed automatically as \u0060{product_url}?variant={id}\u0060. |\n\n### Example catalog file\n\n\u0060\u0060\u0060json\n[\n  {\n    \u0022id\u0022: \u0022prod-12345\u0022,\n    \u0022title\u0022: \u0022Classic Cotton T-Shirt\u0022,\n    \u0022url\u0022: \u0022https://example.com/products/classic-cotton-t-shirt\u0022,\n    \u0022description\u0022: \u0022A comfortable everyday t-shirt.\u0022,\n    \u0022featured_image_url\u0022: \u0022https://cdn.example.com/images/t-shirt.jpg\u0022,\n    \u0022price_min\u0022: 19.99,\n    \u0022price_max\u0022: 29.99,\n    \u0022currency\u0022: \u0022USD\u0022,\n    \u0022in_stock\u0022: true,\n    \u0022tags\u0022: [\u0022organic\u0022, \u0022bestseller\u0022],\n    \u0022collections\u0022: [\u0022Summer Collection\u0022],\n    \u0022category_path\u0022: \u0022Clothing \u003E T-Shirts\u0022,\n    \u0022available_options\u0022: [\n      {\u0022name\u0022: \u0022Size\u0022, \u0022values\u0022: [\u0022S\u0022, \u0022M\u0022, \u0022L\u0022]},\n      {\u0022name\u0022: \u0022Color\u0022, \u0022values\u0022: [\u0022White\u0022, \u0022Blue\u0022]}\n    ],\n    \u0022variants\u0022: [\n      {\n        \u0022id\u0022: \u0022var-001\u0022,\n        \u0022title\u0022: \u0022S / White\u0022,\n        \u0022price\u0022: 19.99,\n        \u0022in_stock\u0022: true,\n        \u0022selected_options\u0022: [\n          {\u0022name\u0022: \u0022Size\u0022, \u0022value\u0022: \u0022S\u0022},\n          {\u0022name\u0022: \u0022Color\u0022, \u0022value\u0022: \u0022White\u0022}\n        ]\n      },\n      {\n        \u0022id\u0022: \u0022var-002\u0022,\n        \u0022title\u0022: \u0022M / Blue\u0022,\n        \u0022price\u0022: 29.99,\n        \u0022in_stock\u0022: true,\n        \u0022selected_options\u0022: [\n          {\u0022name\u0022: \u0022Size\u0022, \u0022value\u0022: \u0022M\u0022},\n          {\u0022name\u0022: \u0022Color\u0022, \u0022value\u0022: \u0022Blue\u0022}\n        ]\n      }\n    ],\n    \u0022additional_data\u0022: {\n      \u0022sku\u0022: \u0022TSHIRT-WHT-S\u0022,\n      \u0022vendor\u0022: \u0022Acme Apparel\u0022\n    }\n  }\n]\n\u0060\u0060\u0060\n",
         "operationId": "UploadEcommerceCatalog",
         "parameters": [
           {
@@ -37445,7 +37445,7 @@
             }
           },
           {
-            "name": "id",
+            "name": "importSourceId",
             "in": "path",
             "description": "The unique identifier of the ecommerce connector.",
             "required": true,
@@ -37480,7 +37480,7 @@
                   "value": {
                     "catalog": "@products_part2.json",
                     "finalize": "false",
-                    "import_job_id": "job_01abc123",
+                    "import_job_id": 1000000471233,
                     "part_number": 2
                   }
                 },
@@ -37488,7 +37488,7 @@
                   "summary": "Multipart \u2014 Step 3: Finalize",
                   "value": {
                     "finalize": "true",
-                    "import_job_id": "job_01abc123"
+                    "import_job_id": 1000000471233
                   }
                 }
               }
@@ -37506,7 +37506,7 @@
                 "examples": {
                   "Part uploaded": {
                     "value": {
-                      "import_job_id": "job_01abc123",
+                      "import_job_id": 1000000471233,
                       "next_part_number": 2
                     }
                   }
@@ -37527,7 +37527,7 @@
                 "examples": {
                   "Sync started": {
                     "value": {
-                      "import_job_id": "job_01abc123",
+                      "import_job_id": 1000000471233,
                       "status": "processing",
                       "message": "Catalog received. Sync has started."
                     }
@@ -37593,7 +37593,7 @@
                       "errors": [
                         {
                           "code": "import_source_not_found",
-                          "message": "No connector found with the provided id."
+                          "message": "No connector found with the provided import_source_id."
                         }
                       ]
                     }
@@ -37631,7 +37631,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/EcommerceCatalogUploadConflictError"
                 },
                 "examples": {
                   "Sync already in progress": {
@@ -37653,9 +37653,10 @@
                       "errors": [
                         {
                           "code": "sync_in_progress",
-                          "message": "A multipart upload is already in progress. Use import_job_id to continue."
+                          "message": "A multipart upload is already in progress. Use the import_job_id to continue."
                         }
-                      ]
+                      ],
+                      "import_job_id": 1000000471233
                     }
                   },
                   "Session cannot be finalized": {
@@ -37785,7 +37786,7 @@
         }
       }
     },
-    "/ecommerce/connectors/{id}/events": {
+    "/ecommerce/connectors/{importSourceId}/events": {
       "post": {
         "tags": [
           "Ecommerce Connectors"
@@ -37802,7 +37803,7 @@
             }
           },
           {
-            "name": "id",
+            "name": "importSourceId",
             "in": "path",
             "description": "The unique identifier of the ecommerce connector.",
             "required": true,
@@ -37990,35 +37991,59 @@
             }
           },
           "400": {
-            "description": "The event is invalid. All validation errors are returned in \u0060message\u0060, separated by \u0060; \u0060.",
+            "description": "The event is invalid. All validation errors are returned in the \u0060message\u0060 of a single error, separated by \u0060; \u0060.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EcommerceProductEventError"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Invalid type": {
                     "value": {
-                      "type": "invalid_event",
-                      "message": "type must be one of product.created, product.updated, product.deleted"
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "type must be one of product.created, product.updated, product.deleted"
+                        }
+                      ]
                     }
                   },
                   "Invalid product": {
                     "value": {
-                      "type": "invalid_event",
-                      "message": "data.product.title is required; data.product.updated_at must be an ISO 8601 timestamp"
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "data.product.title is required; data.product.updated_at must be an ISO 8601 timestamp"
+                        }
+                      ]
                     }
                   },
                   "Missing product id on delete": {
                     "value": {
-                      "type": "invalid_event",
-                      "message": "data.product_id is required"
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "data.product_id is required"
+                        }
+                      ]
                     }
                   },
                   "Product too large": {
                     "value": {
-                      "type": "invalid_event",
-                      "message": "data.product exceeds 60KB"
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "data.product exceeds 60KB"
+                        }
+                      ]
                     }
                   }
                 }
@@ -38033,19 +38058,31 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EcommerceProductEventError"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Connector not found": {
                     "value": {
-                      "type": "import_source_not_found",
-                      "message": "No connector found with the provided import_source_id."
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "import_source_not_found",
+                          "message": "No connector found with the provided import_source_id."
+                        }
+                      ]
                     }
                   },
                   "Feature not available": {
                     "value": {
-                      "type": "not_found",
-                      "message": "The events API is not available for this workspace."
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "The events API is not available for this workspace."
+                        }
+                      ]
                     }
                   }
                 }
@@ -38057,13 +38094,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EcommerceProductEventError"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
                   "Catalog not uploaded": {
                     "value": {
-                      "type": "catalog_not_uploaded",
-                      "message": "Upload a full catalog before sending product events."
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "catalog_not_uploaded",
+                          "message": "Upload a full catalog before sending product events."
+                        }
+                      ]
                     }
                   }
                 }
@@ -64507,14 +64550,51 @@
           }
         }
       },
+      "EcommerceCatalogUploadConflictError": {
+        "title": "Ecommerce Catalog Upload Conflict Error",
+        "required": [
+          "type",
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type is error.list",
+            "example": "error.list"
+          },
+          "request_id": {
+            "type": "string",
+            "description": "",
+            "format": "uuid",
+            "nullable": true,
+            "example": "f93ecfa8-d08a-4325-8694-89aeb89c8f85"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorErrorsItem"
+            },
+            "description": "An array of one or more error objects"
+          },
+          "import_job_id": {
+            "type": "integer",
+            "description": "The identifier of the multipart upload session that is already in progress. Only\npresent when the conflict is an existing multipart session. Pass it as \u0060import_job_id\u0060\nto continue that session.\n",
+            "format": "int64",
+            "example": 1000000471233
+          }
+        },
+        "description": "The error list returned with \u0060409 Conflict\u0060. When a multipart upload session is already in\nprogress for the connector, the body also carries the \u0060import_job_id\u0060 of that session, so you\ncan continue it.\n"
+      },
       "EcommerceCatalogUploadPartResponse": {
         "title": "Ecommerce Catalog Upload Part Response",
         "type": "object",
         "properties": {
           "import_job_id": {
-            "type": "string",
+            "type": "integer",
             "description": "The unique identifier for the active upload session. Pass this as \u0060import_job_id\u0060\nin subsequent part uploads and in the finalization request.\n",
-            "example": "job_01abc123"
+            "format": "int64",
+            "example": 1000000471233
           },
           "next_part_number": {
             "type": "integer",
@@ -64529,9 +64609,10 @@
         "type": "object",
         "properties": {
           "import_job_id": {
-            "type": "string",
+            "type": "integer",
             "description": "The unique identifier for the import job.",
-            "example": "job_01abc123"
+            "format": "int64",
+            "example": 1000000471233
           },
           "status": {
             "$ref": "#/components/schemas/ProcessingStatus"
@@ -64602,21 +64683,6 @@
           }
         },
         "description": "A product variant in an ecommerce catalog upload."
-      },
-      "EcommerceProductEventError": {
-        "title": "Ecommerce Product Event Error",
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/EcommerceProductEventErrorType"
-          },
-          "message": {
-            "type": "string",
-            "description": "A human-readable description of the error. For \u0060invalid_event\u0060, every validation error is listed, separated by \u0060; \u0060.",
-            "example": "data.product.id is required"
-          }
-        },
-        "description": "Returned when a product event is rejected."
       },
       "EcommerceProductEventProduct": {
         "title": "Ecommerce Product Event Product",
@@ -64781,7 +64847,8 @@
           "event_id": {
             "type": "integer",
             "description": "The unique identifier for the queued event.",
-            "example": 81273
+            "format": "int64",
+            "example": 1000000471233
           }
         },
         "description": "Returned when a product event is accepted and queued."
@@ -73690,15 +73757,8 @@
         "type": "object",
         "properties": {
           "code": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "string"
-              }
-            ],
-            "description": "A string indicating the kind of error, used to further qualify the HTTP response code. A few request validation errors send an HTTP status code as an integer here instead, for example \u0060422\u0060.",
+            "type": "string",
+            "description": "A string indicating the kind of error, used to further qualify the HTTP response code.",
             "example": "unauthorized"
           },
           "message": {
@@ -77759,9 +77819,10 @@
             "$ref": "#/components/schemas/UploadEcommerceCatalogFormDataRequestFinalize"
           },
           "import_job_id": {
-            "type": "string",
+            "type": "integer",
             "description": "The import job ID returned from the first multipart upload request. Required\nwhen uploading subsequent parts (\u0060part_number\u0060 \u2265 2) and when finalizing\na multipart session (\u0060finalize=true\u0060).\n",
-            "example": "job_01abc123"
+            "format": "int64",
+            "example": 1000000471233
           },
           "part_number": {
             "type": "integer",
@@ -79196,7 +79257,7 @@
       },
       "BulkUpdateContactsRequestContactsItemCustomAttributesProperty": {
         "type": "object",
-        "description": "Custom attributes to update on the contact."
+        "description": "Custom attributes to update on the contact. For a relationship attribute, send the IDs of the custom object records to link the contact to."
       },
       "ConversationListItemTicketCustomAttributesProperty": {
         "type": "object",
@@ -85039,39 +85100,6 @@
             {
               "value": "processing",
               "name": "Processing"
-            }
-          ]
-        }
-      },
-      "EcommerceProductEventErrorType": {
-        "enum": [
-          "invalid_event",
-          "import_source_not_found",
-          "not_found",
-          "catalog_not_uploaded"
-        ],
-        "type": "string",
-        "description": "The error code.",
-        "example": "invalid_event",
-        "x-ms-enum": {
-          "name": "EcommerceProductEventErrorType",
-          "modelAsString": false,
-          "values": [
-            {
-              "value": "invalid_event",
-              "name": "InvalidEvent"
-            },
-            {
-              "value": "import_source_not_found",
-              "name": "ImportSourceNotFound"
-            },
-            {
-              "value": "not_found",
-              "name": "NotFound"
-            },
-            {
-              "value": "catalog_not_uploaded",
-              "name": "CatalogNotUploaded"
             }
           ]
         }
@@ -93678,6 +93706,17 @@
         }
       }
     },
+    "EcommerceCatalogUploadConflictErrorAllOf2": {
+      "type": "object",
+      "properties": {
+        "import_job_id": {
+          "type": "integer",
+          "description": "The identifier of the multipart upload session that is already in progress. Only\npresent when the conflict is an existing multipart session. Pass it as \u0060import_job_id\u0060\nto continue that session.\n",
+          "format": "int64",
+          "example": 1000000471233
+        }
+      }
+    },
     "EcommerceProductEventProductAllOf2": {
       "required": [
         "updated_at"
@@ -94393,7 +94432,7 @@
     },
     "BulkUpdateContactsRequestContactsItemCustomAttributes": {
       "type": "object",
-      "description": "Custom attributes to update on the contact."
+      "description": "Custom attributes to update on the contact. For a relationship attribute, send the IDs of the custom object records to link the contact to."
     },
     "ConversationListItemTicketCustomAttributes": {
       "type": "object",

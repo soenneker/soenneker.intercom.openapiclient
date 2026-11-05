@@ -77,7 +77,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem> Companies { get => _explicitNullValueCompanies; set { _explicitNullValueCompanies = value; AdditionalData?.Remove("companies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companies"); else _explicitNullProperties?.Remove("companies"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCompaniesItem> _explicitNullValueCompanies = default!;
 #endif
-        /// <summary>Custom attributes to update on the contact.</summary>
+        /// <summary>Custom attributes to update on the contact. For a relationship attribute, send the IDs of the custom object records to link the contact to.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.BulkUpdateContactsRequestContactsItemCustomAttributesProperty? CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; AdditionalData?.Remove("custom_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }

@@ -17,14 +17,14 @@ namespace Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors
     {
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.ecommerce.connectors.item collection</summary>
         /// <param name="position">The unique identifier of the ecommerce connector.</param>
-        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.ConnectorsItemRequestBuilder"/></returns>
-        public global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.ConnectorsItemRequestBuilder this[string position]
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.WithImportSourceItemRequestBuilder"/></returns>
+        public global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.WithImportSourceItemRequestBuilder this[string position]
         {
             get
             {
                 var urlTplParams = new Dictionary<string, object>(PathParameters);
-                urlTplParams.Add("id", position);
-                return new global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.ConnectorsItemRequestBuilder(urlTplParams, RequestAdapter);
+                urlTplParams.Add("importSourceId", position);
+                return new global::Soenneker.Intercom.OpenApiClient.Ecommerce.Connectors.Item.WithImportSourceItemRequestBuilder(urlTplParams, RequestAdapter);
             }
         }
         /// <summary>

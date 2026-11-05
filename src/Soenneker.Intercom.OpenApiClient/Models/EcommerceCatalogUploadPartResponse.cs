@@ -27,15 +27,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
         /// <summary>The unique identifier for the active upload session. Pass this as `import_job_id`in subsequent part uploads and in the finalization request.</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; AdditionalData?.Remove("import_job_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
-        private string? _explicitNullValueImportJobId = default!;
-#nullable restore
-#else
-        public string ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; AdditionalData?.Remove("import_job_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
-        private string _explicitNullValueImportJobId = default!;
-#endif
+        public long? ImportJobId { get => _explicitNullValueImportJobId; set { _explicitNullValueImportJobId = value; AdditionalData?.Remove("import_job_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("import_job_id"); else _explicitNullProperties?.Remove("import_job_id"); } }
+        private long? _explicitNullValueImportJobId = default!;
         /// <summary>The part number to use in the next upload request.</summary>
         public int? NextPartNumber { get => _explicitNullValueNextPartNumber; set { _explicitNullValueNextPartNumber = value; AdditionalData?.Remove("next_part_number"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("next_part_number"); else _explicitNullProperties?.Remove("next_part_number"); } }
         private int? _explicitNullValueNextPartNumber = default!;
@@ -64,7 +57,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "import_job_id", n => { ImportJobId = n.GetStringValue(); } },
+                { "import_job_id", n => { ImportJobId = n.GetLongValue(); } },
                 { "next_part_number", n => { NextPartNumber = n.GetIntValue(); } },
             };
         }
@@ -75,7 +68,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
-            writer.WriteStringValue("import_job_id", ImportJobId);
+            writer.WriteLongValue("import_job_id", ImportJobId);
             writer.WriteIntValue("next_part_number", NextPartNumber);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
