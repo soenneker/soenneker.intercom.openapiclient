@@ -31617,6 +31617,179 @@
         }
       }
     },
+    "/conversations/stream/token": {
+      "post": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Create a conversation stream token",
+        "description": "Realtime streaming of conversation events uses Server-Sent Events (SSE). It is an opt-in feature, enabled per workspace. Contact Intercom to turn it on.\n\nIssue a token that a contact\u0027s client uses to subscribe to a realtime stream of that contact\u0027s conversation events.\n\nTokens are short-lived, so call this endpoint again before \u0060expires_at\u0060 to get a fresh one. Use the \u0060revoke\u0060 link in the response to end every active token for the contact.\n\nRequires the \u0060read_conversations\u0060 permission.\n",
+        "operationId": "CreateConversationStreamToken",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateConversationStreamTokenRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "successful",
+                  "value": {
+                    "external_id": "contact-1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token issued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationStreamToken"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "conversation_stream_token",
+                      "expires_at": 1731241200,
+                      "stream": {
+                        "provider": "ably",
+                        "url": "main.realtime.ably.net",
+                        "channel": "conversation_stream:abc123:6710a1b2c3d4e5f6a7b8c9d0",
+                        "token": "\u003Cstream token\u003E"
+                      },
+                      "links": {
+                        "self": {
+                          "href": "https://api.intercom.io/conversations/stream/token",
+                          "method": "POST"
+                        },
+                        "revoke": {
+                          "href": "https://api.intercom.io/conversations/stream/token?external_id=contact-1234",
+                          "method": "DELETE"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\u0060external_id\u0060 is missing"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7d3e1f0a-5b2c-4a96-8c41-0e9f6b2d7a35",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The access token is limited to the conversations of the teammate who installed the app"
+          },
+          "404": {
+            "description": "The contact was not found, or the conversation stream is not available for the workspace"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Revoke conversation stream tokens",
+        "description": "Realtime streaming of conversation events uses Server-Sent Events (SSE). It is an opt-in feature, enabled per workspace. Contact Intercom to turn it on.\n\nRevoke every active conversation stream token for a contact. Call this when the contact signs out or you suspect a token has been exposed.\n\nRequires the \u0060read_conversations\u0060 permission.\n",
+        "operationId": "RevokeConversationStreamTokens",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "external_id",
+            "in": "query",
+            "description": "The external ID of the contact whose tokens to revoke.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "contact-1234"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Tokens revoked"
+          },
+          "400": {
+            "description": "\u0060external_id\u0060 is missing"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2c8a4e6b-9f1d-4b73-a5e0-6d1c3f8b9a47",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The access token is limited to the conversations of the teammate who installed the app"
+          },
+          "404": {
+            "description": "The contact was not found, or the conversation stream is not available for the workspace"
+          },
+          "502": {
+            "description": "The realtime provider did not confirm the revocation. Retry the request."
+          }
+        }
+      }
+    },
     "/conversations/attributes": {
       "get": {
         "tags": [
@@ -34363,8 +34536,8 @@
                           "request_header_key": "Authorization",
                           "token_prefix": "Bearer",
                           "domain": "api.fulfilment.example.com",
-                          "created_at": "2025-11-15T09:30:00Z",
-                          "updated_at": "2026-01-20T14:22:15Z"
+                          "created_at": 1763199000,
+                          "updated_at": 1768918935
                         }
                       ],
                       "pages": {
@@ -34499,8 +34672,8 @@
                       "request_header_key": "Authorization",
                       "token_prefix": "Bearer",
                       "domain": null,
-                      "created_at": "2025-11-15T09:30:00Z",
-                      "updated_at": "2025-11-15T09:30:00Z"
+                      "created_at": 1763199000,
+                      "updated_at": 1763199000
                     }
                   },
                   "OAuth credential": {
@@ -34513,8 +34686,8 @@
                       "request_header_key": "Authorization",
                       "token_prefix": "Bearer",
                       "domain": null,
-                      "created_at": "2025-11-15T09:30:00Z",
-                      "updated_at": "2025-11-15T09:30:00Z"
+                      "created_at": 1763199000,
+                      "updated_at": 1763199000
                     }
                   }
                 }
@@ -34659,8 +34832,8 @@
                       "request_header_key": "Authorization",
                       "token_prefix": "Bearer",
                       "domain": null,
-                      "created_at": "2025-11-15T09:30:00Z",
-                      "updated_at": "2025-11-15T09:30:00Z"
+                      "created_at": 1763199000,
+                      "updated_at": 1763199000
                     }
                   },
                   "OAuth credential": {
@@ -34673,8 +34846,8 @@
                       "request_header_key": "Authorization",
                       "token_prefix": "Bearer",
                       "domain": null,
-                      "created_at": "2025-11-15T09:30:00Z",
-                      "updated_at": "2025-11-15T09:30:00Z"
+                      "created_at": 1763199000,
+                      "updated_at": 1763199000
                     }
                   }
                 }
@@ -34731,8 +34904,8 @@
                       "request_header_key": "Authorization",
                       "token_prefix": "Bearer",
                       "domain": "api.fulfilment.example.com",
-                      "created_at": "2025-11-15T09:30:00Z",
-                      "updated_at": "2026-01-20T14:22:15Z"
+                      "created_at": 1763199000,
+                      "updated_at": 1768918935
                     }
                   }
                 }
@@ -34852,8 +35025,8 @@
                       "request_header_key": "Authorization",
                       "token_prefix": "Bearer",
                       "domain": "api.fulfilment.example.com",
-                      "created_at": "2025-11-15T09:30:00Z",
-                      "updated_at": "2026-01-20T14:22:15Z"
+                      "created_at": 1763199000,
+                      "updated_at": 1768918935
                     }
                   }
                 }
@@ -56680,16 +56853,16 @@
             "example": "api.fulfilment.example.com"
           },
           "created_at": {
-            "type": "string",
-            "description": "The time the credential was created, as an ISO 8601 timestamp.",
+            "type": "integer",
+            "description": "The time the credential was created as a Unix timestamp.",
             "nullable": true,
-            "example": "2025-11-15T09:30:00Z"
+            "example": 1763199000
           },
           "updated_at": {
-            "type": "string",
-            "description": "The time the credential was last updated, as an ISO 8601 timestamp.",
+            "type": "integer",
+            "description": "The time the credential was last updated as a Unix timestamp.",
             "nullable": true,
-            "example": "2026-01-20T14:22:15Z"
+            "example": 1768918935
           }
         },
         "description": "Metadata for a stored third-party credential that data connectors use to authenticate outbound requests. Only metadata is returned \u2014 the credential value itself, and its refresh and OAuth configuration, are never exposed.\n",
@@ -60535,6 +60708,46 @@
         "description": "A deleted conversation record containing its ID, metrics retained status and deletion timestamp.",
         "x-tags": [
           "Conversation"
+        ]
+      },
+      "CreateConversationStreamTokenRequest": {
+        "title": "Create conversation stream token request",
+        "required": [
+          "external_id"
+        ],
+        "type": "object",
+        "properties": {
+          "external_id": {
+            "type": "string",
+            "description": "The external ID of the contact to issue a token for.",
+            "example": "contact-1234"
+          }
+        }
+      },
+      "ConversationStreamToken": {
+        "title": "Conversation stream token",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationStreamTokenType"
+          },
+          "expires_at": {
+            "type": "integer",
+            "description": "The time the token expires, as a UNIX timestamp.",
+            "format": "int64",
+            "example": 1731241200,
+            "x-client-original-format": "date-time"
+          },
+          "stream": {
+            "$ref": "#/components/schemas/ConversationStreamTokenStream"
+          },
+          "links": {
+            "$ref": "#/components/schemas/ConversationStreamTokenLinks"
+          }
+        },
+        "description": "A token that lets a contact\u0027s client subscribe to a realtime stream of their conversation events.",
+        "x-tags": [
+          "Conversations"
         ]
       },
       "DeletedConversationList": {
@@ -72723,6 +72936,44 @@
         "description": "The ticket details when the conversation is a ticket. \u0060null\u0060 for any other conversation.",
         "nullable": true
       },
+      "ConversationStreamTokenStream": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "The realtime provider that delivers the stream.",
+            "example": "ably"
+          },
+          "url": {
+            "type": "string",
+            "description": "The host to connect to.",
+            "example": "main.realtime.ably.net"
+          },
+          "channel": {
+            "type": "string",
+            "description": "The channel to subscribe to.",
+            "example": "conversation_stream:abc123:6710a1b2c3d4e5f6a7b8c9d0"
+          },
+          "token": {
+            "type": "string",
+            "description": "The token to connect with.",
+            "example": "\u003Cstream token\u003E"
+          }
+        },
+        "description": "What the client needs to connect to the stream."
+      },
+      "ConversationStreamTokenLinks": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "$ref": "#/components/schemas/ConversationStreamTokenLinksSelf"
+          },
+          "revoke": {
+            "$ref": "#/components/schemas/ConversationStreamTokenLinksRevoke"
+          }
+        },
+        "description": "The requests you can make with this token."
+      },
       "ConversationPartReceipts": {
         "type": "object",
         "properties": {
@@ -74833,6 +75084,38 @@
             "example": "Billing"
           }
         }
+      },
+      "ConversationStreamTokenLinksSelf": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The URL to request.",
+            "example": "https://api.intercom.io/conversations/stream/token"
+          },
+          "method": {
+            "type": "string",
+            "description": "The HTTP method to use.",
+            "example": "POST"
+          }
+        },
+        "description": "The request that issues a new token for the contact."
+      },
+      "ConversationStreamTokenLinksRevoke": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "description": "The URL to request.",
+            "example": "https://api.intercom.io/conversations/stream/token?external_id=contact-1234"
+          },
+          "method": {
+            "type": "string",
+            "description": "The HTTP method to use.",
+            "example": "DELETE"
+          }
+        },
+        "description": "The request that revokes every active token for the contact."
       },
       "ConversationPartReceiptsRecipientsItem": {
         "type": "object",
@@ -83669,6 +83952,24 @@
             {
               "value": "ticket",
               "name": "Ticket"
+            }
+          ]
+        }
+      },
+      "ConversationStreamTokenType": {
+        "enum": [
+          "conversation_stream_token"
+        ],
+        "type": "string",
+        "description": "String representing the object\u0027s type. Always has the value \u0060conversation_stream_token\u0060.",
+        "example": "conversation_stream_token",
+        "x-ms-enum": {
+          "name": "ConversationStreamTokenType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "conversation_stream_token",
+              "name": "ConversationStreamToken"
             }
           ]
         }

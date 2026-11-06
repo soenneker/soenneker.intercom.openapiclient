@@ -8,6 +8,7 @@ using Soenneker.Intercom.OpenApiClient.Conversations.Deleted;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item;
 using Soenneker.Intercom.OpenApiClient.Conversations.Redact;
 using Soenneker.Intercom.OpenApiClient.Conversations.Search;
+using Soenneker.Intercom.OpenApiClient.Conversations.StreamNamespace;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -41,6 +42,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Search.SearchRequestBuilder Search
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Search.SearchRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The stream property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.StreamNamespace.StreamRequestBuilder Stream
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Conversations.StreamNamespace.StreamRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>Gets an item from the Soenneker.Intercom.OpenApiClient.conversations.item collection</summary>
         /// <param name="position">The id of the conversation to target</param>
