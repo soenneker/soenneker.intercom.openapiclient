@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Admins.Activity_log_event_types;
 using Soenneker.Intercom.OpenApiClient.Admins.Activity_logs;
+using Soenneker.Intercom.OpenApiClient.Admins.Find_by_email;
 using Soenneker.Intercom.OpenApiClient.Admins.Item;
 using Soenneker.Intercom.OpenApiClient.Admins.Remove;
 using Soenneker.Intercom.OpenApiClient.Models;
@@ -30,6 +31,11 @@ namespace Soenneker.Intercom.OpenApiClient.Admins
         public global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder Activity_logs
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Admins.Activity_logs.Activity_logsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The find_by_email property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Admins.Find_by_email.Find_by_emailRequestBuilder Find_by_email
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Admins.Find_by_email.Find_by_emailRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The remove property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Admins.Remove.RemoveRequestBuilder Remove

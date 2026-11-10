@@ -10,6 +10,7 @@ using Soenneker.Intercom.OpenApiClient.Conversations.Item.Handling_events;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Hitl_events;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Merge;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts;
+using Soenneker.Intercom.OpenApiClient.Conversations.Item.Rating;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Side_conversations;
 using Soenneker.Intercom.OpenApiClient.Conversations.Item.Tags;
@@ -62,6 +63,11 @@ namespace Soenneker.Intercom.OpenApiClient.Conversations.Item
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts.PartsRequestBuilder Parts
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Parts.PartsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The rating property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Rating.RatingRequestBuilder Rating
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Rating.RatingRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The reply property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Conversations.Item.Reply.ReplyRequestBuilder Reply

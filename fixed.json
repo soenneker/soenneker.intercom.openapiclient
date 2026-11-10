@@ -1351,6 +1351,154 @@
         }
       }
     },
+    "/admins/find_by_email": {
+      "get": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "Find an admin by email",
+        "description": "You can find an admin in your workspace by their email address. The response is the same as retrieving the admin by id.\n\nRequires the \u0060read_admins\u0060 OAuth scope.\n",
+        "operationId": "FindAdminByEmail",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The email address of the admin. Matching ignores case.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "admin9@email.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Admin"
+                },
+                "examples": {
+                  "Admin found": {
+                    "value": {
+                      "type": "admin",
+                      "id": "991267468",
+                      "name": "Ciaran9 Lee",
+                      "email": "admin9@email.com",
+                      "away_mode_enabled": false,
+                      "away_mode_reassign": false,
+                      "has_inbox_seat": true,
+                      "away_status_reason_id": null,
+                      "team_ids": [
+                        814865,
+                        991267903
+                      ],
+                      "team_priority_level": {
+                        "primary_team_ids": [
+                          814865
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Email missing": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7c2e9a41-3b5d-4f8e-a1c6-0d9b8e7f6a52",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "Please provide the following parameters: email"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Admin not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Admin not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2f8d4b6a-9e1c-4a7f-b3d5-6c0e8a9b1f24",
+                      "errors": [
+                        {
+                          "code": "admin_not_found",
+                          "message": "Admin not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9a1b3c5d-7e2f-4a6b-8c0d-1e3f5a7b9c2d",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e5b8e2-1234-5678-9abc-def012345678",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admins/{id}": {
       "get": {
         "tags": [
@@ -13863,7 +14011,7 @@
           "Companies"
         ],
         "summary": "Delete a company",
-        "description": "Delete a single company.\n\nThe company record is kept in your workspace, but all contacts are detached. The contacts themselves are not deleted. Detaching contacts is permanent and can\u0027t be reversed. These changes may take some time to be reflected in your workspace.\n\nThe response returns \u0060\u0022deleted\u0022: true\u0060 as soon as the request is accepted; the contacts are detached in the background. A \u0060company.deleted\u0060 webhook is sent after that work finishes, so it arrives some time after the response. No webhook is sent for a company that has no contacts attached, because there is nothing to detach.\n\n{% admonition type=\u0022warning\u0022 %}\nThird-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope.\n",
+        "description": "Delete a single company.\n\n{% admonition type=\u0022warning\u0022 name=\u0022Permanent deletion\u0022 %}\nDeleting a company is permanent and can\u0027t be reversed. The company record is removed from your workspace, along with its notes, tags and external references. Its contacts are detached and its conversations are unlinked from it; the contacts and conversations themselves are not deleted.\n{% /admonition %}\n\nThe response returns \u0060\u0022deleted\u0022: true\u0060 as soon as the request is accepted; the company is deleted in the background. A \u0060company.deleted\u0060 webhook is sent once the deletion finishes, so it arrives some time after the response.\n\n{% admonition type=\u0022warning\u0022 %}\nThird-party integrations that sync companies into Intercom (for example, Salesforce or Chargebee) will recreate any company deleted through this endpoint on their next sync. To prevent recreation, remove or filter the company at the source integration before deleting it via the API.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "DeleteCompany",
         "parameters": [
           {
@@ -13898,6 +14046,30 @@
                       "id": "6762f0881bb69f9f2193bb09",
                       "object": "company",
                       "deleted": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Workspace under legal hold",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Workspace under legal hold": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2f6a8e3c-5b1d-4c7a-9e0f-3d8b6a1c4e72",
+                      "errors": [
+                        {
+                          "code": "legal_hold",
+                          "message": "App is under legal hold, company deletion is not allowed"
+                        }
+                      ]
                     }
                   }
                 }
@@ -16836,7 +17008,7 @@
           "Companies"
         ],
         "summary": "Bulk delete companies",
-        "description": "You can bulk delete companies by submitting an array of companies, each identified by its Intercom company \u0060id\u0060. Deleting a company detaches all of its associated contacts but keeps the company record itself \u2014 the same archival behaviour as the single [Delete a company](/docs/references/preview/rest-api/api.intercom.io/companies/deletecompany) endpoint.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 1,000 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
+        "description": "You can bulk delete companies by submitting an array of companies, each identified by its Intercom company \u0060id\u0060. Each company is permanently deleted, the same as with the single [Delete a company](/docs/references/preview/rest-api/api.intercom.io/companies/deletecompany) endpoint. This can\u0027t be reversed.\n\nIf the workspace is under a legal hold, each item is rejected and the job\u0027s \u0060state\u0060 ends as \u0060completed_with_errors\u0060.\n\nThe endpoint creates an async job that processes the deletes in the background. Use the returned job ID with \u0060GET /companies/bulk/{id}\u0060 to check the job status.\n\n{% admonition type=\u0022info\u0022 name=\u0022Limits\u0022 %}\n  - Maximum of 1,000 companies per request.\n  - You can append tasks to an existing job by including \u0060job.id\u0060 in the request body.\n{% /admonition %}\n",
         "operationId": "BulkDeleteCompanies",
         "parameters": [
           {
@@ -30773,6 +30945,278 @@
         }
       }
     },
+    "/conversations/{conversationId}/rating": {
+      "post": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Rate a conversation",
+        "description": "Record a contact\u0027s CSAT rating, and an optional remark, on the latest rating request Intercom sent for a conversation. The rating counts in your CSAT reports for the teammate, Fin or workflow that was rated.\n\nOnly the contact the request was sent to can answer. Pass their Intercom ID as \u0060intercom_user_id\u0060.\n\nSending the same rating and remark again returns the current rating without changing it, so it is safe to retry. A different \u0060rating\u0060 replaces the earlier one while the rating request still accepts answers. A \u0060remark\u0060 can be added to a rating that has none. Once a remark is set, the rating and the remark can no longer be changed.\n\nRequires the \u0060write_conversations\u0060 permission.\n",
+        "operationId": "RateConversation",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The unique identifier for the conversation.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "215471234567890"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RateConversationRequest"
+              },
+              "examples": {
+                "successful": {
+                  "summary": "successful",
+                  "value": {
+                    "intercom_user_id": "6541f0a2c3d4e5f607182930",
+                    "rating": 4,
+                    "remark": "Fast and friendly"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rating recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatedConversation"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "type": "conversation_rating",
+                      "conversation_id": "215471234567890",
+                      "rating": 4,
+                      "remark": "Fast and friendly",
+                      "created_at": 1793664000,
+                      "updated_at": 1793664120,
+                      "customer": {
+                        "type": "user",
+                        "id": "6541f0a2c3d4e5f607182930"
+                      },
+                      "teammate": {
+                        "type": "admin",
+                        "id": "12345"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Resource not available": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7a80b950-b392-499f-85db-ea7c6c424d37",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing parameter": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5f0c2a8e-3d71-4b96-a1e4-9c6b7d2f8e13",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "rating parameter is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid parameter type": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "0e4b9d1c-6a85-4f32-b7d0-2c8e5a1f9b64",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "rating must be a integer"
+                        }
+                      ]
+                    }
+                  },
+                  "Rating out of range": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c3a1e7f5-82d4-4b09-9e6a-1d5b0f7c2a48",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "rating must be an integer from 1 to 5"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7d3e1f0a-5b2c-4a96-8c41-0e9f6b2d7a35",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Different contact": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9b1c2d3e-4f50-4a61-8b72-c3d4e5f60718",
+                      "errors": [
+                        {
+                          "code": "forbidden",
+                          "message": "The rating request for this conversation was sent to a different contact"
+                        }
+                      ]
+                    }
+                  },
+                  "Conversation access restricted": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2c8a4e6b-9f1d-4b73-a5e0-6d1c3f8b9a47",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access this conversation"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The conversation was not found, or the endpoint is not enabled for the workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Conversation not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "4a5b6c7d-8e9f-4a0b-9c1d-2e3f4a5b6c7d",
+                      "errors": [
+                        {
+                          "code": "conversation_not_found",
+                          "message": "Conversation not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Rating not accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "No rating request": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "6e2f8a1b-0c47-4d93-8b5a-7f1e3c9d0a26",
+                      "errors": [
+                        {
+                          "code": "rating_request_not_found",
+                          "message": "No rating request has been sent for this conversation"
+                        }
+                      ]
+                    }
+                  },
+                  "Rating window closed": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "1d7c4b9a-5e30-4f68-a2b1-8c0e6d3f7a95",
+                      "errors": [
+                        {
+                          "code": "rating_window_closed",
+                          "message": "The rating window for this conversation has closed"
+                        }
+                      ]
+                    }
+                  },
+                  "Rating locked": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8f3a6c2d-1b94-4e07-9d5c-0a7b2e4f1c63",
+                      "errors": [
+                        {
+                          "code": "rating_locked",
+                          "message": "This rating can no longer be changed because a remark has already been submitted"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/conversations/redact": {
       "post": {
         "tags": [
@@ -34629,7 +35073,7 @@
                 "successful": {
                   "value": {
                     "name": "Fulfilment API key",
-                    "token_value": "sk_live_9f3c2a7b41e8",
+                    "token_value": "example-token-value",
                     "request_header_key": "Authorization",
                     "token_prefix": "Bearer",
                     "description": "Used by the order status connector"
@@ -56888,7 +57332,7 @@
           "token_value": {
             "type": "string",
             "description": "The credential value. Required when \u0060token_type\u0060 is \u0060text\u0060. Must be omitted when \u0060token_type\u0060 is \u0060oauth\u0060. Stored encrypted and never returned by any endpoint.",
-            "example": "sk_live_9f3c2a7b41e8"
+            "example": "example-token-value"
           },
           "request_header_key": {
             "type": "string",
@@ -61098,6 +61542,82 @@
         },
         "description": "Details of first response time of assigned team in seconds."
       },
+      "RateConversationRequest": {
+        "title": "Rate conversation request",
+        "required": [
+          "intercom_user_id",
+          "rating"
+        ],
+        "type": "object",
+        "properties": {
+          "intercom_user_id": {
+            "type": "string",
+            "description": "The unique identifier for the contact the rating request was sent to.",
+            "example": "6541f0a2c3d4e5f607182930"
+          },
+          "rating": {
+            "maximum": 5,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The rating, from 1 to 5.",
+            "example": 4
+          },
+          "remark": {
+            "type": "string",
+            "description": "Free text from the contact to go with the rating.",
+            "example": "Fast and friendly"
+          }
+        }
+      },
+      "RatedConversation": {
+        "title": "Rated conversation",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ConversationRatingType"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The unique identifier for the conversation.",
+            "example": "215471234567890"
+          },
+          "rating": {
+            "type": "integer",
+            "description": "The rating, from 1 to 5.",
+            "example": 4
+          },
+          "remark": {
+            "type": "string",
+            "description": "The free text left with the rating.",
+            "nullable": true,
+            "example": "Fast and friendly"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "The time the rating request was created, as a UNIX timestamp.",
+            "format": "int64",
+            "example": 1793664000,
+            "x-client-original-format": "date-time"
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "The time the rating or remark last changed, as a UNIX timestamp.",
+            "format": "int64",
+            "example": 1793664120,
+            "x-client-original-format": "date-time"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/RatedConversationCustomer"
+          },
+          "teammate": {
+            "$ref": "#/components/schemas/RatedConversationTeammate"
+          }
+        },
+        "description": "The CSAT rating recorded on a conversation.",
+        "x-tags": [
+          "Conversations"
+        ]
+      },
       "ConversationSource": {
         "title": "Conversation source",
         "type": "object",
@@ -65232,8 +65752,8 @@
             },
             "description": "Array of tag names that were added",
             "example": [
-              "feature-shopify-multi-store",
-              "second-tag"
+              "example-tag-1",
+              "example-tag-2"
             ]
           },
           "tags_removed": {
@@ -65243,7 +65763,7 @@
             },
             "description": "Array of tag names that were removed",
             "example": [
-              "feature-embercom-app-serializer-limit-external-plans"
+              "example-tag-3"
             ]
           }
         },
@@ -66737,6 +67257,7 @@
           "2.15",
           "2.16",
           "2.17",
+          "2.18",
           "Preview"
         ],
         "type": "string",
@@ -66837,6 +67358,10 @@
             {
               "value": "2.17",
               "name": "Value217"
+            },
+            {
+              "value": "2.18",
+              "name": "Value218"
             }
           ]
         }
@@ -73026,6 +73551,34 @@
         },
         "description": "The teammate, bot or workflow the rating is attributed to.",
         "nullable": true
+      },
+      "RatedConversationCustomer": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/RatedConversationCustomerType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the contact.",
+            "example": "6541f0a2c3d4e5f607182930"
+          }
+        },
+        "description": "The contact who answered."
+      },
+      "RatedConversationTeammate": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/RatedConversationTeammateType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the teammate, Fin or workflow. For a deleted workflow, this is the identifier recorded with the rating.",
+            "example": "12345"
+          }
+        },
+        "description": "Who was rated."
       },
       "ConversationSourceRecipientsItem": {
         "type": "object",
@@ -84038,6 +84591,24 @@
           ]
         }
       },
+      "ConversationRatingType": {
+        "enum": [
+          "conversation_rating"
+        ],
+        "type": "string",
+        "description": "String representing the object\u0027s type. Always has the value \u0060conversation_rating\u0060.",
+        "example": "conversation_rating",
+        "x-ms-enum": {
+          "name": "ConversationRatingType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "conversation_rating",
+              "name": "ConversationRating"
+            }
+          ]
+        }
+      },
       "CreateArticleRequestState": {
         "enum": [
           "published",
@@ -87559,6 +88130,62 @@
             {
               "value": "team",
               "name": "Team"
+            },
+            {
+              "value": "bot",
+              "name": "Bot"
+            },
+            {
+              "value": "workflow",
+              "name": "Workflow"
+            }
+          ]
+        }
+      },
+      "RatedConversationCustomerType": {
+        "enum": [
+          "user",
+          "lead",
+          "visitor"
+        ],
+        "type": "string",
+        "description": "The type of contact.",
+        "example": "user",
+        "x-ms-enum": {
+          "name": "RatedConversationCustomerType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "user",
+              "name": "User"
+            },
+            {
+              "value": "lead",
+              "name": "Lead"
+            },
+            {
+              "value": "visitor",
+              "name": "Visitor"
+            }
+          ]
+        }
+      },
+      "RatedConversationTeammateType": {
+        "enum": [
+          "admin",
+          "bot",
+          "workflow"
+        ],
+        "type": "string",
+        "description": "\u0060admin\u0060 for a teammate, \u0060bot\u0060 for Fin, or \u0060workflow\u0060 for a workflow.",
+        "example": "admin",
+        "x-ms-enum": {
+          "name": "RatedConversationTeammateType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "admin",
+              "name": "Admin"
             },
             {
               "value": "bot",
