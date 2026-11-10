@@ -88,10 +88,10 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.NewsItem>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.NewsItem.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update a news item.You can also send this request with `PATCH`; it behaves the same as `PUT`.`title`, `body`, `state`, `deliver_silently` and `cover_image_url` keep their current values when you leave them out. `labels` and `newsfeed_assignments` do not: leaving either out clears it, so send the full list on every update. Leaving `reactions` out disables reactions, although the list in the response does not change.Requires the `read_write_news_scope` OAuth scope.
+        /// You can update a news item.You can also send this request with `PATCH`; it behaves the same as `PUT`.Every field you leave out keeps its current value, including `labels`, `newsfeed_assignments` and `reactions`. A list you do send replaces the current one: send an empty `labels` or `newsfeed_assignments` list to clear it, and an empty `reactions` list to turn reactions off.Requires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.NewsItem"/></returns>
-        /// <param name="body">The body of a request that updates an existing news item. Leaving `labels` or `newsfeed_assignments` out clears them, and leaving `reactions` out disables reactions; every other optional field keeps its current value when left out.</param>
+        /// <param name="body">The body of a request that updates an existing news item. Every optional field you leave out keeps its current value, including `labels`, `newsfeed_assignments` and `reactions`.</param>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 400 status code</exception>
@@ -157,10 +157,10 @@ namespace Soenneker.Intercom.OpenApiClient.News.News_items.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update a news item.You can also send this request with `PATCH`; it behaves the same as `PUT`.`title`, `body`, `state`, `deliver_silently` and `cover_image_url` keep their current values when you leave them out. `labels` and `newsfeed_assignments` do not: leaving either out clears it, so send the full list on every update. Leaving `reactions` out disables reactions, although the list in the response does not change.Requires the `read_write_news_scope` OAuth scope.
+        /// You can update a news item.You can also send this request with `PATCH`; it behaves the same as `PUT`.Every field you leave out keeps its current value, including `labels`, `newsfeed_assignments` and `reactions`. A list you do send replaces the current one: send an empty `labels` or `newsfeed_assignments` list to clear it, and an empty `reactions` list to turn reactions off.Requires the `read_write_news_scope` OAuth scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
-        /// <param name="body">The body of a request that updates an existing news item. Leaving `labels` or `newsfeed_assignments` out clears them, and leaving `reactions` out disables reactions; every other optional field keeps its current value when left out.</param>
+        /// <param name="body">The body of a request that updates an existing news item. Every optional field you leave out keeps its current value, including `labels`, `newsfeed_assignments` and `reactions`.</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable

@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The body of a request that updates an existing news item. Leaving `labels` or `newsfeed_assignments` out clears them, and leaving `reactions` out disables reactions; every other optional field keeps its current value when left out.
+    /// The body of a request that updates an existing news item. Every optional field you leave out keeps its current value, including `labels`, `newsfeed_assignments` and `reactions`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateNewsItemRequest : IAdditionalDataHolder, IParsable
@@ -63,7 +63,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>When set to `true`, the news item will appear in the messenger newsfeed without showing a notification badge.</summary>
         public bool? DeliverSilently { get => _explicitNullValueDeliverSilently; set { _explicitNullValueDeliverSilently = value; AdditionalData?.Remove("deliver_silently"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("deliver_silently"); else _explicitNullProperties?.Remove("deliver_silently"); } }
         private bool? _explicitNullValueDeliverSilently = default!;
-        /// <summary>Label names displayed to users to categorize the news item. Send the full list; the labels you leave out are removed.</summary>
+        /// <summary>Label names displayed to users to categorize the news item. A list you send replaces the current labels. Leave the field out to keep them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; AdditionalData?.Remove("labels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
@@ -73,7 +73,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<string> Labels { get => _explicitNullValueLabels; set { _explicitNullValueLabels = value; AdditionalData?.Remove("labels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("labels"); else _explicitNullProperties?.Remove("labels"); } }
         private List<string> _explicitNullValueLabels = default!;
 #endif
-        /// <summary>A list of newsfeed_assignments to assign to the specified newsfeed. Send the full list; the assignments you leave out are removed.</summary>
+        /// <summary>A list of newsfeed_assignments to assign to the specified newsfeed. A list you send replaces the current assignments. Leave the field out to keep them.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<global::Soenneker.Intercom.OpenApiClient.Models.NewsfeedAssignment>? NewsfeedAssignments { get => _explicitNullValueNewsfeedAssignments; set { _explicitNullValueNewsfeedAssignments = value; AdditionalData?.Remove("newsfeed_assignments"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("newsfeed_assignments"); else _explicitNullProperties?.Remove("newsfeed_assignments"); } }

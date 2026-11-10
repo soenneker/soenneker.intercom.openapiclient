@@ -111,7 +111,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>Timestamp for when the news item last went live. Null if the news item has never been live.</summary>
         public long? PublishedAt { get => _explicitNullValuePublishedAt; set { _explicitNullValuePublishedAt = value; AdditionalData?.Remove("published_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("published_at"); else _explicitNullProperties?.Remove("published_at"); } }
         private long? _explicitNullValuePublishedAt = default!;
-        /// <summary>Ordered list of emoji reactions to the news item. When empty, reactions are disabled. An update that leaves out `reactions` also disables them but leaves this list as it was.</summary>
+        /// <summary>Ordered list of emoji reactions to the news item. When empty, reactions are disabled. An update that leaves out `reactions` keeps the current reactions.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public List<string>? Reactions { get => _explicitNullValueReactions; set { _explicitNullValueReactions = value; AdditionalData?.Remove("reactions"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("reactions"); else _explicitNullProperties?.Remove("reactions"); } }

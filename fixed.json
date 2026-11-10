@@ -42265,7 +42265,7 @@
           "News"
         ],
         "summary": "Update a news item",
-        "description": "You can update a news item.\n\nYou can also send this request with \u0060PATCH\u0060; it behaves the same as \u0060PUT\u0060.\n\n\u0060title\u0060, \u0060body\u0060, \u0060state\u0060, \u0060deliver_silently\u0060 and \u0060cover_image_url\u0060 keep their current values when you leave them out. \u0060labels\u0060 and \u0060newsfeed_assignments\u0060 do not: leaving either out clears it, so send the full list on every update. Leaving \u0060reactions\u0060 out disables reactions, although the list in the response does not change.\n\nRequires the \u0060read_write_news_scope\u0060 OAuth scope.\n",
+        "description": "You can update a news item.\n\nYou can also send this request with \u0060PATCH\u0060; it behaves the same as \u0060PUT\u0060.\n\nEvery field you leave out keeps its current value, including \u0060labels\u0060, \u0060newsfeed_assignments\u0060 and \u0060reactions\u0060. A list you do send replaces the current one: send an empty \u0060labels\u0060 or \u0060newsfeed_assignments\u0060 list to clear it, and an empty \u0060reactions\u0060 list to turn reactions off.\n\nRequires the \u0060read_write_news_scope\u0060 OAuth scope.\n",
         "operationId": "UpdateNewsItem",
         "parameters": [
           {
@@ -67950,7 +67950,7 @@
               "description": "The emoji reaction to the news item.",
               "example": "\uD83D\uDC4D"
             },
-            "description": "Ordered list of emoji reactions to the news item. When empty, reactions are disabled. An update that leaves out \u0060reactions\u0060 also disables them but leaves this list as it was."
+            "description": "Ordered list of emoji reactions to the news item. When empty, reactions are disabled. An update that leaves out \u0060reactions\u0060 keeps the current reactions."
           },
           "deliver_silently": {
             "type": "boolean",
@@ -68090,7 +68090,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Label names displayed to users to categorize the news item. Send the full list; the labels you leave out are removed.",
+            "description": "Label names displayed to users to categorize the news item. A list you send replaces the current labels. Leave the field out to keep them.",
             "example": [
               "Product",
               "Update",
@@ -68119,10 +68119,10 @@
             "items": {
               "$ref": "#/components/schemas/NewsfeedAssignment"
             },
-            "description": "A list of newsfeed_assignments to assign to the specified newsfeed. Send the full list; the assignments you leave out are removed."
+            "description": "A list of newsfeed_assignments to assign to the specified newsfeed. A list you send replaces the current assignments. Leave the field out to keep them."
           }
         },
-        "description": "The body of a request that updates an existing news item. Leaving \u0060labels\u0060 or \u0060newsfeed_assignments\u0060 out clears them, and leaving \u0060reactions\u0060 out disables reactions; every other optional field keeps its current value when left out."
+        "description": "The body of a request that updates an existing news item. Every optional field you leave out keeps its current value, including \u0060labels\u0060, \u0060newsfeed_assignments\u0060 and \u0060reactions\u0060."
       },
       "Newsfeed": {
         "title": "Newsfeed",
