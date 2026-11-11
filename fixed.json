@@ -38408,8 +38408,8 @@
         "tags": [
           "Ecommerce Connectors"
         ],
-        "summary": "Submit a product event",
-        "description": "Send a single product change to an ecommerce connector. Use product events to keep\nFin\u0027s product knowledge current between full catalog uploads. Each request carries\none event.\n\nA full catalog must be uploaded with\n[Upload a product catalog](/docs/references/preview/rest-api/api.intercom.io/ecommerce-connectors/uploadecommercecatalog)\nbefore you send events. Until then, this endpoint returns \u0060409 Conflict\u0060.\n\n## Event types\n\n| \u0060type\u0060 | \u0060data\u0060 | Effect |\n|---|---|---|\n| \u0060product.created\u0060 | \u0060product\u0060 | Adds the product, or updates it if a product with the same \u0060id\u0060 already exists. |\n| \u0060product.updated\u0060 | \u0060product\u0060 | Updates the product with the same \u0060id\u0060, or adds it if it does not exist yet. |\n| \u0060product.deleted\u0060 | \u0060product_id\u0060 | Removes the product from Fin\u0027s knowledge. |\n\nFor \u0060product.created\u0060 and \u0060product.updated\u0060, send the full product object, not only the\nfields that changed. It uses the same fields as a catalog product\n([\u0060ecommerce_catalog_product\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_product)),\nplus a required \u0060updated_at\u0060 timestamp. The product is matched by \u0060id\u0060. The serialized\nproduct must be 60 KB or smaller.\n\nFor \u0060product.deleted\u0060, send only \u0060data.product_id\u0060.\n\n\u0060occurred_at\u0060 is required on every event and must be an ISO 8601 timestamp.\n\n## Processing\n\nThe endpoint returns \u0060202 Accepted\u0060 with an \u0060event_id\u0060 once the event is queued.\nProcessing is asynchronous, so the change may take a short time to reach Fin.\n",
+        "summary": "Submit an ecommerce event",
+        "description": "Send a single product or order change to an ecommerce connector. Use product events to\nkeep Fin\u0027s product knowledge current between full catalog uploads, and order events to\ntell Fin about the orders your store receives. Each request carries one event.\n\nRequires the \u0060write_content\u0060 OAuth scope. Each connector accepts up to 600 requests per\nminute.\n\nA full catalog must be uploaded with\n[Upload a product catalog](/docs/references/preview/rest-api/api.intercom.io/ecommerce-connectors/uploadecommercecatalog)\nbefore you send product events. Until then, product events return \u0060409 Conflict\u0060. Order\nevents do not need a catalog.\n\n## Event types\n\n| \u0060type\u0060 | \u0060data\u0060 | Effect |\n|---|---|---|\n| \u0060product.created\u0060 | \u0060product\u0060 | Adds the product, or updates it if a product with the same \u0060id\u0060 already exists. |\n| \u0060product.updated\u0060 | \u0060product\u0060 | Updates the product with the same \u0060id\u0060, or adds it if it does not exist yet. |\n| \u0060product.deleted\u0060 | \u0060product_id\u0060 | Removes the product from Fin\u0027s knowledge. |\n| \u0060order.created\u0060 | \u0060order\u0060 | A customer placed an order. |\n| \u0060order.updated\u0060 | \u0060order\u0060 | An order changed, including when it is cancelled or refunded. |\n| \u0060order.deleted\u0060 | \u0060order_id\u0060, \u0060updated_at\u0060 | An order was deleted. |\n\nFor \u0060product.created\u0060 and \u0060product.updated\u0060, send the full product object, not only the\nfields that changed. It uses the same fields as a catalog product\n([\u0060ecommerce_catalog_product\u0060](/docs/references/preview/rest-api/api.intercom.io/models/ecommerce_catalog_product)),\nplus a required \u0060updated_at\u0060 timestamp. The product is matched by \u0060id\u0060. The serialized\nproduct must be 60 KB or smaller.\n\nFor \u0060product.deleted\u0060, send only \u0060data.product_id\u0060.\n\n\u0060occurred_at\u0060 is required on every event and must be an ISO 8601 timestamp.\n\n## Order events\n\nFor \u0060order.created\u0060 and \u0060order.updated\u0060, send the full order object in \u0060data.order\u0060. These fields are\nrequired: \u0060id\u0060, \u0060currency_code\u0060, \u0060total_price\u0060 (zero or more), \u0060ordered_at\u0060, \u0060updated_at\u0060\n(both ISO 8601 timestamps) and \u0060line_items\u0060. Each line item needs a \u0060product_id\u0060, and an\norder can have up to 500 line items. The serialized order must be 60 KB or smaller.\n\nTo connect an order to a Fin conversation, send the conversation\u0027s ID as\n\u0060fin_conversation_id\u0060. \u0060customer.email\u0060 and \u0060status\u0060 are optional. \u0060status\u0060 must be one of\n\u0060pending\u0060, \u0060authorized\u0060, \u0060partially_paid\u0060, \u0060paid\u0060, \u0060partially_refunded\u0060, \u0060refunded\u0060 or\n\u0060voided\u0060. Any other value returns \u0060400\u0060.\n\nFor \u0060order.deleted\u0060, send only \u0060data.order_id\u0060 and \u0060data.updated_at\u0060 (an ISO 8601\ntimestamp). Send the time the order was deleted.\n\nTo report a refund, send an \u0060order.updated\u0060 event with \u0060status\u0060 set to \u0060refunded\u0060 or\n\u0060partially_refunded\u0060. To report a cancellation, send an \u0060order.updated\u0060 event with \u0060status\u0060\nset to \u0060voided\u0060, or \u0060refunded\u0060 if the payment was returned.\n\n## Processing\n\nProduct events return \u0060202 Accepted\u0060 with an \u0060event_id\u0060 once the event is queued.\nProcessing is asynchronous, so the change may take a short time to reach Fin.\n\nOrder events return \u0060202 Accepted\u0060 with the \u0060order_id\u0060 once the order is accepted.\n",
         "operationId": "SubmitEcommerceProductEvent",
         "parameters": [
           {
@@ -38584,6 +38584,72 @@
                       "product_id": "tent-2p-ultralight"
                     }
                   }
+                },
+                "order_created": {
+                  "summary": "Order created",
+                  "value": {
+                    "type": "order.created",
+                    "occurred_at": "2026-10-21T10:15:00Z",
+                    "data": {
+                      "order": {
+                        "id": "ORD-10492",
+                        "status": "paid",
+                        "currency_code": "USD",
+                        "total_price": 349,
+                        "ordered_at": "2026-10-21T10:14:52Z",
+                        "updated_at": "2026-10-21T10:14:52Z",
+                        "customer": {
+                          "email": "alex@example.com"
+                        },
+                        "fin_conversation_id": "215470000012345",
+                        "line_items": [
+                          {
+                            "product_id": "tent-2p-ultralight",
+                            "variant_id": "tent-2p-ultralight-green",
+                            "quantity": 1,
+                            "price": 349
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "order_updated": {
+                  "summary": "Order updated",
+                  "value": {
+                    "type": "order.updated",
+                    "occurred_at": "2026-10-24T16:40:00Z",
+                    "data": {
+                      "order": {
+                        "id": "ORD-10492",
+                        "status": "refunded",
+                        "currency_code": "USD",
+                        "total_price": 349,
+                        "ordered_at": "2026-10-21T10:14:52Z",
+                        "updated_at": "2026-10-24T16:39:30Z",
+                        "fin_conversation_id": "215470000012345",
+                        "line_items": [
+                          {
+                            "product_id": "tent-2p-ultralight",
+                            "variant_id": "tent-2p-ultralight-green",
+                            "quantity": 1,
+                            "price": 349
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "order_deleted": {
+                  "summary": "Order deleted",
+                  "value": {
+                    "type": "order.deleted",
+                    "occurred_at": "2026-10-25T09:00:05Z",
+                    "data": {
+                      "order_id": "ORD-10492",
+                      "updated_at": "2026-10-25T09:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -38598,9 +38664,14 @@
                   "$ref": "#/components/schemas/EcommerceProductEventResponse"
                 },
                 "examples": {
-                  "Event accepted": {
+                  "Product event accepted": {
                     "value": {
                       "event_id": 81273
+                    }
+                  },
+                  "Order event accepted": {
+                    "value": {
+                      "order_id": "ORD-10492"
                     }
                   }
                 }
@@ -38622,7 +38693,7 @@
                       "errors": [
                         {
                           "code": "invalid_event",
-                          "message": "type must be one of product.created, product.updated, product.deleted"
+                          "message": "type must be one of product.created, product.updated, product.deleted, order.created, order.updated, order.deleted"
                         }
                       ]
                     }
@@ -38662,6 +38733,42 @@
                         }
                       ]
                     }
+                  },
+                  "Invalid order": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "data.order.currency_code is required; data.order.total_price must be a non-negative number"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid order line items": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "data.order.line_items must be a list of up to 500 items, each with a product_id"
+                        }
+                      ]
+                    }
+                  },
+                  "Order too large": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "invalid_event",
+                          "message": "data.order exceeds 60KB"
+                        }
+                      ]
+                    }
                   }
                 }
               }
@@ -38669,6 +38776,30 @@
           },
           "401": {
             "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Order events disabled": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "test-uuid-replacement",
+                      "errors": [
+                        {
+                          "code": "order_events_disabled",
+                          "message": "Order events are not enabled for this workspace."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "description": "Not found.",
@@ -38738,9 +38869,14 @@
                   "$ref": "#/components/schemas/EcommerceProductEventResponse"
                 },
                 "examples": {
-                  "Event accepted": {
+                  "Product event accepted": {
                     "value": {
                       "event_id": 81273
+                    }
+                  },
+                  "Order event accepted": {
+                    "value": {
+                      "order_id": "ORD-10492"
                     }
                   }
                 }
@@ -44962,6 +45098,197 @@
                         {
                           "code": "not_found",
                           "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "e097e446-9ae6-44a8-8e13-2bf3008b87ef",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "a3e5b8e2-1234-5678-9abc-def012345678",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Calls"
+        ],
+        "summary": "Delete a call recording",
+        "description": "Permanently deletes every recording and transcript of the call, including the part of the call handled by Fin. Afterwards, the call\u0027s \u0060recording_url\u0060 and \u0060fin_recording_url\u0060 are \u0060null\u0060. Deleting a recording that was already deleted returns the same successful response.\n\nRequires the \u0060write_conversations\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "DeleteCallRecording",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the call",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedCallRecordingObject"
+                },
+                "examples": {
+                  "successful": {
+                    "value": {
+                      "id": "123",
+                      "object": "call",
+                      "deleted": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Call or recording not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Recording not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7c1e9a42-5b3d-4f86-a0e2-d94b6c18f5a3",
+                      "errors": [
+                        {
+                          "code": "call_recording_not_found",
+                          "message": "Recording Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Call not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3e8b5d27-9a14-4c6f-b2d0-61f7a4c9e835",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Conversation access restricted": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5a2f7c91-4e6b-4d38-9f1a-c8b3e0d7a264",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access this conversation"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Recording deletion is temporarily unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Temporarily unavailable": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9d4c2b78-1f5e-4a93-b6c0-e27a8f3d5b19",
+                      "errors": [
+                        {
+                          "code": "conflict",
+                          "message": "Recording deletion is temporarily unavailable, please retry later."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Recording deletion is unavailable for the workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Deletion unavailable": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2b6e8f13-7c4a-4d59-a1e3-f05d9c7b4a82",
+                      "errors": [
+                        {
+                          "code": "legal_hold",
+                          "message": "Recording deletion is currently unavailable."
                         }
                       ]
                     }
@@ -65250,6 +65577,26 @@
         },
         "description": "Response returned when an object is deleted"
       },
+      "DeletedCallRecordingObject": {
+        "title": "Deleted Call Recording Object",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the call which you provided in the URL.",
+            "example": "123"
+          },
+          "object": {
+            "$ref": "#/components/schemas/CallObject"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the call\u0027s recordings were deleted successfully or not.",
+            "example": true
+          }
+        },
+        "description": "Response returned when a call\u0027s recordings are deleted"
+      },
       "DeletedNoteObject": {
         "title": "Deleted Note Object",
         "type": "object",
@@ -65549,6 +65896,99 @@
         },
         "description": "The full product sent in a \u0060product.created\u0060 or \u0060product.updated\u0060 event. It uses the same\nfields as \u0060ecommerce_catalog_product\u0060, plus \u0060updated_at\u0060, which is required. The serialized\nproduct must be 60 KB or smaller.\n"
       },
+      "EcommerceOrderEventLineItem": {
+        "title": "Ecommerce Order Event Line Item",
+        "required": [
+          "product_id"
+        ],
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "The \u0060id\u0060 of the product, as sent in your catalog.",
+            "example": "tent-2p-ultralight"
+          },
+          "variant_id": {
+            "type": "string",
+            "description": "The \u0060id\u0060 of the product variant that was ordered.",
+            "nullable": true,
+            "example": "tent-2p-ultralight-green"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "How many units were ordered.",
+            "example": 1
+          },
+          "price": {
+            "type": "number",
+            "description": "The price of one unit, in the order\u0027s currency.",
+            "example": 349
+          }
+        },
+        "description": "A product in an order."
+      },
+      "EcommerceOrderEventOrder": {
+        "title": "Ecommerce Order Event Order",
+        "required": [
+          "id",
+          "currency_code",
+          "total_price",
+          "ordered_at",
+          "updated_at",
+          "line_items"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the order in your store.",
+            "example": "ORD-10492"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EcommerceOrderEventOrderStatus"
+          },
+          "currency_code": {
+            "type": "string",
+            "description": "The three-letter ISO 4217 currency code of the order.",
+            "example": "USD"
+          },
+          "total_price": {
+            "type": "number",
+            "description": "The total of the order. Must be zero or more.",
+            "example": 349
+          },
+          "ordered_at": {
+            "type": "string",
+            "description": "When the customer placed the order, as an ISO 8601 timestamp.",
+            "format": "date-time",
+            "example": "2026-10-21T10:14:52Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "When the order was last changed in your store, as an ISO 8601 timestamp.",
+            "format": "date-time",
+            "example": "2026-10-21T10:14:52Z"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/EcommerceOrderEventOrderCustomer"
+          },
+          "fin_conversation_id": {
+            "type": "string",
+            "description": "The ID of the Fin conversation that led to this order, if there was one.",
+            "nullable": true,
+            "example": "215470000012345"
+          },
+          "line_items": {
+            "maxItems": 500,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EcommerceOrderEventLineItem"
+            },
+            "description": "The products in the order. Up to 500 items."
+          }
+        },
+        "description": "The full order sent in an \u0060order.*\u0060 event. The serialized order must be 60 KB or smaller.\n"
+      },
       "EcommerceProductEventRequest": {
         "title": "Ecommerce Product Event Request",
         "required": [
@@ -65571,20 +66011,25 @@
             "$ref": "#/components/schemas/EcommerceProductEventRequestData"
           }
         },
-        "description": "A single product event."
+        "description": "A single product or order event."
       },
       "EcommerceProductEventResponse": {
         "title": "Ecommerce Product Event Response",
         "type": "object",
         "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "The \u0060id\u0060 of the accepted order. Returned for order events.",
+            "example": "ORD-10492"
+          },
           "event_id": {
             "type": "integer",
-            "description": "The unique identifier for the queued event.",
+            "description": "The unique identifier for the queued event. Returned for product events.",
             "format": "int64",
             "example": 1000000471233
           }
         },
-        "description": "Returned when a product event is accepted and queued."
+        "description": "Returned when an event is accepted. Product events return \u0060event_id\u0060. Order events return \u0060order_id\u0060."
       },
       "EmailAddressHeader": {
         "title": "Email Address Header",
@@ -74294,6 +74739,18 @@
           }
         }
       },
+      "EcommerceOrderEventOrderCustomer": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The customer\u0027s email address.",
+            "nullable": true,
+            "example": "alex@example.com"
+          }
+        },
+        "description": "The customer who placed the order."
+      },
       "EcommerceProductEventRequestData": {
         "type": "object",
         "properties": {
@@ -74304,9 +74761,23 @@
             "type": "string",
             "description": "The \u0060id\u0060 of the product to delete. Required for \u0060product.deleted\u0060.",
             "example": "tent-2p-ultralight"
+          },
+          "order": {
+            "$ref": "#/components/schemas/EcommerceOrderEventOrder"
+          },
+          "order_id": {
+            "type": "string",
+            "description": "The \u0060id\u0060 of the order to delete. Required for \u0060order.deleted\u0060.",
+            "example": "ORD-10492"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "When the order was deleted, as an ISO 8601 timestamp. Required for \u0060order.deleted\u0060.",
+            "format": "date-time",
+            "example": "2026-10-25T09:00:00Z"
           }
         },
-        "description": "The event payload. Send \u0060product\u0060 for \u0060product.created\u0060 and \u0060product.updated\u0060, and \u0060product_id\u0060 for \u0060product.deleted\u0060."
+        "description": "The event payload. Send \u0060product\u0060 for \u0060product.created\u0060 and \u0060product.updated\u0060, \u0060product_id\u0060 for \u0060product.deleted\u0060, \u0060order\u0060 for \u0060order.created\u0060 and \u0060order.updated\u0060, and \u0060order_id\u0060 and \u0060updated_at\u0060 for \u0060order.deleted\u0060."
       },
       "ConversationAttributeUpdatedByWorkflowWorkflow": {
         "type": "object",
@@ -85940,6 +86411,24 @@
           ]
         }
       },
+      "CallObject": {
+        "enum": [
+          "call"
+        ],
+        "type": "string",
+        "description": "The type of object whose recordings were deleted - call.",
+        "example": "call",
+        "x-ms-enum": {
+          "name": "CallObject",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "call",
+              "name": "Call"
+            }
+          ]
+        }
+      },
       "NoteType": {
         "enum": [
           "note"
@@ -85976,14 +86465,65 @@
           ]
         }
       },
+      "EcommerceOrderEventOrderStatus": {
+        "enum": [
+          "pending",
+          "authorized",
+          "partially_paid",
+          "paid",
+          "partially_refunded",
+          "refunded",
+          "voided"
+        ],
+        "type": "string",
+        "description": "The order\u0027s payment status in your store.",
+        "example": "paid",
+        "x-ms-enum": {
+          "name": "EcommerceOrderEventOrderStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "pending",
+              "name": "Pending"
+            },
+            {
+              "value": "authorized",
+              "name": "Authorized"
+            },
+            {
+              "value": "partially_paid",
+              "name": "PartiallyPaid"
+            },
+            {
+              "value": "paid",
+              "name": "Paid"
+            },
+            {
+              "value": "partially_refunded",
+              "name": "PartiallyRefunded"
+            },
+            {
+              "value": "refunded",
+              "name": "Refunded"
+            },
+            {
+              "value": "voided",
+              "name": "Voided"
+            }
+          ]
+        }
+      },
       "EcommerceProductEventRequestType": {
         "enum": [
           "product.created",
           "product.updated",
-          "product.deleted"
+          "product.deleted",
+          "order.created",
+          "order.updated",
+          "order.deleted"
         ],
         "type": "string",
-        "description": "The kind of product change.",
+        "description": "The kind of change.",
         "example": "product.updated",
         "x-ms-enum": {
           "name": "EcommerceProductEventRequestType",
@@ -86000,6 +86540,18 @@
             {
               "value": "product.deleted",
               "name": "ProductDeleted"
+            },
+            {
+              "value": "order.created",
+              "name": "OrderCreated"
+            },
+            {
+              "value": "order.updated",
+              "name": "OrderUpdated"
+            },
+            {
+              "value": "order.deleted",
+              "name": "OrderDeleted"
             }
           ]
         }

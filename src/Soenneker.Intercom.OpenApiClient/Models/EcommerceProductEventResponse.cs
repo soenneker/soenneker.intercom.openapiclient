@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// Returned when a product event is accepted and queued.
+    /// Returned when an event is accepted. Product events return `event_id`. Order events return `order_id`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class EcommerceProductEventResponse : IAdditionalDataHolder, IParsable
@@ -20,13 +20,25 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if (parseNode.GetChildNode("event_id") is null) { _explicitNullValueEventId = default!; _explicitNullProperties?.Remove("event_id"); }
             else if (parseNode.GetChildNode("event_id") is { } nullNodeEventId && nullNodeEventId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) EventId = null;
+            if (parseNode.GetChildNode("order_id") is null) { _explicitNullValueOrderId = default!; _explicitNullProperties?.Remove("order_id"); }
+            else if (parseNode.GetChildNode("order_id") is { } nullNodeOrderId && nullNodeOrderId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OrderId = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The unique identifier for the queued event.</summary>
+        /// <summary>The unique identifier for the queued event. Returned for product events.</summary>
         public long? EventId { get => _explicitNullValueEventId; set { _explicitNullValueEventId = value; AdditionalData?.Remove("event_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("event_id"); else _explicitNullProperties?.Remove("event_id"); } }
         private long? _explicitNullValueEventId = default!;
+        /// <summary>The `id` of the accepted order. Returned for order events.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OrderId { get => _explicitNullValueOrderId; set { _explicitNullValueOrderId = value; AdditionalData?.Remove("order_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order_id"); else _explicitNullProperties?.Remove("order_id"); } }
+        private string? _explicitNullValueOrderId = default!;
+#nullable restore
+#else
+        public string OrderId { get => _explicitNullValueOrderId; set { _explicitNullValueOrderId = value; AdditionalData?.Remove("order_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order_id"); else _explicitNullProperties?.Remove("order_id"); } }
+        private string _explicitNullValueOrderId = default!;
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventResponse"/> and sets the default values.
         /// </summary>
@@ -53,6 +65,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "event_id", n => { EventId = n.GetLongValue(); } },
+                { "order_id", n => { OrderId = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -63,6 +76,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteLongValue("event_id", EventId);
+            writer.WriteStringValue("order_id", OrderId);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

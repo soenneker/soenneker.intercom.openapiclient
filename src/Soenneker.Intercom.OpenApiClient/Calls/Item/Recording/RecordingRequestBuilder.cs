@@ -34,6 +34,39 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
         {
         }
         /// <summary>
+        /// Permanently deletes every recording and transcript of the call, including the part of the call handled by Fin. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
+        /// </summary>
+        /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject"/></returns>
+        /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 401 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 403 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 404 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 409 status code</exception>
+        /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#nullable restore
+#else
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        {
+#endif
+            var requestInfo = ToDeleteRequestInformation(requestConfiguration);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "401", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "403", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "404", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "409", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "422", global::Soenneker.Intercom.OpenApiClient.Models.Error.CreateFromDiscriminatorValue },
+                { "4XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+                { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
         /// Redirects to a signed URL for the call&apos;s recording if it exists.Requires the `read_conversations` OAuth scope.
         /// </summary>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -58,6 +91,25 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
                 { "5XX", global::Soenneker.OpenApi.Generated.OpenApiRawError.CreateFromDiscriminatorValue },
             };
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Permanently deletes every recording and transcript of the call, including the part of the call handled by Fin. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
+        /// </summary>
+        /// <returns>A <see cref="RequestInformation"/></returns>
+        /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        {
+#nullable restore
+#else
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        {
+#endif
+            var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
+            requestInfo.Configure(requestConfiguration);
+            requestInfo.Headers.TryAdd("Accept", "application/json");
+            return requestInfo;
         }
         /// <summary>
         /// Redirects to a signed URL for the call&apos;s recording if it exists.Requires the `read_conversations` OAuth scope.

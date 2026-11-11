@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
-    /// <summary>The kind of product change.</summary>
+    /// <summary>The kind of change.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public enum EcommerceProductEventRequestType
     {
@@ -18,6 +18,18 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         [EnumMember(Value = "product.deleted")]
         #pragma warning disable CS1591
         ProductDeleted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "order.created")]
+        #pragma warning disable CS1591
+        OrderCreated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "order.updated")]
+        #pragma warning disable CS1591
+        OrderUpdated,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "order.deleted")]
+        #pragma warning disable CS1591
+        OrderDeleted,
         #pragma warning restore CS1591
     }
 }

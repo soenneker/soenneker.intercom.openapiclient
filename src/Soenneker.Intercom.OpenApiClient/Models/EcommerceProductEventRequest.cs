@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// A single product event.
+    /// A single product or order event.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class EcommerceProductEventRequest : IAdditionalDataHolder, IParsable
@@ -28,7 +28,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
-        /// <summary>The event payload. Send `product` for `product.created` and `product.updated`, and `product_id` for `product.deleted`.</summary>
+        /// <summary>The event payload. Send `product` for `product.created` and `product.updated`, `product_id` for `product.deleted`, `order` for `order.created` and `order.updated`, and `order_id` and `updated_at` for `order.deleted`.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventRequestData? Data { get => _explicitNullValueData; set { _explicitNullValueData = value; AdditionalData?.Remove("data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
@@ -41,7 +41,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>When the change happened, as an ISO 8601 timestamp.</summary>
         public DateTimeOffset? OccurredAt { get => _explicitNullValueOccurredAt; set { _explicitNullValueOccurredAt = value; AdditionalData?.Remove("occurred_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("occurred_at"); else _explicitNullProperties?.Remove("occurred_at"); } }
         private DateTimeOffset? _explicitNullValueOccurredAt = default!;
-        /// <summary>The kind of product change.</summary>
+        /// <summary>The kind of change.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventRequestType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventRequestType? _explicitNullValueType = default!;
         /// <summary>

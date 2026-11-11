@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The event payload. Send `product` for `product.created` and `product.updated`, and `product_id` for `product.deleted`.
+    /// The event payload. Send `product` for `product.created` and `product.updated`, `product_id` for `product.deleted`, `order` for `order.created` and `order.updated`, and `order_id` and `updated_at` for `order.deleted`.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class EcommerceProductEventRequestData : IAdditionalDataHolder, IParsable
@@ -18,14 +18,40 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("order") is null) { _explicitNullValueOrder = default!; _explicitNullProperties?.Remove("order"); }
+            else if (parseNode.GetChildNode("order") is { } nullNodeOrder && nullNodeOrder.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Order = null;
+            if (parseNode.GetChildNode("order_id") is null) { _explicitNullValueOrderId = default!; _explicitNullProperties?.Remove("order_id"); }
+            else if (parseNode.GetChildNode("order_id") is { } nullNodeOrderId && nullNodeOrderId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) OrderId = null;
             if (parseNode.GetChildNode("product") is null) { _explicitNullValueProduct = default!; _explicitNullProperties?.Remove("product"); }
             else if (parseNode.GetChildNode("product") is { } nullNodeProduct && nullNodeProduct.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Product = null;
             if (parseNode.GetChildNode("product_id") is null) { _explicitNullValueProductId = default!; _explicitNullProperties?.Remove("product_id"); }
             else if (parseNode.GetChildNode("product_id") is { } nullNodeProductId && nullNodeProductId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) ProductId = null;
+            if (parseNode.GetChildNode("updated_at") is null) { _explicitNullValueUpdatedAt = default!; _explicitNullProperties?.Remove("updated_at"); }
+            else if (parseNode.GetChildNode("updated_at") is { } nullNodeUpdatedAt && nullNodeUpdatedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) UpdatedAt = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The full order sent in an `order.*` event. The serialized order must be 60 KB or smaller.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder? Order { get => _explicitNullValueOrder; set { _explicitNullValueOrder = value; AdditionalData?.Remove("order"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order"); else _explicitNullProperties?.Remove("order"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder? _explicitNullValueOrder = default!;
+#nullable restore
+#else
+        public global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder Order { get => _explicitNullValueOrder; set { _explicitNullValueOrder = value; AdditionalData?.Remove("order"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order"); else _explicitNullProperties?.Remove("order"); } }
+        private global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder _explicitNullValueOrder = default!;
+#endif
+        /// <summary>The `id` of the order to delete. Required for `order.deleted`.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? OrderId { get => _explicitNullValueOrderId; set { _explicitNullValueOrderId = value; AdditionalData?.Remove("order_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order_id"); else _explicitNullProperties?.Remove("order_id"); } }
+        private string? _explicitNullValueOrderId = default!;
+#nullable restore
+#else
+        public string OrderId { get => _explicitNullValueOrderId; set { _explicitNullValueOrderId = value; AdditionalData?.Remove("order_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("order_id"); else _explicitNullProperties?.Remove("order_id"); } }
+        private string _explicitNullValueOrderId = default!;
+#endif
         /// <summary>The full product sent in a `product.created` or `product.updated` event. It uses the samefields as `ecommerce_catalog_product`, plus `updated_at`, which is required. The serializedproduct must be 60 KB or smaller.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -46,6 +72,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string ProductId { get => _explicitNullValueProductId; set { _explicitNullValueProductId = value; AdditionalData?.Remove("product_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("product_id"); else _explicitNullProperties?.Remove("product_id"); } }
         private string _explicitNullValueProductId = default!;
 #endif
+        /// <summary>When the order was deleted, as an ISO 8601 timestamp. Required for `order.deleted`.</summary>
+        public DateTimeOffset? UpdatedAt { get => _explicitNullValueUpdatedAt; set { _explicitNullValueUpdatedAt = value; AdditionalData?.Remove("updated_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("updated_at"); else _explicitNullProperties?.Remove("updated_at"); } }
+        private DateTimeOffset? _explicitNullValueUpdatedAt = default!;
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventRequestData"/> and sets the default values.
         /// </summary>
@@ -71,8 +100,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "order", n => { Order = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder.CreateFromDiscriminatorValue); } },
+                { "order_id", n => { OrderId = n.GetStringValue(); } },
                 { "product", n => { Product = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct.CreateFromDiscriminatorValue); } },
                 { "product_id", n => { ProductId = n.GetStringValue(); } },
+                { "updated_at", n => { UpdatedAt = n.GetDateTimeOffsetValue(); } },
             };
         }
         /// <summary>
@@ -82,8 +114,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceOrderEventOrder>("order", Order);
+            writer.WriteStringValue("order_id", OrderId);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProduct>("product", Product);
             writer.WriteStringValue("product_id", ProductId);
+            writer.WriteDateTimeOffsetValue("updated_at", UpdatedAt);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }
