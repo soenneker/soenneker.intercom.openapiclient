@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCollectionObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedCollectionObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Collection"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -88,7 +88,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Collection>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Collection.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update the details of a single collection by making a PUT request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.`help_center_id` is checked but never applied. It must match the help center of the collection&apos;s articles and sub-collections, or the request returns a `400`. A collection with no content rejects any `help_center_id`, so leave it out. Moving a collection to another help center isn&apos;t supported.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can update the details of a single collection by making a PUT request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.`help_center_id` is checked but never applied. It must match the help center of the collection&apos;s articles and sub-collections, or the request returns a `400`. A collection with no content rejects any `help_center_id`, so leave it out. Moving a collection to another help center isn&apos;t supported.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Collection"/></returns>
         /// <param name="body">You can update a collection</param>
@@ -138,7 +138,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -157,7 +157,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update the details of a single collection by making a PUT request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.`help_center_id` is checked but never applied. It must match the help center of the collection&apos;s articles and sub-collections, or the request returns a `400`. A collection with no content rejects any `help_center_id`, so leave it out. Moving a collection to another help center isn&apos;t supported.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can update the details of a single collection by making a PUT request to `https://api.intercom.io/help_center/collections/&lt;id&gt;`.`help_center_id` is checked but never applied. It must match the help center of the collection&apos;s articles and sub-collections, or the request returns a `400`. A collection with no content rejects any `help_center_id`, so leave it out. Moving a collection to another help center isn&apos;t supported.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can update a collection</param>

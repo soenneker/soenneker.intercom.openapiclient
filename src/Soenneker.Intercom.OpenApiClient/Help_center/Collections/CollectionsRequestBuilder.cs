@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
         {
         }
         /// <summary>
-        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CollectionList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -74,7 +74,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.CollectionList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.CollectionList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Collection"/></returns>
         /// <param name="body">You can create a collection</param>
@@ -103,7 +103,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Collection>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Collection.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -122,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create a collection</param>
@@ -153,7 +153,7 @@ namespace Soenneker.Intercom.OpenApiClient.Help_center.Collections
             return new global::Soenneker.Intercom.OpenApiClient.Help_center.Collections.CollectionsRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class CollectionsRequestBuilderGetQueryParameters 

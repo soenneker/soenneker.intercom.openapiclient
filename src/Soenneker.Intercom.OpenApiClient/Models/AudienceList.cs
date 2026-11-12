@@ -56,7 +56,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The total number of pages.</summary>
         public int? TotalPages { get => _explicitNullValueTotalPages; set { _explicitNullValueTotalPages = value; AdditionalData?.Remove("total_pages"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("total_pages"); else _explicitNullProperties?.Remove("total_pages"); } }
         private int? _explicitNullValueTotalPages = default!;
-        /// <summary>The type of the object.</summary>
+        /// <summary>The type of the object, always `list`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ListType? _explicitNullValueType = default!;
         /// <summary>

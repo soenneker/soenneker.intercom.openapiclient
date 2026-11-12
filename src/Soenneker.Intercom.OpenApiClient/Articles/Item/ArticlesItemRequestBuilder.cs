@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DeletedArticleObject>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DeletedArticleObject.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -108,7 +108,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="body">You can Update an Article</param>
@@ -160,7 +160,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/&lt;id&gt;`.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -179,7 +179,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item
             return requestInfo;
         }
         /// <summary>
-        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can update the details of a single article by making a PUT request to `https://api.intercom.io/articles/&lt;id&gt;`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can Update an Article</param>

@@ -53,7 +53,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
         {
         }
         /// <summary>
-        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.ArticleList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.ArticleList>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.ArticleList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Article"/></returns>
         /// <param name="body">You can create an Article</param>
@@ -113,7 +113,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Article>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Article.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
@@ -132,7 +132,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
             return requestInfo;
         }
         /// <summary>
-        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can create a new article by making a POST request to `https://api.intercom.io/articles`.&gt; 📘 Tags are managed separately&gt;&gt; Tags are returned in article responses but cannot be set in the request body. To add or remove an article&apos;s tags, use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}` endpoints.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">You can create an Article</param>
@@ -163,7 +163,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles
             return new global::Soenneker.Intercom.OpenApiClient.Articles.ArticlesRequestBuilder(rawUrl, RequestAdapter);
         }
         /// <summary>
-        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// You can fetch a list of all articles by making a GET request to `https://api.intercom.io/articles`.&gt; 📘 How are the articles sorted and ordered?&gt;&gt; Articles will be returned in descending order on the `updated_at` attribute. This means if you need to iterate through results then we&apos;ll show the most recently updated articles first.Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
         public partial class ArticlesRequestBuilderGetQueryParameters 

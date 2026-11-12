@@ -1351,6 +1351,533 @@
         }
       }
     },
+    "/admins/office_hours": {
+      "get": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "List teammate office hours",
+        "description": "You can list teammates who have their own office hours schedule. Teammates who inherit office hours are not included. Results include only teammates you can access.\n\nUse \u0060pages.next.starting_after\u0060 to retrieve the next page. \u0060pages.next\u0060 is omitted on the last page.\n\nRequires either the \u0060read_all\u0060 or \u0060read_write_office_hours\u0060 OAuth scope and permission to access reporting. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "ListAdminOfficeHours",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "The number of assignments to return per page. Must be a positive integer. Values above 50 are reduced to 50.",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            },
+            "example": 20
+          },
+          {
+            "name": "starting_after",
+            "in": "query",
+            "description": "The cursor from \u0060pages.next.starting_after\u0060 in the previous response. Omit it to retrieve the first page.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "your-cursor-from-response"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Teammate office hours assignments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOfficeHoursPaginatedList"
+                },
+                "examples": {
+                  "Assignments with another page": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "admin_office_hours",
+                          "admin_id": "456",
+                          "office_hours_schedule_id": "123"
+                        }
+                      ],
+                      "pages": {
+                        "type": "pages",
+                        "per_page": 1,
+                        "next": {
+                          "starting_after": "your-cursor-from-response"
+                        }
+                      }
+                    }
+                  },
+                  "Last page": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "admin_office_hours",
+                          "admin_id": "789",
+                          "office_hours_schedule_id": "123"
+                        }
+                      ],
+                      "pages": {
+                        "type": "pages",
+                        "per_page": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid pagination parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid per_page": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "invalid_per_page",
+                          "message": "per_page must be a positive integer"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid starting_after": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "client_error",
+                          "message": "Invalid starting_after param. Please try again using a starting_after value from a paginated response"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "Update teammate office hours in bulk",
+        "description": "You can assign or clear office hours schedules for up to 50 teammates in one request. Send a non-empty \u0060assignments\u0060 array, with each teammate listed at most once. Each teammate and each non-null schedule must belong to your workspace, and each teammate must be accessible to you.\n\nSet \u0060office_hours_schedule_id\u0060 to \u0060null\u0060 to remove a teammate\u0027s own schedule so they inherit office hours. Sending the current value, including \u0060null\u0060 for a teammate who already inherits, is a no-op that changes nothing.\n\nThe update is all-or-nothing: if any assignment is invalid or cannot be saved, none of the assignments are changed. Errors for invalid entries identify them by their zero-based index. The response contains the submitted teammates in request order, including unchanged assignments, and has no pagination.\n\nRequires the \u0060read_write_office_hours\u0060 OAuth scope and permission to access reporting. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "BulkUpdateAdminOfficeHours",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateAdminOfficeHoursRequest"
+              },
+              "examples": {
+                "Assign and clear schedules": {
+                  "value": {
+                    "assignments": [
+                      {
+                        "admin_id": "456",
+                        "office_hours_schedule_id": "123"
+                      },
+                      {
+                        "admin_id": "789",
+                        "office_hours_schedule_id": null
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Office hours assignments for the submitted teammates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOfficeHoursList"
+                },
+                "examples": {
+                  "Updated assignments": {
+                    "value": {
+                      "type": "list",
+                      "data": [
+                        {
+                          "type": "admin_office_hours",
+                          "admin_id": "456",
+                          "office_hours_schedule_id": "123"
+                        },
+                        {
+                          "type": "admin_office_hours",
+                          "admin_id": "789",
+                          "office_hours_schedule_id": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+          },
+          "422": {
+            "description": "Invalid assignments. No assignments are changed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing empty or oversized assignments": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "assignments must be a non-empty array of at most 50 entries"
+                        }
+                      ]
+                    }
+                  },
+                  "Teammate not in workspace": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid assignments: assignments[0]: teammate must belong to the workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Inaccessible teammate": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid assignments: assignments[0]: teammate is not accessible"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing invalid or other-workspace schedule": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid assignments: assignments[0]: office hours schedule must be null or belong to the workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Duplicate teammate": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid assignments: assignments[1]: teammate is listed more than once"
+                        }
+                      ]
+                    }
+                  },
+                  "Multiple invalid entries": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid assignments: assignments[0]: teammate must belong to the workspace; assignments[1]: office hours schedule must be null or belong to the workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Assignment could not be saved": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid teammate office hours assignment"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admins/{id}/office_hours": {
+      "get": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "Retrieve teammate office hours",
+        "description": "You can retrieve a teammate\u0027s own office hours schedule assignment. An \u0060office_hours_schedule_id\u0060 of \u0060null\u0060 means the teammate has no schedule of their own and inherits office hours instead. This endpoint does not return the inherited schedule.\n\nThe teammate must belong to your workspace and be accessible to you. An unknown, malformed, or other-workspace teammate id returns a \u0060422\u0060 error, not a \u0060404\u0060.\n\nRequires either the \u0060read_all\u0060 or \u0060read_write_office_hours\u0060 OAuth scope and permission to access reporting. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "RetrieveAdminOfficeHours",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the teammate.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "456"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Teammate office hours assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOfficeHours"
+                },
+                "examples": {
+                  "Assigned schedule": {
+                    "value": {
+                      "type": "admin_office_hours",
+                      "admin_id": "456",
+                      "office_hours_schedule_id": "123"
+                    }
+                  },
+                  "Inherited office hours": {
+                    "value": {
+                      "type": "admin_office_hours",
+                      "admin_id": "456",
+                      "office_hours_schedule_id": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+          },
+          "422": {
+            "description": "Teammate does not belong to the workspace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unknown malformed or other-workspace teammate": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Teammate must belong to the workspace"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Admins"
+        ],
+        "summary": "Update teammate office hours",
+        "description": "You can assign an office hours schedule to a teammate or set \u0060office_hours_schedule_id\u0060 to \u0060null\u0060 to remove their own schedule so they inherit office hours. The field is required, even when its value is \u0060null\u0060.\n\nThe teammate and any non-null schedule must belong to your workspace, and the teammate must be accessible to you. Sending the current value, including \u0060null\u0060 for a teammate who already inherits, is a no-op that changes nothing. Returns the same assignment object as \u0060GET /admins/{id}/office_hours\u0060.\n\nRequires the \u0060read_write_office_hours\u0060 OAuth scope and permission to access reporting. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "UpdateAdminOfficeHours",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the teammate.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "456"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOfficeHoursAssignmentRequest"
+              },
+              "examples": {
+                "Assign a schedule": {
+                  "value": {
+                    "office_hours_schedule_id": "123"
+                  }
+                },
+                "Inherit office hours": {
+                  "value": {
+                    "office_hours_schedule_id": null
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Teammate office hours assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminOfficeHours"
+                },
+                "examples": {
+                  "Assigned schedule": {
+                    "value": {
+                      "type": "admin_office_hours",
+                      "admin_id": "456",
+                      "office_hours_schedule_id": "123"
+                    }
+                  },
+                  "Inherited office hours": {
+                    "value": {
+                      "type": "admin_office_hours",
+                      "admin_id": "456",
+                      "office_hours_schedule_id": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/OfficeHoursScheduleIdMissing"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+          },
+          "422": {
+            "description": "Invalid teammate or office hours schedule assignment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unknown malformed or other-workspace teammate": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Teammate must belong to the workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Unknown invalid or other-workspace schedule": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Office hours schedule must belong to the workspace"
+                        }
+                      ]
+                    }
+                  },
+                  "Assignment could not be saved": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "your-request-id",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Invalid teammate office hours assignment"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admins/find_by_email": {
       "get": {
         "tags": [
@@ -4736,7 +5263,7 @@
           "Articles"
         ],
         "summary": "List all articles",
-        "description": "You can fetch a list of all articles by making a GET request to \u0060https://api.intercom.io/articles\u0060.\n\n\u003E \uD83D\uDCD8 How are the articles sorted and ordered?\n\u003E\n\u003E Articles will be returned in descending order on the \u0060updated_at\u0060 attribute. This means if you need to iterate through results then we\u0027ll show the most recently updated articles first.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can fetch a list of all articles by making a GET request to \u0060https://api.intercom.io/articles\u0060.\n\n\u003E \uD83D\uDCD8 How are the articles sorted and ordered?\n\u003E\n\u003E Articles will be returned in descending order on the \u0060updated_at\u0060 attribute. This means if you need to iterate through results then we\u0027ll show the most recently updated articles first.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListArticles",
         "parameters": [
           {
@@ -4881,7 +5408,7 @@
           "Articles"
         ],
         "summary": "Create an article",
-        "description": "You can create a new article by making a POST request to \u0060https://api.intercom.io/articles\u0060.\n\n\u003E \uD83D\uDCD8 Tags are managed separately\n\u003E\n\u003E Tags are returned in article responses but cannot be set in the request body. To add or remove an article\u0027s tags, use the \u0060POST /articles/{article_id}/tags\u0060 and \u0060DELETE /articles/{article_id}/tags/{id}\u0060 endpoints.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can create a new article by making a POST request to \u0060https://api.intercom.io/articles\u0060.\n\n\u003E \uD83D\uDCD8 Tags are managed separately\n\u003E\n\u003E Tags are returned in article responses but cannot be set in the request body. To add or remove an article\u0027s tags, use the \u0060POST /articles/{article_id}/tags\u0060 and \u0060DELETE /articles/{article_id}/tags/{id}\u0060 endpoints.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "CreateArticle",
         "parameters": [
           {
@@ -5199,7 +5726,7 @@
           "Articles"
         ],
         "summary": "Retrieve an article",
-        "description": "You can fetch the details of a single article by making a GET request to \u0060https://api.intercom.io/articles/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can fetch the details of a single article by making a GET request to \u0060https://api.intercom.io/articles/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveArticle",
         "parameters": [
           {
@@ -5335,7 +5862,7 @@
           "Articles"
         ],
         "summary": "Update an article",
-        "description": "You can update the details of a single article by making a PUT request to \u0060https://api.intercom.io/articles/\u003Cid\u003E\u0060.\n\n\u003E \uD83D\uDCD8 Tags are managed separately\n\u003E\n\u003E Tags are returned in article responses but cannot be set in the request body. To add or remove an article\u0027s tags, use the \u0060POST /articles/{article_id}/tags\u0060 and \u0060DELETE /articles/{article_id}/tags/{id}\u0060 endpoints.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can update the details of a single article by making a PUT request to \u0060https://api.intercom.io/articles/\u003Cid\u003E\u0060.\n\n\u003E \uD83D\uDCD8 Tags are managed separately\n\u003E\n\u003E Tags are returned in article responses but cannot be set in the request body. To add or remove an article\u0027s tags, use the \u0060POST /articles/{article_id}/tags\u0060 and \u0060DELETE /articles/{article_id}/tags/{id}\u0060 endpoints.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "UpdateArticle",
         "parameters": [
           {
@@ -5766,7 +6293,7 @@
           "Articles"
         ],
         "summary": "Retrieve an article draft",
-        "description": "Fetch the staged draft of a published article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The response is the article\nrendered with its draft content, leaving the live article untouched.\n\nA draft exists only when a published article has unpublished changes staged\non top of it. Returns \u0060404\u0060 with an empty response body when the article\nhas no staged draft. An article ID that doesn\u0027t exist returns a \u0060404\u0060 with\nthe standard error body.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Fetch the staged draft of a published article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The response is the article\nrendered with its draft content, leaving the live article untouched.\n\nA draft exists only when a published article has unpublished changes staged\non top of it. Returns \u0060404\u0060 with an empty response body when the article\nhas no staged draft. An article ID that doesn\u0027t exist returns a \u0060404\u0060 with\nthe standard error body.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveArticleDraft",
         "parameters": [
           {
@@ -5860,7 +6387,7 @@
           "Articles"
         ],
         "summary": "Stage an article draft",
-        "description": "Stage changes to a published article as a draft by making a PUT request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The live article remains\nunchanged until the draft is published.\n\nThe article must already be published; staging a draft on an article that\nhas never been published returns \u0060422\u0060. That \u0060422\u0060 has the short body\n\u0060{ \u0022errors\u0022: [{ \u0022message\u0022: \u0022...\u0022, \u0022status\u0022: 422 }] }\u0060, with no \u0060type\u0060,\n\u0060request_id\u0060 or \u0060code\u0060. Other \u0060422\u0060 errors use the standard error format.\n\nOnly text content is staged: \u0060title\u0060, \u0060description\u0060, \u0060body\u0060 or\n\u0060body_markdown\u0060, and \u0060author_id\u0060, including per-locale values in\n\u0060translated_content\u0060. Any other field in the request body, such as \u0060state\u0060,\n\u0060parent_id\u0060, \u0060folder_id\u0060, \u0060audience_ids\u0060, the AI availability fields or the\nscheduling fields, is still validated but not applied, so the live article is left untouched.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Stage changes to a published article as a draft by making a PUT request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft\u0060. The live article remains\nunchanged until the draft is published.\n\nThe article must already be published; staging a draft on an article that\nhas never been published returns \u0060422\u0060. That \u0060422\u0060 has the short body\n\u0060{ \u0022errors\u0022: [{ \u0022message\u0022: \u0022...\u0022, \u0022status\u0022: 422 }] }\u0060, with no \u0060type\u0060,\n\u0060request_id\u0060 or \u0060code\u0060. Other \u0060422\u0060 errors use the standard error format.\n\nOnly text content is staged: \u0060title\u0060, \u0060description\u0060, \u0060body\u0060 or\n\u0060body_markdown\u0060, and \u0060author_id\u0060, including per-locale values in\n\u0060translated_content\u0060. Any other field in the request body, such as \u0060state\u0060,\n\u0060parent_id\u0060, \u0060folder_id\u0060, \u0060audience_ids\u0060, the AI availability fields or the\nscheduling fields, is still validated but not applied, so the live article is left untouched.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "StageArticleDraft",
         "parameters": [
           {
@@ -6008,7 +6535,7 @@
           "Articles"
         ],
         "summary": "Publish an article draft",
-        "description": "Publish a staged draft by making a POST request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft/publish\u0060, promoting the draft\ncontent to live.\n\nOn a single-language workspace no body is required. On a multilingual\nworkspace you must list which locales to publish via the \u0060locales\u0060 array;\nomitting it returns \u0060422\u0060. Returns \u0060422\u0060 when there is no staged draft to\npublish, or when a requested locale has no pending changes.\n\nThe \u0060422\u0060 for no staged draft has the short body\n\u0060{ \u0022errors\u0022: [{ \u0022message\u0022: \u0022...\u0022, \u0022status\u0022: 422 }] }\u0060, with no \u0060type\u0060,\n\u0060request_id\u0060 or \u0060code\u0060. The other \u0060422\u0060 errors use the standard error format.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Publish a staged draft by making a POST request to\n\u0060https://api.intercom.io/articles/\u003Cid\u003E/draft/publish\u0060, promoting the draft\ncontent to live.\n\nOn a single-language workspace no body is required. On a multilingual\nworkspace you must list which locales to publish via the \u0060locales\u0060 array;\nomitting it returns \u0060422\u0060. Returns \u0060422\u0060 when there is no staged draft to\npublish, or when a requested locale has no pending changes.\n\nThe \u0060422\u0060 for no staged draft has the short body\n\u0060{ \u0022errors\u0022: [{ \u0022message\u0022: \u0022...\u0022, \u0022status\u0022: 422 }] }\u0060, with no \u0060type\u0060,\n\u0060request_id\u0060 or \u0060code\u0060. The other \u0060422\u0060 errors use the standard error format.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "PublishArticleDraft",
         "parameters": [
           {
@@ -6170,7 +6697,7 @@
           "Articles"
         ],
         "summary": "List article versions",
-        "description": "Fetch the version history of an article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions\u0060. Versions are\nreturned newest-first as a paginated list of metadata. Use\n\u0060GET /articles/{article_id}/versions/{id}\u0060 to retrieve a single version\nwith its full content.\n\nA \u0060404\u0060 has an empty response body, whether the article or its content\nisn\u0027t found.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Fetch the version history of an article by making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions\u0060. Versions are\nreturned newest-first as a paginated list of metadata. Use\n\u0060GET /articles/{article_id}/versions/{id}\u0060 to retrieve a single version\nwith its full content.\n\nA \u0060404\u0060 has an empty response body, whether the article or its content\nisn\u0027t found.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListArticleVersions",
         "parameters": [
           {
@@ -6310,7 +6837,7 @@
           "Articles"
         ],
         "summary": "Retrieve an article version",
-        "description": "Fetch a single prior version of an article, including its body content,\nby making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions/\u003Cid\u003E\u0060. Returns\nthe version\u0027s full content; the live article remains untouched.\n\nA \u0060404\u0060 has an empty response body, whether the article, its content or\nthe version isn\u0027t found.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Fetch a single prior version of an article, including its body content,\nby making a GET request to\n\u0060https://api.intercom.io/articles/\u003Carticle_id\u003E/versions/\u003Cid\u003E\u0060. Returns\nthe version\u0027s full content; the live article remains untouched.\n\nA \u0060404\u0060 has an empty response body, whether the article, its content or\nthe version isn\u0027t found.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveArticleVersion",
         "parameters": [
           {
@@ -6421,7 +6948,7 @@
           "Tags"
         ],
         "summary": "Add a tag to an article",
-        "description": "Apply an existing tag to an article. Returns the tag that was applied.\n\nThe tag must already exist in the workspace (create tags with the Tags API),\nand the authenticating teammate must have the \u0060manage_knowledge_base_content\u0060\npermission.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Apply an existing tag to an article. Returns the tag that was applied.\n\nThe tag must already exist in the workspace (create tags with the Tags API),\nand the authenticating teammate must have the \u0060manage_knowledge_base_content\u0060\npermission.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "AttachTagToArticle",
         "parameters": [
           {
@@ -6569,7 +7096,7 @@
           "Tags"
         ],
         "summary": "Remove a tag from an article",
-        "description": "Remove a tag from an article. Returns the tag that was removed, with null\n\u0060applied_at\u0060 and \u0060applied_by\u0060.\n\nThe authenticating teammate must have the \u0060manage_knowledge_base_content\u0060\npermission.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Remove a tag from an article. Returns the tag that was removed, with null\n\u0060applied_at\u0060 and \u0060applied_by\u0060.\n\nThe authenticating teammate must have the \u0060manage_knowledge_base_content\u0060\npermission.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "DetachTagFromArticle",
         "parameters": [
           {
@@ -6694,7 +7221,7 @@
           "Articles"
         ],
         "summary": "Search for articles",
-        "description": "You can search for articles by making a GET request to \u0060https://api.intercom.io/articles/search\u0060.\n\nIf no articles match the search, \u0060data\u0060 is an empty array rather than an object.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can search for articles by making a GET request to \u0060https://api.intercom.io/articles/search\u0060.\n\nIf no articles match the search, \u0060data\u0060 is an empty array rather than an object.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "SearchArticles",
         "parameters": [
           {
@@ -10251,7 +10778,7 @@
           "Help Center"
         ],
         "summary": "List all collections",
-        "description": "You can fetch a list of all collections by making a GET request to \u0060https://api.intercom.io/help_center/collections\u0060.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can fetch a list of all collections by making a GET request to \u0060https://api.intercom.io/help_center/collections\u0060.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListAllCollections",
         "parameters": [
           {
@@ -10412,7 +10939,7 @@
           "Help Center"
         ],
         "summary": "Create a collection",
-        "description": "You can create a new collection by making a POST request to \u0060https://api.intercom.io/help_center/collections\u0060.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can create a new collection by making a POST request to \u0060https://api.intercom.io/help_center/collections\u0060.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "CreateCollection",
         "parameters": [
           {
@@ -10556,7 +11083,7 @@
           "Help Center"
         ],
         "summary": "Retrieve a collection",
-        "description": "You can fetch the details of a single collection by making a GET request to \u0060https://api.intercom.io/help_center/collections/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can fetch the details of a single collection by making a GET request to \u0060https://api.intercom.io/help_center/collections/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveCollection",
         "parameters": [
           {
@@ -10661,7 +11188,7 @@
           "Help Center"
         ],
         "summary": "Update a collection",
-        "description": "You can update the details of a single collection by making a PUT request to \u0060https://api.intercom.io/help_center/collections/\u003Cid\u003E\u0060.\n\n\u0060help_center_id\u0060 is checked but never applied. It must match the help center of the collection\u0027s articles and sub-collections, or the request returns a \u0060400\u0060. A collection with no content rejects any \u0060help_center_id\u0060, so leave it out. Moving a collection to another help center isn\u0027t supported.\n\nRequires the \u0060read_write_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can update the details of a single collection by making a PUT request to \u0060https://api.intercom.io/help_center/collections/\u003Cid\u003E\u0060.\n\n\u0060help_center_id\u0060 is checked but never applied. It must match the help center of the collection\u0027s articles and sub-collections, or the request returns a \u0060400\u0060. A collection with no content rejects any \u0060help_center_id\u0060, so leave it out. Moving a collection to another help center isn\u0027t supported.\n\nRequires the \u0060read_write_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "UpdateCollection",
         "parameters": [
           {
@@ -10935,7 +11462,7 @@
           "Help Center"
         ],
         "summary": "Retrieve a Help Center",
-        "description": "You can fetch the details of a single Help Center by making a GET request to \u0060https://api.intercom.io/help_center/help_centers/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can fetch the details of a single Help Center by making a GET request to \u0060https://api.intercom.io/help_center/help_centers/\u003Cid\u003E\u0060.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "RetrieveHelpCenter",
         "parameters": [
           {
@@ -11043,7 +11570,7 @@
           "Help Center"
         ],
         "summary": "List all Help Centers",
-        "description": "You can list all Help Centers by making a GET request to \u0060https://api.intercom.io/help_center/help_centers\u0060.\n\nRequires the \u0060read_articles_scope\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "You can list all Help Centers by making a GET request to \u0060https://api.intercom.io/help_center/help_centers\u0060.\n\nRequires the \u0060read_articles_scope\u0060 or \u0060create_update_articles\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "ListHelpCenters",
         "parameters": [
           {
@@ -41863,6 +42390,193 @@
         }
       }
     },
+    "/teams/{teamId}/office_hours": {
+      "get": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Retrieve team office hours",
+        "description": "You can retrieve the team\u0027s linked office hours schedule, or the workspace default if the team has no schedule of its own.\n\nThe team must belong to your workspace. An unknown, malformed, or other-workspace team id returns a \u0060404\u0060 error. If the team has no linked schedule and the workspace has no default, the endpoint returns a \u0060404\u0060 error.\n\nRequires either the \u0060read_all\u0060 or \u0060read_write_office_hours\u0060 OAuth scope and permission to manage workload management. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "RetrieveTeamOfficeHours",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "The unique identifier of the team. Use \u0060GET /teams\u0060 to list available team IDs.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "42"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team office hours schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficeHoursSchedule"
+                },
+                "examples": {
+                  "Office hours schedule": {
+                    "value": {
+                      "type": "office_hours_schedule",
+                      "id": "123",
+                      "name": "Standard Support Hours",
+                      "time_zone_name": "America/New_York",
+                      "time_intervals": [
+                        {
+                          "start_minute": 540,
+                          "end_minute": 1020,
+                          "day_of_week": 0
+                        }
+                      ],
+                      "twenty_four_seven": false,
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/TeamOfficeHoursForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/TeamOfficeHoursNotFound"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Teams"
+        ],
+        "summary": "Update team office hours",
+        "description": "You can assign an office hours schedule to a team or set \u0060office_hours_schedule_id\u0060 to \u0060null\u0060 to remove the team\u0027s own schedule so it uses the workspace default. The field is required, even when its value is \u0060null\u0060.\n\nThe team and any non-null schedule must belong to your workspace. An unknown, malformed, or other-workspace team id returns a \u0060404\u0060 error. An unknown, invalid, or other-workspace schedule id returns a \u0060422\u0060 error. Sending the current value, including \u0060null\u0060 for a team already using the workspace default, changes nothing.\n\nReturns the same schedule object as \u0060GET /teams/{team_id}/office_hours\u0060. If removing the assignment leaves the team without a schedule and the workspace has no default, the assignment is removed but the response is a \u0060404\u0060 error.\n\nRequires the \u0060read_write_office_hours\u0060 OAuth scope and permission to manage workload management. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "operationId": "UpdateTeamOfficeHours",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersionPreview"
+            }
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "The unique identifier of the team. Use \u0060GET /teams\u0060 to list available team IDs.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "42"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOfficeHoursAssignmentRequest"
+              },
+              "examples": {
+                "Assign a schedule": {
+                  "value": {
+                    "office_hours_schedule_id": "123"
+                  }
+                },
+                "Use the workspace default": {
+                  "value": {
+                    "office_hours_schedule_id": null
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Team office hours schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OfficeHoursSchedule"
+                },
+                "examples": {
+                  "Office hours schedule": {
+                    "value": {
+                      "type": "office_hours_schedule",
+                      "id": "123",
+                      "name": "Standard Support Hours",
+                      "time_zone_name": "America/New_York",
+                      "time_intervals": [
+                        {
+                          "start_minute": 540,
+                          "end_minute": 1020,
+                          "day_of_week": 0
+                        }
+                      ],
+                      "twenty_four_seven": false,
+                      "created_at": 1717200000,
+                      "updated_at": 1717200000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/OfficeHoursScheduleIdMissing"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/TeamOfficeHoursForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/TeamOfficeHoursNotFound"
+          },
+          "422": {
+            "description": "Invalid office hours schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unknown invalid or other-workspace schedule": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "55555555-5555-4555-8555-555555555555",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "Office hours schedule not found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/news/news_items": {
       "get": {
         "tags": [
@@ -55038,6 +55752,140 @@
           }
         },
         "description": "A list of office hours schedules."
+      },
+      "AdminOfficeHours": {
+        "title": "Teammate Office Hours",
+        "required": [
+          "type",
+          "admin_id",
+          "office_hours_schedule_id"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AdminOfficeHoursType"
+          },
+          "admin_id": {
+            "type": "string",
+            "description": "The unique identifier of the teammate.",
+            "example": "456"
+          },
+          "office_hours_schedule_id": {
+            "type": "string",
+            "description": "The teammate\u0027s own office hours schedule id, or null if they inherit office hours. This is not the id of the inherited schedule.",
+            "nullable": true,
+            "example": "123"
+          }
+        },
+        "description": "A teammate\u0027s own office hours schedule assignment. A null schedule id means the teammate inherits office hours instead of having their own schedule.",
+        "x-tags": [
+          "Admins"
+        ]
+      },
+      "AdminOfficeHoursList": {
+        "title": "Teammate Office Hours List",
+        "required": [
+          "type",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminOfficeHours"
+            },
+            "description": "The teammates\u0027 office hours assignments.",
+            "example": [
+              {
+                "type": "admin_office_hours",
+                "admin_id": "456",
+                "office_hours_schedule_id": "123"
+              }
+            ]
+          }
+        },
+        "description": "Office hours assignments for the submitted teammates, in request order."
+      },
+      "AdminOfficeHoursPaginatedList": {
+        "title": "Paginated Teammate Office Hours List",
+        "required": [
+          "type",
+          "data",
+          "pages"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ListType"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminOfficeHours"
+            },
+            "description": "Teammates who have their own office hours schedule. Teammates who inherit office hours are not included.",
+            "example": [
+              {
+                "type": "admin_office_hours",
+                "admin_id": "456",
+                "office_hours_schedule_id": "123"
+              }
+            ]
+          },
+          "pages": {
+            "$ref": "#/components/schemas/AdminOfficeHoursPaginatedListPages"
+          }
+        },
+        "description": "A page of accessible teammates who have their own office hours schedule."
+      },
+      "UpdateOfficeHoursAssignmentRequest": {
+        "title": "Update Office Hours Assignment Request",
+        "required": [
+          "office_hours_schedule_id"
+        ],
+        "type": "object",
+        "properties": {
+          "office_hours_schedule_id": {
+            "type": "string",
+            "description": "The id of an office hours schedule in your workspace. Set to null to remove the team\u0027s or teammate\u0027s own schedule. Required even when null.",
+            "nullable": true,
+            "example": "123"
+          }
+        },
+        "description": "Assign a schedule to a team or teammate, or remove the assignment to use inherited office hours."
+      },
+      "BulkUpdateAdminOfficeHoursRequest": {
+        "title": "Bulk Update Teammate Office Hours Request",
+        "required": [
+          "assignments"
+        ],
+        "type": "object",
+        "properties": {
+          "assignments": {
+            "maxItems": 50,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkUpdateAdminOfficeHoursRequestAssignmentsItem"
+            },
+            "description": "The teammates and their new schedule ids. Each teammate must belong to your workspace, be accessible to you, and appear at most once.",
+            "example": [
+              {
+                "admin_id": "456",
+                "office_hours_schedule_id": "123"
+              },
+              {
+                "admin_id": "789",
+                "office_hours_schedule_id": null
+              }
+            ]
+          }
+        },
+        "description": "Assign or clear office hours schedules for up to 50 teammates. All assignments are applied together or none are changed."
       },
       "OfficeHoursException": {
         "title": "Office Hours Exception",
@@ -72621,6 +73469,56 @@
           }
         }
       },
+      "AdminOfficeHoursPaginatedListPages": {
+        "required": [
+          "type",
+          "per_page"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/PagesType"
+          },
+          "per_page": {
+            "maximum": 50,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The number of assignments requested per page, capped at 50.",
+            "example": 20
+          },
+          "next": {
+            "$ref": "#/components/schemas/AdminOfficeHoursPaginatedListPagesNext"
+          }
+        },
+        "description": "Cursor-based pagination. \u0060next\u0060 is omitted on the last page.",
+        "example": {
+          "type": "pages",
+          "per_page": 20,
+          "next": {
+            "starting_after": "your-cursor-from-response"
+          }
+        }
+      },
+      "BulkUpdateAdminOfficeHoursRequestAssignmentsItem": {
+        "required": [
+          "admin_id",
+          "office_hours_schedule_id"
+        ],
+        "type": "object",
+        "properties": {
+          "admin_id": {
+            "type": "string",
+            "description": "The unique identifier of the teammate in your workspace.",
+            "example": "456"
+          },
+          "office_hours_schedule_id": {
+            "type": "string",
+            "description": "The id of an office hours schedule in your workspace, or null to remove the teammate\u0027s own schedule so they inherit office hours.",
+            "nullable": true,
+            "example": "123"
+          }
+        }
+      },
       "ActivityLogPerformedBy": {
         "type": "object",
         "properties": {
@@ -75979,6 +76877,23 @@
           "value": {
             "type": "string"
           }
+        }
+      },
+      "AdminOfficeHoursPaginatedListPagesNext": {
+        "required": [
+          "starting_after"
+        ],
+        "type": "object",
+        "properties": {
+          "starting_after": {
+            "type": "string",
+            "description": "Pass this cursor as \u0060starting_after\u0060 in the next request.",
+            "example": "your-cursor-from-response"
+          }
+        },
+        "description": "The cursor for the next page. Omitted on the last page.",
+        "example": {
+          "starting_after": "your-cursor-from-response"
         }
       },
       "ActivityLogMetadataChangesAdditionalProperties": {
@@ -81125,6 +82040,42 @@
         "type": "object",
         "description": "A JSON Schema describing the request body to send to the capability\u0027s endpoint."
       },
+      "AdminOfficeHoursType": {
+        "enum": [
+          "admin_office_hours"
+        ],
+        "type": "string",
+        "description": "The type of the object, always \u0060admin_office_hours\u0060.",
+        "example": "admin_office_hours",
+        "x-ms-enum": {
+          "name": "AdminOfficeHoursType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "admin_office_hours",
+              "name": "AdminOfficeHours"
+            }
+          ]
+        }
+      },
+      "ListType": {
+        "enum": [
+          "list"
+        ],
+        "type": "string",
+        "description": "The type of the object, always \u0060list\u0060.",
+        "example": "list",
+        "x-ms-enum": {
+          "name": "ListType",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "list",
+              "name": "List"
+            }
+          ]
+        }
+      },
       "OfficeHoursExceptionExceptionType": {
         "enum": [
           "closed",
@@ -83476,24 +84427,6 @@
             {
               "value": "audience",
               "name": "Audience"
-            }
-          ]
-        }
-      },
-      "ListType": {
-        "enum": [
-          "list"
-        ],
-        "type": "string",
-        "description": "The type of the object.",
-        "example": "list",
-        "x-ms-enum": {
-          "name": "ListType",
-          "modelAsString": false,
-          "values": [
-            {
-              "value": "list",
-              "name": "List"
             }
           ]
         }
@@ -92416,6 +93349,126 @@
       }
     },
     "responses": {
+      "OfficeHoursScheduleIdMissing": {
+        "description": "The required office_hours_schedule_id field is missing",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Missing office_hours_schedule_id": {
+                "value": {
+                  "type": "error.list",
+                  "request_id": "11111111-1111-4111-8111-111111111111",
+                  "errors": [
+                    {
+                      "code": "parameter_missing",
+                      "message": "param is missing or the value is empty or invalid: office_hours_schedule_id"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "AdminOfficeHoursForbidden": {
+        "description": "Reporting permission is required and the teammate must be accessible",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Missing reporting permission": {
+                "value": {
+                  "type": "error.list",
+                  "request_id": "your-request-id",
+                  "errors": [
+                    {
+                      "code": "action_forbidden",
+                      "message": "Teammate lacks permission to access reporting"
+                    }
+                  ]
+                }
+              },
+              "Inaccessible teammate": {
+                "value": {
+                  "type": "error.list",
+                  "request_id": "your-request-id",
+                  "errors": [
+                    {
+                      "code": "action_forbidden",
+                      "message": "Teammate is not accessible"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "TeamOfficeHoursForbidden": {
+        "description": "Permission to manage workload management is required",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Missing workload management permission": {
+                "value": {
+                  "type": "error.list",
+                  "request_id": "22222222-2222-4222-8222-222222222222",
+                  "errors": [
+                    {
+                      "code": "action_forbidden",
+                      "message": "Teammate lacks permission to manage team office hours"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "TeamOfficeHoursNotFound": {
+        "description": "Team or office hours schedule not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "Unknown malformed or other-workspace team": {
+                "value": {
+                  "type": "error.list",
+                  "request_id": "33333333-3333-4333-8333-333333333333",
+                  "errors": [
+                    {
+                      "code": "team_not_found",
+                      "message": "Team not found"
+                    }
+                  ]
+                }
+              },
+              "No linked schedule or workspace default": {
+                "value": {
+                  "type": "error.list",
+                  "request_id": "44444444-4444-4444-8444-444444444444",
+                  "errors": [
+                    {
+                      "code": "office_hours_schedule_not_found",
+                      "message": "Office hours schedule not found"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "Unauthorized": {
         "description": "Unauthorized",
         "content": {

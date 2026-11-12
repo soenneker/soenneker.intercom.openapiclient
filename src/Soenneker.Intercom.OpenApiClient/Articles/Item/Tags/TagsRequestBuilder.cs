@@ -47,7 +47,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Tags
         {
         }
         /// <summary>
-        /// Apply an existing tag to an article. Returns the tag that was applied.The tag must already exist in the workspace (create tags with the Tags API),and the authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// Apply an existing tag to an article. Returns the tag that was applied.The tag must already exist in the workspace (create tags with the Tags API),and the authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.Tag"/></returns>
         /// <param name="body">The request body</param>
@@ -78,7 +78,7 @@ namespace Soenneker.Intercom.OpenApiClient.Articles.Item.Tags
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.Tag>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.Tag.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Apply an existing tag to an article. Returns the tag that was applied.The tag must already exist in the workspace (create tags with the Tags API),and the authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        /// Apply an existing tag to an article. Returns the tag that was applied.The tag must already exist in the workspace (create tags with the Tags API),and the authenticating teammate must have the `manage_knowledge_base_content`permission.Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="body">The request body</param>

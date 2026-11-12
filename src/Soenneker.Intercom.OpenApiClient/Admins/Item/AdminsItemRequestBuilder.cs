@@ -4,6 +4,7 @@ using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Admins.Item.Away;
+using Soenneker.Intercom.OpenApiClient.Admins.Item.Office_hours;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -22,6 +23,11 @@ namespace Soenneker.Intercom.OpenApiClient.Admins.Item
         public global::Soenneker.Intercom.OpenApiClient.Admins.Item.Away.AwayRequestBuilder Away
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Admins.Item.Away.AwayRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The office_hours property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Admins.Item.Office_hours.Office_hoursRequestBuilder Office_hours
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Admins.Item.Office_hours.Office_hoursRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Admins.Item.AdminsItemRequestBuilder"/> and sets the default values.

@@ -1090,6 +1090,352 @@ paths:
                       message: Not authorized to access resource
               schema:
                 "$ref": "#/components/schemas/error"
+  "/admins/office_hours":
+    get:
+      summary: List teammate office hours
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      - name: per_page
+        in: query
+        description: The number of assignments to return per page. Must be a positive
+          integer. Values above 50 are reduced to 50.
+        example: 20
+        schema:
+          type: integer
+          minimum: 1
+          default: 20
+      - name: starting_after
+        in: query
+        description: The cursor from `pages.next.starting_after` in the previous response.
+          Omit it to retrieve the first page.
+        example: your-cursor-from-response
+        schema:
+          type: string
+      tags:
+      - Admins
+      operationId: listAdminOfficeHours
+      description: |
+        You can list teammates who have their own office hours schedule. Teammates who inherit office hours are not included. Results include only teammates you can access.
+
+        Use `pages.next.starting_after` to retrieve the next page. `pages.next` is omitted on the last page.
+
+        Requires either the `read_all` or `read_write_office_hours` OAuth scope and permission to access reporting. Set `Intercom-Version: Preview`.
+      responses:
+        '200':
+          description: Teammate office hours assignments
+          content:
+            application/json:
+              examples:
+                Assignments with another page:
+                  value:
+                    type: list
+                    data:
+                    - type: admin_office_hours
+                      admin_id: '456'
+                      office_hours_schedule_id: '123'
+                    pages:
+                      type: pages
+                      per_page: 1
+                      next:
+                        starting_after: your-cursor-from-response
+                Last page:
+                  value:
+                    type: list
+                    data:
+                    - type: admin_office_hours
+                      admin_id: '789'
+                      office_hours_schedule_id: '123'
+                    pages:
+                      type: pages
+                      per_page: 1
+              schema:
+                "$ref": "#/components/schemas/admin_office_hours_paginated_list"
+        '400':
+          description: Invalid pagination parameter
+          content:
+            application/json:
+              examples:
+                Invalid per_page:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: invalid_per_page
+                      message: per_page must be a positive integer
+                Invalid starting_after:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: client_error
+                      message: Invalid starting_after param. Please try again using a starting_after value from a paginated response
+              schema:
+                "$ref": "#/components/schemas/error"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+    put:
+      summary: Update teammate office hours in bulk
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      tags:
+      - Admins
+      operationId: bulkUpdateAdminOfficeHours
+      description: |
+        You can assign or clear office hours schedules for up to 50 teammates in one request. Send a non-empty `assignments` array, with each teammate listed at most once. Each teammate and each non-null schedule must belong to your workspace, and each teammate must be accessible to you.
+
+        Set `office_hours_schedule_id` to `null` to remove a teammate's own schedule so they inherit office hours. Sending the current value, including `null` for a teammate who already inherits, is a no-op that changes nothing.
+
+        The update is all-or-nothing: if any assignment is invalid or cannot be saved, none of the assignments are changed. Errors for invalid entries identify them by their zero-based index. The response contains the submitted teammates in request order, including unchanged assignments, and has no pagination.
+
+        Requires the `read_write_office_hours` OAuth scope and permission to access reporting. Set `Intercom-Version: Preview`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/bulk_update_admin_office_hours_request"
+            examples:
+              Assign and clear schedules:
+                value:
+                  assignments:
+                  - admin_id: '456'
+                    office_hours_schedule_id: '123'
+                  - admin_id: '789'
+                    office_hours_schedule_id: null
+      responses:
+        '200':
+          description: Office hours assignments for the submitted teammates
+          content:
+            application/json:
+              examples:
+                Updated assignments:
+                  value:
+                    type: list
+                    data:
+                    - type: admin_office_hours
+                      admin_id: '456'
+                      office_hours_schedule_id: '123'
+                    - type: admin_office_hours
+                      admin_id: '789'
+                      office_hours_schedule_id: null
+              schema:
+                "$ref": "#/components/schemas/admin_office_hours_list"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+        '422':
+          description: Invalid assignments. No assignments are changed.
+          content:
+            application/json:
+              examples:
+                Missing empty or oversized assignments:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: assignments must be a non-empty array of at most 50 entries
+                Teammate not in workspace:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Invalid assignments: assignments[0]: teammate must belong to the workspace'
+                Inaccessible teammate:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Invalid assignments: assignments[0]: teammate is not accessible'
+                Missing invalid or other-workspace schedule:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Invalid assignments: assignments[0]: office hours schedule must be null or belong to the workspace'
+                Duplicate teammate:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Invalid assignments: assignments[1]: teammate is listed more than once'
+                Multiple invalid entries:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: 'Invalid assignments: assignments[0]: teammate must belong to the workspace; assignments[1]: office hours schedule must be null or belong to the workspace'
+                Assignment could not be saved:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid teammate office hours assignment
+              schema:
+                "$ref": "#/components/schemas/error"
+  "/admins/{id}/office_hours":
+    get:
+      summary: Retrieve teammate office hours
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the teammate.
+        example: '456'
+        schema:
+          type: string
+      tags:
+      - Admins
+      operationId: retrieveAdminOfficeHours
+      description: |
+        You can retrieve a teammate's own office hours schedule assignment. An `office_hours_schedule_id` of `null` means the teammate has no schedule of their own and inherits office hours instead. This endpoint does not return the inherited schedule.
+
+        The teammate must belong to your workspace and be accessible to you. An unknown, malformed, or other-workspace teammate id returns a `422` error, not a `404`.
+
+        Requires either the `read_all` or `read_write_office_hours` OAuth scope and permission to access reporting. Set `Intercom-Version: Preview`.
+      responses:
+        '200':
+          description: Teammate office hours assignment
+          content:
+            application/json:
+              examples:
+                Assigned schedule:
+                  value:
+                    type: admin_office_hours
+                    admin_id: '456'
+                    office_hours_schedule_id: '123'
+                Inherited office hours:
+                  value:
+                    type: admin_office_hours
+                    admin_id: '456'
+                    office_hours_schedule_id: null
+              schema:
+                "$ref": "#/components/schemas/admin_office_hours"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+        '422':
+          description: Teammate does not belong to the workspace
+          content:
+            application/json:
+              examples:
+                Unknown malformed or other-workspace teammate:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: Teammate must belong to the workspace
+              schema:
+                "$ref": "#/components/schemas/error"
+    put:
+      summary: Update teammate office hours
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the teammate.
+        example: '456'
+        schema:
+          type: string
+      tags:
+      - Admins
+      operationId: updateAdminOfficeHours
+      description: |
+        You can assign an office hours schedule to a teammate or set `office_hours_schedule_id` to `null` to remove their own schedule so they inherit office hours. The field is required, even when its value is `null`.
+
+        The teammate and any non-null schedule must belong to your workspace, and the teammate must be accessible to you. Sending the current value, including `null` for a teammate who already inherits, is a no-op that changes nothing. Returns the same assignment object as `GET /admins/{id}/office_hours`.
+
+        Requires the `read_write_office_hours` OAuth scope and permission to access reporting. Set `Intercom-Version: Preview`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_office_hours_assignment_request"
+            examples:
+              Assign a schedule:
+                value:
+                  office_hours_schedule_id: '123'
+              Inherit office hours:
+                value:
+                  office_hours_schedule_id: null
+      responses:
+        '200':
+          description: Teammate office hours assignment
+          content:
+            application/json:
+              examples:
+                Assigned schedule:
+                  value:
+                    type: admin_office_hours
+                    admin_id: '456'
+                    office_hours_schedule_id: '123'
+                Inherited office hours:
+                  value:
+                    type: admin_office_hours
+                    admin_id: '456'
+                    office_hours_schedule_id: null
+              schema:
+                "$ref": "#/components/schemas/admin_office_hours"
+        '400':
+          "$ref": "#/components/responses/OfficeHoursScheduleIdMissing"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/AdminOfficeHoursForbidden"
+        '422':
+          description: Invalid teammate or office hours schedule assignment
+          content:
+            application/json:
+              examples:
+                Unknown malformed or other-workspace teammate:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: Teammate must belong to the workspace
+                Unknown invalid or other-workspace schedule:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: Office hours schedule must belong to the workspace
+                Assignment could not be saved:
+                  value:
+                    type: error.list
+                    request_id: your-request-id
+                    errors:
+                    - code: parameter_invalid
+                      message: Invalid teammate office hours assignment
+              schema:
+                "$ref": "#/components/schemas/error"
   "/admins/find_by_email":
     get:
       summary: Find an admin by email
@@ -3289,7 +3635,7 @@ paths:
         `https://api.intercom.io/articles`.\n\n> \U0001F4D8 How are the articles sorted
         and ordered?\n>\n> Articles will be returned in descending order on the `updated_at`
         attribute. This means if you need to iterate through results then we'll show
-        the most recently updated articles first.\n\nRequires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.\n"
+        the most recently updated articles first.\n\nRequires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.\n"
       responses:
         '200':
           description: successful
@@ -3380,7 +3726,7 @@ paths:
         \U0001F4D8 Tags are managed separately\n>\n> Tags are returned in article responses
         but cannot be set in the request body. To add or remove an article's tags,
         use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}`
-        endpoints.\n\nRequires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.\n"
+        endpoints.\n\nRequires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.\n"
       responses:
         '200':
           description: article created
@@ -3600,7 +3946,7 @@ paths:
       description: |
         You can fetch the details of a single article by making a GET request to `https://api.intercom.io/articles/<id>`.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Article found
@@ -3701,7 +4047,7 @@ paths:
         request to `https://api.intercom.io/articles/<id>`.\n\n> \U0001F4D8 Tags are managed separately\n>\n> Tags are returned in article responses
         but cannot be set in the request body. To add or remove an article's tags,
         use the `POST /articles/{article_id}/tags` and `DELETE /articles/{article_id}/tags/{id}`
-        endpoints.\n\nRequires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.\n"
+        endpoints.\n\nRequires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.\n"
       responses:
         '200':
           description: successful
@@ -3988,7 +4334,7 @@ paths:
         has no staged draft. An article ID that doesn't exist returns a `404` with
         the standard error body.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Article draft found
@@ -4077,7 +4423,7 @@ paths:
         `parent_id`, `folder_id`, `audience_ids`, the AI availability fields or the
         scheduling fields, is still validated but not applied, so the live article is left untouched.
 
-        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Draft staged
@@ -4195,7 +4541,7 @@ paths:
         `{ "errors": [{ "message": "...", "status": 422 }] }`, with no `type`,
         `request_id` or `code`. The other `422` errors use the standard error format.
 
-        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Draft published
@@ -4342,7 +4688,7 @@ paths:
         A `404` has an empty response body, whether the article or its content
         isn't found.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Versions found
@@ -4443,7 +4789,7 @@ paths:
         A `404` has an empty response body, whether the article, its content or
         the version isn't found.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Version found
@@ -4512,7 +4858,7 @@ paths:
         and the authenticating teammate must have the `manage_knowledge_base_content`
         permission.
 
-        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       requestBody:
         content:
           application/json:
@@ -4631,7 +4977,7 @@ paths:
         The authenticating teammate must have the `manage_knowledge_base_content`
         permission.
 
-        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Tag removed
@@ -4759,7 +5105,7 @@ paths:
 
         If no articles match the search, `data` is an empty array rather than an object.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Search successful
@@ -7060,7 +7406,7 @@ paths:
       description: |
         You can fetch a list of all collections by making a GET request to `https://api.intercom.io/help_center/collections`.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Successful
@@ -7151,7 +7497,7 @@ paths:
       description: |
         You can create a new collection by making a POST request to `https://api.intercom.io/help_center/collections`.
 
-        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: collection created
@@ -7251,7 +7597,7 @@ paths:
       description: |
         You can fetch the details of a single collection by making a GET request to `https://api.intercom.io/help_center/collections/<id>`.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Collection found
@@ -7324,7 +7670,7 @@ paths:
 
         `help_center_id` is checked but never applied. It must match the help center of the collection's articles and sub-collections, or the request returns a `400`. A collection with no content rejects any `help_center_id`, so leave it out. Moving a collection to another help center isn't supported.
 
-        Requires the `read_write_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_write_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: successful
@@ -7500,7 +7846,7 @@ paths:
       description: |
         You can fetch the details of a single Help Center by making a GET request to `https://api.intercom.io/help_center/help_centers/<id>`.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Help Center found
@@ -7565,7 +7911,7 @@ paths:
       description: |
         You can list all Help Centers by making a GET request to `https://api.intercom.io/help_center/help_centers`.
 
-        Requires the `read_articles_scope` OAuth scope. Set `Intercom-Version: Preview`.
+        Requires the `read_articles_scope` or `create_update_articles` OAuth scope. Set `Intercom-Version: Preview`.
       responses:
         '200':
           description: Help Centers found
@@ -29485,6 +29831,138 @@ paths:
                       message: "Team not found"
               schema:
                 "$ref": "#/components/schemas/error"
+  "/teams/{team_id}/office_hours":
+    get:
+      summary: Retrieve team office hours
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      - name: team_id
+        in: path
+        required: true
+        description: The unique identifier of the team. Use `GET /teams` to list available team IDs.
+        example: '42'
+        schema:
+          type: string
+      tags:
+      - Teams
+      operationId: retrieveTeamOfficeHours
+      description: |
+        You can retrieve the team's linked office hours schedule, or the workspace default if the team has no schedule of its own.
+
+        The team must belong to your workspace. An unknown, malformed, or other-workspace team id returns a `404` error. If the team has no linked schedule and the workspace has no default, the endpoint returns a `404` error.
+
+        Requires either the `read_all` or `read_write_office_hours` OAuth scope and permission to manage workload management. Set `Intercom-Version: Preview`.
+      responses:
+        '200':
+          description: Team office hours schedule
+          content:
+            application/json:
+              examples:
+                Office hours schedule:
+                  value:
+                    type: office_hours_schedule
+                    id: '123'
+                    name: Standard Support Hours
+                    time_zone_name: America/New_York
+                    time_intervals:
+                    - start_minute: 540
+                      end_minute: 1020
+                      day_of_week: 0
+                    twenty_four_seven: false
+                    created_at: 1717200000
+                    updated_at: 1717200000
+              schema:
+                "$ref": "#/components/schemas/office_hours_schedule"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/TeamOfficeHoursForbidden"
+        '404':
+          "$ref": "#/components/responses/TeamOfficeHoursNotFound"
+    put:
+      summary: Update team office hours
+      parameters:
+      - name: Intercom-Version
+        in: header
+        schema:
+          "$ref": "#/components/schemas/intercom_version_preview"
+      - name: team_id
+        in: path
+        required: true
+        description: The unique identifier of the team. Use `GET /teams` to list available team IDs.
+        example: '42'
+        schema:
+          type: string
+      tags:
+      - Teams
+      operationId: updateTeamOfficeHours
+      description: |
+        You can assign an office hours schedule to a team or set `office_hours_schedule_id` to `null` to remove the team's own schedule so it uses the workspace default. The field is required, even when its value is `null`.
+
+        The team and any non-null schedule must belong to your workspace. An unknown, malformed, or other-workspace team id returns a `404` error. An unknown, invalid, or other-workspace schedule id returns a `422` error. Sending the current value, including `null` for a team already using the workspace default, changes nothing.
+
+        Returns the same schedule object as `GET /teams/{team_id}/office_hours`. If removing the assignment leaves the team without a schedule and the workspace has no default, the assignment is removed but the response is a `404` error.
+
+        Requires the `read_write_office_hours` OAuth scope and permission to manage workload management. Set `Intercom-Version: Preview`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/update_office_hours_assignment_request"
+            examples:
+              Assign a schedule:
+                value:
+                  office_hours_schedule_id: '123'
+              Use the workspace default:
+                value:
+                  office_hours_schedule_id: null
+      responses:
+        '200':
+          description: Team office hours schedule
+          content:
+            application/json:
+              examples:
+                Office hours schedule:
+                  value:
+                    type: office_hours_schedule
+                    id: '123'
+                    name: Standard Support Hours
+                    time_zone_name: America/New_York
+                    time_intervals:
+                    - start_minute: 540
+                      end_minute: 1020
+                      day_of_week: 0
+                    twenty_four_seven: false
+                    created_at: 1717200000
+                    updated_at: 1717200000
+              schema:
+                "$ref": "#/components/schemas/office_hours_schedule"
+        '400':
+          "$ref": "#/components/responses/OfficeHoursScheduleIdMissing"
+        '401':
+          "$ref": "#/components/responses/Unauthorized"
+        '403':
+          "$ref": "#/components/responses/TeamOfficeHoursForbidden"
+        '404':
+          "$ref": "#/components/responses/TeamOfficeHoursNotFound"
+        '422':
+          description: Invalid office hours schedule
+          content:
+            application/json:
+              examples:
+                Unknown invalid or other-workspace schedule:
+                  value:
+                    type: error.list
+                    request_id: 55555555-5555-4555-8555-555555555555
+                    errors:
+                    - code: parameter_invalid
+                      message: Office hours schedule not found
+              schema:
+                "$ref": "#/components/schemas/error"
   "/news/news_items":
     get:
       summary: List all news items
@@ -39047,6 +39525,167 @@ components:
           description: An array of office hours schedules.
           items:
             "$ref": "#/components/schemas/office_hours_schedule"
+    admin_office_hours:
+      type: object
+      title: Teammate Office Hours
+      x-tags:
+      - Admins
+      description: A teammate's own office hours schedule assignment. A null schedule
+        id means the teammate inherits office hours instead of having their own schedule.
+      required:
+      - type
+      - admin_id
+      - office_hours_schedule_id
+      properties:
+        type:
+          type: string
+          enum:
+          - admin_office_hours
+          description: The type of the object, always `admin_office_hours`.
+          example: admin_office_hours
+        admin_id:
+          type: string
+          description: The unique identifier of the teammate.
+          example: '456'
+        office_hours_schedule_id:
+          type: string
+          nullable: true
+          description: The teammate's own office hours schedule id, or null if they
+            inherit office hours. This is not the id of the inherited schedule.
+          example: '123'
+    admin_office_hours_list:
+      type: object
+      title: Teammate Office Hours List
+      description: Office hours assignments for the submitted teammates, in request order.
+      required:
+      - type
+      - data
+      properties:
+        type:
+          type: string
+          enum:
+          - list
+          description: The type of the object, always `list`.
+          example: list
+        data:
+          type: array
+          description: The teammates' office hours assignments.
+          example:
+          - type: admin_office_hours
+            admin_id: '456'
+            office_hours_schedule_id: '123'
+          items:
+            "$ref": "#/components/schemas/admin_office_hours"
+    admin_office_hours_paginated_list:
+      type: object
+      title: Paginated Teammate Office Hours List
+      description: A page of accessible teammates who have their own office hours schedule.
+      required:
+      - type
+      - data
+      - pages
+      properties:
+        type:
+          type: string
+          enum:
+          - list
+          description: The type of the object, always `list`.
+          example: list
+        data:
+          type: array
+          description: Teammates who have their own office hours schedule. Teammates
+            who inherit office hours are not included.
+          example:
+          - type: admin_office_hours
+            admin_id: '456'
+            office_hours_schedule_id: '123'
+          items:
+            "$ref": "#/components/schemas/admin_office_hours"
+        pages:
+          type: object
+          description: Cursor-based pagination. `next` is omitted on the last page.
+          example:
+            type: pages
+            per_page: 20
+            next:
+              starting_after: your-cursor-from-response
+          required:
+          - type
+          - per_page
+          properties:
+            type:
+              type: string
+              enum:
+              - pages
+              description: The type of the object, always `pages`.
+              example: pages
+            per_page:
+              type: integer
+              minimum: 1
+              maximum: 50
+              description: The number of assignments requested per page, capped at 50.
+              example: 20
+            next:
+              type: object
+              description: The cursor for the next page. Omitted on the last page.
+              example:
+                starting_after: your-cursor-from-response
+              required:
+              - starting_after
+              properties:
+                starting_after:
+                  type: string
+                  description: Pass this cursor as `starting_after` in the next request.
+                  example: your-cursor-from-response
+    update_office_hours_assignment_request:
+      type: object
+      title: Update Office Hours Assignment Request
+      description: Assign a schedule to a team or teammate, or remove the assignment
+        to use inherited office hours.
+      required:
+      - office_hours_schedule_id
+      properties:
+        office_hours_schedule_id:
+          type: string
+          nullable: true
+          description: The id of an office hours schedule in your workspace. Set to
+            null to remove the team's or teammate's own schedule. Required even when null.
+          example: '123'
+    bulk_update_admin_office_hours_request:
+      type: object
+      title: Bulk Update Teammate Office Hours Request
+      description: Assign or clear office hours schedules for up to 50 teammates.
+        All assignments are applied together or none are changed.
+      required:
+      - assignments
+      properties:
+        assignments:
+          type: array
+          minItems: 1
+          maxItems: 50
+          description: The teammates and their new schedule ids. Each teammate must
+            belong to your workspace, be accessible to you, and appear at most once.
+          example:
+          - admin_id: '456'
+            office_hours_schedule_id: '123'
+          - admin_id: '789'
+            office_hours_schedule_id: null
+          items:
+            type: object
+            required:
+            - admin_id
+            - office_hours_schedule_id
+            properties:
+              admin_id:
+                type: string
+                description: The unique identifier of the teammate in your workspace.
+                example: '456'
+              office_hours_schedule_id:
+                type: string
+                nullable: true
+                description: The id of an office hours schedule in your workspace,
+                  or null to remove the teammate's own schedule so they inherit office hours.
+                example: '123'
     office_hours_exception:
       type: object
       title: Office Hours Exception
@@ -58915,6 +59554,76 @@ components:
       type: http
       scheme: bearer
   responses:
+    OfficeHoursScheduleIdMissing:
+      description: The required office_hours_schedule_id field is missing
+      content:
+        application/json:
+          examples:
+            Missing office_hours_schedule_id:
+              value:
+                type: error.list
+                request_id: 11111111-1111-4111-8111-111111111111
+                errors:
+                - code: parameter_missing
+                  message: 'param is missing or the value is empty or invalid: office_hours_schedule_id'
+          schema:
+            "$ref": "#/components/schemas/error"
+    AdminOfficeHoursForbidden:
+      description: Reporting permission is required and the teammate must be accessible
+      content:
+        application/json:
+          examples:
+            Missing reporting permission:
+              value:
+                type: error.list
+                request_id: your-request-id
+                errors:
+                - code: action_forbidden
+                  message: Teammate lacks permission to access reporting
+            Inaccessible teammate:
+              value:
+                type: error.list
+                request_id: your-request-id
+                errors:
+                - code: action_forbidden
+                  message: Teammate is not accessible
+          schema:
+            "$ref": "#/components/schemas/error"
+    TeamOfficeHoursForbidden:
+      description: Permission to manage workload management is required
+      content:
+        application/json:
+          examples:
+            Missing workload management permission:
+              value:
+                type: error.list
+                request_id: 22222222-2222-4222-8222-222222222222
+                errors:
+                - code: action_forbidden
+                  message: Teammate lacks permission to manage team office hours
+          schema:
+            "$ref": "#/components/schemas/error"
+    TeamOfficeHoursNotFound:
+      description: Team or office hours schedule not found
+      content:
+        application/json:
+          examples:
+            Unknown malformed or other-workspace team:
+              value:
+                type: error.list
+                request_id: 33333333-3333-4333-8333-333333333333
+                errors:
+                - code: team_not_found
+                  message: Team not found
+            No linked schedule or workspace default:
+              value:
+                type: error.list
+                request_id: 44444444-4444-4444-8444-444444444444
+                errors:
+                - code: office_hours_schedule_not_found
+                  message: Office hours schedule not found
+          schema:
+            "$ref": "#/components/schemas/error"
     Unauthorized:
       description: Unauthorized
       content:

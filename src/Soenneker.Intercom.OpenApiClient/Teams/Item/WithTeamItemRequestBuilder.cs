@@ -5,6 +5,7 @@ using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Models;
 using Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics;
+using Soenneker.Intercom.OpenApiClient.Teams.Item.Office_hours;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace Soenneker.Intercom.OpenApiClient.Teams.Item
         public global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder Metrics
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Teams.Item.Metrics.MetricsRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The office_hours property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Teams.Item.Office_hours.Office_hoursRequestBuilder Office_hours
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Teams.Item.Office_hours.Office_hoursRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Teams.Item.WithTeamItemRequestBuilder"/> and sets the default values.

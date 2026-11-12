@@ -36,7 +36,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute> Data { get => _explicitNullValueData; set { _explicitNullValueData = value; AdditionalData?.Remove("data"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("data"); else _explicitNullProperties?.Remove("data"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.DataAttribute> _explicitNullValueData = default!;
 #endif
-        /// <summary>The type of the object.</summary>
+        /// <summary>The type of the object, always `list`.</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.ListType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.ListType? _explicitNullValueType = default!;
         /// <summary>

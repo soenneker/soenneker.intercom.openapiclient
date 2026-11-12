@@ -7,6 +7,7 @@ using Soenneker.Intercom.OpenApiClient.Admins.Activity_log_event_types;
 using Soenneker.Intercom.OpenApiClient.Admins.Activity_logs;
 using Soenneker.Intercom.OpenApiClient.Admins.Find_by_email;
 using Soenneker.Intercom.OpenApiClient.Admins.Item;
+using Soenneker.Intercom.OpenApiClient.Admins.Office_hours;
 using Soenneker.Intercom.OpenApiClient.Admins.Remove;
 using Soenneker.Intercom.OpenApiClient.Models;
 using System.Collections.Generic;
@@ -36,6 +37,11 @@ namespace Soenneker.Intercom.OpenApiClient.Admins
         public global::Soenneker.Intercom.OpenApiClient.Admins.Find_by_email.Find_by_emailRequestBuilder Find_by_email
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Admins.Find_by_email.Find_by_emailRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The office_hours property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Admins.Office_hours.Office_hoursRequestBuilder Office_hours
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Admins.Office_hours.Office_hoursRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The remove property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Admins.Remove.RemoveRequestBuilder Remove
