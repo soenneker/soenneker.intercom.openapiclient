@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The recipient of a `whatsapp` message, identified by phone number. Required form for `whatsapp` messages. A contact is created for the number if there isn&apos;t one.
+    /// The recipient of a `whatsapp` message, identified by phone number. Required form for `whatsapp` messages. A contact is created for the number if there isn&apos;t one. Only `phone` and `name` are used. Other keys are ignored.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateMessageRequestToWhatsAppRecipient : IAdditionalDataHolder, IParsable

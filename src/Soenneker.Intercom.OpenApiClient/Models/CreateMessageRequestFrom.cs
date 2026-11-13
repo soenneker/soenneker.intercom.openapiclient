@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The sender of the message. If not provided, the default sender will be used.
+    /// The sender of the message. Required. A request without `from` returns a `400` error.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CreateMessageRequestFrom : IAdditionalDataHolder, IParsable
@@ -22,6 +22,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
             if (parseNode.GetChildNode("type") is null) { _explicitNullValueType = default!; _explicitNullProperties?.Remove("type"); }
             else if (parseNode.GetChildNode("type") is { } nullNodeType && nullNodeType.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Type = null;
+            if (parseNode.GetChildNode("whatsapp_number") is null) { _explicitNullValueWhatsappNumber = default!; _explicitNullProperties?.Remove("whatsapp_number"); }
+            else if (parseNode.GetChildNode("whatsapp_number") is { } nullNodeWhatsappNumber && nullNodeWhatsappNumber.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) WhatsappNumber = null;
         }
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
@@ -32,6 +34,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The type property</summary>
         public global::Soenneker.Intercom.OpenApiClient.Models.AdminType? Type { get => _explicitNullValueType; set { _explicitNullValueType = value; AdditionalData?.Remove("type"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("type"); else _explicitNullProperties?.Remove("type"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.AdminType? _explicitNullValueType = default!;
+        /// <summary>For `whatsapp` messages, the WhatsApp number of your workspace to send from, in international format. If you leave it out, a WhatsApp number in your workspace that has the template is used. A number that isn&apos;t valid, or isn&apos;t registered in your workspace, returns a `400` error.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? WhatsappNumber { get => _explicitNullValueWhatsappNumber; set { _explicitNullValueWhatsappNumber = value; AdditionalData?.Remove("whatsapp_number"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsapp_number"); else _explicitNullProperties?.Remove("whatsapp_number"); } }
+        private string? _explicitNullValueWhatsappNumber = default!;
+#nullable restore
+#else
+        public string WhatsappNumber { get => _explicitNullValueWhatsappNumber; set { _explicitNullValueWhatsappNumber = value; AdditionalData?.Remove("whatsapp_number"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("whatsapp_number"); else _explicitNullProperties?.Remove("whatsapp_number"); } }
+        private string _explicitNullValueWhatsappNumber = default!;
+#endif
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom"/> and sets the default values.
         /// </summary>
@@ -59,6 +71,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             {
                 { "id", n => { Id = n.GetIntValue(); } },
                 { "type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueType = default; _explicitNullProperties?.Remove("type"); AdditionalData["type"] = unknown; } else { Type = parsed; AdditionalData.Remove("type"); } } },
+                { "whatsapp_number", n => { WhatsappNumber = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -70,6 +83,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("id", Id);
             writer.WriteEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminType>("type", Type);
+            writer.WriteStringValue("whatsapp_number", WhatsappNumber);
             if (_explicitNullProperties != null) foreach (string name in _explicitNullProperties) writer.WriteNullValue(name);
             writer.WriteAdditionalData(AdditionalData);
         }

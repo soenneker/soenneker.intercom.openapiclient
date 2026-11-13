@@ -98,13 +98,13 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty> Components { get => _explicitNullValueComponents; set { _explicitNullValueComponents = value; AdditionalData?.Remove("components"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("components"); else _explicitNullProperties?.Remove("components"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestComponentsItemProperty> _explicitNullValueComponents = default!;
 #endif
-        /// <summary>Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided.</summary>
+        /// <summary>Whether a conversation should be opened in the inbox for the message without the contact replying. Defaults to false if not provided. For `whatsapp` messages, a conversation is always opened and this field is ignored.</summary>
         public bool? CreateConversationWithoutContactReply { get => _explicitNullValueCreateConversationWithoutContactReply; set { _explicitNullValueCreateConversationWithoutContactReply = value; AdditionalData?.Remove("create_conversation_without_contact_reply"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("create_conversation_without_contact_reply"); else _explicitNullProperties?.Remove("create_conversation_without_contact_reply"); } }
         private bool? _explicitNullValueCreateConversationWithoutContactReply = default!;
         /// <summary>The time the message was created. If not provided, the current time will be used.</summary>
         public int? CreatedAt { get => _explicitNullValueCreatedAt; set { _explicitNullValueCreatedAt = value; AdditionalData?.Remove("created_at"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("created_at"); else _explicitNullProperties?.Remove("created_at"); } }
         private int? _explicitNullValueCreatedAt = default!;
-        /// <summary>The sender of the message. If not provided, the default sender will be used.</summary>
+        /// <summary>The sender of the message. Required. A request without `from` returns a `400` error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.CreateMessageRequestFrom? From { get => _explicitNullValueFrom; set { _explicitNullValueFrom = value; AdditionalData?.Remove("from"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("from"); else _explicitNullProperties?.Remove("from"); } }
@@ -137,7 +137,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public string Subject { get => _explicitNullValueSubject; set { _explicitNullValueSubject = value; AdditionalData?.Remove("subject"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("subject"); else _explicitNullProperties?.Remove("subject"); } }
         private string _explicitNullValueSubject = default!;
 #endif
-        /// <summary>The style of the outgoing message. Possible values `plain` or `personal`.</summary>
+        /// <summary>For `email` messages, the style of the outgoing message. Possible values `plain` or `personal`. For `whatsapp` messages, the name of the WhatsApp message template to send. A template that doesn&apos;t exist returns a `400` error.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public string? Template { get => _explicitNullValueTemplate; set { _explicitNullValueTemplate = value; AdditionalData?.Remove("template"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("template"); else _explicitNullProperties?.Remove("template"); } }
