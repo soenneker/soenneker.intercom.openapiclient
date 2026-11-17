@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// An object containing the custom attributes on a conversation as key-value pairs. For relationship attributes the value is a list of custom object instance models. System-defined attributes such as &quot;AI Topic and Subtopic&quot;, &quot;CX Score rating&quot;, &quot;CX Score explanation&quot; and &quot;CX Score reasons&quot; may also be included.
+    /// An object containing the custom attributes on a conversation as key-value pairs. For relationship attributes the value is a list of custom object instance models. System-defined attributes such as &quot;AI Topic and Subtopic&quot;, &quot;CX Score rating&quot;, &quot;CX Score explanation&quot; and &quot;CX Score reasons&quot; may also be included. Rich-text values are returned as plain text, with line breaks inside a paragraph rendered as newlines (`\n`).
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class CustomAttributes : IAdditionalDataHolder, IParsable

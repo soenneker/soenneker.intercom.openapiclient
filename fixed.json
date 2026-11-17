@@ -64961,7 +64961,7 @@
         "additionalProperties": {
           "$ref": "#/components/schemas/CustomAttributesAdditionalProperties"
         },
-        "description": "An object containing the custom attributes on a conversation as key-value pairs. For relationship attributes the value is a list of custom object instance models. System-defined attributes such as \u0022AI Topic and Subtopic\u0022, \u0022CX Score rating\u0022, \u0022CX Score explanation\u0022 and \u0022CX Score reasons\u0022 may also be included.",
+        "description": "An object containing the custom attributes on a conversation as key-value pairs. For relationship attributes the value is a list of custom object instance models. System-defined attributes such as \u0022AI Topic and Subtopic\u0022, \u0022CX Score rating\u0022, \u0022CX Score explanation\u0022 and \u0022CX Score reasons\u0022 may also be included. Rich-text values are returned as plain text, with line breaks inside a paragraph rendered as newlines (\u0060\\n\u0060).",
         "example": {
           "paid_subscriber": true,
           "monthly_spend": 155.5,
@@ -72859,7 +72859,7 @@
             "$ref": "#/components/schemas/FileAttribute"
           }
         ],
-        "description": "The value of the attribute."
+        "description": "The value of the attribute. Rich-text values are returned as plain text, with line breaks inside a paragraph rendered as newlines (\u0060\\n\u0060)."
       },
       "ConversationChannelComposed": {
         "type": "object",
@@ -81630,7 +81630,7 @@
         "additionalProperties": {
           "$ref": "#/components/schemas/TicketCustomAttributesAdditionalProperties"
         },
-        "description": "An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are \u0060_default_title_\u0060 and \u0060_default_description_\u0060.",
+        "description": "An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. Rich-text values, such as \u0060_default_description_\u0060, are returned as plain text, with line breaks inside a paragraph rendered as newlines (\u0060\\n\u0060).",
         "example": {
           "_default_title_": "Found a bug",
           "_default_description_": "The button\u0027s not working"
@@ -96083,7 +96083,7 @@
       "additionalProperties": {
         "$ref": "#/components/schemas/TicketCustomAttributesAdditionalProperties"
       },
-      "description": "An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are \u0060_default_title_\u0060 and \u0060_default_description_\u0060.",
+      "description": "An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are \u0060_default_title_\u0060 and \u0060_default_description_\u0060. Rich-text values, such as \u0060_default_description_\u0060, are returned as plain text, with line breaks inside a paragraph rendered as newlines (\u0060\\n\u0060).",
       "example": {
         "_default_title_": "Found a bug",
         "_default_description_": "The button\u0027s not working"
@@ -97385,119 +97385,6 @@
     "GetDownloadReportingDataByJobIdentifier200OctetStreamResponse": {
       "type": "string",
       "format": "binary"
-    },
-    "CreateContactRequestRequestBody": {
-      "title": "Create Contact Request Payload",
-      "type": "object",
-      "anyOf": [
-        {
-          "title": "Create contact with email",
-          "required": [
-            "email"
-          ]
-        },
-        {
-          "title": "Create contact with external_id",
-          "required": [
-            "external_id"
-          ]
-        },
-        {
-          "title": "Create contact with role",
-          "required": [
-            "role"
-          ]
-        }
-      ],
-      "properties": {
-        "role": {
-          "type": "string",
-          "description": "The role of the contact. \u0060lead\u0060 creates a lead; any other value creates a user.",
-          "example": "user"
-        },
-        "external_id": {
-          "type": "string",
-          "description": "A unique identifier for the contact which is given to Intercom",
-          "example": "625e90fc55ab113b6d92175f"
-        },
-        "email": {
-          "type": "string",
-          "description": "The contacts email",
-          "example": "jdoe@example.com"
-        },
-        "email_verified": {
-          "type": "boolean",
-          "description": "Whether the contact has proved they own this email address, for example through a confirmation link or one-time code you sent. Send it together with \u0060email\u0060. \u0060email_verified\u0060 without \u0060email\u0060 is rejected.\n\nChanging a contact\u0027s email resets it to not verified. Intercom reuses leads with a verified email when an inbound email, conversation or ticket matches the address.",
-          "nullable": true,
-          "example": true
-        },
-        "phone": {
-          "type": "string",
-          "description": "The contacts phone",
-          "nullable": true,
-          "example": "\u002B353871234567"
-        },
-        "name": {
-          "type": "string",
-          "description": "The contacts name",
-          "nullable": true,
-          "example": "John Doe"
-        },
-        "avatar": {
-          "type": "string",
-          "description": "An image URL containing the avatar of a contact",
-          "nullable": true,
-          "example": "https://www.example.com/avatar_image.jpg"
-        },
-        "signed_up_at": {
-          "type": "integer",
-          "description": "(Unix timestamp in seconds) The time specified for when a contact signed up.",
-          "format": "int64",
-          "nullable": true,
-          "example": 1571672154,
-          "x-client-original-format": "date-time"
-        },
-        "last_seen_at": {
-          "type": "integer",
-          "description": "(Unix timestamp in seconds) The time when the contact was last seen (either where the Intercom Messenger was installed or when specified manually).",
-          "format": "int64",
-          "nullable": true,
-          "example": 1571672154,
-          "x-client-original-format": "date-time"
-        },
-        "owner_id": {
-          "type": "string",
-          "description": "The id of an admin that has been assigned account ownership of the contact",
-          "nullable": true,
-          "example": "321"
-        },
-        "unsubscribed_from_emails": {
-          "type": "boolean",
-          "description": "Whether the contact is unsubscribed from emails",
-          "nullable": true,
-          "example": true
-        },
-        "sms_consent": {
-          "type": "boolean",
-          "description": "Whether the contact has consented to receive SMS messages.",
-          "example": false
-        },
-        "unsubscribed_from_sms": {
-          "type": "boolean",
-          "description": "Whether the contact is unsubscribed from SMS messages.",
-          "example": false
-        },
-        "language_override": {
-          "type": "string",
-          "description": "A preferred language setting for the contact, used by Intercom as the language of Fin and the Messenger even if their browser has a different setting. Supports ISO 639-1 two-letter language codes. If an unsupported code is supplied, the field will be set to null.",
-          "nullable": true,
-          "example": "en"
-        },
-        "custom_attributes": {
-          "$ref": "#/components/schemas/CreateContactRequestCustomAttributesProperty"
-        }
-      },
-      "description": "Payload to create a contact"
     },
     "ShowCallTranscript200Response": {
       "type": "array",

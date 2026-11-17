@@ -143,7 +143,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>The id representing the team assigned to the ticket. If it&apos;s not assigned to a team it will return 0.</summary>
         public int? TeamAssigneeId { get => _explicitNullValueTeamAssigneeId; set { _explicitNullValueTeamAssigneeId = value; AdditionalData?.Remove("team_assignee_id"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("team_assignee_id"); else _explicitNullProperties?.Remove("team_assignee_id"); } }
         private int? _explicitNullValueTeamAssigneeId = default!;
-        /// <summary>An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are `_default_title_` and `_default_description_`.</summary>
+        /// <summary>An object containing the different attributes associated to the ticket as key-value pairs. For the default title and description attributes, the keys are `_default_title_` and `_default_description_`. Rich-text values, such as `_default_description_`, are returned as plain text, with line breaks inside a paragraph rendered as newlines (`\n`).</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.TicketTicketAttributes? TicketAttributes { get => _explicitNullValueTicketAttributes; set { _explicitNullValueTicketAttributes = value; AdditionalData?.Remove("ticket_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("ticket_attributes"); else _explicitNullProperties?.Remove("ticket_attributes"); } }
