@@ -34,7 +34,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
         {
         }
         /// <summary>
-        /// Retrieve details for a specific data connector execution result.Includes the request/response bodies and sanitised request URL when they are available.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
+        /// Retrieve details for a specific data connector execution result.Includes the sanitised request URL, and the request/response bodies when they are available. Bodies are omitted when the request comes from a third-party app (an app owned by another workspace).OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -61,7 +61,7 @@ namespace Soenneker.Intercom.OpenApiClient.Data_connectors.Item.Execution_result
             return await RequestAdapter.SendAsync<global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult>(requestInfo, global::Soenneker.Intercom.OpenApiClient.Models.DataConnectorExecutionResult.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Retrieve details for a specific data connector execution result.Includes the request/response bodies and sanitised request URL when they are available.OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
+        /// Retrieve details for a specific data connector execution result.Includes the sanitised request URL, and the request/response bodies when they are available. Bodies are omitted when the request comes from a third-party app (an app owned by another workspace).OAuth tokens must have the `read_workflow_connector_execution_result` or `read_write_data_connectors` scope.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>

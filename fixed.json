@@ -37310,7 +37310,7 @@
           "Data Connectors"
         ],
         "summary": "List execution results for a data connector",
-        "description": "Retrieve paginated execution logs for a specific data connector.\nResults from the last hour are returned by default. Use \u0060start_ts\u0060 and \u0060end_ts\u0060 to customize the time range.\n\nRequest/response bodies are excluded by default. Use \u0060include_bodies=true\u0060 to include them.\n\nOAuth tokens must have the \u0060read_workflow_connector_execution_result\u0060 or \u0060read_write_data_connectors\u0060 scope.\n",
+        "description": "Retrieve paginated execution logs for a specific data connector.\nResults from the last hour are returned by default. Use \u0060start_ts\u0060 and \u0060end_ts\u0060 to customize the time range.\n\nRequest/response bodies are excluded by default. Use \u0060include_bodies=true\u0060 to include them. Apps owned by another workspace never receive them.\n\nOAuth tokens must have the \u0060read_workflow_connector_execution_result\u0060 or \u0060read_write_data_connectors\u0060 scope.\n",
         "operationId": "ListDataConnectorExecutionResults",
         "parameters": [
           {
@@ -37384,7 +37384,7 @@
           {
             "name": "include_bodies",
             "in": "query",
-            "description": "Include request/response bodies in the response (default false).",
+            "description": "Include request/response bodies in the response (default false). Ignored for third-party apps (apps owned by another workspace), which never receive bodies.",
             "schema": {
               "$ref": "#/components/schemas/ListDataConnectorExecutionResultsIncludeBodiesParameter"
             }
@@ -37559,7 +37559,7 @@
           "Data Connectors"
         ],
         "summary": "Retrieve an execution result",
-        "description": "Retrieve details for a specific data connector execution result.\nIncludes the request/response bodies and sanitised request URL when they are available.\n\nOAuth tokens must have the \u0060read_workflow_connector_execution_result\u0060 or \u0060read_write_data_connectors\u0060 scope.\n",
+        "description": "Retrieve details for a specific data connector execution result.\nIncludes the sanitised request URL, and the request/response bodies when they are available. Bodies are omitted when the request comes from a third-party app (an app owned by another workspace).\n\nOAuth tokens must have the \u0060read_workflow_connector_execution_result\u0060 or \u0060read_write_data_connectors\u0060 scope.\n",
         "operationId": "ShowDataConnectorExecutionResult",
         "parameters": [
           {
