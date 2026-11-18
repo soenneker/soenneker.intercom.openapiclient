@@ -105,7 +105,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "conversations", n => { Conversations = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsConversations.CreateFromDiscriminatorValue); } },
                 { "notes", n => { Notes = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes>(global::Soenneker.Intercom.OpenApiClient.Models.MergePreviewReassignmentsNotes.CreateFromDiscriminatorValue); } },

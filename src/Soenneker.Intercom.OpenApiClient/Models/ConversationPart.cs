@@ -272,7 +272,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(23)
             {
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "app_package_code", n => { AppPackageCode = n.GetStringValue(); } },

@@ -175,7 +175,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(13)
             {
                 { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar.CreateFromDiscriminatorValue); } },
                 { "away_mode_enabled", n => { AwayModeEnabled = n.GetBoolValue(); } },

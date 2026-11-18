@@ -208,7 +208,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(18)
             {
                 { "app_package_code", n => { AppPackageCode = n.GetStringValue(); } },
                 { "assigned_to", n => { AssignedTo = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Reference>(global::Soenneker.Intercom.OpenApiClient.Models.Reference.CreateFromDiscriminatorValue); } },

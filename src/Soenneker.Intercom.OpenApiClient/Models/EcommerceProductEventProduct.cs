@@ -238,7 +238,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(19)
             {
                 { "additional_data", n => { AdditionalDataProperty = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceProductEventProductAdditionalData.CreateFromDiscriminatorValue); } },
                 { "available_options", n => { AvailableOptions = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem>(global::Soenneker.Intercom.OpenApiClient.Models.EcommerceCatalogProductAvailableOptionsItem.CreateFromDiscriminatorValue)?.AsList(); } },

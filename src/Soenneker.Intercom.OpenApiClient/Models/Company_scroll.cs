@@ -86,7 +86,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "data", n => { Data = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Company>(global::Soenneker.Intercom.OpenApiClient.Models.Company.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "pages", n => { Pages = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Cursor_pages>(global::Soenneker.Intercom.OpenApiClient.Models.Cursor_pages.CreateFromDiscriminatorValue); } },

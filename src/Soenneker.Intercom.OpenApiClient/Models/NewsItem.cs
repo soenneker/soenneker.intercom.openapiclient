@@ -176,7 +176,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(15)
             {
                 { "body", n => { Body = n.GetStringValue(); } },
                 { "cover_image_url", n => { CoverImageUrl = n.GetStringValue(); } },

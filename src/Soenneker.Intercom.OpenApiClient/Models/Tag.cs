@@ -98,7 +98,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "applied_at", n => { AppliedAt = n.GetLongValue(); } },
                 { "applied_by", n => { AppliedBy = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy>(global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy.CreateFromDiscriminatorValue); } },

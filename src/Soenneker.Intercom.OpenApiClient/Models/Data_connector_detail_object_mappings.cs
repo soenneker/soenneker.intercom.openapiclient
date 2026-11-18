@@ -81,7 +81,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(4)
             {
                 { "attribute_mappings", n => { AttributeMappings = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_attribute_mappings>(global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_attribute_mappings.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "intercom_object_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_object_mappings_intercom_object_type>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueIntercomObjectType = default; _explicitNullProperties?.Remove("intercom_object_type"); AdditionalData["intercom_object_type"] = unknown; } else { IntercomObjectType = parsed; AdditionalData.Remove("intercom_object_type"); } } },

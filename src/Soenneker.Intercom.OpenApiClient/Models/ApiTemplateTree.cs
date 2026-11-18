@@ -122,7 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(7)
             {
                 { "children", n => { Children = n.GetStringValue(); } },
                 { "content_if", n => { ContentIf = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty>(global::Soenneker.Intercom.OpenApiClient.Models.ApiTemplateTreeContentIfItemProperty.CreateFromDiscriminatorValue)?.AsList(); } },

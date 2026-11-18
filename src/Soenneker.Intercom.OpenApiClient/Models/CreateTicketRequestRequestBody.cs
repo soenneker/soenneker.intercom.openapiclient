@@ -131,7 +131,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(9)
             {
                 { "assignment", n => { Assignment = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment>(global::Soenneker.Intercom.OpenApiClient.Models.CreateTicketRequestAssignment.CreateFromDiscriminatorValue); } },
                 { "channel", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.EmailChannel>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueChannel = default; _explicitNullProperties?.Remove("channel"); AdditionalData["channel"] = unknown; } else { Channel = parsed; AdditionalData.Remove("channel"); } } },

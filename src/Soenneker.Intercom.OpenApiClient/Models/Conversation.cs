@@ -274,7 +274,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <summary>If set this is the time in the future when this conversation will be marked as open. i.e. it will be in a snoozed state until this time. i.e. it will be in a snoozed state until this time.</summary>
         public long? SnoozedUntil { get => _explicitNullValueSnoozedUntil; set { _explicitNullValueSnoozedUntil = value; AdditionalData?.Remove("snoozed_until"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("snoozed_until"); else _explicitNullProperties?.Remove("snoozed_until"); } }
         private long? _explicitNullValueSnoozedUntil = default!;
-        /// <summary>The first message or event that started this conversation. Describes the origin and who initiated it.</summary>
+        /// <summary>The first message or event that started this conversation. Describes the origin and who initiated it. For a conversation started without an opening message, this shows the conversation&apos;s first message, or is null until there is one.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.ConversationSource? Source { get => _explicitNullValueSource; set { _explicitNullValueSource = value; AdditionalData?.Remove("source"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("source"); else _explicitNullProperties?.Remove("source"); } }
@@ -369,7 +369,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(34)
             {
                 { "admin_assignee_id", n => { AdminAssigneeId = n.GetIntValue(); } },
                 { "ai_agent", n => { AiAgent = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AiAgent>(global::Soenneker.Intercom.OpenApiClient.Models.AiAgent.CreateFromDiscriminatorValue); } },

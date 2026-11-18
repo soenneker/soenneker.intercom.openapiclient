@@ -142,7 +142,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(11)
             {
                 { "app_package_code", n => { AppPackageCode = n.GetStringValue(); } },
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },

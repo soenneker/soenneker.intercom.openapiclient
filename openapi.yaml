@@ -10837,7 +10837,7 @@ paths:
           See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details.
         {% /admonition %}
 
-        Requires the `write_users_companies` OAuth scope. A token with only read scopes cannot call this endpoint.
+        Requires the `read_users_companies` or `write_users_companies` OAuth scope.
       responses:
         '200':
           description: Successful
@@ -47880,7 +47880,9 @@ components:
       title: Conversation source
       type: object
       description: The first message or event that started this conversation. Describes
-        the origin and who initiated it.
+        the origin and who initiated it. For a conversation started without an opening
+        message, this shows the conversation's first message, or is null until there
+        is one.
       properties:
         type:
           type: string

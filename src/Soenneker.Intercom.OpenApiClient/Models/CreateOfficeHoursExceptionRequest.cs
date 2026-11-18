@@ -85,7 +85,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "exception_date", n => { ExceptionDate = n.GetDateValue(); } },
                 { "exception_type", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.CreateOfficeHoursExceptionRequestExceptionType>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueExceptionType = default; _explicitNullProperties?.Remove("exception_type"); AdditionalData["exception_type"] = unknown; } else { ExceptionType = parsed; AdditionalData.Remove("exception_type"); } } },

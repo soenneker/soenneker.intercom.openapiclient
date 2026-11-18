@@ -99,7 +99,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "attributes", n => { Attributes = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataGetDatasets200_data_attributes>(global::Soenneker.Intercom.OpenApiClient.Models.GetExportReportingDataGetDatasets200_data_attributes.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "default_time_attribute_id", n => { DefaultTimeAttributeId = n.GetStringValue(); } },

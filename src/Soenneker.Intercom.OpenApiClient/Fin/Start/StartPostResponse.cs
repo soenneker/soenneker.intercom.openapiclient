@@ -97,7 +97,7 @@ namespace Soenneker.Intercom.OpenApiClient.Fin.Start
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(6)
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "created_at_ms", n => { CreatedAtMs = n.GetDateTimeOffsetValue(); } },

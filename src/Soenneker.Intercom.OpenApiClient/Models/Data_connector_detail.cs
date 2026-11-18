@@ -262,7 +262,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(28)
             {
                 { "audiences", n => { Audiences = n.GetCollectionOfEnumValues<global::Soenneker.Intercom.OpenApiClient.Models.Data_connector_detail_audiences>()?.AsList(); } },
                 { "body", n => { Body = n.GetStringValue(); } },

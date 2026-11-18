@@ -72,7 +72,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(4)
             {
                 { "author", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.FinAgentMessageAuthor>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueAuthor = default; _explicitNullProperties?.Remove("author"); AdditionalData["author"] = unknown; } else { Author = parsed; AdditionalData.Remove("author"); } } },
                 { "body", n => { Body = n.GetStringValue(); } },

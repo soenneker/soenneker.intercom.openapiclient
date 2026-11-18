@@ -79,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(4)
             {
                 { "current_sla_status", n => { var parsed = n.GetEnumValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSlaTargetMissedCurrentSlaStatus>(); if (parsed == null && n.GetStringValue() is string unknown) { _explicitNullValueCurrentSlaStatus = default; _explicitNullProperties?.Remove("current_sla_status"); AdditionalData["current_sla_status"] = unknown; } else { CurrentSlaStatus = parsed; AdditionalData.Remove("current_sla_status"); } } },
                 { "sla_name", n => { SlaName = n.GetStringValue(); } },

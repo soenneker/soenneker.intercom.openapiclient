@@ -104,7 +104,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(5)
             {
                 { "conversation_id", n => { ConversationId = n.GetStringValue(); } },
                 { "conversation_metadata", n => { ConversationMetadata = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata>(global::Soenneker.Intercom.OpenApiClient.Models.RunFinProcedureRequestConversationMetadata.CreateFromDiscriminatorValue); } },

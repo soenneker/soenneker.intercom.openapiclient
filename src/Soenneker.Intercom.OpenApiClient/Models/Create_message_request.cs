@@ -145,7 +145,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(11)
             {
                 { "bcc", n => { Bcc = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request.Create_message_request_bcc>(global::Soenneker.Intercom.OpenApiClient.Models.Create_message_request.Create_message_request_bcc.CreateFromDiscriminatorValue); } },
                 { "body", n => { Body = n.GetStringValue(); } },

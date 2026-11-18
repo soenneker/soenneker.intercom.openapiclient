@@ -79,7 +79,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(4)
             {
                 { "reason", n => { Reason = n.GetStringValue(); } },
                 { "teammate", n => { Teammate = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TeammateReference>(global::Soenneker.Intercom.OpenApiClient.Models.TeammateReference.CreateFromDiscriminatorValue); } },

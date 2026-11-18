@@ -15592,7 +15592,7 @@
           "Companies"
         ],
         "summary": "List all companies",
-        "description": "You can list companies. The company list is sorted by the \u0060last_request_at\u0060 field and by default is ordered descending, most recently requested first.\n\nNote that the API does not include companies who have no associated users in list responses.\n\nWhen using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies). Going past that limit returns a \u0060400\u0060 error with code \u0060bad_request\u0060.\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  This endpoint pages by page number, not by cursor. Use the \u0060page\u0060 and \u0060per_page\u0060 query parameters, and the \u0060page\u0060, \u0060total_pages\u0060 and \u0060next\u0060 values in the \u0060pages\u0060 object of the response. The default is \u006015\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details.\n{% /admonition %}\n\nRequires the \u0060write_users_companies\u0060 OAuth scope. A token with only read scopes cannot call this endpoint.\n",
+        "description": "You can list companies. The company list is sorted by the \u0060last_request_at\u0060 field and by default is ordered descending, most recently requested first.\n\nNote that the API does not include companies who have no associated users in list responses.\n\nWhen using the Companies endpoint and the pages object to iterate through the returned companies, there is a limit of 10,000 Companies that can be returned. If you need to list or iterate on more than 10,000 Companies, please use the [Scroll API](https://developers.intercom.com/reference#iterating-over-all-companies). Going past that limit returns a \u0060400\u0060 error with code \u0060bad_request\u0060.\n{% admonition type=\u0022warning\u0022 name=\u0022Pagination\u0022 %}\n  This endpoint pages by page number, not by cursor. Use the \u0060page\u0060 and \u0060per_page\u0060 query parameters, and the \u0060page\u0060, \u0060total_pages\u0060 and \u0060next\u0060 values in the \u0060pages\u0060 object of the response. The default is \u006015\u0060 results per page.\n  See the [pagination section](https://developers.intercom.com/docs/build-an-integration/learn-more/rest-apis/pagination/#pagination-for-list-apis) for more details.\n{% /admonition %}\n\nRequires the \u0060read_users_companies\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
         "operationId": "ListAllCompanies",
         "parameters": [
           {
@@ -63167,7 +63167,7 @@
             "$ref": "#/components/schemas/SourceEmailMessageMetadata"
           }
         },
-        "description": "The first message or event that started this conversation. Describes the origin and who initiated it."
+        "description": "The first message or event that started this conversation. Describes the origin and who initiated it. For a conversation started without an opening message, this shows the conversation\u0027s first message, or is null until there is one."
       },
       "ConversationSourceAuthor": {
         "title": "Conversation source author",

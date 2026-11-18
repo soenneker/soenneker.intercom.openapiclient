@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The first message or event that started this conversation. Describes the origin and who initiated it.
+    /// The first message or event that started this conversation. Describes the origin and who initiated it. For a conversation started without an opening message, this shows the conversation&apos;s first message, or is null until there is one.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class ConversationSource : IAdditionalDataHolder, IParsable
@@ -194,7 +194,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>
+            return new Dictionary<string, Action<IParseNode>>(13)
             {
                 { "attachments", n => { Attachments = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment>(global::Soenneker.Intercom.OpenApiClient.Models.PartAttachment.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "author", n => { Author = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor>(global::Soenneker.Intercom.OpenApiClient.Models.ConversationSourceAuthor.CreateFromDiscriminatorValue); } },
