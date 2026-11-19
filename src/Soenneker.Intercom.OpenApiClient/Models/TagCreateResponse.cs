@@ -18,6 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("archived") is null) { _explicitNullValueArchived = default!; _explicitNullProperties?.Remove("archived"); }
+            else if (parseNode.GetChildNode("archived") is { } nullNodeArchived && nullNodeArchived.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Archived = null;
             if (parseNode.GetChildNode("companies") is null) { _explicitNullValueCompanies = default!; _explicitNullProperties?.Remove("companies"); }
             else if (parseNode.GetChildNode("companies") is { } nullNodeCompanies && nullNodeCompanies.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Companies = null;
             if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
@@ -32,6 +34,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>Whether the tag is archived.</summary>
+        public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; AdditionalData?.Remove("archived"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
+        private bool? _explicitNullValueArchived = default!;
         /// <summary>The companies that were tagged or untagged.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -105,8 +110,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(5)
+            return new Dictionary<string, Action<IParseNode>>(6)
             {
+                { "archived", n => { Archived = n.GetBoolValue(); } },
                 { "companies", n => { Companies = n.GetCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem>(global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem.CreateFromDiscriminatorValue)?.AsList(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
@@ -121,6 +127,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteBoolValue("archived", Archived);
             writer.WriteCollectionOfObjectValues<global::Soenneker.Intercom.OpenApiClient.Models.TagCreateResponseAllOf2CompaniesItem>("companies", Companies);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);

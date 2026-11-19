@@ -22,6 +22,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             else if (parseNode.GetChildNode("applied_at") is { } nullNodeAppliedAt && nullNodeAppliedAt.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AppliedAt = null;
             if (parseNode.GetChildNode("applied_by") is null) { _explicitNullValueAppliedBy = default!; _explicitNullProperties?.Remove("applied_by"); }
             else if (parseNode.GetChildNode("applied_by") is { } nullNodeAppliedBy && nullNodeAppliedBy.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AppliedBy = null;
+            if (parseNode.GetChildNode("archived") is null) { _explicitNullValueArchived = default!; _explicitNullProperties?.Remove("archived"); }
+            else if (parseNode.GetChildNode("archived") is { } nullNodeArchived && nullNodeArchived.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Archived = null;
             if (parseNode.GetChildNode("id") is null) { _explicitNullValueId = default!; _explicitNullProperties?.Remove("id"); }
             else if (parseNode.GetChildNode("id") is { } nullNodeId && nullNodeId.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Id = null;
             if (parseNode.GetChildNode("name") is null) { _explicitNullValueName = default!; _explicitNullProperties?.Remove("name"); }
@@ -45,6 +47,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy AppliedBy { get => _explicitNullValueAppliedBy; set { _explicitNullValueAppliedBy = value; AdditionalData?.Remove("applied_by"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("applied_by"); else _explicitNullProperties?.Remove("applied_by"); } }
         private global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy _explicitNullValueAppliedBy = default!;
 #endif
+        /// <summary>Whether the tag is archived.</summary>
+        public bool? Archived { get => _explicitNullValueArchived; set { _explicitNullValueArchived = value; AdditionalData?.Remove("archived"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("archived"); else _explicitNullProperties?.Remove("archived"); } }
+        private bool? _explicitNullValueArchived = default!;
         /// <summary>The id of the tag</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -98,10 +103,11 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(5)
+            return new Dictionary<string, Action<IParseNode>>(6)
             {
                 { "applied_at", n => { AppliedAt = n.GetLongValue(); } },
                 { "applied_by", n => { AppliedBy = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy>(global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy.CreateFromDiscriminatorValue); } },
+                { "archived", n => { Archived = n.GetBoolValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "type", n => { Type = n.GetStringValue(); } },
@@ -116,6 +122,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
             writer.WriteLongValue("applied_at", AppliedAt);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.TagAppliedBy>("applied_by", AppliedBy);
+            writer.WriteBoolValue("archived", Archived);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("type", Type);

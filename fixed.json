@@ -28570,7 +28570,7 @@
           "Conversations"
         ],
         "summary": "Delete a conversation",
-        "description": "{% admonition type=\u0022warning\u0022 name=\u0022Irreversible operation\u0022 %}\nDeleting a conversation is permanent and cannot be reversed.\n{% /admonition %}\n\nYou can delete a single conversation. The behavior depends on the \u0060retain_metrics\u0060 parameter:\n\n- **With \u0060retain_metrics=true\u0060 (default)**: Deletes the conversation while retaining reporting data. The conversation will still appear in reporting, though some data may be incomplete due to the deletion.\n\n- **With \u0060retain_metrics=false\u0060**: Deletes the conversation and all associated reporting data. The conversation will be completely removed from both the inbox and all reporting.\n\n{% admonition type=\u0022info\u0022 name=\u0022Required scope for retain_metrics=false\u0022 %}\nUsing \u0060retain_metrics=false\u0060 requires the \u0060delete_conversations_and_metrics\u0060 OAuth scope.\n{% /admonition %}\n\nFor more info, see [this help center article](https://www.intercom.com/help/en/articles/13885146-deleting-a-conversation).\n\nIf the conversation is a ticket, the access token must include the \u0060write_tickets\u0060 scope. Without it, the request returns a \u0060401\u0060 with the error code \u0060token_unauthorized\u0060.\n",
+        "description": "{% admonition type=\u0022warning\u0022 name=\u0022Irreversible after the recovery window\u0022 %}\nWith \u0060retain_metrics=false\u0060, deleting a conversation is permanent and cannot be reversed. With the default \u0060retain_metrics=true\u0060, the conversation\u0027s data is retained for 7 days before being permanently deleted, and recovering it during that window isn\u0027t available through the API.\n{% /admonition %}\n\nYou can delete a single conversation. The behavior depends on the \u0060retain_metrics\u0060 parameter:\n\n- **With \u0060retain_metrics=true\u0060 (default)**: Deletes the conversation while retaining reporting data. The conversation will still appear in reporting, though some data may be incomplete due to the deletion.\n\n- **With \u0060retain_metrics=false\u0060**: Deletes the conversation and all associated reporting data. The conversation will be completely removed from both the inbox and all reporting.\n\n{% admonition type=\u0022info\u0022 name=\u0022Required scope for retain_metrics=false\u0022 %}\nUsing \u0060retain_metrics=false\u0060 requires the \u0060delete_conversations_and_metrics\u0060 OAuth scope.\n{% /admonition %}\n\nFor more info, see [this help center article](https://www.intercom.com/help/en/articles/13885146-deleting-a-conversation).\n\nIf the conversation is a ticket, the access token must include the \u0060write_tickets\u0060 scope. Without it, the request returns a \u0060401\u0060 with the error code \u0060token_unauthorized\u0060.\n",
         "operationId": "DeleteConversation",
         "parameters": [
           {
@@ -46712,7 +46712,8 @@
                         {
                           "type": "tag",
                           "id": "102",
-                          "name": "Manual tag 1"
+                          "name": "Manual tag 1",
+                          "archived": false
                         }
                       ]
                     }
@@ -46721,7 +46722,8 @@
                     "value": {
                       "type": "tag",
                       "id": "102",
-                      "name": "Manual tag 1"
+                      "name": "Manual tag 1",
+                      "archived": false
                     }
                   }
                 }
@@ -46910,6 +46912,7 @@
                       "type": "tag",
                       "id": "105",
                       "name": "test",
+                      "archived": false,
                       "users": [],
                       "companies": []
                     }
@@ -46919,6 +46922,7 @@
                       "type": "tag",
                       "id": "105",
                       "name": "test",
+                      "archived": false,
                       "users": [],
                       "companies": [
                         {
@@ -47064,14 +47068,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TagBasic"
+                  "$ref": "#/components/schemas/Tag"
                 },
                 "examples": {
                   "Tag found": {
                     "value": {
                       "type": "tag",
                       "id": "113",
-                      "name": "Manual tag"
+                      "name": "Manual tag",
+                      "archived": false
                     }
                   }
                 }
@@ -70656,6 +70661,11 @@
             "description": "The name of the tag",
             "example": "Test tag"
           },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the tag is archived.",
+            "example": false
+          },
           "applied_at": {
             "type": "integer",
             "description": "The time when the tag was applied to the object. Only present when the tag is returned as part of a tagging operation on a contact, conversation, ticket, article, internal article, content snippet, or external page, when listing the tags on a contact, or when it is returned as part of an external page. \u0060null\u0060 when the tag has just been removed from an article, internal article, content snippet or external page. Removing a tag from a contact, conversation or ticket returns the original value.",
@@ -70716,6 +70726,11 @@
             "type": "string",
             "description": "The name of the tag",
             "example": "Test tag"
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Whether the tag is archived.",
+            "example": false
           },
           "users": {
             "type": "array",
@@ -96663,6 +96678,11 @@
     "TagCreateResponseAllOf2": {
       "type": "object",
       "properties": {
+        "archived": {
+          "type": "boolean",
+          "description": "Whether the tag is archived.",
+          "example": false
+        },
         "users": {
           "type": "array",
           "items": {
