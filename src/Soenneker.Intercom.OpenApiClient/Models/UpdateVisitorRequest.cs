@@ -80,7 +80,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty> Companies { get => _explicitNullValueCompanies; set { _explicitNullValueCompanies = value; AdditionalData?.Remove("companies"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("companies"); else _explicitNullProperties?.Remove("companies"); } }
         private List<global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCompaniesItemProperty> _explicitNullValueCompanies = default!;
 #endif
-        /// <summary>The custom attributes which are set for the visitor.</summary>
+        /// <summary>The custom attributes which are set for the visitor. A key that doesn&apos;t match an existing data attribute creates a new one with `messenger_writable` set to `false`, so the Messenger can&apos;t update it.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Soenneker.Intercom.OpenApiClient.Models.UpdateVisitorRequestCustomAttributesProperty? CustomAttributes { get => _explicitNullValueCustomAttributes; set { _explicitNullValueCustomAttributes = value; AdditionalData?.Remove("custom_attributes"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("custom_attributes"); else _explicitNullProperties?.Remove("custom_attributes"); } }

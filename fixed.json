@@ -46158,7 +46158,7 @@
           "Calls"
         ],
         "summary": "Delete a call recording",
-        "description": "Permanently deletes every recording and transcript of the call, including the part of the call handled by Fin. Afterwards, the call\u0027s \u0060recording_url\u0060 and \u0060fin_recording_url\u0060 are \u0060null\u0060. Deleting a recording that was already deleted returns the same successful response.\n\nRequires the \u0060write_conversations\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
+        "description": "Permanently deletes every recording of the call, including the part of the call handled by Fin, and the call\u0027s transcripts unless \u0060include_transcripts\u0060 is \u0060false\u0060. Afterwards, the call\u0027s \u0060recording_url\u0060 and \u0060fin_recording_url\u0060 are \u0060null\u0060. Deleting a recording that was already deleted returns the same successful response.\n\nRequires the \u0060write_conversations\u0060 OAuth scope. Set \u0060Intercom-Version: Preview\u0060.\n",
         "operationId": "DeleteCallRecording",
         "parameters": [
           {
@@ -46175,6 +46175,15 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "include_transcripts",
+            "in": "query",
+            "description": "By default, the call\u0027s transcripts are deleted too. Pass \u0060false\u0060 to keep them.",
+            "schema": {
+              "type": "boolean",
+              "default": true
             }
           }
         ],
@@ -47247,6 +47256,210 @@
                     "value": {
                       "type": "error.list",
                       "request_id": "1b8e4790-ad35-42f6-8c01-9e5d73a2bf64",
+                      "errors": [
+                        {
+                          "code": "token_unauthorized",
+                          "message": "Not authorized to access resource"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tags"
+        ],
+        "summary": "Archive or unarchive a tag",
+        "description": "You can archive or unarchive a tag by passing in its id. Archived tags are still returned by \u0060GET /tags\u0060, with \u0060archived\u0060 set to \u0060true\u0060.\n\nYou can\u0027t archive a tag that is still in use elsewhere in your workspace, such as in a segment or rule; the request returns a 400 that lists them. Unarchiving always succeeds. Archiving a tag that is already archived, or unarchiving one that isn\u0027t, returns the tag unchanged.\n\nRequires the \u0060write_tags\u0060 or \u0060write_users_companies\u0060 OAuth scope.\n",
+        "operationId": "UpdateTag",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of a given tag",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTagRequest"
+              },
+              "examples": {
+                "archive_tag": {
+                  "summary": "Archive a tag",
+                  "value": {
+                    "archived": true
+                  }
+                },
+                "unarchive_tag": {
+                  "summary": "Unarchive a tag",
+                  "value": {
+                    "archived": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tag updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tag"
+                },
+                "examples": {
+                  "Tag archived": {
+                    "value": {
+                      "type": "tag",
+                      "id": "113",
+                      "name": "Manual tag",
+                      "archived": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing archived": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "3f6b2e1a-8c4d-4f7e-9a2b-5d1c0e8f7a63",
+                      "errors": [
+                        {
+                          "code": "parameter_not_found",
+                          "message": "archived is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid archived": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "7a2d9c4e-1b3f-4e8a-b6d5-0c9f2e1a4b87",
+                      "errors": [
+                        {
+                          "code": "parameter_invalid",
+                          "message": "archived must be a boolean"
+                        }
+                      ]
+                    }
+                  },
+                  "Tag has dependent objects": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "c4e8a1f2-6d3b-4a9e-8f7c-2b5d0e9a1c36",
+                      "errors": [
+                        {
+                          "code": "tag_has_dependent_objects",
+                          "message": "Unable to delete Tag with dependent objects. Segments: Seg 1."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tag not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Tag not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "9b1e5d3a-2c7f-4b8e-a4d6-1f0c3e9b2a75",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Resource Not Found"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Tag is being applied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Tagging in progress": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "2e7c4a9f-5b1d-4c3e-9a8f-6d0b2e1c7f49",
+                      "errors": [
+                        {
+                          "code": "conflict",
+                          "message": "An ongoing import or bulk operation is using this tag. Please wait for it to complete before archiving."
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "5d9a2c7e-3f1b-4e6a-8c4d-0b7e2f9a1c58",
+                      "errors": [
+                        {
+                          "code": "unauthorized",
+                          "message": "Access Token Invalid"
+                        }
+                      ]
+                    }
+                  },
+                  "Token lacks required scope": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "8f3c1e6a-4d2b-4a7e-9b5c-1e0d3f8a2c64",
                       "errors": [
                         {
                           "code": "token_unauthorized",
@@ -64433,6 +64646,21 @@
           }
         },
         "description": "Payload to create or update a Custom Object instance"
+      },
+      "UpdateTagRequest": {
+        "title": "Update Tag Request Payload",
+        "required": [
+          "archived"
+        ],
+        "type": "object",
+        "properties": {
+          "archived": {
+            "type": "boolean",
+            "description": "Set to \u0060true\u0060 to archive the tag, or \u0060false\u0060 to unarchive it.",
+            "example": true
+          }
+        },
+        "description": "You can archive or unarchive a tag."
       },
       "CreateOrUpdateTagRequest": {
         "title": "Create or Update Tag Request Payload",
@@ -81690,7 +81918,7 @@
         "additionalProperties": {
           "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
         },
-        "description": "The custom attributes which are set for the visitor.",
+        "description": "The custom attributes which are set for the visitor. A key that doesn\u0027t match an existing data attribute creates a new one with \u0060messenger_writable\u0060 set to \u0060false\u0060, so the Messenger can\u0027t update it.",
         "example": {
           "paid_subscriber": true,
           "monthly_spend": 155.5,
@@ -97181,7 +97409,7 @@
       "additionalProperties": {
         "$ref": "#/components/schemas/CompanyCustomAttributesAdditionalProperties"
       },
-      "description": "The custom attributes which are set for the visitor.",
+      "description": "The custom attributes which are set for the visitor. A key that doesn\u0027t match an existing data attribute creates a new one with \u0060messenger_writable\u0060 set to \u0060false\u0060, so the Messenger can\u0027t update it.",
       "example": {
         "paid_subscriber": true,
         "monthly_spend": 155.5,

@@ -22,7 +22,7 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RecordingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/calls/{id}/recording", pathParameters)
+        public RecordingRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/calls/{id}/recording{?include_transcripts*}", pathParameters)
         {
         }
         /// <summary>
@@ -30,11 +30,11 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public RecordingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/calls/{id}/recording", rawUrl)
+        public RecordingRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/calls/{id}/recording{?include_transcripts*}", rawUrl)
         {
         }
         /// <summary>
-        /// Permanently deletes every recording and transcript of the call, including the part of the call handled by Fin. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
+        /// Permanently deletes every recording of the call, including the part of the call handled by Fin, and the call&apos;s transcripts unless `include_transcripts` is `false`. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
@@ -46,11 +46,11 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
         /// <exception cref="global::Soenneker.Intercom.OpenApiClient.Models.Error">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject?> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Calls.Item.Recording.RecordingRequestBuilder.RecordingRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Soenneker.Intercom.OpenApiClient.Models.DeletedCallRecordingObject> DeleteAsync(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Calls.Item.Recording.RecordingRequestBuilder.RecordingRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
@@ -93,17 +93,17 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
             await RequestAdapter.SendNoContentAsync(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
-        /// Permanently deletes every recording and transcript of the call, including the part of the call handled by Fin. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
+        /// Permanently deletes every recording of the call, including the part of the call handled by Fin, and the call&apos;s transcripts unless `include_transcripts` is `false`. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
         /// </summary>
         /// <returns>A <see cref="RequestInformation"/></returns>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default)
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Calls.Item.Recording.RecordingRequestBuilder.RecordingRequestBuilderDeleteQueryParameters>>? requestConfiguration = default)
         {
 #nullable restore
 #else
-        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<DefaultQueryParameters>> requestConfiguration = default)
+        public RequestInformation ToDeleteRequestInformation(Action<RequestConfiguration<global::Soenneker.Intercom.OpenApiClient.Calls.Item.Recording.RecordingRequestBuilder.RecordingRequestBuilderDeleteQueryParameters>> requestConfiguration = default)
         {
 #endif
             var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
@@ -138,6 +138,16 @@ namespace Soenneker.Intercom.OpenApiClient.Calls.Item.Recording
         public global::Soenneker.Intercom.OpenApiClient.Calls.Item.Recording.RecordingRequestBuilder WithUrl(string rawUrl)
         {
             return new global::Soenneker.Intercom.OpenApiClient.Calls.Item.Recording.RecordingRequestBuilder(rawUrl, RequestAdapter);
+        }
+        /// <summary>
+        /// Permanently deletes every recording of the call, including the part of the call handled by Fin, and the call&apos;s transcripts unless `include_transcripts` is `false`. Afterwards, the call&apos;s `recording_url` and `fin_recording_url` are `null`. Deleting a recording that was already deleted returns the same successful response.Requires the `write_conversations` OAuth scope. Set `Intercom-Version: Preview`.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
+        public partial class RecordingRequestBuilderDeleteQueryParameters 
+        {
+            /// <summary>By default, the call&apos;s transcripts are deleted too. Pass `false` to keep them.</summary>
+            [QueryParameter("include_transcripts")]
+            public bool? IncludeTranscripts { get; set; }
         }
     }
 }

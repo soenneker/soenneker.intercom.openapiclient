@@ -8,7 +8,7 @@ using System;
 namespace Soenneker.Intercom.OpenApiClient.Models
 {
     /// <summary>
-    /// The custom attributes which are set for the visitor.
+    /// The custom attributes which are set for the visitor. A key that doesn&apos;t match an existing data attribute creates a new one with `messenger_writable` set to `false`, so the Messenger can&apos;t update it.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     public partial class UpdateVisitorRequestCustomAttributesProperty : IAdditionalDataHolder, IParsable
