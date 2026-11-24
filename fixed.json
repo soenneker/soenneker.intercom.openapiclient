@@ -56165,6 +56165,222 @@
           }
         }
       }
+    },
+    "/procedures/{conversationId}/proactive_trigger": {
+      "post": {
+        "tags": [
+          "Procedures"
+        ],
+        "summary": "Trigger a Fin Procedure for a user",
+        "description": "Start a Fin Procedure on a new conversation for an existing user. Fin sends the user the procedure\u0027s opening message and the procedure runs from there.\n\nThe procedure must have an API trigger. Identify the user by the \u0060user_id\u0060 you assigned to them in Intercom. The user must already exist; this endpoint does not create users.\n\nIf you send a \u0060locale\u0060 that Fin does not support for your workspace, the conversation uses your workspace\u0027s default language.\n",
+        "operationId": "TriggerProcedure",
+        "parameters": [
+          {
+            "name": "Intercom-Version",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/IntercomVersion"
+            }
+          },
+          {
+            "name": "conversationId",
+            "in": "path",
+            "description": "The ID of the procedure to trigger.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12345"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TriggerProcedureRequest"
+              },
+              "examples": {
+                "Trigger for a user": {
+                  "value": {
+                    "user": {
+                      "id": "user-456"
+                    }
+                  }
+                },
+                "Trigger with locale and context": {
+                  "value": {
+                    "user": {
+                      "id": "user-456"
+                    },
+                    "locale": "fr",
+                    "context": {
+                      "order_id": "ord-789",
+                      "plan": "premium"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The procedure was triggered.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TriggerProcedureResponse"
+                },
+                "examples": {
+                  "Successful response": {
+                    "value": {
+                      "status": "triggered",
+                      "conversation_id": "192837465",
+                      "procedure_id": "12345"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Missing user": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "user parameter is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Missing user ID": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "user.id is required"
+                        }
+                      ]
+                    }
+                  },
+                  "Invalid context": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "bad_request",
+                          "message": "context must be an object"
+                        }
+                      ]
+                    }
+                  },
+                  "Not available in this API version": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "intercom_version_invalid",
+                          "message": "Requested resource is not available in current API version"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "User not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "User Not Found"
+                        }
+                      ]
+                    }
+                  },
+                  "Procedure not found": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Procedure not found"
+                        }
+                      ]
+                    }
+                  },
+                  "No API trigger": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "not_found",
+                          "message": "Procedure does not have a api trigger"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Procedure cannot be triggered": {
+                    "value": {
+                      "type": "error.list",
+                      "request_id": "b68959ea-6328-4f70-83cb-e7913dba1542",
+                      "errors": [
+                        {
+                          "code": "unprocessable_entity",
+                          "message": "Id matches both a procedure and a Fin skill"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -59675,6 +59891,58 @@
           }
         },
         "description": "Request body for submitting human-collected input to a HITL procedure step.",
+        "x-tags": [
+          "Procedures"
+        ]
+      },
+      "TriggerProcedureRequest": {
+        "title": "Trigger Procedure Request",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/TriggerProcedureRequestUser"
+          },
+          "locale": {
+            "type": "string",
+            "description": "The language for the conversation, such as \u0060fr\u0060. If omitted, or if Fin does not support it for your workspace, your workspace\u0027s default language is used.",
+            "example": "fr"
+          },
+          "context": {
+            "$ref": "#/components/schemas/TriggerProcedureRequestContextProperty"
+          }
+        },
+        "description": "Request body for triggering a Fin Procedure for a user.",
+        "x-tags": [
+          "Procedures"
+        ]
+      },
+      "TriggerProcedureResponse": {
+        "title": "Trigger Procedure Response",
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/TriggeredStatus"
+          },
+          "conversation_id": {
+            "type": "string",
+            "description": "The ID of the conversation the procedure runs on.",
+            "example": "192837465"
+          },
+          "procedure_id": {
+            "type": "string",
+            "description": "The procedure ID from the request path.",
+            "example": "12345"
+          },
+          "fin_skill_id": {
+            "type": "string",
+            "description": "The ID of the Fin skill that ran. Returned only when the procedure ran as a Fin skill.",
+            "example": "67890"
+          }
+        },
+        "description": "The result of triggering a Fin Procedure.",
         "x-tags": [
           "Procedures"
         ]
@@ -74894,6 +75162,20 @@
           }
         }
       },
+      "TriggerProcedureRequestUser": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The \u0060user_id\u0060 you assigned to the user in Intercom.",
+            "example": "user-456"
+          }
+        },
+        "description": "The user to start the procedure for."
+      },
       "CompanyPlan": {
         "type": "object",
         "properties": {
@@ -81628,6 +81910,14 @@
           "_default_description_": "having a problem"
         }
       },
+      "TriggerProcedureRequestContextProperty": {
+        "type": "object",
+        "description": "Data about why you are triggering the procedure, made available to the procedure as it runs. Send an object of any shape.",
+        "example": {
+          "order_id": "ord-789",
+          "plan": "premium"
+        }
+      },
       "CompanyCustomAttributesProperty": {
         "type": "object",
         "additionalProperties": {
@@ -85523,6 +85813,24 @@
             {
               "value": "help_center_redirect",
               "name": "HelpCenterRedirect"
+            }
+          ]
+        }
+      },
+      "TriggeredStatus": {
+        "enum": [
+          "triggered"
+        ],
+        "type": "string",
+        "description": "Always \u0060triggered\u0060.",
+        "example": "triggered",
+        "x-ms-enum": {
+          "name": "TriggeredStatus",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "triggered",
+              "name": "Triggered"
             }
           ]
         }
@@ -94305,7 +94613,7 @@
     },
     {
       "name": "Procedures",
-      "description": "Submit human-collected input to Fin Procedures via the HITL (Human in the Loop) API.\n\n\u0026nbsp;\n\nWhen a Fin Procedure reaches a HITL step with the API channel enabled, Intercom sends a \u0060procedure.hitl_notification.created\u0060 webhook to your system. Your system collects the required input and responds via the callback endpoint documented here.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nThis API requires the Procedures HITL API feature to be enabled for your workspace and an OAuth token with the \u0060write_conversations\u0060 scope.\n{% /admonition %}\n"
+      "description": "Trigger Fin Procedures for your users, and submit human-collected input to Fin Procedures via the HITL (Human in the Loop) API.\n\n\u0026nbsp;\n\nWhen a Fin Procedure reaches a HITL step with the API channel enabled, Intercom sends a \u0060procedure.hitl_notification.created\u0060 webhook to your system. Your system collects the required input and responds via the callback endpoint documented here.\n\n\u0026nbsp;\n\n{% admonition type=\u0022warning\u0022 %}\nThis API requires the Procedures HITL API feature to be enabled for your workspace and an OAuth token with the \u0060write_conversations\u0060 scope.\n{% /admonition %}\n"
     },
     {
       "name": "Reporting Data Export",
@@ -97056,6 +97364,14 @@
       "example": {
         "_default_title_": "example",
         "_default_description_": "having a problem"
+      }
+    },
+    "TriggerProcedureRequestContext": {
+      "type": "object",
+      "description": "Data about why you are triggering the procedure, made available to the procedure as it runs. Send an object of any shape.",
+      "example": {
+        "order_id": "ord-789",
+        "plan": "premium"
       }
     },
     "CompanyCustomAttributes": {

@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input;
+using Soenneker.Intercom.OpenApiClient.Procedures.Item.Proactive_trigger;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Soenneker.Intercom.OpenApiClient.Procedures.Item
         public global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputRequestBuilder Collect_agent_input
         {
             get => new global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Collect_agent_input.Collect_agent_inputRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The proactive_trigger property</summary>
+        public global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Proactive_trigger.Proactive_triggerRequestBuilder Proactive_trigger
+        {
+            get => new global::Soenneker.Intercom.OpenApiClient.Procedures.Item.Proactive_trigger.Proactive_triggerRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Soenneker.Intercom.OpenApiClient.Procedures.Item.WithConversationItemRequestBuilder"/> and sets the default values.
