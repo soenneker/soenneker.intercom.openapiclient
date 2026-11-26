@@ -18,6 +18,8 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         public virtual void CaptureExplicitNulls(global::Microsoft.Kiota.Abstractions.Serialization.IParseNode parseNode)
         {
+            if (parseNode.GetChildNode("available_channels") is null) { _explicitNullValueAvailableChannels = default!; _explicitNullProperties?.Remove("available_channels"); }
+            else if (parseNode.GetChildNode("available_channels") is { } nullNodeAvailableChannels && nullNodeAvailableChannels.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) AvailableChannels = null;
             if (parseNode.GetChildNode("avatar") is null) { _explicitNullValueAvatar = default!; _explicitNullProperties?.Remove("avatar"); }
             else if (parseNode.GetChildNode("avatar") is { } nullNodeAvatar && nullNodeAvatar.GetObjectValue<global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode>(global::Microsoft.Kiota.Abstractions.Serialization.UntypedNode.CreateFromDiscriminatorValue) is null or global::Microsoft.Kiota.Abstractions.Serialization.UntypedNull) Avatar = null;
             if (parseNode.GetChildNode("away_mode_enabled") is null) { _explicitNullValueAwayModeEnabled = default!; _explicitNullProperties?.Remove("away_mode_enabled"); }
@@ -48,6 +50,16 @@ namespace Soenneker.Intercom.OpenApiClient.Models
 
         /// <summary>Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.</summary>
         public IDictionary<string, object> AdditionalData { get; set; }
+        /// <summary>The channels this admin is currently available on for conversation routing. Possible values include email, messenger, chat, sms, phone. New values may be added; ignore values you do not recognise.An empty list `[]` means the admin is available on no channel. Returned by List all admins, Retrieve an admin, Find an admin by email and Set an admin to away.</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public List<string>? AvailableChannels { get => _explicitNullValueAvailableChannels; set { _explicitNullValueAvailableChannels = value; AdditionalData?.Remove("available_channels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("available_channels"); else _explicitNullProperties?.Remove("available_channels"); } }
+        private List<string>? _explicitNullValueAvailableChannels = default!;
+#nullable restore
+#else
+        public List<string> AvailableChannels { get => _explicitNullValueAvailableChannels; set { _explicitNullValueAvailableChannels = value; AdditionalData?.Remove("available_channels"); if (value is null) (_explicitNullProperties ??= new global::System.Collections.Generic.HashSet<string>()).Add("available_channels"); else _explicitNullProperties?.Remove("available_channels"); } }
+        private List<string> _explicitNullValueAvailableChannels = default!;
+#endif
         /// <summary>The teammate&apos;s avatar image. On List all admins it is only included when `display_avatar` is `true`. Elsewhere it is left out when the teammate has neither an uploaded avatar nor a gravatar.</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -175,8 +187,9 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         /// <returns>A IDictionary&lt;string, Action&lt;IParseNode&gt;&gt;</returns>
         public virtual IDictionary<string, Action<IParseNode>> GetFieldDeserializers()
         {
-            return new Dictionary<string, Action<IParseNode>>(13)
+            return new Dictionary<string, Action<IParseNode>>(14)
             {
+                { "available_channels", n => { AvailableChannels = n.GetCollectionOfPrimitiveValues<string>()?.AsList(); } },
                 { "avatar", n => { Avatar = n.GetObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar>(global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar.CreateFromDiscriminatorValue); } },
                 { "away_mode_enabled", n => { AwayModeEnabled = n.GetBoolValue(); } },
                 { "away_mode_reassign", n => { AwayModeReassign = n.GetBoolValue(); } },
@@ -199,6 +212,7 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             if(ReferenceEquals(writer, null)) throw new ArgumentNullException(nameof(writer));
+            writer.WriteCollectionOfPrimitiveValues<string>("available_channels", AvailableChannels);
             writer.WriteObjectValue<global::Soenneker.Intercom.OpenApiClient.Models.AdminAvatar>("avatar", Avatar);
             writer.WriteBoolValue("away_mode_enabled", AwayModeEnabled);
             writer.WriteBoolValue("away_mode_reassign", AwayModeReassign);

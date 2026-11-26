@@ -214,6 +214,11 @@
                       "away_mode_enabled": true,
                       "away_mode_reassign": true,
                       "has_inbox_seat": true,
+                      "available_channels": [
+                        "email",
+                        "messenger",
+                        "chat"
+                      ],
                       "away_status_reason_id": 12345,
                       "team_ids": [
                         991267903
@@ -1351,6 +1356,11 @@
                           "away_mode_enabled": false,
                           "away_mode_reassign": false,
                           "has_inbox_seat": true,
+                          "available_channels": [
+                            "email",
+                            "messenger",
+                            "chat"
+                          ],
                           "team_ids": []
                         }
                       ]
@@ -1971,6 +1981,11 @@
                       "away_mode_enabled": false,
                       "away_mode_reassign": false,
                       "has_inbox_seat": true,
+                      "available_channels": [
+                        "email",
+                        "messenger",
+                        "chat"
+                      ],
                       "away_status_reason_id": null,
                       "team_ids": [
                         814865,
@@ -2119,6 +2134,11 @@
                       "away_mode_enabled": false,
                       "away_mode_reassign": false,
                       "has_inbox_seat": true,
+                      "available_channels": [
+                        "email",
+                        "messenger",
+                        "chat"
+                      ],
                       "away_status_reason_id": null,
                       "team_ids": [
                         814865,
@@ -57158,6 +57178,18 @@
             "nullable": true,
             "example": 12345
           },
+          "available_channels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The channels this admin is currently available on for conversation routing. Possible values include email, messenger, chat, sms, phone. New values may be added; ignore values you do not recognise.\n\nAn empty list \u0060[]\u0060 means the admin is available on no channel. Returned by List all admins, Retrieve an admin, Find an admin by email and Set an admin to away.\n",
+            "example": [
+              "email",
+              "messenger",
+              "chat"
+            ]
+          },
           "has_inbox_seat": {
             "type": "boolean",
             "description": "Identifies if this admin has a paid inbox seat to restrict/allow features that require them.",
@@ -74037,6 +74069,18 @@
             "description": "The unique identifier of the away status reason. Not returned by List all admins.",
             "nullable": true,
             "example": 12345
+          },
+          "available_channels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The channels this admin is currently available on for conversation routing. Possible values include email, messenger, chat, sms, phone. New values may be added; ignore values you do not recognise.\n\nAn empty list \u0060[]\u0060 means the admin is available on no channel. Returned by List all admins, Retrieve an admin, Find an admin by email and Set an admin to away.\n",
+            "example": [
+              "email",
+              "messenger",
+              "chat"
+            ]
           },
           "has_inbox_seat": {
             "type": "boolean",
