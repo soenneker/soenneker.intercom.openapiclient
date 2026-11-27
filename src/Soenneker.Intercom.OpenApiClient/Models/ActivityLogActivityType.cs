@@ -1260,6 +1260,14 @@ namespace Soenneker.Intercom.OpenApiClient.Models
         #pragma warning disable CS1591
         FinProceduresHitlAccessTokenRotated,
         #pragma warning restore CS1591
+        [EnumMember(Value = "fin_procedure_teammate_input_submitted")]
+        #pragma warning disable CS1591
+        FinProcedureTeammateInputSubmitted,
+        #pragma warning restore CS1591
+        [EnumMember(Value = "fin_skill_teammate_input_submitted")]
+        #pragma warning disable CS1591
+        FinSkillTeammateInputSubmitted,
+        #pragma warning restore CS1591
         [EnumMember(Value = "fin_agent_api_secret_revealed")]
         #pragma warning disable CS1591
         FinAgentApiSecretRevealed,

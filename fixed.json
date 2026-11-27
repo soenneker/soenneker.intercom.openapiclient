@@ -1189,6 +1189,8 @@
                         "fin_agent_api_settings_change",
                         "fin_procedures_hitl_settings_change",
                         "fin_procedures_hitl_access_token_rotated",
+                        "fin_procedure_teammate_input_submitted",
+                        "fin_skill_teammate_input_submitted",
                         "fin_agent_api_secret_revealed",
                         "fin_agent_api_secret_copied",
                         "a2a_agent_registered",
@@ -83385,6 +83387,8 @@
           "fin_agent_api_settings_change",
           "fin_procedures_hitl_settings_change",
           "fin_procedures_hitl_access_token_rotated",
+          "fin_procedure_teammate_input_submitted",
+          "fin_skill_teammate_input_submitted",
           "fin_agent_api_secret_revealed",
           "fin_agent_api_secret_copied",
           "a2a_agent_registered",
@@ -84717,6 +84721,14 @@
             {
               "value": "fin_procedures_hitl_access_token_rotated",
               "name": "FinProceduresHitlAccessTokenRotated"
+            },
+            {
+              "value": "fin_procedure_teammate_input_submitted",
+              "name": "FinProcedureTeammateInputSubmitted"
+            },
+            {
+              "value": "fin_skill_teammate_input_submitted",
+              "name": "FinSkillTeammateInputSubmitted"
             },
             {
               "value": "fin_agent_api_secret_revealed",
